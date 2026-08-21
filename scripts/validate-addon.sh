@@ -209,6 +209,7 @@ run_discovered_tests() {
   while IFS= read -r -d '' file; do
     case $file in
       */tests/data/*.py) category=data; run_python_test "$file" ;;
+      */tests/data/*.lua) category=data; run_lua_test "$file" lua5.1; run_lua_test "$file" luajit ;;
       */tests/maps/*.lua) category=maps; run_lua_test "$file" lua5.1; run_lua_test "$file" luajit ;;
       */tests/marking/*.lua) category=marking; run_lua_test "$file" lua5.1; run_lua_test "$file" luajit ;;
       */tests/enemy-info/*.lua|*/tests/enemy_info/*.lua) category=enemy-info; run_lua_test "$file" lua5.1; run_lua_test "$file" luajit ;;
