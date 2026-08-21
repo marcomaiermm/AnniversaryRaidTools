@@ -6,10 +6,13 @@ local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools bootstrap is require
 local L = MDT.L
 
 local DEFAULT_RAID_KEY = "gruuls-lair"
-local RAID_KEYS = { "gruuls-lair", "black-temple", "hyjal" }
-local SHELL_INDICES = { ["gruuls-lair"] = 160, ["black-temple"] = 161, hyjal = 162 }
--- Gruul display IDs are retained from the accepted vertical slice; Black Temple
--- and Hyjal use the first CMaNGOS TBC DisplayId at tbc-db@7060a217.
+local RAID_KEYS = { "gruuls-lair", "black-temple", "hyjal", "karazhan", "magtheridons-lair" }
+local SHELL_INDICES = {
+  ["gruuls-lair"] = 160, ["black-temple"] = 161, hyjal = 162, karazhan = 163,
+  ["magtheridons-lair"] = 164,
+}
+-- Gruul display IDs are retained from the accepted vertical slice; later raids
+-- use the first CMaNGOS TBC DisplayId at tbc-db@7060a217.
 local DISPLAY_IDS = {
   [18831] = 18649, [18832] = 20194, [18834] = 20195, [18835] = 12472,
   [18836] = 11585, [19044] = 18698, [19389] = 18356, [21350] = 20241,
@@ -35,8 +38,23 @@ local DISPLAY_IDS = {
   [23330] = 21546, [23337] = 18251, [23339] = 11342, [23374] = 21442,
   [23394] = 21460, [23397] = 21560, [23398] = 1126, [23399] = 16255,
   [23400] = 21564, [23401] = 21587, [23402] = 21468, [23403] = 21568,
+  [15547] = 16407, [15548] = 16408, [15551] = 16397, [15687] = 16540,
+  [15688] = 11343, [15689] = 15363, [15690] = 19274, [15691] = 16958,
+  [16151] = 19640, [16170] = 16051, [16171] = 16050, [16173] = 1954,
+  [16174] = 9074, [16175] = 7897, [16176] = 16052, [16177] = 7893,
+  [16178] = 16049, [16389] = 16417, [16406] = 16514, [16407] = 16485,
+  [16408] = 16494, [16409] = 16464, [16410] = 16509, [16411] = 16524,
+  [16412] = 16529, [16414] = 16535, [16415] = 7550, [16424] = 16458,
+  [16425] = 16454, [16457] = 16198, [16459] = 16543, [16460] = 16547,
+  [16461] = 16551, [16468] = 16555, [16470] = 16559, [16471] = 2606,
+  [16472] = 16563, [16473] = 16567, [16481] = 14366, [16482] = 14365,
+  [16485] = 16838, [16488] = 16216, [16489] = 14254, [16491] = 19330,
+  [16492] = 19331, [16504] = 16841, [16524] = 16621, [16525] = 16241,
+  [16526] = 16251, [16529] = 16216, [16530] = 14252, [16539] = 12345,
+  [16540] = 16903, [16544] = 19097, [16545] = 21078, [16595] = 18886,
+  [16596] = 18887, [17256] = 9865, [17257] = 18527, [18829] = 11440,
 }
--- Encounter actors from mangos-tbc@adbc7f74 ScriptDevAI Black Temple and Hyjal scripts.
+-- Encounter actors pinned from mangos-tbc@adbc7f74 ScriptDevAI scripts.
 -- Anything not explicitly listed is trash, even when it has only one spawn.
 local BOSS_NPCS = {
   ["gruuls-lair"] = { [18831] = true, [18832] = true, [18834] = true, [18835] = true,
@@ -45,6 +63,9 @@ local BOSS_NPCS = {
     [22898] = true, [22917] = true, [22947] = true, [22948] = true, [22949] = true,
     [22950] = true, [22951] = true, [22952] = true },
   hyjal = { [17767] = true, [17808] = true, [17842] = true, [17888] = true, [17968] = true },
+  karazhan = { [15687] = true, [15688] = true, [15689] = true, [15690] = true,
+    [15691] = true, [16151] = true, [16457] = true, [16524] = true },
+  ["magtheridons-lair"] = { [17257] = true },
 }
 local Integration = ART.GruulsLairIntegration or { diagnostics = {}, status = {}, preserveStoredRoutes = {} }
 ART.GruulsLairIntegration = Integration
@@ -143,6 +164,7 @@ end
 local function publishShellData(raid, map)
   local shellIndex = SHELL_INDICES[raid.key]
   local dungeonMaps, sublevels, tileFormat, pois = {}, {}, {}, {}
+  local canvasWidth, canvasHeight = MDT:GetDefaultMapPanelSize()
   dungeonMaps[0] = map.sublevels[1].asset.textureFolder
   for index, sublevel in ipairs(map.sublevels) do
     local asset = sublevel.asset
@@ -150,6 +172,14 @@ local function publishShellData(raid, map)
         or (asset.noFloorPrefix and (asset.tilePrefix or asset.textureFolder))
         or asset.textureFolder..index.."_"
     sublevels[index], tileFormat[index], pois[index] = localize(sublevel.name), 4, {}
+  end
+  for sublevel, raidPOIs in pairs(raid.pois or {}) do
+    for index, poi in ipairs(raidPOIs) do
+      pois[sublevel][index] = {
+        x = poi.x * canvasWidth, y = -poi.y * canvasHeight,
+        template = "MapLinkPinTemplate", type = "generalNote", text = localize(poi.label or ""),
+      }
+    end
   end
   MDT.dungeonList[shellIndex] = localize(raid.name)
   MDT.mapInfo[shellIndex] = {
@@ -178,6 +208,7 @@ local function publishRaidList(db)
   MDT.seasonList[1] = L["Raid Planner"]
   MDT.dungeonSelectionToIndex[1] = {
     SHELL_INDICES["gruuls-lair"], SHELL_INDICES["black-temple"], SHELL_INDICES.hyjal,
+    SHELL_INDICES.karazhan, SHELL_INDICES["magtheridons-lair"],
   }
   if not MDT.dungeonMaps[db.currentDungeonIdx] then selectShell(DEFAULT_RAID_KEY, db) end
   if db.currentSection == nil or db.currentSection == "raids" then db.currentSection = "maps" end

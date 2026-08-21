@@ -15,17 +15,26 @@ local enemyInfoDataPath = [[..\Data\EnemyInfo\GruulsLair.lua]]
 local enemyInfoDataPosition = assert(loader:find("<Script file='"..enemyInfoDataPath.."'/>", 1, true))
 assert(enemyInfoDataPosition < adapterPosition,
   enemyInfoDataPath..[[ must load before ..\Modules\EnemyInfo.lua]])
-for _, raidFile in ipairs({ "GruulsLair.lua", "BlackTemple.lua", "Hyjal.lua" }) do
+local previousProducerPosition, producerCount, producerPaths = 0, 0, {}
+for _, raidFile in ipairs({ "GruulsLair.lua", "BlackTemple.lua", "Hyjal.lua", "Karazhan.lua", "MagtheridonsLair.lua" }) do
   for _, producerDir in ipairs({ "Generated", "Maps", "Transforms" }) do
     local path = [[..\Raids\TBC\]]..producerDir..[[\]]..raidFile
     local producerPosition = assert(loader:find("<Script file='"..path.."'/>", 1, true))
     assert(producerPosition < adapterPosition, path.." must load before Modules/EnemyInfo.lua")
+    assert(not producerPaths[path], "duplicate producer path: "..path)
+    assert(producerPosition > previousProducerPosition, "global producer load order: "..path)
+    producerPaths[path], previousProducerPosition, producerCount = true, producerPosition, producerCount + 1
   end
 end
+assert(producerCount == 15)
 
 local localeKeys = { "Black Temple", "Battle for Mount Hyjal", "Karabor Sewers", "Sanctuary of Shadows",
   "Halls of Anguish", "Gorefiend's Vigil", "Den of Mortal Delights", "Chamber of Command",
-  "Temple Summit", "Hyjal Summit" }
+  "Temple Summit", "Hyjal Summit", "Karazhan", "Servant's Quarters", "Upper Livery Stables",
+  "The Banquet Hall", "The Guest Chambers", "Opera Hall Balcony", "Master's Terrace",
+  "Lower Broken Stair", "Upper Broken Stair", "The Menagerie", "Guardian's Library",
+  "The Repository", "Upper Library", "The Celestial Watch", "Gamesman's Hall",
+  "Medivh's Chambers", "The Power Station", "Netherspace", "Magtheridon's Lair" }
 local enUS, zhCN = read("/Locales/enUS.lua"), read("/Locales/zhCN.lua")
 for _, key in ipairs(localeKeys) do
   local assignment = "L["..string.format("%q", key).."]"
@@ -117,9 +126,21 @@ for _, path in ipairs({
   "/Raids/TBC/Generated/BlackTemple.lua", "/Raids/TBC/Maps/BlackTemple.lua",
   "/Raids/TBC/Transforms/BlackTemple.lua", "/Raids/TBC/Generated/Hyjal.lua",
   "/Raids/TBC/Maps/Hyjal.lua", "/Raids/TBC/Transforms/Hyjal.lua",
+  "/Raids/TBC/Generated/Karazhan.lua", "/Raids/TBC/Maps/Karazhan.lua",
+  "/Raids/TBC/Transforms/Karazhan.lua", "/Raids/TBC/Generated/MagtheridonsLair.lua",
+  "/Raids/TBC/Maps/MagtheridonsLair.lua", "/Raids/TBC/Transforms/MagtheridonsLair.lua",
 }) do load(path, addon) end
 assert(_G.ART.StaticData.raids["gruuls-lair"] and _G.ART.StaticData.raids["black-temple"]
-  and _G.ART.StaticData.raids.hyjal and _G.ART.StaticData.enemyInfo["gruuls-lair"])
+  and _G.ART.StaticData.raids.hyjal and _G.ART.StaticData.raids.karazhan
+  and _G.ART.StaticData.raids["magtheridons-lair"] and _G.ART.StaticData.enemyInfo["gruuls-lair"])
+for _, raid in pairs(_G.ART.StaticData.raids) do
+  for _, floorPOIs in pairs(raid.pois or {}) do
+    for _, poi in ipairs(floorPOIs) do
+      local assignment = "L["..string.format("%q", poi.label).."]"
+      assert(enUS:find(assignment, 1, true) and zhCN:find(assignment, 1, true), "POI locale parity missing: "..poi.label)
+    end
+  end
+end
 if mode == "missing-enemy" then _G.ART.StaticData.enemyInfo["gruuls-lair"] = nil end
 if mode == "invalid-enemy" then _G.ART.StaticData.enemyInfo["gruuls-lair"].source.confidence = "verified" end
 load("/Modules/EnemyInfo.lua", addon)
@@ -128,15 +149,21 @@ local integration = assert(addon:GetRaidIntegration())
 assert(integration == integration:Initialize())
 assert(addon.RaidRegistry:Get("gruuls-lair"))
 assert(addon.RaidRegistry:Get("black-temple") and addon.RaidRegistry:Get("hyjal"))
+assert(addon.RaidRegistry:Get("karazhan") and addon.RaidRegistry:Get("magtheridons-lair"))
 assert(addon:GetRaidMap().mapId == 565)
 assert(saved.currentDungeonIdx == 160 and saved.currentSection == "maps")
 assert(addon.dungeonMaps[160][1] == "GruulsLair1_" and addon.dungeonSubLevels[160][1] == "Gruul's Lair")
 assert(addon.seasonList[1] == "Raid Planner")
-assert(#addon.dungeonSelectionToIndex[1] == 3 and addon.dungeonSelectionToIndex[1][1] == 160
-  and addon.dungeonSelectionToIndex[1][2] == 161 and addon.dungeonSelectionToIndex[1][3] == 162)
+assert(#addon.dungeonSelectionToIndex[1] == 5 and addon.dungeonSelectionToIndex[1][1] == 160
+  and addon.dungeonSelectionToIndex[1][2] == 161 and addon.dungeonSelectionToIndex[1][3] == 162
+  and addon.dungeonSelectionToIndex[1][4] == 163 and addon.dungeonSelectionToIndex[1][5] == 164)
 assert(addon.dungeonMaps[161][1] == "BlackTemple1_" and addon.dungeonMaps[161][7] == "BlackTemple7_")
 assert(#addon.dungeonSubLevels[161] == 7 and addon.dungeonSubLevels[161][7] == "Temple Summit")
 assert(addon.dungeonMaps[162][1] == "CoTMountHyjal" and addon.dungeonSubLevels[162][1] == "Hyjal Summit")
+assert(addon.dungeonMaps[163][1] == "Karazhan1_" and addon.dungeonMaps[163][17] == "Karazhan17_")
+assert(#addon.dungeonSubLevels[163] == 17 and addon.dungeonSubLevels[163][17] == "Netherspace")
+assert(addon.dungeonMaps[164][1] == "MagtheridonsLair1_"
+  and addon.dungeonSubLevels[164][1] == "Magtheridon's Lair")
 assert(not addon:GetNavigationSection("raids"))
 
 if mode == "invalid-store" then
@@ -178,9 +205,13 @@ local function projectedCounts(shellIndex)
 end
 local btSpawns, btPatrols = projectedCounts(161)
 local hyjalSpawns, hyjalPatrols = projectedCounts(162)
+local karazhanSpawns, karazhanPatrols = projectedCounts(163)
+local magtheridonSpawns, magtheridonPatrols = projectedCounts(164)
 assert(btSpawns == 626 and btPatrols == 88)
 assert(hyjalSpawns == 421 and hyjalPatrols == 396)
-for _, shellIndex in ipairs({ 161, 162 }) do
+assert(karazhanSpawns == 605 and karazhanPatrols == 53)
+assert(magtheridonSpawns == 18 and magtheridonPatrols == 3)
+for _, shellIndex in ipairs({ 160, 161, 162, 163, 164 }) do
   for _, enemy in ipairs(addon.dungeonEnemies[shellIndex]) do
     assert(enemy.displayId and enemy.displayId > 0, "missing pinned display ID for NPC "..enemy.id)
   end
@@ -190,19 +221,81 @@ local function enemyById(shellIndex, npcId)
 end
 local najentus, battlelord = assert(enemyById(161, 22887)), assert(enemyById(161, 22844))
 local archimonde, ghoul = assert(enemyById(162, 17968)), assert(enemyById(162, 17895))
+local gruul, lairBrute = assert(enemyById(160, 19044)), assert(enemyById(160, 19389))
+local moroes, spectralCharger = assert(enemyById(163, 15687)), assert(enemyById(163, 15547))
+local magtheridon, channeler = assert(enemyById(164, 17257)), assert(enemyById(164, 17256))
 assert(najentus.isBoss and najentus.displayId == 21174)
 assert(not battlelord.isBoss and battlelord.displayId == 21115 and battlelord.displayId ~= najentus.displayId)
 assert(archimonde.isBoss and archimonde.displayId == 20939)
 assert(not ghoul.isBoss and ghoul.displayId == 571 and ghoul.displayId ~= archimonde.displayId)
+assert(gruul.isBoss and gruul.displayId == 18698)
+assert(not lairBrute.isBoss and lairBrute.displayId == 18356)
+assert(moroes.isBoss and moroes.displayId == 16540)
+assert(not spectralCharger.isBoss and spectralCharger.displayId == 16407)
+assert(magtheridon.isBoss and magtheridon.displayId == 18527)
+assert(not channeler.isBoss and channeler.displayId == 9865)
+local expectedTierFourBosses = {
+  [15687] = true, [15688] = true, [15689] = true, [15690] = true,
+  [15691] = true, [16151] = true, [16457] = true, [16524] = true,
+}
+for _, enemy in ipairs(addon.dungeonEnemies[163]) do
+  assert(enemy.isBoss == (expectedTierFourBosses[enemy.id] or false), "Karazhan boss classification: "..enemy.id)
+end
+for _, enemy in ipairs(addon.dungeonEnemies[164]) do
+  assert(enemy.isBoss == (enemy.id == 17257), "Magtheridon boss classification: "..enemy.id)
+end
 assert(addon:GetRaidMap("black-temple").mapId == 564 and addon:GetRaidMapTransform("black-temple").raidKey == "black-temple")
 assert(addon:GetRaidMap("hyjal").mapId == 534 and addon:GetRaidMapTransform("hyjal").raidKey == "hyjal")
+assert(addon:GetRaidMap("karazhan").mapId == 532 and addon:GetRaidMapTransform("karazhan").raidKey == "karazhan")
+assert(addon:GetRaidMap("magtheridons-lair").mapId == 544
+  and addon:GetRaidMapTransform("magtheridons-lair").raidKey == "magtheridons-lair")
 
+local poiCount = 0
+for _, floorPOIs in ipairs(addon.mapPOIs[163]) do poiCount = poiCount + #floorPOIs end
+assert(poiCount == 11 and #addon.mapPOIs[163][1] == 5)
+local connection = addon.mapPOIs[163][1][1]
+assert(connection.type == "generalNote" and connection.text == "Entrance / upper-livery connection")
+assert(math.abs(connection.x - (0.52 * 840)) < 0.001 and math.abs(connection.y + (0.55 * 555)) < 0.001)
+assert(#addon.mapPOIs[164][1] == 1 and addon.mapPOIs[164][1][1].type == "generalNote")
+for raidKey, shellIndex in pairs({ ["gruuls-lair"] = 160, ["black-temple"] = 161, hyjal = 162,
+    karazhan = 163, ["magtheridons-lair"] = 164 }) do
+  local raid = addon.RaidRegistry:Get(raidKey)
+  for sublevel = 1, #raid.sublevels do
+    local sourcePOIs, projectedPOIs = raid.pois[sublevel] or {}, addon.mapPOIs[shellIndex][sublevel]
+    assert(#projectedPOIs == #sourcePOIs)
+    for index, poi in ipairs(sourcePOIs) do
+      local projected = projectedPOIs[index]
+      assert(projected.template == "MapLinkPinTemplate" and projected.type == "generalNote"
+        and projected.text == poi.label)
+      assert(math.abs(projected.x - (poi.x * 840)) < 0.001)
+      assert(math.abs(projected.y + (poi.y * 555)) < 0.001)
+    end
+  end
+end
+local excludedKarazhanNPCs = {
+  [15550] = true, [16179] = true, [16180] = true, [16181] = true, [17007] = true,
+  [19872] = true, [19873] = true, [19874] = true, [19875] = true, [19876] = true,
+  [17521] = true, [17533] = true, [17534] = true, [17535] = true, [17543] = true,
+  [17546] = true, [17547] = true, [17603] = true, [18168] = true, [17211] = true,
+  [17469] = true, [21160] = true, [21664] = true, [21682] = true, [21683] = true,
+  [21684] = true, [21726] = true, [21747] = true, [21748] = true, [21750] = true,
+  [21752] = true,
+}
+for _, enemy in ipairs(addon.dungeonEnemies[163]) do
+  assert(not excludedKarazhanNPCs[enemy.id], "excluded Karazhan NPC projected: "..enemy.id)
+end
+
+addon:UpdateToDungeon(163)
+assert(saved.currentDungeonIdx == 163 and addon.RaidPlanner.raid.key == "karazhan")
+addon:UpdateToDungeon(164)
+assert(saved.currentDungeonIdx == 164 and addon.RaidPlanner.raid.key == "magtheridons-lair")
 addon:UpdateToDungeon(161)
 assert(saved.currentDungeonIdx == 161 and addon.RaidPlanner.raid.key == "black-temple")
 assert(addon:CreateRaidRoute("black-temple"))
 assert(saved.currentDungeonIdx == 161 and addon.RaidPlanner.raid.key == "black-temple")
 local blackTemple = addon.RaidRegistry:Get("black-temple")
-local blackTemplePack = next(blackTemple.packs)
+local blackTemplePack = "black-temple:pack:group-5640046"
+assert(blackTemple.packs[blackTemplePack])
 assert(integration.planner:AddRouteStep({ label = "Black Temple", packKeys = { blackTemplePack } }))
 local blackTempleExport = assert(addon:SaveRaidRoute())
 assert(addon:CreateRaidRoute("hyjal"))
@@ -212,6 +305,37 @@ assert(not integration.planner:AddRouteStep({ label = "immutable", packKeys = {}
 assert(not addon:GetRaidEnemyInfo("hyjal", 17767))
 local hyjalExport = assert(addon:SaveRaidRoute())
 
+assert(addon:CreateRaidRoute("karazhan"))
+assert(saved.currentDungeonIdx == 163 and addon.RaidPlanner.raid.key == "karazhan")
+local karazhanPack = "karazhan:pack:aran"
+assert(addon.RaidRegistry:Get("karazhan").packs[karazhanPack])
+assert(integration.planner:AddRouteStep({ label = "Karazhan", packKeys = { karazhanPack } }))
+local karazhanExport = assert(addon:SaveRaidRoute())
+assert(addon:OpenRaidRoute("karazhan") and addon.RaidPlanner.raid.key == "karazhan")
+assert(addon.RaidPlanner:Export() == karazhanExport)
+assert(addon:CreateRaidRoute("magtheridons-lair"))
+assert(saved.currentDungeonIdx == 164 and addon.RaidPlanner.raid.key == "magtheridons-lair")
+local encounterPack = "magtheridons-lair:pack:magtheridon-encounter"
+local encounterSpawnKeys = addon.RaidRegistry:Get("magtheridons-lair").packs[encounterPack].spawnKeys
+for index, expected in ipairs({
+    "magtheridons-lair:spawn:17256:guid-5440003",
+    "magtheridons-lair:spawn:17256:guid-5440004",
+    "magtheridons-lair:spawn:17256:guid-5440005",
+    "magtheridons-lair:spawn:17256:guid-5440006",
+    "magtheridons-lair:spawn:17256:guid-5440007",
+    "magtheridons-lair:spawn:17257:guid-5440008",
+  }) do assert(encounterSpawnKeys[index] == expected) end
+assert(#encounterSpawnKeys == 6)
+assert(integration.planner:AddRouteStep({ label = "Magtheridon", packKeys = { encounterPack } }))
+local magtheridonExport = assert(addon:SaveRaidRoute())
+assert(addon:OpenRaidRoute("magtheridons-lair") and addon.RaidPlanner.raid.key == "magtheridons-lair")
+assert(addon.RaidPlanner:Export() == magtheridonExport)
+assert(addon:OpenRaidRoute("karazhan") and addon.RaidPlanner:Export() == karazhanExport)
+assert(addon:OpenRaidRoute("magtheridons-lair") and addon.RaidPlanner:Export() == magtheridonExport)
+assert(karazhanExport ~= magtheridonExport)
+assert(saved.raidRoutes.presets.karazhan == karazhanExport)
+assert(saved.raidRoutes.presets["magtheridons-lair"] == magtheridonExport)
+
 saved.raidRoutes.presets["black-temple"] = hyjalExport
 saved.raidRoutes.presets.hyjal = "hyjal-original"
 assert(addon:OpenRaidRoute("black-temple"))
@@ -219,6 +343,8 @@ assert(addon.RaidPlanner.raid.key == "black-temple" and saved.currentDungeonIdx 
 assert(integration.status.storedRoute == "stored-route-raid-mismatch")
 assert(saved.raidRoutes.presets["black-temple"] == hyjalExport)
 assert(saved.raidRoutes.presets.hyjal == "hyjal-original")
+assert(saved.raidRoutes.presets.karazhan == karazhanExport)
+assert(saved.raidRoutes.presets["magtheridons-lair"] == magtheridonExport)
 
 assert(addon:OpenRaidRoute("gruuls-lair"))
 assert(saved.currentDungeonIdx == 160 and addon.RaidPlanner.raid.key == "gruuls-lair")

@@ -44,6 +44,12 @@
 	<Script file='..\Raids\TBC\Generated\Hyjal.lua'/>
 	<Script file='..\Raids\TBC\Maps\Hyjal.lua'/>
 	<Script file='..\Raids\TBC\Transforms\Hyjal.lua'/>
+	<Script file='..\Raids\TBC\Generated\Karazhan.lua'/>
+	<Script file='..\Raids\TBC\Maps\Karazhan.lua'/>
+	<Script file='..\Raids\TBC\Transforms\Karazhan.lua'/>
+	<Script file='..\Raids\TBC\Generated\MagtheridonsLair.lua'/>
+	<Script file='..\Raids\TBC\Maps\MagtheridonsLair.lua'/>
+	<Script file='..\Raids\TBC\Transforms\MagtheridonsLair.lua'/>
 	<Script file='..\Data\EnemyInfo\GruulsLair.lua'/>
 	<Script file='EnemyInfo.lua'/>
 </Ui>
