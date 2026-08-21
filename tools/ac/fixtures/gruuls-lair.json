@@ -1,0 +1,109 @@
+{
+  "metadata": {
+    "project": "AzerothCore",
+    "snapshot": "bounded-gruuls-lair-v1",
+    "commit": null,
+    "databaseVersion": "not-provided",
+    "exportedAt": "2026-08-21T00:00:00Z",
+    "coordinateBasis": "bounded candidate fixture; not Anniversary-calibrated"
+  },
+  "source": {
+    "source": "azerothcore",
+    "confidence": "candidate",
+    "sourceRef": "fixture://azerothcore/gruuls-lair-v1",
+    "observedAt": "2026-08-21T00:00:00Z"
+  },
+  "raid": {
+    "key": "gruuls-lair",
+    "name": "Gruul's Lair",
+    "instanceId": 565,
+    "mapId": 565,
+    "mode": "route"
+  },
+  "sublevels": [
+    {
+      "index": 1,
+      "name": "Gruul's Lair",
+      "mapId": 565
+    }
+  ],
+  "spawns": [
+    {
+      "id": "maulgar",
+      "npcId": 18831,
+      "name": "High King Maulgar",
+      "x": 0.48,
+      "y": 0.56,
+      "sublevel": 1,
+      "patrol": [
+        {"x": 0.46, "y": 0.54},
+        {"x": 0.48, "y": 0.56},
+        {"x": 0.50, "y": 0.54}
+      ]
+    },
+    {
+      "id": "krosh",
+      "npcId": 18832,
+      "name": "Krosh Firehand",
+      "x": 0.42,
+      "y": 0.53,
+      "sublevel": 1
+    },
+    {
+      "id": "olm",
+      "npcId": 18834,
+      "name": "Olm the Summoner",
+      "x": 0.54,
+      "y": 0.53,
+      "sublevel": 1
+    },
+    {
+      "id": "kiggler",
+      "npcId": 18835,
+      "name": "Kiggler the Crazed",
+      "x": 0.42,
+      "y": 0.60,
+      "sublevel": 1
+    },
+    {
+      "id": "blindeye",
+      "npcId": 18836,
+      "name": "Blindeye the Seer",
+      "x": 0.54,
+      "y": 0.60,
+      "sublevel": 1
+    },
+    {
+      "id": "gruul",
+      "npcId": 19044,
+      "name": "Gruul the Dragonkiller",
+      "x": 0.72,
+      "y": 0.44,
+      "sublevel": 1,
+      "patrol": [
+        {"x": 0.70, "y": 0.42},
+        {"x": 0.72, "y": 0.44}
+      ]
+    }
+  ],
+  "packs": [
+    {
+      "id": "maulgar",
+      "label": "High King Maulgar",
+      "spawnIds": ["maulgar", "krosh", "olm", "kiggler", "blindeye"]
+    },
+    {
+      "id": "gruul",
+      "label": "Gruul the Dragonkiller",
+      "spawnIds": ["gruul"]
+    }
+  ],
+  "pois": [
+    {
+      "x": 0.72,
+      "y": 0.44,
+      "sublevel": 1,
+      "label": "Gruul's arena"
+    }
+  ]
+}
