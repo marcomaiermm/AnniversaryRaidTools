@@ -17,7 +17,7 @@ from tools.ac.pipeline import build_raid, load_snapshot  # noqa: E402
 from tools.validators.raid import validate_raid  # noqa: E402
 
 
-GENERATOR_VERSION = "art-030-generator-v1"
+GENERATOR_VERSION = "art-030-generator-v2"
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SOURCE = ROOT / "tools" / "ac" / "fixtures" / "gruuls-lair.json"
 DEFAULT_OUTPUT = ROOT / "Raids" / "TBC" / "Generated" / "GruulsLair.lua"
@@ -38,7 +38,24 @@ def render_lua(raid: dict[str, Any]) -> str:
         f"-- ObservedAt: {source.get('observedAt') or 'nil'}\n"
         "-- Nnoggie's Mythic Dungeon Tools attribution and GPL-2.0 terms remain in the repository.\n"
     )
-    return metadata + "return " + _lua_value(raid, 0) + "\n"
+    return (
+        metadata
+        + "local raid = "
+        + _lua_value(raid, 0)
+        + "\n"
+        + "local ART = rawget(_G, \"ART\")\n"
+        + "if type(ART) ~= \"table\" then\n"
+        + "  error(\"AnniversaryRaidTools static data requires Core/Bootstrap.lua to initialize ART\", 2)\n"
+        + "end\n"
+        + "if type(ART.StaticData) ~= \"table\" then\n"
+        + "  error(\"AnniversaryRaidTools static data requires ART.StaticData bootstrap\", 2)\n"
+        + "end\n"
+        + "if type(ART.StaticData.raids) ~= \"table\" then\n"
+        + "  error(\"AnniversaryRaidTools static data requires ART.StaticData.raids bootstrap\", 2)\n"
+        + "end\n"
+        + "ART.StaticData.raids[raid.key] = raid\n"
+        + "return raid\n"
+    )
 
 
 def generate(source_path: str | Path = DEFAULT_SOURCE, output_path: str | Path = DEFAULT_OUTPUT) -> str:

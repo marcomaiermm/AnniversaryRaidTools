@@ -1,10 +1,10 @@
 -- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.
--- Generator: art-030-generator-v1
+-- Generator: art-030-generator-v2
 -- Source: AzerothCore candidate snapshot; not Anniversary-verified.
 -- SourceRef: fixture://azerothcore/gruuls-lair-v1
 -- ObservedAt: 2026-08-21T00:00:00Z
 -- Nnoggie's Mythic Dungeon Tools attribution and GPL-2.0 terms remain in the repository.
-return {
+local raid = {
   schemaVersion = 1,
   key = "gruuls-lair",
   name = "Gruul's Lair",
@@ -250,3 +250,15 @@ return {
     },
   },
 }
+local ART = rawget(_G, "ART")
+if type(ART) ~= "table" then
+  error("AnniversaryRaidTools static data requires Core/Bootstrap.lua to initialize ART", 2)
+end
+if type(ART.StaticData) ~= "table" then
+  error("AnniversaryRaidTools static data requires ART.StaticData bootstrap", 2)
+end
+if type(ART.StaticData.raids) ~= "table" then
+  error("AnniversaryRaidTools static data requires ART.StaticData.raids bootstrap", 2)
+end
+ART.StaticData.raids[raid.key] = raid
+return raid

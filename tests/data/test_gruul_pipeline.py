@@ -27,6 +27,9 @@ def main() -> None:
     second = render_lua(build_raid(load_snapshot(SOURCE)))
     assert first == second, "repeated generation must be byte-identical"
     assert OUTPUT.read_text(encoding="utf-8") == first
+    assert "local raid = {" in first
+    assert "ART.StaticData.raids[raid.key] = raid" in first
+    assert first.rstrip().endswith("return raid")
 
     broken = copy.deepcopy(raid)
     pack = next(iter(broken["packs"].values()))
