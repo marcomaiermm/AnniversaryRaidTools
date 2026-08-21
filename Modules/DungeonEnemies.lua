@@ -412,7 +412,7 @@ function MDTDungeonEnemyMixin:DisplayPatrol(shown)
       patrolLines[patrolIdx] = patrolLines[patrolIdx] or
           MDT.main_frame.mapPanelFrame:CreateTexture("MDTDungeonPatrolLine"..patrolIdx, "BACKGROUND", nil, 0)
       patrolLines[patrolIdx]:SetDrawLayer("OVERLAY", 1)
-      patrolLines[patrolIdx]:SetTexture("Interface\\AddOns\\MythicDungeonTools\\Textures\\Square_White")
+      patrolLines[patrolIdx]:SetTexture(MDT.AddonPath.."Textures\\Square_White")
       patrolLines[patrolIdx]:SetVertexColor(0, 0.2, 0.5, 0.6)
       patrolLines[patrolIdx]:Show()
 
@@ -471,8 +471,7 @@ function MDT:DisplayBlipTooltip(blip, shown)
     return
   end
 
-  local boss = blip.data.isBoss or false
-  local health = MDT:CalculateEnemyHealth(boss, data.health, db.currentDifficulty, data.ignoreFortified)
+  local health = data.health
   local group = blip.clone.g and " "..string.format(L["(G %d)"], blip.clone.g) or ""
   local occurence = (blip.data.isBoss and "") or blip.cloneIdx
 
@@ -489,9 +488,6 @@ function MDT:DisplayBlipTooltip(blip, shown)
     text = L["devModeShiftDragHint"].."\n"..L["devModeCtrlDragHint"].."\n\n"..text
   end
 
-  local count = data.count
-  text = text..L["Forces"]..": "..MDT:FormatEnemyForces(count)
-  text = text.."\n"..L["Efficiency Score"]..": "..MDT:GetEfficiencyScoreString(count, data.health)
   text = text.."\n\n["..L["Right click for more info"].."]"
   tooltip.String:SetText(text)
 

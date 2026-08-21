@@ -218,7 +218,7 @@ function MDT:UpdateDungeonDropDown()
     end
     local mapInfo = MDT.mapInfo[dungeonIdx]
     button.dungeonIdx = dungeonIdx
-    button.texture:SetTexture(mapInfo.iconId or (mapInfo.teleportId and C_Spell.GetSpellTexture(mapInfo.teleportId)) or 134400)
+    button.texture:SetTexture(mapInfo.iconId or 134400)
     button.shortText:SetText(mapInfo.shortName)
     button:SetScript("OnClick", function(self, button)
       MDT:UpdateToDungeon(dungeonIdx)
@@ -230,9 +230,7 @@ function MDT:UpdateDungeonDropDown()
     button:SetFrameLevel(50)
     button:SetScript("OnEnter", function()
       local timer
-      if mapInfo.mapID then
-        timer = select(3, C_ChallengeMode.GetMapUIInfo(mapInfo.mapID))
-      end
+      timer = nil
       GameTooltip:SetOwner(dungeonButtons[idx], "ANCHOR_BOTTOMRIGHT", -dungeonButtons[idx]:GetWidth(), 0)
       GameTooltip:AddLine(MDT.dungeonList[dungeonIdx], 1, 1, 1)
       if timer then

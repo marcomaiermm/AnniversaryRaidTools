@@ -151,13 +151,8 @@ function MDT:UpdatePullTooltip(tooltip)
           local newLine = "\n"
           local text = newLine..newLine..newLine..L[v.enemyData.name].." x"..v.enemyData.quantity..newLine
           text = text..string.format(L["Level %d %s"], v.enemyData.level, L[v.enemyData.creatureType])..newLine
-          local boss = v.enemyData.isBoss or false
-          local health = MDT:CalculateEnemyHealth(boss, v.enemyData.baseHealth, db.currentDifficulty, v.enemyData.ignoreFortified)
+          local health = v.enemyData.baseHealth
           text = text..string.format(L["%s HP"], MDT:FormatEnemyHealth(health))..newLine
-
-          local totalForcesMax = MDT.dungeonTotalCount[db.currentDungeonIdx].normal
-          local count = v.enemyData.count
-          text = text..L["Forces"]..": "..MDT:FormatEnemyForces(count, totalForcesMax, false)
 
           tooltip.topString:SetText(text)
           showData = true
@@ -180,17 +175,7 @@ function MDT:UpdatePullTooltip(tooltip)
         tooltip:Hide()
         return
       end
-      local pullForces = MDT:CountForces(tooltip.currentPull, true)
-      local totalForces = MDT:CountForces(tooltip.currentPull, false)
-      local totalForcesMax = MDT.dungeonTotalCount[db.currentDungeonIdx].normal
-
-      local text = L["Forces"]..": "..MDT:FormatEnemyForces(pullForces, totalForcesMax, false)
-      text = text.."\n"..L["Total"]..": "..MDT:FormatEnemyForces(totalForces, totalForcesMax, true)
-      -- local pullHealth = MDT:SumCurrentPullHealth(tooltip.currentPull)
-      -- text = text .. "\n" .. L["Efficiency Score"] .. ": " .. MDT:GetEfficiencyScoreString(pullForces, pullHealth)
-
-      tooltip.botString:SetText(text)
-      tooltip.botString:Show()
+      tooltip.botString:Hide()
     end
   end
 end
@@ -199,38 +184,8 @@ local function round(number, decimals)
   return tonumber((("%%.%df"):format(decimals)):format(number))
 end
 
-do
-  local fortMult = 1.2
-  local tyrMult = 1.25
-  local scalingNormal = 1.07
-  local scalingExtra = 1.1 -- Xalatath's Guile
-  local extraScalingLevel = 11
-
-  local getFortTyrMult = function(level, boss, fortified, tyrannical, ignoreFortified)
-    local mult = 1
-    if level >= 10 then
-      if not boss and (fortified and not ignoreFortified) then mult = mult * fortMult end
-      if boss and tyrannical then mult = mult * tyrMult end
-    end
-    return mult
-  end
-
-  local function getScaling(mult, level)
-    local scaling = mult * (scalingNormal ^ math.min(level - 1, extraScalingLevel - 2)) * (scalingExtra ^ math.max(0, level - extraScalingLevel + 1))
-    return round(scaling, 2) --not sure if this additional rounding is needed, but it was in the original code
-  end
-
-  function MDT:CalculateEnemyHealth(boss, baseHealth, level, ignoreFortified)
-    local fortified = true --fort and tyr are always present in 10 and above, we don't really care for lower levels
-    local tyrannical = true
-    local mult = 1
-
-    mult = getFortTyrMult(level, boss, fortified, tyrannical, ignoreFortified)
-    mult = getScaling(mult, level)
-
-    return round(mult * baseHealth, 0)
-  end
-
+function MDT:CalculateEnemyHealth(_, baseHealth)
+  return round(baseHealth, 0)
 end
 
 function MDT:FormatEnemyHealth(amount)

@@ -434,7 +434,7 @@ function MDT:DrawCircle(x, y, size, color, layer, layerSublevel, isOwn, objectIn
   local circle = tex or getTexture()
   if not layer then layer = objectDrawLayer end
   circle:SetDrawLayer(layer, layerSublevel)
-  circle:SetTexture("Interface\\AddOns\\MythicDungeonTools\\Textures\\Circle_White")
+  circle:SetTexture(MDT.AddonPath.."Textures\\Circle_White")
   circle:SetVertexColor(color.r, color.g, color.b, color.a)
   circle:SetWidth(1.1 * size)
   circle:SetHeight(1.1 * size)
@@ -453,7 +453,7 @@ end
 function MDT:DrawLine(x, y, a, b, size, color, smooth, layer, layerSublevel, lineFactor, isOwn, objectIndex)
   local line = getTexture()
   if not layer then layer = objectDrawLayer end
-  line:SetTexture("Interface\\AddOns\\MythicDungeonTools\\Textures\\Square_White")
+  line:SetTexture(MDT.AddonPath.."Textures\\Square_White")
   line:SetVertexColor(color.r, color.g, color.b, color.a)
   DrawLine(line, MDT.main_frame.mapPanelTile1, x, y, a, b, size, lineFactor and lineFactor or 1.1, "TOPLEFT")
   line:SetDrawLayer(layer, layerSublevel)
@@ -471,7 +471,7 @@ end
 function MDT:DrawTriangle(x, y, rotation, size, color, layer, layerSublevel, isOwn, objectIndex)
   local triangle = getTexture()
   if not layer then layer = objectDrawLayer end
-  triangle:SetTexture("Interface\\AddOns\\MythicDungeonTools\\Textures\\triangle")
+  triangle:SetTexture(MDT.AddonPath.."Textures\\triangle")
   triangle:SetVertexColor(color.r, color.g, color.b, color.a)
   triangle:Show()
   triangle:SetWidth(size)

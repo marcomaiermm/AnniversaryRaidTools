@@ -525,7 +525,7 @@ function MDT:MakeMapTexture(frame)
       end
     end
 
-    local version = C_AddOns.GetAddOnMetadata(MDT.AddonName, "Version")
+    local version = MDT.Compat:GetAddOnMetadata(MDT.AddonName, "Version")
     if version and version:lower():find("-alpha", 1, true) then
       frame.mapPanelFrame.alphaWatermarkLabels = {}
       frame.mapPanelFrame:SetScript("OnSizeChanged", layoutAlphaWatermark)
@@ -557,10 +557,6 @@ function MDT:UpdateMap(ignoreSetSelection, ignoreReloadPullButtons, ignoreUpdate
   MDT:EnsureDBTables()
   if not MDT:AreFramesInitialized() then coroutine.yield() end
   local preset = MDT:GetCurrentPreset()
-  if preset.difficulty then
-    db.currentDifficulty = preset.difficulty
-    frame.sidePanel.DifficultySlider:SetValue(db.currentDifficulty)
-  end
   if not MDT:AreFramesInitialized() then coroutine.yield() end
   local textureInfo = MDT.dungeonMaps[db.currentDungeonIdx][preset.value.currentSublevel]
   if type(textureInfo) == "string" then --textures from blizzard files
@@ -683,8 +679,7 @@ MDT.zoneIdToDungeonIdx = {}
 local lastUpdatedDungeonIdx
 function MDT:CheckCurrentZone(init)
   initializeDB()
-  if C_ChallengeMode.IsChallengeModeActive() then return end
-  local zoneId = C_Map.GetBestMapForUnit("player")
+  local zoneId = MDT.Compat:GetBestMapForUnit("player")
   local dungeonIdx = MDT.zoneIdToDungeonIdx[zoneId]
   if dungeonIdx and (not lastUpdatedDungeonIdx or dungeonIdx ~= lastUpdatedDungeonIdx) then
     lastUpdatedDungeonIdx = dungeonIdx

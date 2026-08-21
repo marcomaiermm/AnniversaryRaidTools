@@ -7,8 +7,7 @@ local function initializeDB()
   db = db or MDT:GetDB()
 end
 
----CountForces
----Counts total selected enemy forces in the current preset up to pull
+---Legacy selection count; route persistence uses stable pack keys instead.
 function MDT:CountForces(currentPull, currentOnly)
   initializeDB()
   --count up to and including the currently selected pull
@@ -50,7 +49,7 @@ function MDT:SumCurrentPullHealth(currentPull)
       for k, v in pairs(clones) do
         if MDT:IsCloneIncluded(enemyIdx, v) then
           local data = self.dungeonEnemies[db.currentDungeonIdx][enemyIdx]
-          local health = self:CalculateEnemyHealth(data.isBoss or false, data.health, db.currentDifficulty, data.ignoreFortified)
+          local health = self:CalculateEnemyHealth(false, data.health)
           totalHealth = totalHealth + health
         end
       end

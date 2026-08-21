@@ -417,7 +417,7 @@ function MDT:MakeTopBottomTextures(frame)
   frame.bottomLeftPanelString:SetPoint("LEFT", frame.bottomPanel, "LEFT", 0, 0)
   frame.bottomLeftPanelString:SetTextColor(1, 1, 1, 1)
   ---@diagnostic disable-next-line: redundant-parameter
-  frame.bottomLeftPanelString:SetText(" v"..C_AddOns.GetAddOnMetadata(MDT.AddonName, "Version"))
+  frame.bottomLeftPanelString:SetText(" v"..(MDT.Compat:GetAddOnMetadata(MDT.AddonName, "Version") or ""))
   frame.bottomLeftPanelString:Show()
   --add clickarea
   frame.bottomLeftPanelString.clickArea = CreateFrame("Button", "MDTBottomLeftPanelClickArea", frame)
@@ -866,68 +866,23 @@ function MDT:MakeSidePanel(frame)
   frame.sidePanel.WidgetGroup:AddChild(frame.sidePanelImportButton)
   frame.sidePanel.WidgetGroup:AddChild(frame.LiveSessionButton)
 
-  --difficulty slider
-  frame.sidePanel.DifficultySlider = AceGUI:Create("Slider")
-  frame.sidePanel.DifficultySlider:SetSliderValues(1, 35, 1)
-  frame.sidePanel.DifficultySlider:SetLabel(L["Dungeon Level"])
-  frame.sidePanel.DifficultySlider.label:SetJustifyH("LEFT")
-  frame.sidePanel.DifficultySlider.label:SetFontObject("GameFontNormalSmall")
-  frame.sidePanel.DifficultySlider:SetWidth(200)
-  frame.sidePanel.DifficultySlider:SetValue(db.currentDifficulty)
-  local timer
-  frame.sidePanel.DifficultySlider:SetCallback("OnValueChanged", function(widget, callbackName, value)
-    local difficulty = tonumber(value)
-    if (difficulty >= 10 and db.currentDifficulty < 10) or (difficulty < 10 and db.currentDifficulty >= 10) then
-      db.currentDifficulty = difficulty or db.currentDifficulty
-      MDT:POI_UpdateAll()
-      MDT:ReloadPullButtons()
-    else
-      db.currentDifficulty = difficulty or db.currentDifficulty
-    end
-    MDT:GetCurrentPreset().difficulty = db.currentDifficulty
-    MDT:UpdateProgressbar()
-    if MDT.EnemyInfoFrame and MDT.EnemyInfoFrame.frame:IsShown() then MDT:UpdateEnemyInfoData() end
-    if timer then timer:Cancel() end
-    timer = C_Timer.NewTimer(2, function()
-      MDT:ReloadPullButtons()
-      if MDT.liveSessionActive then
-        local livePreset = MDT:GetCurrentLivePreset()
-        local shouldUpdate = livePreset == MDT:GetCurrentPreset()
-        if shouldUpdate then MDT:LiveSession_SendDifficulty() end
-      end
-    end)
-  end)
-  frame.sidePanel.DifficultySlider:SetCallback("OnMouseUp", function()
-    if timer then timer:Cancel() end
-    MDT:ReloadPullButtons()
-    if MDT.liveSessionActive then
-      local livePreset = MDT:GetCurrentLivePreset()
-      local shouldUpdate = livePreset == MDT:GetCurrentPreset()
-      if shouldUpdate then MDT:LiveSession_SendDifficulty() end
-    end
-  end)
-  frame.sidePanel.DifficultySlider:SetCallback("OnEnter", function()
-    GameTooltip:SetOwner(frame.sidePanel.DifficultySlider.frame, "ANCHOR_BOTTOMLEFT", 0, 40)
-    GameTooltip:AddLine(L["Select the dungeon level"], 1, 1, 1)
-    GameTooltip:AddLine(L["The selected level will affect displayed npc health"], 1, 1, 1)
-    GameTooltip:Show()
-  end)
-  frame.sidePanel.DifficultySlider:SetCallback("OnLeave", function()
-    GameTooltip:Hide()
-  end)
-  if MDT:IsRetail() then
-    frame.sidePanel.WidgetGroup:AddChild(frame.sidePanel.DifficultySlider)
-  end
   frame.sidePanel.middleLine = AceGUI:Create("Heading")
   frame.sidePanel.middleLine:SetWidth(240)
   frame.sidePanel.WidgetGroup:AddChild(frame.sidePanel.middleLine)
   frame.sidePanel.WidgetGroup.frame:SetFrameLevel(3)
 
-  frame.sidePanel.ProgressBar = CreateFrame("Frame", nil, frame.sidePanel, "ScenarioProgressBarTemplate")
-  frame.sidePanel.ProgressBar:Show()
-  frame.sidePanel.ProgressBar:ClearAllPoints()
-  frame.sidePanel.ProgressBar:SetPoint("TOP", frame.sidePanel.WidgetGroup.frame, "BOTTOM", -10, 5)
-  MDT:SkinProgressBar(frame.sidePanel.ProgressBar)
+  -- Legacy callers may still touch these until ART-070 replaces their wiring.
+  frame.sidePanel.DifficultySlider = { SetValue = function() end, Show = function() end, Hide = function() end }
+  frame.sidePanel.ProgressBar = {
+    Bar = {
+      SetStatusBarColor = function() end,
+      SetValue = function() end,
+      Label = { SetText = function() end },
+    },
+    Show = function() end,
+    Hide = function() end,
+  }
+
 end
 
 function MDT:FixAceGUIShowHide(widget, frame, isFrame, hideOnly)
@@ -988,13 +943,12 @@ function MDT:HideSpinner()
 end
 
 function MDT:InitializeMainFrame()
-  local initSpinner = CreateFrame("Button", "MDTInitSpinner", UIParent, "LoadingSpinnerTemplate")
-  initSpinner.BackgroundFrame.Background:SetVertexColor(0, 1, 0, 1)
-  initSpinner.AnimFrame.Circle:SetVertexColor(0, 1, 0, 1)
+  local initSpinner = CreateFrame("Frame", "MDTInitSpinner", UIParent)
   initSpinner:SetPoint("CENTER", UIParent, "CENTER", 0, 150)
   initSpinner:SetFrameStrata("DIALOG")
   initSpinner:SetSize(60, 60)
   initSpinner:Show()
+  initSpinner.Anim = { Play = function() end, Stop = function() end }
   initSpinner.Anim:Play()
   MDT.initSpinner = initSpinner
 
@@ -1043,7 +997,7 @@ function MDT:InitializeMainFrame()
   main_frame.mainFrametex:SetColorTexture(unpack(MDT.BackdropColor))
 
   ---@diagnostic disable-next-line: redundant-parameter
-  local version = C_AddOns.GetAddOnMetadata(MDT.AddonName, "Version"):gsub("%.", "")
+  local version = (MDT.Compat:GetAddOnMetadata(MDT.AddonName, "Version") or "0"):gsub("%.", "")
   db.version = tonumber(version)
   -- Set frame position
   main_frame:ClearAllPoints()

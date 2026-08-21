@@ -32,7 +32,7 @@ function MDT:LiveSession_Enable()
       local presetName = preset.text
       local name, realm = UnitFullName("player")
       local fullName = name.."+"..realm
-      C_ChatInfo.SendChatMessage(prefix..fullName.." - "..dungeon..": "..presetName.."]", distribution)
+      MDT.Compat:SendChatMessage(prefix..fullName.." - "..dungeon..": "..presetName.."]", distribution)
     end
     local cancelCallback = function()
       MDT:LiveSession_Disable()
@@ -110,10 +110,10 @@ function MDT:LiveSession_SessionFound(fullName, uid)
         self.main_frame.SendingStatusBar:SetValue(0 / 1)
         self.main_frame.SendingStatusBar.value:SetText(L["Receiving: ..."])
         if not self.main_frame.LoadingSpinner then
-          self.main_frame.LoadingSpinner = CreateFrame("Button", "MDTLoadingSpinner", self.main_frame,
-            "LoadingSpinnerTemplate")
+          self.main_frame.LoadingSpinner = CreateFrame("Frame", "MDTLoadingSpinner", self.main_frame)
           self.main_frame.LoadingSpinner:SetPoint("CENTER", self.main_frame, "CENTER")
           self.main_frame.LoadingSpinner:SetSize(60, 60)
+          self.main_frame.LoadingSpinner.Anim = { Play = function() end, Stop = function() end }
         end
         self.main_frame.LoadingSpinner:Show()
         self.main_frame.LoadingSpinner.Anim:Play()
@@ -212,10 +212,8 @@ end
 function MDT:LiveSession_SendPreset(preset)
   local distribution = self:IsPlayerInGroup()
   if distribution then
-    local db = self:GetDB()
     self:SetUniqueID(preset)
     self:EnsurePresetCreatedBy(preset)
-    preset.difficulty = db.currentDifficulty
     local export = MDT:TableToString(preset)
     local silent, fromLiveSession = true, true
     MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.preset, export, distribution, nil, "BULK", MDT.displaySendingProgress,
@@ -223,7 +221,7 @@ function MDT:LiveSession_SendPreset(preset)
   end
 end
 
----Sends all pulls
+---Sends the legacy pull payload consumed by the existing transmission receiver.
 function MDT:LiveSession_SendPulls(pulls)
   local distribution = self:IsPlayerInGroup()
   if distribution then
@@ -232,13 +230,9 @@ function MDT:LiveSession_SendPulls(pulls)
   end
 end
 
----Sends current difficulty
+-- Kept only for old widget callers until ART-070 removes the legacy control.
 function MDT:LiveSession_SendDifficulty()
-  local distribution = self:IsPlayerInGroup()
-  if distribution then
-    local export = self:GetDB().currentDifficulty
-    MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.difficulty, export.."", distribution, nil, "ALERT")
-  end
+  return false, "not-applicable"
 end
 
 function MDT:LiveSession_SendPOIAssignment(sublevel, poiIdx, value)
