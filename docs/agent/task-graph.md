@@ -11,7 +11,7 @@ ART-000 Contracts ─┬─> ART-010 Bootstrap ─> ART-020 Planner ─┐
                   ├─> ART-050 Enemy Info ───────────────────┤
                   └─> ART-060 Validation ───────────────────┴─> ART-070 Gruul
 ART-001 Retail audit ───────────────> ART-010
-ART-070 ─> ART-080 Black Temple / ART-081 Hyjal / later raid-data tasks
+ART-070 ─> ART-080 Black Temple / ART-081 Hyjal ─> ART-090 Multi-raid integration
 ```
 
 | Task | Owner / paths | Depends on | Gate/output |
@@ -26,7 +26,9 @@ ART-070 ─> ART-080 Black Temple / ART-081 Hyjal / later raid-data tasks
 | ART-050 Enemy Info | Enemy info: repository, recorder, data/tests | 000 | bounded sourced observations |
 | ART-060 Validation | Test agent: `tests/**`, `scripts/validate-*`, `scripts/smoke-*` | 000 | automated matrix + manual protocol |
 | ART-070 Gruul slice | Integrator: central registration/wiring, shared SavedVariables migrations after ART-010, existing `Modules/EnemyInfo.lua` adapter, and paired locale strings | 010, 020, 030, 031, 040, 050, 060 | end-to-end vertical slice; v1 freeze |
-| ART-080+ Raid data | One owner per raid: only its generated, override, map, transform, tests | 070 | validated raid coverage |
+| ART-080 Black Temple | Black Temple owner: pinned CMaNGOS fixture, generated data, map, transform, and assigned tests | 070 | deterministic spawn/patrol and map coverage |
+| ART-081 Hyjal | Hyjal owner: pinned CMaNGOS fixture, generated data, map, transform, and assigned tests | 070 | deterministic spawn/patrol and wave/map coverage |
+| ART-090 Multi-raid integration | Integrator: central raid selection/wiring and integration tests | 080, 081 | Gruul, Black Temple, and Hyjal selectable end to end |
 
 ART-030 through ART-060 may develop in parallel after their dependencies. Integrate
 in order: 000, 010, 060, 020, 030, 031, 040, 050, 070, then raid data. Feature
@@ -56,7 +58,9 @@ must wait for ART-010's accepted handover before touching that path.
 | ART-050 | `Core/EnemyInfoRepository.lua`; `Modules/RaidEnemyInfo.lua`; `Developer/RaidRecorder.lua`; `Data/EnemyInfo/**`; `tests/enemy-info/**` | existing `Modules/EnemyInfo.lua`; `Modules/load_modules.xml`; `Core/SavedVariables.lua` initialization; central registration; planner and marking modules |
 | ART-060 | `tests/**`; `scripts/validate-*.*`; `scripts/smoke-*.*`; `.github/workflows/**` only when explicitly assigned | production behavior, contracts, TOCs/loaders, central registration |
 | ART-070 | `Modules/load_modules.xml` (feature/raid registration, after ART-010 handover); `Core/SavedVariables.lua` (shared migration integration, after ART-010 handover); `Locales/enUS.lua`; `Locales/zhCN.lua`; `Modules/EnemyInfo.lua` (adapter/replacement integration); central raid/module registration and final UI wiring | `locales.xml` loader; ART-010 root rename/bootstrap code; ART-020 route-domain implementation; generator/generated/override/map data; feature internals outside integration seams |
-| ART-080+ | only the assigned raid's `Raids/TBC/Generated/<Raid>.lua`, `Raids/TBC/Overrides/<Raid>.lua`, `Raids/TBC/Maps/<Raid>.lua`, `Raids/TBC/Transforms/<Raid>.lua`, and `tests/data/<Raid>/**` | all `Core/**`; all `Modules/**`; TOCs/loaders; contracts; generator core; `Core/SavedVariables.lua`; shared locale files |
+| ART-080 | `tools/ac/fixtures/black-temple.json`; `Raids/TBC/Generated/BlackTemple.lua` (generator output only); `Raids/TBC/Overrides/BlackTemple.lua`; `Raids/TBC/Maps/BlackTemple.lua`; `Raids/TBC/Transforms/BlackTemple.lua`; `tests/data/test_black_temple_pipeline.py`; `tests/maps/test_black_temple_map.lua` | all `Core/**`; all `Modules/**`; TOCs/loaders; contracts; generator core; shared fixtures/data; `Core/SavedVariables.lua`; shared locale files |
+| ART-081 | `tools/ac/fixtures/hyjal.json`; `Raids/TBC/Generated/Hyjal.lua` (generator output only); `Raids/TBC/Overrides/Hyjal.lua`; `Raids/TBC/Maps/Hyjal.lua`; `Raids/TBC/Transforms/Hyjal.lua`; `tests/data/test_hyjal_pipeline.py`; `tests/maps/test_hyjal_map.lua` | all `Core/**`; all `Modules/**`; TOCs/loaders; contracts; generator core; shared fixtures/data; `Core/SavedVariables.lua`; shared locale files |
+| ART-090 | `Modules/EnemyInfo.lua`; `Modules/load_modules.xml`; `Locales/enUS.lua`; `Locales/zhCN.lua`; `tests/integration/**`; `scripts/validate-addon.sh` | data fixtures; generated/override/map/transform definitions; route/mark/enemy-info internals; TOCs; `Core/SavedVariables.lua`; contracts |
 
 The matrix also resolves the legacy feature paths: `Modules/Transmission.lua` is
 ART-010 transport/codec compatibility; `Modules/LiveSession.lua`,
