@@ -1,19 +1,56 @@
 -- Made by Nnoggie, 2017-2025
--- Gruul vertical-slice registration and sourced enemy-info UI adapter.
+-- Multi-raid registration and sourced enemy-info UI adapter.
 
 local _, MDT = ...
 local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools bootstrap is required")
 local L = MDT.L
 
-local RAID_KEY = "gruuls-lair"
-local SHELL_INDEX = 160
--- AzerothCore creature_template_model at 015976f5298ad374c4e6f8a8d22665946cb4ec32.
+local DEFAULT_RAID_KEY = "gruuls-lair"
+local RAID_KEYS = { "gruuls-lair", "black-temple", "hyjal" }
+local SHELL_INDICES = { ["gruuls-lair"] = 160, ["black-temple"] = 161, hyjal = 162 }
+-- Gruul display IDs are retained from the accepted vertical slice; Black Temple
+-- and Hyjal use the first CMaNGOS TBC DisplayId at tbc-db@7060a217.
 local DISPLAY_IDS = {
   [18831] = 18649, [18832] = 20194, [18834] = 20195, [18835] = 12472,
   [18836] = 11585, [19044] = 18698, [19389] = 18356, [21350] = 20241,
+  [17767] = 17444, [17808] = 21069, [17842] = 18526, [17888] = 17886,
+  [17895] = 571, [17897] = 17308, [17898] = 12818, [17899] = 17537,
+  [17905] = 8783, [17906] = 17311, [17907] = 16919, [17908] = 14520,
+  [17916] = 17321, [17968] = 20939, [22841] = 21357, [22844] = 21115,
+  [22845] = 21116, [22846] = 21118, [22847] = 21117, [22848] = 5187,
+  [22849] = 21114, [22853] = 11335, [22855] = 19991, [22856] = 21146,
+  [22869] = 21120, [22871] = 21262, [22873] = 21159, [22874] = 21161,
+  [22875] = 21162, [22876] = 21164, [22877] = 21165, [22878] = 20609,
+  [22879] = 21369, [22880] = 21367, [22882] = 21373, [22883] = 5492,
+  [22884] = 17528, [22885] = 21457, [22887] = 21174, [22898] = 21145,
+  [22917] = 21135, [22939] = 21449, [22945] = 21372, [22946] = 14334,
+  [22947] = 21252, [22948] = 21443, [22949] = 21416, [22950] = 21417,
+  [22951] = 21419, [22952] = 21418, [22953] = 21151, [22954] = 18753,
+  [22955] = 21452, [22956] = 21456, [22957] = 21503, [22959] = 21530,
+  [22960] = 21216, [22962] = 21502, [22963] = 21535, [22964] = 19199,
+  [22965] = 21196, [23018] = 21378, [23028] = 21538, [23030] = 21543,
+  [23047] = 21383, [23049] = 21380, [23147] = 21375, [23172] = 20381,
+  [23196] = 21490, [23222] = 21549, [23223] = 21284, [23232] = 21355,
+  [23235] = 21555, [23236] = 21553, [23237] = 21552, [23239] = 21550,
+  [23330] = 21546, [23337] = 18251, [23339] = 11342, [23374] = 21442,
+  [23394] = 21460, [23397] = 21560, [23398] = 1126, [23399] = 16255,
+  [23400] = 21564, [23401] = 21587, [23402] = 21468, [23403] = 21568,
+}
+-- Encounter actors from mangos-tbc@adbc7f74 ScriptDevAI Black Temple and Hyjal scripts.
+-- Anything not explicitly listed is trash, even when it has only one spawn.
+local BOSS_NPCS = {
+  ["gruuls-lair"] = { [18831] = true, [18832] = true, [18834] = true, [18835] = true,
+    [18836] = true, [19044] = true },
+  ["black-temple"] = { [22841] = true, [22856] = true, [22871] = true, [22887] = true,
+    [22898] = true, [22917] = true, [22947] = true, [22948] = true, [22949] = true,
+    [22950] = true, [22951] = true, [22952] = true },
+  hyjal = { [17767] = true, [17808] = true, [17842] = true, [17888] = true, [17968] = true },
 }
 local Integration = ART.GruulsLairIntegration or { diagnostics = {}, status = {}, preserveStoredRoutes = {} }
 ART.GruulsLairIntegration = Integration
+ART.MultiRaidIntegration = Integration
+
+local function localize(value) return L[value] or value end
 
 local function diagnose(reason, feature)
   if #Integration.diagnostics < 32 then
@@ -88,14 +125,14 @@ local function projectRaidEnemies(raid)
       spawnLookup[spawn.key] = { enemyIdx = enemyIdx, cloneIdx = cloneIdx, packKey = spawn.packKey }
     end
     enemies[enemyIdx] = {
-      name = L[enemy.name],
+      name = localize(enemy.name),
       id = enemy.npcId,
       count = 0,
       health = 1,
       level = 73,
       creatureType = "Humanoid",
       scale = 1,
-      isBoss = npcKey ~= "19389" and npcKey ~= "21350",
+      isBoss = BOSS_NPCS[raid.key] and BOSS_NPCS[raid.key][enemy.npcId] or false,
       displayId = DISPLAY_IDS[enemy.npcId],
       clones = clones,
     }
@@ -103,58 +140,104 @@ local function projectRaidEnemies(raid)
   return enemies, spawnLookup
 end
 
-local function publishShellData(raid, map, db)
-  local textureFolder = map.sublevels[1].asset.textureFolder
-  MDT.dungeonList[SHELL_INDEX] = L[raid.name]
-  MDT.mapInfo[SHELL_INDEX] = {
-    shortName = L[raid.name], englishName = raid.name, mapID = raid.mapId, tileFormat = { [1] = 4 },
+local function publishShellData(raid, map)
+  local shellIndex = SHELL_INDICES[raid.key]
+  local dungeonMaps, sublevels, tileFormat, pois = {}, {}, {}, {}
+  dungeonMaps[0] = map.sublevels[1].asset.textureFolder
+  for index, sublevel in ipairs(map.sublevels) do
+    local asset = sublevel.asset
+    dungeonMaps[index] = asset.texturePrefix
+        or (asset.noFloorPrefix and (asset.tilePrefix or asset.textureFolder))
+        or asset.textureFolder..index.."_"
+    sublevels[index], tileFormat[index], pois[index] = localize(sublevel.name), 4, {}
+  end
+  MDT.dungeonList[shellIndex] = localize(raid.name)
+  MDT.mapInfo[shellIndex] = {
+    shortName = localize(raid.name), englishName = raid.name, mapID = raid.mapId, tileFormat = tileFormat,
   }
-  MDT.dungeonMaps[SHELL_INDEX] = { [0] = textureFolder, [1] = textureFolder.."1_" }
-  MDT.dungeonSubLevels[SHELL_INDEX] = { [1] = L[map.sublevels[1].name] }
-  MDT.dungeonTotalCount[SHELL_INDEX] = { normal = 0 }
-  MDT.dungeonEnemies[SHELL_INDEX], Integration.spawnLookup = projectRaidEnemies(raid)
-  MDT.mapPOIs[SHELL_INDEX] = { [1] = {} }
-  MDT.scaleMultiplier[SHELL_INDEX] = 1
-  MDT.zoneIdToDungeonIdx[raid.mapId] = SHELL_INDEX
-  MDT.knownDungeons[SHELL_INDEX] = raid.name
+  MDT.dungeonMaps[shellIndex] = dungeonMaps
+  MDT.dungeonSubLevels[shellIndex] = sublevels
+  MDT.dungeonTotalCount[shellIndex] = { normal = 0 }
+  Integration.spawnLookup[raid.key] = {}
+  MDT.dungeonEnemies[shellIndex], Integration.spawnLookup[raid.key] = projectRaidEnemies(raid)
+  MDT.mapPOIs[shellIndex] = pois
+  MDT.scaleMultiplier[shellIndex] = 1
+  MDT.zoneIdToDungeonIdx[raid.mapId] = shellIndex
+  MDT.knownDungeons[shellIndex] = raid.name
+end
+
+local function selectShell(raidKey, db)
+  local shellIndex = SHELL_INDICES[raidKey]
+  if not shellIndex then return nil, "unknown raid" end
+  db.currentDungeonIdx = shellIndex
+  db.selectedDungeonList = 1
+  return shellIndex
+end
+
+local function publishRaidList(db)
   MDT.seasonList[1] = L["Raid Planner"]
-  MDT.dungeonSelectionToIndex[1] = { SHELL_INDEX }
-  if not MDT.dungeonMaps[db.currentDungeonIdx] then db.currentDungeonIdx = SHELL_INDEX end
+  MDT.dungeonSelectionToIndex[1] = {
+    SHELL_INDICES["gruuls-lair"], SHELL_INDICES["black-temple"], SHELL_INDICES.hyjal,
+  }
+  if not MDT.dungeonMaps[db.currentDungeonIdx] then selectShell(DEFAULT_RAID_KEY, db) end
   if db.currentSection == nil or db.currentSection == "raids" then db.currentSection = "maps" end
   db.selectedDungeonList = 1
+end
+
+local function raidKeyForShell(shellIndex)
+  for raidKey, candidate in pairs(SHELL_INDICES) do
+    if candidate == shellIndex then return raidKey end
+  end
+end
+
+local function wireMapSelection()
+  if Integration.originalUpdateToDungeon or type(MDT.UpdateToDungeon) ~= "function" then return end
+  Integration.originalUpdateToDungeon = MDT.UpdateToDungeon
+  function MDT:UpdateToDungeon(dungeonIdx, ...)
+    local result = Integration.originalUpdateToDungeon(self, dungeonIdx, ...)
+    local raidKey = raidKeyForShell(dungeonIdx)
+    if raidKey and (not Integration.planner.raid or Integration.planner.raid.key ~= raidKey) then
+      self:OpenRaidRoute(raidKey)
+    end
+    return result
+  end
 end
 
 function Integration:Initialize()
   if self.initialized then return self end
 
   local static = ART.StaticData or {}
-  local raid = static.raids and static.raids[RAID_KEY]
-  local enemyData = static.enemyInfo and static.enemyInfo[RAID_KEY]
-  if type(raid) ~= "table" then return diagnose("missing-raid-data") end
-
   local registry = ART.RaidRegistry.new({ diagnostics = function(reason) diagnose(reason) end })
-  local registered, reason = registry:Register(raid)
-  if not registered then return diagnose(reason) end
-
-  local map = ART.MapDefinitions and ART.MapDefinitions[RAID_KEY]
-  local transform = ART.MapTransforms and ART.MapTransforms[RAID_KEY]
-  local mapOK, mapReason = validateMap(raid, map, transform)
-  if not mapOK then return diagnose(mapReason) end
+  local raids, maps = {}, {}
+  for _, raidKey in ipairs(RAID_KEYS) do
+    local raid = static.raids and static.raids[raidKey]
+    if type(raid) ~= "table" then return diagnose("missing-raid-data:"..raidKey) end
+    local registered, reason = registry:Register(raid)
+    if not registered then return diagnose(reason) end
+    local map = ART.MapDefinitions and ART.MapDefinitions[raidKey]
+    local transform = ART.MapTransforms and ART.MapTransforms[raidKey]
+    local mapOK, mapReason = validateMap(raid, map, transform)
+    if not mapOK then return diagnose(mapReason..":"..raidKey) end
+    raids[raidKey], maps[raidKey] = raid, map
+  end
 
   local routePreset = ART.RoutePreset.new({ registry = registry })
   local db = MDT:GetDB()
   local routeStore = MDT:GetRaidRouteStore()
-  publishShellData(raid, map, db)
+  self.spawnLookup = {}
+  for _, raidKey in ipairs(RAID_KEYS) do publishShellData(raids[raidKey], maps[raidKey]) end
+  publishRaidList(db)
   local planner
 
   local function wireMarks(preset, activeRaid)
-    local resolver = ART.MarkResolver.new(markDependencies(preset, activeRaid or raid, db))
+    local resolver = ART.MarkResolver.new(markDependencies(preset, activeRaid or raids[DEFAULT_RAID_KEY], db))
     ART.RaidMarks:Initialize({ resolver = resolver })
     ART.RaidMarks.resolver = resolver
     ART.RaidMarksUI:Initialize({ raidMarks = ART.RaidMarks })
   end
 
   local function persist(preset, activeRaid)
+    selectShell(activeRaid.key, db)
     wireMarks(preset, activeRaid)
     if not routeStore or self.preserveStoredRoutes[activeRaid.key] then return end
     local exported = routePreset:Export(preset, activeRaid)
@@ -167,12 +250,13 @@ function Integration:Initialize()
     onChange = persist,
   })
   local raidSelect = ART.RaidSelect:Initialize({ registry = registry, planner = planner })
-  wireMarks(nil, raid)
+  wireMarks(nil, raids[DEFAULT_RAID_KEY])
 
   local enemyInfo
   local enemyOK, enemyResult, enemyReason = pcall(function()
     local repository = ART.EnemyInfoRepository.new()
-    if type(enemyData) ~= "table" or enemyData.raidKey ~= RAID_KEY then
+    local enemyData = static.enemyInfo and static.enemyInfo[DEFAULT_RAID_KEY]
+    if type(enemyData) ~= "table" or enemyData.raidKey ~= DEFAULT_RAID_KEY then
       diagnose("missing-enemy-info", "enemyInfo")
     else
       local merged, mergeReason = repository:Merge(enemyData)
@@ -211,6 +295,7 @@ function Integration:Initialize()
   self.maps = ART.MapDefinitions
   self.transforms = ART.MapTransforms
   self.initialized = true
+  wireMapSelection()
 
   MDT.RaidRegistry = registry
   MDT.RoutePreset = routePreset
@@ -221,6 +306,8 @@ function Integration:Initialize()
   MDT.RaidEnemyInfo = enemyInfo
   MDT.RaidMaps = self.maps
   MDT.RaidMapTransforms = self.transforms
+  local selectedRaidKey = raidKeyForShell(db.currentDungeonIdx)
+  if selectedRaidKey then MDT:OpenRaidRoute(selectedRaidKey) end
   return self
 end
 
@@ -230,7 +317,7 @@ end
 
 function MDT:CreateRaidRoute(raidKey)
   if not Integration.initialized then return nil, MDT.RaidIntegrationError or "not-initialized" end
-  raidKey = raidKey or RAID_KEY
+  raidKey = raidKey or DEFAULT_RAID_KEY
   Integration.preserveStoredRoutes[raidKey] = nil
   Integration.status.storedRoute = nil
   return Integration.raidSelect:Select(raidKey)
@@ -238,14 +325,17 @@ end
 
 function MDT:OpenRaidRoute(raidKey)
   if not Integration.initialized then return nil, MDT.RaidIntegrationError or "not-initialized" end
-  raidKey = raidKey or RAID_KEY
+  raidKey = raidKey or DEFAULT_RAID_KEY
   local store = MDT:GetRaidRouteStore()
   local saved = store and store.presets[raidKey]
   if saved ~= nil then
-    local preset, reason = Integration.planner:Import(saved)
-    if preset then Integration.status.storedRoute = nil return preset end
+    local preset, reason = Integration.routePreset:Import(saved, Integration.registry)
+    if preset and preset.raidKey == raidKey then
+      preset, reason = Integration.planner:Import(saved)
+      if preset then Integration.status.storedRoute = nil return preset end
+    end
     Integration.preserveStoredRoutes[raidKey] = true
-    diagnose(reason or "invalid-stored-route", "storedRoute")
+    diagnose((preset and "stored-route-raid-mismatch") or reason or "invalid-stored-route", "storedRoute")
   end
   return Integration.raidSelect:Select(raidKey)
 end
@@ -264,11 +354,13 @@ function MDT:SaveRaidRoute()
 end
 
 function MDT:GetRaidMap(raidKey)
-  return Integration.maps and Integration.maps[raidKey or RAID_KEY]
+  raidKey = raidKey or (Integration.planner and Integration.planner.raid and Integration.planner.raid.key) or DEFAULT_RAID_KEY
+  return Integration.maps and Integration.maps[raidKey]
 end
 
 function MDT:GetRaidMapTransform(raidKey)
-  return Integration.transforms and Integration.transforms[raidKey or RAID_KEY]
+  raidKey = raidKey or (Integration.planner and Integration.planner.raid and Integration.planner.raid.key) or DEFAULT_RAID_KEY
+  return Integration.transforms and Integration.transforms[raidKey]
 end
 
 function MDT:ActivateRaidRouteStep(routeStepId)
@@ -286,7 +378,8 @@ end
 
 function MDT:GetRaidEnemyInfo(raidKey, npcId)
   if not Integration.enemyInfo then return nil, "not-initialized" end
-  return Integration.enemyInfo:Get(raidKey or RAID_KEY, npcId)
+  raidKey = raidKey or (Integration.planner and Integration.planner.raid and Integration.planner.raid.key) or DEFAULT_RAID_KEY
+  return Integration.enemyInfo:Get(raidKey, npcId)
 end
 
 local lastEnemySelector
@@ -297,7 +390,8 @@ local function npcIdFromSelector(selector)
     return tonumber(selector.npcId or selector.id or (selector.data and (selector.data.npcId or selector.data.id)))
   end
   local npcId = tonumber(selector)
-  if Integration.enemyInfo and npcId and Integration.enemyInfo:Get(RAID_KEY, npcId) then return npcId end
+  local raidKey = Integration.planner and Integration.planner.raid and Integration.planner.raid.key or DEFAULT_RAID_KEY
+  if Integration.enemyInfo and npcId and Integration.enemyInfo:Get(raidKey, npcId) then return npcId end
   local db = MDT:GetDB()
   local enemy = db and MDT.dungeonEnemies and MDT.dungeonEnemies[db.currentDungeonIdx]
       and MDT.dungeonEnemies[db.currentDungeonIdx][npcId]
@@ -333,7 +427,7 @@ function MDT:ShowEnemyInfoFrame(selector)
   lastEnemySelector = selector or lastEnemySelector
   lastEnemyNpcId = npcIdFromSelector(lastEnemySelector) or lastEnemyNpcId
   if not lastEnemyNpcId then return nil, "unknown-enemy" end
-  local info, reason = self:GetRaidEnemyInfo(RAID_KEY, lastEnemyNpcId)
+  local info, reason = self:GetRaidEnemyInfo(nil, lastEnemyNpcId)
   if not info then return nil, reason end
   local frame = ensureEnemyInfoFrame()
   if frame then
