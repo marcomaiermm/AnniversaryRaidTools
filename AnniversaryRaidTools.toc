@@ -15,4 +15,12 @@ BuildCheck.lua
 Core\Compat.lua
 Core\Bootstrap.lua
 Core\CombatLogging.lua
-Bindings.xml
+libs\load_libs.xml
+MythicDungeonTools_UI\Bootstrap.lua
+locales.xml
+AceGUIWidgets\load_widgets.xml
+Utility.lua
+Core\SavedVariables.lua
+MythicDungeonTools.lua
+Core\Lifecycle.lua
+Modules\load_modules.xml

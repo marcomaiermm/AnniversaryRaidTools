@@ -68,6 +68,9 @@ end
 local core = {}
 assert(loadfile(root.."/BuildCheck.lua"))("MythicDungeonTools", core)
 local coreSource = read("Core/Bootstrap.lua")
+local rootTOC = read("AnniversaryRaidTools.toc")
+assert(coreSource:find('local UI_ADDON_NAME = addonName', 1, true), "UI must use the root addon lifecycle")
+assert(rootTOC:find('MythicDungeonTools_UI\\Bootstrap.lua', 1, true), "root TOC must load the integrated UI")
 local callUIWithLoadingSource = assert(coreSource:match(
   "(local function callUIWithLoading%([%s%S]-\r?\nend)\r?\n\r?\nfunction MDT:ShowInterface"))
 local callUIWithLoadingChunk = assert(loadstring(callUIWithLoadingSource.."\nreturn callUIWithLoading", "@Core/Bootstrap.lua"))

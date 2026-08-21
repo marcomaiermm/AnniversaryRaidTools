@@ -33,7 +33,7 @@ def render_lua(raid: dict[str, Any]) -> str:
     metadata = (
         "-- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.\n"
         f"-- Generator: {GENERATOR_VERSION}\n"
-        "-- Source: AzerothCore candidate snapshot; not Anniversary-verified.\n"
+        "-- Source: TBC candidate snapshot; not Anniversary-verified.\n"
         f"-- SourceRef: {source.get('sourceRef') or 'nil'}\n"
         f"-- ObservedAt: {source.get('observedAt') or 'nil'}\n"
         "-- Nnoggie's Mythic Dungeon Tools attribution and GPL-2.0 terms remain in the repository.\n"

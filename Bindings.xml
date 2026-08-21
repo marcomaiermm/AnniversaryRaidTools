@@ -1,6 +1,6 @@
 <Bindings>
-  <Binding name="MDTTOGGLE" Category="BINDING_HEADER_MDT">
+  <Binding name="MDTTOGGLE" category="BINDING_HEADER_MDT">
     AnniversaryRaidToolsAPI:ShowInterface()
   </Binding>
-  <Binding name="CLICK MDTFocusMarkerButton:LeftButton" Category="BINDING_HEADER_MDT" />
+  <Binding name="CLICK MDTFocusMarkerButton:LeftButton" category="BINDING_HEADER_MDT" />
 </Bindings>

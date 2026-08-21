@@ -20,7 +20,7 @@ must be explicit and actionable.
 4. Raid registry and pure domain services.
 5. Feature modules.
 6. Raid data and maps.
-7. UI wiring after its load-on-demand addon is available.
+7. UI wiring inside the root addon.
 
 The bootstrap boundary initializes the static-data publication tables defined by
 `docs/contracts/static-data-publication.md` before raid or enemy-info data loads.
@@ -34,6 +34,6 @@ them after dependency contracts are verified.
 ## Compatibility gates
 
 - Fresh install and migrated MDT-derived SavedVariables load without Lua errors.
-- UI addon enabled and disabled states are safe.
+- The integrated UI opens without a second addon folder.
 - `/art`, reload, minimap, and route import/export work on `20505` and `20506`.
 - No unwrapped Retail-only API occurs on the startup/open/close path.

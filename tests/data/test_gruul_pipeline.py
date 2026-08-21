@@ -23,6 +23,13 @@ OUTPUT = ROOT / "Raids" / "TBC" / "Generated" / "GruulsLair.lua"
 def main() -> None:
     raid = build_raid(load_snapshot(SOURCE))
     assert validate_raid(raid) == []
+    assert sum(len(enemy["spawns"]) for enemy in raid["enemies"].values()) == 18
+    assert len(raid["packs"]) == 6
+    spawns = {spawn["key"]: spawn for enemy in raid["enemies"].values() for spawn in enemy["spawns"]}
+    gruul_hall = raid["packs"]["gruuls-lair:pack:trash-gruul-hall"]["spawnKeys"]
+    assert len(gruul_hall) == 3 and {spawns[key]["npcId"] for key in gruul_hall} == {19389}
+    patrols = [spawn["patrol"] for spawn in spawns.values() if "patrol" in spawn]
+    assert sorted(map(len, patrols)) == [5, 6, 13]
     first = render_lua(raid)
     second = render_lua(build_raid(load_snapshot(SOURCE)))
     assert first == second, "repeated generation must be byte-identical"

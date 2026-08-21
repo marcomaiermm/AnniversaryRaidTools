@@ -11,7 +11,7 @@ local RaidEnemyInfo = ART.RaidEnemyInfo or {}
 ART.RaidEnemyInfo = RaidEnemyInfo
 if addon and addon.RaidEnemyInfo == nil then addon.RaidEnemyInfo = RaidEnemyInfo end
 
-local type, pcall, select, unpack = type, pcall, select, unpack
+local type, pcall, select = type, pcall, select
 
 local function safeCall(fn, ...)
   if type(fn) ~= "function" then return false, "missing" end
@@ -68,11 +68,11 @@ function RaidEnemyInfo:Initialize(dependencies)
         local handler = self.recorder.OnCombatLogEvent or self.recorder.RecordEvent
         if type(handler) ~= "function" then return end
         if select("#", ...) == 0 and type(getCombatLogEventInfo) == "function" then
-          local payload = { pcall(getCombatLogEventInfo) }
-          if not payload[1] then return end
-          table.remove(payload, 1)
-          if #payload == 0 then return end
-          pcall(handler, self.recorder, unpack(payload))
+          local ok, timestamp, subevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags,
+              destGUID, destName, destFlags, destRaidFlags, spellId = pcall(getCombatLogEventInfo)
+          if not ok then return end
+          pcall(handler, self.recorder, timestamp, subevent, hideCaster, sourceGUID, sourceName, sourceFlags,
+            sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, spellId)
           return
         end
         pcall(handler, self.recorder, ...)

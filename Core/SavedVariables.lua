@@ -78,6 +78,16 @@ for i = 1, 200 do
 end
 
 local db
+local raidRouteStore
+
+local function initializeRaidRouteStore(global)
+  if global.raidRoutes == nil then
+    global.raidRoutes = { schemaVersion = 1, presets = {} }
+  end
+  local store = global.raidRoutes
+  if type(store) ~= "table" or store.schemaVersion ~= 1 or type(store.presets) ~= "table" then return end
+  return store
+end
 
 function MDT:GetDefaultSavedVariables()
   return defaultSavedVars
@@ -92,11 +102,17 @@ function MDT:InitializeSavedVariables()
     if presetIdx <= 0 then db.currentPreset[dungeonIdx] = 1 end
   end
 
+  raidRouteStore = initializeRaidRouteStore(db)
+
   return db
 end
 
 function MDT:GetDB()
   return db
+end
+
+function MDT:GetRaidRouteStore()
+  return raidRouteStore
 end
 
 --/run MDT:ResetDataCache();

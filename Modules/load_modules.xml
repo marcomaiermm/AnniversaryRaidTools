@@ -1,4 +1,8 @@
 ﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file='..\Core\RaidRegistry.lua'/>
+	<Script file='..\Core\RoutePreset.lua'/>
+	<Script file='..\Core\EnemyInfoRepository.lua'/>
+	<Script file='..\Core\MarkResolver.lua'/>
 	<Script file='MainFrame.lua'/>
 	<Script file='MapView.lua'/>
 	<Script file='Presets.lua'/>
@@ -7,7 +11,6 @@
 	<Script file='FramePools.lua'/>
 	<Include file='DungeonEnemies.xml'/>
 	<Script file='PullOutlines.lua'/>
-	<Script file='EnemyInfo.lua'/>
 	<Script file='Pointsofinterest.lua'/>
 	<Script file='PresetObjects.lua'/>
 	<Script file='Toolbar.lua'/>
@@ -26,4 +29,15 @@
 	<Script file='ErrorHandling.lua'/>
 	<Script file='InGameChangeLog.lua'/>
 	<Script file='VersionCheck.lua'/>
+	<Script file='..\Developer\RaidRecorder.lua'/>
+	<Script file='RaidPlanner.lua'/>
+	<Script file='RaidSelect.lua'/>
+	<Script file='RaidMarks.lua'/>
+	<Script file='RaidMarksUI.lua'/>
+	<Script file='RaidEnemyInfo.lua'/>
+	<Script file='..\Raids\TBC\Generated\GruulsLair.lua'/>
+	<Script file='..\Raids\TBC\Maps\GruulsLair.lua'/>
+	<Script file='..\Raids\TBC\Transforms\GruulsLair.lua'/>
+	<Script file='..\Data\EnemyInfo\GruulsLair.lua'/>
+	<Script file='EnemyInfo.lua'/>
 </Ui>

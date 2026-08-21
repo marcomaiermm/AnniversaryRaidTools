@@ -23,14 +23,9 @@ assert(feature:Initialize({
   eventFrame = frame,
   GetCombatLogEventInfo = function()
     queriedCombatLog = queriedCombatLog + 1
-    return {
-      raidKey = "gruuls-lair",
-      subevent = "SPELL_CAST_SUCCESS",
-      sourceGUID = "Creature-0-1-2-3-18831-0000000001",
-      npcId = 18831,
-      spellId = 33654,
-      timestamp = 2,
-    }
+    return 2, "SPELL_CAST_SUCCESS", false,
+      "Creature-0-1-2-3-18831-0000000001", "High King Maulgar", 1, 0,
+      nil, nil, nil, nil, 33654
   end,
 }) == feature)
 assert(feature:Initialize({ repository = {} }) == feature, "Initialize is idempotent")
@@ -47,6 +42,8 @@ frame.scripts.OnEvent(frame, "COMBAT_LOG_EVENT_UNFILTERED", {
 assert(feature:GetRecorder():Get("gruuls-lair", 18831).spells[33654])
 frame.scripts.OnEvent(frame, "COMBAT_LOG_EVENT_UNFILTERED")
 assert(queriedCombatLog == 1, "empty event payload must use the injected combat-log callback")
+assert(feature:GetRecorder():Get("gruuls-lair", 18831).spells[33654].events.SPELL_CAST_SUCCESS == 2,
+  "nil combat-log fields must not truncate spellId forwarding")
 feature:Shutdown()
 assert(frame.unregistered == "COMBAT_LOG_EVENT_UNFILTERED")
 

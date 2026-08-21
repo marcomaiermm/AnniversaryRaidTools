@@ -1,8 +1,8 @@
 -- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.
 -- Generator: art-030-generator-v2
--- Source: AzerothCore candidate snapshot; not Anniversary-verified.
--- SourceRef: fixture://azerothcore/gruuls-lair-v1
--- ObservedAt: 2026-08-21T00:00:00Z
+-- Source: TBC candidate snapshot; not Anniversary-verified.
+-- SourceRef: https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations
+-- ObservedAt: 2026-08-21T18:15:00Z
 -- Nnoggie's Mythic Dungeon Tools attribution and GPL-2.0 terms remain in the repository.
 local raid = {
   schemaVersion = 1,
@@ -25,38 +25,24 @@ local raid = {
       npcId = 18831,
       source = {
         confidence = "candidate",
-        observedAt = "2026-08-21T00:00:00Z",
-        source = "azerothcore",
-        sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
       },
       spawns = {
         {
           key = "gruuls-lair:spawn:18831:maulgar",
           npcId = 18831,
           packKey = "gruuls-lair:pack:maulgar",
-          patrol = {
-            {
-              x = 0.46,
-              y = 0.54,
-            },
-            {
-              x = 0.48,
-              y = 0.56,
-            },
-            {
-              x = 0.5,
-              y = 0.54,
-            },
-          },
           source = {
             confidence = "candidate",
-            observedAt = "2026-08-21T00:00:00Z",
-            source = "azerothcore",
-            sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
           },
           sublevel = 1,
-          x = 0.48,
-          y = 0.56,
+          x = 0.537665,
+          y = 0.555574,
         },
       },
     },
@@ -65,9 +51,9 @@ local raid = {
       npcId = 18832,
       source = {
         confidence = "candidate",
-        observedAt = "2026-08-21T00:00:00Z",
-        source = "azerothcore",
-        sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
       },
       spawns = {
         {
@@ -76,13 +62,13 @@ local raid = {
           packKey = "gruuls-lair:pack:maulgar",
           source = {
             confidence = "candidate",
-            observedAt = "2026-08-21T00:00:00Z",
-            source = "azerothcore",
-            sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
           },
           sublevel = 1,
-          x = 0.42,
-          y = 0.53,
+          x = 0.565678,
+          y = 0.53622,
         },
       },
     },
@@ -91,9 +77,9 @@ local raid = {
       npcId = 18834,
       source = {
         confidence = "candidate",
-        observedAt = "2026-08-21T00:00:00Z",
-        source = "azerothcore",
-        sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
       },
       spawns = {
         {
@@ -102,13 +88,13 @@ local raid = {
           packKey = "gruuls-lair:pack:maulgar",
           source = {
             confidence = "candidate",
-            observedAt = "2026-08-21T00:00:00Z",
-            source = "azerothcore",
-            sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
           },
           sublevel = 1,
-          x = 0.54,
-          y = 0.53,
+          x = 0.551699,
+          y = 0.545654,
         },
       },
     },
@@ -117,9 +103,9 @@ local raid = {
       npcId = 18835,
       source = {
         confidence = "candidate",
-        observedAt = "2026-08-21T00:00:00Z",
-        source = "azerothcore",
-        sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
       },
       spawns = {
         {
@@ -128,13 +114,13 @@ local raid = {
           packKey = "gruuls-lair:pack:maulgar",
           source = {
             confidence = "candidate",
-            observedAt = "2026-08-21T00:00:00Z",
-            source = "azerothcore",
-            sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
           },
           sublevel = 1,
-          x = 0.42,
-          y = 0.6,
+          x = 0.509912,
+          y = 0.547257,
         },
       },
     },
@@ -143,9 +129,9 @@ local raid = {
       npcId = 18836,
       source = {
         confidence = "candidate",
-        observedAt = "2026-08-21T00:00:00Z",
-        source = "azerothcore",
-        sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
       },
       spawns = {
         {
@@ -154,13 +140,13 @@ local raid = {
           packKey = "gruuls-lair:pack:maulgar",
           source = {
             confidence = "candidate",
-            observedAt = "2026-08-21T00:00:00Z",
-            source = "azerothcore",
-            sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
           },
           sublevel = 1,
-          x = 0.54,
-          y = 0.6,
+          x = 0.52396,
+          y = 0.550769,
         },
       },
     },
@@ -169,34 +155,318 @@ local raid = {
       npcId = 19044,
       source = {
         confidence = "candidate",
-        observedAt = "2026-08-21T00:00:00Z",
-        source = "azerothcore",
-        sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
       },
       spawns = {
         {
           key = "gruuls-lair:spawn:19044:gruul",
           npcId = 19044,
           packKey = "gruuls-lair:pack:gruul",
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.199,
+          y = 0.283,
+        },
+      },
+    },
+    ["19389"] = {
+      name = "Lair Brute",
+      npcId = 19389,
+      source = {
+        confidence = "candidate",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+      },
+      spawns = {
+        {
+          key = "gruuls-lair:spawn:19389:entrance-brute",
+          npcId = 19389,
+          packKey = "gruuls-lair:pack:trash-entrance",
           patrol = {
             {
-              x = 0.7,
-              y = 0.42,
+              x = 0.675152,
+              y = 0.764071,
             },
             {
-              x = 0.72,
-              y = 0.44,
+              x = 0.640962,
+              y = 0.752212,
+            },
+            {
+              x = 0.623387,
+              y = 0.726221,
+            },
+            {
+              x = 0.641583,
+              y = 0.751593,
+            },
+            {
+              x = 0.675594,
+              y = 0.763512,
+            },
+            {
+              x = 0.737555,
+              y = 0.773571,
             },
           },
           source = {
             confidence = "candidate",
-            observedAt = "2026-08-21T00:00:00Z",
-            source = "azerothcore",
-            sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
           },
           sublevel = 1,
-          x = 0.72,
-          y = 0.44,
+          x = 0.715266,
+          y = 0.772488,
+        },
+        {
+          key = "gruuls-lair:spawn:19389:lower-corridor-brute-1",
+          npcId = 19389,
+          packKey = "gruuls-lair:pack:trash-lower-corridor",
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.368316,
+          y = 0.651831,
+        },
+        {
+          key = "gruuls-lair:spawn:19389:lower-corridor-brute-2",
+          npcId = 19389,
+          packKey = "gruuls-lair:pack:trash-lower-corridor",
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.365617,
+          y = 0.690058,
+        },
+        {
+          key = "gruuls-lair:spawn:19389:upper-corridor-brute-1",
+          npcId = 19389,
+          packKey = "gruuls-lair:pack:trash-upper-corridor",
+          patrol = {
+            {
+              x = 0.24593,
+              y = 0.633043,
+            },
+            {
+              x = 0.271219,
+              y = 0.645691,
+            },
+            {
+              x = 0.272661,
+              y = 0.654389,
+            },
+            {
+              x = 0.257869,
+              y = 0.638457,
+            },
+            {
+              x = 0.242185,
+              y = 0.628889,
+            },
+            {
+              x = 0.225682,
+              y = 0.60912,
+            },
+            {
+              x = 0.215558,
+              y = 0.585691,
+            },
+            {
+              x = 0.209474,
+              y = 0.566106,
+            },
+            {
+              x = 0.211385,
+              y = 0.538949,
+            },
+            {
+              x = 0.207008,
+              y = 0.489563,
+            },
+            {
+              x = 0.209819,
+              y = 0.535777,
+            },
+            {
+              x = 0.207901,
+              y = 0.564311,
+            },
+            {
+              x = 0.216884,
+              y = 0.587263,
+            },
+          },
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.230907,
+          y = 0.617357,
+        },
+        {
+          key = "gruuls-lair:spawn:19389:upper-corridor-brute-2",
+          npcId = 19389,
+          packKey = "gruuls-lair:pack:trash-gruul-hall",
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.207905,
+          y = 0.463731,
+        },
+        {
+          key = "gruuls-lair:spawn:19389:upper-corridor-brute-3",
+          npcId = 19389,
+          packKey = "gruuls-lair:pack:trash-gruul-hall",
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.221543,
+          y = 0.458174,
+        },
+        {
+          key = "gruuls-lair:spawn:19389:gruul-hall-brute",
+          npcId = 19389,
+          packKey = "gruuls-lair:pack:trash-gruul-hall",
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.196272,
+          y = 0.45662,
+        },
+      },
+    },
+    ["21350"] = {
+      name = "Gronn-Priest",
+      npcId = 21350,
+      source = {
+        confidence = "candidate",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+      },
+      spawns = {
+        {
+          key = "gruuls-lair:spawn:21350:entrance-priest-1",
+          npcId = 21350,
+          packKey = "gruuls-lair:pack:trash-entrance",
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.655804,
+          y = 0.776757,
+        },
+        {
+          key = "gruuls-lair:spawn:21350:entrance-priest-2",
+          npcId = 21350,
+          packKey = "gruuls-lair:pack:trash-entrance",
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.658903,
+          y = 0.745376,
+        },
+        {
+          key = "gruuls-lair:spawn:21350:lower-corridor-priest",
+          npcId = 21350,
+          packKey = "gruuls-lair:pack:trash-lower-corridor",
+          patrol = {
+            {
+              x = 0.361693,
+              y = 0.670951,
+            },
+            {
+              x = 0.312337,
+              y = 0.654357,
+            },
+            {
+              x = 0.3042,
+              y = 0.657366,
+            },
+            {
+              x = 0.2852,
+              y = 0.654057,
+            },
+            {
+              x = 0.312691,
+              y = 0.653857,
+            },
+          },
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.355221,
+          y = 0.67126,
+        },
+        {
+          key = "gruuls-lair:spawn:21350:gruul-hall-priest-1",
+          npcId = 21350,
+          packKey = "gruuls-lair:pack:trash-upper-corridor",
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.282027,
+          y = 0.675069,
+        },
+        {
+          key = "gruuls-lair:spawn:21350:gruul-hall-priest-2",
+          npcId = 21350,
+          packKey = "gruuls-lair:pack:trash-upper-corridor",
+          source = {
+            confidence = "candidate",
+            observedAt = "2026-08-21T18:15:00Z",
+            source = "derived",
+            sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+          },
+          sublevel = 1,
+          x = 0.265842,
+          y = 0.670949,
         },
       },
     },
@@ -207,9 +477,9 @@ local raid = {
       label = "Gruul the Dragonkiller",
       source = {
         confidence = "candidate",
-        observedAt = "2026-08-21T00:00:00Z",
-        source = "azerothcore",
-        sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
       },
       spawnKeys = {
         "gruuls-lair:spawn:19044:gruul",
@@ -220,9 +490,9 @@ local raid = {
       label = "High King Maulgar",
       source = {
         confidence = "candidate",
-        observedAt = "2026-08-21T00:00:00Z",
-        source = "azerothcore",
-        sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
       },
       spawnKeys = {
         "gruuls-lair:spawn:18831:maulgar",
@@ -232,6 +502,66 @@ local raid = {
         "gruuls-lair:spawn:18836:blindeye",
       },
     },
+    ["gruuls-lair:pack:trash-entrance"] = {
+      key = "gruuls-lair:pack:trash-entrance",
+      label = "Entrance trash",
+      source = {
+        confidence = "candidate",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+      },
+      spawnKeys = {
+        "gruuls-lair:spawn:19389:entrance-brute",
+        "gruuls-lair:spawn:21350:entrance-priest-1",
+        "gruuls-lair:spawn:21350:entrance-priest-2",
+      },
+    },
+    ["gruuls-lair:pack:trash-gruul-hall"] = {
+      key = "gruuls-lair:pack:trash-gruul-hall",
+      label = "Gruul hall trash",
+      source = {
+        confidence = "candidate",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+      },
+      spawnKeys = {
+        "gruuls-lair:spawn:19389:gruul-hall-brute",
+        "gruuls-lair:spawn:19389:upper-corridor-brute-2",
+        "gruuls-lair:spawn:19389:upper-corridor-brute-3",
+      },
+    },
+    ["gruuls-lair:pack:trash-lower-corridor"] = {
+      key = "gruuls-lair:pack:trash-lower-corridor",
+      label = "Lower corridor trash",
+      source = {
+        confidence = "candidate",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+      },
+      spawnKeys = {
+        "gruuls-lair:spawn:19389:lower-corridor-brute-1",
+        "gruuls-lair:spawn:19389:lower-corridor-brute-2",
+        "gruuls-lair:spawn:21350:lower-corridor-priest",
+      },
+    },
+    ["gruuls-lair:pack:trash-upper-corridor"] = {
+      key = "gruuls-lair:pack:trash-upper-corridor",
+      label = "Upper corridor trash",
+      source = {
+        confidence = "candidate",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+      },
+      spawnKeys = {
+        "gruuls-lair:spawn:19389:upper-corridor-brute-1",
+        "gruuls-lair:spawn:21350:gruul-hall-priest-1",
+        "gruuls-lair:spawn:21350:gruul-hall-priest-2",
+      },
+    },
   },
   pois = {
     [1] = {
@@ -239,13 +569,13 @@ local raid = {
         label = "Gruul's arena",
         source = {
           confidence = "candidate",
-          observedAt = "2026-08-21T00:00:00Z",
-          source = "azerothcore",
-          sourceRef = "fixture://azerothcore/gruuls-lair-v1",
+          observedAt = "2026-08-21T18:15:00Z",
+          source = "derived",
+          sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
         },
         sublevel = 1,
-        x = 0.72,
-        y = 0.44,
+        x = 0.199,
+        y = 0.283,
       },
     },
   },

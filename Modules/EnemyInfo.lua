@@ -1,624 +1,361 @@
+-- Made by Nnoggie, 2017-2025
+-- Gruul vertical-slice registration and sourced enemy-info UI adapter.
+
 local _, MDT = ...
+local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools bootstrap is required")
 local L = MDT.L
-local AceGUI = LibStub("AceGUI-3.0")
-local db
-local tinsert = table.insert
 
-AceGUI:RegisterLayout("ThreeColums", function(content, children)
-  if children[1] then
-    children[1]:SetWidth(content:GetWidth() / 3 - 10)
-    children[1].frame:ClearAllPoints()
-    children[1].frame:SetPoint("TOPLEFT", content, "TOPLEFT", 0, 0)
-    children[1].frame:SetPoint("BOTTOMLEFT", content, "BOTTOMLEFT", 0, 0)
-    children[1].frame:Show()
-  end
-  if children[2] then
-    children[2]:SetWidth(content:GetWidth() / 3 - 10)
-    children[2].frame:ClearAllPoints()
-    children[2].frame:SetPoint("TOPLEFT", children[1].frame, "TOPRIGHT", 0, 0)
-    children[2].frame:SetPoint("BOTTOMLEFT", children[1].frame, "BOTTOMRIGHT", 0, 0)
-    children[2].frame:Show()
-  end
-  if children[3] then
-    children[3]:SetWidth(content:GetWidth() / 3 - 10)
-    children[3].frame:ClearAllPoints()
-    children[3].frame:SetPoint("TOPLEFT", children[2].frame, "TOPRIGHT", 0, 0)
-    children[3].frame:SetPoint("BOTTOMLEFT", children[2].frame, "BOTTOMRIGHT", 0, 0)
-    children[3].frame:Show()
-  end
-  xpcall(content.obj.LayoutFinished, errorhandler, content.obj, nil, nil)
-end)
-
--- Very simple Layout, Children are stacked on top of each other down the left side
-AceGUI:RegisterLayout("ListWithHidden", function(content, children)
-  local filteredChildren = {}
-  for i = 1, #children do
-    local child = children[i]
-    if not child.hidden then
-      tinsert(filteredChildren, child)
-    else
-      local frame = child.frame
-      frame:ClearAllPoints()
-      frame:Hide()
-    end
-  end
-  AceGUI:GetLayout("List")(content, filteredChildren)
-end)
-
-local currentTab = "tab1"
-local function MakeEnemeyInfoFrame()
-  local f = AceGUI:Create("Frame")
-  f.frame:SetParent(MDT.main_frame)
-  f.frame:SetFrameStrata("DIALOG")
-  MDT.enemyInfoFrame = f
-  f:SetTitle(L["Enemy Info"])
-  f:EnableResize(false)
-  f.frame:SetMovable(false)
-  function f.frame:StartMoving() end
-
-  f:SetLayout("Fill")
-  f:SetCallback("OnClose", function(widget)
-
-  end)
-  f.frame:ClearAllPoints()
-  f.frame:SetAllPoints(MDTScrollFrame)
-
-  local originalHide = MDT.main_frame.Hide
-  function MDT.main_frame:Hide(...)
-    f.frame:Hide()
-    return originalHide(self, ...);
-  end
-
-  f.tabGroup = AceGUI:Create("TabGroup")
-  local tabGroup = f.tabGroup
-  tabGroup:SetTabs(
-    {
-      { text = L["Enemy Info"], value = "tab1" },
-      --{text="Damage Calc", value="tab2"},
-    }
-  )
-  tabGroup:SetLayout("ThreeColums")
-  f:AddChild(tabGroup)
-
-  --EnemyInfo
-  local function DrawGroup1(container)
-    ---LEFT
-    local leftContainer = AceGUI:Create("SimpleGroup")
-    f.leftContainer = leftContainer
-    if not leftContainer.frame.SetBackdrop then
-      Mixin(leftContainer.frame, BackdropTemplateMixin)
-    end
-    --Temporary Fix: backdrop frame level is set to 10000 normally
-    --leftContainer.frame:GetBackdrop():SetFrameLevel(1)
-    leftContainer.frame:SetBackdropColor(1, 1, 1, 0)
-    leftContainer:SetLayout("List")
-    leftContainer:SetWidth(container.frame:GetWidth() / 3)
-    leftContainer:SetHeight(container.frame:GetHeight())
-
-    --enemyDropDown
-    f.enemyDropDown = AceGUI:Create("Dropdown")
-    local enemyDropDown = f.enemyDropDown
-    enemyDropDown:SetCallback("OnValueChanged", function(widget, callbackName, key)
-      MDT:UpdateEnemyInfoFrame(key)
-    end)
-
-    --model
-    f.model = f.model or CreateFrame("PlayerModel", nil, f.frame, "ModelWithControlsTemplate")
-    local model = f.model
-    model:SetFrameLevel(1)
-    model:SetSize(leftContainer.frame:GetWidth() - 30, 269)
-    model:SetScript("OnEnter", nil)
-    model:SetFrameLevel(150)
-    model:Show()
-    f.modelContainer = f.modelContainer or AceGUI:Create("InlineGroup")
-    local modelContainer = f.modelContainer
-    if not modelContainer.frame.SetBackdrop then
-      Mixin(modelContainer.frame, BackdropTemplateMixin)
-    end
-    modelContainer.frame:SetBackdropColor(1, 1, 1, 0)
-    modelContainer:SetWidth(leftContainer.frame:GetWidth() - 20)
-    modelContainer:SetHeight(249)
-    modelContainer:SetLayout("Flow")
-    f.modelDummyIcon = f.modelDummyIcon or AceGUI:Create("Icon")
-    local modelDummyIcon = f.modelDummyIcon
-    modelDummyIcon:SetImageSize(leftContainer.frame:GetWidth() - 20, 249)
-    modelDummyIcon:SetDisabled(true)
-    modelContainer:AddChild(modelDummyIcon)
-    model:ClearAllPoints()
-    model:SetPoint("BOTTOM", modelContainer.frame, "BOTTOM", 0, 10)
-    MDT:FixAceGUIShowHide(model, modelContainer.frame, true)
-
-    f.characteristicsContainer = AceGUI:Create("InlineGroup")
-    if not f.characteristicsContainer.frame.SetBackdrop then
-      Mixin(f.characteristicsContainer.frame, BackdropTemplateMixin)
-    end
-    f.characteristicsContainer.frame:SetBackdropColor(1, 1, 1, 0)
-    f.characteristicsContainer:SetWidth(leftContainer.frame:GetWidth() - 20)
-    f.characteristicsContainer:SetHeight(80)
-    f.characteristicsContainer:SetLayout("Flow")
-
-    leftContainer:AddChild(enemyDropDown)
-    leftContainer:AddChild(modelContainer)
-    leftContainer:AddChild(f.characteristicsContainer)
-
-    ---MIDDLE
-    f.midContainer = f.midContainer or AceGUI:Create("SimpleGroup")
-    local midContainer = f.midContainer
-    if not midContainer.frame.SetBackdrop then
-      Mixin(midContainer.frame, BackdropTemplateMixin)
-    end
-    --Temporary Fix: backdrop frame level is set to 10000 normally
-    --midContainer.frame.backdrop:SetFrameLevel(1)
-    midContainer.frame:SetBackdropColor(1, 1, 1, 0)
-    midContainer:SetLayout("List")
-    midContainer:SetWidth(container.frame:GetWidth() / 3)
-    midContainer:SetHeight(container.frame:GetHeight())
-
-    --spacing
-    local midDummyIcon = AceGUI:Create("Icon")
-    midDummyIcon:SetImageSize(20, 20)
-    midDummyIcon:SetHeight(enemyDropDown.frame:GetHeight())
-    midDummyIcon:SetDisabled(true)
-    midContainer:AddChild(midDummyIcon)
-
-    f.enemyDataContainer = AceGUI:Create("InlineGroup")
-    if not f.enemyDataContainer.frame.SetBackdrop then
-      Mixin(f.enemyDataContainer.frame, BackdropTemplateMixin)
-    end
-    f.enemyDataContainer.frame:SetBackdropColor(1, 1, 1, 0)
-    f.enemyDataContainer:SetWidth(leftContainer.frame:GetWidth() - 20)
-    f.enemyDataContainer:SetHeight(235)
-    f.enemyDataContainer:SetLayout("Flow")
-
-    f.enemyDataContainer.nameEditBox = AceGUI:Create("EditBox")
-    f.enemyDataContainer.nameEditBox:SetLabel(L["Enemy Info NPC Name"])
-    f.enemyDataContainer.nameEditBox:DisableButton(true)
-    f.enemyDataContainer.nameEditBox:SetCallback("OnTextChanged", function(self)
-      self:SetText(self.defaultText)
-    end)
-    f.enemyDataContainer:AddChild(f.enemyDataContainer.nameEditBox)
-
-    f.enemyDataContainer.idEditBox = AceGUI:Create("EditBox")
-    f.enemyDataContainer.idEditBox:SetLabel(L["Enemy Info NPC Id"])
-    f.enemyDataContainer.idEditBox:DisableButton(true)
-    f.enemyDataContainer.idEditBox:SetCallback("OnTextChanged", function(self)
-      self:SetText(self.defaultText)
-    end)
-    f.enemyDataContainer:AddChild(f.enemyDataContainer.idEditBox)
-
-    f.enemyDataContainer.healthEditBox = AceGUI:Create("EditBox")
-    f.enemyDataContainer.healthEditBox:SetLabel(" ") --has to be non empty for proper spacing, we set this later
-    f.enemyDataContainer.healthEditBox:DisableButton(true)
-    f.enemyDataContainer.healthEditBox:SetCallback("OnTextChanged", function(self)
-      self:SetText(self.defaultText)
-    end)
-    f.enemyDataContainer:AddChild(f.enemyDataContainer.healthEditBox)
-
-    f.enemyDataContainer.creatureTypeEditBox = AceGUI:Create("EditBox")
-    f.enemyDataContainer.creatureTypeEditBox:SetLabel(L["Enemy Info NPC Creature Type"])
-    f.enemyDataContainer.creatureTypeEditBox:DisableButton(true)
-    f.enemyDataContainer.creatureTypeEditBox:SetCallback("OnTextChanged", function(self)
-      self:SetText(self.defaultText)
-    end)
-    f.enemyDataContainer:AddChild(f.enemyDataContainer.creatureTypeEditBox)
-
-    f.enemyDataContainer.levelEditBox = AceGUI:Create("EditBox")
-    f.enemyDataContainer.levelEditBox:SetLabel(L["Enemy Info NPC Level"])
-    f.enemyDataContainer.levelEditBox:DisableButton(true)
-    f.enemyDataContainer.levelEditBox:SetCallback("OnTextChanged", function(self)
-      self:SetText(self.defaultText)
-    end)
-    f.enemyDataContainer:AddChild(f.enemyDataContainer.levelEditBox)
-
-    f.enemyDataContainer.countEditBox = AceGUI:Create("EditBox")
-    f.enemyDataContainer.countEditBox:SetLabel(L["Enemy Info NPC Enemy Forces"])
-    f.enemyDataContainer.countEditBox:DisableButton(true)
-    f.enemyDataContainer.countEditBox:SetCallback("OnTextChanged", function(self)
-      self:SetText(self.defaultText)
-    end)
-    f.enemyDataContainer:AddChild(f.enemyDataContainer.countEditBox)
-
-    f.enemyDataContainer.stealthCheckBox = AceGUI:Create("CheckBox")
-    f.enemyDataContainer.stealthCheckBox:SetLabel(L["Enemy Info NPC Stealth"])
-    f.enemyDataContainer.stealthCheckBox:SetWidth((f.enemyDataContainer.frame:GetWidth() / 2) - 40)
-    f.enemyDataContainer.stealthCheckBox:SetCallback("OnValueChanged", function(self)
-      self:SetValue(self.defaultValue)
-    end)
-    f.enemyDataContainer:AddChild(f.enemyDataContainer.stealthCheckBox)
-
-    f.enemyDataContainer.stealthDetectCheckBox = AceGUI:Create("CheckBox")
-    f.enemyDataContainer.stealthDetectCheckBox:SetLabel(L["Enemy Info NPC Stealth Detect"])
-    f.enemyDataContainer.stealthDetectCheckBox:SetWidth((f.enemyDataContainer.frame:GetWidth() / 2))
-    f.enemyDataContainer.stealthDetectCheckBox:SetCallback("OnValueChanged", function(self)
-      self:SetValue(self.defaultValue)
-    end)
-    f.enemyDataContainer:AddChild(f.enemyDataContainer.stealthDetectCheckBox)
-
-
-    midContainer:AddChild(f.enemyDataContainer)
-
-    ---RIGHT
-    f.rightContainer = f.rightContainer or AceGUI:Create("SimpleGroup")
-    local rightContainer = f.rightContainer
-    if not rightContainer.frame.SetBackdrop then
-      Mixin(rightContainer.frame, BackdropTemplateMixin)
-    end
-    --Temporary Fix: backdrop frame level is set to 10000 normally
-    --rightContainer.frame.backdrop:SetFrameLevel(1)
-    rightContainer.frame:SetBackdropColor(1, 1, 1, 0)
-    rightContainer:SetLayout("ListWithHidden")
-    rightContainer:SetWidth(container.frame:GetWidth() / 3)
-    rightContainer:SetHeight(container.frame:GetHeight())
-
-    if db.devMode then
-      local devModeLabel = AceGUI:Create("Label")
-      devModeLabel:SetText("R: Delete\nI: Toggle Interruptible\nS: Print SpellId")
-      rightContainer:AddChild(devModeLabel)
-    end
-
-    --spacing
-    local rightDummyIcon = AceGUI:Create("Icon")
-    rightDummyIcon:SetImageSize(20, 20)
-    rightDummyIcon:SetHeight(enemyDropDown.frame:GetHeight())
-    rightDummyIcon:SetDisabled(true)
-
-    --spells
-    f.spellScrollContainer = f.spellScrollContainer or AceGUI:Create("InlineGroup")
-    local spellScrollContainer = f.spellScrollContainer
-    if not spellScrollContainer.frame.SetBackdrop then
-      Mixin(spellScrollContainer.frame, BackdropTemplateMixin)
-    end
-    spellScrollContainer.frame:SetBackdropColor(1, 1, 1, 0)
-    spellScrollContainer:SetWidth(leftContainer.frame:GetWidth() - 20)
-    spellScrollContainer:SetHeight(282)
-    spellScrollContainer:SetLayout("Fill")
-
-    f.spellScroll = AceGUI:Create("ScrollFrame")
-    f.spellScroll:SetLayout("List")
-    spellScrollContainer:AddChild(f.spellScroll)
-
-    --powers
-    f.powerScrollContainer = f.powerScrollContainer or AceGUI:Create("InlineGroup")
-    local powerScrollContainer = f.powerScrollContainer
-    if not powerScrollContainer.frame.SetBackdrop then
-      Mixin(powerScrollContainer.frame, BackdropTemplateMixin)
-    end
-    powerScrollContainer.frame:SetBackdropColor(1, 1, 1, 0)
-    powerScrollContainer:SetWidth(leftContainer.frame:GetWidth() - 20)
-    powerScrollContainer:SetHeight(141)
-    powerScrollContainer:SetLayout("Fill")
-
-    f.powerScroll = AceGUI:Create("ScrollFrame")
-    f.powerScroll:SetLayout("List")
-    powerScrollContainer:AddChild(f.powerScroll)
-    powerScrollContainer.hidden = true
-
-    --spellButtons
-    f.spellButtonsContainer = f.spellButtonsContainer or AceGUI:Create("InlineGroup")
-    local spellButtonsContainer = f.spellButtonsContainer
-    if not spellButtonsContainer.frame.SetBackdrop then
-      Mixin(spellButtonsContainer.frame, BackdropTemplateMixin)
-    end
-    spellButtonsContainer.frame:SetBackdropColor(1, 1, 1, 0)
-    spellButtonsContainer:SetWidth(leftContainer.frame:GetWidth() - 20)
-    spellScrollContainer:SetLayout("Flow")
-
-    local buttonWidth = 110
-    f.sendSpellsButton = f.sendSpellsButton or AceGUI:Create("Button")
-    local sendSpellsButton = f.sendSpellsButton
-    sendSpellsButton:SetText(L["Link Spells"])
-    sendSpellsButton:SetWidth(buttonWidth)
-    sendSpellsButton:SetCallback("OnClick", function()
-      if #f.spellScroll.children < 1 then return end
-      local distribution = (UnitInRaid("player") and "RAID") or (IsInGroup() and "PARTY")
-      if not distribution then return end
-      local enemyName = f.enemyDropDown.text:GetText()
-      C_ChatInfo.SendChatMessage(string.format(L["MDT: Spells for %s:"], enemyName), distribution)
-      for i, child in pairs(f.spellScroll.children) do
-        local link = C_Spell.GetSpellLink(child.spellId)
-        C_ChatInfo.SendChatMessage(i..". "..link, distribution)
-      end
-    end)
-    spellButtonsContainer:AddChild(sendSpellsButton)
-
-    rightContainer:AddChild(rightDummyIcon)
-    rightContainer:AddChild(spellScrollContainer)
-    rightContainer:AddChild(powerScrollContainer)
-    rightContainer:AddChild(spellButtonsContainer)
-
-
-    container:AddChild(leftContainer)
-    container:AddChild(midContainer)
-    container:AddChild(rightContainer)
-  end
-
-  --Damage Calc
-  local function DrawGroup2(container)
-
-  end
-
-  -- Callback function for OnGroupSelected
-  local function SelectGroup(container, event, group)
-    container:ReleaseChildren()
-    if group == "tab1" then
-      DrawGroup1(container)
-    elseif group == "tab2" then
-      DrawGroup2(container)
-    end
-    currentTab = group
-  end
-
-  tabGroup:SetCallback("OnGroupSelected", SelectGroup)
-  tabGroup:SelectTab(currentTab)
-
-  return f
-end
-
-local characteristics = {
-  ["Stun"] = "Interface\\ICONS\\spell_frost_stun",
-  ["Sap"] = "Interface\\ICONS\\ability_sap",
-  ["Incapacitate"] = "Interface\\ICONS\\ability_monk_paralysis",
-  ["Repentance"] = "Interface\\ICONS\\spell_holy_prayerofhealing",
-  ["Disorient"] = "Interface\\ICONS\\spell_shadow_mindsteal",
-  ["Banish"] = "Interface\\ICONS\\spell_shadow_cripple",
-  ["Fear"] = "Interface\\ICONS\\spell_shadow_possession",
-  ["Root"] = "Interface\\ICONS\\spell_frost_frostnova",
-  ["Polymorph"] = "Interface\\ICONS\\spell_nature_polymorph",
-  ["Shackle Undead"] = "Interface\\ICONS\\spell_nature_slow",
-  ["Mind Control"] = "Interface\\ICONS\\spell_shadow_shadowworddominate",
-  ["Grip"] = "Interface\\ICONS\\spell_deathknight_strangulate",
-  ["Knock"] = "Interface\\ICONS\\ability_druid_typhoon",
-  ["Silence"] = "Interface\\ICONS\\ability_priest_silence",
-  ["Taunt"] = "Interface\\ICONS\\spell_nature_reincarnation",
-  ["Control Undead"] = "Interface\\ICONS\\inv_misc_bone_skull_01",
-  ["Enslave Demon"] = "Interface\\ICONS\\spell_shadow_enslavedemon",
-  ["Slow"] = "Interface\\ICONS\\ability_rogue_trip",
-  ["Imprison"] = "Interface\\ICONS\\ability_demonhunter_imprison",
-  ["Sleep Walk"] = "Interface\\ICONS\\ability_xavius_dreamsimulacrum",
-  ["Scare Beast"] = "Interface\\ICONS\\ability_druid_cower",
-  ["Hibernate"] = "Interface\\ICONS\\spell_nature_sleep",
-  ["Turn Evil"] = "Interface\\ICONS\\ability_paladin_turnevil",
-  ["Mind Soothe"] = "Interface\\ICONS\\spell_holy_mindsooth",
+local RAID_KEY = "gruuls-lair"
+local SHELL_INDEX = 160
+-- AzerothCore creature_template_model at 015976f5298ad374c4e6f8a8d22665946cb4ec32.
+local DISPLAY_IDS = {
+  [18831] = 18649, [18832] = 20194, [18834] = 20195, [18835] = 12472,
+  [18836] = 11585, [19044] = 18698, [19389] = 18356, [21350] = 20241,
 }
-local spellBlacklist = {
-  [277564] = true, --Regenerative Blood
-  [277247] = true, --Regenerative Blood
-  [209859] = true, --Bolster
-  [233490] = true, --UA
-  [91021]  = true, --Find Weakness
-  [2094]   = true, --Blind
-  [273836] = true, --Filthy Transfusion
-  [205708] = true, --Chilled
-  [212792] = true, --Cone of Cold
-  [48181]  = true, --Haunt
-  [191380] = true, --Mark of the Distant Army
-  [236299] = true, --Chrono Shift
-  [1490]   = true, --Chaos Brand
-  [205276] = true, --Phantom Singularity
-  [132951] = true, --Flare
-  [255228] = true, --Polymorphed
-  [122]    = true, --Frost Nova
-  [12654]  = true, --Ignite
-  [2818]   = true, --Deadly Poison
-  [55095]  = true, --Frost Fever
-  [408]    = true, --Kidney Shot
-  [34914]  = true, --Vampiric Touch
-  [205369] = true, --Mind Bomb
-  [154953] = true, --Internal Bleeding
-  [51490]  = true, --Thunderstorm
-  [3409]   = true, --Crippling Poison
-  [272970] = true, --Packed Ice
-  [262115] = true, --Deep Wounds
-  [226943] = true, --Mind Bomb
-  [198813] = true, --Vengeful Retreat
-  [121308] = true, --Disguise
-  [224729] = true, --Bursting Shot
-  [186439] = true, --Shadow Mend
-  [113746] = true, --Mystic Touch
-  [280404] = true, --Tidal Surge
-  [589]    = true, --Shadow Word: Pain
-  [5116]   = true, --Concussive Shot
-  [288865] = true, --Meerahs Jukebox
-  [317898] = true, --Blinding Sleet
-  [334882] = true, --
-  [201657] = true, --
-  [320297] = true, --
-  [325748] = true, --
-  [326868] = true, --
-  [132466] = true, --
-  [344991] = true, --
-  [320785] = true, --
-  [335072] = true, --
-  [1604]   = true, --
-  [35079]  = true, --
-  [50707]  = true, --
-  [240443] = true, --
-  [328506] = true, --
-  [344663] = true, -- shattered psyche
-  [176039] = true, -- flametongue
-  [176033] = true, -- flametongue
-  [176031] = true, -- flametongue
-  [213405] = true, -- dh stuff
-  [391191] = true, -- dh stuff
-  [390181] = true, -- dh stuff
-  [228318] = true, -- enrage
-  [374557] = true, -- brittle
-  [387096] = true, -- pyrogenics
-  [454782] = true, -- Radiant Focus
-  [462597] = true, -- [DNT] In RP Combat
-  [434481] = true, -- Bombardments
-  [257069] = true, -- Watertight Shell
-  [324859] = true, -- Bramblethorn Entanglement
-  [427359] = true, -- Defend
-  [429099] = true, -- Overwhelmed
-  [472765] = true, -- Consumed Void
-  --[X]  = true,
-}
-local lastEnemyIdx
-function MDT:GetEnemyInfoEnemyIdx()
-  return lastEnemyIdx
-end
+local Integration = ART.GruulsLairIntegration or { diagnostics = {}, status = {}, preserveStoredRoutes = {} }
+ART.GruulsLairIntegration = Integration
 
-function MDT:UpdateEnemyInfoFrame(enemyIdx)
-  if not enemyIdx then enemyIdx = lastEnemyIdx end
-  lastEnemyIdx = enemyIdx
-  if not enemyIdx then return end
-  local data = MDT.dungeonEnemies[db.currentDungeonIdx][enemyIdx]
-  if not data then return end
-  local f = MDT.EnemyInfoFrame
-  f:SetTitle(L[data.name])
-  f.model:SetDisplayInfo(data.displayId or 39490)
-  if f.model.ResetModel then f.model:ResetModel() end
-  f.model:SetPosition(0, 0, 0)
-
-  local container = f.tabGroup
-  ---rescaling
-  ---LEFT
-  f.leftContainer:SetWidth(container.frame:GetWidth() / 3)
-  f.leftContainer:SetHeight(container.frame:GetHeight())
-  f.model:SetSize(f.leftContainer.frame:GetWidth() - 30, 1.127 * (f.leftContainer.frame:GetWidth() - 30))
-  f.modelContainer:SetWidth(f.leftContainer.frame:GetWidth() - 20)
-  f.modelDummyIcon:SetImageSize(f.leftContainer.frame:GetWidth() - 20, f.leftContainer.frame:GetWidth() - 20)
-  f.characteristicsContainer:SetWidth(f.leftContainer.frame:GetWidth() - 20)
-  ---MIDDLE
-  f.midContainer:SetWidth(container.frame:GetWidth() / 3)
-  f.midContainer:SetHeight(container.frame:GetHeight())
-  f.enemyDataContainer:SetWidth(math.min(f.leftContainer.frame:GetWidth() - 20, 248))
-  ---RIGHT
-  f.rightContainer:SetWidth(container.frame:GetWidth() / 3)
-  f.rightContainer:SetHeight(container.frame:GetHeight())
-  f.spellScrollContainer:SetWidth(math.min(f.leftContainer.frame:GetWidth() - 20, 248))
-  f.spellButtonsContainer:SetWidth(math.min(f.leftContainer.frame:GetWidth() - 20, 248))
-  f.powerScrollContainer:SetWidth(math.min(f.leftContainer.frame:GetWidth() - 20, 248))
-
-  local enemies = {}
-  for mobIdx, edata in ipairs(MDT.dungeonEnemies[db.currentDungeonIdx]) do
-    tinsert(enemies, mobIdx, L[edata.name])
+local function diagnose(reason, feature)
+  if #Integration.diagnostics < 32 then
+    Integration.diagnostics[#Integration.diagnostics + 1] = { reason = reason, feature = feature }
   end
-  f.enemyDropDown:SetList(enemies)
-  f.enemyDropDown:SetValue(enemyIdx)
-
-  --characteristics
-  f.characteristicsContainer:ReleaseChildren()
-  local characteristicsText = AceGUI:Create("Label")
-  characteristicsText:SetWidth(f.characteristicsContainer.frame:GetWidth())
-  characteristicsText:SetText(L["Affected by:"])
-  f.characteristicsContainer:AddChild(characteristicsText)
-  for text, iconPath in pairs(characteristics) do
-    if data.characteristics and data.characteristics[text] then
-      local icon = AceGUI:Create("Icon")
-      icon:SetImage(iconPath)
-      icon:SetImageSize(25, 25)
-      icon:SetWidth(25)
-      icon:SetHeight(27)
-      icon:SetCallback("OnEnter", function()
-        GameTooltip:SetOwner(icon.frame, "ANCHOR_BOTTOM", 0, -5)
-        GameTooltip:SetText(L[text], 1, 1, 1, 1)
-        GameTooltip:Show()
-      end)
-      icon:SetCallback("OnLeave", function()
-        GameTooltip:Hide()
-      end)
-      f.characteristicsContainer:AddChild(icon)
-    end
-  end
-
-  MDT:UpdateEnemyInfoData(enemyIdx)
-
-  --ace is finicky
-  f.rightContainer:PauseLayout()
-  if data.powers then
-    f.spellScrollContainer:SetHeight(181)
-    f.powerScrollContainer.hidden = false
+  if feature then
+    Integration.status[feature] = reason
   else
-    f.spellScrollContainer:SetHeight(322)
-    f.powerScrollContainer.hidden = true
+    MDT.RaidIntegrationError = reason
   end
-  f.spellScrollContainer:SetLayout("Fill")
+  return false, reason
+end
 
-  -- Spells
-  f.spellScroll:ReleaseChildren()
-  if data.spells then
-    -- Create a table to store spell IDs
-    local spellIds = {}
-    -- Insert all spell IDs into the table
-    for spellId in pairs(data.spells) do
-      if MDT:GetDB().devMode or not spellBlacklist[spellId] then
-        table.insert(spellIds, spellId)
+local function validateMap(raid, map, transform)
+  if type(map) ~= "table" or map.schemaVersion ~= 1 or map.raidKey ~= raid.key
+      or map.instanceId ~= raid.instanceId or map.mapId ~= raid.mapId or type(map.sublevels) ~= "table" then
+    return false, "invalid-map-definition"
+  end
+  if type(transform) ~= "table" or transform.schemaVersion ~= 1 or transform.raidKey ~= raid.key
+      or type(transform.toPlanner) ~= "function" or type(transform.fromPlanner) ~= "function" then
+    return false, "invalid-map-transform"
+  end
+  for index, sublevel in ipairs(raid.sublevels) do
+    local mapSublevel = map.sublevels[index]
+    local calibration = transform.calibrations and transform.calibrations[index]
+    if type(mapSublevel) ~= "table" or mapSublevel.mapId ~= sublevel.mapId
+        or type(calibration) ~= "table" or calibration.mapId ~= sublevel.mapId or calibration.sublevel ~= index then
+      return false, "map-sublevel-mismatch"
+    end
+  end
+  return true
+end
+
+local function markDependencies(preset, raid, db)
+  return {
+    raid = raid,
+    routeSteps = preset and preset.routeSteps or {},
+    profile = preset and preset.marking or { npcDefaults = {}, packOverrides = {} },
+    settings = db and db.focusMarker,
+  }
+end
+
+local function projectRaidEnemies(raid)
+  local canvasWidth, canvasHeight = MDT:GetDefaultMapPanelSize()
+  local npcKeys, packGroups, packKeys = {}, {}, {}
+  for npcKey in pairs(raid.enemies) do npcKeys[#npcKeys + 1] = npcKey end
+  for packKey in pairs(raid.packs) do packKeys[#packKeys + 1] = packKey end
+  table.sort(npcKeys)
+  table.sort(packKeys)
+  for index, packKey in ipairs(packKeys) do packGroups[packKey] = index end
+
+  local enemies, spawnLookup = {}, {}
+  for enemyIdx, npcKey in ipairs(npcKeys) do
+    local enemy, clones = raid.enemies[npcKey], {}
+    for cloneIdx, spawn in ipairs(enemy.spawns) do
+      local patrol
+      if spawn.patrol then
+        patrol = {}
+        for pointIdx, point in ipairs(spawn.patrol) do
+          patrol[pointIdx] = { x = point.x * canvasWidth, y = -point.y * canvasHeight }
+        end
+      end
+      clones[cloneIdx] = {
+        x = spawn.x * canvasWidth,
+        y = -spawn.y * canvasHeight,
+        sublevel = spawn.sublevel,
+        g = packGroups[spawn.packKey],
+        patrol = patrol,
+        artSpawnKey = spawn.key,
+        artPackKey = spawn.packKey,
+      }
+      spawnLookup[spawn.key] = { enemyIdx = enemyIdx, cloneIdx = cloneIdx, packKey = spawn.packKey }
+    end
+    enemies[enemyIdx] = {
+      name = L[enemy.name],
+      id = enemy.npcId,
+      count = 0,
+      health = 1,
+      level = 73,
+      creatureType = "Humanoid",
+      scale = 1,
+      isBoss = npcKey ~= "19389" and npcKey ~= "21350",
+      displayId = DISPLAY_IDS[enemy.npcId],
+      clones = clones,
+    }
+  end
+  return enemies, spawnLookup
+end
+
+local function publishShellData(raid, map, db)
+  local textureFolder = map.sublevels[1].asset.textureFolder
+  MDT.dungeonList[SHELL_INDEX] = L[raid.name]
+  MDT.mapInfo[SHELL_INDEX] = {
+    shortName = L[raid.name], englishName = raid.name, mapID = raid.mapId, tileFormat = { [1] = 4 },
+  }
+  MDT.dungeonMaps[SHELL_INDEX] = { [0] = textureFolder, [1] = textureFolder.."1_" }
+  MDT.dungeonSubLevels[SHELL_INDEX] = { [1] = L[map.sublevels[1].name] }
+  MDT.dungeonTotalCount[SHELL_INDEX] = { normal = 0 }
+  MDT.dungeonEnemies[SHELL_INDEX], Integration.spawnLookup = projectRaidEnemies(raid)
+  MDT.mapPOIs[SHELL_INDEX] = { [1] = {} }
+  MDT.scaleMultiplier[SHELL_INDEX] = 1
+  MDT.zoneIdToDungeonIdx[raid.mapId] = SHELL_INDEX
+  MDT.knownDungeons[SHELL_INDEX] = raid.name
+  MDT.seasonList[1] = L["Raid Planner"]
+  MDT.dungeonSelectionToIndex[1] = { SHELL_INDEX }
+  if not MDT.dungeonMaps[db.currentDungeonIdx] then db.currentDungeonIdx = SHELL_INDEX end
+  if db.currentSection == nil or db.currentSection == "raids" then db.currentSection = "maps" end
+  db.selectedDungeonList = 1
+end
+
+function Integration:Initialize()
+  if self.initialized then return self end
+
+  local static = ART.StaticData or {}
+  local raid = static.raids and static.raids[RAID_KEY]
+  local enemyData = static.enemyInfo and static.enemyInfo[RAID_KEY]
+  if type(raid) ~= "table" then return diagnose("missing-raid-data") end
+
+  local registry = ART.RaidRegistry.new({ diagnostics = function(reason) diagnose(reason) end })
+  local registered, reason = registry:Register(raid)
+  if not registered then return diagnose(reason) end
+
+  local map = ART.MapDefinitions and ART.MapDefinitions[RAID_KEY]
+  local transform = ART.MapTransforms and ART.MapTransforms[RAID_KEY]
+  local mapOK, mapReason = validateMap(raid, map, transform)
+  if not mapOK then return diagnose(mapReason) end
+
+  local routePreset = ART.RoutePreset.new({ registry = registry })
+  local db = MDT:GetDB()
+  local routeStore = MDT:GetRaidRouteStore()
+  publishShellData(raid, map, db)
+  local planner
+
+  local function wireMarks(preset, activeRaid)
+    local resolver = ART.MarkResolver.new(markDependencies(preset, activeRaid or raid, db))
+    ART.RaidMarks:Initialize({ resolver = resolver })
+    ART.RaidMarks.resolver = resolver
+    ART.RaidMarksUI:Initialize({ raidMarks = ART.RaidMarks })
+  end
+
+  local function persist(preset, activeRaid)
+    wireMarks(preset, activeRaid)
+    if not routeStore or self.preserveStoredRoutes[activeRaid.key] then return end
+    local exported = routePreset:Export(preset, activeRaid)
+    if exported then routeStore.presets[activeRaid.key] = exported end
+  end
+
+  planner = ART.RaidPlanner:Initialize({
+    registry = registry,
+    routePreset = routePreset,
+    onChange = persist,
+  })
+  local raidSelect = ART.RaidSelect:Initialize({ registry = registry, planner = planner })
+  wireMarks(nil, raid)
+
+  local enemyInfo
+  local enemyOK, enemyResult, enemyReason = pcall(function()
+    local repository = ART.EnemyInfoRepository.new()
+    if type(enemyData) ~= "table" or enemyData.raidKey ~= RAID_KEY then
+      diagnose("missing-enemy-info", "enemyInfo")
+    else
+      local merged, mergeReason = repository:Merge(enemyData)
+      if not merged then
+        diagnose(mergeReason or "invalid-enemy-info", "enemyInfo")
+        repository = ART.EnemyInfoRepository.new()
       end
     end
-    -- Sort the spell IDs
-    table.sort(spellIds) -- Sort in numerical order
 
-    -- Create spell buttons in sorted order
-    for _, spellId in ipairs(spellIds) do
-      local spellData = data.spells[spellId]
-      local spellButton = AceGUI:Create("MDTSpellButton")
-      spellButton:SetSpell(spellId, spellData)
-      spellButton:Initialize()
-      spellButton:Enable()
-      f.spellScroll:AddChild(spellButton)
-    end
+    local eventFrame = type(CreateFrame) == "function" and CreateFrame("Frame") or nil
+    return ART.RaidEnemyInfo:Initialize({
+      repository = repository,
+      eventFrame = eventFrame,
+      getCurrentRaidKey = function()
+        return planner.raid and planner.raid.key or raidSelect.selectedRaidKey
+      end,
+      GetCombatLogEventInfo = function()
+        return MDT.Compat:GetCombatLogEventInfo()
+      end,
+      sourceRef = "combat-log:tbc-anniversary",
+    })
+  end)
+  if enemyOK and enemyResult then
+    enemyInfo = enemyResult
+  else
+    diagnose((enemyOK and enemyReason or enemyResult) or "enemy-info-initialization-failed", "enemyInfo")
   end
 
-  --powers
-  f.powerScroll:ReleaseChildren()
-  if data.powers then
-    for powerSpellId, powerData in pairs(data.powers) do
-      ---@diagnostic disable-next-line: param-type-mismatch
-      local powerButton = AceGUI:Create("MDTPowerButton")
-      powerButton:SetSpell(powerSpellId, powerData)
-      powerButton:Initialize()
-      powerButton:Enable()
-      f.powerScroll:AddChild(powerButton)
-    end
-  end
+  self.registry = registry
+  self.routePreset = routePreset
+  self.planner = planner
+  self.raidSelect = raidSelect
+  self.raidMarks = ART.RaidMarks
+  self.raidMarksUI = ART.RaidMarksUI
+  self.enemyInfo = enemyInfo
+  self.maps = ART.MapDefinitions
+  self.transforms = ART.MapTransforms
+  self.initialized = true
 
-  f.rightContainer:SetHeight(container.frame:GetHeight())
-  f.rightContainer:ResumeLayout()
-  f.rightContainer:DoLayout()
+  MDT.RaidRegistry = registry
+  MDT.RoutePreset = routePreset
+  MDT.RaidPlanner = planner
+  MDT.RaidSelect = raidSelect
+  MDT.RaidMarks = self.raidMarks
+  MDT.RaidMarksUI = self.raidMarksUI
+  MDT.RaidEnemyInfo = enemyInfo
+  MDT.RaidMaps = self.maps
+  MDT.RaidMapTransforms = self.transforms
+  return self
 end
 
-function MDT:UpdateEnemyInfoData(enemyIdx)
-  local f = MDT.EnemyInfoFrame
-  if not enemyIdx then enemyIdx = lastEnemyIdx end
-  if not enemyIdx then return end
-  local data = MDT.dungeonEnemies[db.currentDungeonIdx][enemyIdx]
-  --data
-  f.enemyDataContainer.nameEditBox:SetText(L[data.name])
-  f.enemyDataContainer.nameEditBox.defaultText = data.name
-  f.enemyDataContainer.idEditBox:SetText(data.id)
-  f.enemyDataContainer.idEditBox.defaultText = data.id
-
-  local boss = data.isBoss or false
-  local health = MDT:CalculateEnemyHealth(boss, data.health, db.currentDifficulty, data.ignoreFortified)
-  local healthText = MDT:FormatEnemyHealth(health)
-
-  f.enemyDataContainer.healthEditBox:SetText(healthText)
-  f.enemyDataContainer.healthEditBox.defaultText = healthText
-
-  f.enemyDataContainer.creatureTypeEditBox:SetText(L[data.creatureType])
-  f.enemyDataContainer.creatureTypeEditBox.defaultText = data.creatureType
-  f.enemyDataContainer.levelEditBox:SetText(data.level)
-  f.enemyDataContainer.levelEditBox.defaultText = data.level
-  f.enemyDataContainer.countEditBox:SetText(data.count)
-  f.enemyDataContainer.countEditBox.defaultText = data.count
-  f.enemyDataContainer.stealthCheckBox:SetValue(data.stealth)
-  f.enemyDataContainer.stealthCheckBox.defaultValue = data.stealth
-  f.enemyDataContainer.stealthDetectCheckBox:SetValue(data.stealthDetect)
-  f.enemyDataContainer.stealthDetectCheckBox.defaultValue = data.stealthDetect
-
-  local level = db.currentDifficulty
-  local healthLabel = string.format(L["Enemy Info NPC Health Level"], level)
-  if level >= 10 then
-    healthLabel = string.format(L["Enemy Info NPC Health"], level, L["Fortified"].."/"..L["Tyrannical"])
-  end
-  f.enemyDataContainer.healthEditBox:SetLabel(healthLabel)
+function MDT:GetRaidIntegration()
+  return Integration.initialized and Integration or nil, MDT.RaidIntegrationError
 end
 
-function MDT:ShowEnemyInfoFrame(blip)
-  db = MDT:GetDB()
-  MDT.EnemyInfoFrame = MDT.EnemyInfoFrame or MakeEnemeyInfoFrame()
-  MDT:UpdateEnemyInfoFrame(blip.enemyIdx)
-  MDT.EnemyInfoFrame:Show()
+function MDT:CreateRaidRoute(raidKey)
+  if not Integration.initialized then return nil, MDT.RaidIntegrationError or "not-initialized" end
+  raidKey = raidKey or RAID_KEY
+  Integration.preserveStoredRoutes[raidKey] = nil
+  Integration.status.storedRoute = nil
+  return Integration.raidSelect:Select(raidKey)
+end
+
+function MDT:OpenRaidRoute(raidKey)
+  if not Integration.initialized then return nil, MDT.RaidIntegrationError or "not-initialized" end
+  raidKey = raidKey or RAID_KEY
+  local store = MDT:GetRaidRouteStore()
+  local saved = store and store.presets[raidKey]
+  if saved ~= nil then
+    local preset, reason = Integration.planner:Import(saved)
+    if preset then Integration.status.storedRoute = nil return preset end
+    Integration.preserveStoredRoutes[raidKey] = true
+    diagnose(reason or "invalid-stored-route", "storedRoute")
+  end
+  return Integration.raidSelect:Select(raidKey)
+end
+
+function MDT:SaveRaidRoute()
+  local planner = Integration.planner
+  if not planner or not planner.preset or not planner.raid then return nil, "no active preset" end
+  local store = self:GetRaidRouteStore()
+  if not store then return nil, "route store unavailable" end
+  local exported, reason = planner:Export()
+  if not exported then return nil, reason end
+  Integration.preserveStoredRoutes[planner.raid.key] = nil
+  Integration.status.storedRoute = nil
+  store.presets[planner.raid.key] = exported
+  return exported
+end
+
+function MDT:GetRaidMap(raidKey)
+  return Integration.maps and Integration.maps[raidKey or RAID_KEY]
+end
+
+function MDT:GetRaidMapTransform(raidKey)
+  return Integration.transforms and Integration.transforms[raidKey or RAID_KEY]
+end
+
+function MDT:ActivateRaidRouteStep(routeStepId)
+  return Integration.raidMarks and Integration.raidMarks:ActivateRouteStep(routeStepId)
+end
+
+function MDT:GetRaidMarkPreview(packKey)
+  return Integration.raidMarksUI and Integration.raidMarksUI:GetPreviewForPack(packKey) or {}
+end
+
+function MDT:ApplyRaidMark(unitToken)
+  if not Integration.raidMarksUI then return false, "not-initialized" end
+  return Integration.raidMarksUI:ApplyUnit(unitToken)
+end
+
+function MDT:GetRaidEnemyInfo(raidKey, npcId)
+  if not Integration.enemyInfo then return nil, "not-initialized" end
+  return Integration.enemyInfo:Get(raidKey or RAID_KEY, npcId)
+end
+
+local lastEnemySelector
+local lastEnemyNpcId
+
+local function npcIdFromSelector(selector)
+  if type(selector) == "table" then
+    return tonumber(selector.npcId or selector.id or (selector.data and (selector.data.npcId or selector.data.id)))
+  end
+  local npcId = tonumber(selector)
+  if Integration.enemyInfo and npcId and Integration.enemyInfo:Get(RAID_KEY, npcId) then return npcId end
+  local db = MDT:GetDB()
+  local enemy = db and MDT.dungeonEnemies and MDT.dungeonEnemies[db.currentDungeonIdx]
+      and MDT.dungeonEnemies[db.currentDungeonIdx][npcId]
+  return enemy and tonumber(enemy.id)
+end
+
+local function ensureEnemyInfoFrame()
+  if MDT.RaidEnemyInfoFrame or type(CreateFrame) ~= "function" then return MDT.RaidEnemyInfoFrame end
+  local frame = CreateFrame("Frame", "ARTRaidEnemyInfoFrame", MDT.main_frame or UIParent)
+  frame:SetSize(360, 180)
+  frame:SetPoint("CENTER")
+  frame:SetFrameStrata("DIALOG")
+  local background = frame:CreateTexture(nil, "BACKGROUND")
+  background:SetAllPoints()
+  background:SetColorTexture(0.06, 0.06, 0.06, 0.96)
+  frame.title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+  frame.title:SetPoint("TOPLEFT", 16, -16)
+  frame.details = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+  frame.details:SetPoint("TOPLEFT", frame.title, "BOTTOMLEFT", 0, -12)
+  frame.details:SetPoint("RIGHT", -16, 0)
+  frame.details:SetJustifyH("LEFT")
+  local close = CreateFrame("Button", nil, frame, "UIPanelCloseButton")
+  close:SetPoint("TOPRIGHT", -3, -3)
+  MDT.RaidEnemyInfoFrame = frame
+  return frame
+end
+
+function MDT:GetEnemyInfoEnemyIdx()
+  return lastEnemySelector
+end
+
+function MDT:ShowEnemyInfoFrame(selector)
+  lastEnemySelector = selector or lastEnemySelector
+  lastEnemyNpcId = npcIdFromSelector(lastEnemySelector) or lastEnemyNpcId
+  if not lastEnemyNpcId then return nil, "unknown-enemy" end
+  local info, reason = self:GetRaidEnemyInfo(RAID_KEY, lastEnemyNpcId)
+  if not info then return nil, reason end
+  local frame = ensureEnemyInfoFrame()
+  if frame then
+    local name = info.name and info.name.value or L["Unknown enemy"]
+    local source = info.name and info.name.source or {}
+    frame.title:SetText(L[name])
+    frame.details:SetText((L["NPC ID: %d"]):format(info.npcId).."\n"..
+      (L["Source: %s (%s)"]):format(L[source.source or "-"], L[source.confidence or "-"]))
+    frame:Show()
+  end
+  return info
+end
+
+function MDT:UpdateEnemyInfoFrame(selector)
+  if selector ~= nil then lastEnemySelector = selector end
+  if not lastEnemySelector and not lastEnemyNpcId then return end
+  return self:ShowEnemyInfoFrame(lastEnemySelector or lastEnemyNpcId)
+end
+
+local ok, result, reason = pcall(Integration.Initialize, Integration)
+if not ok then
+  diagnose(result)
+elseif not result then
+  diagnose(reason or "initialization-failed")
 end

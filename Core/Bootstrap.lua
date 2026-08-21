@@ -10,7 +10,7 @@ ART.StaticData = ART.StaticData or {}
 ART.StaticData.raids = ART.StaticData.raids or {}
 ART.StaticData.enemyInfo = ART.StaticData.enemyInfo or {}
 
-local UI_ADDON_NAME = "MythicDungeonTools_UI"
+local UI_ADDON_NAME = addonName
 local UI_DISABLED_POPUP = "ART_UI_DISABLED"
 local coreDefaults = {
   enemyForcesTooltip = 1,

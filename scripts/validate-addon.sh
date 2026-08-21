@@ -65,7 +65,22 @@ check_toc_metadata() {
     else
       fail "${toc#"$ROOT/"}: must declare both Interface 20505 and 20506 (got '$interfaces')"
     fi
-  done < <(find "$ROOT" -type f -name '*.toc' -not -path '*/.git/*' -print0 | sort -z)
+  done < <(find "$ROOT" -type f -name '*.toc' -not -path '*/.git/*' -not -path '*/libs/*' -print0 | sort -z)
+}
+
+check_bindings_manifest() {
+  local root_toc="$ROOT/AnniversaryRaidTools.toc"
+  local bindings="$ROOT/Bindings.xml"
+  if grep -Eq '^[[:space:]]*Bindings\.xml[[:space:]]*$' "$root_toc"; then
+    fail "AnniversaryRaidTools.toc: Bindings.xml is auto-loaded and must not be a TOC entry"
+  else
+    pass "AnniversaryRaidTools.toc: Bindings.xml is not loaded as generic XML"
+  fi
+  if grep -q ' Category=' "$bindings"; then
+    fail "Bindings.xml: binding attributes must use lowercase category"
+  else
+    pass "Bindings.xml: binding attribute casing is client-compatible"
+  fi
 }
 
 check_toc_files() {
@@ -87,7 +102,7 @@ check_toc_files() {
       fi
     done < <(sed -E '/^##/d; /^#/d; s/[[:space:]]+$//' "$toc")
     [[ $ok == 1 ]] && pass "${toc#"$ROOT/"}: all load entries exist"
-  done < <(find "$ROOT" -type f -name '*.toc' -not -path '*/.git/*' -print0 | sort -z)
+  done < <(find "$ROOT" -type f -name '*.toc' -not -path '*/.git/*' -not -path '*/libs/*' -print0 | sort -z)
 }
 
 check_xml_files() {
@@ -136,13 +151,25 @@ check_order() {
 
 check_load_order() {
   local root_toc="$ROOT/AnniversaryRaidTools.toc"
-  local ui_toc="$ROOT/MythicDungeonTools_UI/MythicDungeonTools_UI.toc"
   check_order "$root_toc" "libs/load_core_libs.xml" "BuildCheck.lua"
   check_order "$root_toc" "BuildCheck.lua" "Core/Compat.lua"
   check_order "$root_toc" "Core/Compat.lua" "Core/Bootstrap.lua"
-  check_order "$ui_toc" "../AnniversaryRaidTools/Core/SavedVariables.lua" "../AnniversaryRaidTools/MythicDungeonTools.lua"
-  check_order "$ui_toc" "../AnniversaryRaidTools/MythicDungeonTools.lua" "../AnniversaryRaidTools/Core/Lifecycle.lua"
-  check_order "$ui_toc" "../AnniversaryRaidTools/Core/Lifecycle.lua" "../AnniversaryRaidTools/Modules/load_modules.xml"
+  check_order "$root_toc" "Core/Bootstrap.lua" "MythicDungeonTools_UI/Bootstrap.lua"
+  check_order "$root_toc" "Core/SavedVariables.lua" "MythicDungeonTools.lua"
+  check_order "$root_toc" "MythicDungeonTools.lua" "Core/Lifecycle.lua"
+  check_order "$root_toc" "Core/Lifecycle.lua" "Modules/load_modules.xml"
+}
+
+check_library_load_split() {
+  local duplicates
+  duplicates=$(comm -12 \
+    <(grep -oE "file=['\"][^'\"]+" "$ROOT/libs/load_core_libs.xml" | cut -d= -f2- | sort) \
+    <(grep -oE "file=['\"][^'\"]+" "$ROOT/libs/load_libs.xml" | cut -d= -f2- | sort))
+  if [[ -n $duplicates ]]; then
+    fail "library loaders contain duplicate entries: $(printf '%s' "$duplicates" | tr '\n' ' ')"
+  else
+    pass "core and UI library loaders contain no duplicate entries"
+  fi
 }
 
 check_lua_syntax() {
@@ -192,6 +219,16 @@ run_lua_test() {
   fi
 }
 
+run_lua_test_mode() {
+  local file=$1 runtime=$2 mode=$3 rel
+  rel=${file#"$ROOT/"}
+  if "$runtime" "$file" "$ROOT" "$mode"; then
+    pass "$runtime ($mode): $rel"
+  else
+    fail "$runtime ($mode): $rel"
+  fi
+}
+
 run_python_test() {
   local file=$1 rel=${file#"$ROOT/"}
   if python3 "$file"; then
@@ -204,7 +241,7 @@ run_python_test() {
 run_discovered_tests() {
   local category dir found file
   declare -A category_found=()
-  for category in data maps marking enemy-info route; do category_found[$category]=0; done
+  for category in data maps marking enemy-info route integration; do category_found[$category]=0; done
 
   while IFS= read -r -d '' file; do
     case $file in
@@ -214,6 +251,13 @@ run_discovered_tests() {
       */tests/marking/*.lua) category=marking; run_lua_test "$file" lua5.1; run_lua_test "$file" luajit ;;
       */tests/enemy-info/*.lua|*/tests/enemy_info/*.lua) category=enemy-info; run_lua_test "$file" lua5.1; run_lua_test "$file" luajit ;;
       */tests/route/*.lua|*/tests/preset/*.lua|*/tests/planner/*.lua) category=route; run_lua_test "$file" lua5.1; run_lua_test "$file" luajit ;;
+      */tests/integration/*.lua)
+        category=integration
+        for mode in normal missing-enemy invalid-enemy corrupt-route invalid-store; do
+          run_lua_test_mode "$file" lua5.1 "$mode"
+          run_lua_test_mode "$file" luajit "$mode"
+        done
+        ;;
       *) continue ;;
     esac
     category_found[$category]=1
@@ -228,7 +272,7 @@ run_discovered_tests() {
     fail "missing startup compatibility test: scripts/test_plugin_compat.lua"
   fi
 
-  for category in data maps marking enemy-info route; do
+  for category in data maps marking enemy-info route integration; do
     if [[ ${category_found[$category]} == 1 ]]; then
       pass "test category discovered: $category"
     else
@@ -238,9 +282,11 @@ run_discovered_tests() {
 }
 
 check_toc_metadata
+check_bindings_manifest
 check_toc_files
 check_xml_files
 check_load_order
+check_library_load_split
 check_lua_syntax
 check_banned_domain_tokens
 run_discovered_tests

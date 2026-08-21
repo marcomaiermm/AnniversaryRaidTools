@@ -1,17 +1,17 @@
 {
   "metadata": {
-    "project": "AzerothCore",
-    "snapshot": "bounded-gruuls-lair-v1",
-    "commit": null,
-    "databaseVersion": "not-provided",
-    "exportedAt": "2026-08-21T00:00:00Z",
-    "coordinateBasis": "bounded candidate fixture; not Anniversary-calibrated"
+    "project": "CMaNGOS TBC",
+    "snapshot": "gruuls-lair-map-565",
+    "commit": "7060a217bcf7c454db570e842cd5e2179444d768",
+    "databaseVersion": "TBCDB 1.11.0",
+    "exportedAt": "2026-08-21T18:15:00Z",
+    "coordinateBasis": "CMaNGOS TBC 2.4.3 map 565 world spawns and creature_movement projected through Anniversary UIMap 330 bounds: top=337.5 left=475 bottom=-12.5 right=-50; Gruul and trash composition corrected from Anniversary observation"
   },
   "source": {
-    "source": "azerothcore",
+    "source": "derived",
     "confidence": "candidate",
-    "sourceRef": "fixture://azerothcore/gruuls-lair-v1",
-    "observedAt": "2026-08-21T00:00:00Z"
+    "sourceRef": "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+    "observedAt": "2026-08-21T18:15:00Z"
   },
   "raid": {
     "key": "gruuls-lair",
@@ -28,82 +28,34 @@
     }
   ],
   "spawns": [
-    {
-      "id": "maulgar",
-      "npcId": 18831,
-      "name": "High King Maulgar",
-      "x": 0.48,
-      "y": 0.56,
-      "sublevel": 1,
-      "patrol": [
-        {"x": 0.46, "y": 0.54},
-        {"x": 0.48, "y": 0.56},
-        {"x": 0.50, "y": 0.54}
-      ]
-    },
-    {
-      "id": "krosh",
-      "npcId": 18832,
-      "name": "Krosh Firehand",
-      "x": 0.42,
-      "y": 0.53,
-      "sublevel": 1
-    },
-    {
-      "id": "olm",
-      "npcId": 18834,
-      "name": "Olm the Summoner",
-      "x": 0.54,
-      "y": 0.53,
-      "sublevel": 1
-    },
-    {
-      "id": "kiggler",
-      "npcId": 18835,
-      "name": "Kiggler the Crazed",
-      "x": 0.42,
-      "y": 0.60,
-      "sublevel": 1
-    },
-    {
-      "id": "blindeye",
-      "npcId": 18836,
-      "name": "Blindeye the Seer",
-      "x": 0.54,
-      "y": 0.60,
-      "sublevel": 1
-    },
-    {
-      "id": "gruul",
-      "npcId": 19044,
-      "name": "Gruul the Dragonkiller",
-      "x": 0.72,
-      "y": 0.44,
-      "sublevel": 1,
-      "patrol": [
-        {"x": 0.70, "y": 0.42},
-        {"x": 0.72, "y": 0.44}
-      ]
-    }
+    {"id": "maulgar", "npcId": 18831, "name": "High King Maulgar", "x": 0.537665, "y": 0.555574, "sublevel": 1},
+    {"id": "krosh", "npcId": 18832, "name": "Krosh Firehand", "x": 0.565678, "y": 0.536220, "sublevel": 1},
+    {"id": "olm", "npcId": 18834, "name": "Olm the Summoner", "x": 0.551699, "y": 0.545654, "sublevel": 1},
+    {"id": "kiggler", "npcId": 18835, "name": "Kiggler the Crazed", "x": 0.509912, "y": 0.547257, "sublevel": 1},
+    {"id": "blindeye", "npcId": 18836, "name": "Blindeye the Seer", "x": 0.523960, "y": 0.550769, "sublevel": 1},
+    {"id": "gruul", "npcId": 19044, "name": "Gruul the Dragonkiller", "x": 0.199, "y": 0.283, "sublevel": 1},
+    {"id": "entrance-brute", "npcId": 19389, "name": "Lair Brute", "x": 0.715266, "y": 0.772488, "sublevel": 1, "patrol": [{"x": 0.675152, "y": 0.764071}, {"x": 0.640962, "y": 0.752212}, {"x": 0.623387, "y": 0.726221}, {"x": 0.641583, "y": 0.751593}, {"x": 0.675594, "y": 0.763512}, {"x": 0.737555, "y": 0.773571}]},
+    {"id": "entrance-priest-1", "npcId": 21350, "name": "Gronn-Priest", "x": 0.655804, "y": 0.776757, "sublevel": 1},
+    {"id": "entrance-priest-2", "npcId": 21350, "name": "Gronn-Priest", "x": 0.658903, "y": 0.745376, "sublevel": 1},
+    {"id": "lower-corridor-brute-1", "npcId": 19389, "name": "Lair Brute", "x": 0.368316, "y": 0.651831, "sublevel": 1},
+    {"id": "lower-corridor-brute-2", "npcId": 19389, "name": "Lair Brute", "x": 0.365617, "y": 0.690058, "sublevel": 1},
+    {"id": "lower-corridor-priest", "npcId": 21350, "name": "Gronn-Priest", "x": 0.355221, "y": 0.671260, "sublevel": 1, "patrol": [{"x": 0.361693, "y": 0.670951}, {"x": 0.312337, "y": 0.654357}, {"x": 0.304200, "y": 0.657366}, {"x": 0.285200, "y": 0.654057}, {"x": 0.312691, "y": 0.653857}]},
+    {"id": "upper-corridor-brute-1", "npcId": 19389, "name": "Lair Brute", "x": 0.230907, "y": 0.617357, "sublevel": 1, "patrol": [{"x": 0.245930, "y": 0.633043}, {"x": 0.271219, "y": 0.645691}, {"x": 0.272661, "y": 0.654389}, {"x": 0.257869, "y": 0.638457}, {"x": 0.242185, "y": 0.628889}, {"x": 0.225682, "y": 0.609120}, {"x": 0.215558, "y": 0.585691}, {"x": 0.209474, "y": 0.566106}, {"x": 0.211385, "y": 0.538949}, {"x": 0.207008, "y": 0.489563}, {"x": 0.209819, "y": 0.535777}, {"x": 0.207901, "y": 0.564311}, {"x": 0.216884, "y": 0.587263}]},
+    {"id": "upper-corridor-brute-2", "npcId": 19389, "name": "Lair Brute", "x": 0.207905, "y": 0.463731, "sublevel": 1},
+    {"id": "upper-corridor-brute-3", "npcId": 19389, "name": "Lair Brute", "x": 0.221543, "y": 0.458174, "sublevel": 1},
+    {"id": "gruul-hall-brute", "npcId": 19389, "name": "Lair Brute", "x": 0.196272, "y": 0.456620, "sublevel": 1},
+    {"id": "gruul-hall-priest-1", "npcId": 21350, "name": "Gronn-Priest", "x": 0.282027, "y": 0.675069, "sublevel": 1},
+    {"id": "gruul-hall-priest-2", "npcId": 21350, "name": "Gronn-Priest", "x": 0.265842, "y": 0.670949, "sublevel": 1}
   ],
   "packs": [
-    {
-      "id": "maulgar",
-      "label": "High King Maulgar",
-      "spawnIds": ["maulgar", "krosh", "olm", "kiggler", "blindeye"]
-    },
-    {
-      "id": "gruul",
-      "label": "Gruul the Dragonkiller",
-      "spawnIds": ["gruul"]
-    }
+    {"id": "trash-entrance", "label": "Entrance trash", "spawnIds": ["entrance-brute", "entrance-priest-1", "entrance-priest-2"]},
+    {"id": "trash-lower-corridor", "label": "Lower corridor trash", "spawnIds": ["lower-corridor-brute-1", "lower-corridor-brute-2", "lower-corridor-priest"]},
+    {"id": "trash-upper-corridor", "label": "Upper corridor trash", "spawnIds": ["upper-corridor-brute-1", "gruul-hall-priest-1", "gruul-hall-priest-2"]},
+    {"id": "trash-gruul-hall", "label": "Gruul hall trash", "spawnIds": ["gruul-hall-brute", "upper-corridor-brute-2", "upper-corridor-brute-3"]},
+    {"id": "maulgar", "label": "High King Maulgar", "spawnIds": ["maulgar", "krosh", "olm", "kiggler", "blindeye"]},
+    {"id": "gruul", "label": "Gruul the Dragonkiller", "spawnIds": ["gruul"]}
   ],
   "pois": [
-    {
-      "x": 0.72,
-      "y": 0.44,
-      "sublevel": 1,
-      "label": "Gruul's arena"
-    }
+    {"x": 0.199, "y": 0.283, "sublevel": 1, "label": "Gruul's arena"}
   ]
 }
