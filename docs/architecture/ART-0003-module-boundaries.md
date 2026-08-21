@@ -32,3 +32,7 @@ Invalid persisted data is rejected or migrated before feature initialization;
 unknown schema versions are never guessed. Invalid raid records are omitted with a
 diagnostic rather than partially registered. Missing optional enemy info or marking
 data degrades that feature only, not the planner.
+
+Static data loaded by TOC/XML publishes through the versioned static-data contract;
+chunk return values are retained only for tests and tooling. Publication is not
+registration: the integrator validates and registers published values explicitly.

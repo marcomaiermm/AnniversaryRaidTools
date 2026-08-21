@@ -22,6 +22,11 @@ must be explicit and actionable.
 6. Raid data and maps.
 7. UI wiring after its load-on-demand addon is available.
 
+The bootstrap boundary initializes the static-data publication tables defined by
+`docs/contracts/static-data-publication.md` before raid or enemy-info data loads.
+Client API payload differences, including combat-log event retrieval, remain in
+`Core/Compat.lua` and are injected into feature modules by the integrator.
+
 Only the bootstrap agent changes TOCs/loaders. Feature agents expose initialization
 entry points without registering themselves; the vertical-slice integrator wires
 them after dependency contracts are verified.

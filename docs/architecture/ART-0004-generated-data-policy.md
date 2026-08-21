@@ -22,3 +22,7 @@ points, unknown provenance values, and undeclared schema versions.
 Every generated-data handover records the AzerothCore commit/database version,
 export timestamp, generator version, map/instance IDs, coverage, overrides, and
 uncertainties. Preserve upstream attribution and this repository's GPL-2.0 terms.
+
+Generated Lua artifacts publish and return the same immutable value according to
+`docs/contracts/static-data-publication.md`. The publication wrapper is emitted by
+the generator and never edited in generated output.
