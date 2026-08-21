@@ -67,6 +67,11 @@ function Compat:GetMapInfo(mapId)
   return C_Map and C_Map.GetMapInfo and C_Map.GetMapInfo(mapId)
 end
 
+function Compat:GetCombatLogEventInfo()
+  if not CombatLogGetCurrentEventInfo then return nil end
+  return CombatLogGetCurrentEventInfo()
+end
+
 local menuFrame
 
 local function newDescription(entries)

@@ -2,6 +2,13 @@ local addonName, MDT = ...
 local L = MDT.L
 local API = MDT.API
 local Compat = MDT.Compat
+local ART = rawget(_G, "ART") or MDT.ART or MDT
+
+_G.ART = ART
+if MDT.ART == nil then MDT.ART = ART end
+ART.StaticData = ART.StaticData or {}
+ART.StaticData.raids = ART.StaticData.raids or {}
+ART.StaticData.enemyInfo = ART.StaticData.enemyInfo or {}
 
 local UI_ADDON_NAME = "MythicDungeonTools_UI"
 local UI_DISABLED_POPUP = "ART_UI_DISABLED"
