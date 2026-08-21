@@ -10,7 +10,7 @@ local caughtErrors = {}
 local function getDiagnostics()
   local presetExport = MDT:TableToString(MDT:GetCurrentPreset())
   ---@diagnostic disable-next-line: redundant-parameter
-  local addonVersion = C_AddOns.GetAddOnMetadata(MDT.AddonName, "Version")
+  local addonVersion = MDT.Compat:GetAddOnMetadata(MDT.AddonName, "Version") or "unknown"
   local locale = GetLocale()
   local dateString = date("%d/%m/%y %H:%M:%S")
   local gameVersion = select(4, GetBuildInfo())
@@ -27,8 +27,10 @@ local function getDiagnostics()
   }
   local region = regions[regionId] or "UNKNOWN"
   local combatState = InCombatLockdown() and "In combat" or "Out of combat"
-  local mapID = C_Map.GetBestMapForUnit("player");
-  local zoneInfo = format("Zone: %s (%d)", C_Map.GetMapInfo(C_Map.GetMapInfo(mapID or 0).parentMapID).name, mapID)
+  local mapID = MDT.Compat:GetBestMapForUnit("player")
+  local mapInfo = mapID and MDT.Compat:GetMapInfo(mapID)
+  local parentInfo = mapInfo and mapInfo.parentMapID and MDT.Compat:GetMapInfo(mapInfo.parentMapID)
+  local zoneInfo = format("Zone: %s (%s)", parentInfo and parentInfo.name or "unknown", mapID or "unknown")
   return {
     presetExport = presetExport,
     addonVersion = addonVersion,
@@ -171,7 +173,7 @@ function MDT:DisplayErrors(force)
     MDT:RunAfterFramesInitialized(function()
       --error button
       local errorButton = AceGUI:Create("Icon")
-      errorButton:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0.76, 1, 0.25, 0.5)
+      errorButton:SetImage(MDT.AddonPath.."Textures\\icons", 0.76, 1, 0.25, 0.5)
       errorButton:SetCallback("OnClick", function(widget, callbackName)
         MDT:DisplayErrors("true")
       end)

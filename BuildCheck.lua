@@ -1,5 +1,7 @@
 local addonName, MDT = ...
 local API = {}
+_G.AnniversaryRaidToolsAPI = API
+-- Compatibility alias for MDT-derived plugins during the port.
 _G.MythicDungeonToolsAPI = API
 
 MDT.API = API
@@ -29,12 +31,14 @@ function MDT:IsRetail()
 end
 
 function MDT:IsCompatibleVersion()
-  return MDT:IsRetail()
+  local interface = select(4, GetBuildInfo())
+  return interface == 20505 or interface == 20506
 end
 
 function MDT:ShowFallbackWindow()
   local gameVersionString = GetBuildInfo()
-  local addonVersionString = C_AddOns.GetAddOnMetadata(addonName, "Version")
+  local getMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
+  local addonVersionString = getMetadata and getMetadata(addonName, "Version") or "unknown"
   StaticPopupDialogs.MDT_INCOMPATIBLE_VERSION = {
     text = MDT.L["incompatibleVersionError"].."\n\nGame: "..gameVersionString.."\nMDT: "..addonVersionString,
     button1 = OKAY,
@@ -53,6 +57,10 @@ end
 
 function API:GetAddonName()
   return addonName
+end
+
+function API:GetAddonPath()
+  return "Interface\\AddOns\\"..addonName.."\\"
 end
 
 MDT:ExportAPI("IsRetail")

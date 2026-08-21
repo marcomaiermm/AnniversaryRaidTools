@@ -1,9 +1,10 @@
 local addonName, MDT = ...
 local L = MDT.L
 local API = MDT.API
+local Compat = MDT.Compat
 
 local UI_ADDON_NAME = "MythicDungeonTools_UI"
-local UI_DISABLED_POPUP = "MDT_UI_DISABLED"
+local UI_DISABLED_POPUP = "ART_UI_DISABLED"
 local coreDefaults = {
   enemyForcesTooltip = 1,
   muteXalatathVoiceLines = false,
@@ -43,11 +44,15 @@ local function applyDefaults(target, defaults)
   end
 end
 
-if type(MythicDungeonToolsDB) ~= "table" then MythicDungeonToolsDB = {} end
-if type(MythicDungeonToolsDB.global) ~= "table" then MythicDungeonToolsDB.global = {} end
-applyDefaults(MythicDungeonToolsDB.global, coreDefaults)
+-- The root migration is intentionally a copy: the legacy value remains recoverable
+-- until a later versioned domain migration has accepted its contents.
+if type(AnniversaryRaidToolsDB) ~= "table" then
+  AnniversaryRaidToolsDB = type(MythicDungeonToolsDB) == "table" and CopyTable(MythicDungeonToolsDB) or {}
+end
+if type(AnniversaryRaidToolsDB.global) ~= "table" then AnniversaryRaidToolsDB.global = {} end
+applyDefaults(AnniversaryRaidToolsDB.global, coreDefaults)
 
-local db = MythicDungeonToolsDB.global
+local db = AnniversaryRaidToolsDB.global
 MDT.BackdropColor = { 0.058823399245739, 0.058823399245739, 0.058823399245739, 0.9 }
 
 function MDT:GetDB()
@@ -61,6 +66,7 @@ function API:GetBackdropColor()
 end
 
 function MDT:HardReset()
+  AnniversaryRaidToolsDB = nil
   MythicDungeonToolsDB = nil
   ReloadUI()
 end
@@ -74,7 +80,7 @@ end
 local uiHandlers
 local uiPluginAPI
 local uiLoading
-local uiLoadingSpinner
+local uiLoadingFrame
 local pendingPresetComms = {}
 local pendingUIInitializers = {}
 
@@ -108,37 +114,32 @@ function API:AttachUI(handlers, pluginAPI)
 end
 
 local function isUILoaded()
-  local loadedOrLoading, loaded = C_AddOns.IsAddOnLoaded(UI_ADDON_NAME)
-  return loaded == nil and loadedOrLoading or loaded
+  return Compat:IsAddOnLoaded(UI_ADDON_NAME)
 end
 
 local function showUILoading()
-  if not uiLoadingSpinner then
-    local spinner = CreateFrame("Button", "MDTUILoadingSpinner", UIParent, "LoadingSpinnerTemplate")
-    spinner:SetPoint("CENTER", UIParent, "CENTER")
-    spinner:SetFrameStrata("DIALOG")
-    spinner:SetSize(60, 60)
-    spinner.BackgroundFrame.Background:SetVertexColor(0, 1, 0, 1)
-    spinner.AnimFrame.Circle:SetVertexColor(0, 1, 0, 1)
-    uiLoadingSpinner = spinner
+  if not uiLoadingFrame then
+    uiLoadingFrame = CreateFrame("Frame", "ARTUILoadingFrame", UIParent)
+    uiLoadingFrame:SetPoint("CENTER")
+    uiLoadingFrame:SetFrameStrata("DIALOG")
+    uiLoadingFrame:SetSize(160, 40)
+    local text = uiLoadingFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+    text:SetPoint("CENTER")
+    text:SetText("Loading Anniversary Raid Tools...")
   end
-
-  uiLoadingSpinner:Show()
-  uiLoadingSpinner.Anim:Play()
+  uiLoadingFrame:Show()
 end
 
 local function hideUILoading()
-  if not uiLoadingSpinner then return end
-  uiLoadingSpinner:Hide()
-  uiLoadingSpinner.Anim:Stop()
+  if uiLoadingFrame then uiLoadingFrame:Hide() end
 end
 
 StaticPopupDialogs[UI_DISABLED_POPUP] = {
-  text = "MythicDungeonTools UI is disabled. Enable it and reload the interface?",
+  text = "Anniversary Raid Tools UI is disabled. Enable it and reload the interface?",
   button1 = "Enable and Reload",
   button2 = _G.CANCEL,
   OnAccept = function()
-    C_AddOns.EnableAddOn(UI_ADDON_NAME)
+    Compat:EnableAddOn(UI_ADDON_NAME)
     ReloadUI()
   end,
   timeout = 0,
@@ -151,14 +152,14 @@ function MDT:LoadUI(reason)
   if uiLoading then return false end
 
   uiLoading = true
-  local loaded, loadError = C_AddOns.LoadAddOn(UI_ADDON_NAME)
+  local loaded, loadError = Compat:LoadAddOn(UI_ADDON_NAME)
   uiLoading = nil
 
   if not loaded and not isUILoaded() then
     if loadError == "DISABLED" then
       StaticPopup_Show(UI_DISABLED_POPUP)
     end
-    print(("|cffffd100MDT:|r Failed to load UI%s: %s"):format(reason and " ("..reason..")" or "", loadError or "unknown error"))
+    print(("|cffffd100ART:|r Failed to load UI%s: %s"):format(reason and " ("..reason..")" or "", loadError or "unknown error"))
     return false
   end
   return true
@@ -178,7 +179,7 @@ local function callUI(methodName, ...)
   end
   local implementation = uiHandlers and uiHandlers[methodName]
   if type(implementation) ~= "function" then
-    print("|cffffd100MDT:|r UI method unavailable: "..methodName)
+    print("|cffffd100ART:|r UI method unavailable: "..methodName)
     return
   end
   return implementation(...)
@@ -213,15 +214,15 @@ MDT:ExportAPI("GetEnemyForces")
 MDT:ExportAPI("GetDungeonName")
 MDT:ExportAPI("GetDungeonSublevels")
 
-BINDING_HEADER_MDT = "Mythic Dungeon Tools (MDT)"
-BINDING_NAME_MDTTOGGLE = L["Toggle MDT"]
+BINDING_HEADER_MDT = "Anniversary Raid Tools (ART)"
+BINDING_NAME_MDTTOGGLE = "Toggle ART"
 _G["BINDING_NAME_CLICK MDTFocusMarkerButton:LeftButton"] = L["MDT Set Focus Macro"]
 
-SLASH_MYTHICDUNGEONTOOLS1 = "/mplus"
-SLASH_MYTHICDUNGEONTOOLS2 = "/mdt"
-SLASH_MYTHICDUNGEONTOOLS3 = "/mythicdungeontools"
+SLASH_ANNIVERSARYRAIDTOOLS1 = "/art"
+SLASH_ANNIVERSARYRAIDTOOLS2 = "/mdt"
+SLASH_ANNIVERSARYRAIDTOOLS3 = "/anniversaryraidtools"
 
-function SlashCmdList.MYTHICDUNGEONTOOLS(cmd, editbox)
+function SlashCmdList.ANNIVERSARYRAIDTOOLS(cmd, editbox)
   cmd = cmd:lower()
   local request, argument = strsplit(" ", cmd)
   if request == "minimap" then
@@ -236,16 +237,17 @@ function SlashCmdList.MYTHICDUNGEONTOOLS(cmd, editbox)
 end
 
 local minimapIcon = LibStub("LibDBIcon-1.0")
-local dataBroker = LibStub("LibDataBroker-1.1"):NewDataObject("MythicDungeonTools", {
+local minimapKey = "AnniversaryRaidTools"
+local dataBroker = LibStub("LibDataBroker-1.1"):NewDataObject(minimapKey, {
   type = "data source",
-  text = "Mythic Dungeon Tools",
-  icon = "Interface\\AddOns\\MythicDungeonTools\\Textures\\MDTMinimap",
+  text = "Anniversary Raid Tools",
+  icon = MDT.AddonPath.."Textures\\MDTMinimap",
   OnClick = function(_, button)
     if button == "RightButton" then
       if db.minimap.lock then
-        minimapIcon:Unlock("MythicDungeonTools")
+        minimapIcon:Unlock(minimapKey)
       else
-        minimapIcon:Lock("MythicDungeonTools")
+        minimapIcon:Lock(minimapKey)
       end
     elseif button == "MiddleButton" then
       if db.minimap.hide then MDT:ShowMinimapButton() else MDT:HideMinimapButton() end
@@ -255,7 +257,7 @@ local dataBroker = LibStub("LibDataBroker-1.1"):NewDataObject("MythicDungeonTool
   end,
   OnTooltipShow = function(tooltip)
     if not tooltip or not tooltip.AddLine then return end
-    tooltip:AddLine("|cFFFFFFFFMythic Dungeon Tools|r")
+    tooltip:AddLine("|cFFFFFFFFAnniversary Raid Tools|r")
     tooltip:AddLine(L["Click to toggle AddOn Window"])
     tooltip:AddLine(L["Right-click to lock Minimap Button"])
     tooltip:AddLine(L["Middle-click to disable Minimap Button"])
@@ -264,27 +266,27 @@ local dataBroker = LibStub("LibDataBroker-1.1"):NewDataObject("MythicDungeonTool
 
 function MDT:HideMinimapButton()
   db.minimap.hide = true
-  minimapIcon:Hide("MythicDungeonTools")
+  minimapIcon:Hide(minimapKey)
   if uiHandlers and uiHandlers.OnMinimapVisibilityChanged then uiHandlers.OnMinimapVisibilityChanged(false) end
-  print("MDT: Use /mdt minimap to show the minimap icon again")
+  print("ART: Use /art minimap to show the minimap icon again")
 end
 
 function MDT:ShowMinimapButton()
   db.minimap.hide = false
-  minimapIcon:Refresh("MythicDungeonTools", db.minimap)
+  minimapIcon:Refresh(minimapKey, db.minimap)
   if uiHandlers and uiHandlers.OnMinimapVisibilityChanged then uiHandlers.OnMinimapVisibilityChanged(true) end
 end
 
 function MDT:RefreshMinimapButton()
-  if not db.minimap.hide then minimapIcon:Refresh("MythicDungeonTools", db.minimap) end
+  if not db.minimap.hide then minimapIcon:Refresh(minimapKey, db.minimap) end
 end
 
 function MDT:SetCompartmentButtonShown(shown)
   db.minimap.compartmentHide = not shown
   if shown then
-    minimapIcon:AddButtonToCompartment("MythicDungeonTools")
+    if minimapIcon.AddButtonToCompartment then minimapIcon:AddButtonToCompartment(minimapKey) end
   else
-    minimapIcon:RemoveButtonFromCompartment("MythicDungeonTools")
+    if minimapIcon.RemoveButtonFromCompartment then minimapIcon:RemoveButtonFromCompartment(minimapKey) end
   end
 end
 
@@ -292,9 +294,9 @@ MDT:ExportAPI("HideMinimapButton")
 MDT:ExportAPI("ShowMinimapButton")
 MDT:ExportAPI("SetCompartmentButtonShown")
 
-minimapIcon:Register("MythicDungeonTools", dataBroker, db.minimap)
+minimapIcon:Register(minimapKey, dataBroker, db.minimap)
 if not db.minimap.hide then MDT:ShowMinimapButton() end
-if not db.minimap.compartmentHide then minimapIcon:AddButtonToCompartment("MythicDungeonTools") end
+if not db.minimap.compartmentHide and minimapIcon.AddButtonToCompartment then minimapIcon:AddButtonToCompartment(minimapKey) end
 
 local function buildFocusMarkerMacro(settings)
   local markerIndex = tonumber(settings.lastMarker) or 0
@@ -341,46 +343,17 @@ function MDT:EnableDungeonResetAnnounceHook()
     if not MDT:GetDB().announceDungeonReset then return end
     local message = MDT.L["dungeonResetAnnouncement"]
     if IsInRaid() then
-      C_ChatInfo.SendChatMessage(message, "RAID")
+      Compat:SendChatMessage(message, "RAID")
     elseif IsInGroup() then
-      C_ChatInfo.SendChatMessage(message, "PARTY")
+      Compat:SendChatMessage(message, "PARTY")
     else
       print(message)
     end
   end)
 end
 
-local enemyForcesTooltipEnabled
 function MDT:EnableEnemyForcesTooltip()
-  if enemyForcesTooltipEnabled then return end
-  enemyForcesTooltipEnabled = true
-  TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip)
-    local option = MDT:GetDB().enemyForcesTooltip
-    if option == 1 or not IsInInstance() then return end
-    local count, percent = C_ScenarioInfo.GetUnitCriteriaProgressValues("mouseover")
-    if not count or not percent then return end
-
-    local label = MDT.L["Enemy Info NPC Enemy Forces"]
-    local formats = {
-      [2] = "%s: %.1f%% (%d)",
-      [3] = "%s: %d",
-      [4] = "%s: %.1f%%",
-      [5] = "%.1f%% (%d)",
-      [6] = "%d",
-      [7] = "%.1f%%",
-    }
-    local format = formats[option]
-    if not format then return end
-    local text
-    if option == 2 then text = format:format(label, percent, count)
-    elseif option == 3 then text = format:format(label, count)
-    elseif option == 4 then text = format:format(label, percent)
-    elseif option == 5 then text = format:format(percent, count)
-    elseif option == 6 then text = format:format(count)
-    else text = format:format(percent) end
-    tooltip:AddLine("|TInterface\\AddOns\\MythicDungeonTools\\Textures\\MDTMinimap:0:0|t"..text, 1, 1, 1)
-    tooltip:Show()
-  end)
+  -- Kept as a no-op for MDT-derived plugins; raid planning has no forces tooltip.
 end
 
 if db.announceDungeonReset then MDT:EnableDungeonResetAnnounceHook() end
@@ -434,7 +407,7 @@ end
 local function onCommReceived(self, prefix, message, distribution, sender)
   if prefix == MDT.versionCheckPrefix then
     if message == "R" and distribution == "PARTY" then
-      local version = C_AddOns.GetAddOnMetadata(addonName, "Version")
+      local version = Compat:GetAddOnMetadata(addonName, "Version") or "unknown"
       self:SendCommMessage(prefix, "V"..version, "PARTY", nil, "ALERT")
       return
     end
@@ -517,21 +490,13 @@ eventFrame:SetScript("OnEvent", function(self, event)
     local settings = MDT:GetDB().focusMarker
     local markerIndex = tonumber(settings.lastMarker)
     if settings.announceReadyCheck and markerIndex and markerIndex >= 1 and markerIndex <= 8 and not IsInRaid() then
-      C_ChatInfo.SendChatMessage(MDT.L["focusMarkerChatAnnouncement"]:format(markerIndex), "PARTY")
+      Compat:SendChatMessage(MDT.L["focusMarkerChatAnnouncement"]:format(markerIndex), "PARTY")
     end
     return
   end
 
   MDT:RefreshMinimapButton()
   MDT:ApplyXalatathVoiceLinesMute()
-  if C_AddOns.IsAddOnLoaded("DungeonTools") then
-    SLASH_DUNGEONTOOLS1 = "/mplus"
-    SLASH_DUNGEONTOOLS2 = "/mdt"
-    SLASH_DUNGEONTOOLS3 = "/dungeontools"
-    SlashCmdList.DUNGEONTOOLS = function() MDT:ShowInterface() end
-    local dungeonToolsButton = minimapIcon.objects and minimapIcon.objects.DungeonTools
-    if dungeonToolsButton then dungeonToolsButton:SetScript("OnClick", function() MDT:ShowInterface() end) end
-  end
   if db.loadOnStartUp and db.devMode then MDT:ShowInterface(true) end
   self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)

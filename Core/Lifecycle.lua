@@ -108,7 +108,7 @@ function MDT:StartMainFrameInitialization()
   -- request spell info for all teleports, so icons are instantly working
   for _, mapInfo in pairs(MDT.mapInfo) do
     if mapInfo.teleportId then
-      C_Spell.RequestLoadSpellData(mapInfo.teleportId)
+      MDT.Compat:RequestLoadSpellData(mapInfo.teleportId)
     end
   end
 

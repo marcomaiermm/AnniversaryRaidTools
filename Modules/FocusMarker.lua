@@ -9,7 +9,7 @@ local TARGET_MARKER_CONDITIONALS = "[@focus]"
 local HOSTILE_TARGET_MARKER_CONDITIONALS = "[@focus,harm,exists]"
 local RAID_GROUP_STOP_CONDITIONALS = "[group:raid]"
 local MACRO_ICON = 1033497
-local MDT_LOGO = "Interface\\AddOns\\MythicDungeonTools\\Textures\\MDTFull"
+local MDT_LOGO = MDT.AddonPath.."Textures\\MDTFull"
 local NO_MACRO_SLOTS_ERROR = "nomacroslots"
 local KEYBIND_BUTTON_NAME = "MDTFocusMarkerButton"
 local KEYBIND_COMMAND = "CLICK MDTFocusMarkerButton:LeftButton"
@@ -504,7 +504,7 @@ local function announceFocusMarker()
 
   if markerIndex < 1 or markerIndex > 8 then return end
 
-  C_ChatInfo.SendChatMessage(string.format(L["focusMarkerChatAnnouncement"], markerIndex), "PARTY")
+  MDT.Compat:SendChatMessage(string.format(L["focusMarkerChatAnnouncement"], markerIndex), "PARTY")
 end
 
 local eventFrame = CreateFrame("Frame")

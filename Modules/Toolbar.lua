@@ -28,7 +28,7 @@ function MDT:initToolbar(frame)
 
   frame.toolbar.toggleButton:SetPoint("LEFT", frame, "LEFT")
   frame.toolbar.toggleButton:SetSize(11, 32)
-  frame.toolbar.toggleButton:SetNormalTexture("Interface\\AddOns\\MythicDungeonTools\\Textures\\arrows")
+  frame.toolbar.toggleButton:SetNormalTexture(MDT.AddonPath.."Textures\\arrows")
   frame.toolbar.toggleButton:GetNormalTexture():SetTexCoord(0.7, 1, 0, 1)
 
   frame.toolbar:Hide()
@@ -88,7 +88,7 @@ function MDT:initToolbar(frame)
 
   ---back
   local back = AceGUI:Create("Icon")
-  back:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0.5, 0.75, 0.5, 0.75)
+  back:SetImage(MDT.AddonPath.."Textures\\icons", 0.5, 0.75, 0.5, 0.75)
   back:SetCallback("OnClick", function(widget, callbackName)
     self:PresetObjectStepBack()
   end)
@@ -99,7 +99,7 @@ function MDT:initToolbar(frame)
 
   ---forward
   local forward = AceGUI:Create("Icon")
-  forward:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0.75, 1, 0.5, 0.75)
+  forward:SetImage(MDT.AddonPath.."Textures\\icons", 0.75, 1, 0.5, 0.75)
   forward:SetCallback("OnClick", function(widget, callbackName)
     self:PresetObjectStepForward()
   end)
@@ -120,7 +120,7 @@ function MDT:initToolbar(frame)
   local sizeIndicator
   ---plus
   local plus = AceGUI:Create("Icon")
-  plus:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0.25, 0.5, 0.5, 0.75)
+  plus:SetImage(MDT.AddonPath.."Textures\\icons", 0.25, 0.5, 0.5, 0.75)
   plus:SetCallback("OnClick", function(widget, callbackName)
     db.toolbar.brushSize = db.toolbar.brushSize + 1
     sizeIndicator:SetText(db.toolbar.brushSize)
@@ -162,7 +162,7 @@ function MDT:initToolbar(frame)
 
   ---minus
   local minus = AceGUI:Create("Icon")
-  minus:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0, 0.25, 0.5, 0.75)
+  minus:SetImage(MDT.AddonPath.."Textures\\icons", 0, 0.25, 0.5, 0.75)
   minus:SetCallback("OnClick", function(widget, callbackName)
     db.toolbar.brushSize = db.toolbar.brushSize - 1
     if db.toolbar.brushSize < 1 then db.toolbar.brushSize = 1 end
@@ -173,7 +173,7 @@ function MDT:initToolbar(frame)
 
   ---pencil
   local pencil = AceGUI:Create("Icon")
-  pencil:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0, 0.25, 0, 0.25)
+  pencil:SetImage(MDT.AddonPath.."Textures\\icons", 0, 0.25, 0, 0.25)
   toolbarTools["pencil"] = pencil
   pencil:SetCallback("OnClick", function(widget, callbackName)
     if currentTool == "pencil" then MDT:UpdateSelectedToolbarTool() else MDT:UpdateSelectedToolbarTool("pencil") end
@@ -183,7 +183,7 @@ function MDT:initToolbar(frame)
 
   ---line
   local line = AceGUI:Create("Icon")
-  line:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0, 0.25, 0.75, 1)
+  line:SetImage(MDT.AddonPath.."Textures\\icons", 0, 0.25, 0.75, 1)
   toolbarTools["line"] = line
   line:SetCallback("OnClick", function(widget, callbackName)
     if currentTool == "line" then MDT:UpdateSelectedToolbarTool() else MDT:UpdateSelectedToolbarTool("line") end
@@ -193,7 +193,7 @@ function MDT:initToolbar(frame)
 
   ---arrow
   local arrow = AceGUI:Create("Icon")
-  arrow:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0.25, 0.5, 0, 0.25)
+  arrow:SetImage(MDT.AddonPath.."Textures\\icons", 0.25, 0.5, 0, 0.25)
   toolbarTools["arrow"] = arrow
   arrow:SetCallback("OnClick", function(widget, callbackName)
     if currentTool == "arrow" then MDT:UpdateSelectedToolbarTool() else MDT:UpdateSelectedToolbarTool("arrow") end
@@ -203,7 +203,7 @@ function MDT:initToolbar(frame)
 
   ---note
   local note = AceGUI:Create("Icon")
-  note:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0.75, 1, 0, 0.25)
+  note:SetImage(MDT.AddonPath.."Textures\\icons", 0.75, 1, 0, 0.25)
   toolbarTools["note"] = note
   note:SetCallback("OnClick", function(widget, callbackName)
     if currentTool == "note" then MDT:UpdateSelectedToolbarTool() else MDT:UpdateSelectedToolbarTool("note") end
@@ -213,7 +213,7 @@ function MDT:initToolbar(frame)
 
   ---mover
   local mover = AceGUI:Create("Icon")
-  mover:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0.5, 0.75, 0, 0.25)
+  mover:SetImage(MDT.AddonPath.."Textures\\icons", 0.5, 0.75, 0, 0.25)
   toolbarTools["mover"] = mover
   mover:SetCallback("OnClick", function(widget, callbackName)
     if currentTool == "mover" then MDT:UpdateSelectedToolbarTool() else MDT:UpdateSelectedToolbarTool("mover") end
@@ -223,7 +223,7 @@ function MDT:initToolbar(frame)
 
   ---eraser
   local eraser = AceGUI:Create("Icon")
-  eraser:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0.25, 0.5, 0.25, 0.5)
+  eraser:SetImage(MDT.AddonPath.."Textures\\icons", 0.25, 0.5, 0.25, 0.5)
   toolbarTools["eraser"] = eraser
   eraser:SetCallback("OnClick", function(widget, callbackName)
     if currentTool == "eraser" then MDT:UpdateSelectedToolbarTool() else MDT:UpdateSelectedToolbarTool("eraser") end
@@ -233,7 +233,7 @@ function MDT:initToolbar(frame)
 
   ---delete
   local delete = AceGUI:Create("Icon")
-  delete:SetImage("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0.25, 0.5, 0.75, 1)
+  delete:SetImage(MDT.AddonPath.."Textures\\icons", 0.25, 0.5, 0.75, 1)
   delete:SetCallback("OnClick", function(widget, callbackName)
     local prompt = string.format(L["deleteAllDrawingsPrompt"], "\n", "\n", "\n")
     self:OpenConfirmationFrame(450, 150, L["Delete ALL drawings"], L["Delete"], prompt, function()
@@ -273,7 +273,7 @@ function MDT:CreateBrushPreview(frame)
   frame.brushPreview:SetFrameLevel(4)
   frame.brushPreview:SetSize(1, 1)
   frame.brushPreview.tex = frame.brushPreview:CreateTexture(nil, "OVERLAY", nil, 0)
-  frame.brushPreview.tex:SetTexture("Interface\\AddOns\\MythicDungeonTools\\Textures\\ring")
+  frame.brushPreview.tex:SetTexture(MDT.AddonPath.."Textures\\ring")
   frame.brushPreview.tex:SetAllPoints()
 end
 
@@ -350,7 +350,7 @@ function MDT:UpdateSelectedToolbarTool(widgetName)
   local widget = toolbarTools[widgetName]
   currentTool = widgetName
   toolbar.highlight = toolbar.highlight or toolbar:CreateTexture(nil, "OVERLAY", nil, 7)
-  toolbar.highlight:SetTexture("Interface\\AddOns\\MythicDungeonTools\\Textures\\icons")
+  toolbar.highlight:SetTexture(MDT.AddonPath.."Textures\\icons")
   toolbar.highlight:SetTexCoord(0.5, 0.75, 0.25, 0.5)
   toolbar.highlight:SetSize(widget.frame:GetWidth(), widget.frame:GetWidth())
   toolbar.highlight:ClearAllPoints()
@@ -454,11 +454,11 @@ function MDT:StartArrowDrawing()
   local frame = MDT.main_frame
   local startx, starty = MDT:GetCursorPosition()
   local line = MDT:AcquirePresetObjectTexture()
-  line:SetTexture("Interface\\AddOns\\MythicDungeonTools\\Textures\\Square_White")
+  line:SetTexture(MDT.AddonPath.."Textures\\Square_White")
   line:SetVertexColor(db.toolbar.color.r, db.toolbar.color.g, db.toolbar.color.b, db.toolbar.color.a)
   line:Show()
   local arrow = MDT:AcquirePresetObjectTexture()
-  arrow:SetTexture("Interface\\AddOns\\MythicDungeonTools\\Textures\\triangle")
+  arrow:SetTexture(MDT.AddonPath.."Textures\\triangle")
   arrow:SetVertexColor(db.toolbar.color.r, db.toolbar.color.g, db.toolbar.color.b, db.toolbar.color.a)
   line.isOwn = true
   arrow.isOwn = true
@@ -525,7 +525,7 @@ function MDT:StartLineDrawing()
   local frame = MDT.main_frame
   startx, starty = MDT:GetCursorPosition()
   local line = MDT:AcquirePresetObjectTexture()
-  line:SetTexture("Interface\\AddOns\\MythicDungeonTools\\Textures\\Square_White")
+  line:SetTexture(MDT.AddonPath.."Textures\\Square_White")
   line:SetVertexColor(db.toolbar.color.r, db.toolbar.color.g, db.toolbar.color.b, db.toolbar.color.a)
   line.isOwn = true
   tinsert(activeTextures, line)

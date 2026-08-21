@@ -1,23 +1,21 @@
-## Interface: 120100
-# WOW_INTERFACE_TARGETS: mainline
-## Title: Mythic Dungeon Tools (MDT) - UI
-## Author: Nnoggie
+## Interface: 20505, 20506
+## Title: Anniversary Raid Tools (ART) - UI
+## Author: Nnoggie; AnniversaryRaidTools contributors
 ## Version: @project-version@
-## Notes: Load-on-demand interface for Mythic Dungeon Tools
-## Dependencies: MythicDungeonTools
+## Notes: Load-on-demand interface for Anniversary Raid Tools
+## Dependencies: AnniversaryRaidTools
 ## LoadOnDemand: 1
-## IconTexture: Interface\AddOns\MythicDungeonTools\Textures\MDTFull
+## IconTexture: Interface\AddOns\AnniversaryRaidTools\Textures\MDTFull
 
-..\MythicDungeonTools\libs\load_libs.xml
+..\AnniversaryRaidTools\libs\load_libs.xml
 Bootstrap.lua
-..\MythicDungeonTools\locales.xml
-..\MythicDungeonTools\AceGUIWidgets\load_widgets.xml
-..\MythicDungeonTools\Utility.lua
-..\MythicDungeonTools\Core\SavedVariables.lua
-..\MythicDungeonTools\MythicDungeonTools.lua
-..\MythicDungeonTools\Core\Lifecycle.lua
-..\MythicDungeonTools\Modules\load_modules.xml
+..\AnniversaryRaidTools\locales.xml
+..\AnniversaryRaidTools\AceGUIWidgets\load_widgets.xml
+..\AnniversaryRaidTools\Utility.lua
+..\AnniversaryRaidTools\Core\SavedVariables.lua
+..\AnniversaryRaidTools\MythicDungeonTools.lua
+..\AnniversaryRaidTools\Core\Lifecycle.lua
+..\AnniversaryRaidTools\Modules\load_modules.xml
 #@do-not-package@
-..\MythicDungeonTools\Developer\load_developer.xml
+..\AnniversaryRaidTools\Developer\load_developer.xml
 #@end-do-not-package@
-..\MythicDungeonTools\Midnight\load_midnight.xml [AllowLoadGameType mainline]

@@ -11,17 +11,7 @@ local candidates = {
   ["DungeonTools"] = {
     name = "Dungeon Tools",
     detected = false,
-    onDetect = function()
-      SLASH_DUNGEONTOOLS1 = "/mplus"
-      SLASH_DUNGEONTOOLS2 = "/mdt"
-      SLASH_DUNGEONTOOLS3 = "/dungeontools"
-      function SlashCmdList.DUNGEONTOOLS(cmd, editbox)
-        MDT:Async(function() MDT:ShowInterfaceInternal() end, "showInterface")
-      end
-
-      local ldb = LibStub("LibDBIcon-1.0")
-      ldb.objects["DungeonTools"]:SetScript("OnClick", function() MDT:Async(function() MDT:ShowInterfaceInternal() end, "showInterface") end)
-    end
+    onDetect = function() end
   },
   ["MDTGuide"] = {
     name = "MDTGuide",
@@ -88,14 +78,14 @@ conflictCheckFrame:SetScript("OnEvent", function(self, event, ...)
 end)
 
 function MDT:CheckAddonConflicts()
-  for i = 1, C_AddOns.GetNumAddOns() do
-    local name = C_AddOns.GetAddOnInfo(i)
-    local loaded = C_AddOns.IsAddOnLoaded(i)
+  for i = 1, MDT.Compat:GetNumAddOns() do
+    local name = MDT.Compat:GetAddOnInfo(i)
+    local loaded = MDT.Compat:IsAddOnLoaded(i)
     local candidate = candidates[name]
     if loaded and candidate then
       if candidate.version then
         ---@diagnostic disable-next-line: redundant-parameter
-        local version = C_AddOns.GetAddOnMetadata(i, "Version"):gsub("%.", "")
+        local version = (MDT.Compat:GetAddOnMetadata(i, "Version") or ""):gsub("%.", "")
         local versionNum = tonumber(version)
         candidate.detected = versionNum ~= nil and versionNum <= candidate.version
       else

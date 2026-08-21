@@ -10,7 +10,7 @@ local changeLogRequestPrefix = "C"
 local changeLogHeaderPrefix = "H"
 local changeLogNotePrefix = "N"
 local versionCheckCooldown = 300
-local currentVersion = C_AddOns.GetAddOnMetadata(MDT.AddonName, "Version")
+local currentVersion = MDT.Compat:GetAddOnMetadata(MDT.AddonName, "Version") or "0"
 local latestVersion = currentVersion
 local lastVersionRequestAt = -versionCheckCooldown
 
@@ -263,12 +263,12 @@ local function requestMissingPlayerVersions()
 end
 
 local function reportPlayerVersionsToParty()
-  C_ChatInfo.SendChatMessage("MDT Version Check:", "PARTY")
-  C_ChatInfo.SendChatMessage(getFullName("player")..": v"..currentVersion, "PARTY")
+  MDT.Compat:SendChatMessage("MDT Version Check:", "PARTY")
+  MDT.Compat:SendChatMessage(getFullName("player")..": v"..currentVersion, "PARTY")
   forEachPartyMember(function(memberName)
     local version = reportedVersions[memberName]
     if version then
-      C_ChatInfo.SendChatMessage(memberName..": v"..version, "PARTY")
+      MDT.Compat:SendChatMessage(memberName..": v"..version, "PARTY")
     end
   end)
 end

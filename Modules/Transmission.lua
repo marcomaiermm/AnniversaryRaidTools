@@ -1,8 +1,8 @@
 local _, MDT = ...
 local L = MDT.L
 local LegacyCompressor = LibStub:GetLibrary("LibCompress")
-local LegacySerializer = LibStub:GetLibrary("AceSerializer-3.0")
-local LegacyDeflate = LibStub:GetLibrary("LibDeflate")
+local Serializer = LibStub:GetLibrary("AceSerializer-3.0")
+local Deflate = LibStub:GetLibrary("LibDeflate")
 local MDTcommsObject = MDT.commsObject
 local presetCommPrefix = MDT.presetCommPrefix
 
@@ -12,19 +12,30 @@ local pairs, type, unpack = pairs, type, unpack
 
 local uidCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()"
 
--- "~" cannot start either legacy LibDeflate encoding, so this marker cannot collide with existing exports.
-local encodingPrefix = "!~MDT2~"
+local encodingPrefix = "!ART1!"
+local retailEncodingPrefix = "!~MDT2~"
 
 function MDT:TableToString(inTable)
-  local serialized = C_EncodingUtil.SerializeCBOR(inTable)
-  local compressed = C_EncodingUtil.CompressString(serialized, Enum.CompressionMethod.Deflate)
-  local encoded = C_EncodingUtil.EncodeBase64(compressed)
-  return encodingPrefix..encoded
+  local serialized = Serializer:Serialize(inTable)
+  local compressed = Deflate:CompressDeflate(serialized)
+  return encodingPrefix..Deflate:EncodeForPrint(compressed)
 end
 
 function MDT:StringToTable(inString, fromChat)
   if inString:sub(1, #encodingPrefix) == encodingPrefix then
-    local decoded = C_EncodingUtil.DecodeBase64(inString:sub(#encodingPrefix + 1))
+    local decoded = Deflate:DecodeForPrint(inString:sub(#encodingPrefix + 1))
+    if not decoded then return "Error decoding." end
+    local decompressed = Deflate:DecompressDeflate(decoded)
+    if not decompressed then return "Error decompressing." end
+    local success, deserialized = Serializer:Deserialize(decompressed)
+    return success and deserialized or "Error deserializing "..tostring(deserialized)
+  end
+
+  if inString:sub(1, #retailEncodingPrefix) == retailEncodingPrefix then
+    if not (C_EncodingUtil and Enum and Enum.CompressionMethod) then
+      return "Unsupported Retail export encoding."
+    end
+    local decoded = C_EncodingUtil.DecodeBase64(inString:sub(#retailEncodingPrefix + 1))
     if not decoded then return "Error decoding." end
     local decompressed = C_EncodingUtil.DecompressString(decoded, Enum.CompressionMethod.Deflate)
     if not decompressed then return "Error decompressing." end
@@ -35,9 +46,9 @@ function MDT:StringToTable(inString, fromChat)
   local encoded, usesDeflate = inString:gsub("^%!", "")
   local decoded
   if (fromChat) then
-    decoded = LegacyDeflate:DecodeForPrint(encoded)
+    decoded = Deflate:DecodeForPrint(encoded)
   else
-    decoded = LegacyDeflate:DecodeForWoWAddonChannel(encoded)
+    decoded = Deflate:DecodeForWoWAddonChannel(encoded)
   end
 
   if not decoded then
@@ -46,7 +57,7 @@ function MDT:StringToTable(inString, fromChat)
 
   local decompressed, errorMsg = nil, "unknown compression method"
   if usesDeflate == 1 then
-    decompressed = LegacyDeflate:DecompressDeflate(decoded)
+    decompressed = Deflate:DecompressDeflate(decoded)
   else
     decompressed, errorMsg = LegacyCompressor:Decompress(decoded)
   end
@@ -54,7 +65,7 @@ function MDT:StringToTable(inString, fromChat)
     return "Error decompressing: "..errorMsg
   end
 
-  local success, deserialized = LegacySerializer:Deserialize(decompressed)
+  local success, deserialized = Serializer:Deserialize(decompressed)
   if not (success) then
     return "Error deserializing "..deserialized
   end
@@ -450,7 +461,7 @@ local function displaySendingProgress(userArgs, bytesSent, bytesToSend, didSend)
       local fullName = name.."+"..realm
       local message = prefix..fullName.." - "..dungeon..": "..presetName.."]"
       -- ponytail: delivery gap; add receiver acknowledgements if cross-client ordering still races.
-      C_Timer.After(0.5, function() C_ChatInfo.SendChatMessage(message, distribution) end)
+      C_Timer.After(0.5, function() MDT.Compat:SendChatMessage(message, distribution) end)
     end
   end
 end

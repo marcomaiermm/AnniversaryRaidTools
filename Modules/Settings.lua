@@ -15,7 +15,7 @@ local colorPaletteNames = {
   [6] = L["Custom"],
 }
 
-local enemyForcesTooltipIcon = "|TInterface\\AddOns\\MythicDungeonTools\\Textures\\MDTMinimap:0:0|t"
+local enemyForcesTooltipIcon = "|T"..MDT.AddonPath.."Textures\\MDTMinimap:0:0|t"
 local enemyForcesTooltipLabel = L["Enemy Info NPC Enemy Forces"]
 local enemyForcesTooltipOptions = {
   [1] = "None",

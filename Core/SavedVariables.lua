@@ -85,7 +85,7 @@ end
 
 function MDT:InitializeSavedVariables()
   if db then return db end
-  db = LibStub("AceDB-3.0"):New("MythicDungeonToolsDB", defaultSavedVars).global
+  db = LibStub("AceDB-3.0"):New("AnniversaryRaidToolsDB", defaultSavedVars).global
   if not db then return end
 
   for dungeonIdx, presetIdx in pairs(db.currentPreset) do
@@ -107,6 +107,7 @@ function MDT:ResetDataCache()
 end
 
 function MDT:HardReset()
+  AnniversaryRaidToolsDB = nil
   MythicDungeonToolsDB = nil
   ReloadUI()
 end

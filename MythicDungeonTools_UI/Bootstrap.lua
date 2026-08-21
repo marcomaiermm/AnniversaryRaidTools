@@ -1,8 +1,10 @@
 local addonName, MDT = ...
-local API = assert(_G.MythicDungeonToolsAPI, "MythicDungeonTools_UI requires MythicDungeonTools")
+local API = assert(_G.AnniversaryRaidToolsAPI or _G.MythicDungeonToolsAPI,
+  "Anniversary Raid Tools UI requires Anniversary Raid Tools")
 
 MDT.UIAddonName = addonName
 MDT.AddonName = API:GetAddonName()
+MDT.AddonPath = API:GetAddonPath()
 MDT.BackdropColor = { API:GetBackdropColor() }
 MDT.L = setmetatable({}, { __index = function(_, key) return key end })
 MDT.presetCommPrefix = API:GetPresetCommPrefix()

@@ -22,7 +22,7 @@ end
 
 function MDT:CreateContextMenu(ownerRegion, generator, ...)
   if self:IsInRestrictedEnvironment(true) then return end
-  return MenuUtil.CreateContextMenu(ownerRegion, generator, ...)
+  return self.Compat:CreateContextMenu(ownerRegion, generator, ...)
 end
 
 function MDT:InitializeRuntime()

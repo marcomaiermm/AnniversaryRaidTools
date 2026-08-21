@@ -7,19 +7,19 @@ MDT.externalLinks = {
     name = "GitHub",
     tooltip = L["Open an issue on GitHub"],
     url = "https://github.com/Nnoggie/MythicDungeonTools/issues",
-    texture = { "Interface\\AddOns\\MythicDungeonTools\\Textures\\github", 0, 1, 0, 1 },
+    texture = { MDT.AddonPath.."Textures\\github", 0, 1, 0, 1 },
   },
   {
     name = "Discord",
     tooltip = L["Provide feedback in Discord"],
     url = "https://discord.gg/tdxMPb3",
-    texture = { "Interface\\AddOns\\MythicDungeonTools\\Textures\\icons", 0.5, .75, 0.75, 1 },
+    texture = { MDT.AddonPath.."Textures\\icons", 0.5, .75, 0.75, 1 },
   },
   {
     name = "Patreon",
     tooltip = L["Support MDT on Patreon"],
     url = "https://www.patreon.com/nnoggie",
-    texture = { "Interface\\AddOns\\MythicDungeonTools\\Textures\\patreon", 0, 1, 0, 1 },
+    texture = { MDT.AddonPath.."Textures\\patreon", 0, 1, 0, 1 },
   },
 }
 
