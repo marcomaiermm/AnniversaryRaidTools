@@ -3,6 +3,7 @@
 local root = arg and arg[1] or "."
 local ART = {}
 _G.ART = ART
+ART.StaticData = { enemyInfo = {} }
 local load = function(path) return assert(loadfile(root..path)) end
 local repositoryAPI = load("/Core/EnemyInfoRepository.lua")("AnniversaryRaidTools", { ART = ART })
 local recorderAPI = load("/Developer/RaidRecorder.lua")("AnniversaryRaidTools", { ART = ART })

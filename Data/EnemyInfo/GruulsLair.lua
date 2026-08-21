@@ -10,7 +10,7 @@ local source = {
   observedAt = "2026-08-21T00:00:00Z",
 }
 
-return {
+local enemyInfo = {
   raidKey = "gruuls-lair",
   source = source,
   enemies = {
@@ -22,3 +22,17 @@ return {
     [19044] = { name = { value = "Gruul the Dragonkiller", source = source } },
   },
 }
+
+local ART = rawget(_G, "ART")
+if type(ART) ~= "table" then
+  error("AnniversaryRaidTools static data requires Core/Bootstrap.lua to initialize ART", 2)
+end
+if type(ART.StaticData) ~= "table" then
+  error("AnniversaryRaidTools static data requires ART.StaticData bootstrap", 2)
+end
+if type(ART.StaticData.enemyInfo) ~= "table" then
+  error("AnniversaryRaidTools static data requires ART.StaticData.enemyInfo bootstrap", 2)
+end
+
+ART.StaticData.enemyInfo[enemyInfo.raidKey] = enemyInfo
+return enemyInfo
