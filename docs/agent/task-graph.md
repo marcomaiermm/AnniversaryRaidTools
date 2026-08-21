@@ -12,6 +12,7 @@ ART-000 Contracts ─┬─> ART-010 Bootstrap ─> ART-020 Planner ─┐
                   └─> ART-060 Validation ───────────────────┴─> ART-070 Gruul
 ART-001 Retail audit ───────────────> ART-010
 ART-070 ─> ART-080 Black Temple / ART-081 Hyjal ─> ART-090 Multi-raid integration
+ART-090 ─> ART-100 Karazhan / ART-101 Magtheridon ─> ART-110 Tier-4 integration
 ```
 
 | Task | Owner / paths | Depends on | Gate/output |
@@ -29,6 +30,9 @@ ART-070 ─> ART-080 Black Temple / ART-081 Hyjal ─> ART-090 Multi-raid integr
 | ART-080 Black Temple | Black Temple owner: pinned CMaNGOS fixture, generated data, map, transform, and assigned tests | 070 | deterministic spawn/patrol and map coverage |
 | ART-081 Hyjal | Hyjal owner: pinned CMaNGOS fixture, generated data, map, transform, and assigned tests | 070 | deterministic spawn/patrol and wave/map coverage |
 | ART-090 Multi-raid integration | Integrator: central raid selection/wiring and integration tests | 080, 081 | Gruul, Black Temple, and Hyjal selectable end to end |
+| ART-100 Karazhan | Karazhan owner: pinned CMaNGOS fixture, generated data, maps, transforms, and assigned tests | 090 | deterministic spawn/patrol and multi-floor map coverage |
+| ART-101 Magtheridon | Magtheridon owner: pinned CMaNGOS fixture, generated data, map, transform, and assigned tests | 090 | deterministic spawn/patrol and encounter coverage |
+| ART-110 Tier-4 integration | Integrator: central Karazhan/Magtheridon selection and integration tests | 100, 101 | five raids selectable end to end |
 
 ART-030 through ART-060 may develop in parallel after their dependencies. Integrate
 in order: 000, 010, 060, 020, 030, 031, 040, 050, 070, then raid data. Feature
@@ -61,6 +65,9 @@ must wait for ART-010's accepted handover before touching that path.
 | ART-080 | `tools/ac/fixtures/black-temple.json`; `Raids/TBC/Generated/BlackTemple.lua` (generator output only); `Raids/TBC/Overrides/BlackTemple.lua`; `Raids/TBC/Maps/BlackTemple.lua`; `Raids/TBC/Transforms/BlackTemple.lua`; `tests/data/test_black_temple_pipeline.py`; `tests/maps/test_black_temple_map.lua` | all `Core/**`; all `Modules/**`; TOCs/loaders; contracts; generator core; shared fixtures/data; `Core/SavedVariables.lua`; shared locale files |
 | ART-081 | `tools/ac/fixtures/hyjal.json`; `Raids/TBC/Generated/Hyjal.lua` (generator output only); `Raids/TBC/Overrides/Hyjal.lua`; `Raids/TBC/Maps/Hyjal.lua`; `Raids/TBC/Transforms/Hyjal.lua`; `tests/data/test_hyjal_pipeline.py`; `tests/maps/test_hyjal_map.lua` | all `Core/**`; all `Modules/**`; TOCs/loaders; contracts; generator core; shared fixtures/data; `Core/SavedVariables.lua`; shared locale files |
 | ART-090 | `Modules/EnemyInfo.lua`; `Modules/load_modules.xml`; `Locales/enUS.lua`; `Locales/zhCN.lua`; `tests/integration/**`; `scripts/validate-addon.sh` | data fixtures; generated/override/map/transform definitions; route/mark/enemy-info internals; TOCs; `Core/SavedVariables.lua`; contracts |
+| ART-100 | `tools/ac/fixtures/karazhan.json`; `Raids/TBC/Generated/Karazhan.lua` (generator output only); `Raids/TBC/Overrides/Karazhan.lua`; `Raids/TBC/Maps/Karazhan.lua`; `Raids/TBC/Transforms/Karazhan.lua`; `tests/data/test_karazhan_pipeline.py`; `tests/maps/test_karazhan_map.lua` | all `Core/**`; all `Modules/**`; TOCs/loaders; contracts; generator core; shared fixtures/data; `Core/SavedVariables.lua`; shared locale files |
+| ART-101 | `tools/ac/fixtures/magtheridons-lair.json`; `Raids/TBC/Generated/MagtheridonsLair.lua` (generator output only); `Raids/TBC/Overrides/MagtheridonsLair.lua`; `Raids/TBC/Maps/MagtheridonsLair.lua`; `Raids/TBC/Transforms/MagtheridonsLair.lua`; `tests/data/test_magtheridons_lair_pipeline.py`; `tests/maps/test_magtheridons_lair_map.lua` | all `Core/**`; all `Modules/**`; TOCs/loaders; contracts; generator core; shared fixtures/data; `Core/SavedVariables.lua`; shared locale files |
+| ART-110 | `Modules/EnemyInfo.lua`; `Modules/load_modules.xml`; `Locales/enUS.lua`; `Locales/zhCN.lua`; `tests/integration/**`; `scripts/validate-addon.sh` | data fixtures; generated/override/map/transform definitions; route/mark/enemy-info internals; TOCs; `Core/SavedVariables.lua`; contracts |
 
 The matrix also resolves the legacy feature paths: `Modules/Transmission.lua` is
 ART-010 transport/codec compatibility; `Modules/LiveSession.lua`,
