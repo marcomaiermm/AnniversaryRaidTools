@@ -1,7 +1,7 @@
 -- Pure-Lua acceptance checks for ART-031 Gruul map calibration.
 
 local root = arg and arg[1] or "."
-local ART = {}
+local ART = { StaticData = { raids = {} } }
 _G.ART = ART
 local addon = { ART = ART }
 local map = assert(loadfile(root.."/Raids/TBC/Maps/GruulsLair.lua"))("AnniversaryRaidTools", addon)
