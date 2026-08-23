@@ -156,6 +156,7 @@ def _ordered_keys(value: dict[Any, Any], level: int) -> list[Any]:
             "instanceId",
             "mapId",
             "mode",
+            "enemyMetadataSource",
             "sublevels",
             "enemies",
             "packs",

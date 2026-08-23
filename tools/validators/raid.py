@@ -40,6 +40,8 @@ def validate_raid(raid: Any) -> list[str]:
     for field in ("instanceId", "mapId"):
         if not _positive_int(raid.get(field)):
             errors.append(f"{field} must be a positive integer")
+    if raid.get("enemyMetadataSource") is not None:
+        _check_provenance(raid["enemyMetadataSource"], "enemyMetadataSource", errors)
 
     sublevels = raid.get("sublevels")
     sublevel_ids: set[int] = set()
@@ -83,6 +85,39 @@ def validate_raid(raid: Any) -> list[str]:
             errors.append(f"enemy key {enemy_key!r} disagrees with npcId {npc_id}")
         if not isinstance(enemy.get("name"), str) or not enemy["name"]:
             errors.append(f"enemy {enemy_key!r}.name must be a non-empty string")
+        for field in ("health", "level", "displayId"):
+            if enemy.get(field) is not None and not _positive_int(enemy[field]):
+                errors.append(f"enemy {enemy_key!r}.{field} must be a positive integer")
+        if enemy.get("creatureType") is not None and (
+            not isinstance(enemy["creatureType"], str) or not enemy["creatureType"]
+        ):
+            errors.append(f"enemy {enemy_key!r}.creatureType must be a non-empty string")
+        scale = enemy.get("scale")
+        if scale is not None and (
+            not isinstance(scale, (int, float)) or isinstance(scale, bool) or scale <= 0
+        ):
+            errors.append(f"enemy {enemy_key!r}.scale must be a positive number")
+        if enemy.get("stealthDetect") is not None and not isinstance(enemy["stealthDetect"], bool):
+            errors.append(f"enemy {enemy_key!r}.stealthDetect must be a boolean")
+        spells = enemy.get("spells")
+        if spells is not None and not isinstance(spells, dict):
+            errors.append(f"enemy {enemy_key!r}.spells must be an object")
+        elif spells is not None:
+            for spell_id, spell in spells.items():
+                if not _positive_int(spell_id):
+                    errors.append(f"enemy {enemy_key!r}.spells keys must be positive spell IDs")
+                if not isinstance(spell, dict):
+                    errors.append(f"enemy {enemy_key!r}.spells[{spell_id!r}] must be an object")
+                elif spell.get("interruptible") is not None and not isinstance(spell["interruptible"], bool):
+                    errors.append(f"enemy {enemy_key!r}.spells[{spell_id!r}].interruptible must be a boolean")
+                elif spell.get("description") is not None and not isinstance(spell["description"], str):
+                    errors.append(f"enemy {enemy_key!r}.spells[{spell_id!r}].description must be a string")
+        characteristics = enemy.get("characteristics")
+        if characteristics is not None and (not isinstance(characteristics, dict) or any(
+            not isinstance(name, str) or not name or affected is not True
+            for name, affected in characteristics.items()
+        )):
+            errors.append(f"enemy {enemy_key!r}.characteristics must map names to true")
         _check_provenance(enemy.get("source"), f"enemy {enemy_key!r}.source", errors)
         spawns = enemy.get("spawns")
         if not isinstance(spawns, list) or not spawns:

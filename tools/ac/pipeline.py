@@ -47,6 +47,8 @@ def build_raid(snapshot: dict[str, Any]) -> dict[str, Any]:
     sublevels = _sublevels(snapshot.get("sublevels"), raid_input.get("mapId"))
     spawns = snapshot["spawns"]
     packs_input = snapshot["packs"]
+    npc_data = snapshot.get("npcs", {})
+    npc_source = snapshot.get("npcSource")
 
     spawn_records: dict[str, dict[str, Any]] = {}
     enemies: dict[str, dict[str, Any]] = {}
@@ -80,9 +82,21 @@ def build_raid(snapshot: dict[str, Any]) -> dict[str, Any]:
 
         enemy_key = str(npc_id)
         enemy_name = _string(raw.get("name"), f"spawn {spawn_key}.name")
+        metadata = copy.deepcopy(npc_data.get(enemy_key, {}))
+        if isinstance(metadata.get("spells"), dict):
+            metadata["spells"] = {
+                int(spell_id) if isinstance(spell_id, str) and spell_id.isdecimal() else spell_id: spell
+                for spell_id, spell in metadata["spells"].items()
+            }
         enemy = enemies.setdefault(
             enemy_key,
-            {"npcId": npc_id, "name": enemy_name, "spawns": [], "source": spawn_source},
+            {
+                "npcId": npc_id,
+                "name": enemy_name,
+                **metadata,
+                "spawns": [],
+                "source": spawn_source,
+            },
         )
         if enemy["name"] != enemy_name:
             raise SnapshotError(f"conflicting names for NPC {npc_id}")
@@ -135,6 +149,8 @@ def build_raid(snapshot: dict[str, Any]) -> dict[str, Any]:
         "packs": packs,
         "pois": pois,
     }
+    if npc_source is not None:
+        raid["enemyMetadataSource"] = _provenance(npc_source, "npcSource")
     if raid["mode"] == "waves":
         raid["waves"] = _waves(snapshot.get("waves"), source, packs, raid_key)
     elif raid["mode"] != "route":
@@ -176,6 +192,43 @@ def _normalize_snapshot(payload: dict[str, Any]) -> dict[str, Any]:
         if stable_id in seen_pack_ids:
             raise SnapshotError(f"duplicate source pack id: {stable_id}")
         seen_pack_ids.add(stable_id)
+    npcs = payload.get("npcs", {})
+    if not isinstance(npcs, dict):
+        raise SnapshotError("npcs must be an object")
+    for npc_id, metadata in npcs.items():
+        if not isinstance(npc_id, str) or not npc_id.isdecimal():
+            raise SnapshotError("npc metadata keys must be decimal NPC IDs")
+        metadata = _object(metadata, f"npcs.{npc_id}")
+        _integer(metadata.get("health"), f"npcs.{npc_id}.health", minimum=1)
+        _integer(metadata.get("level"), f"npcs.{npc_id}.level", minimum=1)
+        _string(metadata.get("creatureType"), f"npcs.{npc_id}.creatureType")
+        _integer(metadata.get("displayId"), f"npcs.{npc_id}.displayId", minimum=1)
+        scale = metadata.get("scale")
+        if not isinstance(scale, (int, float)) or isinstance(scale, bool) or scale <= 0:
+            raise SnapshotError(f"npcs.{npc_id}.scale must be a positive number")
+        if metadata.get("stealthDetect") is not None and not isinstance(metadata["stealthDetect"], bool):
+            raise SnapshotError(f"npcs.{npc_id}.stealthDetect must be a boolean")
+        spells = metadata.get("spells")
+        if spells is not None:
+            if not isinstance(spells, dict):
+                raise SnapshotError(f"npcs.{npc_id}.spells must be an object")
+            for spell_id, spell in spells.items():
+                if not isinstance(spell_id, str) or not spell_id.isdecimal() or int(spell_id) <= 0:
+                    raise SnapshotError(f"npcs.{npc_id}.spells keys must be positive spell IDs")
+                spell = _object(spell, f"npcs.{npc_id}.spells.{spell_id}")
+                if spell.get("interruptible") is not None and not isinstance(spell["interruptible"], bool):
+                    raise SnapshotError(f"npcs.{npc_id}.spells.{spell_id}.interruptible must be a boolean")
+                if spell.get("description") is not None and not isinstance(spell["description"], str):
+                    raise SnapshotError(f"npcs.{npc_id}.spells.{spell_id}.description must be a string")
+            metadata["spells"] = {int(spell_id): spell for spell_id, spell in spells.items()}
+        characteristics = metadata.get("characteristics")
+        if characteristics is not None and (not isinstance(characteristics, dict) or any(
+            not isinstance(name, str) or not name or affected is not True
+            for name, affected in characteristics.items()
+        )):
+            raise SnapshotError(f"npcs.{npc_id}.characteristics must map names to true")
+    if payload.get("npcSource") is not None:
+        _provenance(payload["npcSource"], "npcSource")
     return copy.deepcopy(payload)
 
 
