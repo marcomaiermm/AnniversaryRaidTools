@@ -67,6 +67,12 @@ function Compat:GetMapInfo(mapId)
   return C_Map and C_Map.GetMapInfo and C_Map.GetMapInfo(mapId)
 end
 
+function Compat:GetMapPositionFromWorld(instanceId, x, y, uiMapId)
+  if not C_Map or type(C_Map.GetMapPosFromWorldPos) ~= "function" or type(CreateVector2D) ~= "function" then return end
+  local ok, _, position = pcall(C_Map.GetMapPosFromWorldPos, instanceId, CreateVector2D(x, y), uiMapId)
+  return ok and position or nil
+end
+
 function Compat:GetCombatLogEventInfo()
   if not CombatLogGetCurrentEventInfo then return nil end
   return CombatLogGetCurrentEventInfo()

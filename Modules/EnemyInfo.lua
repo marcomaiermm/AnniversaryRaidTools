@@ -6,10 +6,12 @@ local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools bootstrap is require
 local L = MDT.L
 
 local DEFAULT_RAID_KEY = "gruuls-lair"
-local RAID_KEYS = { "gruuls-lair", "black-temple", "hyjal", "karazhan", "magtheridons-lair" }
+local RAID_KEYS = { "gruuls-lair", "black-temple", "hyjal", "karazhan", "magtheridons-lair",
+  "serpentshrine-cavern", "the-eye", "sunwell-plateau" }
 local SHELL_INDICES = {
   ["gruuls-lair"] = 160, ["black-temple"] = 161, hyjal = 162, karazhan = 163,
   ["magtheridons-lair"] = 164,
+  ["serpentshrine-cavern"] = 165, ["the-eye"] = 166, ["sunwell-plateau"] = 167,
 }
 -- Gruul display IDs are retained from the accepted vertical slice; later raids
 -- use the first CMaNGOS TBC DisplayId at tbc-db@7060a217.
@@ -53,6 +55,31 @@ local DISPLAY_IDS = {
   [16526] = 16251, [16529] = 16216, [16530] = 14252, [16539] = 12345,
   [16540] = 16903, [16544] = 19097, [16545] = 21078, [16595] = 18886,
   [16596] = 18887, [17256] = 9865, [17257] = 18527, [18829] = 11440,
+
+  [18805] = 18239, [19514] = 18945, [19516] = 18951,
+  [19622] = 20023, [20031] = 19386, [20032] = 19388, [20033] = 19390,
+  [20034] = 19392, [20035] = 20978, [20036] = 19394, [20037] = 19398,
+  [20038] = 19298, [20039] = 19299, [20040] = 19410, [20041] = 19300,
+  [20042] = 19412, [20043] = 19470, [20044] = 19472, [20045] = 19474,
+  [20046] = 19423, [20047] = 19499, [20048] = 19505, [20049] = 19503,
+  [20050] = 19507, [20052] = 19254, [20060] = 20178, [20062] = 20237,
+  [20063] = 20177, [20064] = 20236, [21212] = 20748, [21213] = 20739,
+  [21217] = 20216,
+  [21214] = 20662, [21215] = 20514, [21216] = 20162, [21218] = 20200,
+  [21220] = 20212, [21221] = 20201, [21228] = 5286, [21229] = 20640,
+  [21230] = 20635, [21231] = 20636, [21232] = 20637, [21246] = 18030,
+  [21251] = 20812, [21263] = 20639, [21298] = 20470, [21299] = 20641,
+  [21301] = 20205, [21339] = 20642, [21806] = 20638, [21863] = 20560,
+  [21964] = 20672, [21965] = 20670, [21966] = 20671, [24850] = 23345,
+  [24882] = 22711, [24891] = 23350, [24892] = 6686, [25038] = 22838,
+  [25165] = 23177, [25166] = 23334, [25363] = 23153, [25367] = 23154,
+  [25368] = 23529, [25369] = 23156, [25370] = 23158, [25371] = 23159,
+  [25372] = 23161, [25373] = 23476, [25483] = 23478, [25484] = 23474,
+  [25486] = 23479, [25506] = 23477, [25507] = 23240, [25508] = 17205,
+  [25509] = 21455, [25588] = 19294, [25591] = 22811, [25592] = 18139,
+  [25593] = 20919, [25595] = 23266, [25597] = 23267, [25599] = 14173,
+  [25608] = 11686, [25741] = 23404, [25837] = 23473, [25851] = 23269,
+  [25867] = 19663, [26262] = 169,
 }
 -- Encounter actors pinned from mangos-tbc@adbc7f74 ScriptDevAI scripts.
 -- Anything not explicitly listed is trash, even when it has only one spawn.
@@ -66,6 +93,13 @@ local BOSS_NPCS = {
   karazhan = { [15687] = true, [15688] = true, [15689] = true, [15690] = true,
     [15691] = true, [16151] = true, [16457] = true, [16524] = true },
   ["magtheridons-lair"] = { [17257] = true },
+  ["serpentshrine-cavern"] = { [21212] = true, [21213] = true, [21214] = true,
+    [21215] = true, [21216] = true, [21217] = true },
+  ["the-eye"] = { [18805] = true, [19514] = true, [19516] = true, [19622] = true,
+    [20060] = true, [20062] = true, [20063] = true, [20064] = true },
+  ["sunwell-plateau"] = { [24850] = true, [24891] = true, [24892] = true,
+    [24882] = true, [25038] = true, [25165] = true, [25166] = true,
+    [25315] = true, [25608] = true, [25741] = true },
 }
 local Integration = ART.GruulsLairIntegration or { diagnostics = {}, status = {}, preserveStoredRoutes = {} }
 ART.GruulsLairIntegration = Integration
@@ -114,11 +148,30 @@ local function markDependencies(preset, raid, db)
   }
 end
 
-local function projectRaidEnemies(raid)
+local function mapPosition(raid, map, sublevel, raw)
+  local uiMapId = map.sublevels[sublevel] and map.sublevels[sublevel].uiMapId
+  if not raw or not uiMapId then return end
+  local position = MDT.Compat:GetMapPositionFromWorld(raid.instanceId, raw.x, raw.y, uiMapId)
+  if not position then return end
+  local x, y = position.x, position.y
+  local transform = ART.MapTransforms and ART.MapTransforms[raid.key]
+  -- Legacy dungeon textures (Karazhan) are west-left; the Anniversary C_Map
+  -- projection returns east-right x. Mirror before the planner transform.
+  if transform and transform.flipX then x = 1 - x end
+  if transform then x, y = transform.toPlanner(raid.mapId, sublevel, x, y) end
+  if type(x) ~= "number" or type(y) ~= "number" or x < 0 or x > 1 or y < 0 or y > 1 then return end
+  return x, y
+end
+
+local function projectRaidEnemies(raid, map)
   local canvasWidth, canvasHeight = MDT:GetDefaultMapPanelSize()
-  local npcKeys, packGroups, packKeys = {}, {}, {}
+  local useStaticCoordinates = raid.key == "black-temple"
+  local npcKeys, packGroups, packKeys, packWaves = {}, {}, {}, {}
   for npcKey in pairs(raid.enemies) do npcKeys[#npcKeys + 1] = npcKey end
   for packKey in pairs(raid.packs) do packKeys[#packKeys + 1] = packKey end
+  for waveIndex, wave in ipairs(raid.waves or {}) do
+    for _, packKey in ipairs(wave.packKeys) do packWaves[packKey] = waveIndex end
+  end
   table.sort(npcKeys)
   table.sort(packKeys)
   for index, packKey in ipairs(packKeys) do packGroups[packKey] = index end
@@ -127,21 +180,40 @@ local function projectRaidEnemies(raid)
   for enemyIdx, npcKey in ipairs(npcKeys) do
     local enemy, clones = raid.enemies[npcKey], {}
     for cloneIdx, spawn in ipairs(enemy.spawns) do
+      local raw = ART.MapWorldPositions and ART.MapWorldPositions[raid.key]
+          and ART.MapWorldPositions[raid.key][spawn.key]
+      local normalizedX, normalizedY
+      if useStaticCoordinates then
+        normalizedX, normalizedY = ART.MapTransforms[raid.key].toPlanner(
+          raid.mapId, spawn.sublevel, spawn.x, spawn.y)
+      else
+        normalizedX, normalizedY = mapPosition(raid, map, spawn.sublevel, raw)
+      end
+      normalizedX, normalizedY = normalizedX or spawn.x, normalizedY or spawn.y
       local patrol
       if spawn.patrol then
         patrol = {}
         for pointIdx, point in ipairs(spawn.patrol) do
-          patrol[pointIdx] = { x = point.x * canvasWidth, y = -point.y * canvasHeight }
+          local patrolX, patrolY
+          if useStaticCoordinates then
+            patrolX, patrolY = ART.MapTransforms[raid.key].toPlanner(
+              raid.mapId, spawn.sublevel, point.x, point.y)
+          else
+            patrolX, patrolY = mapPosition(raid, map, spawn.sublevel, raw and raw.patrol and raw.patrol[pointIdx])
+          end
+          patrol[pointIdx] = { x = (patrolX or point.x) * canvasWidth, y = -(patrolY or point.y) * canvasHeight }
         end
       end
       clones[cloneIdx] = {
-        x = spawn.x * canvasWidth,
-        y = -spawn.y * canvasHeight,
+        x = normalizedX * canvasWidth,
+        y = -normalizedY * canvasHeight,
         sublevel = spawn.sublevel,
+        hidden = spawn.hidden,
         g = packGroups[spawn.packKey],
         patrol = patrol,
         artSpawnKey = spawn.key,
         artPackKey = spawn.packKey,
+        artWave = packWaves[spawn.packKey],
       }
       spawnLookup[spawn.key] = { enemyIdx = enemyIdx, cloneIdx = cloneIdx, packKey = spawn.packKey }
     end
@@ -168,7 +240,8 @@ local function publishShellData(raid, map)
   dungeonMaps[0] = map.sublevels[1].asset.textureFolder
   for index, sublevel in ipairs(map.sublevels) do
     local asset = sublevel.asset
-    dungeonMaps[index] = asset.texturePrefix
+    dungeonMaps[index] = asset.customTextures and { customTextures = asset.customTextures }
+        or asset.useUiMapArt and { uiMapId = asset.uiMapId } or asset.texturePrefix
         or (asset.noFloorPrefix and (asset.tilePrefix or asset.textureFolder))
         or asset.textureFolder..index.."_"
     sublevels[index], tileFormat[index], pois[index] = localize(sublevel.name), 4, {}
@@ -189,11 +262,34 @@ local function publishShellData(raid, map)
   MDT.dungeonSubLevels[shellIndex] = sublevels
   MDT.dungeonTotalCount[shellIndex] = { normal = 0 }
   Integration.spawnLookup[raid.key] = {}
-  MDT.dungeonEnemies[shellIndex], Integration.spawnLookup[raid.key] = projectRaidEnemies(raid)
+  MDT.dungeonEnemies[shellIndex], Integration.spawnLookup[raid.key] = projectRaidEnemies(raid, map)
   MDT.mapPOIs[shellIndex] = pois
   MDT.scaleMultiplier[shellIndex] = 1
   MDT.zoneIdToDungeonIdx[raid.mapId] = shellIndex
   MDT.knownDungeons[shellIndex] = raid.name
+end
+
+local function configureWavePulls(raid, preset)
+  if raid.mode ~= "waves" then return end
+  preset = preset or MDT:GetCurrentPreset()
+  local pulls, lookup = {}, Integration.spawnLookup[raid.key]
+  for waveIndex, wave in ipairs(raid.waves) do
+    local pull = {}
+    for _, packKey in ipairs(wave.packKeys) do
+      for _, spawnKey in ipairs(raid.packs[packKey].spawnKeys) do
+        local clone = lookup[spawnKey]
+        if clone then
+          pull[clone.enemyIdx] = pull[clone.enemyIdx] or {}
+          pull[clone.enemyIdx][#pull[clone.enemyIdx] + 1] = clone.cloneIdx
+        end
+      end
+    end
+    pulls[waveIndex] = pull
+  end
+  preset.value.pulls = pulls
+  preset.value.currentPull = math.min(math.max(preset.value.currentPull or 1, 1), #pulls)
+  preset.value.selection = { preset.value.currentPull }
+  preset.value.artWaveRaid = raid.key
 end
 
 local function selectShell(raidKey, db)
@@ -209,6 +305,8 @@ local function publishRaidList(db)
   MDT.dungeonSelectionToIndex[1] = {
     SHELL_INDICES["gruuls-lair"], SHELL_INDICES["black-temple"], SHELL_INDICES.hyjal,
     SHELL_INDICES.karazhan, SHELL_INDICES["magtheridons-lair"],
+    SHELL_INDICES["serpentshrine-cavern"], SHELL_INDICES["the-eye"],
+    SHELL_INDICES["sunwell-plateau"],
   }
   if not MDT.dungeonMaps[db.currentDungeonIdx] then selectShell(DEFAULT_RAID_KEY, db) end
   if db.currentSection == nil or db.currentSection == "raids" then db.currentSection = "maps" end
@@ -269,6 +367,7 @@ function Integration:Initialize()
 
   local function persist(preset, activeRaid)
     selectShell(activeRaid.key, db)
+    configureWavePulls(activeRaid)
     wireMarks(preset, activeRaid)
     if not routeStore or self.preserveStoredRoutes[activeRaid.key] then return end
     local exported = routePreset:Export(preset, activeRaid)
@@ -327,6 +426,51 @@ function Integration:Initialize()
   self.transforms = ART.MapTransforms
   self.initialized = true
   wireMapSelection()
+
+  local originalSetSelectionToPull = MDT.SetSelectionToPull
+  function MDT:SetSelectionToPull(pull, ...)
+    local current = self:GetCurrentPreset()
+    if current and current.value.artWaveRaid and type(pull) == "number" then
+      pull = math.min(math.max(pull, 1), #current.value.pulls)
+    end
+    local result = originalSetSelectionToPull(self, pull, ...)
+    current = self:GetCurrentPreset()
+    if current and current.value.artWaveRaid and type(pull) == "number" then
+      self:Async(function() self:DungeonEnemies_UpdateEnemiesAsync() end, "ARTWaveSelection", true)
+    end
+    return result
+  end
+
+  local waveMutators = {
+    "AddPull", "ClearPull", "MovePullUp", "MovePullDown", "DeletePull", "ClearPreset",
+    "PresetsAddPull", "PresetsDeletePull", "PresetsSwapPulls", "PresetsMergePulls",
+    "DungeonEnemies_AddOrRemoveBlipToCurrentPull",
+  }
+  local explicitPresetArgument = { ClearPreset = 1, PresetsAddPull = 3, PresetsDeletePull = 2 }
+  for _, methodName in ipairs(waveMutators) do
+    local original = MDT[methodName]
+    if type(original) == "function" then
+      MDT[methodName] = function(self, ...)
+        local target = explicitPresetArgument[methodName] and select(explicitPresetArgument[methodName], ...)
+            or self:GetCurrentPreset()
+        if target and target.value and target.value.artWaveRaid then
+          if methodName == "PresetsMergePulls" then return target.value.currentPull end
+          return false, "wave-composition-immutable"
+        end
+        return original(self, ...)
+      end
+    end
+  end
+
+  local originalImportPreset = MDT.ImportPreset
+  if type(originalImportPreset) == "function" then
+    function MDT:ImportPreset(preset, ...)
+      if preset and preset.value and preset.value.currentDungeonIdx == SHELL_INDICES.hyjal then
+        configureWavePulls(raids.hyjal, preset)
+      end
+      return originalImportPreset(self, preset, ...)
+    end
+  end
 
   MDT.RaidRegistry = registry
   MDT.RoutePreset = routePreset

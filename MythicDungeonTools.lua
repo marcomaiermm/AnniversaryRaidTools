@@ -413,6 +413,7 @@ function MDT:RGBToHex(r, g, b)
 end
 
 function MDT:HexToRGB(rgb)
+  if type(rgb) ~= "string" then return end
   if string.len(rgb) == 6 then
     local r, g, b
     r, g, b = tonumber('0x'..strsub(rgb, 0, 2)), tonumber('0x'..strsub(rgb, 3, 4)), tonumber('0x'..
