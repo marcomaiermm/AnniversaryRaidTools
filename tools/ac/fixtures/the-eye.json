@@ -1,0 +1,6589 @@
+{
+  "metadata": {
+    "project": "CMaNGOS TBC",
+    "snapshot": "the-eye-map-550",
+    "commit": "da2de07e6606d495872c3fd92ba8363cf79f43c9",
+    "databaseVersion": "TBCDB 1.11.0",
+    "exportedAt": "2026-08-22T12:00:00Z",
+    "coordinateBasis": "CMaNGOS world positions projected through pinned LibMapData rectangles; client C_Map world projection remains runtime authority",
+    "coverage": {
+      "selectedStaticSpawns": 187,
+      "npcIds": 29,
+      "renderedPatrols": 14
+    }
+  },
+  "source": {
+    "source": "derived",
+    "confidence": "candidate",
+    "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+    "observedAt": "2026-08-22T12:00:00Z"
+  },
+  "raid": {
+    "key": "the-eye",
+    "name": "The Eye",
+    "instanceId": 550,
+    "mapId": 550,
+    "mode": "route"
+  },
+  "sublevels": [
+    {
+      "index": 1,
+      "name": "The Eye",
+      "mapId": 550
+    }
+  ],
+  "spawns": [
+    {
+      "id": "5500001",
+      "npcId": 18805,
+      "name": "High Astromancer Solarian",
+      "x": 0.262905,
+      "y": 0.507532,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 432.90899658203125,
+      "worldY": -373.42401123046875
+    },
+    {
+      "id": "5500003",
+      "npcId": 19514,
+      "name": "Al'ar",
+      "x": 0.484667,
+      "y": 0.452583,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 375.2120056152344,
+      "worldY": -24.148799896240234
+    },
+    {
+      "id": "5500004",
+      "npcId": 19516,
+      "name": "Void Reaver",
+      "x": 0.759022,
+      "y": 0.498389,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 423.3080139160156,
+      "worldY": 407.9599914550781
+    },
+    {
+      "id": "5500005",
+      "npcId": 19622,
+      "name": "Kael'thas Sunstrider",
+      "x": 0.499708,
+      "y": 0.852388,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 795.0070190429688,
+      "worldY": -0.4605720043182373
+    },
+    {
+      "id": "5500006",
+      "npcId": 20031,
+      "name": "Bloodwarder Legionnaire",
+      "x": 0.400059,
+      "y": 0.58968,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 519.1640014648438,
+      "worldY": -157.40699768066406
+    },
+    {
+      "id": "5500007",
+      "npcId": 20031,
+      "name": "Bloodwarder Legionnaire",
+      "x": 0.399609,
+      "y": 0.585156,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 514.4140014648438,
+      "worldY": -158.11599731445312
+    },
+    {
+      "id": "5500008",
+      "npcId": 20031,
+      "name": "Bloodwarder Legionnaire",
+      "x": 0.492695,
+      "y": 0.194687,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 104.4209976196289,
+      "worldY": -11.505999565124512
+    },
+    {
+      "id": "5500009",
+      "npcId": 20031,
+      "name": "Bloodwarder Legionnaire",
+      "x": 0.50532,
+      "y": 0.195147,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 104.90399932861328,
+      "worldY": 8.378910064697266
+    },
+    {
+      "id": "5500010",
+      "npcId": 20031,
+      "name": "Bloodwarder Legionnaire",
+      "x": 0.496981,
+      "y": 0.278089,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 191.9929962158203,
+      "worldY": -4.75432014465332
+    },
+    {
+      "id": "5500011",
+      "npcId": 20031,
+      "name": "Bloodwarder Legionnaire",
+      "x": 0.28578,
+      "y": 0.548401,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 475.8210144042969,
+      "worldY": -337.3970031738281
+    },
+    {
+      "id": "5500012",
+      "npcId": 20031,
+      "name": "Bloodwarder Legionnaire",
+      "x": 0.284724,
+      "y": 0.544772,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 472.010986328125,
+      "worldY": -339.05999755859375
+    },
+    {
+      "id": "5500013",
+      "npcId": 20031,
+      "name": "Bloodwarder Legionnaire",
+      "x": 0.22731,
+      "y": 0.458279,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 381.1929931640625,
+      "worldY": -429.4859924316406
+    },
+    {
+      "id": "5500014",
+      "npcId": 20031,
+      "name": "Bloodwarder Legionnaire",
+      "x": 0.229504,
+      "y": 0.460862,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 383.9049987792969,
+      "worldY": -426.031005859375
+    },
+    {
+      "id": "5500015",
+      "npcId": 20031,
+      "name": "Bloodwarder Legionnaire",
+      "x": 0.502098,
+      "y": 0.2775,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 191.375,
+      "worldY": 3.304840087890625
+    },
+    {
+      "id": "5500016",
+      "npcId": 20032,
+      "name": "Bloodwarder Vindicator",
+      "x": 0.503988,
+      "y": 0.199403,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 109.37300109863281,
+      "worldY": 6.2814202308654785
+    },
+    {
+      "id": "5500017",
+      "npcId": 20032,
+      "name": "Bloodwarder Vindicator",
+      "x": 0.495802,
+      "y": 0.154381,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 62.099998474121094,
+      "worldY": -6.61191987991333
+    },
+    {
+      "id": "5500018",
+      "npcId": 20032,
+      "name": "Bloodwarder Vindicator",
+      "x": 0.502273,
+      "y": 0.154343,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 62.05979919433594,
+      "worldY": 3.579770088195801
+    },
+    {
+      "id": "5500019",
+      "npcId": 20032,
+      "name": "Bloodwarder Vindicator",
+      "x": 0.503241,
+      "y": 0.275755,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 189.54299926757812,
+      "worldY": 5.105160236358643
+    },
+    {
+      "id": "5500020",
+      "npcId": 20033,
+      "name": "Astromancer",
+      "x": 0.494525,
+      "y": 0.20095,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 110.99800109863281,
+      "worldY": -8.622879981994629
+    },
+    {
+      "id": "5500021",
+      "npcId": 20033,
+      "name": "Astromancer",
+      "x": 0.493935,
+      "y": 0.151522,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 59.09830093383789,
+      "worldY": -9.551790237426758
+    },
+    {
+      "id": "5500022",
+      "npcId": 20033,
+      "name": "Astromancer",
+      "x": 0.494136,
+      "y": 0.275257,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 189.02000427246094,
+      "worldY": -9.236149787902832
+    },
+    {
+      "id": "5500023",
+      "npcId": 20033,
+      "name": "Astromancer",
+      "x": 0.49567,
+      "y": 0.276075,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 189.87899780273438,
+      "worldY": -6.820529937744141
+    },
+    {
+      "id": "5500024",
+      "npcId": 20033,
+      "name": "Astromancer",
+      "x": 0.504959,
+      "y": 0.146018,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 53.31930160522461,
+      "worldY": 7.810060024261475
+    },
+    {
+      "id": "5500025",
+      "npcId": 20034,
+      "name": "Star Scryer",
+      "x": 0.494529,
+      "y": 0.204754,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 114.99199676513672,
+      "worldY": -8.616829872131348
+    },
+    {
+      "id": "5500026",
+      "npcId": 20034,
+      "name": "Star Scryer",
+      "x": 0.503668,
+      "y": 0.203452,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 113.625,
+      "worldY": 5.7777299880981445
+    },
+    {
+      "id": "5500027",
+      "npcId": 20034,
+      "name": "Star Scryer",
+      "x": 0.493153,
+      "y": 0.14795,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 55.3473014831543,
+      "worldY": -10.783300399780273
+    },
+    {
+      "id": "5500028",
+      "npcId": 20034,
+      "name": "Star Scryer",
+      "x": 0.504088,
+      "y": 0.151184,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 58.74369812011719,
+      "worldY": 6.438549995422363
+    },
+    {
+      "id": "5500029",
+      "npcId": 20034,
+      "name": "Star Scryer",
+      "x": 0.504958,
+      "y": 0.274761,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 188.49899291992188,
+      "worldY": 7.808849811553955
+    },
+    {
+      "id": "5500030",
+      "npcId": 20035,
+      "name": "Bloodwarder Marshal",
+      "x": 0.498925,
+      "y": 0.152596,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 60.225799560546875,
+      "worldY": -1.6927000284194946,
+      "patrol": [
+        {
+          "x": 0.498957,
+          "y": 0.200901,
+          "worldX": 110.946,
+          "worldY": -1.64237
+        },
+        {
+          "x": 0.499438,
+          "y": 0.272906,
+          "worldX": 186.551,
+          "worldY": -0.884694
+        },
+        {
+          "x": 0.499438,
+          "y": 0.33164,
+          "worldX": 248.222,
+          "worldY": -0.884694
+        },
+        {
+          "x": 0.499438,
+          "y": 0.276638,
+          "worldX": 190.47,
+          "worldY": -0.884694
+        },
+        {
+          "x": 0.498895,
+          "y": 0.201249,
+          "worldX": 111.311,
+          "worldY": -1.74098
+        },
+        {
+          "x": 0.49889,
+          "y": 0.15295,
+          "worldX": 60.5976,
+          "worldY": -1.7476
+        }
+      ]
+    },
+    {
+      "id": "5500031",
+      "npcId": 20035,
+      "name": "Bloodwarder Marshal",
+      "x": 0.501297,
+      "y": 0.7046,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 639.8300170898438,
+      "worldY": 2.0433900356292725
+    },
+    {
+      "id": "5500032",
+      "npcId": 20035,
+      "name": "Bloodwarder Marshal",
+      "x": 0.530191,
+      "y": 0.785398,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 724.6680297851562,
+      "worldY": 47.55160140991211
+    },
+    {
+      "id": "5500033",
+      "npcId": 20035,
+      "name": "Bloodwarder Marshal",
+      "x": 0.472617,
+      "y": 0.789337,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 728.8040161132812,
+      "worldY": -43.128299713134766
+    },
+    {
+      "id": "5500034",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.299201,
+      "y": 0.429922,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 351.4179992675781,
+      "worldY": -316.2590026855469
+    },
+    {
+      "id": "5500035",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.40396,
+      "y": 0.576768,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 505.6059875488281,
+      "worldY": -151.26300048828125
+    },
+    {
+      "id": "5500036",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.400792,
+      "y": 0.575663,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 504.4460144042969,
+      "worldY": -156.2530059814453
+    },
+    {
+      "id": "5500037",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.349185,
+      "y": 0.575321,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 504.0870056152344,
+      "worldY": -237.53399658203125
+    },
+    {
+      "id": "5500038",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.497843,
+      "y": 0.151046,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 58.59830093383789,
+      "worldY": -3.3980000019073486
+    },
+    {
+      "id": "5500039",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.500138,
+      "y": 0.151046,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 58.59830093383789,
+      "worldY": 0.21736299991607666
+    },
+    {
+      "id": "5500040",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.26075,
+      "y": 0.414997,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 335.74700927734375,
+      "worldY": -376.8179931640625
+    },
+    {
+      "id": "5500041",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.343307,
+      "y": 0.581464,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 510.5369873046875,
+      "worldY": -246.79100036621094
+    },
+    {
+      "id": "5500042",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.26711,
+      "y": 0.601387,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 531.4559936523438,
+      "worldY": -366.802001953125
+    },
+    {
+      "id": "5500043",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.232093,
+      "y": 0.584084,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 513.2880249023438,
+      "worldY": -421.9530029296875
+    },
+    {
+      "id": "5500044",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.209401,
+      "y": 0.465416,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 388.68701171875,
+      "worldY": -457.6940002441406
+    },
+    {
+      "id": "5500045",
+      "npcId": 20036,
+      "name": "Bloodwarder Squire",
+      "x": 0.200901,
+      "y": 0.512464,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 438.0870056152344,
+      "worldY": -471.08099365234375
+    },
+    {
+      "id": "5500046",
+      "npcId": 20037,
+      "name": "Tempest Falconer",
+      "x": 0.519907,
+      "y": 0.379827,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 298.8179931640625,
+      "worldY": 31.35420036315918,
+      "patrol": [
+        {
+          "x": 0.519907,
+          "y": 0.379827,
+          "worldX": 298.818,
+          "worldY": 31.3542
+        },
+        {
+          "x": 0.509971,
+          "y": 0.36911,
+          "worldX": 287.566,
+          "worldY": 15.7041
+        },
+        {
+          "x": 0.523842,
+          "y": 0.392572,
+          "worldX": 312.201,
+          "worldY": 37.5505
+        },
+        {
+          "x": 0.528096,
+          "y": 0.4203,
+          "worldX": 341.315,
+          "worldY": 44.2515
+        },
+        {
+          "x": 0.523842,
+          "y": 0.392572,
+          "worldX": 312.201,
+          "worldY": 37.5505
+        },
+        {
+          "x": 0.509971,
+          "y": 0.36911,
+          "worldX": 287.566,
+          "worldY": 15.7041
+        }
+      ]
+    },
+    {
+      "id": "5500047",
+      "npcId": 20037,
+      "name": "Tempest Falconer",
+      "x": 0.524911,
+      "y": 0.396206,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 316.0159912109375,
+      "worldY": 39.234798431396484
+    },
+    {
+      "id": "5500048",
+      "npcId": 20037,
+      "name": "Tempest Falconer",
+      "x": 0.474662,
+      "y": 0.432438,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 354.05999755859375,
+      "worldY": -39.907901763916016,
+      "patrol": [
+        {
+          "x": 0.474662,
+          "y": 0.432438,
+          "worldX": 354.06,
+          "worldY": -39.9079
+        },
+        {
+          "x": 0.478282,
+          "y": 0.440431,
+          "worldX": 362.453,
+          "worldY": -34.206
+        },
+        {
+          "x": 0.471525,
+          "y": 0.409865,
+          "worldX": 330.358,
+          "worldY": -44.848
+        },
+        {
+          "x": 0.478294,
+          "y": 0.388195,
+          "worldX": 307.605,
+          "worldY": -34.1864
+        },
+        {
+          "x": 0.48663,
+          "y": 0.372941,
+          "worldX": 291.588,
+          "worldY": -21.0585
+        },
+        {
+          "x": 0.478294,
+          "y": 0.388195,
+          "worldX": 307.605,
+          "worldY": -34.1864
+        },
+        {
+          "x": 0.471525,
+          "y": 0.409865,
+          "worldX": 330.358,
+          "worldY": -44.848
+        }
+      ]
+    },
+    {
+      "id": "5500049",
+      "npcId": 20037,
+      "name": "Tempest Falconer",
+      "x": 0.470056,
+      "y": 0.416608,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 337.43798828125,
+      "worldY": -47.16130065917969
+    },
+    {
+      "id": "5500050",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.468647,
+      "y": 0.425106,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 346.3609924316406,
+      "worldY": -49.380699157714844
+    },
+    {
+      "id": "5500051",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.471263,
+      "y": 0.42374,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 344.927001953125,
+      "worldY": -45.260101318359375
+    },
+    {
+      "id": "5500052",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.470558,
+      "y": 0.427861,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 349.2539978027344,
+      "worldY": -46.37089920043945
+    },
+    {
+      "id": "5500053",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.475279,
+      "y": 0.42263,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 343.7619934082031,
+      "worldY": -38.935001373291016
+    },
+    {
+      "id": "5500054",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.522882,
+      "y": 0.39019,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 309.70001220703125,
+      "worldY": 36.03960037231445
+    },
+    {
+      "id": "5500055",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.523939,
+      "y": 0.38623,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 305.5419921875,
+      "worldY": 37.704200744628906
+    },
+    {
+      "id": "5500056",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.522547,
+      "y": 0.381404,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 300.4739990234375,
+      "worldY": 35.51110076904297
+    },
+    {
+      "id": "5500057",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.520628,
+      "y": 0.384426,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 303.6470031738281,
+      "worldY": 32.48849868774414
+    },
+    {
+      "id": "5500058",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.517875,
+      "y": 0.385905,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 305.20001220703125,
+      "worldY": 28.15239906311035
+    },
+    {
+      "id": "5500059",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.520168,
+      "y": 0.391607,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 311.18701171875,
+      "worldY": 31.764799118041992
+    },
+    {
+      "id": "5500060",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.474662,
+      "y": 0.432438,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 354.05999755859375,
+      "worldY": -39.907901763916016
+    },
+    {
+      "id": "5500061",
+      "npcId": 20038,
+      "name": "Phoenix-Hawk Hatchling",
+      "x": 0.475198,
+      "y": 0.424978,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 346.22698974609375,
+      "worldY": -39.062599182128906
+    },
+    {
+      "id": "5500062",
+      "npcId": 20039,
+      "name": "Phoenix-Hawk",
+      "x": 0.449938,
+      "y": 0.474494,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 398.218994140625,
+      "worldY": -78.8478012084961,
+      "patrol": [
+        {
+          "x": 0.450155,
+          "y": 0.476177,
+          "worldX": 399.986,
+          "worldY": -78.5058
+        },
+        {
+          "x": 0.446597,
+          "y": 0.461107,
+          "worldX": 384.162,
+          "worldY": -84.109
+        },
+        {
+          "x": 0.445247,
+          "y": 0.454296,
+          "worldX": 377.011,
+          "worldY": -86.2365
+        },
+        {
+          "x": 0.443682,
+          "y": 0.441171,
+          "worldX": 363.23,
+          "worldY": -88.7003
+        },
+        {
+          "x": 0.442613,
+          "y": 0.431978,
+          "worldX": 353.577,
+          "worldY": -90.3841
+        },
+        {
+          "x": 0.442211,
+          "y": 0.421103,
+          "worldX": 342.158,
+          "worldY": -91.0184
+        },
+        {
+          "x": 0.442732,
+          "y": 0.407792,
+          "worldX": 328.182,
+          "worldY": -90.1968
+        },
+        {
+          "x": 0.442993,
+          "y": 0.401137,
+          "worldX": 321.194,
+          "worldY": -89.786
+        },
+        {
+          "x": 0.443418,
+          "y": 0.390946,
+          "worldX": 310.493,
+          "worldY": -89.1173
+        },
+        {
+          "x": 0.444367,
+          "y": 0.383075,
+          "worldX": 302.229,
+          "worldY": -87.6214
+        },
+        {
+          "x": 0.446034,
+          "y": 0.375003,
+          "worldX": 293.753,
+          "worldY": -84.9968
+        },
+        {
+          "x": 0.44846,
+          "y": 0.367629,
+          "worldX": 286.01,
+          "worldY": -81.1759
+        },
+        {
+          "x": 0.451643,
+          "y": 0.360953,
+          "worldX": 279.001,
+          "worldY": -76.1629
+        },
+        {
+          "x": 0.460994,
+          "y": 0.348374,
+          "worldX": 265.793,
+          "worldY": -61.4346
+        },
+        {
+          "x": 0.471397,
+          "y": 0.337828,
+          "worldX": 254.719,
+          "worldY": -45.0501
+        },
+        {
+          "x": 0.480975,
+          "y": 0.331399,
+          "worldX": 247.969,
+          "worldY": -29.9646
+        },
+        {
+          "x": 0.493571,
+          "y": 0.324843,
+          "worldX": 241.085,
+          "worldY": -10.1249
+        },
+        {
+          "x": 0.495951,
+          "y": 0.323622,
+          "worldX": 239.803,
+          "worldY": -6.37641
+        },
+        {
+          "x": 0.500127,
+          "y": 0.322095,
+          "worldX": 238.2,
+          "worldY": 0.200354
+        },
+        {
+          "x": 0.504121,
+          "y": 0.321816,
+          "worldX": 237.907,
+          "worldY": 6.49007
+        },
+        {
+          "x": 0.509562,
+          "y": 0.322703,
+          "worldX": 238.838,
+          "worldY": 15.0601
+        },
+        {
+          "x": 0.517721,
+          "y": 0.325965,
+          "worldX": 242.263,
+          "worldY": 27.9099
+        },
+        {
+          "x": 0.526392,
+          "y": 0.331107,
+          "worldX": 247.662,
+          "worldY": 41.5678
+        },
+        {
+          "x": 0.530353,
+          "y": 0.334118,
+          "worldX": 250.824,
+          "worldY": 47.8056
+        },
+        {
+          "x": 0.53954,
+          "y": 0.345967,
+          "worldX": 263.265,
+          "worldY": 62.276
+        },
+        {
+          "x": 0.541147,
+          "y": 0.348583,
+          "worldX": 266.012,
+          "worldY": 64.807
+        },
+        {
+          "x": 0.544144,
+          "y": 0.355181,
+          "worldX": 272.94,
+          "worldY": 69.5261
+        },
+        {
+          "x": 0.548018,
+          "y": 0.367181,
+          "worldX": 285.54,
+          "worldY": 75.6283
+        },
+        {
+          "x": 0.551892,
+          "y": 0.379181,
+          "worldX": 298.14,
+          "worldY": 81.7305
+        },
+        {
+          "x": 0.553788,
+          "y": 0.385208,
+          "worldX": 304.468,
+          "worldY": 84.7154
+        },
+        {
+          "x": 0.557022,
+          "y": 0.401386,
+          "worldX": 321.455,
+          "worldY": 89.8092
+        },
+        {
+          "x": 0.55756,
+          "y": 0.407997,
+          "worldX": 328.397,
+          "worldY": 90.6563
+        },
+        {
+          "x": 0.557045,
+          "y": 0.421309,
+          "worldX": 342.374,
+          "worldY": 89.8457
+        },
+        {
+          "x": 0.556614,
+          "y": 0.431284,
+          "worldX": 352.848,
+          "worldY": 89.1664
+        },
+        {
+          "x": 0.554025,
+          "y": 0.443999,
+          "worldX": 366.199,
+          "worldY": 85.0899
+        },
+        {
+          "x": 0.552966,
+          "y": 0.447912,
+          "worldX": 370.308,
+          "worldY": 83.4219
+        },
+        {
+          "x": 0.549946,
+          "y": 0.455562,
+          "worldX": 378.34,
+          "worldY": 78.665
+        },
+        {
+          "x": 0.544324,
+          "y": 0.46589,
+          "worldX": 389.184,
+          "worldY": 69.811
+        },
+        {
+          "x": 0.541545,
+          "y": 0.470917,
+          "worldX": 394.463,
+          "worldY": 65.4326
+        },
+        {
+          "x": 0.537126,
+          "y": 0.47702,
+          "worldX": 400.871,
+          "worldY": 58.4734
+        },
+        {
+          "x": 0.525343,
+          "y": 0.488501,
+          "worldX": 412.926,
+          "worldY": 39.9157
+        },
+        {
+          "x": 0.520971,
+          "y": 0.491798,
+          "worldX": 416.388,
+          "worldY": 33.0296
+        },
+        {
+          "x": 0.512436,
+          "y": 0.49552,
+          "worldX": 420.296,
+          "worldY": 19.5862
+        },
+        {
+          "x": 0.505881,
+          "y": 0.497213,
+          "worldX": 422.074,
+          "worldY": 9.26311
+        },
+        {
+          "x": 0.503232,
+          "y": 0.497642,
+          "worldX": 422.524,
+          "worldY": 5.09056
+        },
+        {
+          "x": 0.49266,
+          "y": 0.496057,
+          "worldX": 420.86,
+          "worldY": -11.5604
+        },
+        {
+          "x": 0.486925,
+          "y": 0.495033,
+          "worldX": 419.785,
+          "worldY": -20.5932
+        },
+        {
+          "x": 0.478349,
+          "y": 0.491528,
+          "worldX": 416.104,
+          "worldY": -34.1006
+        },
+        {
+          "x": 0.474061,
+          "y": 0.489775,
+          "worldX": 414.264,
+          "worldY": -40.8543
+        },
+        {
+          "x": 0.465485,
+          "y": 0.48627,
+          "worldX": 410.583,
+          "worldY": -54.3617
+        },
+        {
+          "x": 0.460064,
+          "y": 0.484012,
+          "worldX": 408.213,
+          "worldY": -62.8995
+        }
+      ]
+    },
+    {
+      "id": "5500063",
+      "npcId": 20039,
+      "name": "Phoenix-Hawk",
+      "x": 0.474713,
+      "y": 0.487056,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 411.40899658203125,
+      "worldY": -39.826698303222656,
+      "patrol": [
+        {
+          "x": 0.474713,
+          "y": 0.487056,
+          "worldX": 411.409,
+          "worldY": -39.8267
+        },
+        {
+          "x": 0.46272,
+          "y": 0.478316,
+          "worldX": 402.232,
+          "worldY": -58.7157
+        },
+        {
+          "x": 0.452467,
+          "y": 0.468475,
+          "worldX": 391.899,
+          "worldY": -74.8641
+        },
+        {
+          "x": 0.44817,
+          "y": 0.46045,
+          "worldX": 383.473,
+          "worldY": -81.6315
+        },
+        {
+          "x": 0.444346,
+          "y": 0.446965,
+          "worldX": 369.313,
+          "worldY": -87.6543
+        },
+        {
+          "x": 0.442062,
+          "y": 0.433393,
+          "worldX": 355.063,
+          "worldY": -91.2521
+        },
+        {
+          "x": 0.441035,
+          "y": 0.421494,
+          "worldX": 342.569,
+          "worldY": -92.8699
+        },
+        {
+          "x": 0.440996,
+          "y": 0.41118,
+          "worldX": 331.739,
+          "worldY": -92.9311
+        },
+        {
+          "x": 0.442765,
+          "y": 0.393035,
+          "worldX": 312.687,
+          "worldY": -90.1452
+        },
+        {
+          "x": 0.444887,
+          "y": 0.38147,
+          "worldX": 300.544,
+          "worldY": -86.8028
+        },
+        {
+          "x": 0.448372,
+          "y": 0.369945,
+          "worldX": 288.442,
+          "worldY": -81.3148
+        },
+        {
+          "x": 0.451987,
+          "y": 0.361543,
+          "worldX": 279.62,
+          "worldY": -75.6206
+        },
+        {
+          "x": 0.456357,
+          "y": 0.351494,
+          "worldX": 269.069,
+          "worldY": -68.7371
+        },
+        {
+          "x": 0.46245,
+          "y": 0.340444,
+          "worldX": 257.466,
+          "worldY": -59.1413
+        },
+        {
+          "x": 0.454938,
+          "y": 0.354069,
+          "worldX": 271.772,
+          "worldY": -70.972
+        },
+        {
+          "x": 0.452493,
+          "y": 0.360392,
+          "worldX": 278.412,
+          "worldY": -74.8233
+        },
+        {
+          "x": 0.44849,
+          "y": 0.369212,
+          "worldX": 287.673,
+          "worldY": -81.1282
+        },
+        {
+          "x": 0.4458,
+          "y": 0.378363,
+          "worldX": 297.281,
+          "worldY": -85.3646
+        },
+        {
+          "x": 0.441688,
+          "y": 0.397309,
+          "worldX": 317.174,
+          "worldY": -91.8419
+        },
+        {
+          "x": 0.441026,
+          "y": 0.407241,
+          "worldX": 327.603,
+          "worldY": -92.8838
+        },
+        {
+          "x": 0.440251,
+          "y": 0.4205,
+          "worldX": 341.525,
+          "worldY": -94.104
+        },
+        {
+          "x": 0.441088,
+          "y": 0.43109,
+          "worldX": 352.645,
+          "worldY": -92.786
+        },
+        {
+          "x": 0.444565,
+          "y": 0.450994,
+          "worldX": 373.544,
+          "worldY": -87.3097
+        },
+        {
+          "x": 0.446292,
+          "y": 0.456758,
+          "worldX": 379.596,
+          "worldY": -84.5898
+        },
+        {
+          "x": 0.453392,
+          "y": 0.470845,
+          "worldX": 394.387,
+          "worldY": -73.4072
+        },
+        {
+          "x": 0.458731,
+          "y": 0.47675,
+          "worldX": 400.587,
+          "worldY": -64.9991
+        },
+        {
+          "x": 0.474714,
+          "y": 0.488913,
+          "worldX": 413.359,
+          "worldY": -39.8251
+        }
+      ]
+    },
+    {
+      "id": "5500064",
+      "npcId": 20039,
+      "name": "Phoenix-Hawk",
+      "x": 0.522654,
+      "y": 0.328488,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 244.91200256347656,
+      "worldY": 35.679298400878906,
+      "patrol": [
+        {
+          "x": 0.530428,
+          "y": 0.335602,
+          "worldX": 252.382,
+          "worldY": 47.9237
+        },
+        {
+          "x": 0.541538,
+          "y": 0.349749,
+          "worldX": 267.236,
+          "worldY": 65.4216
+        },
+        {
+          "x": 0.552241,
+          "y": 0.373287,
+          "worldX": 291.951,
+          "worldY": 82.2793
+        },
+        {
+          "x": 0.556752,
+          "y": 0.397495,
+          "worldX": 317.37,
+          "worldY": 89.3851
+        },
+        {
+          "x": 0.555694,
+          "y": 0.42471,
+          "worldX": 345.946,
+          "worldY": 87.7176
+        },
+        {
+          "x": 0.552771,
+          "y": 0.442117,
+          "worldX": 364.223,
+          "worldY": 83.1151
+        },
+        {
+          "x": 0.550706,
+          "y": 0.451257,
+          "worldX": 373.82,
+          "worldY": 79.8616
+        },
+        {
+          "x": 0.546015,
+          "y": 0.463747,
+          "worldX": 386.934,
+          "worldY": 72.4743
+        },
+        {
+          "x": 0.536306,
+          "y": 0.479695,
+          "worldX": 403.68,
+          "worldY": 57.1827
+        },
+        {
+          "x": 0.52959,
+          "y": 0.487825,
+          "worldX": 412.216,
+          "worldY": 46.6041
+        },
+        {
+          "x": 0.534699,
+          "y": 0.481401,
+          "worldX": 405.471,
+          "worldY": 54.6513
+        },
+        {
+          "x": 0.547485,
+          "y": 0.460733,
+          "worldX": 383.77,
+          "worldY": 74.7894
+        },
+        {
+          "x": 0.549424,
+          "y": 0.4559,
+          "worldX": 378.695,
+          "worldY": 77.8425
+        },
+        {
+          "x": 0.551548,
+          "y": 0.446421,
+          "worldX": 368.742,
+          "worldY": 81.1875
+        },
+        {
+          "x": 0.555484,
+          "y": 0.422244,
+          "worldX": 343.356,
+          "worldY": 87.3876
+        },
+        {
+          "x": 0.556573,
+          "y": 0.395713,
+          "worldX": 315.499,
+          "worldY": 89.1032
+        },
+        {
+          "x": 0.550433,
+          "y": 0.370498,
+          "worldX": 289.023,
+          "worldY": 79.4323
+        },
+        {
+          "x": 0.541072,
+          "y": 0.351281,
+          "worldX": 268.845,
+          "worldY": 64.6878
+        },
+        {
+          "x": 0.530316,
+          "y": 0.337004,
+          "worldX": 253.854,
+          "worldY": 47.7474
+        }
+      ]
+    },
+    {
+      "id": "5500065",
+      "npcId": 20039,
+      "name": "Phoenix-Hawk",
+      "x": 0.456111,
+      "y": 0.48107,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 405.12298583984375,
+      "worldY": -69.12580108642578,
+      "patrol": [
+        {
+          "x": 0.468649,
+          "y": 0.487585,
+          "worldX": 411.964,
+          "worldY": -49.3781
+        },
+        {
+          "x": 0.48183,
+          "y": 0.494906,
+          "worldX": 419.651,
+          "worldY": -28.6171
+        },
+        {
+          "x": 0.482203,
+          "y": 0.495003,
+          "worldX": 419.753,
+          "worldY": -28.0309
+        },
+        {
+          "x": 0.494631,
+          "y": 0.49806,
+          "worldX": 422.963,
+          "worldY": -8.45616
+        },
+        {
+          "x": 0.506092,
+          "y": 0.49813,
+          "worldX": 423.036,
+          "worldY": 9.59528
+        },
+        {
+          "x": 0.515955,
+          "y": 0.495749,
+          "worldX": 420.536,
+          "worldY": 25.1295
+        },
+        {
+          "x": 0.52463,
+          "y": 0.490903,
+          "worldX": 415.448,
+          "worldY": 38.792
+        },
+        {
+          "x": 0.535094,
+          "y": 0.481446,
+          "worldX": 405.518,
+          "worldY": 55.2728
+        },
+        {
+          "x": 0.542679,
+          "y": 0.471694,
+          "worldX": 395.279,
+          "worldY": 67.22
+        },
+        {
+          "x": 0.549706,
+          "y": 0.458784,
+          "worldX": 381.723,
+          "worldY": 78.2877
+        },
+        {
+          "x": 0.554835,
+          "y": 0.442802,
+          "worldX": 364.942,
+          "worldY": 86.3658
+        },
+        {
+          "x": 0.557591,
+          "y": 0.422697,
+          "worldX": 343.832,
+          "worldY": 90.7063
+        },
+        {
+          "x": 0.557946,
+          "y": 0.408289,
+          "worldX": 328.703,
+          "worldY": 91.2646
+        },
+        {
+          "x": 0.556498,
+          "y": 0.392874,
+          "worldX": 312.518,
+          "worldY": 88.9843
+        },
+        {
+          "x": 0.556064,
+          "y": 0.39019,
+          "worldX": 309.699,
+          "worldY": 88.3012
+        },
+        {
+          "x": 0.552048,
+          "y": 0.37345,
+          "worldX": 292.122,
+          "worldY": 81.9759
+        },
+        {
+          "x": 0.548364,
+          "y": 0.363174,
+          "worldX": 281.333,
+          "worldY": 76.174
+        },
+        {
+          "x": 0.54116,
+          "y": 0.349012,
+          "worldX": 266.463,
+          "worldY": 64.8265
+        },
+        {
+          "x": 0.536182,
+          "y": 0.342497,
+          "worldX": 259.622,
+          "worldY": 56.9863
+        },
+        {
+          "x": 0.523911,
+          "y": 0.332129,
+          "worldX": 248.735,
+          "worldY": 37.6605
+        },
+        {
+          "x": 0.515567,
+          "y": 0.327556,
+          "worldX": 243.934,
+          "worldY": 24.5186
+        },
+        {
+          "x": 0.50469,
+          "y": 0.324153,
+          "worldX": 240.361,
+          "worldY": 7.38719
+        },
+        {
+          "x": 0.490407,
+          "y": 0.321946,
+          "worldX": 238.043,
+          "worldY": -15.1097
+        },
+        {
+          "x": 0.488181,
+          "y": 0.32231,
+          "worldX": 238.426,
+          "worldY": -18.6155
+        },
+        {
+          "x": 0.481085,
+          "y": 0.325329,
+          "worldX": 241.595,
+          "worldY": -29.7919
+        },
+        {
+          "x": 0.471353,
+          "y": 0.333371,
+          "worldX": 250.04,
+          "worldY": -45.1193
+        },
+        {
+          "x": 0.460107,
+          "y": 0.34497,
+          "worldX": 262.218,
+          "worldY": -62.8313
+        },
+        {
+          "x": 0.452518,
+          "y": 0.35859,
+          "worldX": 276.519,
+          "worldY": -74.7845
+        },
+        {
+          "x": 0.447087,
+          "y": 0.373747,
+          "worldX": 292.434,
+          "worldY": -83.3372
+        },
+        {
+          "x": 0.444015,
+          "y": 0.389764,
+          "worldX": 309.252,
+          "worldY": -88.177
+        },
+        {
+          "x": 0.442144,
+          "y": 0.400489,
+          "worldX": 320.513,
+          "worldY": -91.1232
+        },
+        {
+          "x": 0.441654,
+          "y": 0.413776,
+          "worldX": 334.465,
+          "worldY": -91.8952
+        },
+        {
+          "x": 0.443562,
+          "y": 0.430754,
+          "worldX": 352.292,
+          "worldY": -88.89
+        },
+        {
+          "x": 0.451159,
+          "y": 0.462079,
+          "worldX": 385.183,
+          "worldY": -76.9252
+        }
+      ]
+    },
+    {
+      "id": "5500066",
+      "npcId": 20040,
+      "name": "Crystalcore Devastator",
+      "x": 0.715879,
+      "y": 0.536947,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 463.79400634765625,
+      "worldY": 340.0090026855469
+    },
+    {
+      "id": "5500067",
+      "npcId": 20040,
+      "name": "Crystalcore Devastator",
+      "x": 0.557462,
+      "y": 0.55135,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 478.9169921875,
+      "worldY": 90.50199890136719,
+      "patrol": [
+        {
+          "x": 0.557468,
+          "y": 0.551451,
+          "worldX": 479.024,
+          "worldY": 90.5127
+        },
+        {
+          "x": 0.562373,
+          "y": 0.558225,
+          "worldX": 486.136,
+          "worldY": 98.2374
+        },
+        {
+          "x": 0.567446,
+          "y": 0.565196,
+          "worldX": 493.456,
+          "worldY": 106.227
+        },
+        {
+          "x": 0.574655,
+          "y": 0.573566,
+          "worldX": 502.244,
+          "worldY": 117.582
+        },
+        {
+          "x": 0.581126,
+          "y": 0.578707,
+          "worldX": 507.642,
+          "worldY": 127.774
+        },
+        {
+          "x": 0.587546,
+          "y": 0.581402,
+          "worldX": 510.472,
+          "worldY": 137.885
+        },
+        {
+          "x": 0.595259,
+          "y": 0.584579,
+          "worldX": 513.808,
+          "worldY": 150.033
+        },
+        {
+          "x": 0.601844,
+          "y": 0.586123,
+          "worldX": 515.429,
+          "worldY": 160.404
+        },
+        {
+          "x": 0.60843,
+          "y": 0.587668,
+          "worldX": 517.051,
+          "worldY": 170.778
+        },
+        {
+          "x": 0.616334,
+          "y": 0.589521,
+          "worldX": 518.997,
+          "worldY": 183.226
+        },
+        {
+          "x": 0.624098,
+          "y": 0.58921,
+          "worldX": 518.671,
+          "worldY": 195.455
+        },
+        {
+          "x": 0.629201,
+          "y": 0.588901,
+          "worldX": 518.346,
+          "worldY": 203.492
+        },
+        {
+          "x": 0.636787,
+          "y": 0.586306,
+          "worldX": 515.621,
+          "worldY": 215.439
+        },
+        {
+          "x": 0.640662,
+          "y": 0.584832,
+          "worldX": 514.074,
+          "worldY": 221.543
+        },
+        {
+          "x": 0.64691,
+          "y": 0.581345,
+          "worldX": 510.412,
+          "worldY": 231.384
+        },
+        {
+          "x": 0.653159,
+          "y": 0.577857,
+          "worldX": 506.75,
+          "worldY": 241.225
+        },
+        {
+          "x": 0.644606,
+          "y": 0.582439,
+          "worldX": 511.561,
+          "worldY": 227.755
+        },
+        {
+          "x": 0.63978,
+          "y": 0.58583,
+          "worldX": 515.122,
+          "worldY": 220.153
+        },
+        {
+          "x": 0.635092,
+          "y": 0.587848,
+          "worldX": 517.24,
+          "worldY": 212.77
+        },
+        {
+          "x": 0.628489,
+          "y": 0.589222,
+          "worldX": 518.683,
+          "worldY": 202.37
+        },
+        {
+          "x": 0.624523,
+          "y": 0.589988,
+          "worldX": 519.487,
+          "worldY": 196.123
+        },
+        {
+          "x": 0.617857,
+          "y": 0.590189,
+          "worldX": 519.698,
+          "worldY": 185.625
+        },
+        {
+          "x": 0.607515,
+          "y": 0.588368,
+          "worldX": 517.786,
+          "worldY": 169.336
+        },
+        {
+          "x": 0.600954,
+          "y": 0.586598,
+          "worldX": 515.928,
+          "worldY": 159.002
+        },
+        {
+          "x": 0.594392,
+          "y": 0.58483,
+          "worldX": 514.071,
+          "worldY": 148.667
+        },
+        {
+          "x": 0.591126,
+          "y": 0.583848,
+          "worldX": 513.04,
+          "worldY": 143.524
+        },
+        {
+          "x": 0.584822,
+          "y": 0.580598,
+          "worldX": 509.628,
+          "worldY": 133.594
+        },
+        {
+          "x": 0.573246,
+          "y": 0.573088,
+          "worldX": 501.742,
+          "worldY": 115.362
+        },
+        {
+          "x": 0.567347,
+          "y": 0.565509,
+          "worldX": 493.784,
+          "worldY": 106.071
+        },
+        {
+          "x": 0.562344,
+          "y": 0.558899,
+          "worldX": 486.844,
+          "worldY": 98.1916
+        },
+        {
+          "x": 0.557341,
+          "y": 0.55229,
+          "worldX": 479.904,
+          "worldY": 90.3124
+        }
+      ]
+    },
+    {
+      "id": "5500068",
+      "npcId": 20040,
+      "name": "Crystalcore Devastator",
+      "x": 0.708614,
+      "y": 0.50401,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 429.2099914550781,
+      "worldY": 328.5669860839844
+    },
+    {
+      "id": "5500069",
+      "npcId": 20040,
+      "name": "Crystalcore Devastator",
+      "x": 0.697827,
+      "y": 0.489595,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 414.07501220703125,
+      "worldY": 311.5769958496094,
+      "patrol": [
+        {
+          "x": 0.700391,
+          "y": 0.485648,
+          "worldX": 409.93,
+          "worldY": 315.616
+        },
+        {
+          "x": 0.703574,
+          "y": 0.480995,
+          "worldX": 405.045,
+          "worldY": 320.629
+        },
+        {
+          "x": 0.706757,
+          "y": 0.476342,
+          "worldX": 400.159,
+          "worldY": 325.642
+        },
+        {
+          "x": 0.710029,
+          "y": 0.47183,
+          "worldX": 395.422,
+          "worldY": 330.796
+        },
+        {
+          "x": 0.713368,
+          "y": 0.467431,
+          "worldX": 390.803,
+          "worldY": 336.055
+        },
+        {
+          "x": 0.719751,
+          "y": 0.46059,
+          "worldX": 383.62,
+          "worldY": 346.108
+        },
+        {
+          "x": 0.722523,
+          "y": 0.458474,
+          "worldX": 381.398,
+          "worldY": 350.473
+        },
+        {
+          "x": 0.726646,
+          "y": 0.456022,
+          "worldX": 378.823,
+          "worldY": 356.968
+        },
+        {
+          "x": 0.726912,
+          "y": 0.455764,
+          "worldX": 378.552,
+          "worldY": 357.387
+        },
+        {
+          "x": 0.722835,
+          "y": 0.458412,
+          "worldX": 381.333,
+          "worldY": 350.965
+        },
+        {
+          "x": 0.717527,
+          "y": 0.462342,
+          "worldX": 385.459,
+          "worldY": 342.605
+        },
+        {
+          "x": 0.71439,
+          "y": 0.465683,
+          "worldX": 388.967,
+          "worldY": 337.665
+        },
+        {
+          "x": 0.710984,
+          "y": 0.469964,
+          "worldX": 393.462,
+          "worldY": 332.3
+        },
+        {
+          "x": 0.707759,
+          "y": 0.474548,
+          "worldX": 398.275,
+          "worldY": 327.22
+        },
+        {
+          "x": 0.704564,
+          "y": 0.479182,
+          "worldX": 403.141,
+          "worldY": 322.188
+        },
+        {
+          "x": 0.699919,
+          "y": 0.486655,
+          "worldX": 410.988,
+          "worldY": 314.873
+        },
+        {
+          "x": 0.697477,
+          "y": 0.493225,
+          "worldX": 417.886,
+          "worldY": 311.027
+        },
+        {
+          "x": 0.696166,
+          "y": 0.501654,
+          "worldX": 426.737,
+          "worldY": 308.961
+        },
+        {
+          "x": 0.696043,
+          "y": 0.505194,
+          "worldX": 430.454,
+          "worldY": 308.767
+        },
+        {
+          "x": 0.696323,
+          "y": 0.51051,
+          "worldX": 436.035,
+          "worldY": 309.208
+        },
+        {
+          "x": 0.696917,
+          "y": 0.517115,
+          "worldX": 442.971,
+          "worldY": 310.145
+        },
+        {
+          "x": 0.698425,
+          "y": 0.527766,
+          "worldX": 454.154,
+          "worldY": 312.519
+        },
+        {
+          "x": 0.699928,
+          "y": 0.534038,
+          "worldX": 460.74,
+          "worldY": 314.886
+        },
+        {
+          "x": 0.702559,
+          "y": 0.540699,
+          "worldX": 467.734,
+          "worldY": 319.03
+        },
+        {
+          "x": 0.705614,
+          "y": 0.545241,
+          "worldX": 472.503,
+          "worldY": 323.842
+        },
+        {
+          "x": 0.709056,
+          "y": 0.549456,
+          "worldX": 476.929,
+          "worldY": 329.263
+        },
+        {
+          "x": 0.712631,
+          "y": 0.553414,
+          "worldX": 481.085,
+          "worldY": 334.894
+        },
+        {
+          "x": 0.715292,
+          "y": 0.555829,
+          "worldX": 483.62,
+          "worldY": 339.085
+        },
+        {
+          "x": 0.719139,
+          "y": 0.558683,
+          "worldX": 486.617,
+          "worldY": 345.144
+        },
+        {
+          "x": 0.723316,
+          "y": 0.560956,
+          "worldX": 489.004,
+          "worldY": 351.722
+        },
+        {
+          "x": 0.728279,
+          "y": 0.563151,
+          "worldX": 491.309,
+          "worldY": 359.54
+        },
+        {
+          "x": 0.72398,
+          "y": 0.561461,
+          "worldX": 489.534,
+          "worldY": 352.769
+        },
+        {
+          "x": 0.719698,
+          "y": 0.559684,
+          "worldX": 487.668,
+          "worldY": 346.024
+        },
+        {
+          "x": 0.715629,
+          "y": 0.557016,
+          "worldX": 484.867,
+          "worldY": 339.615
+        },
+        {
+          "x": 0.711884,
+          "y": 0.553429,
+          "worldX": 481.1,
+          "worldY": 333.717
+        },
+        {
+          "x": 0.707229,
+          "y": 0.548298,
+          "worldX": 475.713,
+          "worldY": 326.386
+        },
+        {
+          "x": 0.704961,
+          "y": 0.545105,
+          "worldX": 472.36,
+          "worldY": 322.813
+        },
+        {
+          "x": 0.702022,
+          "y": 0.540103,
+          "worldX": 467.108,
+          "worldY": 318.185
+        },
+        {
+          "x": 0.699665,
+          "y": 0.53477,
+          "worldX": 461.508,
+          "worldY": 314.473
+        },
+        {
+          "x": 0.698416,
+          "y": 0.530032,
+          "worldX": 456.534,
+          "worldY": 312.505
+        },
+        {
+          "x": 0.69665,
+          "y": 0.517423,
+          "worldX": 443.294,
+          "worldY": 309.724
+        },
+        {
+          "x": 0.695891,
+          "y": 0.510854,
+          "worldX": 436.397,
+          "worldY": 308.528
+        },
+        {
+          "x": 0.695623,
+          "y": 0.506875,
+          "worldX": 432.219,
+          "worldY": 308.106
+        },
+        {
+          "x": 0.695686,
+          "y": 0.503065,
+          "worldX": 428.218,
+          "worldY": 308.206
+        },
+        {
+          "x": 0.696735,
+          "y": 0.494387,
+          "worldX": 419.106,
+          "worldY": 309.858
+        }
+      ]
+    },
+    {
+      "id": "5500070",
+      "npcId": 20041,
+      "name": "Crystalcore Sentinel",
+      "x": 0.6545,
+      "y": 0.58686,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 516.2030029296875,
+      "worldY": 243.33700561523438
+    },
+    {
+      "id": "5500071",
+      "npcId": 20041,
+      "name": "Crystalcore Sentinel",
+      "x": 0.649253,
+      "y": 0.571694,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 500.27899169921875,
+      "worldY": 235.072998046875
+    },
+    {
+      "id": "5500072",
+      "npcId": 20041,
+      "name": "Crystalcore Sentinel",
+      "x": 0.411356,
+      "y": 0.5957,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 525.4849853515625,
+      "worldY": -139.61500549316406
+    },
+    {
+      "id": "5500073",
+      "npcId": 20041,
+      "name": "Crystalcore Sentinel",
+      "x": 0.400217,
+      "y": 0.600451,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 530.4739990234375,
+      "worldY": -157.15899658203125
+    },
+    {
+      "id": "5500074",
+      "npcId": 20041,
+      "name": "Crystalcore Sentinel",
+      "x": 0.587046,
+      "y": 0.596011,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 525.81201171875,
+      "worldY": 137.09800720214844
+    },
+    {
+      "id": "5500075",
+      "npcId": 20041,
+      "name": "Crystalcore Sentinel",
+      "x": 0.598983,
+      "y": 0.600532,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 530.5590209960938,
+      "worldY": 155.8990020751953
+    },
+    {
+      "id": "5500076",
+      "npcId": 20041,
+      "name": "Crystalcore Sentinel",
+      "x": 0.721942,
+      "y": 0.472107,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 395.7120056152344,
+      "worldY": 349.5580139160156
+    },
+    {
+      "id": "5500077",
+      "npcId": 20041,
+      "name": "Crystalcore Sentinel",
+      "x": 0.725985,
+      "y": 0.46886,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 392.3030090332031,
+      "worldY": 355.927001953125
+    },
+    {
+      "id": "5500078",
+      "npcId": 20041,
+      "name": "Crystalcore Sentinel",
+      "x": 0.741508,
+      "y": 0.548265,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 475.6780090332031,
+      "worldY": 380.375
+    },
+    {
+      "id": "5500079",
+      "npcId": 20041,
+      "name": "Crystalcore Sentinel",
+      "x": 0.74541,
+      "y": 0.54608,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 473.3840026855469,
+      "worldY": 386.5199890136719
+    },
+    {
+      "id": "5500080",
+      "npcId": 20042,
+      "name": "Tempest-Smith",
+      "x": 0.725969,
+      "y": 0.477179,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 401.0379943847656,
+      "worldY": 355.9010009765625
+    },
+    {
+      "id": "5500081",
+      "npcId": 20042,
+      "name": "Tempest-Smith",
+      "x": 0.719772,
+      "y": 0.53183,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 458.4209899902344,
+      "worldY": 346.1409912109375
+    },
+    {
+      "id": "5500082",
+      "npcId": 20042,
+      "name": "Tempest-Smith",
+      "x": 0.742095,
+      "y": 0.53983,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 466.8210144042969,
+      "worldY": 381.29998779296875
+    },
+    {
+      "id": "5500083",
+      "npcId": 20042,
+      "name": "Tempest-Smith",
+      "x": 0.713475,
+      "y": 0.504928,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 430.17401123046875,
+      "worldY": 336.2229919433594
+    },
+    {
+      "id": "5500084",
+      "npcId": 20042,
+      "name": "Tempest-Smith",
+      "x": 0.699041,
+      "y": 0.493525,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 418.20098876953125,
+      "worldY": 313.489990234375
+    },
+    {
+      "id": "5500085",
+      "npcId": 20042,
+      "name": "Tempest-Smith",
+      "x": 0.694312,
+      "y": 0.490436,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 414.9580078125,
+      "worldY": 306.0409851074219
+    },
+    {
+      "id": "5500086",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.29701,
+      "y": 0.430912,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 352.4580078125,
+      "worldY": -319.7090148925781
+    },
+    {
+      "id": "5500087",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.288195,
+      "y": 0.423071,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 344.2250061035156,
+      "worldY": -333.5929870605469
+    },
+    {
+      "id": "5500088",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.407143,
+      "y": 0.574462,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 503.18499755859375,
+      "worldY": -146.24899291992188
+    },
+    {
+      "id": "5500089",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.405131,
+      "y": 0.573805,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 502.4949951171875,
+      "worldY": -149.41799926757812
+    },
+    {
+      "id": "5500090",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.402079,
+      "y": 0.577301,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 506.1659851074219,
+      "worldY": -154.2259979248047
+    },
+    {
+      "id": "5500091",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.39934,
+      "y": 0.579969,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 508.9670104980469,
+      "worldY": -158.53900146484375
+    },
+    {
+      "id": "5500092",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.346855,
+      "y": 0.570172,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 498.6809997558594,
+      "worldY": -241.2030029296875
+    },
+    {
+      "id": "5500093",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.2663,
+      "y": 0.414378,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 335.09698486328125,
+      "worldY": -368.0780029296875
+    },
+    {
+      "id": "5500094",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.348485,
+      "y": 0.572263,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 500.8760070800781,
+      "worldY": -238.63600158691406
+    },
+    {
+      "id": "5500095",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.264707,
+      "y": 0.419336,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 340.3030090332031,
+      "worldY": -370.5870056152344
+    },
+    {
+      "id": "5500096",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.34256,
+      "y": 0.587138,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 516.4949951171875,
+      "worldY": -247.96800231933594
+    },
+    {
+      "id": "5500097",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.346205,
+      "y": 0.585703,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 514.9879760742188,
+      "worldY": -242.2270050048828
+    },
+    {
+      "id": "5500098",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.344056,
+      "y": 0.586973,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 516.322021484375,
+      "worldY": -245.61199951171875
+    },
+    {
+      "id": "5500099",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.260136,
+      "y": 0.410341,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 330.8580017089844,
+      "worldY": -377.7860107421875
+    },
+    {
+      "id": "5500100",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.268271,
+      "y": 0.598787,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 528.7260131835938,
+      "worldY": -364.9729919433594
+    },
+    {
+      "id": "5500101",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.265891,
+      "y": 0.597355,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 527.2230224609375,
+      "worldY": -368.72198486328125
+    },
+    {
+      "id": "5500102",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.258034,
+      "y": 0.59798,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 527.8790283203125,
+      "worldY": -381.09600830078125
+    },
+    {
+      "id": "5500103",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.236203,
+      "y": 0.588651,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 518.083984375,
+      "worldY": -415.4800109863281
+    },
+    {
+      "id": "5500104",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.237555,
+      "y": 0.590296,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 519.8109741210938,
+      "worldY": -413.35101318359375
+    },
+    {
+      "id": "5500105",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.213649,
+      "y": 0.457167,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 380.0249938964844,
+      "worldY": -451.00299072265625
+    },
+    {
+      "id": "5500106",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.211019,
+      "y": 0.454232,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 376.9440002441406,
+      "worldY": -455.1449890136719
+    },
+    {
+      "id": "5500107",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.202848,
+      "y": 0.513784,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 439.4729919433594,
+      "worldY": -468.0150146484375
+    },
+    {
+      "id": "5500108",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.203601,
+      "y": 0.510132,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 435.6390075683594,
+      "worldY": -466.8290100097656
+    },
+    {
+      "id": "5500109",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.19902,
+      "y": 0.503773,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 428.9620056152344,
+      "worldY": -474.0429992675781
+    },
+    {
+      "id": "5500110",
+      "npcId": 20043,
+      "name": "Apprentice Star Scryer",
+      "x": 0.399967,
+      "y": 0.577798,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 506.68798828125,
+      "worldY": -157.552001953125
+    },
+    {
+      "id": "5500111",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.298277,
+      "y": 0.432715,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 354.35101318359375,
+      "worldY": -317.7130126953125
+    },
+    {
+      "id": "5500112",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.289956,
+      "y": 0.421906,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 343.0010070800781,
+      "worldY": -330.82000732421875
+    },
+    {
+      "id": "5500113",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.289768,
+      "y": 0.425702,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 346.98699951171875,
+      "worldY": -331.1159973144531
+    },
+    {
+      "id": "5500114",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.39901,
+      "y": 0.576204,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 505.0140075683594,
+      "worldY": -159.0590057373047
+    },
+    {
+      "id": "5500115",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.402662,
+      "y": 0.574731,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 503.4679870605469,
+      "worldY": -153.3070068359375
+    },
+    {
+      "id": "5500116",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.403801,
+      "y": 0.574151,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 502.8590087890625,
+      "worldY": -151.51400756835938
+    },
+    {
+      "id": "5500117",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.405777,
+      "y": 0.576965,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 505.81298828125,
+      "worldY": -148.40199279785156
+    },
+    {
+      "id": "5500118",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.267371,
+      "y": 0.417695,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 338.5799865722656,
+      "worldY": -366.3900146484375
+    },
+    {
+      "id": "5500119",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.346878,
+      "y": 0.572679,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 501.31298828125,
+      "worldY": -241.16700744628906
+    },
+    {
+      "id": "5500120",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.398143,
+      "y": 0.57837,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 507.28900146484375,
+      "worldY": -160.4239959716797
+    },
+    {
+      "id": "5500121",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.34498,
+      "y": 0.574138,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 502.8450012207031,
+      "worldY": -244.156005859375
+    },
+    {
+      "id": "5500122",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.342579,
+      "y": 0.584645,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 513.8770141601562,
+      "worldY": -247.93800354003906
+    },
+    {
+      "id": "5500123",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.347304,
+      "y": 0.57545,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 504.22198486328125,
+      "worldY": -240.49600219726562
+    },
+    {
+      "id": "5500124",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.345041,
+      "y": 0.583483,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 512.656982421875,
+      "worldY": -244.06100463867188
+    },
+    {
+      "id": "5500125",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.258393,
+      "y": 0.416894,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 337.739013671875,
+      "worldY": -380.531005859375
+    },
+    {
+      "id": "5500126",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.261349,
+      "y": 0.597094,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 526.948974609375,
+      "worldY": -375.875
+    },
+    {
+      "id": "5500127",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.259316,
+      "y": 0.601451,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 531.5239868164062,
+      "worldY": -379.0769958496094
+    },
+    {
+      "id": "5500128",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.230146,
+      "y": 0.58335,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 512.5180053710938,
+      "worldY": -425.0199890136719
+    },
+    {
+      "id": "5500129",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.236158,
+      "y": 0.591811,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 521.4019775390625,
+      "worldY": -415.5509948730469
+    },
+    {
+      "id": "5500130",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.229243,
+      "y": 0.586482,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 515.8060302734375,
+      "worldY": -426.4419860839844
+    },
+    {
+      "id": "5500131",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.21279,
+      "y": 0.452633,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 375.2650146484375,
+      "worldY": -452.3559875488281
+    },
+    {
+      "id": "5500132",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.207999,
+      "y": 0.468379,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 391.7980041503906,
+      "worldY": -459.9010009765625
+    },
+    {
+      "id": "5500133",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.206361,
+      "y": 0.465597,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 388.87701416015625,
+      "worldY": -462.4809875488281
+    },
+    {
+      "id": "5500134",
+      "npcId": 20044,
+      "name": "Novice Astromancer",
+      "x": 0.202289,
+      "y": 0.502847,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 427.989013671875,
+      "worldY": -468.8949890136719
+    },
+    {
+      "id": "5500135",
+      "npcId": 20045,
+      "name": "Nether Scryer",
+      "x": 0.28365,
+      "y": 0.5477,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 475.0849914550781,
+      "worldY": -340.75201416015625,
+      "patrol": [
+        {
+          "x": 0.278317,
+          "y": 0.551203,
+          "worldX": 478.763,
+          "worldY": -349.151
+        },
+        {
+          "x": 0.277479,
+          "y": 0.551665,
+          "worldX": 479.248,
+          "worldY": -350.47
+        },
+        {
+          "x": 0.269773,
+          "y": 0.55484,
+          "worldX": 482.582,
+          "worldY": -362.608
+        },
+        {
+          "x": 0.265377,
+          "y": 0.555708,
+          "worldX": 483.493,
+          "worldY": -369.532
+        },
+        {
+          "x": 0.258948,
+          "y": 0.555212,
+          "worldX": 482.973,
+          "worldY": -379.657
+        },
+        {
+          "x": 0.253758,
+          "y": 0.553484,
+          "worldX": 481.158,
+          "worldY": -387.831
+        },
+        {
+          "x": 0.249543,
+          "y": 0.550528,
+          "worldX": 478.054,
+          "worldY": -394.47
+        },
+        {
+          "x": 0.244286,
+          "y": 0.544377,
+          "worldX": 471.596,
+          "worldY": -402.749
+        },
+        {
+          "x": 0.240999,
+          "y": 0.540398,
+          "worldX": 467.418,
+          "worldY": -407.926
+        },
+        {
+          "x": 0.236961,
+          "y": 0.533749,
+          "worldX": 460.436,
+          "worldY": -414.286
+        },
+        {
+          "x": 0.234246,
+          "y": 0.527279,
+          "worldX": 453.643,
+          "worldY": -418.563
+        },
+        {
+          "x": 0.232485,
+          "y": 0.519737,
+          "worldX": 445.724,
+          "worldY": -421.336
+        },
+        {
+          "x": 0.231677,
+          "y": 0.510834,
+          "worldX": 436.376,
+          "worldY": -422.609
+        },
+        {
+          "x": 0.232166,
+          "y": 0.503199,
+          "worldX": 428.359,
+          "worldY": -421.839
+        },
+        {
+          "x": 0.233957,
+          "y": 0.493567,
+          "worldX": 418.245,
+          "worldY": -419.017
+        },
+        {
+          "x": 0.234357,
+          "y": 0.492021,
+          "worldX": 416.622,
+          "worldY": -418.388
+        },
+        {
+          "x": 0.237258,
+          "y": 0.483769,
+          "worldX": 407.957,
+          "worldY": -413.818
+        },
+        {
+          "x": 0.242657,
+          "y": 0.473624,
+          "worldX": 397.305,
+          "worldY": -405.315
+        },
+        {
+          "x": 0.246177,
+          "y": 0.46905,
+          "worldX": 392.503,
+          "worldY": -399.771
+        },
+        {
+          "x": 0.250498,
+          "y": 0.46568,
+          "worldX": 388.964,
+          "worldY": -392.966
+        },
+        {
+          "x": 0.255668,
+          "y": 0.46381,
+          "worldX": 387.0,
+          "worldY": -384.823
+        },
+        {
+          "x": 0.262335,
+          "y": 0.463781,
+          "worldX": 386.97,
+          "worldY": -374.323
+        },
+        {
+          "x": 0.268117,
+          "y": 0.463862,
+          "worldX": 387.055,
+          "worldY": -365.215
+        },
+        {
+          "x": 0.273385,
+          "y": 0.465207,
+          "worldX": 388.467,
+          "worldY": -356.918
+        },
+        {
+          "x": 0.278328,
+          "y": 0.468067,
+          "worldX": 391.47,
+          "worldY": -349.133
+        },
+        {
+          "x": 0.281811,
+          "y": 0.472174,
+          "worldX": 395.783,
+          "worldY": -343.648
+        },
+        {
+          "x": 0.285991,
+          "y": 0.479555,
+          "worldX": 403.533,
+          "worldY": -337.064
+        },
+        {
+          "x": 0.289638,
+          "y": 0.485379,
+          "worldX": 409.648,
+          "worldY": -331.32
+        },
+        {
+          "x": 0.293057,
+          "y": 0.493555,
+          "worldX": 418.233,
+          "worldY": -325.936
+        },
+        {
+          "x": 0.294314,
+          "y": 0.498877,
+          "worldX": 423.821,
+          "worldY": -323.955
+        },
+        {
+          "x": 0.295224,
+          "y": 0.509117,
+          "worldX": 434.573,
+          "worldY": -322.522
+        },
+        {
+          "x": 0.294998,
+          "y": 0.514967,
+          "worldX": 440.715,
+          "worldY": -322.878
+        },
+        {
+          "x": 0.294085,
+          "y": 0.499444,
+          "worldX": 424.416,
+          "worldY": -324.316
+        },
+        {
+          "x": 0.291269,
+          "y": 0.488586,
+          "worldX": 413.015,
+          "worldY": -328.751
+        },
+        {
+          "x": 0.289487,
+          "y": 0.484363,
+          "worldX": 408.581,
+          "worldY": -331.558
+        },
+        {
+          "x": 0.285587,
+          "y": 0.477084,
+          "worldX": 400.938,
+          "worldY": -337.7
+        },
+        {
+          "x": 0.2798,
+          "y": 0.468822,
+          "worldX": 392.263,
+          "worldY": -346.815
+        },
+        {
+          "x": 0.275889,
+          "y": 0.46573,
+          "worldX": 389.017,
+          "worldY": -352.975
+        },
+        {
+          "x": 0.269411,
+          "y": 0.46337,
+          "worldX": 386.539,
+          "worldY": -363.178
+        },
+        {
+          "x": 0.266982,
+          "y": 0.462656,
+          "worldX": 385.789,
+          "worldY": -367.003
+        },
+        {
+          "x": 0.258112,
+          "y": 0.462272,
+          "worldX": 385.386,
+          "worldY": -380.974
+        },
+        {
+          "x": 0.251533,
+          "y": 0.463769,
+          "worldX": 386.957,
+          "worldY": -391.335
+        },
+        {
+          "x": 0.248182,
+          "y": 0.465585,
+          "worldX": 388.864,
+          "worldY": -396.614
+        },
+        {
+          "x": 0.247207,
+          "y": 0.466366,
+          "worldX": 389.684,
+          "worldY": -398.149
+        },
+        {
+          "x": 0.242128,
+          "y": 0.471648,
+          "worldX": 395.23,
+          "worldY": -406.149
+        },
+        {
+          "x": 0.238664,
+          "y": 0.476832,
+          "worldX": 400.674,
+          "worldY": -411.604
+        },
+        {
+          "x": 0.237724,
+          "y": 0.478691,
+          "worldX": 402.626,
+          "worldY": -413.084
+        },
+        {
+          "x": 0.233987,
+          "y": 0.48891,
+          "worldX": 413.355,
+          "worldY": -418.97
+        },
+        {
+          "x": 0.231137,
+          "y": 0.501251,
+          "worldX": 426.314,
+          "worldY": -423.46
+        },
+        {
+          "x": 0.230608,
+          "y": 0.509131,
+          "worldX": 434.588,
+          "worldY": -424.292
+        },
+        {
+          "x": 0.230668,
+          "y": 0.516451,
+          "worldX": 442.274,
+          "worldY": -424.198
+        },
+        {
+          "x": 0.231587,
+          "y": 0.522644,
+          "worldX": 448.776,
+          "worldY": -422.751
+        },
+        {
+          "x": 0.231973,
+          "y": 0.524196,
+          "worldX": 450.406,
+          "worldY": -422.143
+        },
+        {
+          "x": 0.235257,
+          "y": 0.534027,
+          "worldX": 460.728,
+          "worldY": -416.97
+        },
+        {
+          "x": 0.23833,
+          "y": 0.53971,
+          "worldX": 466.695,
+          "worldY": -412.13
+        },
+        {
+          "x": 0.243798,
+          "y": 0.54543,
+          "worldX": 472.701,
+          "worldY": -403.518
+        },
+        {
+          "x": 0.250699,
+          "y": 0.552649,
+          "worldX": 480.281,
+          "worldY": -392.649
+        },
+        {
+          "x": 0.254811,
+          "y": 0.555102,
+          "worldX": 482.857,
+          "worldY": -386.173
+        },
+        {
+          "x": 0.255453,
+          "y": 0.555369,
+          "worldX": 483.137,
+          "worldY": -385.162
+        },
+        {
+          "x": 0.263112,
+          "y": 0.557619,
+          "worldX": 485.5,
+          "worldY": -373.099
+        },
+        {
+          "x": 0.268397,
+          "y": 0.557391,
+          "worldX": 485.261,
+          "worldY": -364.775
+        },
+        {
+          "x": 0.272758,
+          "y": 0.556039,
+          "worldX": 483.841,
+          "worldY": -357.906
+        },
+        {
+          "x": 0.27402,
+          "y": 0.555408,
+          "worldX": 483.178,
+          "worldY": -355.918
+        },
+        {
+          "x": 0.280053,
+          "y": 0.551153,
+          "worldX": 478.711,
+          "worldY": -346.416
+        },
+        {
+          "x": 0.28266,
+          "y": 0.54919,
+          "worldX": 476.65,
+          "worldY": -342.31
+        }
+      ]
+    },
+    {
+      "id": "5500136",
+      "npcId": 20045,
+      "name": "Nether Scryer",
+      "x": 0.227214,
+      "y": 0.462102,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 385.2070007324219,
+      "worldY": -429.63800048828125,
+      "patrol": [
+        {
+          "x": 0.223033,
+          "y": 0.469981,
+          "worldX": 393.48,
+          "worldY": -436.223
+        },
+        {
+          "x": 0.219592,
+          "y": 0.47891,
+          "worldX": 402.855,
+          "worldY": -441.642
+        },
+        {
+          "x": 0.216309,
+          "y": 0.494109,
+          "worldX": 418.814,
+          "worldY": -446.814
+        },
+        {
+          "x": 0.215455,
+          "y": 0.50869,
+          "worldX": 434.124,
+          "worldY": -448.158
+        },
+        {
+          "x": 0.216759,
+          "y": 0.518495,
+          "worldX": 444.42,
+          "worldY": -446.105
+        },
+        {
+          "x": 0.21841,
+          "y": 0.528178,
+          "worldX": 454.587,
+          "worldY": -443.505
+        },
+        {
+          "x": 0.220523,
+          "y": 0.536599,
+          "worldX": 463.429,
+          "worldY": -440.177
+        },
+        {
+          "x": 0.223549,
+          "y": 0.545508,
+          "worldX": 472.783,
+          "worldY": -435.41
+        },
+        {
+          "x": 0.225106,
+          "y": 0.549164,
+          "worldX": 476.622,
+          "worldY": -432.958
+        },
+        {
+          "x": 0.229041,
+          "y": 0.556805,
+          "worldX": 484.645,
+          "worldY": -426.761
+        },
+        {
+          "x": 0.235624,
+          "y": 0.566258,
+          "worldX": 494.571,
+          "worldY": -416.392
+        },
+        {
+          "x": 0.239484,
+          "y": 0.57017,
+          "worldX": 498.678,
+          "worldY": -410.312
+        },
+        {
+          "x": 0.2458,
+          "y": 0.573365,
+          "worldX": 502.033,
+          "worldY": -400.365
+        },
+        {
+          "x": 0.252215,
+          "y": 0.576077,
+          "worldX": 504.881,
+          "worldY": -390.262
+        },
+        {
+          "x": 0.256117,
+          "y": 0.577376,
+          "worldX": 506.245,
+          "worldY": -384.115
+        },
+        {
+          "x": 0.26518,
+          "y": 0.578272,
+          "worldX": 507.186,
+          "worldY": -369.842
+        },
+        {
+          "x": 0.271547,
+          "y": 0.576968,
+          "worldX": 505.816,
+          "worldY": -359.814
+        },
+        {
+          "x": 0.281109,
+          "y": 0.572589,
+          "worldX": 501.218,
+          "worldY": -344.754
+        },
+        {
+          "x": 0.287919,
+          "y": 0.567675,
+          "worldX": 496.059,
+          "worldY": -334.027
+        },
+        {
+          "x": 0.283228,
+          "y": 0.571473,
+          "worldX": 500.047,
+          "worldY": -341.416
+        },
+        {
+          "x": 0.268537,
+          "y": 0.577751,
+          "worldX": 506.639,
+          "worldY": -364.554
+        },
+        {
+          "x": 0.26194,
+          "y": 0.579165,
+          "worldX": 508.123,
+          "worldY": -374.944
+        },
+        {
+          "x": 0.254302,
+          "y": 0.577081,
+          "worldX": 505.935,
+          "worldY": -386.974
+        },
+        {
+          "x": 0.247775,
+          "y": 0.575071,
+          "worldX": 503.825,
+          "worldY": -397.255
+        },
+        {
+          "x": 0.237971,
+          "y": 0.569697,
+          "worldX": 498.182,
+          "worldY": -412.695
+        },
+        {
+          "x": 0.236327,
+          "y": 0.567999,
+          "worldX": 496.399,
+          "worldY": -415.285
+        },
+        {
+          "x": 0.231522,
+          "y": 0.561069,
+          "worldX": 489.122,
+          "worldY": -422.853
+        },
+        {
+          "x": 0.225209,
+          "y": 0.551239,
+          "worldX": 478.801,
+          "worldY": -432.796
+        },
+        {
+          "x": 0.222337,
+          "y": 0.542215,
+          "worldX": 469.326,
+          "worldY": -437.319
+        },
+        {
+          "x": 0.218111,
+          "y": 0.52976,
+          "worldX": 456.248,
+          "worldY": -443.975
+        },
+        {
+          "x": 0.216547,
+          "y": 0.520041,
+          "worldX": 446.043,
+          "worldY": -446.439
+        },
+        {
+          "x": 0.214972,
+          "y": 0.507309,
+          "worldX": 432.674,
+          "worldY": -448.919
+        },
+        {
+          "x": 0.2151,
+          "y": 0.501332,
+          "worldX": 426.399,
+          "worldY": -448.718
+        },
+        {
+          "x": 0.218257,
+          "y": 0.48264,
+          "worldX": 406.772,
+          "worldY": -443.746
+        },
+        {
+          "x": 0.222454,
+          "y": 0.470533,
+          "worldX": 394.06,
+          "worldY": -437.135
+        },
+        {
+          "x": 0.225826,
+          "y": 0.464337,
+          "worldX": 387.554,
+          "worldY": -431.824
+        },
+        {
+          "x": 0.233509,
+          "y": 0.451397,
+          "worldX": 373.967,
+          "worldY": -419.724
+        },
+        {
+          "x": 0.241398,
+          "y": 0.442815,
+          "worldX": 364.956,
+          "worldY": -407.298
+        },
+        {
+          "x": 0.242563,
+          "y": 0.441842,
+          "worldX": 363.934,
+          "worldY": -405.464
+        },
+        {
+          "x": 0.250451,
+          "y": 0.437391,
+          "worldX": 359.261,
+          "worldY": -393.04
+        },
+        {
+          "x": 0.256987,
+          "y": 0.435458,
+          "worldX": 357.231,
+          "worldY": -382.745
+        },
+        {
+          "x": 0.260963,
+          "y": 0.434693,
+          "worldX": 356.428,
+          "worldY": -376.483
+        },
+        {
+          "x": 0.274194,
+          "y": 0.437143,
+          "worldX": 359.0,
+          "worldY": -355.645
+        },
+        {
+          "x": 0.280577,
+          "y": 0.439875,
+          "worldX": 361.869,
+          "worldY": -345.591
+        },
+        {
+          "x": 0.286669,
+          "y": 0.443922,
+          "worldX": 366.118,
+          "worldY": -335.996
+        },
+        {
+          "x": 0.291373,
+          "y": 0.447646,
+          "worldX": 370.028,
+          "worldY": -328.588
+        },
+        {
+          "x": 0.300064,
+          "y": 0.457992,
+          "worldX": 380.892,
+          "worldY": -314.899
+        },
+        {
+          "x": 0.301895,
+          "y": 0.460899,
+          "worldX": 383.944,
+          "worldY": -312.015
+        },
+        {
+          "x": 0.307787,
+          "y": 0.474195,
+          "worldX": 397.905,
+          "worldY": -302.736
+        },
+        {
+          "x": 0.309717,
+          "y": 0.480566,
+          "worldX": 404.594,
+          "worldY": -299.696
+        },
+        {
+          "x": 0.311148,
+          "y": 0.486868,
+          "worldX": 411.211,
+          "worldY": -297.442
+        },
+        {
+          "x": 0.312703,
+          "y": 0.496933,
+          "worldX": 421.78,
+          "worldY": -294.993
+        },
+        {
+          "x": 0.312973,
+          "y": 0.510246,
+          "worldX": 435.758,
+          "worldY": -294.568
+        },
+        {
+          "x": 0.311881,
+          "y": 0.524793,
+          "worldX": 451.033,
+          "worldY": -296.287
+        },
+        {
+          "x": 0.310095,
+          "y": 0.53442,
+          "worldX": 461.141,
+          "worldY": -299.101
+        },
+        {
+          "x": 0.311843,
+          "y": 0.524246,
+          "worldX": 450.458,
+          "worldY": -296.348
+        },
+        {
+          "x": 0.312752,
+          "y": 0.514677,
+          "worldX": 440.411,
+          "worldY": -294.916
+        },
+        {
+          "x": 0.31253,
+          "y": 0.497026,
+          "worldX": 421.877,
+          "worldY": -295.265
+        },
+        {
+          "x": 0.310655,
+          "y": 0.484989,
+          "worldX": 409.238,
+          "worldY": -298.219
+        },
+        {
+          "x": 0.308119,
+          "y": 0.478022,
+          "worldX": 401.923,
+          "worldY": -302.213
+        },
+        {
+          "x": 0.306288,
+          "y": 0.470874,
+          "worldX": 394.418,
+          "worldY": -305.096
+        },
+        {
+          "x": 0.303805,
+          "y": 0.464968,
+          "worldX": 388.216,
+          "worldY": -309.007
+        },
+        {
+          "x": 0.298016,
+          "y": 0.455738,
+          "worldX": 378.525,
+          "worldY": -318.125
+        },
+        {
+          "x": 0.292779,
+          "y": 0.44955,
+          "worldX": 372.028,
+          "worldY": -326.373
+        },
+        {
+          "x": 0.290615,
+          "y": 0.447216,
+          "worldX": 369.577,
+          "worldY": -329.782
+        },
+        {
+          "x": 0.2847,
+          "y": 0.44261,
+          "worldX": 364.74,
+          "worldY": -339.098
+        },
+        {
+          "x": 0.278619,
+          "y": 0.438582,
+          "worldX": 360.511,
+          "worldY": -348.675
+        },
+        {
+          "x": 0.27207,
+          "y": 0.436709,
+          "worldX": 358.544,
+          "worldY": -358.99
+        },
+        {
+          "x": 0.262843,
+          "y": 0.434722,
+          "worldX": 356.458,
+          "worldY": -373.522
+        },
+        {
+          "x": 0.257969,
+          "y": 0.435055,
+          "worldX": 356.808,
+          "worldY": -381.199
+        },
+        {
+          "x": 0.251425,
+          "y": 0.436947,
+          "worldX": 358.794,
+          "worldY": -391.505
+        },
+        {
+          "x": 0.246609,
+          "y": 0.438537,
+          "worldX": 360.464,
+          "worldY": -399.091
+        },
+        {
+          "x": 0.236108,
+          "y": 0.446956,
+          "worldX": 369.304,
+          "worldY": -415.63
+        },
+        {
+          "x": 0.230057,
+          "y": 0.456225,
+          "worldX": 379.036,
+          "worldY": -425.16
+        }
+      ]
+    },
+    {
+      "id": "5500137",
+      "npcId": 20046,
+      "name": "Astromancer Lord",
+      "x": 0.398603,
+      "y": 0.587646,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 517.0280151367188,
+      "worldY": -159.6999969482422,
+      "patrol": [
+        {
+          "x": 0.394717,
+          "y": 0.588265,
+          "worldX": 517.678,
+          "worldY": -165.821
+        },
+        {
+          "x": 0.385909,
+          "y": 0.590061,
+          "worldX": 519.564,
+          "worldY": -179.693
+        },
+        {
+          "x": 0.382093,
+          "y": 0.5908,
+          "worldX": 520.34,
+          "worldY": -185.704
+        },
+        {
+          "x": 0.375434,
+          "y": 0.590816,
+          "worldX": 520.357,
+          "worldY": -196.192
+        },
+        {
+          "x": 0.366756,
+          "y": 0.587929,
+          "worldX": 517.325,
+          "worldY": -209.86
+        },
+        {
+          "x": 0.357644,
+          "y": 0.584896,
+          "worldX": 514.141,
+          "worldY": -224.211
+        },
+        {
+          "x": 0.364533,
+          "y": 0.587476,
+          "worldX": 516.85,
+          "worldY": -213.361
+        },
+        {
+          "x": 0.373237,
+          "y": 0.59018,
+          "worldX": 519.689,
+          "worldY": -199.652
+        },
+        {
+          "x": 0.385949,
+          "y": 0.590302,
+          "worldX": 519.817,
+          "worldY": -179.63
+        },
+        {
+          "x": 0.394683,
+          "y": 0.587824,
+          "worldX": 517.215,
+          "worldY": -165.874
+        },
+        {
+          "x": 0.403418,
+          "y": 0.585346,
+          "worldX": 514.613,
+          "worldY": -152.117
+        },
+        {
+          "x": 0.407766,
+          "y": 0.584002,
+          "worldX": 513.202,
+          "worldY": -145.268
+        },
+        {
+          "x": 0.420136,
+          "y": 0.576537,
+          "worldX": 505.364,
+          "worldY": -125.786
+        },
+        {
+          "x": 0.426878,
+          "y": 0.570622,
+          "worldX": 499.153,
+          "worldY": -115.167
+        },
+        {
+          "x": 0.434123,
+          "y": 0.562894,
+          "worldX": 491.039,
+          "worldY": -103.757
+        },
+        {
+          "x": 0.440525,
+          "y": 0.554692,
+          "worldX": 482.427,
+          "worldY": -93.673
+        },
+        {
+          "x": 0.435299,
+          "y": 0.561271,
+          "worldX": 489.335,
+          "worldY": -101.904
+        },
+        {
+          "x": 0.427923,
+          "y": 0.569812,
+          "worldX": 498.303,
+          "worldY": -113.521
+        },
+        {
+          "x": 0.420095,
+          "y": 0.576488,
+          "worldX": 505.312,
+          "worldY": -125.851
+        },
+        {
+          "x": 0.410825,
+          "y": 0.583041,
+          "worldX": 512.193,
+          "worldY": -140.451
+        },
+        {
+          "x": 0.400401,
+          "y": 0.587151,
+          "worldX": 516.509,
+          "worldY": -156.868
+        }
+      ]
+    },
+    {
+      "id": "5500138",
+      "npcId": 20047,
+      "name": "Crimson Hand Battle Mage",
+      "x": 0.555719,
+      "y": 0.715644,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 651.426025390625,
+      "worldY": 87.75810241699219
+    },
+    {
+      "id": "5500139",
+      "npcId": 20047,
+      "name": "Crimson Hand Battle Mage",
+      "x": 0.572989,
+      "y": 0.664741,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 597.97802734375,
+      "worldY": 114.95800018310547
+    },
+    {
+      "id": "5500140",
+      "npcId": 20047,
+      "name": "Crimson Hand Battle Mage",
+      "x": 0.425055,
+      "y": 0.654589,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 587.3179931640625,
+      "worldY": -118.03800201416016
+    },
+    {
+      "id": "5500141",
+      "npcId": 20047,
+      "name": "Crimson Hand Battle Mage",
+      "x": 0.415542,
+      "y": 0.66234,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 595.4569702148438,
+      "worldY": -133.02099609375
+    },
+    {
+      "id": "5500142",
+      "npcId": 20047,
+      "name": "Crimson Hand Battle Mage",
+      "x": 0.579404,
+      "y": 0.669995,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 603.4949951171875,
+      "worldY": 125.06199645996094
+    },
+    {
+      "id": "5500143",
+      "npcId": 20047,
+      "name": "Crimson Hand Battle Mage",
+      "x": 0.448768,
+      "y": 0.705865,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 641.1580200195312,
+      "worldY": -80.68990325927734
+    },
+    {
+      "id": "5500144",
+      "npcId": 20047,
+      "name": "Crimson Hand Battle Mage",
+      "x": 0.444982,
+      "y": 0.715909,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 651.7039794921875,
+      "worldY": -86.65270233154297
+    },
+    {
+      "id": "5500145",
+      "npcId": 20047,
+      "name": "Crimson Hand Battle Mage",
+      "x": 0.551129,
+      "y": 0.70705,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 642.4030151367188,
+      "worldY": 80.52880096435547
+    },
+    {
+      "id": "5500146",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.426234,
+      "y": 0.663437,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 596.6090087890625,
+      "worldY": -116.18199920654297
+    },
+    {
+      "id": "5500147",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.573215,
+      "y": 0.657618,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 590.4990234375,
+      "worldY": 115.31300354003906
+    },
+    {
+      "id": "5500148",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.582719,
+      "y": 0.664972,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 598.2210083007812,
+      "worldY": 130.28199768066406
+    },
+    {
+      "id": "5500149",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.419345,
+      "y": 0.668254,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 601.6669921875,
+      "worldY": -127.03099822998047
+    },
+    {
+      "id": "5500150",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.429284,
+      "y": 0.687998,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 622.3980102539062,
+      "worldY": -111.37799835205078
+    },
+    {
+      "id": "5500151",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.566625,
+      "y": 0.685969,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 620.2670288085938,
+      "worldY": 104.93499755859375
+    },
+    {
+      "id": "5500152",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.49629,
+      "y": 0.706851,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 642.1939697265625,
+      "worldY": -5.843319892883301
+    },
+    {
+      "id": "5500153",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.431417,
+      "y": 0.685931,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 620.22802734375,
+      "worldY": -108.01899719238281
+    },
+    {
+      "id": "5500154",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.569983,
+      "y": 0.68897,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 623.4180297851562,
+      "worldY": 110.2229995727539
+    },
+    {
+      "id": "5500155",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.448462,
+      "y": 0.709541,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 645.0180053710938,
+      "worldY": -81.17289733886719
+    },
+    {
+      "id": "5500156",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.443367,
+      "y": 0.716007,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 651.8070068359375,
+      "worldY": -89.19709777832031
+    },
+    {
+      "id": "5500157",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.527072,
+      "y": 0.784191,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 723.4010009765625,
+      "worldY": 42.638301849365234
+    },
+    {
+      "id": "5500158",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.472932,
+      "y": 0.784211,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 723.4219970703125,
+      "worldY": -42.631500244140625
+    },
+    {
+      "id": "5500159",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.549781,
+      "y": 0.709481,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 644.9550170898438,
+      "worldY": 78.40489959716797
+    },
+    {
+      "id": "5500160",
+      "npcId": 20048,
+      "name": "Crimson Hand Centurion",
+      "x": 0.554198,
+      "y": 0.715693,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 651.47802734375,
+      "worldY": 85.36160278320312
+    },
+    {
+      "id": "5500161",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.572848,
+      "y": 0.66162,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 594.7009887695312,
+      "worldY": 114.73500061035156
+    },
+    {
+      "id": "5500162",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.417215,
+      "y": 0.66548,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 598.7540283203125,
+      "worldY": -130.38699340820312
+    },
+    {
+      "id": "5500163",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.581001,
+      "y": 0.667654,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 601.0369873046875,
+      "worldY": 127.57599639892578
+    },
+    {
+      "id": "5500164",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.5031,
+      "y": 0.706927,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 642.2730102539062,
+      "worldY": 4.8821702003479
+    },
+    {
+      "id": "5500165",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.450141,
+      "y": 0.707972,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 643.3709716796875,
+      "worldY": -78.52799987792969
+    },
+    {
+      "id": "5500166",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.442162,
+      "y": 0.718272,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 654.1859741210938,
+      "worldY": -91.09549713134766
+    },
+    {
+      "id": "5500167",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.525118,
+      "y": 0.788712,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 728.1480102539062,
+      "worldY": 39.56050109863281
+    },
+    {
+      "id": "5500168",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.470077,
+      "y": 0.783557,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 722.7349853515625,
+      "worldY": -47.12919998168945
+    },
+    {
+      "id": "5500169",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.556179,
+      "y": 0.718797,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 654.7369995117188,
+      "worldY": 88.48179626464844
+    },
+    {
+      "id": "5500170",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.426341,
+      "y": 0.659657,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 592.6400146484375,
+      "worldY": -116.01300048828125
+    },
+    {
+      "id": "5500171",
+      "npcId": 20049,
+      "name": "Crimson Hand Blood Knight",
+      "x": 0.549416,
+      "y": 0.705868,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 641.1610107421875,
+      "worldY": 77.83039855957031
+    },
+    {
+      "id": "5500172",
+      "npcId": 20050,
+      "name": "Crimson Hand Inquisitor",
+      "x": 0.428505,
+      "y": 0.682834,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 616.9760131835938,
+      "worldY": -112.60399627685547,
+      "patrol": [
+        {
+          "x": 0.427659,
+          "y": 0.680382,
+          "worldX": 614.401,
+          "worldY": -113.937
+        },
+        {
+          "x": 0.426657,
+          "y": 0.677407,
+          "worldX": 611.277,
+          "worldY": -115.516
+        },
+        {
+          "x": 0.424653,
+          "y": 0.671456,
+          "worldX": 605.029,
+          "worldY": -118.672
+        },
+        {
+          "x": 0.422648,
+          "y": 0.665506,
+          "worldX": 598.781,
+          "worldY": -121.829
+        },
+        {
+          "x": 0.420644,
+          "y": 0.659555,
+          "worldX": 592.533,
+          "worldY": -124.986
+        },
+        {
+          "x": 0.419702,
+          "y": 0.655823,
+          "worldX": 588.614,
+          "worldY": -126.469
+        },
+        {
+          "x": 0.418012,
+          "y": 0.649657,
+          "worldX": 582.14,
+          "worldY": -129.131
+        },
+        {
+          "x": 0.419083,
+          "y": 0.65447,
+          "worldX": 587.194,
+          "worldY": -127.445
+        },
+        {
+          "x": 0.420968,
+          "y": 0.660509,
+          "worldX": 593.534,
+          "worldY": -124.476
+        },
+        {
+          "x": 0.42191,
+          "y": 0.663527,
+          "worldX": 596.703,
+          "worldY": -122.992
+        },
+        {
+          "x": 0.423795,
+          "y": 0.669565,
+          "worldX": 603.043,
+          "worldY": -120.023
+        },
+        {
+          "x": 0.424737,
+          "y": 0.672583,
+          "worldX": 606.212,
+          "worldY": -118.539
+        },
+        {
+          "x": 0.426717,
+          "y": 0.678922,
+          "worldX": 612.868,
+          "worldY": -115.421
+        },
+        {
+          "x": 0.42717,
+          "y": 0.680326,
+          "worldX": 614.342,
+          "worldY": -114.708
+        },
+        {
+          "x": 0.429524,
+          "y": 0.68598,
+          "worldX": 620.279,
+          "worldY": -111.0
+        },
+        {
+          "x": 0.430701,
+          "y": 0.688808,
+          "worldX": 623.248,
+          "worldY": -109.146
+        },
+        {
+          "x": 0.431397,
+          "y": 0.690522,
+          "worldX": 625.048,
+          "worldY": -108.049
+        },
+        {
+          "x": 0.428941,
+          "y": 0.684966,
+          "worldX": 619.214,
+          "worldY": -111.918
+        }
+      ]
+    },
+    {
+      "id": "5500173",
+      "npcId": 20050,
+      "name": "Crimson Hand Inquisitor",
+      "x": 0.568886,
+      "y": 0.686245,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 620.5570068359375,
+      "worldY": 108.49600219726562,
+      "patrol": [
+        {
+          "x": 0.571291,
+          "y": 0.680852,
+          "worldX": 614.895,
+          "worldY": 112.283
+        },
+        {
+          "x": 0.573414,
+          "y": 0.67577,
+          "worldX": 609.558,
+          "worldY": 115.627
+        },
+        {
+          "x": 0.577268,
+          "y": 0.663754,
+          "worldX": 596.942,
+          "worldY": 121.697
+        },
+        {
+          "x": 0.579195,
+          "y": 0.657747,
+          "worldX": 590.634,
+          "worldY": 124.732
+        },
+        {
+          "x": 0.58305,
+          "y": 0.645732,
+          "worldX": 578.019,
+          "worldY": 130.803
+        },
+        {
+          "x": 0.583754,
+          "y": 0.643533,
+          "worldX": 575.71,
+          "worldY": 131.913
+        },
+        {
+          "x": 0.579825,
+          "y": 0.655493,
+          "worldX": 588.268,
+          "worldY": 125.725
+        },
+        {
+          "x": 0.57786,
+          "y": 0.661473,
+          "worldX": 594.547,
+          "worldY": 122.63
+        },
+        {
+          "x": 0.575896,
+          "y": 0.667453,
+          "worldX": 600.826,
+          "worldY": 119.536
+        },
+        {
+          "x": 0.573931,
+          "y": 0.673433,
+          "worldX": 607.105,
+          "worldY": 116.441
+        },
+        {
+          "x": 0.571966,
+          "y": 0.679413,
+          "worldX": 613.384,
+          "worldY": 113.347
+        },
+        {
+          "x": 0.570635,
+          "y": 0.683377,
+          "worldX": 617.546,
+          "worldY": 111.25
+        },
+        {
+          "x": 0.568215,
+          "y": 0.688969,
+          "worldX": 623.417,
+          "worldY": 107.439
+        }
+      ]
+    },
+    {
+      "id": "5500174",
+      "npcId": 20050,
+      "name": "Crimson Hand Inquisitor",
+      "x": 0.497879,
+      "y": 0.70444,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 639.6619873046875,
+      "worldY": -3.3410699367523193
+    },
+    {
+      "id": "5500175",
+      "npcId": 20050,
+      "name": "Crimson Hand Inquisitor",
+      "x": 0.528792,
+      "y": 0.790639,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 730.1710205078125,
+      "worldY": 45.34769821166992
+    },
+    {
+      "id": "5500176",
+      "npcId": 20050,
+      "name": "Crimson Hand Inquisitor",
+      "x": 0.470194,
+      "y": 0.788075,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 727.47900390625,
+      "worldY": -46.94499969482422
+    },
+    {
+      "id": "5500177",
+      "npcId": 20052,
+      "name": "Crystalcore Mechanic",
+      "x": 0.704859,
+      "y": 0.505876,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 431.1700134277344,
+      "worldY": 322.65301513671875
+    },
+    {
+      "id": "5500178",
+      "npcId": 20052,
+      "name": "Crystalcore Mechanic",
+      "x": 0.739199,
+      "y": 0.55433,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 482.0469970703125,
+      "worldY": 376.739013671875
+    },
+    {
+      "id": "5500179",
+      "npcId": 20052,
+      "name": "Crystalcore Mechanic",
+      "x": 0.715844,
+      "y": 0.542945,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 470.0920104980469,
+      "worldY": 339.9540100097656
+    },
+    {
+      "id": "5500180",
+      "npcId": 20052,
+      "name": "Crystalcore Mechanic",
+      "x": 0.712298,
+      "y": 0.53567,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 462.4530029296875,
+      "worldY": 334.3689880371094
+    },
+    {
+      "id": "5500181",
+      "npcId": 20052,
+      "name": "Crystalcore Mechanic",
+      "x": 0.708889,
+      "y": 0.497296,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 422.1610107421875,
+      "worldY": 329.0
+    },
+    {
+      "id": "5500182",
+      "npcId": 20052,
+      "name": "Crystalcore Mechanic",
+      "x": 0.727084,
+      "y": 0.46488,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 388.1239929199219,
+      "worldY": 357.6579895019531
+    },
+    {
+      "id": "5500183",
+      "npcId": 20052,
+      "name": "Crystalcore Mechanic",
+      "x": 0.718837,
+      "y": 0.470513,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 394.03900146484375,
+      "worldY": 344.6679992675781
+    },
+    {
+      "id": "5500184",
+      "npcId": 20052,
+      "name": "Crystalcore Mechanic",
+      "x": 0.74869,
+      "y": 0.547609,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 474.989013671875,
+      "worldY": 391.6860046386719
+    },
+    {
+      "id": "5500185",
+      "npcId": 20060,
+      "name": "Lord Sanguinar",
+      "x": 0.485954,
+      "y": 0.843643,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 785.8250122070312,
+      "worldY": -22.12310028076172
+    },
+    {
+      "id": "5500186",
+      "npcId": 20062,
+      "name": "Grand Astromancer Capernian",
+      "x": 0.491953,
+      "y": 0.848693,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 791.1279907226562,
+      "worldY": -12.673500061035156
+    },
+    {
+      "id": "5500187",
+      "npcId": 20063,
+      "name": "Master Engineer Telonicus",
+      "x": 0.507567,
+      "y": 0.849434,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 791.906005859375,
+      "worldY": 11.918299674987793
+    },
+    {
+      "id": "5500188",
+      "npcId": 20064,
+      "name": "Thaladred the Darkener",
+      "x": 0.512878,
+      "y": 0.844076,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 786.280029296875,
+      "worldY": 20.282499313354492
+    }
+  ],
+  "packs": [
+    {
+      "id": "candidate-001",
+      "label": "Candidate pack 1",
+      "spawnIds": [
+        "5500001"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-002",
+      "label": "Candidate pack 2",
+      "spawnIds": [
+        "5500003"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-003",
+      "label": "Candidate pack 3",
+      "spawnIds": [
+        "5500004"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-004",
+      "label": "Candidate pack 4",
+      "spawnIds": [
+        "5500005"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-005",
+      "label": "Candidate pack 5",
+      "spawnIds": [
+        "5500006",
+        "5500007"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-006",
+      "label": "Candidate pack 6",
+      "spawnIds": [
+        "5500008",
+        "5500009",
+        "5500016",
+        "5500020",
+        "5500025",
+        "5500026"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-007",
+      "label": "Candidate pack 7",
+      "spawnIds": [
+        "5500010",
+        "5500015",
+        "5500019",
+        "5500022",
+        "5500023",
+        "5500029"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-008",
+      "label": "Candidate pack 8",
+      "spawnIds": [
+        "5500011",
+        "5500012"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-009",
+      "label": "Candidate pack 9",
+      "spawnIds": [
+        "5500013",
+        "5500014"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-010",
+      "label": "Candidate pack 10",
+      "spawnIds": [
+        "5500017",
+        "5500018",
+        "5500021",
+        "5500024",
+        "5500027",
+        "5500028",
+        "5500030",
+        "5500038",
+        "5500039"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-011",
+      "label": "Candidate pack 11",
+      "spawnIds": [
+        "5500031"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-012",
+      "label": "Candidate pack 12",
+      "spawnIds": [
+        "5500032"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-013",
+      "label": "Candidate pack 13",
+      "spawnIds": [
+        "5500033"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-014",
+      "label": "Candidate pack 14",
+      "spawnIds": [
+        "5500034"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-015",
+      "label": "Candidate pack 15",
+      "spawnIds": [
+        "5500035",
+        "5500036"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-016",
+      "label": "Candidate pack 16",
+      "spawnIds": [
+        "5500037",
+        "5500041"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-017",
+      "label": "Candidate pack 17",
+      "spawnIds": [
+        "5500040"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-018",
+      "label": "Candidate pack 18",
+      "spawnIds": [
+        "5500042"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-019",
+      "label": "Candidate pack 19",
+      "spawnIds": [
+        "5500043"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-020",
+      "label": "Candidate pack 20",
+      "spawnIds": [
+        "5500044"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-021",
+      "label": "Candidate pack 21",
+      "spawnIds": [
+        "5500045"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-022",
+      "label": "Candidate pack 22",
+      "spawnIds": [
+        "5500046",
+        "5500047",
+        "5500054",
+        "5500055",
+        "5500056",
+        "5500057",
+        "5500058",
+        "5500059"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-023",
+      "label": "Candidate pack 23",
+      "spawnIds": [
+        "5500048",
+        "5500049",
+        "5500050",
+        "5500051",
+        "5500052",
+        "5500053",
+        "5500060",
+        "5500061"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-024",
+      "label": "Candidate pack 24",
+      "spawnIds": [
+        "5500062",
+        "5500065"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-025",
+      "label": "Candidate pack 25",
+      "spawnIds": [
+        "5500063"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-026",
+      "label": "Candidate pack 26",
+      "spawnIds": [
+        "5500064"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-027",
+      "label": "Candidate pack 27",
+      "spawnIds": [
+        "5500066",
+        "5500081"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-028",
+      "label": "Candidate pack 28",
+      "spawnIds": [
+        "5500067"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-029",
+      "label": "Candidate pack 29",
+      "spawnIds": [
+        "5500068",
+        "5500083"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-030",
+      "label": "Candidate pack 30",
+      "spawnIds": [
+        "5500069",
+        "5500084",
+        "5500085"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-031",
+      "label": "Candidate pack 31",
+      "spawnIds": [
+        "5500070",
+        "5500071"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-032",
+      "label": "Candidate pack 32",
+      "spawnIds": [
+        "5500072"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-033",
+      "label": "Candidate pack 33",
+      "spawnIds": [
+        "5500073"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-034",
+      "label": "Candidate pack 34",
+      "spawnIds": [
+        "5500074"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-035",
+      "label": "Candidate pack 35",
+      "spawnIds": [
+        "5500075"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-036",
+      "label": "Candidate pack 36",
+      "spawnIds": [
+        "5500076",
+        "5500077",
+        "5500080"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-037",
+      "label": "Candidate pack 37",
+      "spawnIds": [
+        "5500078",
+        "5500079",
+        "5500082"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-038",
+      "label": "Candidate pack 38",
+      "spawnIds": [
+        "5500086",
+        "5500087"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-039",
+      "label": "Candidate pack 39",
+      "spawnIds": [
+        "5500088",
+        "5500089",
+        "5500090",
+        "5500091",
+        "5500110",
+        "5500114",
+        "5500115",
+        "5500116",
+        "5500117",
+        "5500120",
+        "5500137"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-040",
+      "label": "Candidate pack 40",
+      "spawnIds": [
+        "5500092",
+        "5500094",
+        "5500096",
+        "5500097",
+        "5500098"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-041",
+      "label": "Candidate pack 41",
+      "spawnIds": [
+        "5500093",
+        "5500095",
+        "5500099",
+        "5500118",
+        "5500125"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-042",
+      "label": "Candidate pack 42",
+      "spawnIds": [
+        "5500100",
+        "5500101",
+        "5500102"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-043",
+      "label": "Candidate pack 43",
+      "spawnIds": [
+        "5500103",
+        "5500104"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-044",
+      "label": "Candidate pack 44",
+      "spawnIds": [
+        "5500105",
+        "5500106"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-045",
+      "label": "Candidate pack 45",
+      "spawnIds": [
+        "5500107",
+        "5500108",
+        "5500109"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-046",
+      "label": "Candidate pack 46",
+      "spawnIds": [
+        "5500111",
+        "5500112",
+        "5500113"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-047",
+      "label": "Candidate pack 47",
+      "spawnIds": [
+        "5500119",
+        "5500121",
+        "5500122",
+        "5500123",
+        "5500124"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-048",
+      "label": "Candidate pack 48",
+      "spawnIds": [
+        "5500126",
+        "5500127"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-049",
+      "label": "Candidate pack 49",
+      "spawnIds": [
+        "5500128",
+        "5500129",
+        "5500130"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-050",
+      "label": "Candidate pack 50",
+      "spawnIds": [
+        "5500131",
+        "5500132",
+        "5500133"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-051",
+      "label": "Candidate pack 51",
+      "spawnIds": [
+        "5500134"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-052",
+      "label": "Candidate pack 52",
+      "spawnIds": [
+        "5500135"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-053",
+      "label": "Candidate pack 53",
+      "spawnIds": [
+        "5500136"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-054",
+      "label": "Candidate pack 54",
+      "spawnIds": [
+        "5500138",
+        "5500145",
+        "5500159",
+        "5500160",
+        "5500169",
+        "5500171"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-055",
+      "label": "Candidate pack 55",
+      "spawnIds": [
+        "5500139",
+        "5500142",
+        "5500147",
+        "5500148",
+        "5500161",
+        "5500163"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-056",
+      "label": "Candidate pack 56",
+      "spawnIds": [
+        "5500140",
+        "5500141",
+        "5500146",
+        "5500149",
+        "5500162",
+        "5500170"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-057",
+      "label": "Candidate pack 57",
+      "spawnIds": [
+        "5500143",
+        "5500144",
+        "5500155",
+        "5500156",
+        "5500165",
+        "5500166"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-058",
+      "label": "Candidate pack 58",
+      "spawnIds": [
+        "5500150",
+        "5500153",
+        "5500172"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-059",
+      "label": "Candidate pack 59",
+      "spawnIds": [
+        "5500151",
+        "5500154",
+        "5500173"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-060",
+      "label": "Candidate pack 60",
+      "spawnIds": [
+        "5500152",
+        "5500164",
+        "5500174"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-061",
+      "label": "Candidate pack 61",
+      "spawnIds": [
+        "5500157",
+        "5500167",
+        "5500175"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-062",
+      "label": "Candidate pack 62",
+      "spawnIds": [
+        "5500158",
+        "5500168",
+        "5500176"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-063",
+      "label": "Candidate pack 63",
+      "spawnIds": [
+        "5500177",
+        "5500181"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-064",
+      "label": "Candidate pack 64",
+      "spawnIds": [
+        "5500178",
+        "5500184"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-065",
+      "label": "Candidate pack 65",
+      "spawnIds": [
+        "5500179",
+        "5500180"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-066",
+      "label": "Candidate pack 66",
+      "spawnIds": [
+        "5500182",
+        "5500183"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-067",
+      "label": "Candidate pack 67",
+      "spawnIds": [
+        "5500185"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-068",
+      "label": "Candidate pack 68",
+      "spawnIds": [
+        "5500186"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-069",
+      "label": "Candidate pack 69",
+      "spawnIds": [
+        "5500187"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-070",
+      "label": "Candidate pack 70",
+      "spawnIds": [
+        "5500188"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    }
+  ],
+  "pois": []
+}

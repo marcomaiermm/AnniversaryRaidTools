@@ -1,0 +1,7028 @@
+{
+  "metadata": {
+    "project": "CMaNGOS TBC",
+    "snapshot": "serpentshrine-cavern-map-548",
+    "commit": "da2de07e6606d495872c3fd92ba8363cf79f43c9",
+    "databaseVersion": "TBCDB 1.11.0",
+    "exportedAt": "2026-08-22T12:00:00Z",
+    "coordinateBasis": "CMaNGOS world positions projected through pinned LibMapData rectangles; client C_Map world projection remains runtime authority",
+    "coverage": {
+      "selectedStaticSpawns": 194,
+      "npcIds": 26,
+      "renderedPatrols": 66
+    }
+  },
+  "source": {
+    "source": "derived",
+    "confidence": "candidate",
+    "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+    "observedAt": "2026-08-22T12:00:00Z"
+  },
+  "raid": {
+    "key": "serpentshrine-cavern",
+    "name": "Serpentshrine Cavern",
+    "instanceId": 548,
+    "mapId": 548,
+    "mode": "route"
+  },
+  "sublevels": [
+    {
+      "index": 1,
+      "name": "Serpentshrine Cavern",
+      "mapId": 548
+    }
+  ],
+  "spawns": [
+    {
+      "id": "5480038",
+      "npcId": 21213,
+      "name": "Morogrim Tidewalker",
+      "x": 0.405435,
+      "y": 0.734121,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 370.8290100097656,
+      "worldY": -723.9390258789062
+    },
+    {
+      "id": "5480039",
+      "npcId": 21214,
+      "name": "Fathom-Lord Karathress",
+      "x": 0.522386,
+      "y": 0.816064,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 456.8689880371094,
+      "worldY": -539.7410278320312
+    },
+    {
+      "id": "5480040",
+      "npcId": 21215,
+      "name": "Leotheras the Blind",
+      "x": 0.586583,
+      "y": 0.739563,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 376.5429992675781,
+      "worldY": -438.6310119628906
+    },
+    {
+      "id": "5480041",
+      "npcId": 21216,
+      "name": "Hydross the Unstable",
+      "x": 0.632384,
+      "y": 0.15253,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -239.84300231933594,
+      "worldY": -366.4939880371094
+    },
+    {
+      "id": "5480042",
+      "npcId": 21218,
+      "name": "Vashj'ir Honor Guard",
+      "x": 0.678292,
+      "y": 0.420071,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 41.07529830932617,
+      "worldY": -294.18798828125,
+      "patrol": [
+        {
+          "x": 0.678049,
+          "y": 0.424111,
+          "worldX": 45.3171,
+          "worldY": -294.571
+        },
+        {
+          "x": 0.67592,
+          "y": 0.427957,
+          "worldX": 49.3555,
+          "worldY": -297.925
+        },
+        {
+          "x": 0.672672,
+          "y": 0.429777,
+          "worldX": 51.2663,
+          "worldY": -303.04
+        },
+        {
+          "x": 0.669842,
+          "y": 0.428484,
+          "worldX": 49.9086,
+          "worldY": -307.498
+        },
+        {
+          "x": 0.667067,
+          "y": 0.42552,
+          "worldX": 46.7972,
+          "worldY": -311.868
+        },
+        {
+          "x": 0.666065,
+          "y": 0.4212,
+          "worldX": 42.2604,
+          "worldY": -313.446
+        },
+        {
+          "x": 0.666596,
+          "y": 0.416088,
+          "worldX": 36.8932,
+          "worldY": -312.61
+        },
+        {
+          "x": 0.668524,
+          "y": 0.412341,
+          "worldX": 32.9589,
+          "worldY": -309.573
+        },
+        {
+          "x": 0.671903,
+          "y": 0.410923,
+          "worldX": 31.47,
+          "worldY": -304.252
+        },
+        {
+          "x": 0.674967,
+          "y": 0.411673,
+          "worldX": 32.2574,
+          "worldY": -299.425
+        },
+        {
+          "x": 0.677643,
+          "y": 0.414976,
+          "worldX": 35.7256,
+          "worldY": -295.211
+        },
+        {
+          "x": 0.678522,
+          "y": 0.419711,
+          "worldX": 40.6971,
+          "worldY": -293.826
+        }
+      ]
+    },
+    {
+      "id": "5480043",
+      "npcId": 21218,
+      "name": "Vashj'ir Honor Guard",
+      "x": 0.635113,
+      "y": 0.330612,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -52.856998443603516,
+      "worldY": -362.19500732421875,
+      "patrol": [
+        {
+          "x": 0.633059,
+          "y": 0.334497,
+          "worldX": -48.7774,
+          "worldY": -365.43
+        },
+        {
+          "x": 0.629807,
+          "y": 0.336552,
+          "worldX": -46.6197,
+          "worldY": -370.552
+        },
+        {
+          "x": 0.62679,
+          "y": 0.335518,
+          "worldX": -47.7054,
+          "worldY": -375.304
+        },
+        {
+          "x": 0.62408,
+          "y": 0.332395,
+          "worldX": -50.9851,
+          "worldY": -379.573
+        },
+        {
+          "x": 0.622951,
+          "y": 0.327762,
+          "worldX": -55.8492,
+          "worldY": -381.351
+        },
+        {
+          "x": 0.623621,
+          "y": 0.322607,
+          "worldX": -61.2621,
+          "worldY": -380.296
+        },
+        {
+          "x": 0.625859,
+          "y": 0.31859,
+          "worldX": -65.48,
+          "worldY": -376.77
+        },
+        {
+          "x": 0.628998,
+          "y": 0.316948,
+          "worldX": -67.2035,
+          "worldY": -371.827
+        },
+        {
+          "x": 0.632397,
+          "y": 0.317968,
+          "worldX": -66.1333,
+          "worldY": -366.474
+        },
+        {
+          "x": 0.632465,
+          "y": 0.317858,
+          "worldX": -66.2489,
+          "worldY": -366.366
+        },
+        {
+          "x": 0.634857,
+          "y": 0.320738,
+          "worldX": -63.2242,
+          "worldY": -362.599
+        },
+        {
+          "x": 0.636009,
+          "y": 0.325677,
+          "worldX": -58.0382,
+          "worldY": -360.785
+        },
+        {
+          "x": 0.635624,
+          "y": 0.331005,
+          "worldX": -52.4439,
+          "worldY": -361.391
+        }
+      ]
+    },
+    {
+      "id": "5480044",
+      "npcId": 21218,
+      "name": "Vashj'ir Honor Guard",
+      "x": 0.552437,
+      "y": 0.326504,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -57.17020034790039,
+      "worldY": -492.4100036621094,
+      "patrol": [
+        {
+          "x": 0.553214,
+          "y": 0.331015,
+          "worldX": -52.4339,
+          "worldY": -491.187
+        },
+        {
+          "x": 0.555852,
+          "y": 0.334798,
+          "worldX": -48.4612,
+          "worldY": -487.032
+        },
+        {
+          "x": 0.558529,
+          "y": 0.335843,
+          "worldX": -47.3638,
+          "worldY": -482.815
+        },
+        {
+          "x": 0.5617,
+          "y": 0.334464,
+          "worldX": -48.812,
+          "worldY": -477.822
+        },
+        {
+          "x": 0.563894,
+          "y": 0.331143,
+          "worldX": -52.2993,
+          "worldY": -474.365
+        },
+        {
+          "x": 0.564687,
+          "y": 0.326742,
+          "worldX": -56.9205,
+          "worldY": -473.117
+        },
+        {
+          "x": 0.563934,
+          "y": 0.322309,
+          "worldX": -61.5747,
+          "worldY": -474.302
+        },
+        {
+          "x": 0.561528,
+          "y": 0.319005,
+          "worldX": -65.0446,
+          "worldY": -478.092
+        },
+        {
+          "x": 0.558595,
+          "y": 0.317733,
+          "worldX": -66.3798,
+          "worldY": -482.712
+        },
+        {
+          "x": 0.555688,
+          "y": 0.318671,
+          "worldX": -65.3944,
+          "worldY": -487.29
+        },
+        {
+          "x": 0.553293,
+          "y": 0.322149,
+          "worldX": -61.7429,
+          "worldY": -491.062
+        },
+        {
+          "x": 0.552508,
+          "y": 0.326782,
+          "worldX": -56.8779,
+          "worldY": -492.298
+        }
+      ]
+    },
+    {
+      "id": "5480045",
+      "npcId": 21218,
+      "name": "Vashj'ir Honor Guard",
+      "x": 0.643198,
+      "y": 0.507897,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 133.29299926757812,
+      "worldY": -349.4620056152344,
+      "patrol": [
+        {
+          "x": 0.64561,
+          "y": 0.511387,
+          "worldX": 136.957,
+          "worldY": -345.663
+        },
+        {
+          "x": 0.646539,
+          "y": 0.515618,
+          "worldX": 141.4,
+          "worldY": -344.199
+        },
+        {
+          "x": 0.645778,
+          "y": 0.520789,
+          "worldX": 146.83,
+          "worldY": -345.398
+        },
+        {
+          "x": 0.64353,
+          "y": 0.523856,
+          "worldX": 150.05,
+          "worldY": -348.939
+        },
+        {
+          "x": 0.640547,
+          "y": 0.525564,
+          "worldX": 151.843,
+          "worldY": -353.637
+        },
+        {
+          "x": 0.637167,
+          "y": 0.523649,
+          "worldX": 149.832,
+          "worldY": -358.961
+        },
+        {
+          "x": 0.63518,
+          "y": 0.520576,
+          "worldX": 146.606,
+          "worldY": -362.09
+        },
+        {
+          "x": 0.634335,
+          "y": 0.51576,
+          "worldX": 141.549,
+          "worldY": -363.421
+        },
+        {
+          "x": 0.634933,
+          "y": 0.511568,
+          "worldX": 137.147,
+          "worldY": -362.479
+        },
+        {
+          "x": 0.637371,
+          "y": 0.508131,
+          "worldX": 133.539,
+          "worldY": -358.64
+        },
+        {
+          "x": 0.640512,
+          "y": 0.506874,
+          "worldX": 132.219,
+          "worldY": -353.692
+        },
+        {
+          "x": 0.643187,
+          "y": 0.508233,
+          "worldX": 133.646,
+          "worldY": -349.479
+        }
+      ]
+    },
+    {
+      "id": "5480046",
+      "npcId": 21218,
+      "name": "Vashj'ir Honor Guard",
+      "x": 0.509889,
+      "y": 0.412601,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 33.2317008972168,
+      "worldY": -559.4240112304688,
+      "patrol": [
+        {
+          "x": 0.514283,
+          "y": 0.411344,
+          "worldX": 31.9125,
+          "worldY": -552.504
+        },
+        {
+          "x": 0.517069,
+          "y": 0.413384,
+          "worldX": 34.0538,
+          "worldY": -548.115
+        },
+        {
+          "x": 0.518962,
+          "y": 0.417135,
+          "worldX": 37.9921,
+          "worldY": -545.134
+        },
+        {
+          "x": 0.519183,
+          "y": 0.4217,
+          "worldX": 42.7862,
+          "worldY": -544.786
+        },
+        {
+          "x": 0.517728,
+          "y": 0.426409,
+          "worldX": 47.7304,
+          "worldY": -547.078
+        },
+        {
+          "x": 0.515129,
+          "y": 0.429182,
+          "worldX": 50.6424,
+          "worldY": -551.171
+        },
+        {
+          "x": 0.511869,
+          "y": 0.42941,
+          "worldX": 50.8812,
+          "worldY": -556.306
+        },
+        {
+          "x": 0.508886,
+          "y": 0.427416,
+          "worldX": 48.7875,
+          "worldY": -561.003
+        },
+        {
+          "x": 0.507075,
+          "y": 0.423218,
+          "worldX": 44.3801,
+          "worldY": -563.856
+        },
+        {
+          "x": 0.506872,
+          "y": 0.418182,
+          "worldX": 39.0915,
+          "worldY": -564.176
+        },
+        {
+          "x": 0.508251,
+          "y": 0.413881,
+          "worldX": 34.5758,
+          "worldY": -562.004
+        },
+        {
+          "x": 0.510932,
+          "y": 0.411378,
+          "worldX": 31.9475,
+          "worldY": -557.781
+        }
+      ]
+    },
+    {
+      "id": "5480047",
+      "npcId": 21218,
+      "name": "Vashj'ir Honor Guard",
+      "x": 0.543881,
+      "y": 0.508307,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 133.72300720214844,
+      "worldY": -505.8869934082031,
+      "patrol": [
+        {
+          "x": 0.546251,
+          "y": 0.512526,
+          "worldX": 138.153,
+          "worldY": -502.153
+        },
+        {
+          "x": 0.546752,
+          "y": 0.516739,
+          "worldX": 142.577,
+          "worldY": -501.364
+        },
+        {
+          "x": 0.546119,
+          "y": 0.521324,
+          "worldX": 147.391,
+          "worldY": -502.362
+        },
+        {
+          "x": 0.544135,
+          "y": 0.523972,
+          "worldX": 150.172,
+          "worldY": -505.487
+        },
+        {
+          "x": 0.540694,
+          "y": 0.52514,
+          "worldX": 151.398,
+          "worldY": -510.906
+        },
+        {
+          "x": 0.537737,
+          "y": 0.523582,
+          "worldX": 149.762,
+          "worldY": -515.563
+        },
+        {
+          "x": 0.535623,
+          "y": 0.520262,
+          "worldX": 146.276,
+          "worldY": -518.893
+        },
+        {
+          "x": 0.534824,
+          "y": 0.515928,
+          "worldX": 141.725,
+          "worldY": -520.151
+        },
+        {
+          "x": 0.535792,
+          "y": 0.511297,
+          "worldX": 136.863,
+          "worldY": -518.627
+        },
+        {
+          "x": 0.538027,
+          "y": 0.508054,
+          "worldX": 133.458,
+          "worldY": -515.107
+        },
+        {
+          "x": 0.541352,
+          "y": 0.506882,
+          "worldX": 132.227,
+          "worldY": -509.869
+        },
+        {
+          "x": 0.543732,
+          "y": 0.508786,
+          "worldX": 134.226,
+          "worldY": -506.121
+        }
+      ]
+    },
+    {
+      "id": "5480048",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.670604,
+      "y": 0.400876,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 20.921100616455078,
+      "worldY": -306.2969970703125
+    },
+    {
+      "id": "5480049",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.661382,
+      "y": 0.409592,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 30.072099685668945,
+      "worldY": -320.8219909667969
+    },
+    {
+      "id": "5480050",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.639224,
+      "y": 0.313044,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -71.3031005859375,
+      "worldY": -355.7200012207031
+    },
+    {
+      "id": "5480051",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.63142,
+      "y": 0.307931,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -76.6720962524414,
+      "worldY": -368.0119934082031
+    },
+    {
+      "id": "5480052",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.644355,
+      "y": 0.496976,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 121.82599639892578,
+      "worldY": -347.6390075683594
+    },
+    {
+      "id": "5480053",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.650405,
+      "y": 0.502272,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 127.38700103759766,
+      "worldY": -338.1109924316406
+    },
+    {
+      "id": "5480054",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.556124,
+      "y": 0.347223,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -35.41529846191406,
+      "worldY": -486.6029968261719
+    },
+    {
+      "id": "5480055",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.547507,
+      "y": 0.338838,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -44.21979904174805,
+      "worldY": -500.1759948730469
+    },
+    {
+      "id": "5480056",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.52191,
+      "y": 0.436821,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 58.66279983520508,
+      "worldY": -540.4910278320312
+    },
+    {
+      "id": "5480057",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.512699,
+      "y": 0.441491,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 63.56650161743164,
+      "worldY": -554.9979858398438
+    },
+    {
+      "id": "5480058",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.554767,
+      "y": 0.509677,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 135.16200256347656,
+      "worldY": -488.7409973144531
+    },
+    {
+      "id": "5480059",
+      "npcId": 21220,
+      "name": "Coilfang Priestess",
+      "x": 0.554461,
+      "y": 0.523812,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 150.00399780273438,
+      "worldY": -489.2229919433594
+    },
+    {
+      "id": "5480060",
+      "npcId": 21221,
+      "name": "Coilfang Beast-Tamer",
+      "x": 0.781112,
+      "y": 0.247326,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -140.3070068359375,
+      "worldY": -132.2469940185547
+    },
+    {
+      "id": "5480061",
+      "npcId": 21221,
+      "name": "Coilfang Beast-Tamer",
+      "x": 0.723433,
+      "y": 0.2529,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -134.4550018310547,
+      "worldY": -223.09100341796875
+    },
+    {
+      "id": "5480062",
+      "npcId": 21221,
+      "name": "Coilfang Beast-Tamer",
+      "x": 0.708989,
+      "y": 0.17062,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -220.8489990234375,
+      "worldY": -245.83999633789062
+    },
+    {
+      "id": "5480063",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.41629,
+      "y": 0.625204,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 256.4649963378906,
+      "worldY": -706.843017578125,
+      "patrol": [
+        {
+          "x": 0.434459,
+          "y": 0.619894,
+          "worldX": 250.89,
+          "worldY": -678.227
+        },
+        {
+          "x": 0.416408,
+          "y": 0.625043,
+          "worldX": 256.296,
+          "worldY": -706.656
+        },
+        {
+          "x": 0.40852,
+          "y": 0.633031,
+          "worldX": 264.684,
+          "worldY": -719.08
+        },
+        {
+          "x": 0.402769,
+          "y": 0.644275,
+          "worldX": 276.49,
+          "worldY": -728.138
+        },
+        {
+          "x": 0.400473,
+          "y": 0.660196,
+          "worldX": 293.207,
+          "worldY": -731.754
+        },
+        {
+          "x": 0.40274,
+          "y": 0.64435,
+          "worldX": 276.569,
+          "worldY": -728.184
+        },
+        {
+          "x": 0.408393,
+          "y": 0.633385,
+          "worldX": 265.056,
+          "worldY": -719.28
+        },
+        {
+          "x": 0.416173,
+          "y": 0.625258,
+          "worldX": 256.522,
+          "worldY": -707.027
+        },
+        {
+          "x": 0.434356,
+          "y": 0.620151,
+          "worldX": 251.16,
+          "worldY": -678.388
+        }
+      ]
+    },
+    {
+      "id": "5480064",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.395817,
+      "y": 0.692819,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 327.46099853515625,
+      "worldY": -739.0880126953125
+    },
+    {
+      "id": "5480065",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.394829,
+      "y": 0.695958,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 330.7569885253906,
+      "worldY": -740.6439819335938
+    },
+    {
+      "id": "5480066",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.383572,
+      "y": 0.723803,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 359.9949951171875,
+      "worldY": -758.3729858398438,
+      "patrol": [
+        {
+          "x": 0.383626,
+          "y": 0.718925,
+          "worldX": 354.873,
+          "worldY": -758.288
+        },
+        {
+          "x": 0.382459,
+          "y": 0.707528,
+          "worldX": 342.906,
+          "worldY": -760.127
+        },
+        {
+          "x": 0.382605,
+          "y": 0.69305,
+          "worldX": 327.704,
+          "worldY": -759.897
+        },
+        {
+          "x": 0.382806,
+          "y": 0.708888,
+          "worldX": 344.334,
+          "worldY": -759.58
+        },
+        {
+          "x": 0.385549,
+          "y": 0.741262,
+          "worldX": 378.327,
+          "worldY": -755.26
+        },
+        {
+          "x": 0.385725,
+          "y": 0.750998,
+          "worldX": 388.549,
+          "worldY": -754.983
+        },
+        {
+          "x": 0.381889,
+          "y": 0.775188,
+          "worldX": 413.949,
+          "worldY": -761.024
+        },
+        {
+          "x": 0.382021,
+          "y": 0.790346,
+          "worldX": 429.865,
+          "worldY": -760.817
+        },
+        {
+          "x": 0.384417,
+          "y": 0.751905,
+          "worldX": 389.502,
+          "worldY": -757.043
+        },
+        {
+          "x": 0.384412,
+          "y": 0.748928,
+          "worldX": 386.376,
+          "worldY": -757.05
+        },
+        {
+          "x": 0.38439,
+          "y": 0.746828,
+          "worldX": 384.171,
+          "worldY": -757.085
+        },
+        {
+          "x": 0.38427,
+          "y": 0.741347,
+          "worldX": 378.416,
+          "worldY": -757.274
+        }
+      ]
+    },
+    {
+      "id": "5480067",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.416061,
+      "y": 0.628294,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 259.7099914550781,
+      "worldY": -707.2030029296875
+    },
+    {
+      "id": "5480068",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.414356,
+      "y": 0.624378,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 255.59800720214844,
+      "worldY": -709.8889770507812
+    },
+    {
+      "id": "5480069",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.422636,
+      "y": 0.694483,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 329.2090148925781,
+      "worldY": -696.8469848632812,
+      "patrol": [
+        {
+          "x": 0.413691,
+          "y": 0.69074,
+          "worldX": 325.278,
+          "worldY": -710.936
+        },
+        {
+          "x": 0.402099,
+          "y": 0.697862,
+          "worldX": 332.757,
+          "worldY": -729.194
+        },
+        {
+          "x": 0.390953,
+          "y": 0.730763,
+          "worldX": 367.303,
+          "worldY": -746.748
+        },
+        {
+          "x": 0.388148,
+          "y": 0.742757,
+          "worldX": 379.896,
+          "worldY": -751.166
+        },
+        {
+          "x": 0.387892,
+          "y": 0.75171,
+          "worldX": 389.297,
+          "worldY": -751.57
+        },
+        {
+          "x": 0.397375,
+          "y": 0.764195,
+          "worldX": 402.406,
+          "worldY": -736.634
+        },
+        {
+          "x": 0.414187,
+          "y": 0.765215,
+          "worldX": 403.477,
+          "worldY": -710.154
+        },
+        {
+          "x": 0.414883,
+          "y": 0.74949,
+          "worldX": 386.966,
+          "worldY": -709.059
+        },
+        {
+          "x": 0.42735,
+          "y": 0.712757,
+          "worldX": 348.396,
+          "worldY": -689.423
+        },
+        {
+          "x": 0.427297,
+          "y": 0.693641,
+          "worldX": 328.324,
+          "worldY": -689.507
+        }
+      ]
+    },
+    {
+      "id": "5480070",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.396364,
+      "y": 0.694944,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 329.6929931640625,
+      "worldY": -738.2260131835938,
+      "patrol": [
+        {
+          "x": 0.399508,
+          "y": 0.697236,
+          "worldX": 332.099,
+          "worldY": -733.274
+        },
+        {
+          "x": 0.402819,
+          "y": 0.700945,
+          "worldX": 335.994,
+          "worldY": -728.06
+        },
+        {
+          "x": 0.417215,
+          "y": 0.728265,
+          "worldX": 364.68,
+          "worldY": -705.385
+        },
+        {
+          "x": 0.414785,
+          "y": 0.7447,
+          "worldX": 381.936,
+          "worldY": -709.213
+        },
+        {
+          "x": 0.414247,
+          "y": 0.747505,
+          "worldX": 384.882,
+          "worldY": -710.06
+        },
+        {
+          "x": 0.412956,
+          "y": 0.750975,
+          "worldX": 388.525,
+          "worldY": -712.093
+        },
+        {
+          "x": 0.406353,
+          "y": 0.766726,
+          "worldX": 405.064,
+          "worldY": -722.494
+        },
+        {
+          "x": 0.400702,
+          "y": 0.79062,
+          "worldX": 430.153,
+          "worldY": -731.393
+        },
+        {
+          "x": 0.396686,
+          "y": 0.79324,
+          "worldX": 432.904,
+          "worldY": -737.719
+        },
+        {
+          "x": 0.405283,
+          "y": 0.776491,
+          "worldX": 415.317,
+          "worldY": -724.179
+        },
+        {
+          "x": 0.408076,
+          "y": 0.769037,
+          "worldX": 407.49,
+          "worldY": -719.78
+        },
+        {
+          "x": 0.413801,
+          "y": 0.754793,
+          "worldX": 392.534,
+          "worldY": -710.763
+        },
+        {
+          "x": 0.415379,
+          "y": 0.749377,
+          "worldX": 386.847,
+          "worldY": -708.277
+        },
+        {
+          "x": 0.416214,
+          "y": 0.745131,
+          "worldX": 382.389,
+          "worldY": -706.962
+        },
+        {
+          "x": 0.420681,
+          "y": 0.726356,
+          "worldX": 362.675,
+          "worldY": -699.926
+        },
+        {
+          "x": 0.406234,
+          "y": 0.708645,
+          "worldX": 344.079,
+          "worldY": -722.681
+        },
+        {
+          "x": 0.402191,
+          "y": 0.702525,
+          "worldX": 337.653,
+          "worldY": -729.049
+        }
+      ]
+    },
+    {
+      "id": "5480071",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.393098,
+      "y": 0.697022,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 331.8739929199219,
+      "worldY": -743.3699951171875
+    },
+    {
+      "id": "5480072",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.428712,
+      "y": 0.767859,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 406.2539978027344,
+      "worldY": -687.2780151367188,
+      "patrol": [
+        {
+          "x": 0.426696,
+          "y": 0.753193,
+          "worldX": 390.854,
+          "worldY": -690.453
+        },
+        {
+          "x": 0.424467,
+          "y": 0.744316,
+          "worldX": 381.533,
+          "worldY": -693.963
+        },
+        {
+          "x": 0.424907,
+          "y": 0.737189,
+          "worldX": 374.05,
+          "worldY": -693.27
+        },
+        {
+          "x": 0.425124,
+          "y": 0.731153,
+          "worldX": 367.712,
+          "worldY": -692.929
+        },
+        {
+          "x": 0.428415,
+          "y": 0.689477,
+          "worldX": 323.952,
+          "worldY": -687.746
+        },
+        {
+          "x": 0.424813,
+          "y": 0.731823,
+          "worldX": 368.416,
+          "worldY": -693.418
+        },
+        {
+          "x": 0.42418,
+          "y": 0.740018,
+          "worldX": 377.02,
+          "worldY": -694.415
+        },
+        {
+          "x": 0.424012,
+          "y": 0.744971,
+          "worldX": 382.221,
+          "worldY": -694.68
+        },
+        {
+          "x": 0.424376,
+          "y": 0.752562,
+          "worldX": 390.192,
+          "worldY": -694.107
+        },
+        {
+          "x": 0.429078,
+          "y": 0.784458,
+          "worldX": 423.682,
+          "worldY": -686.702
+        }
+      ]
+    },
+    {
+      "id": "5480073",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.430059,
+      "y": 0.769073,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 407.52801513671875,
+      "worldY": -685.156982421875
+    },
+    {
+      "id": "5480074",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.385196,
+      "y": 0.727276,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 363.6409912109375,
+      "worldY": -755.8150024414062
+    },
+    {
+      "id": "5480075",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.382045,
+      "y": 0.727296,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 363.6619873046875,
+      "worldY": -760.7789916992188
+    },
+    {
+      "id": "5480076",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.413582,
+      "y": 0.627805,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 259.1969909667969,
+      "worldY": -711.1069946289062
+    },
+    {
+      "id": "5480077",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.423749,
+      "y": 0.693976,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 328.6759948730469,
+      "worldY": -695.093994140625
+    },
+    {
+      "id": "5480078",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.424193,
+      "y": 0.697051,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 331.9049987792969,
+      "worldY": -694.39501953125
+    },
+    {
+      "id": "5480079",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.427384,
+      "y": 0.693027,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 327.67999267578125,
+      "worldY": -689.3690185546875
+    },
+    {
+      "id": "5480080",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.427656,
+      "y": 0.769965,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 408.4649963378906,
+      "worldY": -688.9409790039062
+    },
+    {
+      "id": "5480081",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.382968,
+      "y": 0.726144,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 362.4530029296875,
+      "worldY": -759.323974609375
+    },
+    {
+      "id": "5480082",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.427078,
+      "y": 0.770866,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 409.4110107421875,
+      "worldY": -689.8519897460938
+    },
+    {
+      "id": "5480083",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.412023,
+      "y": 0.627185,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 258.5459899902344,
+      "worldY": -713.56298828125
+    },
+    {
+      "id": "5480084",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.395537,
+      "y": 0.690916,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 325.4630126953125,
+      "worldY": -739.5289916992188
+    },
+    {
+      "id": "5480085",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.413878,
+      "y": 0.630882,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 262.427001953125,
+      "worldY": -710.6409912109375
+    },
+    {
+      "id": "5480086",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.424368,
+      "y": 0.700027,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 335.0299987792969,
+      "worldY": -694.1199951171875
+    },
+    {
+      "id": "5480087",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.425551,
+      "y": 0.693327,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 327.9949951171875,
+      "worldY": -692.2570190429688
+    },
+    {
+      "id": "5480088",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.394047,
+      "y": 0.69383,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 328.52301025390625,
+      "worldY": -741.8759765625
+    },
+    {
+      "id": "5480089",
+      "npcId": 21228,
+      "name": "Tidewalker Hydromancer",
+      "x": 0.43094,
+      "y": 0.76985,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 408.343994140625,
+      "worldY": -683.7680053710938
+    },
+    {
+      "id": "5480090",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.705663,
+      "y": 0.585317,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 214.58399963378906,
+      "worldY": -251.07899475097656
+    },
+    {
+      "id": "5480091",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.586149,
+      "y": 0.602067,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 232.1719970703125,
+      "worldY": -439.3139953613281
+    },
+    {
+      "id": "5480092",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.543842,
+      "y": 0.585579,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 214.85899353027344,
+      "worldY": -505.947998046875
+    },
+    {
+      "id": "5480093",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.636541,
+      "y": 0.666055,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 299.3590087890625,
+      "worldY": -359.9460144042969
+    },
+    {
+      "id": "5480094",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.636765,
+      "y": 0.694578,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 329.3080139160156,
+      "worldY": -359.593994140625,
+      "patrol": [
+        {
+          "x": 0.644336,
+          "y": 0.69174,
+          "worldX": 326.328,
+          "worldY": -347.67
+        },
+        {
+          "x": 0.648385,
+          "y": 0.695692,
+          "worldX": 330.478,
+          "worldY": -341.292
+        },
+        {
+          "x": 0.644246,
+          "y": 0.692013,
+          "worldX": 326.615,
+          "worldY": -347.811
+        },
+        {
+          "x": 0.636779,
+          "y": 0.694452,
+          "worldX": 329.176,
+          "worldY": -359.571
+        },
+        {
+          "x": 0.636298,
+          "y": 0.69935,
+          "worldX": 334.319,
+          "worldY": -360.33
+        },
+        {
+          "x": 0.633805,
+          "y": 0.709724,
+          "worldX": 345.212,
+          "worldY": -364.255
+        },
+        {
+          "x": 0.636296,
+          "y": 0.699559,
+          "worldX": 334.538,
+          "worldY": -360.333
+        },
+        {
+          "x": 0.636503,
+          "y": 0.694433,
+          "worldX": 329.156,
+          "worldY": -360.006
+        }
+      ]
+    },
+    {
+      "id": "5480095",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.623955,
+      "y": 0.671432,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 305.0050048828125,
+      "worldY": -379.7699890136719
+    },
+    {
+      "id": "5480096",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.66241,
+      "y": 0.718422,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 354.3450012207031,
+      "worldY": -319.2030029296875
+    },
+    {
+      "id": "5480097",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.599267,
+      "y": 0.694262,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 328.97601318359375,
+      "worldY": -418.65301513671875,
+      "patrol": [
+        {
+          "x": 0.596805,
+          "y": 0.700771,
+          "worldX": 335.811,
+          "worldY": -422.531
+        },
+        {
+          "x": 0.591489,
+          "y": 0.704842,
+          "worldX": 340.085,
+          "worldY": -430.903
+        },
+        {
+          "x": 0.587253,
+          "y": 0.702574,
+          "worldX": 337.704,
+          "worldY": -437.576
+        },
+        {
+          "x": 0.59124,
+          "y": 0.704947,
+          "worldX": 340.196,
+          "worldY": -431.296
+        },
+        {
+          "x": 0.596459,
+          "y": 0.700876,
+          "worldX": 335.921,
+          "worldY": -423.076
+        },
+        {
+          "x": 0.59876,
+          "y": 0.695382,
+          "worldX": 330.152,
+          "worldY": -419.451
+        }
+      ]
+    },
+    {
+      "id": "5480098",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.661185,
+      "y": 0.724002,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 360.2040100097656,
+      "worldY": -321.1319885253906
+    },
+    {
+      "id": "5480099",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.588353,
+      "y": 0.69948,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 334.4549865722656,
+      "worldY": -435.8420104980469
+    },
+    {
+      "id": "5480100",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.628098,
+      "y": 0.752829,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 390.47198486328125,
+      "worldY": -373.2449951171875,
+      "patrol": [
+        {
+          "x": 0.624051,
+          "y": 0.756405,
+          "worldX": 394.227,
+          "worldY": -379.619
+        },
+        {
+          "x": 0.627964,
+          "y": 0.753035,
+          "worldX": 390.688,
+          "worldY": -373.455
+        },
+        {
+          "x": 0.629365,
+          "y": 0.752069,
+          "worldX": 389.674,
+          "worldY": -371.249
+        },
+        {
+          "x": 0.633304,
+          "y": 0.751508,
+          "worldX": 389.085,
+          "worldY": -365.045
+        },
+        {
+          "x": 0.638482,
+          "y": 0.753755,
+          "worldX": 391.444,
+          "worldY": -356.89
+        },
+        {
+          "x": 0.633271,
+          "y": 0.751814,
+          "worldX": 389.406,
+          "worldY": -365.096
+        }
+      ]
+    },
+    {
+      "id": "5480101",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.637774,
+      "y": 0.761942,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 400.0409851074219,
+      "worldY": -358.0039978027344
+    },
+    {
+      "id": "5480102",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.542816,
+      "y": 0.716618,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 352.45001220703125,
+      "worldY": -507.56298828125
+    },
+    {
+      "id": "5480103",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.467419,
+      "y": 0.569953,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 198.45199584960938,
+      "worldY": -626.3140258789062
+    },
+    {
+      "id": "5480104",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.59515,
+      "y": 0.782125,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 421.2330017089844,
+      "worldY": -425.13800048828125
+    },
+    {
+      "id": "5480105",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.595197,
+      "y": 0.78786,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 427.2550048828125,
+      "worldY": -425.06298828125
+    },
+    {
+      "id": "5480106",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.605846,
+      "y": 0.790511,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 430.0379943847656,
+      "worldY": -408.2919921875
+    },
+    {
+      "id": "5480107",
+      "npcId": 21229,
+      "name": "Greyheart Tidecaller",
+      "x": 0.603016,
+      "y": 0.795123,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 434.8810119628906,
+      "worldY": -412.7489929199219
+    },
+    {
+      "id": "5480108",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.704237,
+      "y": 0.589926,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 219.4239959716797,
+      "worldY": -253.3249969482422
+    },
+    {
+      "id": "5480109",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.703021,
+      "y": 0.58475,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 213.98899841308594,
+      "worldY": -255.24000549316406
+    },
+    {
+      "id": "5480110",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.587465,
+      "y": 0.594131,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 223.83900451660156,
+      "worldY": -437.24200439453125
+    },
+    {
+      "id": "5480111",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.584073,
+      "y": 0.596566,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 226.39500427246094,
+      "worldY": -442.5830078125
+    },
+    {
+      "id": "5480112",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.547032,
+      "y": 0.596801,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 226.64199829101562,
+      "worldY": -500.9230041503906
+    },
+    {
+      "id": "5480113",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.542886,
+      "y": 0.590473,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 219.9980010986328,
+      "worldY": -507.4530029296875
+    },
+    {
+      "id": "5480114",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.630391,
+      "y": 0.669848,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 303.3420104980469,
+      "worldY": -369.63299560546875
+    },
+    {
+      "id": "5480115",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.644783,
+      "y": 0.69977,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 334.760009765625,
+      "worldY": -346.96600341796875
+    },
+    {
+      "id": "5480116",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.662514,
+      "y": 0.712278,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 347.89300537109375,
+      "worldY": -319.03900146484375
+    },
+    {
+      "id": "5480117",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.591983,
+      "y": 0.696787,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 331.62799072265625,
+      "worldY": -430.125
+    },
+    {
+      "id": "5480118",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.626941,
+      "y": 0.751307,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 388.8739929199219,
+      "worldY": -375.0669860839844
+    },
+    {
+      "id": "5480119",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.471024,
+      "y": 0.564126,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 192.33299255371094,
+      "worldY": -620.635986328125
+    },
+    {
+      "id": "5480120",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.472371,
+      "y": 0.574557,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 203.28599548339844,
+      "worldY": -618.5150146484375
+    },
+    {
+      "id": "5480121",
+      "npcId": 21230,
+      "name": "Greyheart Nether-Mage",
+      "x": 0.550585,
+      "y": 0.719366,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 355.33599853515625,
+      "worldY": -495.3280029296875
+    },
+    {
+      "id": "5480122",
+      "npcId": 21231,
+      "name": "Greyheart Shield-Bearer",
+      "x": 0.58436,
+      "y": 0.701005,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 336.0570068359375,
+      "worldY": -442.1310119628906
+    },
+    {
+      "id": "5480123",
+      "npcId": 21231,
+      "name": "Greyheart Shield-Bearer",
+      "x": 0.548253,
+      "y": 0.711826,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 347.41900634765625,
+      "worldY": -499.0010070800781,
+      "patrol": [
+        {
+          "x": 0.548568,
+          "y": 0.705407,
+          "worldX": 340.679,
+          "worldY": -498.504
+        },
+        {
+          "x": 0.551091,
+          "y": 0.694038,
+          "worldX": 328.741,
+          "worldY": -494.53
+        },
+        {
+          "x": 0.570271,
+          "y": 0.694478,
+          "worldX": 329.203,
+          "worldY": -464.322
+        },
+        {
+          "x": 0.553402,
+          "y": 0.69448,
+          "worldX": 329.205,
+          "worldY": -490.89
+        },
+        {
+          "x": 0.546287,
+          "y": 0.705204,
+          "worldX": 340.466,
+          "worldY": -502.097
+        },
+        {
+          "x": 0.545743,
+          "y": 0.744632,
+          "worldX": 381.865,
+          "worldY": -502.954
+        },
+        {
+          "x": 0.545461,
+          "y": 0.717471,
+          "worldX": 353.346,
+          "worldY": -503.398
+        }
+      ]
+    },
+    {
+      "id": "5480124",
+      "npcId": 21231,
+      "name": "Greyheart Shield-Bearer",
+      "x": 0.625938,
+      "y": 0.7605,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 398.5270080566406,
+      "worldY": -376.6470031738281
+    },
+    {
+      "id": "5480125",
+      "npcId": 21231,
+      "name": "Greyheart Shield-Bearer",
+      "x": 0.545811,
+      "y": 0.714083,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 349.78900146484375,
+      "worldY": -502.84600830078125
+    },
+    {
+      "id": "5480126",
+      "npcId": 21231,
+      "name": "Greyheart Shield-Bearer",
+      "x": 0.549712,
+      "y": 0.715939,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 351.73699951171875,
+      "worldY": -496.7030029296875
+    },
+    {
+      "id": "5480127",
+      "npcId": 21231,
+      "name": "Greyheart Shield-Bearer",
+      "x": 0.593569,
+      "y": 0.784984,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 424.2349853515625,
+      "worldY": -427.62799072265625,
+      "patrol": [
+        {
+          "x": 0.589101,
+          "y": 0.78583,
+          "worldX": 425.123,
+          "worldY": -434.665
+        },
+        {
+          "x": 0.582963,
+          "y": 0.78538,
+          "worldX": 424.651,
+          "worldY": -444.332
+        },
+        {
+          "x": 0.572176,
+          "y": 0.792214,
+          "worldX": 431.826,
+          "worldY": -461.322
+        },
+        {
+          "x": 0.563985,
+          "y": 0.791466,
+          "worldX": 431.041,
+          "worldY": -474.222
+        },
+        {
+          "x": 0.558934,
+          "y": 0.785208,
+          "worldX": 424.47,
+          "worldY": -482.178
+        },
+        {
+          "x": 0.552364,
+          "y": 0.778939,
+          "worldX": 417.887,
+          "worldY": -492.525
+        },
+        {
+          "x": 0.547963,
+          "y": 0.768261,
+          "worldX": 406.676,
+          "worldY": -499.457
+        },
+        {
+          "x": 0.546127,
+          "y": 0.759382,
+          "worldX": 397.353,
+          "worldY": -502.349
+        },
+        {
+          "x": 0.545455,
+          "y": 0.752985,
+          "worldX": 390.636,
+          "worldY": -503.407
+        },
+        {
+          "x": 0.546194,
+          "y": 0.760169,
+          "worldX": 398.179,
+          "worldY": -502.243
+        },
+        {
+          "x": 0.547799,
+          "y": 0.768004,
+          "worldX": 406.406,
+          "worldY": -499.716
+        },
+        {
+          "x": 0.552518,
+          "y": 0.778964,
+          "worldX": 417.914,
+          "worldY": -492.283
+        },
+        {
+          "x": 0.558253,
+          "y": 0.786382,
+          "worldX": 425.703,
+          "worldY": -483.25
+        },
+        {
+          "x": 0.563924,
+          "y": 0.791648,
+          "worldX": 431.232,
+          "worldY": -474.319
+        },
+        {
+          "x": 0.57216,
+          "y": 0.792329,
+          "worldX": 431.947,
+          "worldY": -461.346
+        },
+        {
+          "x": 0.583235,
+          "y": 0.786357,
+          "worldX": 425.676,
+          "worldY": -443.904
+        },
+        {
+          "x": 0.589308,
+          "y": 0.785458,
+          "worldX": 424.733,
+          "worldY": -434.338
+        },
+        {
+          "x": 0.593352,
+          "y": 0.785311,
+          "worldX": 424.578,
+          "worldY": -427.969
+        },
+        {
+          "x": 0.596378,
+          "y": 0.785864,
+          "worldX": 425.159,
+          "worldY": -423.204
+        },
+        {
+          "x": 0.599513,
+          "y": 0.788542,
+          "worldX": 427.971,
+          "worldY": -418.265
+        },
+        {
+          "x": 0.596064,
+          "y": 0.785515,
+          "worldX": 424.792,
+          "worldY": -423.698
+        }
+      ]
+    },
+    {
+      "id": "5480128",
+      "npcId": 21231,
+      "name": "Greyheart Shield-Bearer",
+      "x": 0.603133,
+      "y": 0.791183,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 430.7439880371094,
+      "worldY": -412.56500244140625,
+      "patrol": [
+        {
+          "x": 0.598884,
+          "y": 0.787219,
+          "worldX": 426.582,
+          "worldY": -419.256
+        },
+        {
+          "x": 0.602972,
+          "y": 0.791201,
+          "worldX": 430.763,
+          "worldY": -412.818
+        },
+        {
+          "x": 0.606867,
+          "y": 0.797885,
+          "worldX": 437.781,
+          "worldY": -406.683
+        },
+        {
+          "x": 0.608673,
+          "y": 0.806788,
+          "worldX": 447.129,
+          "worldY": -403.838
+        },
+        {
+          "x": 0.60703,
+          "y": 0.81493,
+          "worldX": 455.678,
+          "worldY": -406.427
+        },
+        {
+          "x": 0.602727,
+          "y": 0.825076,
+          "worldX": 466.331,
+          "worldY": -413.204
+        },
+        {
+          "x": 0.597583,
+          "y": 0.835222,
+          "worldX": 476.985,
+          "worldY": -421.305
+        },
+        {
+          "x": 0.58735,
+          "y": 0.845936,
+          "worldX": 488.234,
+          "worldY": -437.423
+        },
+        {
+          "x": 0.597578,
+          "y": 0.835702,
+          "worldX": 477.489,
+          "worldY": -421.314
+        },
+        {
+          "x": 0.603506,
+          "y": 0.826121,
+          "worldX": 467.429,
+          "worldY": -411.977
+        },
+        {
+          "x": 0.607008,
+          "y": 0.815381,
+          "worldX": 456.152,
+          "worldY": -406.461
+        },
+        {
+          "x": 0.608362,
+          "y": 0.80677,
+          "worldX": 447.11,
+          "worldY": -404.329
+        },
+        {
+          "x": 0.606723,
+          "y": 0.797955,
+          "worldX": 437.854,
+          "worldY": -406.91
+        },
+        {
+          "x": 0.60481,
+          "y": 0.792731,
+          "worldX": 432.369,
+          "worldY": -409.923
+        }
+      ]
+    },
+    {
+      "id": "5480129",
+      "npcId": 21232,
+      "name": "Greyheart Skulker",
+      "x": 0.699006,
+      "y": 0.588863,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 218.3070068359375,
+      "worldY": -261.5639953613281
+    },
+    {
+      "id": "5480130",
+      "npcId": 21232,
+      "name": "Greyheart Skulker",
+      "x": 0.590323,
+      "y": 0.602723,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 232.86000061035156,
+      "worldY": -432.739990234375
+    },
+    {
+      "id": "5480131",
+      "npcId": 21232,
+      "name": "Greyheart Skulker",
+      "x": 0.539672,
+      "y": 0.595726,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 225.51400756835938,
+      "worldY": -512.5150146484375
+    },
+    {
+      "id": "5480132",
+      "npcId": 21232,
+      "name": "Greyheart Skulker",
+      "x": 0.632691,
+      "y": 0.664604,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 297.83599853515625,
+      "worldY": -366.010009765625,
+      "patrol": [
+        {
+          "x": 0.630607,
+          "y": 0.663095,
+          "worldX": 296.251,
+          "worldY": -369.293
+        },
+        {
+          "x": 0.632819,
+          "y": 0.664814,
+          "worldX": 298.056,
+          "worldY": -365.808
+        },
+        {
+          "x": 0.634306,
+          "y": 0.667211,
+          "worldX": 300.573,
+          "worldY": -363.467
+        },
+        {
+          "x": 0.63499,
+          "y": 0.672509,
+          "worldX": 306.136,
+          "worldY": -362.389
+        },
+        {
+          "x": 0.634167,
+          "y": 0.667145,
+          "worldX": 300.504,
+          "worldY": -363.685
+        }
+      ]
+    },
+    {
+      "id": "5480133",
+      "npcId": 21232,
+      "name": "Greyheart Skulker",
+      "x": 0.640171,
+      "y": 0.700767,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 335.8070068359375,
+      "worldY": -354.22900390625
+    },
+    {
+      "id": "5480134",
+      "npcId": 21232,
+      "name": "Greyheart Skulker",
+      "x": 0.640605,
+      "y": 0.708218,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 343.6300048828125,
+      "worldY": -353.5459899902344
+    },
+    {
+      "id": "5480135",
+      "npcId": 21232,
+      "name": "Greyheart Skulker",
+      "x": 0.596649,
+      "y": 0.69526,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 330.02398681640625,
+      "worldY": -422.7760009765625
+    },
+    {
+      "id": "5480136",
+      "npcId": 21232,
+      "name": "Greyheart Skulker",
+      "x": 0.584734,
+      "y": 0.692688,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 327.3240051269531,
+      "worldY": -441.5419921875
+    },
+    {
+      "id": "5480137",
+      "npcId": 21232,
+      "name": "Greyheart Skulker",
+      "x": 0.472674,
+      "y": 0.569473,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 197.947998046875,
+      "worldY": -618.0380249023438
+    },
+    {
+      "id": "5480138",
+      "npcId": 21232,
+      "name": "Greyheart Skulker",
+      "x": 0.630542,
+      "y": 0.764061,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 402.2659912109375,
+      "worldY": -369.3949890136719
+    },
+    {
+      "id": "5480139",
+      "npcId": 21246,
+      "name": "Serpentshrine Sporebat",
+      "x": 0.779047,
+      "y": 0.24721,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -140.4290008544922,
+      "worldY": -135.49899291992188
+    },
+    {
+      "id": "5480140",
+      "npcId": 21246,
+      "name": "Serpentshrine Sporebat",
+      "x": 0.783308,
+      "y": 0.248134,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -139.45899963378906,
+      "worldY": -128.78799438476562
+    },
+    {
+      "id": "5480141",
+      "npcId": 21246,
+      "name": "Serpentshrine Sporebat",
+      "x": 0.723506,
+      "y": 0.250161,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -137.3300018310547,
+      "worldY": -222.9770050048828
+    },
+    {
+      "id": "5480142",
+      "npcId": 21246,
+      "name": "Serpentshrine Sporebat",
+      "x": 0.723133,
+      "y": 0.255754,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -131.45799255371094,
+      "worldY": -223.56399536132812
+    },
+    {
+      "id": "5480143",
+      "npcId": 21246,
+      "name": "Serpentshrine Sporebat",
+      "x": 0.707616,
+      "y": 0.171076,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -220.3699951171875,
+      "worldY": -248.0030059814453
+    },
+    {
+      "id": "5480144",
+      "npcId": 21246,
+      "name": "Serpentshrine Sporebat",
+      "x": 0.710382,
+      "y": 0.169633,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -221.88499450683594,
+      "worldY": -243.64599609375
+    },
+    {
+      "id": "5480145",
+      "npcId": 21251,
+      "name": "Underbog Colossus",
+      "x": 0.73033,
+      "y": 0.235729,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -152.48399353027344,
+      "worldY": -212.22900390625,
+      "patrol": [
+        {
+          "x": 0.732577,
+          "y": 0.251421,
+          "worldX": -136.007,
+          "worldY": -208.69
+        },
+        {
+          "x": 0.740687,
+          "y": 0.261519,
+          "worldX": -125.404,
+          "worldY": -195.916
+        },
+        {
+          "x": 0.74582,
+          "y": 0.263062,
+          "worldX": -123.784,
+          "worldY": -187.831
+        },
+        {
+          "x": 0.740646,
+          "y": 0.261906,
+          "worldX": -124.998,
+          "worldY": -195.981
+        },
+        {
+          "x": 0.732264,
+          "y": 0.251386,
+          "worldX": -136.044,
+          "worldY": -209.183
+        },
+        {
+          "x": 0.730051,
+          "y": 0.234925,
+          "worldX": -153.328,
+          "worldY": -212.668
+        },
+        {
+          "x": 0.727438,
+          "y": 0.222232,
+          "worldX": -166.656,
+          "worldY": -216.784
+        }
+      ]
+    },
+    {
+      "id": "5480146",
+      "npcId": 21251,
+      "name": "Underbog Colossus",
+      "x": 0.717722,
+      "y": 0.197607,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -192.51199340820312,
+      "worldY": -232.08599853515625,
+      "patrol": [
+        {
+          "x": 0.723767,
+          "y": 0.208302,
+          "worldX": -181.282,
+          "worldY": -222.566
+        },
+        {
+          "x": 0.717783,
+          "y": 0.197684,
+          "worldX": -192.431,
+          "worldY": -231.99
+        },
+        {
+          "x": 0.710179,
+          "y": 0.187178,
+          "worldX": -203.463,
+          "worldY": -243.966
+        },
+        {
+          "x": 0.702197,
+          "y": 0.18076,
+          "worldX": -210.202,
+          "worldY": -256.538
+        },
+        {
+          "x": 0.677447,
+          "y": 0.173479,
+          "worldX": -217.847,
+          "worldY": -295.52
+        },
+        {
+          "x": 0.702039,
+          "y": 0.180796,
+          "worldX": -210.164,
+          "worldY": -256.787
+        },
+        {
+          "x": 0.710153,
+          "y": 0.187346,
+          "worldX": -203.286,
+          "worldY": -244.007
+        }
+      ]
+    },
+    {
+      "id": "5480147",
+      "npcId": 21251,
+      "name": "Underbog Colossus",
+      "x": 0.662347,
+      "y": 0.580543,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 209.5709991455078,
+      "worldY": -319.302001953125,
+      "patrol": [
+        {
+          "x": 0.651907,
+          "y": 0.569226,
+          "worldX": 197.688,
+          "worldY": -335.745
+        },
+        {
+          "x": 0.639187,
+          "y": 0.560649,
+          "worldX": 188.683,
+          "worldY": -355.779
+        },
+        {
+          "x": 0.631912,
+          "y": 0.560955,
+          "worldX": 189.004,
+          "worldY": -367.237
+        },
+        {
+          "x": 0.624562,
+          "y": 0.564974,
+          "worldX": 193.224,
+          "worldY": -378.813
+        },
+        {
+          "x": 0.615345,
+          "y": 0.579247,
+          "worldX": 208.21,
+          "worldY": -393.331
+        },
+        {
+          "x": 0.612938,
+          "y": 0.589186,
+          "worldX": 218.647,
+          "worldY": -397.121
+        },
+        {
+          "x": 0.609723,
+          "y": 0.596159,
+          "worldX": 225.968,
+          "worldY": -402.185
+        },
+        {
+          "x": 0.604592,
+          "y": 0.599774,
+          "worldX": 229.764,
+          "worldY": -410.266
+        },
+        {
+          "x": 0.600408,
+          "y": 0.598601,
+          "worldX": 228.532,
+          "worldY": -416.856
+        },
+        {
+          "x": 0.604611,
+          "y": 0.600061,
+          "worldX": 230.065,
+          "worldY": -410.237
+        },
+        {
+          "x": 0.609585,
+          "y": 0.596418,
+          "worldX": 226.24,
+          "worldY": -402.402
+        },
+        {
+          "x": 0.612757,
+          "y": 0.589605,
+          "worldX": 219.086,
+          "worldY": -397.407
+        },
+        {
+          "x": 0.615156,
+          "y": 0.579617,
+          "worldX": 208.599,
+          "worldY": -393.628
+        },
+        {
+          "x": 0.624404,
+          "y": 0.565157,
+          "worldX": 193.416,
+          "worldY": -379.063
+        },
+        {
+          "x": 0.631918,
+          "y": 0.561463,
+          "worldX": 189.537,
+          "worldY": -367.228
+        },
+        {
+          "x": 0.639049,
+          "y": 0.561109,
+          "worldX": 189.166,
+          "worldY": -355.996
+        },
+        {
+          "x": 0.651849,
+          "y": 0.569732,
+          "worldX": 198.22,
+          "worldY": -335.836
+        },
+        {
+          "x": 0.662491,
+          "y": 0.580388,
+          "worldX": 209.409,
+          "worldY": -319.075
+        },
+        {
+          "x": 0.675165,
+          "y": 0.583636,
+          "worldX": 212.819,
+          "worldY": -299.114
+        },
+        {
+          "x": 0.684148,
+          "y": 0.590129,
+          "worldX": 219.637,
+          "worldY": -284.966
+        },
+        {
+          "x": 0.70024,
+          "y": 0.606723,
+          "worldX": 237.06,
+          "worldY": -259.621
+        },
+        {
+          "x": 0.68469,
+          "y": 0.589879,
+          "worldX": 219.374,
+          "worldY": -284.112
+        },
+        {
+          "x": 0.674728,
+          "y": 0.584247,
+          "worldX": 213.461,
+          "worldY": -299.802
+        },
+        {
+          "x": 0.662598,
+          "y": 0.580243,
+          "worldX": 209.256,
+          "worldY": -318.906
+        }
+      ]
+    },
+    {
+      "id": "5480148",
+      "npcId": 21251,
+      "name": "Underbog Colossus",
+      "x": 0.451769,
+      "y": 0.601221,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 231.2830047607422,
+      "worldY": -650.9630126953125,
+      "patrol": [
+        {
+          "x": 0.45818,
+          "y": 0.595345,
+          "worldX": 225.113,
+          "worldY": -640.865
+        },
+        {
+          "x": 0.465824,
+          "y": 0.585295,
+          "worldX": 214.561,
+          "worldY": -628.827
+        },
+        {
+          "x": 0.47333,
+          "y": 0.584802,
+          "worldX": 214.043,
+          "worldY": -617.004
+        },
+        {
+          "x": 0.490809,
+          "y": 0.595953,
+          "worldX": 225.752,
+          "worldY": -589.475
+        },
+        {
+          "x": 0.506745,
+          "y": 0.595066,
+          "worldX": 224.821,
+          "worldY": -564.376
+        },
+        {
+          "x": 0.528863,
+          "y": 0.585472,
+          "worldX": 214.747,
+          "worldY": -529.54
+        },
+        {
+          "x": 0.547803,
+          "y": 0.57606,
+          "worldX": 204.864,
+          "worldY": -499.709
+        },
+        {
+          "x": 0.565065,
+          "y": 0.578491,
+          "worldX": 207.417,
+          "worldY": -472.521
+        },
+        {
+          "x": 0.575491,
+          "y": 0.581607,
+          "worldX": 210.689,
+          "worldY": -456.101
+        },
+        {
+          "x": 0.581374,
+          "y": 0.5837,
+          "worldX": 212.886,
+          "worldY": -446.834
+        },
+        {
+          "x": 0.575356,
+          "y": 0.581846,
+          "worldX": 210.939,
+          "worldY": -456.313
+        },
+        {
+          "x": 0.564819,
+          "y": 0.578756,
+          "worldX": 207.695,
+          "worldY": -472.909
+        },
+        {
+          "x": 0.547641,
+          "y": 0.576362,
+          "worldX": 205.181,
+          "worldY": -499.964
+        },
+        {
+          "x": 0.529148,
+          "y": 0.585432,
+          "worldX": 214.705,
+          "worldY": -529.091
+        },
+        {
+          "x": 0.506675,
+          "y": 0.595119,
+          "worldX": 224.876,
+          "worldY": -564.486
+        },
+        {
+          "x": 0.490947,
+          "y": 0.596193,
+          "worldX": 226.004,
+          "worldY": -589.257
+        },
+        {
+          "x": 0.47377,
+          "y": 0.584984,
+          "worldX": 214.234,
+          "worldY": -616.312
+        },
+        {
+          "x": 0.466175,
+          "y": 0.585245,
+          "worldX": 214.508,
+          "worldY": -628.273
+        },
+        {
+          "x": 0.458321,
+          "y": 0.595232,
+          "worldX": 224.995,
+          "worldY": -640.644
+        },
+        {
+          "x": 0.446274,
+          "y": 0.608811,
+          "worldX": 239.253,
+          "worldY": -659.618
+        }
+      ]
+    },
+    {
+      "id": "5480149",
+      "npcId": 21251,
+      "name": "Underbog Colossus",
+      "x": 0.559366,
+      "y": 0.818137,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 459.0459899902344,
+      "worldY": -481.49798583984375,
+      "patrol": [
+        {
+          "x": 0.548964,
+          "y": 0.822159,
+          "worldX": 463.269,
+          "worldY": -497.881
+        },
+        {
+          "x": 0.5427,
+          "y": 0.836702,
+          "worldX": 478.539,
+          "worldY": -507.747
+        },
+        {
+          "x": 0.545426,
+          "y": 0.853609,
+          "worldX": 496.291,
+          "worldY": -503.453
+        },
+        {
+          "x": 0.550691,
+          "y": 0.86004,
+          "worldX": 503.044,
+          "worldY": -495.161
+        },
+        {
+          "x": 0.563216,
+          "y": 0.868472,
+          "worldX": 511.897,
+          "worldY": -475.434
+        },
+        {
+          "x": 0.566943,
+          "y": 0.875488,
+          "worldX": 519.264,
+          "worldY": -469.563
+        },
+        {
+          "x": 0.562944,
+          "y": 0.891456,
+          "worldX": 536.031,
+          "worldY": -475.862
+        },
+        {
+          "x": 0.559347,
+          "y": 0.896016,
+          "worldX": 540.819,
+          "worldY": -481.528
+        },
+        {
+          "x": 0.553499,
+          "y": 0.895462,
+          "worldX": 540.237,
+          "worldY": -490.738
+        },
+        {
+          "x": 0.547416,
+          "y": 0.883841,
+          "worldX": 528.035,
+          "worldY": -500.318
+        },
+        {
+          "x": 0.546642,
+          "y": 0.869084,
+          "worldX": 512.54,
+          "worldY": -501.538
+        },
+        {
+          "x": 0.556988,
+          "y": 0.856375,
+          "worldX": 499.195,
+          "worldY": -485.243
+        },
+        {
+          "x": 0.565063,
+          "y": 0.839786,
+          "worldX": 481.777,
+          "worldY": -472.524
+        },
+        {
+          "x": 0.563647,
+          "y": 0.828288,
+          "worldX": 469.704,
+          "worldY": -474.755
+        }
+      ]
+    },
+    {
+      "id": "5480150",
+      "npcId": 21251,
+      "name": "Underbog Colossus",
+      "x": 0.565936,
+      "y": 0.856963,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 499.81298828125,
+      "worldY": -471.14898681640625,
+      "patrol": [
+        {
+          "x": 0.571734,
+          "y": 0.85667,
+          "worldX": 499.505,
+          "worldY": -462.018
+        },
+        {
+          "x": 0.528109,
+          "y": 0.858553,
+          "worldX": 501.482,
+          "worldY": -530.727
+        }
+      ]
+    },
+    {
+      "id": "5480151",
+      "npcId": 21251,
+      "name": "Underbog Colossus",
+      "x": 0.542063,
+      "y": 0.841114,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 483.1709899902344,
+      "worldY": -508.75,
+      "patrol": [
+        {
+          "x": 0.543495,
+          "y": 0.809722,
+          "worldX": 450.21,
+          "worldY": -506.495
+        },
+        {
+          "x": 0.539453,
+          "y": 0.840356,
+          "worldX": 482.375,
+          "worldY": -512.86
+        },
+        {
+          "x": 0.540777,
+          "y": 0.876972,
+          "worldX": 520.822,
+          "worldY": -510.775
+        },
+        {
+          "x": 0.542633,
+          "y": 0.906574,
+          "worldX": 551.905,
+          "worldY": -507.852
+        },
+        {
+          "x": 0.540538,
+          "y": 0.876959,
+          "worldX": 520.809,
+          "worldY": -511.151
+        }
+      ]
+    },
+    {
+      "id": "5480152",
+      "npcId": 21251,
+      "name": "Underbog Colossus",
+      "x": 0.511625,
+      "y": 0.85791,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 500.8070068359375,
+      "worldY": -556.6890258789062,
+      "patrol": [
+        {
+          "x": 0.528139,
+          "y": 0.858363,
+          "worldX": 501.283,
+          "worldY": -530.68
+        },
+        {
+          "x": 0.515344,
+          "y": 0.858515,
+          "worldX": 501.443,
+          "worldY": -550.832
+        },
+        {
+          "x": 0.484667,
+          "y": 0.85773,
+          "worldX": 500.618,
+          "worldY": -599.148
+        },
+        {
+          "x": 0.515289,
+          "y": 0.858735,
+          "worldX": 501.673,
+          "worldY": -550.918
+        }
+      ]
+    },
+    {
+      "id": "5480153",
+      "npcId": 21251,
+      "name": "Underbog Colossus",
+      "x": 0.497977,
+      "y": 0.873272,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 516.93701171875,
+      "worldY": -578.1849975585938,
+      "patrol": [
+        {
+          "x": 0.504926,
+          "y": 0.858861,
+          "worldX": 501.806,
+          "worldY": -567.24
+        },
+        {
+          "x": 0.513976,
+          "y": 0.843915,
+          "worldX": 486.112,
+          "worldY": -552.987
+        },
+        {
+          "x": 0.515182,
+          "y": 0.839519,
+          "worldX": 481.497,
+          "worldY": -551.088
+        },
+        {
+          "x": 0.504604,
+          "y": 0.859639,
+          "worldX": 502.623,
+          "worldY": -567.748
+        },
+        {
+          "x": 0.498354,
+          "y": 0.874061,
+          "worldX": 517.766,
+          "worldY": -577.592
+        },
+        {
+          "x": 0.497947,
+          "y": 0.879567,
+          "worldX": 523.547,
+          "worldY": -578.233
+        },
+        {
+          "x": 0.499756,
+          "y": 0.885757,
+          "worldX": 530.047,
+          "worldY": -575.383
+        },
+        {
+          "x": 0.505519,
+          "y": 0.890747,
+          "worldX": 535.286,
+          "worldY": -566.306
+        },
+        {
+          "x": 0.512216,
+          "y": 0.889945,
+          "worldX": 534.444,
+          "worldY": -555.758
+        },
+        {
+          "x": 0.520105,
+          "y": 0.879997,
+          "worldX": 523.999,
+          "worldY": -543.333
+        },
+        {
+          "x": 0.51207,
+          "y": 0.890527,
+          "worldX": 535.055,
+          "worldY": -555.988
+        },
+        {
+          "x": 0.505749,
+          "y": 0.891236,
+          "worldX": 535.8,
+          "worldY": -565.944
+        },
+        {
+          "x": 0.499355,
+          "y": 0.885605,
+          "worldX": 529.887,
+          "worldY": -576.015
+        },
+        {
+          "x": 0.498029,
+          "y": 0.879412,
+          "worldX": 523.384,
+          "worldY": -578.104
+        }
+      ]
+    },
+    {
+      "id": "5480155",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.691622,
+      "y": 0.425409,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 46.68000030517578,
+      "worldY": -273.1940002441406,
+      "patrol": [
+        {
+          "x": 0.691622,
+          "y": 0.425409,
+          "worldX": 46.68,
+          "worldY": -273.194
+        },
+        {
+          "x": 0.675612,
+          "y": 0.420752,
+          "worldX": 41.79,
+          "worldY": -298.409
+        }
+      ]
+    },
+    {
+      "id": "5480156",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.685287,
+      "y": 0.397759,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 17.647499084472656,
+      "worldY": -283.1719970703125,
+      "patrol": [
+        {
+          "x": 0.685287,
+          "y": 0.397759,
+          "worldX": 17.6475,
+          "worldY": -283.172
+        },
+        {
+          "x": 0.674411,
+          "y": 0.416052,
+          "worldX": 36.8553,
+          "worldY": -300.301
+        }
+      ]
+    },
+    {
+      "id": "5480157",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.686963,
+      "y": 0.439483,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 61.45800018310547,
+      "worldY": -280.5320129394531,
+      "patrol": [
+        {
+          "x": 0.686963,
+          "y": 0.439483,
+          "worldX": 61.458,
+          "worldY": -280.532
+        },
+        {
+          "x": 0.674535,
+          "y": 0.424248,
+          "worldX": 45.4612,
+          "worldY": -300.106
+        }
+      ]
+    },
+    {
+      "id": "5480158",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.665301,
+      "y": 0.4235,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 44.67559814453125,
+      "worldY": -314.6499938964844,
+      "patrol": [
+        {
+          "x": 0.653631,
+          "y": 0.430136,
+          "worldX": 51.644,
+          "worldY": -333.03
+        },
+        {
+          "x": 0.668916,
+          "y": 0.42176,
+          "worldX": 42.8488,
+          "worldY": -308.956
+        }
+      ]
+    },
+    {
+      "id": "5480159",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.649089,
+      "y": 0.332063,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -51.33300018310547,
+      "worldY": -340.1839904785156,
+      "patrol": [
+        {
+          "x": 0.649089,
+          "y": 0.332063,
+          "worldX": -51.333,
+          "worldY": -340.184
+        },
+        {
+          "x": 0.631859,
+          "y": 0.326746,
+          "worldX": -56.9158,
+          "worldY": -367.32
+        }
+      ]
+    },
+    {
+      "id": "5480160",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.625911,
+      "y": 0.355639,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -26.577899932861328,
+      "worldY": -376.6889953613281,
+      "patrol": [
+        {
+          "x": 0.625911,
+          "y": 0.355639,
+          "worldX": -26.5779,
+          "worldY": -376.689
+        },
+        {
+          "x": 0.628685,
+          "y": 0.330791,
+          "worldX": -52.6689,
+          "worldY": -372.319
+        }
+      ]
+    },
+    {
+      "id": "5480161",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.616762,
+      "y": 0.349219,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -33.319000244140625,
+      "worldY": -391.0979919433594,
+      "patrol": [
+        {
+          "x": 0.616762,
+          "y": 0.349219,
+          "worldX": -33.319,
+          "worldY": -391.098
+        },
+        {
+          "x": 0.62703,
+          "y": 0.329843,
+          "worldX": -53.6642,
+          "worldY": -374.926
+        }
+      ]
+    },
+    {
+      "id": "5480162",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.610959,
+      "y": 0.336828,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -46.329898834228516,
+      "worldY": -400.239013671875,
+      "patrol": [
+        {
+          "x": 0.610959,
+          "y": 0.336828,
+          "worldX": -46.3299,
+          "worldY": -400.239
+        },
+        {
+          "x": 0.626564,
+          "y": 0.325966,
+          "worldX": -57.7352,
+          "worldY": -375.661
+        }
+      ]
+    },
+    {
+      "id": "5480163",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.564261,
+      "y": 0.29769,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -87.42489624023438,
+      "worldY": -473.7869873046875,
+      "patrol": [
+        {
+          "x": 0.564261,
+          "y": 0.29769,
+          "worldX": -87.4249,
+          "worldY": -473.787
+        },
+        {
+          "x": 0.55914,
+          "y": 0.323237,
+          "worldX": -60.6005,
+          "worldY": -481.853
+        }
+      ]
+    },
+    {
+      "id": "5480164",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.578274,
+      "y": 0.334646,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -48.620601654052734,
+      "worldY": -451.7179870605469,
+      "patrol": [
+        {
+          "x": 0.578274,
+          "y": 0.334646,
+          "worldX": -48.6206,
+          "worldY": -451.718
+        },
+        {
+          "x": 0.560779,
+          "y": 0.328207,
+          "worldX": -55.382,
+          "worldY": -479.272
+        }
+      ]
+    },
+    {
+      "id": "5480165",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.573182,
+      "y": 0.306079,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -78.61609649658203,
+      "worldY": -459.73699951171875,
+      "patrol": [
+        {
+          "x": 0.573182,
+          "y": 0.306079,
+          "worldX": -78.6161,
+          "worldY": -459.737
+        },
+        {
+          "x": 0.561305,
+          "y": 0.324288,
+          "worldX": -59.4973,
+          "worldY": -478.444
+        }
+      ]
+    },
+    {
+      "id": "5480166",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.544896,
+      "y": 0.305259,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -79.47709655761719,
+      "worldY": -504.2869873046875,
+      "patrol": [
+        {
+          "x": 0.544896,
+          "y": 0.305259,
+          "worldX": -79.4771,
+          "worldY": -504.287
+        },
+        {
+          "x": 0.556967,
+          "y": 0.324263,
+          "worldX": -59.5232,
+          "worldY": -485.276
+        }
+      ]
+    },
+    {
+      "id": "5480167",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.626572,
+      "y": 0.495018,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 119.7699966430664,
+      "worldY": -375.64801025390625,
+      "patrol": [
+        {
+          "x": 0.626572,
+          "y": 0.495018,
+          "worldX": 119.77,
+          "worldY": -375.648
+        },
+        {
+          "x": 0.639139,
+          "y": 0.512713,
+          "worldX": 138.35,
+          "worldY": -355.855
+        }
+      ]
+    },
+    {
+      "id": "5480168",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.521843,
+      "y": 0.393816,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 13.507800102233887,
+      "worldY": -540.5969848632812,
+      "patrol": [
+        {
+          "x": 0.521842,
+          "y": 0.393816,
+          "worldX": 13.5078,
+          "worldY": -540.597
+        },
+        {
+          "x": 0.514094,
+          "y": 0.416524,
+          "worldX": 37.3509,
+          "worldY": -552.801
+        }
+      ]
+    },
+    {
+      "id": "5480169",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.529536,
+      "y": 0.404366,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 24.58489990234375,
+      "worldY": -528.47900390625,
+      "patrol": [
+        {
+          "x": 0.529536,
+          "y": 0.404366,
+          "worldX": 24.5849,
+          "worldY": -528.479
+        },
+        {
+          "x": 0.516576,
+          "y": 0.419905,
+          "worldX": 40.9015,
+          "worldY": -548.892
+        }
+      ]
+    },
+    {
+      "id": "5480170",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.511378,
+      "y": 0.390989,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 10.539299964904785,
+      "worldY": -557.0789794921875,
+      "patrol": [
+        {
+          "x": 0.511378,
+          "y": 0.390989,
+          "worldX": 10.5393,
+          "worldY": -557.079
+        },
+        {
+          "x": 0.512219,
+          "y": 0.416092,
+          "worldX": 36.897,
+          "worldY": -555.754
+        }
+      ]
+    },
+    {
+      "id": "5480171",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.50187,
+      "y": 0.396438,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 16.260900497436523,
+      "worldY": -572.052978515625,
+      "patrol": [
+        {
+          "x": 0.50187,
+          "y": 0.396438,
+          "worldX": 16.2609,
+          "worldY": -572.053
+        },
+        {
+          "x": 0.510056,
+          "y": 0.417952,
+          "worldX": 38.8509,
+          "worldY": -559.16
+        }
+      ]
+    },
+    {
+      "id": "5480172",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.535859,
+      "y": 0.487529,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 111.90599822998047,
+      "worldY": -518.52099609375,
+      "patrol": [
+        {
+          "x": 0.535859,
+          "y": 0.487529,
+          "worldX": 111.906,
+          "worldY": -518.521
+        },
+        {
+          "x": 0.54039,
+          "y": 0.510997,
+          "worldX": 136.548,
+          "worldY": -511.384
+        }
+      ]
+    },
+    {
+      "id": "5480173",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.654273,
+      "y": 0.537607,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 164.48800659179688,
+      "worldY": -332.01800537109375,
+      "patrol": [
+        {
+          "x": 0.654273,
+          "y": 0.537607,
+          "worldX": 164.488,
+          "worldY": -332.018
+        },
+        {
+          "x": 0.642758,
+          "y": 0.518303,
+          "worldX": 144.219,
+          "worldY": -350.154
+        }
+      ]
+    },
+    {
+      "id": "5480174",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.635085,
+      "y": 0.544207,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 171.41799926757812,
+      "worldY": -362.239013671875,
+      "patrol": [
+        {
+          "x": 0.635085,
+          "y": 0.544207,
+          "worldX": 171.418,
+          "worldY": -362.239
+        },
+        {
+          "x": 0.64015,
+          "y": 0.518531,
+          "worldX": 144.459,
+          "worldY": -354.262
+        }
+      ]
+    },
+    {
+      "id": "5480175",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.62665,
+      "y": 0.536784,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 163.62399291992188,
+      "worldY": -375.5249938964844,
+      "patrol": [
+        {
+          "x": 0.62665,
+          "y": 0.536784,
+          "worldX": 163.624,
+          "worldY": -375.525
+        },
+        {
+          "x": 0.638447,
+          "y": 0.51745,
+          "worldX": 143.324,
+          "worldY": -356.944
+        }
+      ]
+    },
+    {
+      "id": "5480176",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.527032,
+      "y": 0.494969,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 119.71800231933594,
+      "worldY": -532.4229736328125,
+      "patrol": [
+        {
+          "x": 0.527032,
+          "y": 0.494969,
+          "worldX": 119.718,
+          "worldY": -532.423
+        },
+        {
+          "x": 0.538788,
+          "y": 0.513607,
+          "worldX": 139.288,
+          "worldY": -513.907
+        }
+      ]
+    },
+    {
+      "id": "5480177",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.521969,
+      "y": 0.523569,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 149.74899291992188,
+      "worldY": -540.3980102539062,
+      "patrol": [
+        {
+          "x": 0.521969,
+          "y": 0.523569,
+          "worldX": 149.749,
+          "worldY": -540.398
+        },
+        {
+          "x": 0.539175,
+          "y": 0.517068,
+          "worldX": 142.922,
+          "worldY": -513.298
+        }
+      ]
+    },
+    {
+      "id": "5480178",
+      "npcId": 21263,
+      "name": "Greyheart Technician",
+      "x": 0.535836,
+      "y": 0.544269,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 171.48399353027344,
+      "worldY": -518.5570068359375,
+      "patrol": [
+        {
+          "x": 0.535836,
+          "y": 0.544269,
+          "worldX": 171.484,
+          "worldY": -518.557
+        },
+        {
+          "x": 0.541205,
+          "y": 0.519522,
+          "worldX": 145.499,
+          "worldY": -510.101
+        }
+      ]
+    },
+    {
+      "id": "5480179",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.699815,
+      "y": 0.582249,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 211.36300659179688,
+      "worldY": -260.28900146484375
+    },
+    {
+      "id": "5480180",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.702138,
+      "y": 0.594146,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 223.85400390625,
+      "worldY": -256.6310119628906
+    },
+    {
+      "id": "5480181",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.585258,
+      "y": 0.590127,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 219.63499450683594,
+      "worldY": -440.7170104980469
+    },
+    {
+      "id": "5480182",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.591679,
+      "y": 0.596146,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 225.95399475097656,
+      "worldY": -430.6050109863281
+    },
+    {
+      "id": "5480183",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.547168,
+      "y": 0.589607,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 219.08900451660156,
+      "worldY": -500.7090148925781
+    },
+    {
+      "id": "5480184",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.539411,
+      "y": 0.58912,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 218.57699584960938,
+      "worldY": -512.926025390625
+    },
+    {
+      "id": "5480185",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.69144,
+      "y": 0.626435,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 257.75799560546875,
+      "worldY": -273.4800109863281
+    },
+    {
+      "id": "5480186",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.701382,
+      "y": 0.626038,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 257.34100341796875,
+      "worldY": -257.8219909667969
+    },
+    {
+      "id": "5480187",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.474552,
+      "y": 0.566128,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 194.43600463867188,
+      "worldY": -615.0800170898438
+    },
+    {
+      "id": "5480188",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.468709,
+      "y": 0.574909,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 203.656005859375,
+      "worldY": -624.2830200195312
+    },
+    {
+      "id": "5480189",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.445264,
+      "y": 0.62349,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 254.66600036621094,
+      "worldY": -661.2080078125
+    },
+    {
+      "id": "5480190",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.437992,
+      "y": 0.608725,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 239.16299438476562,
+      "worldY": -672.6610107421875
+    },
+    {
+      "id": "5480191",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.465615,
+      "y": 0.85803,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 500.9330139160156,
+      "worldY": -629.155029296875,
+      "patrol": [
+        {
+          "x": 0.481557,
+          "y": 0.857712,
+          "worldX": 500.599,
+          "worldY": -604.047
+        },
+        {
+          "x": 0.459072,
+          "y": 0.85847,
+          "worldX": 501.395,
+          "worldY": -639.46
+        },
+        {
+          "x": 0.450132,
+          "y": 0.864532,
+          "worldX": 507.76,
+          "worldY": -653.542
+        },
+        {
+          "x": 0.434243,
+          "y": 0.888503,
+          "worldX": 532.93,
+          "worldY": -678.566
+        },
+        {
+          "x": 0.449903,
+          "y": 0.864916,
+          "worldX": 508.164,
+          "worldY": -653.902
+        },
+        {
+          "x": 0.458443,
+          "y": 0.85876,
+          "worldX": 501.7,
+          "worldY": -640.451
+        }
+      ]
+    },
+    {
+      "id": "5480192",
+      "npcId": 21298,
+      "name": "Coilfang Serpentguard",
+      "x": 0.404727,
+      "y": 0.847995,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 490.39599609375,
+      "worldY": -725.0549926757812,
+      "patrol": [
+        {
+          "x": 0.405348,
+          "y": 0.808551,
+          "worldX": 448.98,
+          "worldY": -724.076
+        },
+        {
+          "x": 0.405167,
+          "y": 0.860218,
+          "worldX": 503.231,
+          "worldY": -724.361
+        },
+        {
+          "x": 0.409158,
+          "y": 0.878247,
+          "worldX": 522.161,
+          "worldY": -718.075
+        },
+        {
+          "x": 0.420347,
+          "y": 0.888046,
+          "worldX": 532.45,
+          "worldY": -700.452
+        },
+        {
+          "x": 0.408952,
+          "y": 0.87882,
+          "worldX": 522.763,
+          "worldY": -718.4
+        },
+        {
+          "x": 0.405381,
+          "y": 0.860497,
+          "worldX": 503.524,
+          "worldY": -724.024
+        }
+      ]
+    },
+    {
+      "id": "5480193",
+      "npcId": 21299,
+      "name": "Coilfang Fathom-Witch",
+      "x": 0.694003,
+      "y": 0.621779,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 252.86900329589844,
+      "worldY": -269.4429931640625
+    },
+    {
+      "id": "5480194",
+      "npcId": 21299,
+      "name": "Coilfang Fathom-Witch",
+      "x": 0.699339,
+      "y": 0.621579,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 252.65899658203125,
+      "worldY": -261.0400085449219
+    },
+    {
+      "id": "5480195",
+      "npcId": 21299,
+      "name": "Coilfang Fathom-Witch",
+      "x": 0.445343,
+      "y": 0.619718,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 250.7050018310547,
+      "worldY": -661.083984375
+    },
+    {
+      "id": "5480196",
+      "npcId": 21299,
+      "name": "Coilfang Fathom-Witch",
+      "x": 0.440731,
+      "y": 0.610279,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 240.79400634765625,
+      "worldY": -668.3480224609375
+    },
+    {
+      "id": "5480197",
+      "npcId": 21299,
+      "name": "Coilfang Fathom-Witch",
+      "x": 0.464647,
+      "y": 0.855115,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 497.87200927734375,
+      "worldY": -630.6799926757812
+    },
+    {
+      "id": "5480198",
+      "npcId": 21299,
+      "name": "Coilfang Fathom-Witch",
+      "x": 0.464999,
+      "y": 0.861014,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 504.0660095214844,
+      "worldY": -630.125
+    },
+    {
+      "id": "5480199",
+      "npcId": 21299,
+      "name": "Coilfang Fathom-Witch",
+      "x": 0.403389,
+      "y": 0.850132,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 492.6400146484375,
+      "worldY": -727.1619873046875
+    },
+    {
+      "id": "5480200",
+      "npcId": 21299,
+      "name": "Coilfang Fathom-Witch",
+      "x": 0.40634,
+      "y": 0.849525,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 492.00299072265625,
+      "worldY": -722.5139770507812
+    },
+    {
+      "id": "5480201",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.685569,
+      "y": 0.42055,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 41.5786018371582,
+      "worldY": -282.72698974609375,
+      "patrol": [
+        {
+          "x": 0.684014,
+          "y": 0.428961,
+          "worldX": 50.4095,
+          "worldY": -285.177
+        },
+        {
+          "x": 0.685697,
+          "y": 0.418925,
+          "worldX": 39.872,
+          "worldY": -282.525
+        },
+        {
+          "x": 0.682483,
+          "y": 0.409412,
+          "worldX": 29.8833,
+          "worldY": -287.587
+        }
+      ]
+    },
+    {
+      "id": "5480202",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.664063,
+      "y": 0.436167,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 57.97610092163086,
+      "worldY": -316.5989990234375,
+      "patrol": [
+        {
+          "x": 0.673337,
+          "y": 0.440644,
+          "worldX": 62.6766,
+          "worldY": -301.993
+        },
+        {
+          "x": 0.660953,
+          "y": 0.431023,
+          "worldX": 52.5746,
+          "worldY": -321.498
+        },
+        {
+          "x": 0.666049,
+          "y": 0.438806,
+          "worldX": 60.7468,
+          "worldY": -313.471
+        }
+      ]
+    },
+    {
+      "id": "5480203",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.641423,
+      "y": 0.337371,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -45.75979995727539,
+      "worldY": -352.2569885253906,
+      "patrol": [
+        {
+          "x": 0.637078,
+          "y": 0.343367,
+          "worldX": -39.4635,
+          "worldY": -359.101
+        },
+        {
+          "x": 0.630425,
+          "y": 0.346878,
+          "worldX": -35.7769,
+          "worldY": -369.58
+        },
+        {
+          "x": 0.636835,
+          "y": 0.343664,
+          "worldX": -39.1521,
+          "worldY": -359.484
+        },
+        {
+          "x": 0.642031,
+          "y": 0.334713,
+          "worldX": -48.5506,
+          "worldY": -351.299
+        }
+      ]
+    },
+    {
+      "id": "5480204",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.617792,
+      "y": 0.333986,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -49.313899993896484,
+      "worldY": -389.47601318359375,
+      "patrol": [
+        {
+          "x": 0.618965,
+          "y": 0.337056,
+          "worldX": -46.0906,
+          "worldY": -387.628
+        },
+        {
+          "x": 0.624044,
+          "y": 0.343404,
+          "worldX": -39.4246,
+          "worldY": -379.63
+        },
+        {
+          "x": 0.6188,
+          "y": 0.336933,
+          "worldX": -46.2192,
+          "worldY": -387.889
+        },
+        {
+          "x": 0.615946,
+          "y": 0.327957,
+          "worldX": -55.6442,
+          "worldY": -392.384
+        }
+      ]
+    },
+    {
+      "id": "5480205",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.572281,
+      "y": 0.32314,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -60.701900482177734,
+      "worldY": -461.156005859375,
+      "patrol": [
+        {
+          "x": 0.570524,
+          "y": 0.316846,
+          "worldX": -67.3108,
+          "worldY": -463.924
+        },
+        {
+          "x": 0.572381,
+          "y": 0.326897,
+          "worldX": -56.7574,
+          "worldY": -460.999
+        },
+        {
+          "x": 0.570039,
+          "y": 0.336703,
+          "worldX": -46.4616,
+          "worldY": -464.688
+        },
+        {
+          "x": 0.573073,
+          "y": 0.326858,
+          "worldX": -56.7982,
+          "worldY": -459.909
+        }
+      ]
+    },
+    {
+      "id": "5480206",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.55863,
+      "y": 0.306284,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -78.40149688720703,
+      "worldY": -482.6570129394531,
+      "patrol": [
+        {
+          "x": 0.55204,
+          "y": 0.308471,
+          "worldX": -76.1053,
+          "worldY": -493.036
+        },
+        {
+          "x": 0.547632,
+          "y": 0.316672,
+          "worldX": -67.4938,
+          "worldY": -499.978
+        },
+        {
+          "x": 0.551846,
+          "y": 0.308691,
+          "worldX": -75.874,
+          "worldY": -493.342
+        },
+        {
+          "x": 0.559434,
+          "y": 0.306316,
+          "worldX": -78.368,
+          "worldY": -481.391
+        }
+      ]
+    },
+    {
+      "id": "5480207",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.522585,
+      "y": 0.404122,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 24.328899383544922,
+      "worldY": -539.427001953125,
+      "patrol": [
+        {
+          "x": 0.515272,
+          "y": 0.399702,
+          "worldX": 19.6877,
+          "worldY": -550.945
+        },
+        {
+          "x": 0.522448,
+          "y": 0.404236,
+          "worldX": 24.4482,
+          "worldY": -539.644
+        },
+        {
+          "x": 0.525908,
+          "y": 0.41353,
+          "worldX": 34.2069,
+          "worldY": -534.194
+        }
+      ]
+    },
+    {
+      "id": "5480208",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.628308,
+      "y": 0.508773,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 134.21299743652344,
+      "worldY": -372.9129943847656,
+      "patrol": [
+        {
+          "x": 0.629394,
+          "y": 0.504872,
+          "worldX": 130.117,
+          "worldY": -371.203
+        },
+        {
+          "x": 0.627412,
+          "y": 0.515553,
+          "worldX": 141.332,
+          "worldY": -374.325
+        },
+        {
+          "x": 0.629174,
+          "y": 0.525598,
+          "worldX": 151.879,
+          "worldY": -371.549
+        },
+        {
+          "x": 0.627627,
+          "y": 0.515796,
+          "worldX": 141.587,
+          "worldY": -373.986
+        }
+      ]
+    },
+    {
+      "id": "5480209",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.501543,
+      "y": 0.420556,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 41.584598541259766,
+      "worldY": -572.5679931640625,
+      "patrol": [
+        {
+          "x": 0.501381,
+          "y": 0.416512,
+          "worldX": 37.3388,
+          "worldY": -572.824
+        },
+        {
+          "x": 0.50354,
+          "y": 0.407286,
+          "worldX": 27.6516,
+          "worldY": -569.424
+        },
+        {
+          "x": 0.501338,
+          "y": 0.416965,
+          "worldX": 37.8146,
+          "worldY": -572.892
+        },
+        {
+          "x": 0.502164,
+          "y": 0.426734,
+          "worldX": 48.0711,
+          "worldY": -571.591
+        }
+      ]
+    },
+    {
+      "id": "5480210",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.646353,
+      "y": 0.534123,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 160.8300018310547,
+      "worldY": -344.4930114746094,
+      "patrol": [
+        {
+          "x": 0.651847,
+          "y": 0.526618,
+          "worldX": 152.95,
+          "worldY": -335.84
+        },
+        {
+          "x": 0.647035,
+          "y": 0.533391,
+          "worldX": 160.062,
+          "worldY": -343.419
+        },
+        {
+          "x": 0.640501,
+          "y": 0.534856,
+          "worldX": 161.6,
+          "worldY": -353.709
+        }
+      ]
+    },
+    {
+      "id": "5480211",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.536842,
+      "y": 0.499201,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 124.16200256347656,
+      "worldY": -516.9719848632812,
+      "patrol": [
+        {
+          "x": 0.541042,
+          "y": 0.496664,
+          "worldX": 121.498,
+          "worldY": -510.357
+        },
+        {
+          "x": 0.534976,
+          "y": 0.499127,
+          "worldX": 124.084,
+          "worldY": -519.912
+        },
+        {
+          "x": 0.529839,
+          "y": 0.506557,
+          "worldX": 131.886,
+          "worldY": -528.003
+        }
+      ]
+    },
+    {
+      "id": "5480212",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.53354,
+      "y": 0.533901,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 160.5970001220703,
+      "worldY": -522.1729736328125,
+      "patrol": [
+        {
+          "x": 0.529825,
+          "y": 0.525799,
+          "worldX": 152.09,
+          "worldY": -528.025
+        },
+        {
+          "x": 0.53414,
+          "y": 0.534158,
+          "worldX": 160.867,
+          "worldY": -521.229
+        },
+        {
+          "x": 0.541092,
+          "y": 0.536499,
+          "worldX": 163.325,
+          "worldY": -510.279
+        }
+      ]
+    },
+    {
+      "id": "5480213",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.464019,
+      "y": 0.850996,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 493.5469970703125,
+      "worldY": -631.6690063476562
+    },
+    {
+      "id": "5480214",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.464488,
+      "y": 0.863964,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 507.16400146484375,
+      "worldY": -630.9310302734375
+    },
+    {
+      "id": "5480215",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.401918,
+      "y": 0.852348,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 494.9670104980469,
+      "worldY": -729.47900390625
+    },
+    {
+      "id": "5480216",
+      "npcId": 21301,
+      "name": "Coilfang Shatterer",
+      "x": 0.408271,
+      "y": 0.850727,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 493.2650146484375,
+      "worldY": -719.4719848632812
+    },
+    {
+      "id": "5480217",
+      "npcId": 21339,
+      "name": "Coilfang Hate-Screamer",
+      "x": 0.776514,
+      "y": 0.246016,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -141.68299865722656,
+      "worldY": -139.48899841308594
+    },
+    {
+      "id": "5480218",
+      "npcId": 21339,
+      "name": "Coilfang Hate-Screamer",
+      "x": 0.785739,
+      "y": 0.249474,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -138.052001953125,
+      "worldY": -124.95999908447266
+    },
+    {
+      "id": "5480219",
+      "npcId": 21339,
+      "name": "Coilfang Hate-Screamer",
+      "x": 0.723539,
+      "y": 0.259535,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -127.48799896240234,
+      "worldY": -222.9239959716797
+    },
+    {
+      "id": "5480220",
+      "npcId": 21339,
+      "name": "Coilfang Hate-Screamer",
+      "x": 0.723984,
+      "y": 0.246491,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -141.1840057373047,
+      "worldY": -222.2239990234375
+    },
+    {
+      "id": "5480221",
+      "npcId": 21339,
+      "name": "Coilfang Hate-Screamer",
+      "x": 0.713102,
+      "y": 0.169862,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -221.64500427246094,
+      "worldY": -239.36300659179688
+    },
+    {
+      "id": "5480222",
+      "npcId": 21339,
+      "name": "Coilfang Hate-Screamer",
+      "x": 0.705534,
+      "y": 0.173424,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": -217.9040069580078,
+      "worldY": -251.28199768066406
+    },
+    {
+      "id": "5480273",
+      "npcId": 21806,
+      "name": "Greyheart Spellbinder",
+      "x": 0.592604,
+      "y": 0.736398,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 373.218994140625,
+      "worldY": -429.14801025390625
+    },
+    {
+      "id": "5480274",
+      "npcId": 21806,
+      "name": "Greyheart Spellbinder",
+      "x": 0.581604,
+      "y": 0.732602,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 369.2340087890625,
+      "worldY": -446.4729919433594
+    },
+    {
+      "id": "5480275",
+      "npcId": 21806,
+      "name": "Greyheart Spellbinder",
+      "x": 0.5847,
+      "y": 0.747768,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 385.1579895019531,
+      "worldY": -441.59698486328125
+    },
+    {
+      "id": "5480276",
+      "npcId": 21863,
+      "name": "Serpentshrine Lurker",
+      "x": 0.62794,
+      "y": 0.679848,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 313.8420104980469,
+      "worldY": -373.4930114746094,
+      "patrol": [
+        {
+          "x": 0.634178,
+          "y": 0.677844,
+          "worldX": 311.738,
+          "worldY": -363.668
+        },
+        {
+          "x": 0.640559,
+          "y": 0.669365,
+          "worldX": 302.835,
+          "worldY": -353.618
+        },
+        {
+          "x": 0.634065,
+          "y": 0.678924,
+          "worldX": 312.872,
+          "worldY": -363.847
+        },
+        {
+          "x": 0.627908,
+          "y": 0.68023,
+          "worldX": 314.243,
+          "worldY": -373.544
+        },
+        {
+          "x": 0.622905,
+          "y": 0.677504,
+          "worldX": 311.381,
+          "worldY": -381.423
+        },
+        {
+          "x": 0.628091,
+          "y": 0.680591,
+          "worldX": 314.622,
+          "worldY": -373.256
+        }
+      ]
+    },
+    {
+      "id": "5480277",
+      "npcId": 21863,
+      "name": "Serpentshrine Lurker",
+      "x": 0.630201,
+      "y": 0.758524,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 396.4519958496094,
+      "worldY": -369.9320068359375
+    },
+    {
+      "id": "5480281",
+      "npcId": 21964,
+      "name": "Fathom-Guard Caribdis",
+      "x": 0.517804,
+      "y": 0.821595,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 462.6759948730469,
+      "worldY": -546.9569702148438
+    },
+    {
+      "id": "5480282",
+      "npcId": 21965,
+      "name": "Fathom-Guard Tidalvess",
+      "x": 0.526418,
+      "y": 0.821445,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 462.5190124511719,
+      "worldY": -533.3909912109375
+    },
+    {
+      "id": "5480283",
+      "npcId": 21966,
+      "name": "Fathom-Guard Sharkkis",
+      "x": 0.522199,
+      "y": 0.824511,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 465.7380065917969,
+      "worldY": -540.0360107421875
+    },
+    {
+      "id": "5480290",
+      "npcId": 21212,
+      "name": "Lady Vashj",
+      "x": 0.279423,
+      "y": 0.409514,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 29.99020004272461,
+      "worldY": -922.4089965820312
+    },
+    {
+      "id": "5489999",
+      "npcId": 21217,
+      "name": "The Lurker Below",
+      "x": 0.599625,
+      "y": 0.417798,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/blob/da2de07e6606d495872c3fd92ba8363cf79f43c9/Updates/Instances/548_serpentshrine_cavern.sql#Lurker",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 38.68840026855469,
+      "worldY": -418.0889892578125
+    }
+  ],
+  "packs": [
+    {
+      "id": "candidate-001",
+      "label": "Candidate pack 1",
+      "spawnIds": [
+        "5480038"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-002",
+      "label": "Candidate pack 2",
+      "spawnIds": [
+        "5480039"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-003",
+      "label": "Candidate pack 3",
+      "spawnIds": [
+        "5480040"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-004",
+      "label": "Candidate pack 4",
+      "spawnIds": [
+        "5480041"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-005",
+      "label": "Candidate pack 5",
+      "spawnIds": [
+        "5480042"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-006",
+      "label": "Candidate pack 6",
+      "spawnIds": [
+        "5480043"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-007",
+      "label": "Candidate pack 7",
+      "spawnIds": [
+        "5480044"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-008",
+      "label": "Candidate pack 8",
+      "spawnIds": [
+        "5480045"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-009",
+      "label": "Candidate pack 9",
+      "spawnIds": [
+        "5480046"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-010",
+      "label": "Candidate pack 10",
+      "spawnIds": [
+        "5480047"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-011",
+      "label": "Candidate pack 11",
+      "spawnIds": [
+        "5480048",
+        "5480049"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-012",
+      "label": "Candidate pack 12",
+      "spawnIds": [
+        "5480050",
+        "5480051"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-013",
+      "label": "Candidate pack 13",
+      "spawnIds": [
+        "5480052",
+        "5480053"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-014",
+      "label": "Candidate pack 14",
+      "spawnIds": [
+        "5480054",
+        "5480055"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-015",
+      "label": "Candidate pack 15",
+      "spawnIds": [
+        "5480056",
+        "5480057"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-016",
+      "label": "Candidate pack 16",
+      "spawnIds": [
+        "5480058",
+        "5480059"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-017",
+      "label": "Candidate pack 17",
+      "spawnIds": [
+        "5480060"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-018",
+      "label": "Candidate pack 18",
+      "spawnIds": [
+        "5480061"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-019",
+      "label": "Candidate pack 19",
+      "spawnIds": [
+        "5480062"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-020",
+      "label": "Candidate pack 20",
+      "spawnIds": [
+        "5480063",
+        "5480067",
+        "5480068",
+        "5480076",
+        "5480083",
+        "5480085"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-021",
+      "label": "Candidate pack 21",
+      "spawnIds": [
+        "5480064",
+        "5480065",
+        "5480070",
+        "5480071",
+        "5480084",
+        "5480088"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-022",
+      "label": "Candidate pack 22",
+      "spawnIds": [
+        "5480066",
+        "5480074",
+        "5480075",
+        "5480081"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-023",
+      "label": "Candidate pack 23",
+      "spawnIds": [
+        "5480069",
+        "5480077",
+        "5480078",
+        "5480079",
+        "5480086",
+        "5480087"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-024",
+      "label": "Candidate pack 24",
+      "spawnIds": [
+        "5480072",
+        "5480073",
+        "5480080",
+        "5480082",
+        "5480089"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-025",
+      "label": "Candidate pack 25",
+      "spawnIds": [
+        "5480090",
+        "5480108",
+        "5480109",
+        "5480129"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-026",
+      "label": "Candidate pack 26",
+      "spawnIds": [
+        "5480091",
+        "5480110",
+        "5480111",
+        "5480130"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-027",
+      "label": "Candidate pack 27",
+      "spawnIds": [
+        "5480092",
+        "5480112",
+        "5480113",
+        "5480131"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-028",
+      "label": "Candidate pack 28",
+      "spawnIds": [
+        "5480093"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-029",
+      "label": "Candidate pack 29",
+      "spawnIds": [
+        "5480094"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-030",
+      "label": "Candidate pack 30",
+      "spawnIds": [
+        "5480095",
+        "5480114",
+        "5480132"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-031",
+      "label": "Candidate pack 31",
+      "spawnIds": [
+        "5480096",
+        "5480098",
+        "5480116"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-032",
+      "label": "Candidate pack 32",
+      "spawnIds": [
+        "5480097",
+        "5480099",
+        "5480117",
+        "5480122",
+        "5480135",
+        "5480136"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-033",
+      "label": "Candidate pack 33",
+      "spawnIds": [
+        "5480100",
+        "5480101",
+        "5480118",
+        "5480124",
+        "5480138"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-034",
+      "label": "Candidate pack 34",
+      "spawnIds": [
+        "5480102",
+        "5480121",
+        "5480123",
+        "5480125",
+        "5480126"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-035",
+      "label": "Candidate pack 35",
+      "spawnIds": [
+        "5480103",
+        "5480119",
+        "5480120",
+        "5480137"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-036",
+      "label": "Candidate pack 36",
+      "spawnIds": [
+        "5480104",
+        "5480105",
+        "5480106",
+        "5480107"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-037",
+      "label": "Candidate pack 37",
+      "spawnIds": [
+        "5480115",
+        "5480133",
+        "5480134"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-038",
+      "label": "Candidate pack 38",
+      "spawnIds": [
+        "5480127",
+        "5480128"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-039",
+      "label": "Candidate pack 39",
+      "spawnIds": [
+        "5480139",
+        "5480140"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-040",
+      "label": "Candidate pack 40",
+      "spawnIds": [
+        "5480141",
+        "5480142"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-041",
+      "label": "Candidate pack 41",
+      "spawnIds": [
+        "5480143",
+        "5480144"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-042",
+      "label": "Candidate pack 42",
+      "spawnIds": [
+        "5480145"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-043",
+      "label": "Candidate pack 43",
+      "spawnIds": [
+        "5480146"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-044",
+      "label": "Candidate pack 44",
+      "spawnIds": [
+        "5480147"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-045",
+      "label": "Candidate pack 45",
+      "spawnIds": [
+        "5480148"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-046",
+      "label": "Candidate pack 46",
+      "spawnIds": [
+        "5480149"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-047",
+      "label": "Candidate pack 47",
+      "spawnIds": [
+        "5480150"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-048",
+      "label": "Candidate pack 48",
+      "spawnIds": [
+        "5480151"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-049",
+      "label": "Candidate pack 49",
+      "spawnIds": [
+        "5480152"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-050",
+      "label": "Candidate pack 50",
+      "spawnIds": [
+        "5480153"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-051",
+      "label": "Candidate pack 51",
+      "spawnIds": [
+        "5480155",
+        "5480157"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-052",
+      "label": "Candidate pack 52",
+      "spawnIds": [
+        "5480156"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-053",
+      "label": "Candidate pack 53",
+      "spawnIds": [
+        "5480158"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-054",
+      "label": "Candidate pack 54",
+      "spawnIds": [
+        "5480159"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-055",
+      "label": "Candidate pack 55",
+      "spawnIds": [
+        "5480160",
+        "5480161",
+        "5480162"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-056",
+      "label": "Candidate pack 56",
+      "spawnIds": [
+        "5480163",
+        "5480165"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-057",
+      "label": "Candidate pack 57",
+      "spawnIds": [
+        "5480164"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-058",
+      "label": "Candidate pack 58",
+      "spawnIds": [
+        "5480166"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-059",
+      "label": "Candidate pack 59",
+      "spawnIds": [
+        "5480167"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-060",
+      "label": "Candidate pack 60",
+      "spawnIds": [
+        "5480168",
+        "5480169",
+        "5480170",
+        "5480171"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-061",
+      "label": "Candidate pack 61",
+      "spawnIds": [
+        "5480172",
+        "5480176"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-062",
+      "label": "Candidate pack 62",
+      "spawnIds": [
+        "5480173"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-063",
+      "label": "Candidate pack 63",
+      "spawnIds": [
+        "5480174",
+        "5480175"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-064",
+      "label": "Candidate pack 64",
+      "spawnIds": [
+        "5480177"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-065",
+      "label": "Candidate pack 65",
+      "spawnIds": [
+        "5480178"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-066",
+      "label": "Candidate pack 66",
+      "spawnIds": [
+        "5480179",
+        "5480180"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-067",
+      "label": "Candidate pack 67",
+      "spawnIds": [
+        "5480181",
+        "5480182"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-068",
+      "label": "Candidate pack 68",
+      "spawnIds": [
+        "5480183",
+        "5480184"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-069",
+      "label": "Candidate pack 69",
+      "spawnIds": [
+        "5480185",
+        "5480186",
+        "5480193",
+        "5480194"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-070",
+      "label": "Candidate pack 70",
+      "spawnIds": [
+        "5480187",
+        "5480188"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-071",
+      "label": "Candidate pack 71",
+      "spawnIds": [
+        "5480189",
+        "5480190",
+        "5480195",
+        "5480196"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-072",
+      "label": "Candidate pack 72",
+      "spawnIds": [
+        "5480191",
+        "5480197",
+        "5480198",
+        "5480213",
+        "5480214"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-073",
+      "label": "Candidate pack 73",
+      "spawnIds": [
+        "5480192",
+        "5480199",
+        "5480200",
+        "5480215",
+        "5480216"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-074",
+      "label": "Candidate pack 74",
+      "spawnIds": [
+        "5480201"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-075",
+      "label": "Candidate pack 75",
+      "spawnIds": [
+        "5480202"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-076",
+      "label": "Candidate pack 76",
+      "spawnIds": [
+        "5480203"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-077",
+      "label": "Candidate pack 77",
+      "spawnIds": [
+        "5480204"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-078",
+      "label": "Candidate pack 78",
+      "spawnIds": [
+        "5480205"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-079",
+      "label": "Candidate pack 79",
+      "spawnIds": [
+        "5480206"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-080",
+      "label": "Candidate pack 80",
+      "spawnIds": [
+        "5480207"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-081",
+      "label": "Candidate pack 81",
+      "spawnIds": [
+        "5480208"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-082",
+      "label": "Candidate pack 82",
+      "spawnIds": [
+        "5480209"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-083",
+      "label": "Candidate pack 83",
+      "spawnIds": [
+        "5480210"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-084",
+      "label": "Candidate pack 84",
+      "spawnIds": [
+        "5480211"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-085",
+      "label": "Candidate pack 85",
+      "spawnIds": [
+        "5480212"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-086",
+      "label": "Candidate pack 86",
+      "spawnIds": [
+        "5480217",
+        "5480218"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-087",
+      "label": "Candidate pack 87",
+      "spawnIds": [
+        "5480219",
+        "5480220"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-088",
+      "label": "Candidate pack 88",
+      "spawnIds": [
+        "5480221",
+        "5480222"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-089",
+      "label": "Candidate pack 89",
+      "spawnIds": [
+        "5480273",
+        "5480274",
+        "5480275"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-090",
+      "label": "Candidate pack 90",
+      "spawnIds": [
+        "5480276"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-091",
+      "label": "Candidate pack 91",
+      "spawnIds": [
+        "5480277"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-092",
+      "label": "Candidate pack 92",
+      "spawnIds": [
+        "5480281"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-093",
+      "label": "Candidate pack 93",
+      "spawnIds": [
+        "5480282",
+        "5480283"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-094",
+      "label": "Candidate pack 94",
+      "spawnIds": [
+        "5480290"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-095",
+      "label": "Candidate pack 95",
+      "spawnIds": [
+        "5489999"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    }
+  ],
+  "pois": []
+}

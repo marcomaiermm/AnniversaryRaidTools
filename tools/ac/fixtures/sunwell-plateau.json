@@ -1,0 +1,6230 @@
+{
+  "metadata": {
+    "project": "CMaNGOS TBC",
+    "snapshot": "sunwell-plateau-map-580",
+    "commit": "da2de07e6606d495872c3fd92ba8363cf79f43c9",
+    "databaseVersion": "TBCDB 1.11.0",
+    "exportedAt": "2026-08-22T12:00:00Z",
+    "coordinateBasis": "CMaNGOS world positions projected through pinned LibMapData rectangles; client C_Map world projection remains runtime authority",
+    "coverage": {
+      "selectedStaticSpawns": 203,
+      "npcIds": 35,
+      "renderedPatrols": 23
+    }
+  },
+  "source": {
+    "source": "derived",
+    "confidence": "candidate",
+    "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+    "observedAt": "2026-08-22T12:00:00Z"
+  },
+  "raid": {
+    "key": "sunwell-plateau",
+    "name": "Sunwell Plateau",
+    "instanceId": 580,
+    "mapId": 580,
+    "mode": "route"
+  },
+  "sublevels": [
+    {
+      "index": 1,
+      "name": "Sunwell Plateau",
+      "mapId": 580
+    },
+    {
+      "index": 2,
+      "name": "Shrine of the Eclipse",
+      "mapId": 580
+    }
+  ],
+  "spawns": [
+    {
+      "id": "5800061",
+      "npcId": 24850,
+      "name": "Kalecgos",
+      "x": 0.689388,
+      "y": 0.489727,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1704.2099609375,
+      "worldY": 924.7579956054688
+    },
+    {
+      "id": "5800062",
+      "npcId": 24882,
+      "name": "Brutallus",
+      "x": 0.343737,
+      "y": 0.091857,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1463.8299560546875,
+      "worldY": 611.5120239257812
+    },
+    {
+      "id": "5800063",
+      "npcId": 24891,
+      "name": "Kalecgos",
+      "x": 0.692417,
+      "y": 0.497804,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1709.0899658203125,
+      "worldY": 927.5029907226562
+    },
+    {
+      "id": "5800064",
+      "npcId": 24892,
+      "name": "Sathrovarr the Corruptor",
+      "x": 0.694092,
+      "y": 0.48261,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1699.9100341796875,
+      "worldY": 929.02099609375
+    },
+    {
+      "id": "5800068",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.786383,
+      "y": 0.319724,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1601.5,
+      "worldY": 1012.6599731445312
+    },
+    {
+      "id": "5800070",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.689127,
+      "y": 0.361004,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1626.43994140625,
+      "worldY": 924.52099609375
+    },
+    {
+      "id": "5800071",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.686797,
+      "y": 0.402218,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1651.3399658203125,
+      "worldY": 922.4099731445312
+    },
+    {
+      "id": "5800072",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.687948,
+      "y": 0.408508,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1655.1400146484375,
+      "worldY": 923.4530029296875
+    },
+    {
+      "id": "5800073",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.759827,
+      "y": 0.410113,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1656.1099853515625,
+      "worldY": 988.593017578125
+    },
+    {
+      "id": "5800074",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.825148,
+      "y": 0.421881,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1663.219970703125,
+      "worldY": 1047.7900390625
+    },
+    {
+      "id": "5800076",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.777688,
+      "y": 0.548717,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1739.8499755859375,
+      "worldY": 1004.780029296875
+    },
+    {
+      "id": "5800077",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.838963,
+      "y": 0.558582,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1745.81005859375,
+      "worldY": 1060.31005859375
+    },
+    {
+      "id": "5800078",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.601687,
+      "y": 0.662759,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1808.75,
+      "worldY": 845.2789916992188
+    },
+    {
+      "id": "5800079",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.792618,
+      "y": 0.6664,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1810.949951171875,
+      "worldY": 1018.3099975585938
+    },
+    {
+      "id": "5800080",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.60938,
+      "y": 0.319625,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1601.43994140625,
+      "worldY": 852.2509765625
+    },
+    {
+      "id": "5800081",
+      "npcId": 25367,
+      "name": "Sunblade Arch Mage",
+      "x": 0.825622,
+      "y": 0.333065,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1609.56005859375,
+      "worldY": 1048.219970703125
+    },
+    {
+      "id": "5800082",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.802317,
+      "y": 0.353771,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1622.0699462890625,
+      "worldY": 1027.0999755859375
+    },
+    {
+      "id": "5800083",
+      "npcId": 25367,
+      "name": "Sunblade Arch Mage",
+      "x": 0.688084,
+      "y": 0.375321,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1635.0899658203125,
+      "worldY": 923.5759887695312
+    },
+    {
+      "id": "5800084",
+      "npcId": 25367,
+      "name": "Sunblade Arch Mage",
+      "x": 0.691959,
+      "y": 0.377225,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1636.239990234375,
+      "worldY": 927.0880126953125
+    },
+    {
+      "id": "5800085",
+      "npcId": 25367,
+      "name": "Sunblade Arch Mage",
+      "x": 0.738758,
+      "y": 0.390632,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1644.3399658203125,
+      "worldY": 969.4990234375
+    },
+    {
+      "id": "5800087",
+      "npcId": 25367,
+      "name": "Sunblade Arch Mage",
+      "x": 0.827277,
+      "y": 0.414169,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1658.56005859375,
+      "worldY": 1049.719970703125
+    },
+    {
+      "id": "5800088",
+      "npcId": 25367,
+      "name": "Sunblade Arch Mage",
+      "x": 0.819608,
+      "y": 0.415708,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1659.489990234375,
+      "worldY": 1042.77001953125
+    },
+    {
+      "id": "5800089",
+      "npcId": 25367,
+      "name": "Sunblade Arch Mage",
+      "x": 0.763763,
+      "y": 0.449722,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1680.0400390625,
+      "worldY": 992.1599731445312
+    },
+    {
+      "id": "5800090",
+      "npcId": 25367,
+      "name": "Sunblade Arch Mage",
+      "x": 0.846246,
+      "y": 0.552491,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1742.1300048828125,
+      "worldY": 1066.9100341796875
+    },
+    {
+      "id": "5800091",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.768642,
+      "y": 0.557093,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1744.9100341796875,
+      "worldY": 996.5819702148438
+    },
+    {
+      "id": "5800094",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.80021,
+      "y": 0.647018,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1799.239990234375,
+      "worldY": 1025.18994140625
+    },
+    {
+      "id": "5800095",
+      "npcId": 25368,
+      "name": "Sunblade Slayer",
+      "x": 0.694262,
+      "y": 0.364464,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1628.530029296875,
+      "worldY": 929.1749877929688
+    },
+    {
+      "id": "5800096",
+      "npcId": 25368,
+      "name": "Sunblade Slayer",
+      "x": 0.830389,
+      "y": 0.404039,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1652.43994140625,
+      "worldY": 1052.5400390625
+    },
+    {
+      "id": "5800097",
+      "npcId": 25368,
+      "name": "Sunblade Slayer",
+      "x": 0.695034,
+      "y": 0.420855,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1662.5999755859375,
+      "worldY": 929.875
+    },
+    {
+      "id": "5800098",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.779023,
+      "y": 0.33386,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1610.0400390625,
+      "worldY": 1005.989990234375
+    },
+    {
+      "id": "5800099",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.832309,
+      "y": 0.335846,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1611.239990234375,
+      "worldY": 1054.280029296875,
+      "patrol": [
+        {
+          "x": 0.849368,
+          "y": 0.337931,
+          "worldX": 1612.5,
+          "worldY": 1069.74
+        },
+        {
+          "x": 0.866108,
+          "y": 0.355476,
+          "worldX": 1623.1,
+          "worldY": 1084.91
+        },
+        {
+          "x": 0.875145,
+          "y": 0.377821,
+          "worldX": 1636.6,
+          "worldY": 1093.1
+        },
+        {
+          "x": 0.876292,
+          "y": 0.393578,
+          "worldX": 1646.12,
+          "worldY": 1094.14
+        },
+        {
+          "x": 0.877429,
+          "y": 0.421418,
+          "worldX": 1662.94,
+          "worldY": 1095.17
+        },
+        {
+          "x": 0.87819,
+          "y": 0.450003,
+          "worldX": 1680.21,
+          "worldY": 1095.86
+        },
+        {
+          "x": 0.878433,
+          "y": 0.465826,
+          "worldX": 1689.77,
+          "worldY": 1096.08
+        },
+        {
+          "x": 0.878312,
+          "y": 0.492756,
+          "worldX": 1706.04,
+          "worldY": 1095.97
+        },
+        {
+          "x": 0.878257,
+          "y": 0.52053,
+          "worldX": 1722.82,
+          "worldY": 1095.92
+        },
+        {
+          "x": 0.877197,
+          "y": 0.545192,
+          "worldX": 1737.72,
+          "worldY": 1094.96
+        },
+        {
+          "x": 0.876568,
+          "y": 0.580348,
+          "worldX": 1758.96,
+          "worldY": 1094.39
+        },
+        {
+          "x": 0.873181,
+          "y": 0.608817,
+          "worldX": 1776.16,
+          "worldY": 1091.32
+        },
+        {
+          "x": 0.859906,
+          "y": 0.640745,
+          "worldX": 1795.45,
+          "worldY": 1079.29
+        },
+        {
+          "x": 0.844491,
+          "y": 0.651586,
+          "worldX": 1802.0,
+          "worldY": 1065.32
+        },
+        {
+          "x": 0.827354,
+          "y": 0.653639,
+          "worldX": 1803.24,
+          "worldY": 1049.79
+        },
+        {
+          "x": 0.844491,
+          "y": 0.651586,
+          "worldX": 1802.0,
+          "worldY": 1065.32
+        },
+        {
+          "x": 0.859906,
+          "y": 0.640745,
+          "worldX": 1795.45,
+          "worldY": 1079.29
+        },
+        {
+          "x": 0.873181,
+          "y": 0.608817,
+          "worldX": 1776.16,
+          "worldY": 1091.32
+        },
+        {
+          "x": 0.876524,
+          "y": 0.580679,
+          "worldX": 1759.16,
+          "worldY": 1094.35
+        },
+        {
+          "x": 0.877197,
+          "y": 0.545192,
+          "worldX": 1737.72,
+          "worldY": 1094.96
+        },
+        {
+          "x": 0.878257,
+          "y": 0.52053,
+          "worldX": 1722.82,
+          "worldY": 1095.92
+        },
+        {
+          "x": 0.878312,
+          "y": 0.492756,
+          "worldX": 1706.04,
+          "worldY": 1095.97
+        },
+        {
+          "x": 0.878433,
+          "y": 0.465826,
+          "worldX": 1689.77,
+          "worldY": 1096.08
+        },
+        {
+          "x": 0.87819,
+          "y": 0.450003,
+          "worldX": 1680.21,
+          "worldY": 1095.86
+        },
+        {
+          "x": 0.877429,
+          "y": 0.421418,
+          "worldX": 1662.94,
+          "worldY": 1095.17
+        },
+        {
+          "x": 0.876314,
+          "y": 0.393859,
+          "worldX": 1646.29,
+          "worldY": 1094.16
+        },
+        {
+          "x": 0.875145,
+          "y": 0.377821,
+          "worldX": 1636.6,
+          "worldY": 1093.1
+        },
+        {
+          "x": 0.866108,
+          "y": 0.355476,
+          "worldX": 1623.1,
+          "worldY": 1084.91
+        },
+        {
+          "x": 0.849368,
+          "y": 0.337931,
+          "worldX": 1612.5,
+          "worldY": 1069.74
+        },
+        {
+          "x": 0.838047,
+          "y": 0.335779,
+          "worldX": 1611.2,
+          "worldY": 1059.48
+        },
+        {
+          "x": 0.827531,
+          "y": 0.335962,
+          "worldX": 1611.31,
+          "worldY": 1049.95
+        },
+        {
+          "x": 0.838047,
+          "y": 0.335779,
+          "worldX": 1611.2,
+          "worldY": 1059.48
+        }
+      ]
+    },
+    {
+      "id": "5800101",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.692132,
+      "y": 0.358124,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1624.699951171875,
+      "worldY": 927.2449951171875
+    },
+    {
+      "id": "5800102",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.745587,
+      "y": 0.393595,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1646.1300048828125,
+      "worldY": 975.68798828125,
+      "patrol": [
+        {
+          "x": 0.768881,
+          "y": 0.395564,
+          "worldX": 1647.32,
+          "worldY": 996.798
+        },
+        {
+          "x": 0.787807,
+          "y": 0.403211,
+          "worldX": 1651.94,
+          "worldY": 1013.95
+        },
+        {
+          "x": 0.79776,
+          "y": 0.411768,
+          "worldX": 1657.11,
+          "worldY": 1022.97
+        },
+        {
+          "x": 0.807702,
+          "y": 0.421385,
+          "worldX": 1662.92,
+          "worldY": 1031.98
+        },
+        {
+          "x": 0.82197,
+          "y": 0.435901,
+          "worldX": 1671.69,
+          "worldY": 1044.91
+        },
+        {
+          "x": 0.83424,
+          "y": 0.464436,
+          "worldX": 1688.93,
+          "worldY": 1056.03
+        },
+        {
+          "x": 0.83648,
+          "y": 0.480673,
+          "worldX": 1698.74,
+          "worldY": 1058.06
+        },
+        {
+          "x": 0.836657,
+          "y": 0.504259,
+          "worldX": 1712.99,
+          "worldY": 1058.22
+        },
+        {
+          "x": 0.833556,
+          "y": 0.536751,
+          "worldX": 1732.62,
+          "worldY": 1055.41
+        },
+        {
+          "x": 0.81856,
+          "y": 0.554577,
+          "worldX": 1743.39,
+          "worldY": 1041.82
+        },
+        {
+          "x": 0.79424,
+          "y": 0.576276,
+          "worldX": 1756.5,
+          "worldY": 1019.78
+        },
+        {
+          "x": 0.757103,
+          "y": 0.609396,
+          "worldX": 1776.51,
+          "worldY": 986.125
+        },
+        {
+          "x": 0.79424,
+          "y": 0.576276,
+          "worldX": 1756.5,
+          "worldY": 1019.78
+        },
+        {
+          "x": 0.81856,
+          "y": 0.554577,
+          "worldX": 1743.39,
+          "worldY": 1041.82
+        },
+        {
+          "x": 0.833556,
+          "y": 0.536751,
+          "worldX": 1732.62,
+          "worldY": 1055.41
+        },
+        {
+          "x": 0.836657,
+          "y": 0.504259,
+          "worldX": 1712.99,
+          "worldY": 1058.22
+        },
+        {
+          "x": 0.83648,
+          "y": 0.480673,
+          "worldX": 1698.74,
+          "worldY": 1058.06
+        },
+        {
+          "x": 0.83424,
+          "y": 0.464436,
+          "worldX": 1688.93,
+          "worldY": 1056.03
+        },
+        {
+          "x": 0.82197,
+          "y": 0.435901,
+          "worldX": 1671.69,
+          "worldY": 1044.91
+        },
+        {
+          "x": 0.807702,
+          "y": 0.421385,
+          "worldX": 1662.92,
+          "worldY": 1031.98
+        },
+        {
+          "x": 0.79776,
+          "y": 0.411768,
+          "worldX": 1657.11,
+          "worldY": 1022.97
+        },
+        {
+          "x": 0.787807,
+          "y": 0.403211,
+          "worldX": 1651.94,
+          "worldY": 1013.95
+        },
+        {
+          "x": 0.768881,
+          "y": 0.395564,
+          "worldX": 1647.32,
+          "worldY": 996.798
+        },
+        {
+          "x": 0.748265,
+          "y": 0.393628,
+          "worldX": 1646.15,
+          "worldY": 978.115
+        },
+        {
+          "x": 0.733537,
+          "y": 0.393843,
+          "worldX": 1646.28,
+          "worldY": 964.768
+        },
+        {
+          "x": 0.748265,
+          "y": 0.393628,
+          "worldX": 1646.15,
+          "worldY": 978.115
+        }
+      ]
+    },
+    {
+      "id": "5800104",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.692064,
+      "y": 0.407912,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1654.780029296875,
+      "worldY": 927.1829833984375
+    },
+    {
+      "id": "5800105",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.83157,
+      "y": 0.410477,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1656.3299560546875,
+      "worldY": 1053.6099853515625
+    },
+    {
+      "id": "5800106",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.751265,
+      "y": 0.431829,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1669.22998046875,
+      "worldY": 980.833984375
+    },
+    {
+      "id": "5800107",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.84565,
+      "y": 0.561562,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1747.6099853515625,
+      "worldY": 1066.3699951171875
+    },
+    {
+      "id": "5800108",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.774643,
+      "y": 0.572651,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1754.31005859375,
+      "worldY": 1002.02001953125
+    },
+    {
+      "id": "5800109",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.766947,
+      "y": 0.577832,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1757.43994140625,
+      "worldY": 995.0460205078125
+    },
+    {
+      "id": "5800111",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.782908,
+      "y": 0.645181,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1798.1300048828125,
+      "worldY": 1009.510009765625
+    },
+    {
+      "id": "5800112",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.608058,
+      "y": 0.647564,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1799.5699462890625,
+      "worldY": 851.052978515625
+    },
+    {
+      "id": "5800113",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.781782,
+      "y": 0.659498,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1806.780029296875,
+      "worldY": 1008.489990234375
+    },
+    {
+      "id": "5800115",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.809732,
+      "y": 0.33515,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1610.8199462890625,
+      "worldY": 1033.8199462890625
+    },
+    {
+      "id": "5800116",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.825655,
+      "y": 0.338808,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1613.030029296875,
+      "worldY": 1048.25
+    },
+    {
+      "id": "5800117",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.738723,
+      "y": 0.396359,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1647.800048828125,
+      "worldY": 969.468017578125
+    },
+    {
+      "id": "5800119",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.690989,
+      "y": 0.425804,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1665.5899658203125,
+      "worldY": 926.208984375
+    },
+    {
+      "id": "5800120",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.766604,
+      "y": 0.435752,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1671.5999755859375,
+      "worldY": 994.7349853515625
+    },
+    {
+      "id": "5800121",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.773131,
+      "y": 0.550025,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1740.6400146484375,
+      "worldY": 1000.6500244140625
+    },
+    {
+      "id": "5800122",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.830279,
+      "y": 0.566544,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1750.6199951171875,
+      "worldY": 1052.43994140625
+    },
+    {
+      "id": "5800125",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.800044,
+      "y": 0.657231,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1805.4100341796875,
+      "worldY": 1025.0400390625
+    },
+    {
+      "id": "5800126",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.800772,
+      "y": 0.317986,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1600.449951171875,
+      "worldY": 1025.699951171875
+    },
+    {
+      "id": "5800128",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.828954,
+      "y": 0.335895,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1611.27001953125,
+      "worldY": 1051.239990234375
+    },
+    {
+      "id": "5800129",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.606911,
+      "y": 0.344088,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1616.219970703125,
+      "worldY": 850.0130004882812
+    },
+    {
+      "id": "5800130",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.785236,
+      "y": 0.351239,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1620.5400390625,
+      "worldY": 1011.6199951171875
+    },
+    {
+      "id": "5800131",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.691375,
+      "y": 0.352927,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1621.56005859375,
+      "worldY": 926.5590209960938
+    },
+    {
+      "id": "5800132",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.74205,
+      "y": 0.393545,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1646.0999755859375,
+      "worldY": 972.4829711914062
+    },
+    {
+      "id": "5800133",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.690443,
+      "y": 0.40384,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1652.3199462890625,
+      "worldY": 925.7139892578125
+    },
+    {
+      "id": "5800134",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.825225,
+      "y": 0.406521,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1653.93994140625,
+      "worldY": 1047.8599853515625
+    },
+    {
+      "id": "5800137",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.763907,
+      "y": 0.430306,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1668.31005859375,
+      "worldY": 992.291015625
+    },
+    {
+      "id": "5800138",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.753628,
+      "y": 0.453942,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1682.5899658203125,
+      "worldY": 982.9749755859375
+    },
+    {
+      "id": "5800139",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.764566,
+      "y": 0.54971,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1740.449951171875,
+      "worldY": 992.8880004882812
+    },
+    {
+      "id": "5800140",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.832541,
+      "y": 0.556215,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1744.3800048828125,
+      "worldY": 1054.489990234375
+    },
+    {
+      "id": "5800141",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.850681,
+      "y": 0.559327,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1746.260009765625,
+      "worldY": 1070.9300537109375
+    },
+    {
+      "id": "5800143",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.60084,
+      "y": 0.632552,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1790.5,
+      "worldY": 844.510986328125
+    },
+    {
+      "id": "5800144",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.792044,
+      "y": 0.638626,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1794.1700439453125,
+      "worldY": 1017.7899780273438
+    },
+    {
+      "id": "5800146",
+      "npcId": 25372,
+      "name": "Sunblade Scout",
+      "x": 0.750654,
+      "y": 0.401093,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1650.6600341796875,
+      "worldY": 980.280029296875,
+      "patrol": [
+        {
+          "x": 0.742745,
+          "y": 0.38368,
+          "worldX": 1640.14,
+          "worldY": 973.113
+        },
+        {
+          "x": 0.747091,
+          "y": 0.377738,
+          "worldX": 1636.55,
+          "worldY": 977.051
+        },
+        {
+          "x": 0.756218,
+          "y": 0.376315,
+          "worldX": 1635.69,
+          "worldY": 985.323
+        },
+        {
+          "x": 0.766618,
+          "y": 0.377871,
+          "worldX": 1636.63,
+          "worldY": 994.748
+        },
+        {
+          "x": 0.774764,
+          "y": 0.384607,
+          "worldX": 1640.7,
+          "worldY": 1002.13
+        },
+        {
+          "x": 0.768028,
+          "y": 0.395631,
+          "worldX": 1647.36,
+          "worldY": 996.025
+        },
+        {
+          "x": 0.757124,
+          "y": 0.404055,
+          "worldX": 1652.45,
+          "worldY": 986.144
+        },
+        {
+          "x": 0.756817,
+          "y": 0.413142,
+          "worldX": 1657.94,
+          "worldY": 985.865
+        },
+        {
+          "x": 0.757779,
+          "y": 0.422858,
+          "worldX": 1663.81,
+          "worldY": 986.737
+        },
+        {
+          "x": 0.760366,
+          "y": 0.431978,
+          "worldX": 1669.32,
+          "worldY": 989.082
+        },
+        {
+          "x": 0.763212,
+          "y": 0.439344,
+          "worldX": 1673.77,
+          "worldY": 991.661
+        },
+        {
+          "x": 0.76029,
+          "y": 0.448083,
+          "worldX": 1679.05,
+          "worldY": 989.013
+        },
+        {
+          "x": 0.752362,
+          "y": 0.449192,
+          "worldX": 1679.72,
+          "worldY": 981.828
+        },
+        {
+          "x": 0.750114,
+          "y": 0.443349,
+          "worldX": 1676.19,
+          "worldY": 979.791
+        },
+        {
+          "x": 0.753081,
+          "y": 0.434775,
+          "worldX": 1671.01,
+          "worldY": 982.48
+        },
+        {
+          "x": 0.754375,
+          "y": 0.425391,
+          "worldX": 1665.34,
+          "worldY": 983.652
+        },
+        {
+          "x": 0.754374,
+          "y": 0.415857,
+          "worldX": 1659.58,
+          "worldY": 983.651
+        },
+        {
+          "x": 0.753996,
+          "y": 0.406853,
+          "worldX": 1654.14,
+          "worldY": 983.309
+        },
+        {
+          "x": 0.747566,
+          "y": 0.395763,
+          "worldX": 1647.44,
+          "worldY": 977.482
+        }
+      ]
+    },
+    {
+      "id": "5800147",
+      "npcId": 25372,
+      "name": "Sunblade Scout",
+      "x": 0.828039,
+      "y": 0.433766,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1670.4000244140625,
+      "worldY": 1050.4100341796875,
+      "patrol": [
+        {
+          "x": 0.840099,
+          "y": 0.455647,
+          "worldX": 1683.62,
+          "worldY": 1061.34
+        },
+        {
+          "x": 0.830301,
+          "y": 0.455962,
+          "worldX": 1683.81,
+          "worldY": 1052.46
+        },
+        {
+          "x": 0.819343,
+          "y": 0.457153,
+          "worldX": 1684.53,
+          "worldY": 1042.53
+        },
+        {
+          "x": 0.810858,
+          "y": 0.445716,
+          "worldX": 1677.62,
+          "worldY": 1034.84
+        },
+        {
+          "x": 0.802229,
+          "y": 0.436298,
+          "worldX": 1671.93,
+          "worldY": 1027.02
+        },
+        {
+          "x": 0.795862,
+          "y": 0.428966,
+          "worldX": 1667.5,
+          "worldY": 1021.25
+        },
+        {
+          "x": 0.802847,
+          "y": 0.422229,
+          "worldX": 1663.43,
+          "worldY": 1027.58
+        },
+        {
+          "x": 0.809611,
+          "y": 0.415939,
+          "worldX": 1659.63,
+          "worldY": 1033.71
+        },
+        {
+          "x": 0.8176,
+          "y": 0.423272,
+          "worldX": 1664.06,
+          "worldY": 1040.95
+        },
+        {
+          "x": 0.826339,
+          "y": 0.432061,
+          "worldX": 1669.37,
+          "worldY": 1048.87
+        },
+        {
+          "x": 0.831702,
+          "y": 0.437738,
+          "worldX": 1672.8,
+          "worldY": 1053.73
+        }
+      ]
+    },
+    {
+      "id": "5800148",
+      "npcId": 25372,
+      "name": "Sunblade Scout",
+      "x": 0.81717,
+      "y": 0.563879,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1749.010009765625,
+      "worldY": 1040.56005859375,
+      "patrol": [
+        {
+          "x": 0.817854,
+          "y": 0.546615,
+          "worldX": 1738.58,
+          "worldY": 1041.18
+        },
+        {
+          "x": 0.823139,
+          "y": 0.538538,
+          "worldX": 1733.7,
+          "worldY": 1045.97
+        },
+        {
+          "x": 0.827167,
+          "y": 0.533986,
+          "worldX": 1730.95,
+          "worldY": 1049.62
+        },
+        {
+          "x": 0.834814,
+          "y": 0.533871,
+          "worldX": 1730.88,
+          "worldY": 1056.55
+        },
+        {
+          "x": 0.842637,
+          "y": 0.536122,
+          "worldX": 1732.24,
+          "worldY": 1063.64
+        },
+        {
+          "x": 0.85131,
+          "y": 0.548353,
+          "worldX": 1739.63,
+          "worldY": 1071.5
+        },
+        {
+          "x": 0.84459,
+          "y": 0.546053,
+          "worldX": 1738.24,
+          "worldY": 1065.41
+        },
+        {
+          "x": 0.839459,
+          "y": 0.552392,
+          "worldX": 1742.07,
+          "worldY": 1060.76
+        },
+        {
+          "x": 0.830621,
+          "y": 0.550505,
+          "worldX": 1740.93,
+          "worldY": 1052.75
+        },
+        {
+          "x": 0.826593,
+          "y": 0.561942,
+          "worldX": 1747.84,
+          "worldY": 1049.1
+        },
+        {
+          "x": 0.823481,
+          "y": 0.567173,
+          "worldX": 1751.0,
+          "worldY": 1046.28
+        },
+        {
+          "x": 0.817931,
+          "y": 0.565104,
+          "worldX": 1749.75,
+          "worldY": 1041.25
+        },
+        {
+          "x": 0.811432,
+          "y": 0.554626,
+          "worldX": 1743.42,
+          "worldY": 1035.36
+        }
+      ]
+    },
+    {
+      "id": "5800149",
+      "npcId": 25372,
+      "name": "Sunblade Scout",
+      "x": 0.766353,
+      "y": 0.569556,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1752.43994140625,
+      "worldY": 994.5070190429688,
+      "patrol": [
+        {
+          "x": 0.78101,
+          "y": 0.566593,
+          "worldX": 1750.65,
+          "worldY": 1007.79
+        },
+        {
+          "x": 0.78389,
+          "y": 0.559211,
+          "worldX": 1746.19,
+          "worldY": 1010.4
+        },
+        {
+          "x": 0.787156,
+          "y": 0.553004,
+          "worldX": 1742.44,
+          "worldY": 1013.36
+        },
+        {
+          "x": 0.787972,
+          "y": 0.544728,
+          "worldX": 1737.44,
+          "worldY": 1014.1
+        },
+        {
+          "x": 0.789219,
+          "y": 0.529683,
+          "worldX": 1728.35,
+          "worldY": 1015.23
+        },
+        {
+          "x": 0.787686,
+          "y": 0.524188,
+          "worldX": 1725.03,
+          "worldY": 1013.84
+        },
+        {
+          "x": 0.783625,
+          "y": 0.518179,
+          "worldX": 1721.4,
+          "worldY": 1010.16
+        },
+        {
+          "x": 0.777457,
+          "y": 0.51184,
+          "worldX": 1717.57,
+          "worldY": 1004.57
+        },
+        {
+          "x": 0.769779,
+          "y": 0.511195,
+          "worldX": 1717.18,
+          "worldY": 997.612
+        },
+        {
+          "x": 0.762653,
+          "y": 0.51525,
+          "worldX": 1719.63,
+          "worldY": 991.154
+        },
+        {
+          "x": 0.754022,
+          "y": 0.517815,
+          "worldX": 1721.18,
+          "worldY": 983.332
+        },
+        {
+          "x": 0.747358,
+          "y": 0.523708,
+          "worldX": 1724.74,
+          "worldY": 977.293
+        },
+        {
+          "x": 0.739989,
+          "y": 0.532497,
+          "worldX": 1730.05,
+          "worldY": 970.615
+        },
+        {
+          "x": 0.733032,
+          "y": 0.535708,
+          "worldX": 1731.99,
+          "worldY": 964.31
+        },
+        {
+          "x": 0.729411,
+          "y": 0.547608,
+          "worldX": 1739.18,
+          "worldY": 961.029
+        },
+        {
+          "x": 0.731097,
+          "y": 0.562008,
+          "worldX": 1747.88,
+          "worldY": 962.557
+        },
+        {
+          "x": 0.74007,
+          "y": 0.563962,
+          "worldX": 1749.06,
+          "worldY": 970.688
+        },
+        {
+          "x": 0.747119,
+          "y": 0.565219,
+          "worldX": 1749.82,
+          "worldY": 977.077
+        },
+        {
+          "x": 0.753508,
+          "y": 0.567802,
+          "worldX": 1751.38,
+          "worldY": 982.867
+        },
+        {
+          "x": 0.758514,
+          "y": 0.569705,
+          "worldX": 1752.53,
+          "worldY": 987.403
+        },
+        {
+          "x": 0.7627,
+          "y": 0.57045,
+          "worldX": 1752.98,
+          "worldY": 991.197
+        },
+        {
+          "x": 0.769562,
+          "y": 0.570268,
+          "worldX": 1752.87,
+          "worldY": 997.416
+        },
+        {
+          "x": 0.776243,
+          "y": 0.569159,
+          "worldX": 1752.2,
+          "worldY": 1003.47
+        }
+      ]
+    },
+    {
+      "id": "5800150",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.740971,
+      "y": 0.343112,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1615.6300048828125,
+      "worldY": 971.5050048828125
+    },
+    {
+      "id": "5800151",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.800805,
+      "y": 0.380452,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1638.18994140625,
+      "worldY": 1025.72998046875
+    },
+    {
+      "id": "5800152",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.864364,
+      "y": 0.434246,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1670.68994140625,
+      "worldY": 1083.3299560546875
+    },
+    {
+      "id": "5800153",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.652248,
+      "y": 0.437076,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1672.4000244140625,
+      "worldY": 891.0999755859375,
+      "patrol": [
+        {
+          "x": 0.66754,
+          "y": 0.41152,
+          "worldX": 1656.96,
+          "worldY": 904.958
+        },
+        {
+          "x": 0.669226,
+          "y": 0.390019,
+          "worldX": 1643.97,
+          "worldY": 906.486
+        },
+        {
+          "x": 0.662919,
+          "y": 0.374395,
+          "worldX": 1634.53,
+          "worldY": 900.77
+        },
+        {
+          "x": 0.64908,
+          "y": 0.367228,
+          "worldX": 1630.2,
+          "worldY": 888.229
+        },
+        {
+          "x": 0.631978,
+          "y": 0.378499,
+          "worldX": 1637.01,
+          "worldY": 872.73
+        },
+        {
+          "x": 0.623834,
+          "y": 0.398676,
+          "worldX": 1649.2,
+          "worldY": 865.35
+        },
+        {
+          "x": 0.624395,
+          "y": 0.418025,
+          "worldX": 1660.89,
+          "worldY": 865.858
+        },
+        {
+          "x": 0.62912,
+          "y": 0.433633,
+          "worldX": 1670.32,
+          "worldY": 870.14
+        },
+        {
+          "x": 0.637268,
+          "y": 0.442091,
+          "worldX": 1675.43,
+          "worldY": 877.524
+        },
+        {
+          "x": 0.64821,
+          "y": 0.441164,
+          "worldX": 1674.87,
+          "worldY": 887.44
+        },
+        {
+          "x": 0.66031,
+          "y": 0.428916,
+          "worldX": 1667.47,
+          "worldY": 898.406
+        }
+      ]
+    },
+    {
+      "id": "5800154",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.7904,
+      "y": 0.466091,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1689.9300537109375,
+      "worldY": 1016.2999877929688
+    },
+    {
+      "id": "5800156",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.752812,
+      "y": 0.490273,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1704.5400390625,
+      "worldY": 982.2360229492188,
+      "patrol": [
+        {
+          "x": 0.778869,
+          "y": 0.491515,
+          "worldX": 1705.29,
+          "worldY": 1005.85
+        },
+        {
+          "x": 0.805617,
+          "y": 0.492458,
+          "worldX": 1705.86,
+          "worldY": 1030.09
+        },
+        {
+          "x": 0.845396,
+          "y": 0.49408,
+          "worldX": 1706.84,
+          "worldY": 1066.14
+        },
+        {
+          "x": 0.805617,
+          "y": 0.492458,
+          "worldX": 1705.86,
+          "worldY": 1030.09
+        },
+        {
+          "x": 0.778869,
+          "y": 0.491515,
+          "worldX": 1705.29,
+          "worldY": 1005.85
+        },
+        {
+          "x": 0.757761,
+          "y": 0.490753,
+          "worldX": 1704.83,
+          "worldY": 986.721
+        },
+        {
+          "x": 0.739495,
+          "y": 0.490042,
+          "worldX": 1704.4,
+          "worldY": 970.167
+        },
+        {
+          "x": 0.757761,
+          "y": 0.490753,
+          "worldX": 1704.83,
+          "worldY": 986.721
+        }
+      ]
+    },
+    {
+      "id": "5800157",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.797572,
+      "y": 0.515912,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1720.030029296875,
+      "worldY": 1022.7999877929688
+    },
+    {
+      "id": "5800158",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.712138,
+      "y": 0.590146,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1764.8800048828125,
+      "worldY": 945.375
+    },
+    {
+      "id": "5800159",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.862886,
+      "y": 0.60309,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1772.699951171875,
+      "worldY": 1081.989990234375
+    },
+    {
+      "id": "5800160",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.813473,
+      "y": 0.621562,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1783.8599853515625,
+      "worldY": 1037.2099609375
+    },
+    {
+      "id": "5800166",
+      "npcId": 25597,
+      "name": "Oblivion Mage",
+      "x": 0.260246,
+      "y": 0.83824,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1914.77001953125,
+      "worldY": 535.8480224609375
+    },
+    {
+      "id": "5800167",
+      "npcId": 25509,
+      "name": "Priestess of Torment",
+      "x": 0.240292,
+      "y": 0.842428,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1917.300048828125,
+      "worldY": 517.7650146484375
+    },
+    {
+      "id": "5800170",
+      "npcId": 25597,
+      "name": "Oblivion Mage",
+      "x": 0.229567,
+      "y": 0.836618,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1913.7900390625,
+      "worldY": 508.0450134277344
+    },
+    {
+      "id": "5800173",
+      "npcId": 25592,
+      "name": "Doomfire Destroyer",
+      "x": 0.268498,
+      "y": 0.896188,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1949.780029296875,
+      "worldY": 543.3259887695312
+    },
+    {
+      "id": "5800178",
+      "npcId": 25593,
+      "name": "Apocalypse Guard",
+      "x": 0.186486,
+      "y": 0.860006,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1927.9200439453125,
+      "worldY": 469.00299072265625
+    },
+    {
+      "id": "5800179",
+      "npcId": 25593,
+      "name": "Apocalypse Guard",
+      "x": 0.198431,
+      "y": 0.879735,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1939.8399658203125,
+      "worldY": 479.8280029296875
+    },
+    {
+      "id": "5800180",
+      "npcId": 25595,
+      "name": "Chaos Gazer",
+      "x": 0.196713,
+      "y": 0.843239,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1917.7900390625,
+      "worldY": 478.27099609375,
+      "patrol": [
+        {
+          "x": 0.219914,
+          "y": 0.876756,
+          "worldX": 1938.04,
+          "worldY": 499.297
+        },
+        {
+          "x": 0.240177,
+          "y": 0.886687,
+          "worldX": 1944.04,
+          "worldY": 517.66
+        },
+        {
+          "x": 0.219914,
+          "y": 0.876756,
+          "worldX": 1938.04,
+          "worldY": 499.297
+        },
+        {
+          "x": 0.190508,
+          "y": 0.834284,
+          "worldX": 1912.38,
+          "worldY": 472.648
+        }
+      ]
+    },
+    {
+      "id": "5800181",
+      "npcId": 25595,
+      "name": "Chaos Gazer",
+      "x": 0.295087,
+      "y": 0.852127,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1923.1600341796875,
+      "worldY": 567.4229736328125,
+      "patrol": [
+        {
+          "x": 0.291863,
+          "y": 0.858533,
+          "worldX": 1927.03,
+          "worldY": 564.501
+        },
+        {
+          "x": 0.265976,
+          "y": 0.872287,
+          "worldX": 1935.34,
+          "worldY": 541.041
+        },
+        {
+          "x": 0.291863,
+          "y": 0.858533,
+          "worldX": 1927.03,
+          "worldY": 564.501
+        },
+        {
+          "x": 0.308211,
+          "y": 0.826025,
+          "worldX": 1907.39,
+          "worldY": 579.316
+        }
+      ]
+    },
+    {
+      "id": "5800186",
+      "npcId": 25597,
+      "name": "Oblivion Mage",
+      "x": 0.250282,
+      "y": 0.841369,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1916.6600341796875,
+      "worldY": 526.8179931640625
+    },
+    {
+      "id": "5800187",
+      "npcId": 25597,
+      "name": "Oblivion Mage",
+      "x": 0.284566,
+      "y": 0.889402,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1945.6800537109375,
+      "worldY": 557.8880004882812
+    },
+    {
+      "id": "5800188",
+      "npcId": 25597,
+      "name": "Oblivion Mage",
+      "x": 0.254377,
+      "y": 0.904348,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1954.7099609375,
+      "worldY": 530.5289916992188
+    },
+    {
+      "id": "5800190",
+      "npcId": 25599,
+      "name": "Cataclysm Hound",
+      "x": 0.218074,
+      "y": 0.834996,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1912.81005859375,
+      "worldY": 497.6300048828125,
+      "patrol": [
+        {
+          "x": 0.202844,
+          "y": 0.802985,
+          "worldX": 1893.47,
+          "worldY": 483.827
+        },
+        {
+          "x": 0.209193,
+          "y": 0.82288,
+          "worldX": 1905.49,
+          "worldY": 489.581
+        },
+        {
+          "x": 0.21999,
+          "y": 0.837611,
+          "worldX": 1914.39,
+          "worldY": 499.366
+        },
+        {
+          "x": 0.234007,
+          "y": 0.846632,
+          "worldX": 1919.84,
+          "worldY": 512.069
+        },
+        {
+          "x": 0.247895,
+          "y": 0.847857,
+          "worldX": 1920.58,
+          "worldY": 524.655
+        },
+        {
+          "x": 0.262268,
+          "y": 0.842676,
+          "worldX": 1917.45,
+          "worldY": 537.68
+        },
+        {
+          "x": 0.247895,
+          "y": 0.847857,
+          "worldX": 1920.58,
+          "worldY": 524.655
+        },
+        {
+          "x": 0.234007,
+          "y": 0.846632,
+          "worldX": 1919.84,
+          "worldY": 512.069
+        },
+        {
+          "x": 0.21999,
+          "y": 0.837611,
+          "worldX": 1914.39,
+          "worldY": 499.366
+        },
+        {
+          "x": 0.209193,
+          "y": 0.82288,
+          "worldX": 1905.49,
+          "worldY": 489.581
+        }
+      ]
+    },
+    {
+      "id": "5800191",
+      "npcId": 25608,
+      "name": "Kil'jaeden",
+      "x": 0.361964,
+      "y": 0.480193,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1698.449951171875,
+      "worldY": 628.030029296875
+    },
+    {
+      "id": "5800230",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.29403,
+      "y": 0.80272,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1893.31005859375,
+      "worldY": 566.4650268554688
+    },
+    {
+      "id": "5800231",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.308487,
+      "y": 0.828558,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1908.9200439453125,
+      "worldY": 579.5659790039062
+    },
+    {
+      "id": "5800232",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.296851,
+      "y": 0.836436,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1913.6800537109375,
+      "worldY": 569.02099609375
+    },
+    {
+      "id": "5800233",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.297868,
+      "y": 0.863002,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1929.72998046875,
+      "worldY": 569.9429931640625
+    },
+    {
+      "id": "5800237",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.188662,
+      "y": 0.814869,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1900.6500244140625,
+      "worldY": 470.9750061035156
+    },
+    {
+      "id": "5800238",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.208856,
+      "y": 0.863564,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1930.0699462890625,
+      "worldY": 489.2760009765625
+    },
+    {
+      "id": "5800239",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.271308,
+      "y": 0.858946,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1927.280029296875,
+      "worldY": 545.8729858398438
+    },
+    {
+      "id": "5800240",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.208585,
+      "y": 0.834764,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1912.6700439453125,
+      "worldY": 489.0299987792969
+    },
+    {
+      "id": "5800241",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.247597,
+      "y": 0.87669,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1938.0,
+      "worldY": 524.385009765625
+    },
+    {
+      "id": "5800242",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.223231,
+      "y": 0.87477,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1936.8399658203125,
+      "worldY": 502.3030090332031
+    },
+    {
+      "id": "5800243",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.240569,
+      "y": 0.892133,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1947.3299560546875,
+      "worldY": 518.0159912109375
+    },
+    {
+      "id": "5800244",
+      "npcId": 25867,
+      "name": "Sunblade Dragonhawk",
+      "x": 0.695441,
+      "y": 0.371465,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1632.760009765625,
+      "worldY": 930.2429809570312
+    },
+    {
+      "id": "5800245",
+      "npcId": 25867,
+      "name": "Sunblade Dragonhawk",
+      "x": 0.832949,
+      "y": 0.399371,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1649.6199951171875,
+      "worldY": 1054.8599853515625,
+      "patrol": [
+        {
+          "x": 0.841964,
+          "y": 0.405578,
+          "worldX": 1653.37,
+          "worldY": 1063.03
+        },
+        {
+          "x": 0.847669,
+          "y": 0.402483,
+          "worldX": 1651.5,
+          "worldY": 1068.2
+        },
+        {
+          "x": 0.852833,
+          "y": 0.393677,
+          "worldX": 1646.18,
+          "worldY": 1072.88
+        },
+        {
+          "x": 0.854919,
+          "y": 0.381893,
+          "worldX": 1639.06,
+          "worldY": 1074.77
+        },
+        {
+          "x": 0.850339,
+          "y": 0.370356,
+          "worldX": 1632.09,
+          "worldY": 1070.62
+        },
+        {
+          "x": 0.842637,
+          "y": 0.364298,
+          "worldX": 1628.43,
+          "worldY": 1063.64
+        },
+        {
+          "x": 0.836281,
+          "y": 0.364579,
+          "worldX": 1628.6,
+          "worldY": 1057.88
+        },
+        {
+          "x": 0.831073,
+          "y": 0.369032,
+          "worldX": 1631.29,
+          "worldY": 1053.16
+        },
+        {
+          "x": 0.827619,
+          "y": 0.376447,
+          "worldX": 1635.77,
+          "worldY": 1050.03
+        },
+        {
+          "x": 0.827388,
+          "y": 0.386444,
+          "worldX": 1641.81,
+          "worldY": 1049.82
+        },
+        {
+          "x": 0.832916,
+          "y": 0.399255,
+          "worldX": 1649.55,
+          "worldY": 1054.83
+        }
+      ]
+    },
+    {
+      "id": "5800246",
+      "npcId": 25867,
+      "name": "Sunblade Dragonhawk",
+      "x": 0.696038,
+      "y": 0.414698,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1658.8800048828125,
+      "worldY": 930.7839965820312
+    },
+    {
+      "id": "5800300",
+      "npcId": 25483,
+      "name": "Shadowsword Manafiend",
+      "x": 0.257092,
+      "y": 0.273363,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1573.489990234375,
+      "worldY": 532.989990234375
+    },
+    {
+      "id": "5800301",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.249632,
+      "y": 0.275928,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1575.0400390625,
+      "worldY": 526.22900390625
+    },
+    {
+      "id": "5800303",
+      "npcId": 25506,
+      "name": "Shadowsword Lifeshaper",
+      "x": 0.260764,
+      "y": 0.282019,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1578.719970703125,
+      "worldY": 536.3170166015625
+    },
+    {
+      "id": "5800332",
+      "npcId": 25373,
+      "name": "Shadowsword Soulbinder",
+      "x": 0.288721,
+      "y": 0.251664,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1560.3800048828125,
+      "worldY": 561.6530151367188
+    },
+    {
+      "id": "5800353",
+      "npcId": 25588,
+      "name": "Hand of the Deceiver",
+      "x": 0.370834,
+      "y": 0.454472,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1682.9100341796875,
+      "worldY": 636.0679931640625
+    },
+    {
+      "id": "5800354",
+      "npcId": 25588,
+      "name": "Hand of the Deceiver",
+      "x": 0.348257,
+      "y": 0.460149,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1686.3399658203125,
+      "worldY": 615.6079711914062
+    },
+    {
+      "id": "5800355",
+      "npcId": 25588,
+      "name": "Hand of the Deceiver",
+      "x": 0.34486,
+      "y": 0.493484,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1706.47998046875,
+      "worldY": 612.5289916992188
+    },
+    {
+      "id": "5809999",
+      "npcId": 25038,
+      "name": "Felmyst",
+      "x": 0.350498,
+      "y": 0.101808,
+      "sublevel": 1,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/blob/da2de07e6606d495872c3fd92ba8363cf79f43c9/Updates/Instances/580_sunwell_plateau.sql#Felmyst",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1469.842,
+      "worldY": 617.6385
+    },
+    {
+      "id": "5800069",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.975976,
+      "y": 0.115645,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1615.8499755859375,
+      "worldY": 831.3289794921875
+    },
+    {
+      "id": "5800075",
+      "npcId": 25363,
+      "name": "Sunblade Cabalist",
+      "x": 0.788396,
+      "y": 0.268774,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1663.3199462890625,
+      "worldY": 744.10400390625
+    },
+    {
+      "id": "5800086",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.758568,
+      "y": 0.250226,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1657.5699462890625,
+      "worldY": 730.2340087890625
+    },
+    {
+      "id": "5800092",
+      "npcId": 25367,
+      "name": "Sunblade Arch Mage",
+      "x": 0.989503,
+      "y": 0.643581,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1779.510009765625,
+      "worldY": 837.6190185546875
+    },
+    {
+      "id": "5800093",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.974568,
+      "y": 0.676742,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1789.7900390625,
+      "worldY": 830.6740112304688
+    },
+    {
+      "id": "5800100",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.99657,
+      "y": 0.13129,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1620.699951171875,
+      "worldY": 840.905029296875
+    },
+    {
+      "id": "5800103",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.777587,
+      "y": 0.228484,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1650.8299560546875,
+      "worldY": 739.0780029296875
+    },
+    {
+      "id": "5800110",
+      "npcId": 25369,
+      "name": "Sunblade Vindicator",
+      "x": 0.987402,
+      "y": 0.610968,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1769.4000244140625,
+      "worldY": 836.6420288085938,
+      "patrol": [
+        {
+          "x": 0.986884,
+          "y": 0.557581,
+          "worldX": 1752.85,
+          "worldY": 836.401
+        },
+        {
+          "x": 0.987262,
+          "y": 0.49629,
+          "worldX": 1733.85,
+          "worldY": 836.577
+        },
+        {
+          "x": 0.987422,
+          "y": 0.434065,
+          "worldX": 1714.56,
+          "worldY": 836.651
+        },
+        {
+          "x": 0.988355,
+          "y": 0.367935,
+          "worldX": 1694.06,
+          "worldY": 837.085
+        },
+        {
+          "x": 0.990609,
+          "y": 0.252645,
+          "worldX": 1658.32,
+          "worldY": 838.133
+        },
+        {
+          "x": 0.991267,
+          "y": 0.185355,
+          "worldX": 1637.46,
+          "worldY": 838.439
+        },
+        {
+          "x": 0.995049,
+          "y": 0.143645,
+          "worldX": 1624.53,
+          "worldY": 840.198
+        },
+        {
+          "x": 0.995062,
+          "y": 0.143516,
+          "worldX": 1624.49,
+          "worldY": 840.204
+        },
+        {
+          "x": 0.991269,
+          "y": 0.185194,
+          "worldX": 1637.41,
+          "worldY": 838.44
+        },
+        {
+          "x": 0.990609,
+          "y": 0.252645,
+          "worldX": 1658.32,
+          "worldY": 838.133
+        },
+        {
+          "x": 0.988355,
+          "y": 0.367935,
+          "worldX": 1694.06,
+          "worldY": 837.085
+        },
+        {
+          "x": 0.987422,
+          "y": 0.434065,
+          "worldX": 1714.56,
+          "worldY": 836.651
+        },
+        {
+          "x": 0.987262,
+          "y": 0.49629,
+          "worldX": 1733.85,
+          "worldY": 836.577
+        },
+        {
+          "x": 0.986884,
+          "y": 0.557581,
+          "worldX": 1752.85,
+          "worldY": 836.401
+        },
+        {
+          "x": 0.986796,
+          "y": 0.607129,
+          "worldX": 1768.21,
+          "worldY": 836.36
+        }
+      ]
+    },
+    {
+      "id": "5800114",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.998415,
+      "y": 0.048774,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1595.1199951171875,
+      "worldY": 841.7630004882812
+    },
+    {
+      "id": "5800118",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.767058,
+      "y": 0.262936,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1661.510009765625,
+      "worldY": 734.1820068359375
+    },
+    {
+      "id": "5800123",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.993804,
+      "y": 0.624581,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1773.6199951171875,
+      "worldY": 839.6190185546875
+    },
+    {
+      "id": "5800124",
+      "npcId": 25370,
+      "name": "Sunblade Dusk Priest",
+      "x": 0.963637,
+      "y": 0.712678,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1800.9300537109375,
+      "worldY": 825.5910034179688
+    },
+    {
+      "id": "5800127",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.975546,
+      "y": 0.073387,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1602.75,
+      "worldY": 831.1290283203125
+    },
+    {
+      "id": "5800135",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.78349,
+      "y": 0.247581,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1656.75,
+      "worldY": 741.822998046875
+    },
+    {
+      "id": "5800136",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.796957,
+      "y": 0.266032,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1662.469970703125,
+      "worldY": 748.0850219726562
+    },
+    {
+      "id": "5800142",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.98872,
+      "y": 0.617484,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1771.4200439453125,
+      "worldY": 837.2550048828125
+    },
+    {
+      "id": "5800145",
+      "npcId": 25371,
+      "name": "Sunblade Dawn Priest",
+      "x": 0.980434,
+      "y": 0.741548,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1809.8800048828125,
+      "worldY": 833.4019775390625
+    },
+    {
+      "id": "5800155",
+      "npcId": 25507,
+      "name": "Sunblade Protector",
+      "x": 0.793183,
+      "y": 0.389548,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1700.760009765625,
+      "worldY": 746.3300170898438,
+      "patrol": [
+        {
+          "x": 0.848198,
+          "y": 0.390968,
+          "worldX": 1701.2,
+          "worldY": 771.912
+        },
+        {
+          "x": 0.877839,
+          "y": 0.390903,
+          "worldX": 1701.18,
+          "worldY": 785.695
+        },
+        {
+          "x": 0.907675,
+          "y": 0.392065,
+          "worldX": 1701.54,
+          "worldY": 799.569
+        },
+        {
+          "x": 0.942155,
+          "y": 0.392774,
+          "worldX": 1701.76,
+          "worldY": 815.602
+        },
+        {
+          "x": 0.987789,
+          "y": 0.393742,
+          "worldX": 1702.06,
+          "worldY": 836.822
+        },
+        {
+          "x": 0.942155,
+          "y": 0.392774,
+          "worldX": 1701.76,
+          "worldY": 815.602
+        },
+        {
+          "x": 0.907675,
+          "y": 0.392065,
+          "worldX": 1701.54,
+          "worldY": 799.569
+        },
+        {
+          "x": 0.877839,
+          "y": 0.390903,
+          "worldX": 1701.18,
+          "worldY": 785.695
+        },
+        {
+          "x": 0.848198,
+          "y": 0.390968,
+          "worldX": 1701.2,
+          "worldY": 771.912
+        },
+        {
+          "x": 0.800383,
+          "y": 0.39029,
+          "worldX": 1700.99,
+          "worldY": 749.678
+        }
+      ]
+    },
+    {
+      "id": "5800161",
+      "npcId": 25508,
+      "name": "Shadowsword Guardian",
+      "x": 0.684834,
+      "y": 0.242258,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1655.0999755859375,
+      "worldY": 695.947998046875,
+      "patrol": [
+        {
+          "x": 0.649516,
+          "y": 0.179774,
+          "worldX": 1635.73,
+          "worldY": 679.525
+        },
+        {
+          "x": 0.62229,
+          "y": 0.157355,
+          "worldX": 1628.78,
+          "worldY": 666.865
+        },
+        {
+          "x": 0.649516,
+          "y": 0.179774,
+          "worldX": 1635.73,
+          "worldY": 679.525
+        },
+        {
+          "x": 0.67554,
+          "y": 0.220871,
+          "worldX": 1648.47,
+          "worldY": 691.626
+        },
+        {
+          "x": 0.701684,
+          "y": 0.284871,
+          "worldX": 1668.31,
+          "worldY": 703.783
+        },
+        {
+          "x": 0.67554,
+          "y": 0.220871,
+          "worldX": 1648.47,
+          "worldY": 691.626
+        }
+      ]
+    },
+    {
+      "id": "5800162",
+      "npcId": 25508,
+      "name": "Shadowsword Guardian",
+      "x": 0.400191,
+      "y": 0.255226,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1659.1199951171875,
+      "worldY": 563.5889892578125,
+      "patrol": [
+        {
+          "x": 0.447643,
+          "y": 0.171226,
+          "worldX": 1633.08,
+          "worldY": 585.654
+        },
+        {
+          "x": 0.49631,
+          "y": 0.142387,
+          "worldX": 1624.14,
+          "worldY": 608.284
+        },
+        {
+          "x": 0.546946,
+          "y": 0.128452,
+          "worldX": 1619.82,
+          "worldY": 631.83
+        },
+        {
+          "x": 0.49631,
+          "y": 0.142387,
+          "worldX": 1624.14,
+          "worldY": 608.284
+        },
+        {
+          "x": 0.447643,
+          "y": 0.171226,
+          "worldX": 1633.08,
+          "worldY": 585.654
+        },
+        {
+          "x": 0.409194,
+          "y": 0.227387,
+          "worldX": 1650.49,
+          "worldY": 567.775
+        },
+        {
+          "x": 0.385065,
+          "y": 0.30029,
+          "worldX": 1673.09,
+          "worldY": 556.555
+        },
+        {
+          "x": 0.409194,
+          "y": 0.227387,
+          "worldX": 1650.49,
+          "worldY": 567.775
+        }
+      ]
+    },
+    {
+      "id": "5800163",
+      "npcId": 25509,
+      "name": "Priestess of Torment",
+      "x": 0.171933,
+      "y": 0.883,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1853.72998046875,
+      "worldY": 457.4490051269531
+    },
+    {
+      "id": "5800164",
+      "npcId": 25591,
+      "name": "Painbringer",
+      "x": 0.466262,
+      "y": 0.938968,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1871.0799560546875,
+      "worldY": 594.31201171875
+    },
+    {
+      "id": "5800165",
+      "npcId": 25597,
+      "name": "Oblivion Mage",
+      "x": 0.474546,
+      "y": 0.978161,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1883.22998046875,
+      "worldY": 598.1640014648438
+    },
+    {
+      "id": "5800168",
+      "npcId": 25591,
+      "name": "Painbringer",
+      "x": 0.1658,
+      "y": 0.916806,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1864.2099609375,
+      "worldY": 454.59698486328125
+    },
+    {
+      "id": "5800169",
+      "npcId": 25591,
+      "name": "Painbringer",
+      "x": 0.452045,
+      "y": 0.965032,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1879.1600341796875,
+      "worldY": 587.7009887695312
+    },
+    {
+      "id": "5800171",
+      "npcId": 25592,
+      "name": "Doomfire Destroyer",
+      "x": 0.224757,
+      "y": 0.824258,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1835.52001953125,
+      "worldY": 482.0119934082031
+    },
+    {
+      "id": "5800172",
+      "npcId": 25592,
+      "name": "Doomfire Destroyer",
+      "x": 0.679583,
+      "y": 0.849484,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1843.3399658203125,
+      "worldY": 693.5059814453125
+    },
+    {
+      "id": "5800174",
+      "npcId": 25593,
+      "name": "Apocalypse Guard",
+      "x": 0.423875,
+      "y": 0.864806,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1848.0899658203125,
+      "worldY": 574.6019897460938
+    },
+    {
+      "id": "5800175",
+      "npcId": 25593,
+      "name": "Apocalypse Guard",
+      "x": 0.454093,
+      "y": 0.881613,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1853.300048828125,
+      "worldY": 588.6530151367188
+    },
+    {
+      "id": "5800176",
+      "npcId": 25593,
+      "name": "Apocalypse Guard",
+      "x": 0.470787,
+      "y": 0.90329,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1860.02001953125,
+      "worldY": 596.416015625
+    },
+    {
+      "id": "5800177",
+      "npcId": 25593,
+      "name": "Apocalypse Guard",
+      "x": 0.386118,
+      "y": 0.929968,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1868.2900390625,
+      "worldY": 557.0449829101562
+    },
+    {
+      "id": "5800182",
+      "npcId": 25597,
+      "name": "Oblivion Mage",
+      "x": 0.677632,
+      "y": 0.809065,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1830.81005859375,
+      "worldY": 692.5989990234375
+    },
+    {
+      "id": "5800183",
+      "npcId": 25597,
+      "name": "Oblivion Mage",
+      "x": 0.181336,
+      "y": 0.855451,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1845.18994140625,
+      "worldY": 461.8210144042969
+    },
+    {
+      "id": "5800184",
+      "npcId": 25597,
+      "name": "Oblivion Mage",
+      "x": 0.658024,
+      "y": 0.869613,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1849.5799560546875,
+      "worldY": 683.4810180664062
+    },
+    {
+      "id": "5800185",
+      "npcId": 25597,
+      "name": "Oblivion Mage",
+      "x": 0.48663,
+      "y": 0.936839,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1870.4200439453125,
+      "worldY": 603.7830200195312
+    },
+    {
+      "id": "5800189",
+      "npcId": 25599,
+      "name": "Cataclysm Hound",
+      "x": 0.366447,
+      "y": 0.859903,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1846.5699462890625,
+      "worldY": 547.8980102539062,
+      "patrol": [
+        {
+          "x": 0.337525,
+          "y": 0.846258,
+          "worldX": 1842.34,
+          "worldY": 534.449
+        },
+        {
+          "x": 0.293017,
+          "y": 0.85071,
+          "worldX": 1843.72,
+          "worldY": 513.753
+        },
+        {
+          "x": 0.257357,
+          "y": 0.878226,
+          "worldX": 1852.25,
+          "worldY": 497.171
+        },
+        {
+          "x": 0.232009,
+          "y": 0.932032,
+          "worldX": 1868.93,
+          "worldY": 485.384
+        },
+        {
+          "x": 0.257357,
+          "y": 0.878226,
+          "worldX": 1852.25,
+          "worldY": 497.171
+        },
+        {
+          "x": 0.293017,
+          "y": 0.85071,
+          "worldX": 1843.72,
+          "worldY": 513.753
+        },
+        {
+          "x": 0.337525,
+          "y": 0.846258,
+          "worldX": 1842.34,
+          "worldY": 534.449
+        },
+        {
+          "x": 0.374267,
+          "y": 0.863613,
+          "worldX": 1847.72,
+          "worldY": 551.534
+        }
+      ]
+    },
+    {
+      "id": "5800219",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.586247,
+      "y": 0.952194,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1875.1800537109375,
+      "worldY": 650.10498046875
+    },
+    {
+      "id": "5800220",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.57734,
+      "y": 0.930903,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1868.5799560546875,
+      "worldY": 645.9630126953125
+    },
+    {
+      "id": "5800221",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.594507,
+      "y": 0.915387,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1863.77001953125,
+      "worldY": 653.9459838867188
+    },
+    {
+      "id": "5800222",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.571316,
+      "y": 0.959516,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1877.449951171875,
+      "worldY": 643.1619873046875
+    },
+    {
+      "id": "5800223",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.557566,
+      "y": 0.938871,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1871.050048828125,
+      "worldY": 636.7680053710938
+    },
+    {
+      "id": "5800224",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.563112,
+      "y": 0.961065,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1877.9300537109375,
+      "worldY": 639.3469848632812
+    },
+    {
+      "id": "5800225",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.435516,
+      "y": 0.969,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1880.3900146484375,
+      "worldY": 580.0150146484375
+    },
+    {
+      "id": "5800226",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.426092,
+      "y": 0.941742,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1871.93994140625,
+      "worldY": 575.6329956054688
+    },
+    {
+      "id": "5800227",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.407914,
+      "y": 0.961129,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1877.949951171875,
+      "worldY": 567.1799926757812
+    },
+    {
+      "id": "5800228",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.416682,
+      "y": 0.994226,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1888.2099609375,
+      "worldY": 571.2570190429688
+    },
+    {
+      "id": "5800229",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.40286,
+      "y": 0.986452,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1885.800048828125,
+      "worldY": 564.8300170898438
+    },
+    {
+      "id": "5800234",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.210746,
+      "y": 0.896258,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1857.8399658203125,
+      "worldY": 475.49700927734375
+    },
+    {
+      "id": "5800235",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.219817,
+      "y": 0.965484,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1879.300048828125,
+      "worldY": 479.7149963378906
+    },
+    {
+      "id": "5800236",
+      "npcId": 25851,
+      "name": "Volatile Fiend",
+      "x": 0.172546,
+      "y": 0.957516,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1876.8299560546875,
+      "worldY": 457.7340087890625
+    },
+    {
+      "id": "5800302",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.332544,
+      "y": 0.019645,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1586.0899658203125,
+      "worldY": 532.1329956054688
+    },
+    {
+      "id": "5800304",
+      "npcId": 25483,
+      "name": "Shadowsword Manafiend",
+      "x": 0.282477,
+      "y": 0.232871,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1652.18994140625,
+      "worldY": 508.85198974609375
+    },
+    {
+      "id": "5800305",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.264834,
+      "y": 0.202,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1642.6199951171875,
+      "worldY": 500.64801025390625
+    },
+    {
+      "id": "5800306",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.290409,
+      "y": 0.213742,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1646.260009765625,
+      "worldY": 512.5399780273438
+    },
+    {
+      "id": "5800307",
+      "npcId": 25506,
+      "name": "Shadowsword Lifeshaper",
+      "x": 0.266217,
+      "y": 0.221742,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1648.739990234375,
+      "worldY": 501.2909851074219
+    },
+    {
+      "id": "5800308",
+      "npcId": 25483,
+      "name": "Shadowsword Manafiend",
+      "x": 0.436624,
+      "y": 0.051323,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1595.9100341796875,
+      "worldY": 580.530029296875
+    },
+    {
+      "id": "5800309",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.424632,
+      "y": 0.051064,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1595.8299560546875,
+      "worldY": 574.9539794921875
+    },
+    {
+      "id": "5800310",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.43114,
+      "y": 0.08242,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1605.550048828125,
+      "worldY": 577.97998046875
+    },
+    {
+      "id": "5800311",
+      "npcId": 25506,
+      "name": "Shadowsword Lifeshaper",
+      "x": 0.440968,
+      "y": 0.07329,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1602.719970703125,
+      "worldY": 582.5499877929688
+    },
+    {
+      "id": "5800312",
+      "npcId": 25483,
+      "name": "Shadowsword Manafiend",
+      "x": 0.363544,
+      "y": 0.302516,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1673.780029296875,
+      "worldY": 546.5479736328125
+    },
+    {
+      "id": "5800313",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.365538,
+      "y": 0.286032,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1668.6700439453125,
+      "worldY": 547.4749755859375
+    },
+    {
+      "id": "5800314",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.381865,
+      "y": 0.339258,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1685.1700439453125,
+      "worldY": 555.0670166015625
+    },
+    {
+      "id": "5800315",
+      "npcId": 25506,
+      "name": "Shadowsword Lifeshaper",
+      "x": 0.367785,
+      "y": 0.337936,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1684.760009765625,
+      "worldY": 548.52001953125
+    },
+    {
+      "id": "5800316",
+      "npcId": 25837,
+      "name": "Shadowsword Commander",
+      "x": 0.344353,
+      "y": 0.330097,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1682.3299560546875,
+      "worldY": 537.6240234375
+    },
+    {
+      "id": "5800317",
+      "npcId": 25373,
+      "name": "Shadowsword Soulbinder",
+      "x": 0.291652,
+      "y": 0.327258,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1681.449951171875,
+      "worldY": 513.1179809570312
+    },
+    {
+      "id": "5800318",
+      "npcId": 25373,
+      "name": "Shadowsword Soulbinder",
+      "x": 0.28549,
+      "y": 0.351581,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1688.989990234375,
+      "worldY": 510.25299072265625
+    },
+    {
+      "id": "5800319",
+      "npcId": 25373,
+      "name": "Shadowsword Soulbinder",
+      "x": 0.283886,
+      "y": 0.405451,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1705.68994140625,
+      "worldY": 509.5069885253906
+    },
+    {
+      "id": "5800320",
+      "npcId": 25373,
+      "name": "Shadowsword Soulbinder",
+      "x": 0.293512,
+      "y": 0.426097,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1712.0899658203125,
+      "worldY": 513.9829711914062
+    },
+    {
+      "id": "5800321",
+      "npcId": 25483,
+      "name": "Shadowsword Manafiend",
+      "x": 0.42337,
+      "y": 0.615871,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1770.9200439453125,
+      "worldY": 574.3670043945312
+    },
+    {
+      "id": "5800322",
+      "npcId": 25484,
+      "name": "Shadowsword Assassin",
+      "x": 0.408411,
+      "y": 0.604871,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1767.510009765625,
+      "worldY": 567.4110107421875
+    },
+    {
+      "id": "5800323",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.422931,
+      "y": 0.557064,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1752.68994140625,
+      "worldY": 574.1630249023438
+    },
+    {
+      "id": "5800324",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.398129,
+      "y": 0.587322,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1762.0699462890625,
+      "worldY": 562.6300048828125
+    },
+    {
+      "id": "5800325",
+      "npcId": 25506,
+      "name": "Shadowsword Lifeshaper",
+      "x": 0.435454,
+      "y": 0.578774,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1759.4200439453125,
+      "worldY": 579.9860229492188
+    },
+    {
+      "id": "5800326",
+      "npcId": 25483,
+      "name": "Shadowsword Manafiend",
+      "x": 0.464363,
+      "y": 0.76629,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1817.550048828125,
+      "worldY": 593.4290161132812
+    },
+    {
+      "id": "5800327",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.448477,
+      "y": 0.750387,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1812.6199951171875,
+      "worldY": 586.0419921875,
+      "patrol": [
+        {
+          "x": 0.448477,
+          "y": 0.750387,
+          "worldX": 1812.62,
+          "worldY": 586.042
+        },
+        {
+          "x": 0.449252,
+          "y": 0.731097,
+          "worldX": 1806.64,
+          "worldY": 586.402
+        },
+        {
+          "x": 0.435811,
+          "y": 0.712548,
+          "worldX": 1800.89,
+          "worldY": 580.152
+        },
+        {
+          "x": 0.411617,
+          "y": 0.702065,
+          "worldX": 1797.64,
+          "worldY": 568.902
+        },
+        {
+          "x": 0.390886,
+          "y": 0.694065,
+          "worldX": 1795.16,
+          "worldY": 559.262
+        }
+      ]
+    },
+    {
+      "id": "5800328",
+      "npcId": 25486,
+      "name": "Shadowsword Vanquisher",
+      "x": 0.464776,
+      "y": 0.690032,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1793.9100341796875,
+      "worldY": 593.6209716796875,
+      "patrol": [
+        {
+          "x": 0.45414,
+          "y": 0.701452,
+          "worldX": 1797.45,
+          "worldY": 588.675
+        },
+        {
+          "x": 0.438548,
+          "y": 0.705484,
+          "worldX": 1798.7,
+          "worldY": 581.425
+        },
+        {
+          "x": 0.421344,
+          "y": 0.687742,
+          "worldX": 1793.2,
+          "worldY": 573.425
+        },
+        {
+          "x": 0.40372,
+          "y": 0.653194,
+          "worldX": 1782.49,
+          "worldY": 565.23
+        }
+      ]
+    },
+    {
+      "id": "5800329",
+      "npcId": 25484,
+      "name": "Shadowsword Assassin",
+      "x": 0.446172,
+      "y": 0.709548,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1799.9599609375,
+      "worldY": 584.969970703125
+    },
+    {
+      "id": "5800330",
+      "npcId": 25483,
+      "name": "Shadowsword Manafiend",
+      "x": 0.337671,
+      "y": 0.530161,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1744.3499755859375,
+      "worldY": 534.5170288085938,
+      "patrol": [
+        {
+          "x": 0.288839,
+          "y": 0.586774,
+          "worldX": 1761.9,
+          "worldY": 511.81
+        },
+        {
+          "x": 0.260376,
+          "y": 0.614516,
+          "worldX": 1770.5,
+          "worldY": 498.575
+        },
+        {
+          "x": 0.260983,
+          "y": 0.653806,
+          "worldX": 1782.68,
+          "worldY": 498.857
+        },
+        {
+          "x": 0.284738,
+          "y": 0.678097,
+          "worldX": 1790.21,
+          "worldY": 509.903
+        },
+        {
+          "x": 0.311103,
+          "y": 0.657258,
+          "worldX": 1783.75,
+          "worldY": 522.163
+        },
+        {
+          "x": 0.343071,
+          "y": 0.628355,
+          "worldX": 1774.79,
+          "worldY": 537.028
+        },
+        {
+          "x": 0.362282,
+          "y": 0.621323,
+          "worldX": 1772.61,
+          "worldY": 545.961
+        },
+        {
+          "x": 0.384135,
+          "y": 0.650935,
+          "worldX": 1781.79,
+          "worldY": 556.123
+        },
+        {
+          "x": 0.408996,
+          "y": 0.684065,
+          "worldX": 1792.06,
+          "worldY": 567.683
+        },
+        {
+          "x": 0.384135,
+          "y": 0.650935,
+          "worldX": 1781.79,
+          "worldY": 556.123
+        },
+        {
+          "x": 0.362282,
+          "y": 0.621323,
+          "worldX": 1772.61,
+          "worldY": 545.961
+        },
+        {
+          "x": 0.343071,
+          "y": 0.628355,
+          "worldX": 1774.79,
+          "worldY": 537.028
+        },
+        {
+          "x": 0.311103,
+          "y": 0.657258,
+          "worldX": 1783.75,
+          "worldY": 522.163
+        },
+        {
+          "x": 0.284738,
+          "y": 0.678097,
+          "worldX": 1790.21,
+          "worldY": 509.903
+        },
+        {
+          "x": 0.260983,
+          "y": 0.653806,
+          "worldX": 1782.68,
+          "worldY": 498.857
+        },
+        {
+          "x": 0.260376,
+          "y": 0.614516,
+          "worldX": 1770.5,
+          "worldY": 498.575
+        },
+        {
+          "x": 0.288839,
+          "y": 0.586774,
+          "worldX": 1761.9,
+          "worldY": 511.81
+        },
+        {
+          "x": 0.307381,
+          "y": 0.569742,
+          "worldX": 1756.62,
+          "worldY": 520.432
+        },
+        {
+          "x": 0.339658,
+          "y": 0.540871,
+          "worldX": 1747.67,
+          "worldY": 535.441
+        },
+        {
+          "x": 0.307381,
+          "y": 0.569742,
+          "worldX": 1756.62,
+          "worldY": 520.432
+        }
+      ]
+    },
+    {
+      "id": "5800331",
+      "npcId": 25506,
+      "name": "Shadowsword Lifeshaper",
+      "x": 0.345176,
+      "y": 0.544774,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1748.8800048828125,
+      "worldY": 538.0070190429688
+    },
+    {
+      "id": "5800333",
+      "npcId": 25484,
+      "name": "Shadowsword Assassin",
+      "x": 0.420077,
+      "y": 0.058322,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1598.0799560546875,
+      "worldY": 572.8359985351562
+    },
+    {
+      "id": "5800334",
+      "npcId": 25484,
+      "name": "Shadowsword Assassin",
+      "x": 0.506316,
+      "y": 0.156742,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1628.5899658203125,
+      "worldY": 612.93701171875
+    },
+    {
+      "id": "5800335",
+      "npcId": 25484,
+      "name": "Shadowsword Assassin",
+      "x": 0.391338,
+      "y": 0.176968,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1634.8599853515625,
+      "worldY": 559.4719848632812
+    },
+    {
+      "id": "5800336",
+      "npcId": 25373,
+      "name": "Shadowsword Soulbinder",
+      "x": 0.270415,
+      "y": 0.243452,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1655.469970703125,
+      "worldY": 503.2430114746094,
+      "patrol": [
+        {
+          "x": 0.316009,
+          "y": 0.267323,
+          "worldX": 1662.87,
+          "worldY": 524.444
+        },
+        {
+          "x": 0.279353,
+          "y": 0.260645,
+          "worldX": 1660.8,
+          "worldY": 507.399
+        },
+        {
+          "x": 0.253159,
+          "y": 0.242871,
+          "worldX": 1655.29,
+          "worldY": 495.219
+        },
+        {
+          "x": 0.279353,
+          "y": 0.260645,
+          "worldX": 1660.8,
+          "worldY": 507.399
+        }
+      ]
+    },
+    {
+      "id": "5800337",
+      "npcId": 25373,
+      "name": "Shadowsword Soulbinder",
+      "x": 0.457,
+      "y": 0.055355,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1597.1600341796875,
+      "worldY": 590.0050048828125,
+      "patrol": [
+        {
+          "x": 0.417581,
+          "y": 0.078935,
+          "worldX": 1604.47,
+          "worldY": 571.675
+        },
+        {
+          "x": 0.388054,
+          "y": 0.111677,
+          "worldX": 1614.62,
+          "worldY": 557.945
+        },
+        {
+          "x": 0.35277,
+          "y": 0.161774,
+          "worldX": 1630.15,
+          "worldY": 541.538
+        },
+        {
+          "x": 0.323331,
+          "y": 0.222,
+          "worldX": 1648.82,
+          "worldY": 527.849
+        },
+        {
+          "x": 0.35277,
+          "y": 0.161774,
+          "worldX": 1630.15,
+          "worldY": 541.538
+        },
+        {
+          "x": 0.388054,
+          "y": 0.111677,
+          "worldX": 1614.62,
+          "worldY": 557.945
+        },
+        {
+          "x": 0.417581,
+          "y": 0.078935,
+          "worldX": 1604.47,
+          "worldY": 571.675
+        },
+        {
+          "x": 0.444473,
+          "y": 0.060484,
+          "worldX": 1598.75,
+          "worldY": 584.18
+        },
+        {
+          "x": 0.473948,
+          "y": 0.04529,
+          "worldX": 1594.04,
+          "worldY": 597.886
+        },
+        {
+          "x": 0.444473,
+          "y": 0.060484,
+          "worldX": 1598.75,
+          "worldY": 584.18
+        }
+      ]
+    },
+    {
+      "id": "5800338",
+      "npcId": 25837,
+      "name": "Shadowsword Commander",
+      "x": 0.402561,
+      "y": 0.555613,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1752.239990234375,
+      "worldY": 564.6909790039062,
+      "patrol": [
+        {
+          "x": 0.432467,
+          "y": 0.593613,
+          "worldX": 1764.02,
+          "worldY": 578.597
+        },
+        {
+          "x": 0.415198,
+          "y": 0.575452,
+          "worldX": 1758.39,
+          "worldY": 570.567
+        },
+        {
+          "x": 0.40288,
+          "y": 0.556,
+          "worldX": 1752.36,
+          "worldY": 564.839
+        },
+        {
+          "x": 0.415198,
+          "y": 0.575452,
+          "worldX": 1758.39,
+          "worldY": 570.567
+        }
+      ]
+    },
+    {
+      "id": "5800346",
+      "npcId": 25165,
+      "name": "Lady Sacrolash",
+      "x": 0.535381,
+      "y": 0.75571,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1814.27001953125,
+      "worldY": 626.4520263671875
+    },
+    {
+      "id": "5800347",
+      "npcId": 25166,
+      "name": "Grand Warlock Alythess",
+      "x": 0.532353,
+      "y": 0.768419,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1818.2099609375,
+      "worldY": 625.0440063476562
+    },
+    {
+      "id": "5800348",
+      "npcId": 25741,
+      "name": "M'uru",
+      "x": 0.534181,
+      "y": 0.762581,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1816.4000244140625,
+      "worldY": 625.8939819335938
+    },
+    {
+      "id": "5800363",
+      "npcId": 26262,
+      "name": "The Core of Entropius",
+      "x": 0.539155,
+      "y": 0.38371,
+      "sublevel": 2,
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      },
+      "worldX": 1698.949951171875,
+      "worldY": 628.2069702148438
+    }
+  ],
+  "packs": [
+    {
+      "id": "candidate-001",
+      "label": "Candidate pack 1",
+      "spawnIds": [
+        "5800061"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-002",
+      "label": "Candidate pack 2",
+      "spawnIds": [
+        "5800062"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-003",
+      "label": "Candidate pack 3",
+      "spawnIds": [
+        "5800063",
+        "5800064"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-004",
+      "label": "Candidate pack 4",
+      "spawnIds": [
+        "5800068"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-005",
+      "label": "Candidate pack 5",
+      "spawnIds": [
+        "5800069"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-006",
+      "label": "Candidate pack 6",
+      "spawnIds": [
+        "5800070",
+        "5800071",
+        "5800072",
+        "5800083",
+        "5800084",
+        "5800095",
+        "5800101"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-007",
+      "label": "Candidate pack 7",
+      "spawnIds": [
+        "5800073"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-008",
+      "label": "Candidate pack 8",
+      "spawnIds": [
+        "5800074",
+        "5800087",
+        "5800088",
+        "5800096",
+        "5800105"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-009",
+      "label": "Candidate pack 9",
+      "spawnIds": [
+        "5800075",
+        "5800086",
+        "5800103",
+        "5800118",
+        "5800135",
+        "5800136"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-010",
+      "label": "Candidate pack 10",
+      "spawnIds": [
+        "5800076",
+        "5800091",
+        "5800108",
+        "5800109",
+        "5800121",
+        "5800139",
+        "5800149"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-011",
+      "label": "Candidate pack 11",
+      "spawnIds": [
+        "5800077",
+        "5800090",
+        "5800107",
+        "5800122",
+        "5800140",
+        "5800141",
+        "5800148"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-012",
+      "label": "Candidate pack 12",
+      "spawnIds": [
+        "5800078"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-013",
+      "label": "Candidate pack 13",
+      "spawnIds": [
+        "5800079",
+        "5800094",
+        "5800111",
+        "5800113",
+        "5800125",
+        "5800144"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-014",
+      "label": "Candidate pack 14",
+      "spawnIds": [
+        "5800080"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-015",
+      "label": "Candidate pack 15",
+      "spawnIds": [
+        "5800081",
+        "5800099",
+        "5800115",
+        "5800116",
+        "5800126",
+        "5800128"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-016",
+      "label": "Candidate pack 16",
+      "spawnIds": [
+        "5800082"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-017",
+      "label": "Candidate pack 17",
+      "spawnIds": [
+        "5800085",
+        "5800102",
+        "5800117",
+        "5800132",
+        "5800146"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-018",
+      "label": "Candidate pack 18",
+      "spawnIds": [
+        "5800089",
+        "5800106",
+        "5800120",
+        "5800137",
+        "5800138"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-019",
+      "label": "Candidate pack 19",
+      "spawnIds": [
+        "5800092",
+        "5800093",
+        "5800110",
+        "5800123",
+        "5800142"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-020",
+      "label": "Candidate pack 20",
+      "spawnIds": [
+        "5800097",
+        "5800104",
+        "5800119",
+        "5800133"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-021",
+      "label": "Candidate pack 21",
+      "spawnIds": [
+        "5800098"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-022",
+      "label": "Candidate pack 22",
+      "spawnIds": [
+        "5800100"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-023",
+      "label": "Candidate pack 23",
+      "spawnIds": [
+        "5800112"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-024",
+      "label": "Candidate pack 24",
+      "spawnIds": [
+        "5800114",
+        "5800127"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-025",
+      "label": "Candidate pack 25",
+      "spawnIds": [
+        "5800124"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-026",
+      "label": "Candidate pack 26",
+      "spawnIds": [
+        "5800129"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-027",
+      "label": "Candidate pack 27",
+      "spawnIds": [
+        "5800130"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-028",
+      "label": "Candidate pack 28",
+      "spawnIds": [
+        "5800131"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-029",
+      "label": "Candidate pack 29",
+      "spawnIds": [
+        "5800134",
+        "5800147"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-030",
+      "label": "Candidate pack 30",
+      "spawnIds": [
+        "5800143"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-031",
+      "label": "Candidate pack 31",
+      "spawnIds": [
+        "5800145"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-032",
+      "label": "Candidate pack 32",
+      "spawnIds": [
+        "5800150"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-033",
+      "label": "Candidate pack 33",
+      "spawnIds": [
+        "5800151"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-034",
+      "label": "Candidate pack 34",
+      "spawnIds": [
+        "5800152"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-035",
+      "label": "Candidate pack 35",
+      "spawnIds": [
+        "5800153"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-036",
+      "label": "Candidate pack 36",
+      "spawnIds": [
+        "5800154"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-037",
+      "label": "Candidate pack 37",
+      "spawnIds": [
+        "5800155"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-038",
+      "label": "Candidate pack 38",
+      "spawnIds": [
+        "5800156"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-039",
+      "label": "Candidate pack 39",
+      "spawnIds": [
+        "5800157"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-040",
+      "label": "Candidate pack 40",
+      "spawnIds": [
+        "5800158"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-041",
+      "label": "Candidate pack 41",
+      "spawnIds": [
+        "5800159"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-042",
+      "label": "Candidate pack 42",
+      "spawnIds": [
+        "5800160"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-043",
+      "label": "Candidate pack 43",
+      "spawnIds": [
+        "5800161"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-044",
+      "label": "Candidate pack 44",
+      "spawnIds": [
+        "5800162"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-045",
+      "label": "Candidate pack 45",
+      "spawnIds": [
+        "5800163",
+        "5800168",
+        "5800183"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-046",
+      "label": "Candidate pack 46",
+      "spawnIds": [
+        "5800164",
+        "5800165",
+        "5800169",
+        "5800174",
+        "5800175",
+        "5800176",
+        "5800185"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-047",
+      "label": "Candidate pack 47",
+      "spawnIds": [
+        "5800166",
+        "5800167",
+        "5800170",
+        "5800186",
+        "5800190"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-048",
+      "label": "Candidate pack 48",
+      "spawnIds": [
+        "5800171"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-049",
+      "label": "Candidate pack 49",
+      "spawnIds": [
+        "5800172",
+        "5800182",
+        "5800184"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-050",
+      "label": "Candidate pack 50",
+      "spawnIds": [
+        "5800173",
+        "5800187",
+        "5800188"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-051",
+      "label": "Candidate pack 51",
+      "spawnIds": [
+        "5800177"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-052",
+      "label": "Candidate pack 52",
+      "spawnIds": [
+        "5800178",
+        "5800179",
+        "5800180"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-053",
+      "label": "Candidate pack 53",
+      "spawnIds": [
+        "5800181"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-054",
+      "label": "Candidate pack 54",
+      "spawnIds": [
+        "5800189"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-055",
+      "label": "Candidate pack 55",
+      "spawnIds": [
+        "5800191"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-056",
+      "label": "Candidate pack 56",
+      "spawnIds": [
+        "5800219",
+        "5800220",
+        "5800221",
+        "5800222",
+        "5800223",
+        "5800224"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-057",
+      "label": "Candidate pack 57",
+      "spawnIds": [
+        "5800225",
+        "5800226",
+        "5800227",
+        "5800228",
+        "5800229"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-058",
+      "label": "Candidate pack 58",
+      "spawnIds": [
+        "5800230"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-059",
+      "label": "Candidate pack 59",
+      "spawnIds": [
+        "5800231",
+        "5800232",
+        "5800233"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-060",
+      "label": "Candidate pack 60",
+      "spawnIds": [
+        "5800234"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-061",
+      "label": "Candidate pack 61",
+      "spawnIds": [
+        "5800235"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-062",
+      "label": "Candidate pack 62",
+      "spawnIds": [
+        "5800236"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-063",
+      "label": "Candidate pack 63",
+      "spawnIds": [
+        "5800237"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-064",
+      "label": "Candidate pack 64",
+      "spawnIds": [
+        "5800238",
+        "5800240",
+        "5800242"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-065",
+      "label": "Candidate pack 65",
+      "spawnIds": [
+        "5800239"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-066",
+      "label": "Candidate pack 66",
+      "spawnIds": [
+        "5800241",
+        "5800243"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-067",
+      "label": "Candidate pack 67",
+      "spawnIds": [
+        "5800244"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-068",
+      "label": "Candidate pack 68",
+      "spawnIds": [
+        "5800245"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-069",
+      "label": "Candidate pack 69",
+      "spawnIds": [
+        "5800246"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-070",
+      "label": "Candidate pack 70",
+      "spawnIds": [
+        "5800300",
+        "5800301",
+        "5800303"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-071",
+      "label": "Candidate pack 71",
+      "spawnIds": [
+        "5800302"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-072",
+      "label": "Candidate pack 72",
+      "spawnIds": [
+        "5800304",
+        "5800305",
+        "5800306",
+        "5800307"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-073",
+      "label": "Candidate pack 73",
+      "spawnIds": [
+        "5800308",
+        "5800309",
+        "5800310",
+        "5800311"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-074",
+      "label": "Candidate pack 74",
+      "spawnIds": [
+        "5800312",
+        "5800313",
+        "5800314",
+        "5800315",
+        "5800316"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-075",
+      "label": "Candidate pack 75",
+      "spawnIds": [
+        "5800317",
+        "5800318",
+        "5800319",
+        "5800320"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-076",
+      "label": "Candidate pack 76",
+      "spawnIds": [
+        "5800321",
+        "5800322",
+        "5800323",
+        "5800324",
+        "5800325",
+        "5800338"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-077",
+      "label": "Candidate pack 77",
+      "spawnIds": [
+        "5800326",
+        "5800327",
+        "5800328",
+        "5800329"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-078",
+      "label": "Candidate pack 78",
+      "spawnIds": [
+        "5800330",
+        "5800331"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-079",
+      "label": "Candidate pack 79",
+      "spawnIds": [
+        "5800332"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-080",
+      "label": "Candidate pack 80",
+      "spawnIds": [
+        "5800333",
+        "5800337"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-081",
+      "label": "Candidate pack 81",
+      "spawnIds": [
+        "5800334"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-082",
+      "label": "Candidate pack 82",
+      "spawnIds": [
+        "5800335"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-083",
+      "label": "Candidate pack 83",
+      "spawnIds": [
+        "5800336"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-084",
+      "label": "Candidate pack 84",
+      "spawnIds": [
+        "5800346"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-085",
+      "label": "Candidate pack 85",
+      "spawnIds": [
+        "5800347"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-086",
+      "label": "Candidate pack 86",
+      "spawnIds": [
+        "5800348"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-087",
+      "label": "Candidate pack 87",
+      "spawnIds": [
+        "5800353"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-088",
+      "label": "Candidate pack 88",
+      "spawnIds": [
+        "5800354"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-089",
+      "label": "Candidate pack 89",
+      "spawnIds": [
+        "5800355"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-090",
+      "label": "Candidate pack 90",
+      "spawnIds": [
+        "5800363"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    },
+    {
+      "id": "candidate-091",
+      "label": "Candidate pack 91",
+      "spawnIds": [
+        "5809999"
+      ],
+      "source": {
+        "source": "derived",
+        "confidence": "candidate",
+        "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+        "observedAt": "2026-08-22T12:00:00Z"
+      }
+    }
+  ],
+  "pois": []
+}
