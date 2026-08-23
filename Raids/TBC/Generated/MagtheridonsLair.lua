@@ -12,6 +12,12 @@ local raid = {
   instanceId = 544,
   mapId = 544,
   mode = "route",
+  enemyMetadataSource = {
+    confidence = "candidate",
+    observedAt = "2026-08-23T00:00:00Z",
+    source = "azerothcore",
+    sourceRef = "azerothcore-wotlk@361ff97e5d2fbb4976d1bf18db09763a683309ca#creature_template,creature_template_model,creature_classlevelstats",
+  },
   sublevels = {
     {
       index = 1,
@@ -21,8 +27,14 @@ local raid = {
   },
   enemies = {
     ["17256"] = {
+      characteristics = {},
+      creatureType = "Humanoid",
+      displayId = 9865,
+      health = 242800,
+      level = 73,
       name = "Hellfire Channeler",
       npcId = 17256,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T21:30:00Z",
@@ -101,10 +113,28 @@ local raid = {
           y = 0.774544,
         },
       },
+      spells = {
+        [30207] = {},
+        [30510] = {
+          interruptible = true,
+        },
+        [30511] = {},
+        [30528] = {
+          interruptible = true,
+        },
+        [30530] = {},
+        [30531] = {},
+      },
     },
     ["17257"] = {
+      characteristics = {},
+      creatureType = "Demon",
+      displayId = 18527,
+      health = 4818380,
+      level = 73,
       name = "Magtheridon",
       npcId = 17257,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T21:30:00Z",
@@ -127,10 +157,27 @@ local raid = {
           y = 0.739302,
         },
       },
+      spells = {
+        [27680] = {},
+        [30205] = {},
+        [30541] = {},
+        [30572] = {},
+        [30616] = {},
+        [30619] = {},
+        [30657] = {},
+        [36449] = {},
+        [36455] = {},
+      },
     },
     ["18829"] = {
+      characteristics = {},
+      creatureType = "Humanoid",
+      displayId = 11440,
+      health = 188896,
+      level = 72,
       name = "Hellfire Warder",
       npcId = 18829,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T21:30:00Z",
@@ -711,6 +758,16 @@ local raid = {
           sublevel = 1,
           x = 0.570365,
           y = 0.71288,
+        },
+      },
+      spells = {
+        [34435] = {},
+        [34436] = {},
+        [34437] = {},
+        [34439] = {},
+        [34441] = {},
+        [39175] = {
+          interruptible = true,
         },
       },
     },

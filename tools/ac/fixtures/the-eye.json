@@ -10,13 +10,512 @@
       "selectedStaticSpawns": 187,
       "npcIds": 29,
       "renderedPatrols": 14
-    }
+    },
+    "enemyInfoBasis": "CMaNGOS tbc-db@7060a217bcf7c454db570e842cd5e2179444d768 creature_spell_list, creature_template_spells, creature_ai_scripts and mechanic immunities; mangos-tbc@adbc7f747a3a5c4741a012d86f6cd8112238b5bc 2.4.3 Spell.dbc and ScriptDevAI"
   },
   "source": {
     "source": "derived",
     "confidence": "candidate",
     "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
     "observedAt": "2026-08-22T12:00:00Z"
+  },
+  "npcSource": {
+    "source": "azerothcore",
+    "confidence": "candidate",
+    "sourceRef": "azerothcore-wotlk@361ff97e5d2fbb4976d1bf18db09763a683309ca#creature_template,creature_template_model,creature_classlevelstats",
+    "observedAt": "2026-08-23T00:00:00Z"
+  },
+  "npcs": {
+    "18805": {
+      "health": 3035000,
+      "level": 73,
+      "creatureType": "Humanoid",
+      "displayId": 18239,
+      "scale": 1.0,
+      "spells": {
+        "25824": {},
+        "33009": {},
+        "33023": {},
+        "33031": {},
+        "33040": {},
+        "34322": {},
+        "39117": {},
+        "39329": {},
+        "39414": {},
+        "42783": {}
+      },
+      "characteristics": {}
+    },
+    "19514": {
+      "health": 2800000,
+      "level": 73,
+      "creatureType": "Elemental",
+      "displayId": 18945,
+      "scale": 1.0,
+      "spells": {
+        "18814": {},
+        "26662": {},
+        "34098": {},
+        "34121": {},
+        "34229": {},
+        "34341": {},
+        "34342": {},
+        "35181": {},
+        "35367": {},
+        "35369": {},
+        "35380": {},
+        "35410": {},
+        "35412": {}
+      },
+      "characteristics": {}
+    },
+    "19516": {
+      "health": 4552500,
+      "level": 73,
+      "creatureType": "Mechanical",
+      "displayId": 18951,
+      "scale": 1.0,
+      "spells": {
+        "25778": {},
+        "26662": {},
+        "34162": {},
+        "34172": {}
+      },
+      "characteristics": {}
+    },
+    "19622": {
+      "health": 3642000,
+      "level": 73,
+      "creatureType": "Humanoid",
+      "displayId": 20023,
+      "scale": 1.0,
+      "spells": {
+        "34480": {},
+        "36089": {},
+        "36090": {},
+        "36091": {},
+        "36092": {},
+        "36187": {
+          "interruptible": true
+        },
+        "36450": {},
+        "36723": {},
+        "36730": {},
+        "36735": {},
+        "36797": {},
+        "36805": {
+          "interruptible": true
+        },
+        "36815": {},
+        "36819": {
+          "interruptible": true
+        },
+        "36834": {},
+        "36976": {
+          "interruptible": true
+        },
+        "39432": {},
+        "39497": {},
+        "40370": {}
+      },
+      "characteristics": {}
+    },
+    "20031": {
+      "health": 179525,
+      "level": 71,
+      "creatureType": "Humanoid",
+      "displayId": 19386,
+      "scale": 1.0,
+      "spells": {
+        "15284": {},
+        "33500": {},
+        "35949": {}
+      },
+      "characteristics": {
+        "Sap": true,
+        "Repentance": true,
+        "Disorient": true,
+        "Fear": true,
+        "Root": true,
+        "Polymorph": true,
+        "Slow": true
+      }
+    },
+    "20032": {
+      "health": 229760,
+      "level": 71,
+      "creatureType": "Humanoid",
+      "displayId": 19388,
+      "scale": 1.0,
+      "spells": {
+        "13005": {},
+        "37249": {},
+        "37251": {},
+        "39078": {}
+      },
+      "characteristics": {}
+    },
+    "20033": {
+      "health": 143600,
+      "level": 71,
+      "creatureType": "Humanoid",
+      "displayId": 19390,
+      "scale": 1.0,
+      "spells": {
+        "35915": {},
+        "37109": {},
+        "37110": {}
+      },
+      "characteristics": {
+        "Sap": true,
+        "Repentance": true,
+        "Disorient": true,
+        "Fear": true,
+        "Root": true,
+        "Polymorph": true,
+        "Slow": true
+      }
+    },
+    "20034": {
+      "health": 143600,
+      "level": 71,
+      "creatureType": "Humanoid",
+      "displayId": 19392,
+      "scale": 1.0,
+      "spells": {
+        "37122": {},
+        "37124": {},
+        "37126": {}
+      },
+      "characteristics": {
+        "Sap": true,
+        "Repentance": true,
+        "Disorient": true,
+        "Fear": true,
+        "Root": true,
+        "Polymorph": true,
+        "Slow": true
+      }
+    },
+    "20035": {
+      "health": 295200,
+      "level": 72,
+      "creatureType": "Humanoid",
+      "displayId": 20978,
+      "scale": 1.0,
+      "spells": {
+        "34996": {},
+        "35949": {},
+        "36132": {}
+      },
+      "characteristics": {}
+    },
+    "20036": {
+      "health": 143600,
+      "level": 71,
+      "creatureType": "Humanoid",
+      "displayId": 19394,
+      "scale": 1.0,
+      "spells": {
+        "37254": {},
+        "37255": {},
+        "39077": {},
+        "39078": {}
+      },
+      "characteristics": {}
+    },
+    "20037": {
+      "health": 144398,
+      "level": 71,
+      "creatureType": "Humanoid",
+      "displayId": 19398,
+      "scale": 1.0,
+      "spells": {
+        "37154": {},
+        "37317": {},
+        "39079": {}
+      },
+      "characteristics": {}
+    },
+    "20038": {
+      "health": 69860,
+      "level": 70,
+      "creatureType": "Beast",
+      "displayId": 19298,
+      "scale": 1.0,
+      "spells": {
+        "37160": {},
+        "37319": {}
+      },
+      "characteristics": {
+        "Disorient": true,
+        "Fear": true,
+        "Root": true,
+        "Polymorph": true,
+        "Slow": true,
+        "Scare Beast": true,
+        "Hibernate": true
+      }
+    },
+    "20039": {
+      "health": 69860,
+      "level": 72,
+      "creatureType": "Beast",
+      "displayId": 19299,
+      "scale": 1.0,
+      "spells": {
+        "37156": {},
+        "37159": {}
+      },
+      "characteristics": {}
+    },
+    "20040": {
+      "health": 553500,
+      "level": 72,
+      "creatureType": "Mechanical",
+      "displayId": 19410,
+      "scale": 1.0,
+      "spells": {
+        "18943": {},
+        "35035": {},
+        "35039": {},
+        "37102": {}
+      },
+      "characteristics": {}
+    },
+    "20041": {
+      "health": 295200,
+      "level": 72,
+      "creatureType": "Mechanical",
+      "displayId": 19300,
+      "scale": 1.0,
+      "spells": {
+        "37104": {},
+        "37106": {}
+      },
+      "characteristics": {}
+    },
+    "20042": {
+      "health": 179482,
+      "level": 71,
+      "creatureType": "Humanoid",
+      "displayId": 19412,
+      "scale": 1.0,
+      "spells": {
+        "37112": {},
+        "37118": {},
+        "37120": {}
+      },
+      "characteristics": {
+        "Stun": true,
+        "Sap": true,
+        "Repentance": true,
+        "Disorient": true,
+        "Fear": true,
+        "Root": true,
+        "Polymorph": true,
+        "Mind Control": true,
+        "Silence": true,
+        "Slow": true
+      }
+    },
+    "20043": {
+      "health": 22000,
+      "level": 70,
+      "creatureType": "Humanoid",
+      "displayId": 19470,
+      "scale": 1.0,
+      "spells": {
+        "37129": {},
+        "37132": {},
+        "37133": {},
+        "38725": {}
+      },
+      "characteristics": {
+        "Sap": true,
+        "Repentance": true
+      }
+    },
+    "20044": {
+      "health": 26000,
+      "level": 70,
+      "creatureType": "Humanoid",
+      "displayId": 19472,
+      "scale": 1.0,
+      "spells": {
+        "37111": {},
+        "37279": {},
+        "37282": {},
+        "38728": {}
+      },
+      "characteristics": {
+        "Sap": true,
+        "Repentance": true
+      }
+    },
+    "20045": {
+      "health": 236120,
+      "level": 72,
+      "creatureType": "Humanoid",
+      "displayId": 19474,
+      "scale": 1.0,
+      "spells": {
+        "37126": {},
+        "37135": {}
+      },
+      "characteristics": {}
+    },
+    "20046": {
+      "health": 236120,
+      "level": 72,
+      "creatureType": "Humanoid",
+      "displayId": 19423,
+      "scale": 1.0,
+      "spells": {
+        "37109": {},
+        "37110": {},
+        "37289": {},
+        "38732": {}
+      },
+      "characteristics": {}
+    },
+    "20047": {
+      "health": 143600,
+      "level": 71,
+      "creatureType": "Humanoid",
+      "displayId": 19499,
+      "scale": 1.0,
+      "spells": {
+        "37262": {},
+        "37263": {},
+        "37265": {}
+      },
+      "characteristics": {
+        "Sap": true,
+        "Repentance": true,
+        "Disorient": true,
+        "Fear": true,
+        "Root": true,
+        "Polymorph": true,
+        "Slow": true
+      }
+    },
+    "20048": {
+      "health": 180000,
+      "level": 71,
+      "creatureType": "Humanoid",
+      "displayId": 19505,
+      "scale": 1.0,
+      "spells": {
+        "37268": {}
+      },
+      "characteristics": {
+        "Sap": true,
+        "Repentance": true,
+        "Disorient": true,
+        "Fear": true,
+        "Root": true,
+        "Polymorph": true
+      }
+    },
+    "20049": {
+      "health": 230000,
+      "level": 71,
+      "creatureType": "Humanoid",
+      "displayId": 19503,
+      "scale": 1.0,
+      "spells": {
+        "37257": {},
+        "37259": {},
+        "37260": {},
+        "39077": {},
+        "39078": {}
+      },
+      "characteristics": {}
+    },
+    "20050": {
+      "health": 230000,
+      "level": 72,
+      "creatureType": "Humanoid",
+      "displayId": 19507,
+      "scale": 1.0,
+      "spells": {
+        "37274": {},
+        "37275": {},
+        "37276": {}
+      },
+      "characteristics": {
+        "Polymorph": true
+      }
+    },
+    "20052": {
+      "health": 179525,
+      "level": 71,
+      "creatureType": "Demon",
+      "displayId": 19254,
+      "scale": 1.0,
+      "spells": {
+        "37121": {},
+        "37123": {
+          "description": "Debuff: Physical damage every 2 sec for 8 sec."
+        }
+      },
+      "characteristics": {
+        "Banish": true
+      }
+    },
+    "20060": {
+      "health": 273168,
+      "level": 73,
+      "creatureType": "Humanoid",
+      "displayId": 20178,
+      "scale": 1.0,
+      "spells": {
+        "8876": {},
+        "44863": {}
+      },
+      "characteristics": {}
+    },
+    "20062": {
+      "health": 191196,
+      "level": 73,
+      "creatureType": "Humanoid",
+      "displayId": 20237,
+      "scale": 1.0,
+      "spells": {
+        "36970": {},
+        "36971": {},
+        "37018": {}
+      },
+      "characteristics": {}
+    },
+    "20063": {
+      "health": 273168,
+      "level": 73,
+      "creatureType": "Humanoid",
+      "displayId": 20177,
+      "scale": 1.0,
+      "spells": {
+        "16496": {},
+        "37027": {},
+        "37036": {}
+      },
+      "characteristics": {}
+    },
+    "20064": {
+      "health": 273168,
+      "level": 73,
+      "creatureType": "Humanoid",
+      "displayId": 20236,
+      "scale": 1.0,
+      "spells": {
+        "30225": {},
+        "36965": {},
+        "36966": {},
+        "40373": {}
+      },
+      "characteristics": {}
+    }
   },
   "raid": {
     "key": "the-eye",

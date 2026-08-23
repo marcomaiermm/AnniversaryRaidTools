@@ -10,8 +10,8 @@ local source = {
   observedAt = "2026-08-22T12:00:00Z",
 }
 local floors = {
-  { "Sunwell Plateau", 335, "SunwellPlateau", "SunwellPlateau1_" },
-  { "Shrine of the Eclipse", 336, "SunwellPlateau", "SunwellPlateau2_" },
+  { "Sunwell Plateau", 335, "SunwellPlateau", "SunwellPlateau" },
+  { "Shrine of the Eclipse", 336, "SunwellPlateau", "SunwellPlateau1_" },
 }
 local sublevels = {}
 for index, floor in ipairs(floors) do

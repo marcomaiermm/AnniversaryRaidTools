@@ -35,13 +35,79 @@
       "channelerSpawnGroupId": 5440005,
       "timedReleaseSeconds": 120,
       "allChannelersDeadRelease": "immediate"
-    }
+    },
+    "enemyInfoBasis": "CMaNGOS tbc-db@7060a217bcf7c454db570e842cd5e2179444d768 creature_spell_list, creature_template_spells, creature_ai_scripts and mechanic immunities; mangos-tbc@adbc7f747a3a5c4741a012d86f6cd8112238b5bc 2.4.3 Spell.dbc and ScriptDevAI"
   },
   "source": {
     "source": "derived",
     "confidence": "candidate",
     "sourceRef": "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/outland/hellfire_citadel/magtheridons_lair/magtheridons_lair.cpp | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/outland/hellfire_citadel/magtheridons_lair/boss_magtheridon.cpp",
     "observedAt": "2026-08-21T21:30:00Z"
+  },
+  "npcSource": {
+    "source": "azerothcore",
+    "confidence": "candidate",
+    "sourceRef": "azerothcore-wotlk@361ff97e5d2fbb4976d1bf18db09763a683309ca#creature_template,creature_template_model,creature_classlevelstats",
+    "observedAt": "2026-08-23T00:00:00Z"
+  },
+  "npcs": {
+    "17256": {
+      "health": 242800,
+      "level": 73,
+      "creatureType": "Humanoid",
+      "displayId": 9865,
+      "scale": 1.0,
+      "spells": {
+        "30207": {},
+        "30510": {
+          "interruptible": true
+        },
+        "30511": {},
+        "30528": {
+          "interruptible": true
+        },
+        "30530": {},
+        "30531": {}
+      },
+      "characteristics": {}
+    },
+    "17257": {
+      "health": 4818380,
+      "level": 73,
+      "creatureType": "Demon",
+      "displayId": 18527,
+      "scale": 1.0,
+      "spells": {
+        "27680": {},
+        "30205": {},
+        "30541": {},
+        "30572": {},
+        "30616": {},
+        "30619": {},
+        "30657": {},
+        "36449": {},
+        "36455": {}
+      },
+      "characteristics": {}
+    },
+    "18829": {
+      "health": 188896,
+      "level": 72,
+      "creatureType": "Humanoid",
+      "displayId": 11440,
+      "scale": 1.0,
+      "spells": {
+        "34435": {},
+        "34436": {},
+        "34437": {},
+        "34439": {},
+        "34441": {},
+        "39175": {
+          "interruptible": true
+        }
+      },
+      "characteristics": {}
+    }
   },
   "raid": {
     "key": "magtheridons-lair",

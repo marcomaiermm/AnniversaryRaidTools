@@ -12,6 +12,12 @@ local raid = {
   instanceId = 565,
   mapId = 565,
   mode = "route",
+  enemyMetadataSource = {
+    confidence = "candidate",
+    observedAt = "2026-08-23T00:00:00Z",
+    source = "azerothcore",
+    sourceRef = "azerothcore-wotlk@361ff97e5d2fbb4976d1bf18db09763a683309ca#creature_template,creature_template_model,creature_classlevelstats",
+  },
   sublevels = {
     {
       index = 1,
@@ -21,8 +27,14 @@ local raid = {
   },
   enemies = {
     ["18831"] = {
+      characteristics = {},
+      creatureType = "Humanoid",
+      displayId = 18649,
+      health = 758800,
+      level = 73,
       name = "High King Maulgar",
       npcId = 18831,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T18:15:00Z",
@@ -45,10 +57,25 @@ local raid = {
           y = 0.555574,
         },
       },
+      spells = {
+        [16508] = {},
+        [26561] = {},
+        [28168] = {},
+        [33230] = {},
+        [33232] = {},
+        [33238] = {},
+        [39144] = {},
+      },
     },
     ["18832"] = {
+      characteristics = {},
+      creatureType = "Humanoid",
+      displayId = 20194,
+      health = 303500,
+      level = 73,
       name = "Krosh Firehand",
       npcId = 18832,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T18:15:00Z",
@@ -71,10 +98,21 @@ local raid = {
           y = 0.53622,
         },
       },
+      spells = {
+        [33051] = {},
+        [33054] = {},
+        [33061] = {},
+      },
     },
     ["18834"] = {
+      characteristics = {},
+      creatureType = "Humanoid",
+      displayId = 20195,
+      health = 303500,
+      level = 73,
       name = "Olm the Summoner",
       npcId = 18834,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T18:15:00Z",
@@ -97,10 +135,21 @@ local raid = {
           y = 0.545654,
         },
       },
+      spells = {
+        [33129] = {},
+        [33130] = {},
+        [33131] = {},
+      },
     },
     ["18835"] = {
+      characteristics = {},
+      creatureType = "Humanoid",
+      displayId = 12472,
+      health = 303500,
+      level = 73,
       name = "Kiggler the Crazed",
       npcId = 18835,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T18:15:00Z",
@@ -123,10 +172,24 @@ local raid = {
           y = 0.547257,
         },
       },
+      spells = {
+        [33173] = {},
+        [33175] = {},
+        [33237] = {},
+        [36152] = {},
+      },
     },
     ["18836"] = {
+      characteristics = {
+        Stun = true,
+      },
+      creatureType = "Humanoid",
+      displayId = 11585,
+      health = 212450,
+      level = 73,
       name = "Blindeye the Seer",
       npcId = 18836,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T18:15:00Z",
@@ -149,10 +212,27 @@ local raid = {
           y = 0.550769,
         },
       },
+      spells = {
+        [30991] = {},
+        [30992] = {},
+        [33144] = {
+          interruptible = true,
+        },
+        [33147] = {},
+        [33152] = {
+          interruptible = true,
+        },
+      },
     },
     ["19044"] = {
+      characteristics = {},
+      creatureType = "Humanoid",
+      displayId = 18698,
+      health = 3414600,
+      level = 73,
       name = "Gruul the Dragonkiller",
       npcId = 19044,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T18:15:00Z",
@@ -175,10 +255,26 @@ local raid = {
           y = 0.283,
         },
       },
+      spells = {
+        [33525] = {},
+        [33654] = {},
+        [33812] = {},
+        [33965] = {},
+        [36240] = {},
+        [36297] = {},
+        [36300] = {},
+        [39188] = {},
+      },
     },
     ["19389"] = {
+      characteristics = {},
+      creatureType = "Humanoid",
+      displayId = 18356,
+      health = 298298,
+      level = 72,
       name = "Lair Brute",
       npcId = 19389,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T18:15:00Z",
@@ -365,10 +461,21 @@ local raid = {
           y = 0.45662,
         },
       },
+      spells = {
+        [24193] = {},
+        [39171] = {},
+        [39174] = {},
+      },
     },
     ["21350"] = {
+      characteristics = {},
+      creatureType = "Humanoid",
+      displayId = 20241,
+      health = 236120,
+      level = 72,
       name = "Gronn-Priest",
       npcId = 21350,
+      scale = 1,
       source = {
         confidence = "candidate",
         observedAt = "2026-08-21T18:15:00Z",
@@ -468,6 +575,13 @@ local raid = {
           x = 0.265842,
           y = 0.670949,
         },
+      },
+      spells = {
+        [22884] = {},
+        [36678] = {
+          interruptible = true,
+        },
+        [36679] = {},
       },
     },
   },

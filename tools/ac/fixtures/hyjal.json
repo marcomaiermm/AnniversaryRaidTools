@@ -56,13 +56,309 @@
         "archimonde-night-elf-crypt-fiend",
         "archimonde-night-elf-ghoul-abomination"
       ]
-    }
+    },
+    "enemyInfoBasis": "CMaNGOS tbc-db@7060a217bcf7c454db570e842cd5e2179444d768 creature_spell_list, creature_template_spells, creature_ai_scripts and mechanic immunities; mangos-tbc@adbc7f747a3a5c4741a012d86f6cd8112238b5bc 2.4.3 Spell.dbc and ScriptDevAI"
   },
   "source": {
     "source": "derived",
     "confidence": "candidate",
     "sourceRef": "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/kalimdor/caverns_of_time/hyjal/hyjal.cpp",
     "observedAt": "2026-08-21T19:30:00Z"
+  },
+  "npcSource": {
+    "source": "azerothcore",
+    "confidence": "candidate",
+    "sourceRef": "azerothcore-wotlk@361ff97e5d2fbb4976d1bf18db09763a683309ca#creature_template,creature_template_model,creature_classlevelstats",
+    "observedAt": "2026-08-23T00:00:00Z"
+  },
+  "npcs": {
+    "17767": {
+      "health": 4249000,
+      "level": 73,
+      "creatureType": "Undead",
+      "displayId": 17444,
+      "scale": 1.0,
+      "spells": {
+        "26662": {},
+        "31249": {},
+        "31250": {},
+        "31256": {},
+        "31258": {}
+      },
+      "characteristics": {}
+    },
+    "17808": {
+      "health": 4249000,
+      "level": 73,
+      "creatureType": "Demon",
+      "displayId": 21069,
+      "scale": 1.0,
+      "spells": {
+        "26662": {},
+        "31298": {},
+        "31299": {},
+        "31302": {},
+        "31304": {},
+        "31306": {},
+        "31317": {},
+        "38061": {},
+        "39346": {}
+      },
+      "characteristics": {}
+    },
+    "17842": {
+      "health": 4249000,
+      "level": 73,
+      "creatureType": "Demon",
+      "displayId": 18526,
+      "scale": 1.0,
+      "spells": {
+        "26662": {},
+        "31340": {},
+        "31344": {},
+        "31345": {},
+        "31347": {},
+        "40505": {},
+        "42023": {}
+      },
+      "characteristics": {}
+    },
+    "17888": {
+      "health": 4249000,
+      "level": 73,
+      "creatureType": "Demon",
+      "displayId": 17886,
+      "scale": 1.0,
+      "spells": {
+        "31436": {},
+        "31447": {},
+        "31477": {},
+        "31480": {},
+        "40936": {}
+      },
+      "characteristics": {}
+    },
+    "17895": {
+      "health": 139720,
+      "level": 70,
+      "creatureType": "Undead",
+      "displayId": 571,
+      "scale": 1.0,
+      "spells": {
+        "21727": {},
+        "31537": {},
+        "31540": {}
+      },
+      "characteristics": {
+        "Stun": true,
+        "Disorient": true,
+        "Root": true,
+        "Shackle Undead": true,
+        "Silence": true,
+        "Slow": true,
+        "Turn Evil": true
+      }
+    },
+    "17897": {
+      "health": 174650,
+      "level": 70,
+      "creatureType": "Undead",
+      "displayId": 17308,
+      "scale": 1.0,
+      "spells": {
+        "21727": {}
+      },
+      "characteristics": {
+        "Stun": true,
+        "Disorient": true,
+        "Root": true,
+        "Shackle Undead": true,
+        "Silence": true,
+        "Slow": true,
+        "Turn Evil": true
+      }
+    },
+    "17898": {
+      "health": 179525,
+      "level": 71,
+      "creatureType": "Undead",
+      "displayId": 12818,
+      "scale": 1.0,
+      "spells": {
+        "21727": {},
+        "31607": {},
+        "31610": {}
+      },
+      "characteristics": {
+        "Stun": true,
+        "Disorient": true,
+        "Root": true,
+        "Shackle Undead": true,
+        "Silence": true,
+        "Slow": true,
+        "Turn Evil": true
+      }
+    },
+    "17899": {
+      "health": 120000,
+      "level": 70,
+      "creatureType": "Humanoid",
+      "displayId": 17537,
+      "scale": 1.0,
+      "spells": {
+        "21727": {},
+        "31617": {
+          "interruptible": true
+        },
+        "31624": {
+          "interruptible": true
+        },
+        "31625": {
+          "interruptible": true
+        },
+        "31626": {},
+        "31627": {
+          "interruptible": true
+        }
+      },
+      "characteristics": {
+        "Stun": true,
+        "Sap": true,
+        "Repentance": true,
+        "Disorient": true,
+        "Fear": true,
+        "Root": true,
+        "Polymorph": true,
+        "Mind Control": true,
+        "Silence": true,
+        "Slow": true
+      }
+    },
+    "17905": {
+      "health": 8383,
+      "level": 70,
+      "creatureType": "Undead",
+      "displayId": 8783,
+      "scale": 1.0,
+      "spells": {
+        "21727": {},
+        "31651": {},
+        "31662": {
+          "interruptible": true
+        },
+        "38183": {
+          "interruptible": true
+        }
+      },
+      "characteristics": {
+        "Stun": true,
+        "Disorient": true,
+        "Root": true,
+        "Shackle Undead": true,
+        "Silence": true,
+        "Slow": true,
+        "Turn Evil": true
+      }
+    },
+    "17906": {
+      "health": 125748,
+      "level": 70,
+      "creatureType": "Undead",
+      "displayId": 17311,
+      "scale": 1.0,
+      "spells": {
+        "31664": {
+          "interruptible": true
+        }
+      },
+      "characteristics": {
+        "Stun": true,
+        "Disorient": true,
+        "Root": true,
+        "Shackle Undead": true,
+        "Silence": true,
+        "Slow": true,
+        "Turn Evil": true
+      }
+    },
+    "17907": {
+      "health": 332100,
+      "level": 72,
+      "creatureType": "Undead",
+      "displayId": 16919,
+      "scale": 1.0,
+      "spells": {
+        "31688": {}
+      },
+      "characteristics": {}
+    },
+    "17908": {
+      "health": 129258,
+      "level": 71,
+      "creatureType": "Demon",
+      "displayId": 14520,
+      "scale": 1.0,
+      "spells": {
+        "21727": {},
+        "31722": {},
+        "35747": {}
+      },
+      "characteristics": {
+        "Stun": true,
+        "Disorient": true,
+        "Banish": true,
+        "Fear": true,
+        "Root": true,
+        "Silence": true,
+        "Slow": true,
+        "Turn Evil": true
+      }
+    },
+    "17916": {
+      "health": 104790,
+      "level": 70,
+      "creatureType": "Demon",
+      "displayId": 17321,
+      "scale": 1.0,
+      "spells": {
+        "21727": {},
+        "31729": {
+          "interruptible": true
+        }
+      },
+      "characteristics": {
+        "Stun": true,
+        "Disorient": true,
+        "Banish": true,
+        "Fear": true,
+        "Root": true,
+        "Silence": true,
+        "Slow": true,
+        "Turn Evil": true
+      }
+    },
+    "17968": {
+      "health": 4552500,
+      "level": 73,
+      "creatureType": "Demon",
+      "displayId": 20939,
+      "scale": 1.0,
+      "spells": {
+        "31903": {},
+        "31945": {},
+        "31970": {},
+        "31972": {},
+        "31984": {},
+        "32014": {},
+        "32074": {},
+        "32124": {},
+        "35354": {},
+        "38528": {},
+        "39140": {},
+        "39314": {}
+      },
+      "characteristics": {}
+    }
   },
   "raid": {
     "key": "hyjal",
