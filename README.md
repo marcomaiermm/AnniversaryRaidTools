@@ -1,50 +1,66 @@
-## Mythic Dungeon Tools
+# Anniversary Raid Tools
 
-![Main Window](https://i.imgur.com/cmRBpgU.png "Logo")
+Anniversary Raid Tools (ART) is a raid-route planner for the WoW TBC
+Anniversary clients `20505` and `20506`. It is derived from Nnoggie's Mythic
+Dungeon Tools and includes the TBC raids from Karazhan through Sunwell Plateau.
 
-![Main Window](https://imgur.com/XPO5B8C.png "Main Window")
+## Install
 
-## Download
+1. Copy the repository to
+   `World of Warcraft/_anniversary_/Interface/AddOns/AnniversaryRaidTools`.
+2. Install the bundled addon libraries when they are absent:
 
-Wago: https://addons.wago.io/addons/mythic-dungeon-tools
+   ```sh
+   python3 scripts/install_addon_libs.py
+   ```
 
-Curseforge: https://www.curseforge.com/wow/addons/mythic-dungeon-tools
+3. Enable **Anniversary Raid Tools** in the character-selection addon list.
 
-[![CurseforgeBadge](https://cf.way2muchnoise.eu/full_288981_downloads.svg)](https://www.curseforge.com/wow/addons/mythic-dungeon-tools)
+## Use
 
-## Description
+- `/art` opens the planner.
+- `/art minimap` toggles the minimap button.
+- `/mdt` and `/anniversaryraidtools` are aliases for `/art`.
+- Developer mode provides a **Calibration** panel that overlays live `C_Map`
+  tiles on every supported raid floor for map alignment.
 
-Mythic Dungeon Tools is a Mythic+ Dungeon Planner AddOn which helps you perfectly plan out your strategies and pull patterns in Mythic+ Dungeons. Every NPC in every Mythic+ dungeon has been mapped out and can be viewed on an interactive map. Furthermore you have the option to select these enemies and divide the enemies you wish to defeat into pulls. While going through the dungeon and selecting more enemies the progress bar will fill up and you will know exactly which enemies to defeat to reach perfect enemy forces count. When done with selecting enemies the route can be exported and shared via a paste string or send to party members ingame so other users of the AddOn can see what you have planned for the dungeon.
+ART supports two planning modes:
 
-## Features
+- **Route:** compose and order spatial raid packs.
+- **Waves:** annotate raid-defined waves without changing their identity or
+  composition.
 
-- Maps for all Mythic+ dungeons
-- NPC positions for all dungeons
-- Patrol paths for all patroling NPCs
-- Enemy forces for every npc and dungeon
-- Detailed enemy info including crowd control and casted spells
-- Toolbar with drawing and note tools
-- Route management including export/import via paste strings
-- Ingame sharing functions to share routes with party members
-- Live mode for cooperative editing of routes including drawing, selecting enemies and more!
+## Validate
 
-For dungeons of previous expansions use the [MDT Legacy Plugin](https://github.com/Nnoggie/MDT_Legacy)
+The validation matrix requires Bash, Python 3, `realpath`, Lua 5.1, and LuaJIT.
 
-## Slash Commands
+```sh
+./scripts/validate-addon.sh
+```
 
-- /mythicdungeontools
-- /mdt
+Client behavior must also pass the
+[manual smoke protocol](scripts/smoke-clients.md) on both supported interfaces.
 
-## Support / Social
+## Architecture
 
-[![Foo](https://i.imgur.com/Y2fEMMH.png)](https://streamlabs.com/nnoggie/tip) Support me with a [Donation](https://streamlabs.com/nnoggie/tip "Donate")
+- [Architecture decisions](docs/architecture/README.md) record why durable or
+  expensive-to-reverse choices were made.
+- [Data contracts](docs/contracts/) define the versioned runtime and persistence
+  boundaries.
+- [Retail-to-TBC audit](docs/audits/ART-001-retail-to-tbc.md) tracks inherited
+  compatibility work.
 
-[![Foo](https://i.imgur.com/CKxlJJd.png)](https://www.patreon.com/nnoggie) Support me on [Patreon](https://www.patreon.com/nnoggie "Patreon")
+The main runtime boundaries are bootstrap/client compatibility, validated raid
+data, route presets, planner UI, deterministic marking, enemy information, and
+their integration wiring. See
+[ART-0003](docs/architecture/ART-0003-module-boundaries.md) for ownership rules.
 
-[![Foo](https://i.imgur.com/UxFnFkD.png)](https://www.twitch.tv/nnoggie) Watch me live on [Twitch](https://www.twitch.tv/nnoggie "Twitch")
+## Contributing
 
-[![Foo](https://i.imgur.com/0lqcpvj.png)](https://twitter.com/nnoggie) Follow me on [Twitter](https://twitter.com/nnoggie "Twitter")
+See [CONTRIBUTING.md](CONTRIBUTING.md). Generated files under
+`Raids/TBC/Generated/` must not be edited by hand.
 
-[![Foo](https://i.imgur.com/XvxEoEE.png)](https://discord.gg/tdxMPb3) Give Feedback in my [Discord](https://discord.gg/tdxMPb3 "Discord")
+## License and origin
 
-[![Foo](https://i.imgur.com/qV0ZkHA.png)](https://github.com/nnoggie/MythicDungeonTools/issues/new) Open a ticket on [GitHub](https://github.com/nnoggie/MythicDungeonTools/issues/new "GitHub")
+ART is derived from [Mythic Dungeon Tools](https://github.com/Nnoggie/MythicDungeonTools)
+and distributed under [GPL-2.0](LICENSE).

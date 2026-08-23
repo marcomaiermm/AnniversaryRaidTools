@@ -1,5 +1,19 @@
 # ART-0004: Generated Data Policy
 
+## Status
+
+Accepted
+
+## Date
+
+2026-08-21
+
+## Context
+
+Raid records combine upstream database extracts, deterministic transformation,
+and reviewed corrections. Editing generated Lua directly would make corrections
+non-reproducible and erase where a fact came from.
+
 ## Decision
 
 `Raids/TBC/Generated/**` is written only by the data generator. Humans never edit
@@ -33,3 +47,18 @@ repository's GPL-2.0 terms.
 Generated Lua artifacts publish and return the same immutable value according to
 `docs/contracts/static-data-publication.md`. The publication wrapper is emitted by
 the generator and never edited in generated output.
+
+## Alternatives considered
+
+- **Edit generated Lua directly:** rejected because regeneration would overwrite
+  fixes and the source of each correction would be unclear.
+- **Treat one upstream database as verified truth:** rejected because emulator
+  data can differ from the Anniversary clients.
+
+## Consequences
+
+- Generator or fixture changes produce generated data; reviewed manual corrections
+  are isolated as stable-key overrides.
+- Generation must be byte-identical for the same inputs and generator version.
+- Provenance and confidence remain visible through generation, merge, and runtime
+  consumption.

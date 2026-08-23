@@ -1,5 +1,19 @@
 # ART-0002: Client Compatibility
 
+## Status
+
+Accepted
+
+## Date
+
+2026-08-21
+
+## Context
+
+Interfaces `20505` and `20506` expose a smaller and potentially different API
+surface than Retail. Scattered feature-level probes would make startup behavior
+and client support difficult to verify.
+
 ## Decision
 
 The only target interfaces are WoW TBC Anniversary `20505` and `20506`. Both are
@@ -30,6 +44,21 @@ Client API payload differences, including combat-log event retrieval, remain in
 Only the bootstrap agent changes TOCs/loaders. Feature agents expose initialization
 entry points without registering themselves; the vertical-slice integrator wires
 them after dependency contracts are verified.
+
+## Alternatives considered
+
+- **Probe client APIs inside each feature:** rejected because fallback behavior
+  and failure messages would diverge.
+- **Support one interface per release:** rejected because both Anniversary
+  interfaces are explicit release targets.
+
+## Consequences
+
+- Client API differences are centralized in `Core/Compat.lua`.
+- Every release requires automated validation plus manual smoke coverage on both
+  target interfaces.
+- Optional missing capabilities degrade safely; required capability failures must
+  remain actionable.
 
 ## Compatibility gates
 

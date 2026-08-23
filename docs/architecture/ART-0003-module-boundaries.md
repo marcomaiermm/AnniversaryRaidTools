@@ -1,5 +1,19 @@
 # ART-0003: Module Boundaries
 
+## Status
+
+Accepted
+
+## Date
+
+2026-08-21
+
+## Context
+
+ART combines inherited UI code, pure raid-domain services, generated data, and
+client lifecycle wiring. Explicit ownership is needed to prevent generated data,
+UI behavior, and compatibility concerns from becoming mutually dependent.
+
 ## Decision
 
 Boundaries follow ownership and data flow, not speculative layers:
@@ -36,3 +50,18 @@ data degrades that feature only, not the planner.
 Static data loaded by TOC/XML publishes through the versioned static-data contract;
 chunk return values are retained only for tests and tooling. Publication is not
 registration: the integrator validates and registers published values explicitly.
+
+## Alternatives considered
+
+- **Let feature modules self-register:** rejected because loader order and reload
+  behavior would be distributed across modules.
+- **Introduce a generic service framework:** rejected because the listed ownership
+  boundaries and injected dependencies are sufficient.
+
+## Consequences
+
+- The integrator owns ordering and registration, while feature initialization is
+  idempotent.
+- UI modules depend on core contracts; generated data never depends on UI code.
+- Boundary changes require updating the related contract or this ADR rather than
+  adding cross-layer exceptions.

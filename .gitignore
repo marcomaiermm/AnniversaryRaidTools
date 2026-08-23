@@ -5,3 +5,10 @@ libs/*
 !libs/LibDeflate
 !libs/load_core_libs.xml
 !libs/load_libs.xml
+
+.playwright*
+.pytest*
+.codegraph
+.agents
+__pycache__/
+*.pyc
