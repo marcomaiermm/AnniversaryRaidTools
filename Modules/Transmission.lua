@@ -203,6 +203,7 @@ function MDTcommsObject:OnCommReceived(prefix, message, distribution, sender)
   if prefix == MDT.liveSessionPrefixes.pull then
     if MDT.liveSessionActive then
       local preset = MDT:GetCurrentLivePreset()
+      if preset.value.artWaveRaid then return end
       local pulls = MDT:StringToTable(message, false)
       preset.value.pulls = pulls
       if not preset.value.pulls[preset.value.currentPull] then

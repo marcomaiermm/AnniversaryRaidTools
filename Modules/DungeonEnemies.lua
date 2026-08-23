@@ -821,7 +821,9 @@ function MDT:DungeonEnemies_UpdateEnemiesAsync()
   for enemyIdx, data in pairs(enemies) do
     for cloneIdx, clone in pairs(data["clones"]) do
       --check sublevel
-      if clone.sublevel == currentSublevel or (not clone.sublevel) then
+      if (clone.sublevel == currentSublevel or (not clone.sublevel))
+          and not clone.hidden
+          and (not clone.artWave or clone.artWave == preset.value.currentPull) then
         twipe(overlapCandidates)
         local bucketX = floor(clone.x / OVERLAP_BUCKET_SIZE)
         local bucketY = floor(clone.y / OVERLAP_BUCKET_SIZE)
