@@ -32,5 +32,13 @@ for key, (stem, map_id, count, patrols, bosses) in RAIDS.items():
     world = ROOT / "Raids/TBC/Generated" / f"{stem}WorldPositions.lua"
     assert render_lua(raid) == generated.read_text()
     assert render_world_positions(raw, raid) == world.read_text()
+    if key == "the-eye":
+        assert raid["enemies"]["19514"]["health"] == 2800000
+        assert raid["enemies"]["19516"]["health"] == 4552500
+        assert raid["enemies"]["20052"]["spells"][37123]["description"] == (
+            "Debuff: Physical damage every 2 sec for 8 sec."
+        )
+        assert not raid["enemies"]["20052"]["spells"][37123].get("interruptible")
+        assert not raid["enemies"]["19514"]["spells"][34342].get("interruptible")
 
 print("Remaining TBC raid pipeline checks passed")

@@ -90,6 +90,9 @@ def main() -> None:
     by_key = {spawn["key"]: spawn for spawn in spawns}
     assert {by_key[key]["npcId"] for key in council} == {22949, 22950, 22951, 22952}
     assert {by_key[key]["sublevel"] for key in council} == {7}
+    for npc_id in ("22849", "22878", "22946"):
+        assert raid["enemies"][npc_id]["stealthDetect"] is True
+        assert 18950 not in raid["enemies"][npc_id]["spells"]
 
     rendered = render_lua(raid)
     assert rendered == render_lua(build_raid(load_snapshot(SOURCE)))

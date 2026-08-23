@@ -6,7 +6,7 @@ local addon = { ART = ART }
 local raids = {
   { "SerpentshrineCavern", "serpentshrine-cavern", 548, { 332 }, { "CoilfangReservoir1_" } },
   { "TheEye", "the-eye", 550, { 334 }, { "TempestKeep1_" } },
-  { "SunwellPlateau", "sunwell-plateau", 580, { 335, 336 }, { "SunwellPlateau1_", "SunwellPlateau2_" } },
+  { "SunwellPlateau", "sunwell-plateau", 580, { 335, 336 }, { "SunwellPlateau", "SunwellPlateau1_" } },
 }
 for _, spec in ipairs(raids) do
   local map = assert(loadfile(root.."/Raids/TBC/Maps/"..spec[1]..".lua"))("AnniversaryRaidTools", addon)

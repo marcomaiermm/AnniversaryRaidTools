@@ -23,6 +23,24 @@ OUTPUT = ROOT / "Raids" / "TBC" / "Generated" / "GruulsLair.lua"
 def main() -> None:
     raid = build_raid(load_snapshot(SOURCE))
     assert validate_raid(raid) == []
+    assert raid["enemyMetadataSource"]["source"] == "azerothcore"
+    assert {
+        key: raid["enemies"]["19044"][key]
+        for key in ("health", "level", "creatureType", "displayId", "scale")
+    } == {
+        "health": 3414600,
+        "level": 73,
+        "creatureType": "Humanoid",
+        "displayId": 18698,
+        "scale": 1.0,
+    }
+    assert raid["enemies"]["18836"]["spells"][33144]["interruptible"] is True
+    assert 36300 in raid["enemies"]["19044"]["spells"]
+    assert raid["enemies"]["19044"]["characteristics"] == {}
+    assert raid["enemies"]["18834"]["spells"] == {
+        33129: {}, 33130: {}, 33131: {}
+    }
+    assert raid["enemies"]["18836"]["characteristics"] == {"Stun": True}
     assert sum(len(enemy["spawns"]) for enemy in raid["enemies"].values()) == 18
     assert len(raid["packs"]) == 6
     spawns = {spawn["key"]: spawn for enemy in raid["enemies"].values() for spawn in enemy["spawns"]}
@@ -52,6 +70,14 @@ def main() -> None:
     spawn = next(iter(next(iter(broken["enemies"].values()))["spawns"]))
     spawn["key"] = "gruuls-lair:spawn:18831:unstable key"
     assert any("stable spawn key" in error for error in validate_raid(broken))
+
+    broken = copy.deepcopy(raid)
+    broken["enemies"]["19044"]["health"] = 0
+    assert any("health must be a positive integer" in error for error in validate_raid(broken))
+
+    broken = copy.deepcopy(raid)
+    broken["enemies"]["18836"]["spells"][33144]["interruptible"] = "yes"
+    assert any("interruptible must be a boolean" in error for error in validate_raid(broken))
 
     digest = hashlib.sha256(first.encode("utf-8")).hexdigest()
     print(f"ART-030 checks passed: {digest}")
