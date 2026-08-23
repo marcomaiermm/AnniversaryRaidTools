@@ -72,6 +72,10 @@ def build_raid(snapshot: dict[str, Any]) -> dict[str, Any]:
         patrol = raw.get("patrol")
         if patrol is not None:
             spawn["patrol"] = _patrol(patrol, f"spawn {spawn_key}.patrol")
+        if raw.get("hidden") is not None:
+            if not isinstance(raw["hidden"], bool):
+                raise SnapshotError(f"spawn {spawn_key}.hidden must be a boolean")
+            spawn["hidden"] = raw["hidden"]
         spawn_records[spawn_key] = spawn
 
         enemy_key = str(npc_id)

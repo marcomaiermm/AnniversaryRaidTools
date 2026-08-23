@@ -58,6 +58,34 @@ def render_lua(raid: dict[str, Any]) -> str:
     )
 
 
+def render_world_positions(snapshot: dict[str, Any], raid: dict[str, Any]) -> str:
+    """Render integration-private world coordinates without extending raid schema v1."""
+
+    positions: dict[str, Any] = {}
+    for spawn in snapshot.get("spawns", []):
+        if "worldX" not in spawn or "worldY" not in spawn:
+            continue
+        key = f"{raid['key']}:spawn:{spawn['npcId']}:{spawn['id']}"
+        position: dict[str, Any] = {"x": spawn["worldX"], "y": spawn["worldY"]}
+        if "worldZ" in spawn:
+            position["z"] = spawn["worldZ"]
+        patrol = spawn.get("patrol")
+        if patrol and all("worldX" in point and "worldY" in point for point in patrol):
+            position["patrol"] = [{"x": point["worldX"], "y": point["worldY"]} for point in patrol]
+        positions[key] = position
+    if not positions:
+        return ""
+    return (
+        "-- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.\n"
+        f"-- Generator: {GENERATOR_VERSION}\n"
+        "-- Integration-private C_Map projection inputs; raid schema v1 is unchanged.\n"
+        "local ART = assert(rawget(_G, \"ART\"), \"AnniversaryRaidTools requires Core/Bootstrap.lua\")\n"
+        "ART.MapWorldPositions = ART.MapWorldPositions or {}\n"
+        f"ART.MapWorldPositions[{_lua_string(raid['key'])}] = {_lua_value(positions, 1)}\n"
+        f"return ART.MapWorldPositions[{_lua_string(raid['key'])}]\n"
+    )
+
+
 def generate(source_path: str | Path = DEFAULT_SOURCE, output_path: str | Path = DEFAULT_OUTPUT) -> str:
     """Generate output atomically and return the exact bytes written as text."""
 
@@ -157,14 +185,20 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Generate deterministic ART raid Lua data")
     parser.add_argument("--input", type=Path, default=DEFAULT_SOURCE, help="AC snapshot JSON")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT, help="generated Lua path")
+    parser.add_argument("--world-output", type=Path, help="optional generated C_Map world-position path")
     parser.add_argument(
         "--check",
         action="store_true",
         help="verify the existing output is exactly what generation would produce",
     )
     args = parser.parse_args(argv)
-    raid = build_raid(load_snapshot(args.input))
+    snapshot = load_snapshot(args.input)
+    raid = build_raid(snapshot)
     rendered = render_lua(raid)
+    world_rendered = render_world_positions(snapshot, raid)
+    world_output = args.world_output or (
+        args.output.with_name(args.output.stem + "WorldPositions.lua") if world_rendered else None
+    )
     if args.check:
         try:
             current = args.output.read_text(encoding="utf-8")
@@ -174,12 +208,26 @@ def main(argv: list[str] | None = None) -> int:
         if current != rendered:
             print(f"not deterministic: {args.output} differs from generator output", file=sys.stderr)
             return 1
+        if world_output:
+            try:
+                current_world = world_output.read_text(encoding="utf-8")
+            except OSError as exc:
+                print(f"not deterministic: cannot read {world_output}: {exc}", file=sys.stderr)
+                return 1
+            if current_world != world_rendered:
+                print(f"not deterministic: {world_output} differs from generator output", file=sys.stderr)
+                return 1
         print(f"deterministic: {args.output}")
         return 0
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary = args.output.with_name(args.output.name + ".tmp")
     temporary.write_text(rendered, encoding="utf-8", newline="\n")
     os.replace(temporary, args.output)
+    if world_output:
+        world_output.parent.mkdir(parents=True, exist_ok=True)
+        temporary_world = world_output.with_name(world_output.name + ".tmp")
+        temporary_world.write_text(world_rendered, encoding="utf-8", newline="\n")
+        os.replace(temporary_world, world_output)
     print(f"generated: {args.output}")
     return 0
 

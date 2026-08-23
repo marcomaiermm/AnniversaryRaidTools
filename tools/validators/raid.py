@@ -115,6 +115,8 @@ def validate_raid(raid: Any) -> list[str]:
             patrol = spawn.get("patrol")
             if patrol is not None:
                 _check_patrol(patrol, f"{path}.patrol", errors)
+            if spawn.get("hidden") is not None and not isinstance(spawn["hidden"], bool):
+                errors.append(f"{path}.hidden must be a boolean")
 
     pack_membership: dict[str, str] = {}
     for pack_key, pack in packs.items():
