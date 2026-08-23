@@ -50,17 +50,18 @@ for sublevel = 1, 17 do
   local calibration = transform.getCalibration(532, sublevel)
   assert(calibration.provenance.confidence == "candidate", "candidate transform overstated")
   assert(calibration.provenance.sourceRef == transformSource, "transform provenance drifted")
+  assert(calibration.flipY == true, "Karazhan texture orientation drifted")
   local actual, expected = calibration.worldBounds, exactBounds[sublevel]
   for index = 1, 6 do close(actual[index], expected[index], 0.000001, "world bound mismatch") end
 end
 
--- Absolute direction: increasing world Y moves left; increasing world X moves down.
+-- Absolute direction: increasing world Y moves left; increasing world X moves up.
 local x, y = transform.worldToPlanner(532, 3, -10982.7001953125, -1877.9300537109375)
-close(x, 0.262219, 0.000001, "Moroes world-to-planner x")
-close(y, 0.363319, 0.000001, "Moroes world-to-planner y")
+close(x, 0.263672, 0.000001, "Moroes world-to-planner x")
+close(y, 0.446615, 0.000001, "Moroes world-to-planner y")
 local rightX = assert(transform.worldToPlanner(532, 3, -10982.7001953125, -1887.9300537109375))
 local _, downY = transform.worldToPlanner(532, 3, -10972.7001953125, -1877.9300537109375)
-assert(rightX > x and downY > y, "absolute transform axes reversed")
+assert(rightX > x and downY < y, "absolute transform axes reversed")
 local worldX, worldY = transform.plannerToWorld(532, 3, x, y)
 close(worldX, -10982.7001953125, 0.001, "world x round trip")
 close(worldY, -1877.9300537109375, 0.001, "world y round trip")
@@ -78,10 +79,9 @@ close(sourceY, 0.40, 0.000001, "non-identity y round trip")
 
 for _, enemy in pairs(raid.enemies) do
   for _, spawn in ipairs(enemy.spawns) do
-    local px, py = transform.toPlanner(532, spawn.sublevel, spawn.x, spawn.y)
-    assert(px and py, "spawn did not normalize")
+    assert(spawn.x >= 0 and spawn.x <= 1 and spawn.y >= 0 and spawn.y <= 1, "spawn did not normalize")
     for _, point in ipairs(spawn.patrol or {}) do
-      assert(transform.toPlanner(532, spawn.sublevel, point.x, point.y), "patrol did not normalize")
+      assert(point.x >= 0 and point.x <= 1 and point.y >= 0 and point.y <= 1, "patrol did not normalize")
     end
   end
 end

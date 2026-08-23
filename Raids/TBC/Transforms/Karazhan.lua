@@ -35,14 +35,25 @@ local provenance = {
   observedAt = "2026-08-21T22:15:00Z",
 }
 
-local transform = { schemaVersion = 1, raidKey = "karazhan", calibrations = {} }
+local transform = { schemaVersion = 1, raidKey = "karazhan", calibrations = {}, flipX = true }
+-- flipX: legacy Interface/WorldMap Karazhan textures are drawn west-left
+-- (RZTI convention), while C_Map.GetMapPosFromWorldPos returns east-right x.
+-- Modules/EnemyInfo mirrors the client result before toPlanner.
 for sublevel, worldBounds in ipairs(bounds) do
   transform.calibrations[sublevel] = {
     mapId = 532, sublevel = sublevel,
-    offsetX = 0, offsetY = 0, scaleX = 1, scaleY = 1, flipY = false,
+    offsetX = 0, offsetY = 0, scaleX = 1, scaleY = 1, flipY = true,
     tolerance = 0.0005, worldBounds = worldBounds, provenance = provenance,
   }
 end
+transform.calibrations[3].offsetX = 0.001452875
+transform.calibrations[3].offsetY = -0.190066416666667
+transform.calibrations[4].offsetX = -0.01777375
+transform.calibrations[4].offsetY = 0.066112166666667
+transform.calibrations[9].offsetX = 0.021814875
+transform.calibrations[9].offsetY = 0.087
+transform.calibrations[11].offsetX = -0.0379805625
+transform.calibrations[11].offsetY = -0.361806916666667
 
 local function finite(value)
   return type(value) == "number" and value == value and value ~= math.huge and value ~= -math.huge
@@ -102,7 +113,7 @@ function transform.worldToPlanner(mapId, sublevel, worldX, worldY)
   local x = (-worldY - b[5]) / b[1]
   local y = (worldX - b[4]) / b[2]
   if not normalized(x) or not normalized(y) then return nil, "outside-world-bounds" end
-  return x, y
+  return transform.toPlanner(mapId, sublevel, x, y, selected)
 end
 
 function transform.plannerToWorld(mapId, sublevel, x, y)
@@ -110,7 +121,8 @@ function transform.plannerToWorld(mapId, sublevel, x, y)
   if not selected then return nil, reason end
   if not normalized(x) or not normalized(y) then return nil, "invalid-planner-coordinate" end
   local b = selected.worldBounds
-  return b[4] + y * b[2], -(b[5] + x * b[1])
+  local sourceX, sourceY = transform.fromPlanner(mapId, sublevel, x, y, selected)
+  return b[4] + sourceY * b[2], -(b[5] + sourceX * b[1])
 end
 
 function transform.getCalibration(mapId, sublevel)
