@@ -1,0 +1,4 @@
+source=wow_anniversary 2.5.6.69110
+worldTileBounds=27,23,32,33
+tiles=55
+cropPixels=267,1283,1535,2591

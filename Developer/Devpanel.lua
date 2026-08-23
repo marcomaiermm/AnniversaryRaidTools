@@ -171,6 +171,7 @@ function MDT:CreateDevPanel(frame)
       { text = "POI/Zoom",  value = "tab1" },
       { text = "Enemy",     value = "tab2" },
       { text = "Manage DB", value = "tab3" },
+      { text = "Calibration", value = "tab4" },
     }
   )
   devPanel:SetWidth(250)
@@ -865,6 +866,45 @@ function MDT:CreateDevPanel(frame)
     container:AddChild(vdtDbButton)
   end
 
+  local function DrawGroup4(container)
+    local value = MDT:GetMapCalibration()
+    if not value then return end
+
+    local enabled = AceGUI:Create("CheckBox")
+    enabled:SetLabel("Show calibration overlay")
+    enabled:SetValue(value.enabled)
+    enabled:SetCallback("OnValueChanged", function(_, _, checked)
+      value.enabled = checked
+      MDT:UpdateMapCalibrationOverlay()
+      enabled:SetValue(value.enabled)
+    end)
+    container:AddChild(enabled)
+
+    for _, field in ipairs({
+      { "offsetX", "Offset X" }, { "offsetY", "Offset Y" },
+      { "scaleX", "Scale X" }, { "scaleY", "Scale Y" },
+      { "rotation", "Rotation °" }, { "alpha", "Alpha" },
+    }) do
+      local input = AceGUI:Create("EditBox")
+      input:SetLabel(field[2])
+      input:SetText(value[field[1]])
+      input:SetCallback("OnEnterPressed", function(_, _, text)
+        value[field[1]] = tonumber(text) or value[field[1]]
+        MDT:UpdateMapCalibrationOverlay()
+      end)
+      container:AddChild(input)
+    end
+
+    local reset = AceGUI:Create("Button")
+    reset:SetText("Reset")
+    reset:SetCallback("OnClick", function() MDT:ResetMapCalibration(); devPanel:SelectTab("tab4") end)
+    container:AddChild(reset)
+    local dump = AceGUI:Create("Button")
+    dump:SetText("Print values")
+    dump:SetCallback("OnClick", function() MDT:PrintMapCalibration() end)
+    container:AddChild(dump)
+  end
+
   -- Callback function for OnGroupSelected
   local function SelectGroup(container, event, group)
     container:ReleaseChildren()
@@ -874,6 +914,8 @@ function MDT:CreateDevPanel(frame)
       DrawGroup2(container)
     elseif group == "tab3" then
       DrawGroup3(container)
+    elseif group == "tab4" then
+      DrawGroup4(container)
     end
   end
 
@@ -884,6 +926,7 @@ function MDT:CreateDevPanel(frame)
   local originalFunc = MDT.UpdateMap
   function MDT:UpdateMap(...)
     originalFunc(...)
+    MDT:UpdateMapCalibrationOverlay()
     if not db.devMode then return end
     local selectedTab
     for k, v in pairs(devPanel.tabs) do
