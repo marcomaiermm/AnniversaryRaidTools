@@ -6,81 +6,23 @@ local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools bootstrap is require
 local L = MDT.L
 
 local DEFAULT_RAID_KEY = "gruuls-lair"
-local RAID_KEYS = { "gruuls-lair", "black-temple", "hyjal", "karazhan", "magtheridons-lair",
-  "serpentshrine-cavern", "the-eye", "sunwell-plateau" }
+local RAID_KEYS = { "gruuls-lair", "black-temple", "hyjal", "magtheridons-lair",
+  "serpentshrine-cavern", "the-eye" }
 local SHELL_INDICES = {
   ["gruuls-lair"] = 160, ["black-temple"] = 161, hyjal = 162, karazhan = 163,
   ["magtheridons-lair"] = 164,
   ["serpentshrine-cavern"] = 165, ["the-eye"] = 166, ["sunwell-plateau"] = 167,
 }
--- Gruul display IDs are retained from the accepted vertical slice; later raids
--- use the first CMaNGOS TBC DisplayId at tbc-db@7060a217.
-local DISPLAY_IDS = {
-  [18831] = 18649, [18832] = 20194, [18834] = 20195, [18835] = 12472,
-  [18836] = 11585, [19044] = 18698, [19389] = 18356, [21350] = 20241,
-  [17767] = 17444, [17808] = 21069, [17842] = 18526, [17888] = 17886,
-  [17895] = 571, [17897] = 17308, [17898] = 12818, [17899] = 17537,
-  [17905] = 8783, [17906] = 17311, [17907] = 16919, [17908] = 14520,
-  [17916] = 17321, [17968] = 20939, [22841] = 21357, [22844] = 21115,
-  [22845] = 21116, [22846] = 21118, [22847] = 21117, [22848] = 5187,
-  [22849] = 21114, [22853] = 11335, [22855] = 19991, [22856] = 21146,
-  [22869] = 21120, [22871] = 21262, [22873] = 21159, [22874] = 21161,
-  [22875] = 21162, [22876] = 21164, [22877] = 21165, [22878] = 20609,
-  [22879] = 21369, [22880] = 21367, [22882] = 21373, [22883] = 5492,
-  [22884] = 17528, [22885] = 21457, [22887] = 21174, [22898] = 21145,
-  [22917] = 21135, [22939] = 21449, [22945] = 21372, [22946] = 14334,
-  [22947] = 21252, [22948] = 21443, [22949] = 21416, [22950] = 21417,
-  [22951] = 21419, [22952] = 21418, [22953] = 21151, [22954] = 18753,
-  [22955] = 21452, [22956] = 21456, [22957] = 21503, [22959] = 21530,
-  [22960] = 21216, [22962] = 21502, [22963] = 21535, [22964] = 19199,
-  [22965] = 21196, [23018] = 21378, [23028] = 21538, [23030] = 21543,
-  [23047] = 21383, [23049] = 21380, [23147] = 21375, [23172] = 20381,
-  [23196] = 21490, [23222] = 21549, [23223] = 21284, [23232] = 21355,
-  [23235] = 21555, [23236] = 21553, [23237] = 21552, [23239] = 21550,
-  [23330] = 21546, [23337] = 18251, [23339] = 11342, [23374] = 21442,
-  [23394] = 21460, [23397] = 21560, [23398] = 1126, [23399] = 16255,
-  [23400] = 21564, [23401] = 21587, [23402] = 21468, [23403] = 21568,
-  [15547] = 16407, [15548] = 16408, [15551] = 16397, [15687] = 16540,
-  [15688] = 11343, [15689] = 15363, [15690] = 19274, [15691] = 16958,
-  [16151] = 19640, [16170] = 16051, [16171] = 16050, [16173] = 1954,
-  [16174] = 9074, [16175] = 7897, [16176] = 16052, [16177] = 7893,
-  [16178] = 16049, [16389] = 16417, [16406] = 16514, [16407] = 16485,
-  [16408] = 16494, [16409] = 16464, [16410] = 16509, [16411] = 16524,
-  [16412] = 16529, [16414] = 16535, [16415] = 7550, [16424] = 16458,
-  [16425] = 16454, [16457] = 16198, [16459] = 16543, [16460] = 16547,
-  [16461] = 16551, [16468] = 16555, [16470] = 16559, [16471] = 2606,
-  [16472] = 16563, [16473] = 16567, [16481] = 14366, [16482] = 14365,
-  [16485] = 16838, [16488] = 16216, [16489] = 14254, [16491] = 19330,
-  [16492] = 19331, [16504] = 16841, [16524] = 16621, [16525] = 16241,
-  [16526] = 16251, [16529] = 16216, [16530] = 14252, [16539] = 12345,
-  [16540] = 16903, [16544] = 19097, [16545] = 21078, [16595] = 18886,
-  [16596] = 18887, [17256] = 9865, [17257] = 18527, [18829] = 11440,
-
-  [18805] = 18239, [19514] = 18945, [19516] = 18951,
-  [19622] = 20023, [20031] = 19386, [20032] = 19388, [20033] = 19390,
-  [20034] = 19392, [20035] = 20978, [20036] = 19394, [20037] = 19398,
-  [20038] = 19298, [20039] = 19299, [20040] = 19410, [20041] = 19300,
-  [20042] = 19412, [20043] = 19470, [20044] = 19472, [20045] = 19474,
-  [20046] = 19423, [20047] = 19499, [20048] = 19505, [20049] = 19503,
-  [20050] = 19507, [20052] = 19254, [20060] = 20178, [20062] = 20237,
-  [20063] = 20177, [20064] = 20236, [21212] = 20748, [21213] = 20739,
-  [21217] = 20216,
-  [21214] = 20662, [21215] = 20514, [21216] = 20162, [21218] = 20200,
-  [21220] = 20212, [21221] = 20201, [21228] = 5286, [21229] = 20640,
-  [21230] = 20635, [21231] = 20636, [21232] = 20637, [21246] = 18030,
-  [21251] = 20812, [21263] = 20639, [21298] = 20470, [21299] = 20641,
-  [21301] = 20205, [21339] = 20642, [21806] = 20638, [21863] = 20560,
-  [21964] = 20672, [21965] = 20670, [21966] = 20671, [24850] = 23345,
-  [24882] = 22711, [24891] = 23350, [24892] = 6686, [25038] = 22838,
-  [25165] = 23177, [25166] = 23334, [25363] = 23153, [25367] = 23154,
-  [25368] = 23529, [25369] = 23156, [25370] = 23158, [25371] = 23159,
-  [25372] = 23161, [25373] = 23476, [25483] = 23478, [25484] = 23474,
-  [25486] = 23479, [25506] = 23477, [25507] = 23240, [25508] = 17205,
-  [25509] = 21455, [25588] = 19294, [25591] = 22811, [25592] = 18139,
-  [25593] = 20919, [25595] = 23266, [25597] = 23267, [25599] = 14173,
-  [25608] = 11686, [25741] = 23404, [25837] = 23473, [25851] = 23269,
-  [25867] = 19663, [26262] = 169,
+local UNSUPPORTED_RAIDS = { [163] = "Karazhan", [167] = "Sunwell Plateau" }
+local UNSUPPORTED_TOOLTIP = "Not supported yet."
+local RAID_ICONS = {
+  [160] = "LoadScreenGruulsLair", [161] = "LoadScreenBlackTemple", [162] = "LoadScreenHyjal",
+  [163] = "LoadScreenKarazhan", [164] = "LoadScreenHellfireCitadelRaid",
+  [165] = "LoadScreenCoilfang", [166] = "LoadScreenTempestKeep", [167] = "LoadScreenSunwell",
 }
+-- Retain the accepted TBC Teron Gorefiend variant instead of AzerothCore's
+-- alternate display.
+local DISPLAY_ID_OVERRIDES = { [22871] = 21262 }
 -- Encounter actors pinned from mangos-tbc@adbc7f74 ScriptDevAI scripts.
 -- Anything not explicitly listed is trash, even when it has only one spawn.
 local BOSS_NPCS = {
@@ -146,6 +88,19 @@ local function markDependencies(preset, raid, db)
     profile = preset and preset.marking or { npcDefaults = {}, packOverrides = {} },
     settings = db and db.focusMarker,
   }
+end
+
+local function repositoryMetadata(raid)
+  local metadata = { raidKey = raid.key, source = raid.enemyMetadataSource, enemies = {} }
+  for _, enemy in pairs(raid.enemies) do
+    metadata.enemies[enemy.npcId] = {
+      name = enemy.name,
+      level = enemy.level,
+      creatureType = enemy.creatureType,
+      maxHealth = enemy.health,
+    }
+  end
+  return metadata
 end
 
 local function mapPosition(raid, map, sublevel, raw)
@@ -221,12 +176,16 @@ local function projectRaidEnemies(raid, map)
       name = localize(enemy.name),
       id = enemy.npcId,
       count = 0,
-      health = 1,
-      level = 73,
-      creatureType = "Humanoid",
-      scale = 1,
+      health = assert(enemy.health, "missing enemy health: "..enemy.npcId),
+      level = assert(enemy.level, "missing enemy level: "..enemy.npcId),
+      creatureType = assert(enemy.creatureType, "missing enemy creature type: "..enemy.npcId),
+      scale = assert(enemy.scale, "missing enemy scale: "..enemy.npcId),
       isBoss = BOSS_NPCS[raid.key] and BOSS_NPCS[raid.key][enemy.npcId] or false,
-      displayId = DISPLAY_IDS[enemy.npcId],
+      displayId = DISPLAY_ID_OVERRIDES[enemy.npcId]
+          or assert(enemy.displayId, "missing enemy display ID: "..enemy.npcId),
+      spells = enemy.spells,
+      characteristics = enemy.characteristics,
+      stealthDetect = enemy.stealthDetect,
       clones = clones,
     }
   end
@@ -257,6 +216,8 @@ local function publishShellData(raid, map)
   MDT.dungeonList[shellIndex] = localize(raid.name)
   MDT.mapInfo[shellIndex] = {
     shortName = localize(raid.name), englishName = raid.name, mapID = raid.mapId, tileFormat = tileFormat,
+    iconId = "Interface\\Glues\\LoadingScreens\\"..RAID_ICONS[shellIndex],
+    iconTexCoords = { 0.12, 0.88, 0.30, 0.92 },
   }
   MDT.dungeonMaps[shellIndex] = dungeonMaps
   MDT.dungeonSubLevels[shellIndex] = sublevels
@@ -267,6 +228,20 @@ local function publishShellData(raid, map)
   MDT.scaleMultiplier[shellIndex] = 1
   MDT.zoneIdToDungeonIdx[raid.mapId] = shellIndex
   MDT.knownDungeons[shellIndex] = raid.name
+end
+
+local function publishUnsupportedRaids()
+  MDT.unsupportedDungeons = {}
+  for shellIndex, raidName in pairs(UNSUPPORTED_RAIDS) do
+    MDT.dungeonList[shellIndex] = localize(raidName)
+    MDT.mapInfo[shellIndex] = {
+      shortName = localize(raidName), englishName = raidName,
+      iconId = "Interface\\Glues\\LoadingScreens\\"..RAID_ICONS[shellIndex],
+      iconTexCoords = { 0.12, 0.88, 0.30, 0.92 },
+    }
+    MDT.knownDungeons[shellIndex] = raidName
+    MDT.unsupportedDungeons[shellIndex] = UNSUPPORTED_TOOLTIP
+  end
 end
 
 local function configureWavePulls(raid, preset)
@@ -323,6 +298,7 @@ local function wireMapSelection()
   if Integration.originalUpdateToDungeon or type(MDT.UpdateToDungeon) ~= "function" then return end
   Integration.originalUpdateToDungeon = MDT.UpdateToDungeon
   function MDT:UpdateToDungeon(dungeonIdx, ...)
+    if self.unsupportedDungeons[dungeonIdx] then return nil, "unsupported-raid" end
     local result = Integration.originalUpdateToDungeon(self, dungeonIdx, ...)
     local raidKey = raidKeyForShell(dungeonIdx)
     if raidKey and (not Integration.planner.raid or Integration.planner.raid.key ~= raidKey) then
@@ -355,6 +331,7 @@ function Integration:Initialize()
   local routeStore = MDT:GetRaidRouteStore()
   self.spawnLookup = {}
   for _, raidKey in ipairs(RAID_KEYS) do publishShellData(raids[raidKey], maps[raidKey]) end
+  publishUnsupportedRaids()
   publishRaidList(db)
   local planner
 
@@ -385,6 +362,10 @@ function Integration:Initialize()
   local enemyInfo
   local enemyOK, enemyResult, enemyReason = pcall(function()
     local repository = ART.EnemyInfoRepository.new()
+    for _, raidKey in ipairs(RAID_KEYS) do
+      local merged, mergeReason = repository:Merge(repositoryMetadata(raids[raidKey]))
+      if not merged then error(mergeReason or "invalid-generated-enemy-info") end
+    end
     local enemyData = static.enemyInfo and static.enemyInfo[DEFAULT_RAID_KEY]
     if type(enemyData) ~= "table" or enemyData.raidKey ~= DEFAULT_RAID_KEY then
       diagnose("missing-enemy-info", "enemyInfo")
@@ -392,7 +373,6 @@ function Integration:Initialize()
       local merged, mergeReason = repository:Merge(enemyData)
       if not merged then
         diagnose(mergeReason or "invalid-enemy-info", "enemyInfo")
-        repository = ART.EnemyInfoRepository.new()
       end
     end
 
@@ -607,10 +587,15 @@ function MDT:ShowEnemyInfoFrame(selector)
   local frame = ensureEnemyInfoFrame()
   if frame then
     local name = info.name and info.name.value or L["Unknown enemy"]
-    local source = info.name and info.name.source or {}
+    local source = info.maxHealth and info.maxHealth.source or info.name and info.name.source or {}
+    local details = { (L["NPC ID: %d"]):format(info.npcId) }
+    if info.level and info.creatureType then
+      details[#details + 1] = (L["Level %d %s"]):format(info.level.value, L[info.creatureType.value])
+    end
+    if info.maxHealth then details[#details + 1] = (L["%s HP"]):format(MDT:FormatEnemyHealth(info.maxHealth.value)) end
+    details[#details + 1] = (L["Source: %s (%s)"]):format(L[source.source or "-"], L[source.confidence or "-"])
     frame.title:SetText(L[name])
-    frame.details:SetText((L["NPC ID: %d"]):format(info.npcId).."\n"..
-      (L["Source: %s (%s)"]):format(L[source.source or "-"], L[source.confidence or "-"]))
+    frame.details:SetText(table.concat(details, "\n"))
     frame:Show()
   end
   return info

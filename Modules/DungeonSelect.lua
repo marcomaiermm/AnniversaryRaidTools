@@ -117,7 +117,7 @@ function MDT:GetSeasonList()
 end
 
 local dungeonButtons = {}
-local BUTTON_SIZE = 40
+local BUTTON_WIDTH, BUTTON_HEIGHT = 65, 40
 
 function MDT:UpdateDungeonSelectVisibility(showMapControls)
   if showMapControls == nil then showMapControls = MDT:IsMapSectionActive() end
@@ -195,9 +195,9 @@ function MDT:UpdateDungeonDropDown()
     if not button then
       dungeonButtons[idx] = CreateFrame("Button", "MDTDungeonButton"..idx, MDT.main_frame)
       button = dungeonButtons[idx]
-      button:SetSize(BUTTON_SIZE, BUTTON_SIZE)
+      button:SetSize(BUTTON_WIDTH, BUTTON_HEIGHT)
       button:ClearAllPoints()
-      button:SetPoint("TOPLEFT", MDT.main_frame, "TOPLEFT", (idx - 1) * (BUTTON_SIZE - 1), 0)
+      button:SetPoint("TOPLEFT", MDT.main_frame, "TOPLEFT", (idx - 1) * (BUTTON_WIDTH - 1), 0)
       button.texture = button:CreateTexture()
       button.texture:SetAllPoints(button)
       button.texture:Show()
@@ -217,12 +217,20 @@ function MDT:UpdateDungeonDropDown()
       end)
     end
     local mapInfo = MDT.mapInfo[dungeonIdx]
+    local disabledReason = MDT.unsupportedDungeons and MDT.unsupportedDungeons[dungeonIdx]
     button.dungeonIdx = dungeonIdx
     button.texture:SetTexture(mapInfo.iconId or 134400)
-    button.shortText:SetText(mapInfo.shortName)
+    button.texture:SetTexCoord(unpack(mapInfo.iconTexCoords or { 0, 1, 0, 1 }))
+    button.texture:SetDesaturated(disabledReason ~= nil)
+    button.texture:SetAlpha(disabledReason and 0.4 or 1)
+    button.shortText:SetText(mapInfo.iconTexCoords and "" or mapInfo.shortName)
+    button.shortText:SetTextColor(disabledReason and 0.5 or 1, disabledReason and 0.5 or 1,
+      disabledReason and 0.5 or 1)
     button:SetScript("OnClick", function(self, button)
-      MDT:UpdateToDungeon(dungeonIdx)
-      MDT:UpdateDungeonSelectHighlight()
+      if not disabledReason then
+        MDT:UpdateToDungeon(dungeonIdx)
+        MDT:UpdateDungeonSelectHighlight()
+      end
     end)
     button:RegisterForClicks("AnyDown", "AnyUp")
     button:Show()
@@ -233,6 +241,7 @@ function MDT:UpdateDungeonDropDown()
       timer = nil
       GameTooltip:SetOwner(dungeonButtons[idx], "ANCHOR_BOTTOMRIGHT", -dungeonButtons[idx]:GetWidth(), 0)
       GameTooltip:AddLine(MDT.dungeonList[dungeonIdx], 1, 1, 1)
+      if disabledReason then GameTooltip:AddLine(disabledReason, 0.7, 0.7, 0.7) end
       if timer then
         GameTooltip:AddLine(L["Timer"]..": "..formatTime(timer), 1, 1, 1)
       end

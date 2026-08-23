@@ -2,8 +2,7 @@ local _, MDT = ...
 local Type, Version = "MDTSpellButton", 1
 local AceGUI = LibStub and LibStub("AceGUI-3.0", true)
 local L = MDT.L
-local width, height = 248, 32
-local tooltipIconSize = 12
+local width, height, expandedHeight = 248, 32, 60
 local statusIconScale = 0.504
 local firstStatusIconOffsetX = 36
 local firstStatusIconOffsetY = -1
@@ -36,17 +35,6 @@ local statusLabels = {
   enrage = L["Enrage"],
 }
 
-local function AddTooltipStatusLine(tooltip, statusKey)
-  local label = statusLabels[statusKey]
-  local atlas = statusAtlases[statusKey]
-  if CreateAtlasMarkup and atlas then
-    tooltip:AddLine(CreateAtlasMarkup(atlas, tooltipIconSize, tooltipIconSize)..label)
-    return
-  end
-
-  tooltip:AddLine(label)
-end
-
 local function CreateStatusIcon(parent, atlas)
   local texture = parent:CreateTexture(nil, "OVERLAY", nil, 0)
   texture:SetSize(height * statusIconScale, height * statusIconScale)
@@ -59,6 +47,9 @@ local methods = {
   ["OnAcquire"] = function(self)
     self:SetWidth(width)
     self:SetHeight(height)
+    self.expanded = false
+    self.expandToggle:Hide()
+    self.descriptionText:Hide()
   end,
 
   ["Initialize"] = function(self)
@@ -72,7 +63,12 @@ local methods = {
           local link = C_Spell.GetSpellLink(self.spellId) or ""
           DEFAULT_CHAT_FRAME.editBox:SetText(old..link)
         end
-      else
+      elseif mouseButton == "LeftButton" and self.description then
+        self.expanded = not self.expanded
+        self.expandVertical:SetShown(not self.expanded)
+        self.descriptionText:SetShown(self.expanded)
+        self:SetHeight(self.expanded and expandedHeight or height)
+        if self.parent then self.parent:DoLayout() end
       end
     end
 
@@ -80,13 +76,6 @@ local methods = {
       GameTooltip:SetOwner(self.frame, "ANCHOR_BOTTOMLEFT", 0, self.frame:GetHeight())
       GameTooltip:ClearLines()
       GameTooltip:SetSpellByID(self.spellId)
-
-      for _, statusKey in ipairs(statusOrder) do
-        if self[statusKey] then
-          AddTooltipStatusLine(GameTooltip, statusKey)
-        end
-      end
-
       GameTooltip:Show()
 
       if MDT:GetDB().devMode then
@@ -188,6 +177,19 @@ local methods = {
     self.curse         = spellData.curse         or false
     self.bleed         = spellData.bleed         or false
     self.enrage        = spellData.enrage        or false
+    self.description   = spellData.description
+    self.expanded      = false
+    self.expandVertical:Show()
+    self.expandToggle:SetShown(not not self.description)
+    self.descriptionText:SetText(self.description or "")
+    self.descriptionText:Hide()
+    self:SetHeight(height)
+
+    local visibleStatuses = {}
+    for _, statusKey in ipairs(statusOrder) do
+      if self[statusKey] then table.insert(visibleStatuses, statusLabels[statusKey]) end
+    end
+    self.statusText:SetText(table.concat(visibleStatuses, " | "))
 
     for _, statusKey in ipairs(statusOrder) do
       self[statusKey.."Icon"]:Hide()
@@ -263,7 +265,27 @@ local function Constructor()
   button.icon = icon
   icon:SetWidth(height)
   icon:SetHeight(height)
-  icon:SetPoint("LEFT", button, "LEFT", 3, 0)
+  icon:SetPoint("TOPLEFT", button, "TOPLEFT", 3, 0)
+
+  local expandToggle = CreateFrame("Frame", nil, button)
+  expandToggle:SetSize(16, height)
+  expandToggle:SetPoint("TOPRIGHT", button, "TOPRIGHT", -2, 0)
+  expandToggle:SetFrameLevel(button:GetFrameLevel() + 5)
+
+  local expandBackground = expandToggle:CreateTexture(nil, "ARTWORK")
+  expandBackground:SetSize(15, 15)
+  expandBackground:SetPoint("CENTER")
+  expandBackground:SetColorTexture(0.08, 0.08, 0.08, 0.9)
+
+  local expandHorizontal = expandToggle:CreateTexture(nil, "OVERLAY")
+  expandHorizontal:SetSize(9, 2)
+  expandHorizontal:SetPoint("CENTER")
+  expandHorizontal:SetColorTexture(1, 0.82, 0, 1)
+
+  local expandVertical = expandToggle:CreateTexture(nil, "OVERLAY")
+  expandVertical:SetSize(2, 9)
+  expandVertical:SetPoint("CENTER")
+  expandVertical:SetColorTexture(1, 0.82, 0, 1)
 
   local title = button:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   button.title = title
@@ -271,7 +293,20 @@ local function Constructor()
   title:SetJustifyH("LEFT")
   title:SetPoint("TOP", button, "TOP", 0, -2)
   title:SetPoint("LEFT", icon, "RIGHT", 2, 0)
-  title:SetPoint("RIGHT", button, "RIGHT", -2, 0)
+  title:SetPoint("RIGHT", expandToggle, "LEFT", -2, 0)
+
+  local statusText = button:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+  statusText:SetJustifyH("LEFT")
+  statusText:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -1)
+  statusText:SetPoint("RIGHT", expandToggle, "LEFT", -2, 0)
+
+  local descriptionText = button:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+  descriptionText:SetJustifyH("LEFT")
+  descriptionText:SetJustifyV("TOP")
+  descriptionText:SetWordWrap(true)
+  descriptionText:SetPoint("TOPLEFT", button, "TOPLEFT", 8, -37)
+  descriptionText:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -8, 5)
+  descriptionText:Hide()
 
   local interruptibleIcon = CreateStatusIcon(button, statusAtlases.interruptible)
   button.interruptibleIcon = interruptibleIcon
@@ -302,6 +337,10 @@ local function Constructor()
   local widget = {
     frame = button,
     title = title,
+    statusText = statusText,
+    expandToggle = expandToggle,
+    expandVertical = expandVertical,
+    descriptionText = descriptionText,
     icon = icon,
     interruptibleIcon = interruptibleIcon,
     magicIcon = magicIcon,
