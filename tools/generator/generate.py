@@ -61,17 +61,19 @@ def render_lua(raid: dict[str, Any]) -> str:
 def render_world_positions(snapshot: dict[str, Any], raid: dict[str, Any]) -> str:
     """Render integration-private world coordinates without extending raid schema v1."""
 
+    bounds = snapshot.get("metadata", {}).get("worldBounds")
     positions: dict[str, Any] = {}
     for spawn in snapshot.get("spawns", []):
-        if "worldX" not in spawn or "worldY" not in spawn:
+        position = _world_position(spawn, bounds)
+        if position is None:
             continue
         key = f"{raid['key']}:spawn:{spawn['npcId']}:{spawn['id']}"
-        position: dict[str, Any] = {"x": spawn["worldX"], "y": spawn["worldY"]}
         if "worldZ" in spawn:
             position["z"] = spawn["worldZ"]
         patrol = spawn.get("patrol")
-        if patrol and all("worldX" in point and "worldY" in point for point in patrol):
-            position["patrol"] = [{"x": point["worldX"], "y": point["worldY"]} for point in patrol]
+        world_patrol = [_world_position(point, bounds) for point in patrol or []]
+        if world_patrol and all(point is not None for point in world_patrol):
+            position["patrol"] = world_patrol
         positions[key] = position
     if not positions:
         return ""
@@ -84,6 +86,20 @@ def render_world_positions(snapshot: dict[str, Any], raid: dict[str, Any]) -> st
         f"ART.MapWorldPositions[{_lua_string(raid['key'])}] = {_lua_value(positions, 1)}\n"
         f"return ART.MapWorldPositions[{_lua_string(raid['key'])}]\n"
     )
+
+
+def _world_position(point: dict[str, Any], bounds: Any) -> dict[str, Any] | None:
+    if "worldX" in point and "worldY" in point:
+        return {"x": point["worldX"], "y": point["worldY"]}
+    if not isinstance(bounds, dict) or "x" not in point or "y" not in point:
+        return None
+    left_y, right_y = bounds["leftY"], bounds["rightY"]
+    margin = bounds.get("eastMarginYards", 0)
+    right_y += margin if right_y >= left_y else -margin
+    return {
+        "x": bounds["topX"] + point["y"] * (bounds["bottomX"] - bounds["topX"]),
+        "y": left_y + point["x"] * (right_y - left_y),
+    }
 
 
 def generate(source_path: str | Path = DEFAULT_SOURCE, output_path: str | Path = DEFAULT_OUTPUT) -> str:
