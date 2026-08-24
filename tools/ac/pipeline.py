@@ -131,6 +131,9 @@ def build_raid(snapshot: dict[str, Any]) -> dict[str, Any]:
         pack: dict[str, Any] = {"key": pack_key, "spawnKeys": spawn_keys, "source": pack_source}
         if raw.get("label") is not None:
             pack["label"] = _string(raw["label"], f"pack {pack_key}.label")
+        if raw.get("pullGroup") is not None:
+            pull_group = _stable_id(raw["pullGroup"], f"pack {pack_key}.pullGroup")
+            pack["pullGroup"] = f"{raid_key}:pull-group:{pull_group}"
         packs[pack_key] = pack
         for spawn_key in spawn_keys:
             spawn_records[spawn_key]["packKey"] = pack_key

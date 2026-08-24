@@ -68,6 +68,8 @@ def main() -> None:
     # Broken Stair ghosts (z=124.6) below floor 8's z>=140 base on floor 7.
     assert {s["sublevel"] for s in spawns} == (set(range(1, 18)) - {8, 14})
     assert len(spawns) == 605 and len(raid["enemies"]) == 57 and len(raid["packs"]) == 286
+    pull_groups = [pack["pullGroup"] for pack in raid["packs"].values() if pack.get("pullGroup")]
+    assert len(pull_groups) == 170 and len(set(pull_groups)) == 68
     assert sum("patrol" in spawn for spawn in spawns) == 53
     assert all("worldX" in spawn and "worldY" in spawn and "worldZ" in spawn for spawn in snapshot["spawns"])
     assert all(len(spawn["patrol"]) >= 2 for spawn in spawns if "patrol" in spawn)

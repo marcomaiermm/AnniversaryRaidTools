@@ -6,6 +6,12 @@
     "databaseVersion": "TBCDB 1.11.0",
     "exportedAt": "2026-08-21T18:15:00Z",
     "coordinateBasis": "CMaNGOS TBC 2.4.3 map 565 world spawns and creature_movement projected through Anniversary UIMap 330 bounds: top=337.5 left=475 bottom=-12.5 right=-50; Gruul and trash composition corrected from Anniversary observation",
+    "worldBounds": {
+      "leftY": 475.0,
+      "rightY": -50.0,
+      "topX": 337.5,
+      "bottomX": -12.5
+    },
     "enemyInfoBasis": "CMaNGOS tbc-db@7060a217bcf7c454db570e842cd5e2179444d768 creature_spell_list, creature_template_spells, creature_ai_scripts and mechanic immunities; mangos-tbc@adbc7f747a3a5c4741a012d86f6cd8112238b5bc 2.4.3 Spell.dbc and ScriptDevAI"
   },
   "source": {

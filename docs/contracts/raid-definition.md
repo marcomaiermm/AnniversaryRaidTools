@@ -32,6 +32,7 @@ Raid definitions are immutable registry inputs. Keys are lowercase ASCII slugs.
 ---@field key string
 ---@field label string|nil
 ---@field spawnKeys string[]
+---@field pullGroup string|nil -- packs with the same key join one pull on the same sublevel
 ---@field source ARTProvenance
 
 ---@class ARTPOI
@@ -69,7 +70,9 @@ reused. Runtime `enemyIdx`/`cloneIdx` may exist only as transient projections.
 
 Every pack member names an existing spawn in the same raid; each spawn's optional
 `packKey` agrees with membership. Coordinates are finite and patrol points use the
-same sublevel transform. `waves` is required only when `mode == "waves"`; its array
+same sublevel transform. Packs sharing a `pullGroup` remain separate spatial packs
+but are selected together when they are on the active sublevel. `waves` is required
+only when `mode == "waves"`; its array
 order is the authoritative wave order, while `waveKey` is the only persistent wave
 identity. Wave keys are unique and never derived from array position or an integer
 ordinal. Each wave's `packKeys` is a validated immutable snapshot: every key must

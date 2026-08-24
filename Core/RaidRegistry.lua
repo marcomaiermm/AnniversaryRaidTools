@@ -35,6 +35,11 @@ local function stablePackKey(value, key)
   return type(value) == "string" and value:sub(1, #prefix) == prefix and stableId(value:sub(#prefix + 1))
 end
 
+local function stablePullGroup(value, key)
+  local prefix = key..":pull-group:"
+  return type(value) == "string" and value:sub(1, #prefix) == prefix and stableId(value:sub(#prefix + 1))
+end
+
 local function stableSpawnKey(value, key, npcId)
   local prefix = key..":spawn:"..npcId..":"
   return type(value) == "string" and value:sub(1, #prefix) == prefix and stableId(value:sub(#prefix + 1))
@@ -123,7 +128,8 @@ function Registry:Validate(raid)
   for packKey, pack in pairs(raid.packs) do
     if not stablePackKey(packKey, raid.key) or type(pack) ~= "table"
         or pack.key ~= packKey or not array(pack.spawnKeys) or #pack.spawnKeys == 0 or not provenance(pack.source)
-        or (pack.label ~= nil and type(pack.label) ~= "string") then
+        or (pack.label ~= nil and type(pack.label) ~= "string")
+        or (pack.pullGroup ~= nil and not stablePullGroup(pack.pullGroup, raid.key)) then
       return fail("invalid pack "..tostring(packKey))
     end
     local members = {}

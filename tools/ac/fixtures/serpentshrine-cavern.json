@@ -6171,7 +6171,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480039"
     },
     {
       "id": "candidate-003",
@@ -6210,7 +6211,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480042"
     },
     {
       "id": "candidate-006",
@@ -6223,7 +6225,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480043"
     },
     {
       "id": "candidate-007",
@@ -6236,7 +6239,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480044"
     },
     {
       "id": "candidate-008",
@@ -6249,7 +6253,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480045"
     },
     {
       "id": "candidate-009",
@@ -6262,7 +6267,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480046"
     },
     {
       "id": "candidate-010",
@@ -6275,7 +6281,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480047"
     },
     {
       "id": "candidate-011",
@@ -6289,7 +6296,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480042"
     },
     {
       "id": "candidate-012",
@@ -6303,7 +6311,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480043"
     },
     {
       "id": "candidate-013",
@@ -6317,7 +6326,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480045"
     },
     {
       "id": "candidate-014",
@@ -6331,7 +6341,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480044"
     },
     {
       "id": "candidate-015",
@@ -6345,7 +6356,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480046"
     },
     {
       "id": "candidate-016",
@@ -6359,7 +6371,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480047"
     },
     {
       "id": "candidate-017",
@@ -6372,7 +6385,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480060"
     },
     {
       "id": "candidate-018",
@@ -6385,7 +6399,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480061"
     },
     {
       "id": "candidate-019",
@@ -6398,7 +6413,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480062"
     },
     {
       "id": "candidate-020",
@@ -6501,7 +6517,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480090"
     },
     {
       "id": "candidate-026",
@@ -6517,7 +6534,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480091"
     },
     {
       "id": "candidate-027",
@@ -6533,7 +6551,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480092"
     },
     {
       "id": "candidate-028",
@@ -6546,7 +6565,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480093"
     },
     {
       "id": "candidate-029",
@@ -6559,7 +6579,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480094"
     },
     {
       "id": "candidate-030",
@@ -6574,7 +6595,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480093"
     },
     {
       "id": "candidate-031",
@@ -6624,7 +6646,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480100"
     },
     {
       "id": "candidate-034",
@@ -6657,7 +6680,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480103"
     },
     {
       "id": "candidate-036",
@@ -6673,7 +6697,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480104"
     },
     {
       "id": "candidate-037",
@@ -6688,7 +6713,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480094"
     },
     {
       "id": "candidate-038",
@@ -6702,7 +6728,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480104"
     },
     {
       "id": "candidate-039",
@@ -6716,7 +6743,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480060"
     },
     {
       "id": "candidate-040",
@@ -6730,7 +6758,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480061"
     },
     {
       "id": "candidate-041",
@@ -6744,7 +6773,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480062"
     },
     {
       "id": "candidate-042",
@@ -6875,7 +6905,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480042"
     },
     {
       "id": "candidate-052",
@@ -6888,7 +6919,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480042"
     },
     {
       "id": "candidate-053",
@@ -6901,7 +6933,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480042"
     },
     {
       "id": "candidate-054",
@@ -6914,7 +6947,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480043"
     },
     {
       "id": "candidate-055",
@@ -6929,7 +6963,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480043"
     },
     {
       "id": "candidate-056",
@@ -6943,7 +6978,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480044"
     },
     {
       "id": "candidate-057",
@@ -6956,7 +6992,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480044"
     },
     {
       "id": "candidate-058",
@@ -6969,7 +7006,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480044"
     },
     {
       "id": "candidate-059",
@@ -6982,7 +7020,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480045"
     },
     {
       "id": "candidate-060",
@@ -6998,7 +7037,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480046"
     },
     {
       "id": "candidate-061",
@@ -7012,7 +7052,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480047"
     },
     {
       "id": "candidate-062",
@@ -7025,7 +7066,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480045"
     },
     {
       "id": "candidate-063",
@@ -7039,7 +7081,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480045"
     },
     {
       "id": "candidate-064",
@@ -7052,7 +7095,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480047"
     },
     {
       "id": "candidate-065",
@@ -7065,7 +7109,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480047"
     },
     {
       "id": "candidate-066",
@@ -7079,7 +7124,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480090"
     },
     {
       "id": "candidate-067",
@@ -7093,7 +7139,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480091"
     },
     {
       "id": "candidate-068",
@@ -7107,7 +7154,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480092"
     },
     {
       "id": "candidate-069",
@@ -7137,7 +7185,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480103"
     },
     {
       "id": "candidate-071",
@@ -7200,7 +7249,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480042"
     },
     {
       "id": "candidate-075",
@@ -7213,7 +7263,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480042"
     },
     {
       "id": "candidate-076",
@@ -7226,7 +7277,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480043"
     },
     {
       "id": "candidate-077",
@@ -7239,7 +7291,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480043"
     },
     {
       "id": "candidate-078",
@@ -7252,7 +7305,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480044"
     },
     {
       "id": "candidate-079",
@@ -7265,7 +7319,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480044"
     },
     {
       "id": "candidate-080",
@@ -7278,7 +7333,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480046"
     },
     {
       "id": "candidate-081",
@@ -7291,7 +7347,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480045"
     },
     {
       "id": "candidate-082",
@@ -7304,7 +7361,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480046"
     },
     {
       "id": "candidate-083",
@@ -7317,7 +7375,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480045"
     },
     {
       "id": "candidate-084",
@@ -7330,7 +7389,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480047"
     },
     {
       "id": "candidate-085",
@@ -7343,7 +7403,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480047"
     },
     {
       "id": "candidate-086",
@@ -7357,7 +7418,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480060"
     },
     {
       "id": "candidate-087",
@@ -7371,7 +7433,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480061"
     },
     {
       "id": "candidate-088",
@@ -7385,7 +7448,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480062"
     },
     {
       "id": "candidate-089",
@@ -7413,7 +7477,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480093"
     },
     {
       "id": "candidate-091",
@@ -7426,7 +7491,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480100"
     },
     {
       "id": "candidate-092",
@@ -7439,7 +7505,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480039"
     },
     {
       "id": "candidate-093",
@@ -7453,7 +7520,8 @@
         "confidence": "candidate",
         "sourceRef": "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
         "observedAt": "2026-08-22T12:00:00Z"
-      }
+      },
+      "pullGroup": "cmangos-5480039"
     },
     {
       "id": "candidate-094",

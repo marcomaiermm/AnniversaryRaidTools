@@ -37,6 +37,11 @@ def main() -> None:
     assert len(raid["sublevels"]) == 8
     assert len(spawns) == 626 and len(raid["enemies"]) == 74
     assert len(raid["packs"]) == 204
+    pull_groups = [pack["pullGroup"] for pack in raid["packs"].values() if pack.get("pullGroup")]
+    assert len(pull_groups) == 102 and len(set(pull_groups)) == 46
+    assert raid["packs"]["black-temple:pack:group-5640051"]["pullGroup"] == (
+        raid["packs"]["black-temple:pack:group-5640774"]["pullGroup"]
+    )
     assert {spawn["sublevel"] for spawn in spawns} == set(range(1, 9))
     assert all("worldX" in spawn and "worldY" in spawn and "worldZ" in spawn for spawn in snapshot["spawns"])
     assert sum("patrol" in spawn for spawn in spawns) == 88

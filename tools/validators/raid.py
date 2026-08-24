@@ -172,6 +172,12 @@ def validate_raid(raid: Any) -> list[str]:
             errors.append(f"{path}.key disagrees with table key")
         if pack.get("label") is not None and not isinstance(pack["label"], str):
             errors.append(f"{path}.label must be a string or nil")
+        pull_group = pack.get("pullGroup")
+        if pull_group is not None and (
+            not isinstance(pull_group, str)
+            or not re.fullmatch(rf"{re.escape(key)}:pull-group:{STABLE_ID}", pull_group)
+        ):
+            errors.append(f"{path}.pullGroup is not a stable pull-group key for this raid")
         _check_provenance(pack.get("source"), f"{path}.source", errors)
         members = pack.get("spawnKeys")
         if not isinstance(members, list) or not members:
