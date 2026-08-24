@@ -418,7 +418,7 @@ end
 
 ---Sets the sublevel of the currently active preset, need to UpdateMap to reflect the change in UI
 function MDT:SetCurrentSubLevel(sublevel)
-  MDT:GetCurrentPreset().value.currentSublevel = sublevel
+  if MDT.SetPullSublevel then MDT:SetPullSublevel(sublevel) else MDT:GetCurrentPreset().value.currentSublevel = sublevel end
 end
 
 ---Returns the sublevel of the currently active preset
@@ -705,7 +705,7 @@ function MDT:SetMapSublevel(pull)
   if lastSubLevel then
     shouldResetZoom = db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentSublevel ~=
         lastSubLevel
-    db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentSublevel = lastSubLevel
+    MDT:SetCurrentSubLevel(lastSubLevel)
     if shouldResetZoom then
       MDT:UpdateMap(true, true, true)
     end

@@ -73,6 +73,63 @@ function MDT:GetCurrentPull()
   return selection[#selection]
 end
 
+function MDT:EnablePullsPerSublevel()
+  initializeDB()
+  local value = self:GetCurrentPreset().value
+  local currentSublevel = value.currentSublevel or 1
+  if not value.pullsBySublevel then
+    local pullsBySublevel = {}
+    for _, pull in ipairs(value.pulls or {}) do
+      local split, options = {}, {}
+      for key, item in pairs(pull) do
+        local enemyIdx = tonumber(key)
+        if enemyIdx and type(item) == "table" then
+          local enemy = self.dungeonEnemies[db.currentDungeonIdx] and self.dungeonEnemies[db.currentDungeonIdx][enemyIdx]
+          for _, cloneIdx in ipairs(item) do
+            local clone = enemy and enemy.clones and enemy.clones[cloneIdx]
+            local sublevel = clone and clone.sublevel or currentSublevel
+            split[sublevel] = split[sublevel] or {}
+            split[sublevel][enemyIdx] = split[sublevel][enemyIdx] or {}
+            tinsert(split[sublevel][enemyIdx], cloneIdx)
+          end
+        else
+          options[key] = item
+        end
+      end
+      if next(split) then
+        for sublevel, floorPull in pairs(split) do
+          for key, item in pairs(options) do floorPull[key] = item end
+          pullsBySublevel[sublevel] = pullsBySublevel[sublevel] or {}
+          tinsert(pullsBySublevel[sublevel], floorPull)
+        end
+      else
+        pullsBySublevel[currentSublevel] = pullsBySublevel[currentSublevel] or {}
+        tinsert(pullsBySublevel[currentSublevel], pull)
+      end
+    end
+    value.pullsBySublevel = pullsBySublevel
+    value.currentPullBySublevel = {}
+  end
+  local pulls = value.pullsBySublevel[currentSublevel] or { {} }
+  value.pullsBySublevel[currentSublevel] = pulls
+  value.pulls = pulls
+  value.currentPull = math.min(value.currentPullBySublevel[currentSublevel] or value.currentPull or 1, #pulls)
+  value.selection = { value.currentPull }
+end
+
+function MDT:SetPullSublevel(sublevel)
+  local value = self:GetCurrentPreset().value
+  if not value.pullsBySublevel then value.currentSublevel = sublevel; return end
+  value.pullsBySublevel[value.currentSublevel] = value.pulls
+  value.currentPullBySublevel[value.currentSublevel] = value.currentPull
+  value.currentSublevel = sublevel
+  local pulls = value.pullsBySublevel[sublevel] or { {} }
+  value.pullsBySublevel[sublevel] = pulls
+  value.pulls = pulls
+  value.currentPull = math.min(value.currentPullBySublevel[sublevel] or 1, #pulls)
+  value.selection = { value.currentPull }
+end
+
 ---Stores r g b values for coloring pulls with MDT:ColorPull()
 local colorPaletteValues = {
   [1] = { --Rainbow values

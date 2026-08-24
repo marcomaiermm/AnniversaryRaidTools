@@ -306,7 +306,7 @@ function MDT:CreateSublevelDropdown(frame)
   ---@diagnostic disable-next-line: undefined-field
   group.sublevelDropdown.text:SetJustifyH("LEFT")
   group.sublevelDropdown:SetCallback("OnValueChanged", function(widget, callbackName, key)
-    db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentSublevel = key
+    MDT:SetCurrentSubLevel(key)
     MDT:UpdateMap()
   end)
   ---@diagnostic disable-next-line: undefined-field
