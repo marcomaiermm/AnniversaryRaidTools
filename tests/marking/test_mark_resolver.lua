@@ -14,6 +14,7 @@ local function fixture()
   local raid = {
     packs = {
       p = { spawnKeys = { "s1", "s2", "s3", "s4" } },
+      q = { spawnKeys = { "s5" } },
     },
     enemies = {
       [100] = { spawns = {
@@ -22,6 +23,7 @@ local function fixture()
         { key = "s3", npcId = 100, packKey = "p" },
       } },
       [200] = { spawns = { { key = "s4", npcId = 200, packKey = "p" } } },
+      [300] = { spawns = { { key = "s5", npcId = 300, packKey = "q" } } },
     },
   }
   local step = { id = "step-1", packKeys = { "p" }, marks = { s1 = 8 } }
@@ -128,6 +130,13 @@ do
   units.outside = { guid = "outside", npcId = 100, spawnKey = "not-in-step" }
   ok, reason = resolver:ApplyUnit("outside")
   equal(reason, "outside-active-step", "outside-step reason")
+  dependencies.allowOutsideActiveStep = true
+  dependencies.getSpawnMarker = function(spawnKey) return spawnKey == "s5" and 6 or nil end
+  units.presetWide = { guid = "preset-wide", npcId = 300, spawnKey = "s5" }
+  ok, reason = resolver:ApplyUnit("presetWide")
+  equal(ok, true, "an explicit preset mark applies outside the active pull")
+  equal(units.presetWide.applied, 6, "outside-pull application keeps the planned marker")
+  resolver:ResetActivePack()
   units.existing = { guid = "existing", npcId = 100, spawnKey = "s1", currentMarker = 6 }
   ok, reason = resolver:ApplyUnit("existing")
   equal(reason, "existing-marker", "preservation reason")
@@ -135,6 +144,13 @@ do
   ok, reason = resolver:ApplyUnit("good")
   equal(ok, true, "valid unit is applied")
   equal(units.good.applied, 4, "ApplyUnit sets the resolved marker without changing target")
+
+  _G.InCombatLockdown = function() return true end
+  resolver:ResetActivePack()
+  units.nativeCombat = { guid = "native-combat", npcId = 100, spawnKey = "s1" }
+  ok, reason = resolver:ApplyUnit("nativeCombat")
+  equal(ok, true, "native combat lockdown does not block raid target marking")
+  _G.InCombatLockdown = nil
 
   dependencies.profile.packOverrides.p.npcDefaults = {}
   dependencies.profile.packOverrides.p.spawns = {}

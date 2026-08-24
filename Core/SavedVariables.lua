@@ -9,6 +9,7 @@ local defaultSavedVars = {
     useForcesCount = false, -- replaces percent in pull buttons with count
     showPullButtonHealth = false,
     autoPanToPull = true,
+    autoMark = false,
     enemyForcesTooltip = 1,
     muteXalatathVoiceLines = false,
     announceDungeonReset = false,

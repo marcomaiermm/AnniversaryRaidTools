@@ -269,6 +269,11 @@ function Resolver:_findPack(info)
       for _, packKey in ipairs(active) do
         if packKey == spawn.packKey then return packKey end
       end
+      local fallback = self.dependencies.getSpawnMarker
+      if self.dependencies.allowOutsideActiveStep and type(fallback) == "function"
+          and validMarker(fallback(info.spawnKey)) then
+        return spawn.packKey
+      end
     end
   end
   -- A unit with a known but unmatched stable key is outside the active step;
@@ -280,6 +285,11 @@ function Resolver:_specificMarker(step, packKey, spawnKey)
   if type(step) == "table" and type(step.marks) == "table" then
     local marker = validMarker(step.marks[spawnKey])
     if marker then return marker, "route-step-spawn" end
+  end
+  local global = self.dependencies.getSpawnMarker
+  if type(global) == "function" then
+    local marker = validMarker(global(spawnKey))
+    if marker then return marker, "preset-spawn" end
   end
   local override = self.profile.packOverrides and self.profile.packOverrides[packKey]
   if type(override) == "table" and type(override.spawns) == "table" then
@@ -381,9 +391,7 @@ function Resolver:ApplyUnit(unitToken)
   if dependencies.canMark == false or (type(dependencies.canMark) == "function" and not dependencies.canMark(info.unitToken)) then
     return false, "permission", { info = info }
   end
-  local nativeInCombat = rawget(_G, "InCombatLockdown")
-  if dependencies.inCombat == true or (type(dependencies.inCombat) == "function" and dependencies.inCombat())
-      or (type(nativeInCombat) == "function" and nativeInCombat()) then
+  if dependencies.inCombat == true or (type(dependencies.inCombat) == "function" and dependencies.inCombat()) then
     return false, "combat", { info = info }
   end
   if dependencies.apiAllowsMarking == false or (type(dependencies.apiAllowsMarking) == "function" and not dependencies.apiAllowsMarking(info.unitToken)) then

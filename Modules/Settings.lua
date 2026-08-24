@@ -244,6 +244,17 @@ function MDT:MakeSettingsFrame(frame)
   end)
   frame.settingsGeneralColumn:AddChild(frame.autoPanToPullCheckbox)
 
+  frame.autoMarkCheckbox = AceGUI:Create("CheckBox")
+  frame.autoMarkCheckbox:SetLabel(L["Auto Mark"])
+  frame.autoMarkCheckbox:SetWidth(settingWidth)
+  frame.autoMarkCheckbox:SetValue(db.autoMark == true)
+  frame.autoMarkCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
+    db.autoMark = value
+    local art = rawget(_G, "ART")
+    if value and art and art.LiveMarks and art.LiveMarks.OnPlanChanged then art.LiveMarks:OnPlanChanged() end
+  end)
+  frame.settingsGeneralColumn:AddChild(frame.autoMarkCheckbox)
+
   frame.enemyForcesTooltipDropdown = AceGUI:Create("Dropdown")
   frame.enemyForcesTooltipDropdown:SetList(enemyForcesTooltipOptions, enemyForcesTooltipOptionOrder)
   frame.enemyForcesTooltipDropdown:SetLabel(L["Enemy forces in tooltips"])

@@ -3,6 +3,7 @@
 	<Script file='..\Core\RoutePreset.lua'/>
 	<Script file='..\Core\EnemyInfoRepository.lua'/>
 	<Script file='..\Core\MarkResolver.lua'/>
+	<Script file='..\Core\SpawnMatcher.lua'/>
 	<Script file='MainFrame.lua'/>
 	<Script file='MapView.lua'/>
 	<Script file='Presets.lua'/>
@@ -35,8 +36,11 @@
 	<Script file='RaidSelect.lua'/>
 	<Script file='RaidMarks.lua'/>
 	<Script file='RaidMarksUI.lua'/>
+	<Script file='QuickMark.lua'/>
+	<Script file='LiveMarks.lua'/>
 	<Script file='RaidEnemyInfo.lua'/>
 	<Script file='..\Raids\TBC\Generated\GruulsLair.lua'/>
+	<Script file='..\Raids\TBC\Generated\GruulsLairWorldPositions.lua'/>
 	<Script file='..\Raids\TBC\Maps\GruulsLair.lua'/>
 	<Script file='..\Raids\TBC\Transforms\GruulsLair.lua'/>
 	<Script file='..\Raids\TBC\Generated\BlackTemple.lua'/>
@@ -44,9 +48,11 @@
 	<Script file='..\Raids\TBC\Maps\BlackTemple.lua'/>
 	<Script file='..\Raids\TBC\Transforms\BlackTemple.lua'/>
 	<Script file='..\Raids\TBC\Generated\Hyjal.lua'/>
+	<Script file='..\Raids\TBC\Generated\HyjalWorldPositions.lua'/>
 	<Script file='..\Raids\TBC\Maps\Hyjal.lua'/>
 	<Script file='..\Raids\TBC\Transforms\Hyjal.lua'/>
 	<Script file='..\Raids\TBC\Generated\MagtheridonsLair.lua'/>
+	<Script file='..\Raids\TBC\Generated\MagtheridonsLairWorldPositions.lua'/>
 	<Script file='..\Raids\TBC\Maps\MagtheridonsLair.lua'/>
 	<Script file='..\Raids\TBC\Transforms\MagtheridonsLair.lua'/>
 	<Script file='..\Raids\TBC\Generated\SerpentshrineCavern.lua'/>
