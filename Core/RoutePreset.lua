@@ -117,13 +117,23 @@ function RoutePreset:Validate(preset, raid)
       waveKeys[step.waveKey] = true
     end
   end
+  if preset.currentStepId ~= nil and (type(preset.currentStepId) ~= "string" or not stepIds[preset.currentStepId]) then
+    return nil, "invalid currentStepId"
+  end
+  if preset.currentStepPinned ~= nil and type(preset.currentStepPinned) ~= "boolean" then
+    return nil, "invalid currentStepPinned"
+  end
   if raid.mode == "waves" and #preset.routeSteps ~= #raid.waves then return nil, "missing or extra wave steps" end
   return validateMarking(preset.marking, raid, spawns)
 end
 
 function RoutePreset:Create(raid)
   assert(type(raid) == "table", "RoutePreset.Create requires a raid")
-  local preset = { schemaVersion = 1, raidKey = raid.key, currentSublevel = 1, routeSteps = {}, marking = { npcDefaults = {}, packOverrides = {} } }
+  local preset = {
+    schemaVersion = 1, raidKey = raid.key, currentSublevel = 1,
+    routeSteps = {}, marking = { npcDefaults = {}, packOverrides = {} },
+    currentStepId = nil, currentStepPinned = false,
+  }
   if raid.mode == "waves" then
     for index, wave in ipairs(raid.waves) do
       preset.routeSteps[index] = {
