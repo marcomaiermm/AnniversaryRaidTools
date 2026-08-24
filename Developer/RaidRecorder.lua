@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Bounded combat-log observation recorder. It has no UI or registration side effects.
 
 local _, addon = ...

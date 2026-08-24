@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Pure route-preset validation and deterministic import/export.
 
 local _, addon = ...

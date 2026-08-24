@@ -26,7 +26,9 @@ Boundaries follow ownership and data flow, not speculative layers:
 | Planner UI | route/wave editing and presentation | mark resolution or source confidence |
 | Data Pipeline | deterministic generated raid records | loaders, UI, manual corrections |
 | Map Calibration | coordinate transforms and floor hints | pack inference |
+| Spawn Matcher | exact spawn evidence and ambiguous allocation pools | marker assignment, pull progress |
 | Mark Resolver | deterministic profile resolution and live GUID assignments | target switching, planner mutation |
+| Pull Progress | exclusive exact-spawn or pool GUID bindings and death completion | unit discovery, marker assignment |
 | Enemy Info | sourced metadata and bounded live observations | route mutation |
 | Integrator | central registration and cross-boundary wiring | new feature semantics |
 

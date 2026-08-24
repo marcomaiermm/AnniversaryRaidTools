@@ -62,5 +62,12 @@ for key, stem in ALL_RAIDS.items():
     rendered = render_world_positions(raw, raid)
     assert rendered and rendered == world.read_text()
     assert all(f'{key}:spawn:{spawn["npcId"]}:{spawn["id"]}' in rendered for spawn in raw["spawns"])
+    assert "coordinateKind = " in rendered and "_meta = " in rendered and "provenance = " in rendered
+    if any("worldX" in spawn and "worldY" in spawn for spawn in raw["spawns"]):
+        assert 'coordinateKind = "raw-server"' in rendered
+    if raw.get("metadata", {}).get("worldBounds") and any(
+        "worldX" not in spawn and "x" in spawn and "y" in spawn for spawn in raw["spawns"]
+    ):
+        assert 'coordinateKind = "derived-affine"' in rendered
 
 print("Remaining TBC raid pipeline checks passed")

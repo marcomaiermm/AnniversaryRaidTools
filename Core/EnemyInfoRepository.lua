@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Enemy metadata boundary for AnniversaryRaidTools.
 
 local _, addon = ...

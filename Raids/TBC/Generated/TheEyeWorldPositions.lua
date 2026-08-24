@@ -1,122 +1,159 @@
 -- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.
 -- Generator: art-030-generator-v2
--- Integration-private C_Map projection inputs; raid schema v1 is unchanged.
+-- Integration-private world-position matching inputs; raid schema v1 is unchanged.
 local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools requires Core/Bootstrap.lua")
 ART.MapWorldPositions = ART.MapWorldPositions or {}
 ART.MapWorldPositions["the-eye"] = {
+    _meta = {
+      provenance = {
+        confidence = "candidate",
+        observedAt = "2026-08-22T12:00:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+      },
+    },
     ["the-eye:spawn:18805:5500001"] = {
+      coordinateKind = "raw-server",
       x = 432.908996582031,
       y = -373.424011230469,
     },
     ["the-eye:spawn:19514:5500003"] = {
+      coordinateKind = "raw-server",
       x = 375.212005615234,
       y = -24.1487998962402,
     },
     ["the-eye:spawn:19516:5500004"] = {
+      coordinateKind = "raw-server",
       x = 423.308013916016,
       y = 407.959991455078,
     },
     ["the-eye:spawn:19622:5500005"] = {
+      coordinateKind = "raw-server",
       x = 795.007019042969,
       y = -0.460572004318237,
     },
     ["the-eye:spawn:20031:5500006"] = {
+      coordinateKind = "raw-server",
       x = 519.164001464844,
       y = -157.406997680664,
     },
     ["the-eye:spawn:20031:5500007"] = {
+      coordinateKind = "raw-server",
       x = 514.414001464844,
       y = -158.115997314453,
     },
     ["the-eye:spawn:20031:5500008"] = {
+      coordinateKind = "raw-server",
       x = 104.420997619629,
       y = -11.5059995651245,
     },
     ["the-eye:spawn:20031:5500009"] = {
+      coordinateKind = "raw-server",
       x = 104.903999328613,
       y = 8.37891006469727,
     },
     ["the-eye:spawn:20031:5500010"] = {
+      coordinateKind = "raw-server",
       x = 191.99299621582,
       y = -4.75432014465332,
     },
     ["the-eye:spawn:20031:5500011"] = {
+      coordinateKind = "raw-server",
       x = 475.821014404297,
       y = -337.397003173828,
     },
     ["the-eye:spawn:20031:5500012"] = {
+      coordinateKind = "raw-server",
       x = 472.010986328125,
       y = -339.059997558594,
     },
     ["the-eye:spawn:20031:5500013"] = {
+      coordinateKind = "raw-server",
       x = 381.192993164062,
       y = -429.485992431641,
     },
     ["the-eye:spawn:20031:5500014"] = {
+      coordinateKind = "raw-server",
       x = 383.904998779297,
       y = -426.031005859375,
     },
     ["the-eye:spawn:20031:5500015"] = {
+      coordinateKind = "raw-server",
       x = 191.375,
       y = 3.30484008789062,
     },
     ["the-eye:spawn:20032:5500016"] = {
+      coordinateKind = "raw-server",
       x = 109.373001098633,
       y = 6.28142023086548,
     },
     ["the-eye:spawn:20032:5500017"] = {
+      coordinateKind = "raw-server",
       x = 62.0999984741211,
       y = -6.61191987991333,
     },
     ["the-eye:spawn:20032:5500018"] = {
+      coordinateKind = "raw-server",
       x = 62.0597991943359,
       y = 3.5797700881958,
     },
     ["the-eye:spawn:20032:5500019"] = {
+      coordinateKind = "raw-server",
       x = 189.542999267578,
       y = 5.10516023635864,
     },
     ["the-eye:spawn:20033:5500020"] = {
+      coordinateKind = "raw-server",
       x = 110.998001098633,
       y = -8.62287998199463,
     },
     ["the-eye:spawn:20033:5500021"] = {
+      coordinateKind = "raw-server",
       x = 59.0983009338379,
       y = -9.55179023742676,
     },
     ["the-eye:spawn:20033:5500022"] = {
+      coordinateKind = "raw-server",
       x = 189.020004272461,
       y = -9.23614978790283,
     },
     ["the-eye:spawn:20033:5500023"] = {
+      coordinateKind = "raw-server",
       x = 189.878997802734,
       y = -6.82052993774414,
     },
     ["the-eye:spawn:20033:5500024"] = {
+      coordinateKind = "raw-server",
       x = 53.3193016052246,
       y = 7.81006002426147,
     },
     ["the-eye:spawn:20034:5500025"] = {
+      coordinateKind = "raw-server",
       x = 114.991996765137,
       y = -8.61682987213135,
     },
     ["the-eye:spawn:20034:5500026"] = {
+      coordinateKind = "raw-server",
       x = 113.625,
       y = 5.77772998809814,
     },
     ["the-eye:spawn:20034:5500027"] = {
+      coordinateKind = "raw-server",
       x = 55.3473014831543,
       y = -10.7833003997803,
     },
     ["the-eye:spawn:20034:5500028"] = {
+      coordinateKind = "raw-server",
       x = 58.7436981201172,
       y = 6.43854999542236,
     },
     ["the-eye:spawn:20034:5500029"] = {
+      coordinateKind = "raw-server",
       x = 188.498992919922,
       y = 7.80884981155396,
     },
     ["the-eye:spawn:20035:5500030"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 110.946,
@@ -143,70 +180,87 @@ ART.MapWorldPositions["the-eye"] = {
           y = -1.7476,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 60.2257995605469,
       y = -1.69270002841949,
     },
     ["the-eye:spawn:20035:5500031"] = {
+      coordinateKind = "raw-server",
       x = 639.830017089844,
       y = 2.04339003562927,
     },
     ["the-eye:spawn:20035:5500032"] = {
+      coordinateKind = "raw-server",
       x = 724.668029785156,
       y = 47.5516014099121,
     },
     ["the-eye:spawn:20035:5500033"] = {
+      coordinateKind = "raw-server",
       x = 728.804016113281,
       y = -43.1282997131348,
     },
     ["the-eye:spawn:20036:5500034"] = {
+      coordinateKind = "raw-server",
       x = 351.417999267578,
       y = -316.259002685547,
     },
     ["the-eye:spawn:20036:5500035"] = {
+      coordinateKind = "raw-server",
       x = 505.605987548828,
       y = -151.263000488281,
     },
     ["the-eye:spawn:20036:5500036"] = {
+      coordinateKind = "raw-server",
       x = 504.446014404297,
       y = -156.253005981445,
     },
     ["the-eye:spawn:20036:5500037"] = {
+      coordinateKind = "raw-server",
       x = 504.087005615234,
       y = -237.533996582031,
     },
     ["the-eye:spawn:20036:5500038"] = {
+      coordinateKind = "raw-server",
       x = 58.5983009338379,
       y = -3.39800000190735,
     },
     ["the-eye:spawn:20036:5500039"] = {
+      coordinateKind = "raw-server",
       x = 58.5983009338379,
       y = 0.217362999916077,
     },
     ["the-eye:spawn:20036:5500040"] = {
+      coordinateKind = "raw-server",
       x = 335.747009277344,
       y = -376.817993164062,
     },
     ["the-eye:spawn:20036:5500041"] = {
+      coordinateKind = "raw-server",
       x = 510.536987304688,
       y = -246.791000366211,
     },
     ["the-eye:spawn:20036:5500042"] = {
+      coordinateKind = "raw-server",
       x = 531.455993652344,
       y = -366.802001953125,
     },
     ["the-eye:spawn:20036:5500043"] = {
+      coordinateKind = "raw-server",
       x = 513.288024902344,
       y = -421.953002929688,
     },
     ["the-eye:spawn:20036:5500044"] = {
+      coordinateKind = "raw-server",
       x = 388.68701171875,
       y = -457.694000244141,
     },
     ["the-eye:spawn:20036:5500045"] = {
+      coordinateKind = "raw-server",
       x = 438.087005615234,
       y = -471.080993652344,
     },
     ["the-eye:spawn:20037:5500046"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 298.818,
@@ -233,14 +287,17 @@ ART.MapWorldPositions["the-eye"] = {
           y = 15.7041,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 298.817993164062,
       y = 31.3542003631592,
     },
     ["the-eye:spawn:20037:5500047"] = {
+      coordinateKind = "raw-server",
       x = 316.015991210938,
       y = 39.2347984313965,
     },
     ["the-eye:spawn:20037:5500048"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 354.06,
@@ -271,62 +328,77 @@ ART.MapWorldPositions["the-eye"] = {
           y = -44.848,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 354.059997558594,
       y = -39.907901763916,
     },
     ["the-eye:spawn:20037:5500049"] = {
+      coordinateKind = "raw-server",
       x = 337.43798828125,
       y = -47.1613006591797,
     },
     ["the-eye:spawn:20038:5500050"] = {
+      coordinateKind = "raw-server",
       x = 346.360992431641,
       y = -49.3806991577148,
     },
     ["the-eye:spawn:20038:5500051"] = {
+      coordinateKind = "raw-server",
       x = 344.927001953125,
       y = -45.2601013183594,
     },
     ["the-eye:spawn:20038:5500052"] = {
+      coordinateKind = "raw-server",
       x = 349.253997802734,
       y = -46.3708992004395,
     },
     ["the-eye:spawn:20038:5500053"] = {
+      coordinateKind = "raw-server",
       x = 343.761993408203,
       y = -38.935001373291,
     },
     ["the-eye:spawn:20038:5500054"] = {
+      coordinateKind = "raw-server",
       x = 309.700012207031,
       y = 36.0396003723145,
     },
     ["the-eye:spawn:20038:5500055"] = {
+      coordinateKind = "raw-server",
       x = 305.5419921875,
       y = 37.7042007446289,
     },
     ["the-eye:spawn:20038:5500056"] = {
+      coordinateKind = "raw-server",
       x = 300.473999023438,
       y = 35.511100769043,
     },
     ["the-eye:spawn:20038:5500057"] = {
+      coordinateKind = "raw-server",
       x = 303.647003173828,
       y = 32.4884986877441,
     },
     ["the-eye:spawn:20038:5500058"] = {
+      coordinateKind = "raw-server",
       x = 305.200012207031,
       y = 28.1523990631104,
     },
     ["the-eye:spawn:20038:5500059"] = {
+      coordinateKind = "raw-server",
       x = 311.18701171875,
       y = 31.764799118042,
     },
     ["the-eye:spawn:20038:5500060"] = {
+      coordinateKind = "raw-server",
       x = 354.059997558594,
       y = -39.907901763916,
     },
     ["the-eye:spawn:20038:5500061"] = {
+      coordinateKind = "raw-server",
       x = 346.226989746094,
       y = -39.0625991821289,
     },
     ["the-eye:spawn:20039:5500062"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 399.986,
@@ -533,10 +605,12 @@ ART.MapWorldPositions["the-eye"] = {
           y = -62.8995,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 398.218994140625,
       y = -78.8478012084961,
     },
     ["the-eye:spawn:20039:5500063"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 411.409,
@@ -647,10 +721,12 @@ ART.MapWorldPositions["the-eye"] = {
           y = -39.8251,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 411.408996582031,
       y = -39.8266983032227,
     },
     ["the-eye:spawn:20039:5500064"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 252.382,
@@ -729,10 +805,12 @@ ART.MapWorldPositions["the-eye"] = {
           y = 47.7474,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 244.912002563477,
       y = 35.6792984008789,
     },
     ["the-eye:spawn:20039:5500065"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 411.964,
@@ -871,14 +949,17 @@ ART.MapWorldPositions["the-eye"] = {
           y = -76.9252,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 405.122985839844,
       y = -69.1258010864258,
     },
     ["the-eye:spawn:20040:5500066"] = {
+      coordinateKind = "raw-server",
       x = 463.794006347656,
       y = 340.009002685547,
     },
     ["the-eye:spawn:20040:5500067"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 479.024,
@@ -1005,14 +1086,17 @@ ART.MapWorldPositions["the-eye"] = {
           y = 90.3124,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 478.9169921875,
       y = 90.5019989013672,
     },
     ["the-eye:spawn:20040:5500068"] = {
+      coordinateKind = "raw-server",
       x = 429.209991455078,
       y = 328.566986083984,
     },
     ["the-eye:spawn:20040:5500069"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 409.93,
@@ -1195,270 +1279,337 @@ ART.MapWorldPositions["the-eye"] = {
           y = 309.858,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 414.075012207031,
       y = 311.576995849609,
     },
     ["the-eye:spawn:20041:5500070"] = {
+      coordinateKind = "raw-server",
       x = 516.203002929688,
       y = 243.337005615234,
     },
     ["the-eye:spawn:20041:5500071"] = {
+      coordinateKind = "raw-server",
       x = 500.278991699219,
       y = 235.072998046875,
     },
     ["the-eye:spawn:20041:5500072"] = {
+      coordinateKind = "raw-server",
       x = 525.484985351562,
       y = -139.615005493164,
     },
     ["the-eye:spawn:20041:5500073"] = {
+      coordinateKind = "raw-server",
       x = 530.473999023438,
       y = -157.158996582031,
     },
     ["the-eye:spawn:20041:5500074"] = {
+      coordinateKind = "raw-server",
       x = 525.81201171875,
       y = 137.098007202148,
     },
     ["the-eye:spawn:20041:5500075"] = {
+      coordinateKind = "raw-server",
       x = 530.559020996094,
       y = 155.899002075195,
     },
     ["the-eye:spawn:20041:5500076"] = {
+      coordinateKind = "raw-server",
       x = 395.712005615234,
       y = 349.558013916016,
     },
     ["the-eye:spawn:20041:5500077"] = {
+      coordinateKind = "raw-server",
       x = 392.303009033203,
       y = 355.927001953125,
     },
     ["the-eye:spawn:20041:5500078"] = {
+      coordinateKind = "raw-server",
       x = 475.678009033203,
       y = 380.375,
     },
     ["the-eye:spawn:20041:5500079"] = {
+      coordinateKind = "raw-server",
       x = 473.384002685547,
       y = 386.519989013672,
     },
     ["the-eye:spawn:20042:5500080"] = {
+      coordinateKind = "raw-server",
       x = 401.037994384766,
       y = 355.901000976562,
     },
     ["the-eye:spawn:20042:5500081"] = {
+      coordinateKind = "raw-server",
       x = 458.420989990234,
       y = 346.140991210938,
     },
     ["the-eye:spawn:20042:5500082"] = {
+      coordinateKind = "raw-server",
       x = 466.821014404297,
       y = 381.299987792969,
     },
     ["the-eye:spawn:20042:5500083"] = {
+      coordinateKind = "raw-server",
       x = 430.174011230469,
       y = 336.222991943359,
     },
     ["the-eye:spawn:20042:5500084"] = {
+      coordinateKind = "raw-server",
       x = 418.200988769531,
       y = 313.489990234375,
     },
     ["the-eye:spawn:20042:5500085"] = {
+      coordinateKind = "raw-server",
       x = 414.9580078125,
       y = 306.040985107422,
     },
     ["the-eye:spawn:20043:5500086"] = {
+      coordinateKind = "raw-server",
       x = 352.4580078125,
       y = -319.709014892578,
     },
     ["the-eye:spawn:20043:5500087"] = {
+      coordinateKind = "raw-server",
       x = 344.225006103516,
       y = -333.592987060547,
     },
     ["the-eye:spawn:20043:5500088"] = {
+      coordinateKind = "raw-server",
       x = 503.184997558594,
       y = -146.248992919922,
     },
     ["the-eye:spawn:20043:5500089"] = {
+      coordinateKind = "raw-server",
       x = 502.494995117188,
       y = -149.417999267578,
     },
     ["the-eye:spawn:20043:5500090"] = {
+      coordinateKind = "raw-server",
       x = 506.165985107422,
       y = -154.225997924805,
     },
     ["the-eye:spawn:20043:5500091"] = {
+      coordinateKind = "raw-server",
       x = 508.967010498047,
       y = -158.539001464844,
     },
     ["the-eye:spawn:20043:5500092"] = {
+      coordinateKind = "raw-server",
       x = 498.680999755859,
       y = -241.203002929688,
     },
     ["the-eye:spawn:20043:5500093"] = {
+      coordinateKind = "raw-server",
       x = 335.096984863281,
       y = -368.078002929688,
     },
     ["the-eye:spawn:20043:5500094"] = {
+      coordinateKind = "raw-server",
       x = 500.876007080078,
       y = -238.636001586914,
     },
     ["the-eye:spawn:20043:5500095"] = {
+      coordinateKind = "raw-server",
       x = 340.303009033203,
       y = -370.587005615234,
     },
     ["the-eye:spawn:20043:5500096"] = {
+      coordinateKind = "raw-server",
       x = 516.494995117188,
       y = -247.968002319336,
     },
     ["the-eye:spawn:20043:5500097"] = {
+      coordinateKind = "raw-server",
       x = 514.987976074219,
       y = -242.227005004883,
     },
     ["the-eye:spawn:20043:5500098"] = {
+      coordinateKind = "raw-server",
       x = 516.322021484375,
       y = -245.611999511719,
     },
     ["the-eye:spawn:20043:5500099"] = {
+      coordinateKind = "raw-server",
       x = 330.858001708984,
       y = -377.786010742188,
     },
     ["the-eye:spawn:20043:5500100"] = {
+      coordinateKind = "raw-server",
       x = 528.726013183594,
       y = -364.972991943359,
     },
     ["the-eye:spawn:20043:5500101"] = {
+      coordinateKind = "raw-server",
       x = 527.223022460938,
       y = -368.721984863281,
     },
     ["the-eye:spawn:20043:5500102"] = {
+      coordinateKind = "raw-server",
       x = 527.879028320312,
       y = -381.096008300781,
     },
     ["the-eye:spawn:20043:5500103"] = {
+      coordinateKind = "raw-server",
       x = 518.083984375,
       y = -415.480010986328,
     },
     ["the-eye:spawn:20043:5500104"] = {
+      coordinateKind = "raw-server",
       x = 519.810974121094,
       y = -413.351013183594,
     },
     ["the-eye:spawn:20043:5500105"] = {
+      coordinateKind = "raw-server",
       x = 380.024993896484,
       y = -451.002990722656,
     },
     ["the-eye:spawn:20043:5500106"] = {
+      coordinateKind = "raw-server",
       x = 376.944000244141,
       y = -455.144989013672,
     },
     ["the-eye:spawn:20043:5500107"] = {
+      coordinateKind = "raw-server",
       x = 439.472991943359,
       y = -468.015014648438,
     },
     ["the-eye:spawn:20043:5500108"] = {
+      coordinateKind = "raw-server",
       x = 435.639007568359,
       y = -466.829010009766,
     },
     ["the-eye:spawn:20043:5500109"] = {
+      coordinateKind = "raw-server",
       x = 428.962005615234,
       y = -474.042999267578,
     },
     ["the-eye:spawn:20043:5500110"] = {
+      coordinateKind = "raw-server",
       x = 506.68798828125,
       y = -157.552001953125,
     },
     ["the-eye:spawn:20044:5500111"] = {
+      coordinateKind = "raw-server",
       x = 354.351013183594,
       y = -317.713012695312,
     },
     ["the-eye:spawn:20044:5500112"] = {
+      coordinateKind = "raw-server",
       x = 343.001007080078,
       y = -330.820007324219,
     },
     ["the-eye:spawn:20044:5500113"] = {
+      coordinateKind = "raw-server",
       x = 346.986999511719,
       y = -331.115997314453,
     },
     ["the-eye:spawn:20044:5500114"] = {
+      coordinateKind = "raw-server",
       x = 505.014007568359,
       y = -159.059005737305,
     },
     ["the-eye:spawn:20044:5500115"] = {
+      coordinateKind = "raw-server",
       x = 503.467987060547,
       y = -153.307006835938,
     },
     ["the-eye:spawn:20044:5500116"] = {
+      coordinateKind = "raw-server",
       x = 502.859008789062,
       y = -151.514007568359,
     },
     ["the-eye:spawn:20044:5500117"] = {
+      coordinateKind = "raw-server",
       x = 505.81298828125,
       y = -148.401992797852,
     },
     ["the-eye:spawn:20044:5500118"] = {
+      coordinateKind = "raw-server",
       x = 338.579986572266,
       y = -366.390014648438,
     },
     ["the-eye:spawn:20044:5500119"] = {
+      coordinateKind = "raw-server",
       x = 501.31298828125,
       y = -241.167007446289,
     },
     ["the-eye:spawn:20044:5500120"] = {
+      coordinateKind = "raw-server",
       x = 507.289001464844,
       y = -160.42399597168,
     },
     ["the-eye:spawn:20044:5500121"] = {
+      coordinateKind = "raw-server",
       x = 502.845001220703,
       y = -244.156005859375,
     },
     ["the-eye:spawn:20044:5500122"] = {
+      coordinateKind = "raw-server",
       x = 513.877014160156,
       y = -247.938003540039,
     },
     ["the-eye:spawn:20044:5500123"] = {
+      coordinateKind = "raw-server",
       x = 504.221984863281,
       y = -240.496002197266,
     },
     ["the-eye:spawn:20044:5500124"] = {
+      coordinateKind = "raw-server",
       x = 512.656982421875,
       y = -244.061004638672,
     },
     ["the-eye:spawn:20044:5500125"] = {
+      coordinateKind = "raw-server",
       x = 337.739013671875,
       y = -380.531005859375,
     },
     ["the-eye:spawn:20044:5500126"] = {
+      coordinateKind = "raw-server",
       x = 526.948974609375,
       y = -375.875,
     },
     ["the-eye:spawn:20044:5500127"] = {
+      coordinateKind = "raw-server",
       x = 531.523986816406,
       y = -379.076995849609,
     },
     ["the-eye:spawn:20044:5500128"] = {
+      coordinateKind = "raw-server",
       x = 512.518005371094,
       y = -425.019989013672,
     },
     ["the-eye:spawn:20044:5500129"] = {
+      coordinateKind = "raw-server",
       x = 521.401977539062,
       y = -415.550994873047,
     },
     ["the-eye:spawn:20044:5500130"] = {
+      coordinateKind = "raw-server",
       x = 515.806030273438,
       y = -426.441986083984,
     },
     ["the-eye:spawn:20044:5500131"] = {
+      coordinateKind = "raw-server",
       x = 375.265014648438,
       y = -452.355987548828,
     },
     ["the-eye:spawn:20044:5500132"] = {
+      coordinateKind = "raw-server",
       x = 391.798004150391,
       y = -459.901000976562,
     },
     ["the-eye:spawn:20044:5500133"] = {
+      coordinateKind = "raw-server",
       x = 388.877014160156,
       y = -462.480987548828,
     },
     ["the-eye:spawn:20044:5500134"] = {
+      coordinateKind = "raw-server",
       x = 427.989013671875,
       y = -468.894989013672,
     },
     ["the-eye:spawn:20045:5500135"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 478.763,
@@ -1721,10 +1872,12 @@ ART.MapWorldPositions["the-eye"] = {
           y = -342.31,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 475.084991455078,
       y = -340.752014160156,
     },
     ["the-eye:spawn:20045:5500136"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 393.48,
@@ -2023,10 +2176,12 @@ ART.MapWorldPositions["the-eye"] = {
           y = -425.16,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 385.207000732422,
       y = -429.638000488281,
     },
     ["the-eye:spawn:20046:5500137"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 517.678,
@@ -2113,146 +2268,182 @@ ART.MapWorldPositions["the-eye"] = {
           y = -156.868,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 517.028015136719,
       y = -159.699996948242,
     },
     ["the-eye:spawn:20047:5500138"] = {
+      coordinateKind = "raw-server",
       x = 651.426025390625,
       y = 87.7581024169922,
     },
     ["the-eye:spawn:20047:5500139"] = {
+      coordinateKind = "raw-server",
       x = 597.97802734375,
       y = 114.958000183105,
     },
     ["the-eye:spawn:20047:5500140"] = {
+      coordinateKind = "raw-server",
       x = 587.317993164062,
       y = -118.03800201416,
     },
     ["the-eye:spawn:20047:5500141"] = {
+      coordinateKind = "raw-server",
       x = 595.456970214844,
       y = -133.02099609375,
     },
     ["the-eye:spawn:20047:5500142"] = {
+      coordinateKind = "raw-server",
       x = 603.494995117188,
       y = 125.061996459961,
     },
     ["the-eye:spawn:20047:5500143"] = {
+      coordinateKind = "raw-server",
       x = 641.158020019531,
       y = -80.6899032592773,
     },
     ["the-eye:spawn:20047:5500144"] = {
+      coordinateKind = "raw-server",
       x = 651.703979492188,
       y = -86.652702331543,
     },
     ["the-eye:spawn:20047:5500145"] = {
+      coordinateKind = "raw-server",
       x = 642.403015136719,
       y = 80.5288009643555,
     },
     ["the-eye:spawn:20048:5500146"] = {
+      coordinateKind = "raw-server",
       x = 596.609008789062,
       y = -116.181999206543,
     },
     ["the-eye:spawn:20048:5500147"] = {
+      coordinateKind = "raw-server",
       x = 590.4990234375,
       y = 115.313003540039,
     },
     ["the-eye:spawn:20048:5500148"] = {
+      coordinateKind = "raw-server",
       x = 598.221008300781,
       y = 130.281997680664,
     },
     ["the-eye:spawn:20048:5500149"] = {
+      coordinateKind = "raw-server",
       x = 601.6669921875,
       y = -127.03099822998,
     },
     ["the-eye:spawn:20048:5500150"] = {
+      coordinateKind = "raw-server",
       x = 622.398010253906,
       y = -111.377998352051,
     },
     ["the-eye:spawn:20048:5500151"] = {
+      coordinateKind = "raw-server",
       x = 620.267028808594,
       y = 104.934997558594,
     },
     ["the-eye:spawn:20048:5500152"] = {
+      coordinateKind = "raw-server",
       x = 642.193969726562,
       y = -5.8433198928833,
     },
     ["the-eye:spawn:20048:5500153"] = {
+      coordinateKind = "raw-server",
       x = 620.22802734375,
       y = -108.018997192383,
     },
     ["the-eye:spawn:20048:5500154"] = {
+      coordinateKind = "raw-server",
       x = 623.418029785156,
       y = 110.222999572754,
     },
     ["the-eye:spawn:20048:5500155"] = {
+      coordinateKind = "raw-server",
       x = 645.018005371094,
       y = -81.1728973388672,
     },
     ["the-eye:spawn:20048:5500156"] = {
+      coordinateKind = "raw-server",
       x = 651.807006835938,
       y = -89.1970977783203,
     },
     ["the-eye:spawn:20048:5500157"] = {
+      coordinateKind = "raw-server",
       x = 723.401000976562,
       y = 42.6383018493652,
     },
     ["the-eye:spawn:20048:5500158"] = {
+      coordinateKind = "raw-server",
       x = 723.421997070312,
       y = -42.6315002441406,
     },
     ["the-eye:spawn:20048:5500159"] = {
+      coordinateKind = "raw-server",
       x = 644.955017089844,
       y = 78.404899597168,
     },
     ["the-eye:spawn:20048:5500160"] = {
+      coordinateKind = "raw-server",
       x = 651.47802734375,
       y = 85.3616027832031,
     },
     ["the-eye:spawn:20049:5500161"] = {
+      coordinateKind = "raw-server",
       x = 594.700988769531,
       y = 114.735000610352,
     },
     ["the-eye:spawn:20049:5500162"] = {
+      coordinateKind = "raw-server",
       x = 598.754028320312,
       y = -130.386993408203,
     },
     ["the-eye:spawn:20049:5500163"] = {
+      coordinateKind = "raw-server",
       x = 601.036987304688,
       y = 127.575996398926,
     },
     ["the-eye:spawn:20049:5500164"] = {
+      coordinateKind = "raw-server",
       x = 642.273010253906,
       y = 4.8821702003479,
     },
     ["the-eye:spawn:20049:5500165"] = {
+      coordinateKind = "raw-server",
       x = 643.370971679688,
       y = -78.5279998779297,
     },
     ["the-eye:spawn:20049:5500166"] = {
+      coordinateKind = "raw-server",
       x = 654.185974121094,
       y = -91.0954971313477,
     },
     ["the-eye:spawn:20049:5500167"] = {
+      coordinateKind = "raw-server",
       x = 728.148010253906,
       y = 39.5605010986328,
     },
     ["the-eye:spawn:20049:5500168"] = {
+      coordinateKind = "raw-server",
       x = 722.734985351562,
       y = -47.1291999816895,
     },
     ["the-eye:spawn:20049:5500169"] = {
+      coordinateKind = "raw-server",
       x = 654.736999511719,
       y = 88.4817962646484,
     },
     ["the-eye:spawn:20049:5500170"] = {
+      coordinateKind = "raw-server",
       x = 592.640014648438,
       y = -116.013000488281,
     },
     ["the-eye:spawn:20049:5500171"] = {
+      coordinateKind = "raw-server",
       x = 641.161010742188,
       y = 77.8303985595703,
     },
     ["the-eye:spawn:20050:5500172"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 614.401,
@@ -2327,10 +2518,12 @@ ART.MapWorldPositions["the-eye"] = {
           y = -111.918,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 616.976013183594,
       y = -112.603996276855,
     },
     ["the-eye:spawn:20050:5500173"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 614.895,
@@ -2385,66 +2578,82 @@ ART.MapWorldPositions["the-eye"] = {
           y = 107.439,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 620.557006835938,
       y = 108.496002197266,
     },
     ["the-eye:spawn:20050:5500174"] = {
+      coordinateKind = "raw-server",
       x = 639.661987304688,
       y = -3.34106993675232,
     },
     ["the-eye:spawn:20050:5500175"] = {
+      coordinateKind = "raw-server",
       x = 730.171020507812,
       y = 45.3476982116699,
     },
     ["the-eye:spawn:20050:5500176"] = {
+      coordinateKind = "raw-server",
       x = 727.47900390625,
       y = -46.9449996948242,
     },
     ["the-eye:spawn:20052:5500177"] = {
+      coordinateKind = "raw-server",
       x = 431.170013427734,
       y = 322.653015136719,
     },
     ["the-eye:spawn:20052:5500178"] = {
+      coordinateKind = "raw-server",
       x = 482.046997070312,
       y = 376.739013671875,
     },
     ["the-eye:spawn:20052:5500179"] = {
+      coordinateKind = "raw-server",
       x = 470.092010498047,
       y = 339.954010009766,
     },
     ["the-eye:spawn:20052:5500180"] = {
+      coordinateKind = "raw-server",
       x = 462.453002929688,
       y = 334.368988037109,
     },
     ["the-eye:spawn:20052:5500181"] = {
+      coordinateKind = "raw-server",
       x = 422.161010742188,
       y = 329,
     },
     ["the-eye:spawn:20052:5500182"] = {
+      coordinateKind = "raw-server",
       x = 388.123992919922,
       y = 357.657989501953,
     },
     ["the-eye:spawn:20052:5500183"] = {
+      coordinateKind = "raw-server",
       x = 394.039001464844,
       y = 344.667999267578,
     },
     ["the-eye:spawn:20052:5500184"] = {
+      coordinateKind = "raw-server",
       x = 474.989013671875,
       y = 391.686004638672,
     },
     ["the-eye:spawn:20060:5500185"] = {
+      coordinateKind = "raw-server",
       x = 785.825012207031,
       y = -22.1231002807617,
     },
     ["the-eye:spawn:20062:5500186"] = {
+      coordinateKind = "raw-server",
       x = 791.127990722656,
       y = -12.6735000610352,
     },
     ["the-eye:spawn:20063:5500187"] = {
+      coordinateKind = "raw-server",
       x = 791.906005859375,
       y = 11.9182996749878,
     },
     ["the-eye:spawn:20064:5500188"] = {
+      coordinateKind = "raw-server",
       x = 786.280029296875,
       y = 20.2824993133545,
     },

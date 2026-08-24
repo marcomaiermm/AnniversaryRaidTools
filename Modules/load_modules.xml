@@ -4,6 +4,7 @@
 	<Script file='..\Core\EnemyInfoRepository.lua'/>
 	<Script file='..\Core\MarkResolver.lua'/>
 	<Script file='..\Core\SpawnMatcher.lua'/>
+	<Script file='..\Core\PullProgress.lua'/>
 	<Script file='MainFrame.lua'/>
 	<Script file='MapView.lua'/>
 	<Script file='Presets.lua'/>

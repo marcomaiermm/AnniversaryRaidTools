@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 local _, MDT = ...
 local L = MDT.L
 

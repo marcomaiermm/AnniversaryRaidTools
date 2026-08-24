@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Raid selection boundary; central registration belongs to ART-070.
 
 local _, addon = ...
@@ -29,4 +28,3 @@ function RaidSelect:Select(raidKey)
   if self.planner and self.planner.Create then return self.planner:Create(raidKey) end
   return raid
 end
-

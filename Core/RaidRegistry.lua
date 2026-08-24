@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Validated, stable-keyed raid definition registry.
 
 local _, addon = ...

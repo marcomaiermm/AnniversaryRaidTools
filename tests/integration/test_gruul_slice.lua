@@ -12,8 +12,11 @@ end
 local loader = read("/Modules/load_modules.xml")
 local spawnMatcherPosition = assert(loader:find("<Script file='..\\Core\\SpawnMatcher.lua'/>", 1, true),
   "SpawnMatcher.lua must be loaded by the addon")
+local pullProgressPosition = assert(loader:find("<Script file='..\\Core\\PullProgress.lua'/>", 1, true),
+  "PullProgress.lua must be loaded by the addon")
 local liveMarksPosition = assert(loader:find("<Script file='LiveMarks.lua'/>", 1, true))
-assert(spawnMatcherPosition < liveMarksPosition, "SpawnMatcher.lua must load before LiveMarks.lua")
+assert(spawnMatcherPosition < liveMarksPosition and pullProgressPosition < liveMarksPosition,
+  "marking core must load before LiveMarks.lua")
 local adapterPosition = assert(loader:find("<Script file='EnemyInfo.lua'/>", 1, true))
 local uiPosition = assert(loader:find("<Script file='EnemyInfoUI.lua'/>", 1, true))
 assert(adapterPosition < uiPosition, "EnemyInfoUI.lua must replace the fallback frame after raid data publication")

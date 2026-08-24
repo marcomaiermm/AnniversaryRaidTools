@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Feature boundary for the pure raid mark resolver.
 
 local _, addon = ...

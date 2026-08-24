@@ -342,17 +342,20 @@ function MDT:SetSelectionToPull(pull, ignoreHulls)
   if type(pull) == "number" and pull > 0 then
     MDT:GetCurrentPreset().value.currentPull = pull
     MDT:GetCurrentPreset().value.selection = { pull }
-    MDT:PickPullButton(pull)
-
-    MDT:DungeonEnemies_UpdateSelected(pull, nil, ignoreHulls)
+    if MDT.main_frame and MDT.main_frame.sidePanel then
+      MDT:PickPullButton(pull)
+      MDT:DungeonEnemies_UpdateSelected(pull, nil, ignoreHulls)
+    end
   elseif type(pull) == "table" then
     MDT:GetCurrentPreset().value.currentPull = pull[#pull]
     MDT:GetCurrentPreset().value.selection = pull
 
-    MDT:ClearPullButtonPicks()
-    for _, pullIdx in ipairs(MDT:GetSelection()) do
-      MDT:PickPullButton(pullIdx, true)
-      MDT:DungeonEnemies_UpdateSelected(pullIdx, nil, ignoreHulls)
+    if MDT.main_frame and MDT.main_frame.sidePanel then
+      MDT:ClearPullButtonPicks()
+      for _, pullIdx in ipairs(MDT:GetSelection()) do
+        MDT:PickPullButton(pullIdx, true)
+        MDT:DungeonEnemies_UpdateSelected(pullIdx, nil, ignoreHulls)
+      end
     end
   end
   MDT:PullClickAreaOnLeave()

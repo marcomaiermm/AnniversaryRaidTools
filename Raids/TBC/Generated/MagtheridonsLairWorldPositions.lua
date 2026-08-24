@@ -1,58 +1,79 @@
 -- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.
 -- Generator: art-030-generator-v2
--- Integration-private C_Map projection inputs; raid schema v1 is unchanged.
+-- Integration-private world-position matching inputs; raid schema v1 is unchanged.
 local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools requires Core/Bootstrap.lua")
 ART.MapWorldPositions = ART.MapWorldPositions or {}
 ART.MapWorldPositions["magtheridons-lair"] = {
+    _meta = {
+      provenance = {
+        confidence = "candidate",
+        observedAt = "2026-08-21T21:30:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/outland/hellfire_citadel/magtheridons_lair/magtheridons_lair.cpp | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/outland/hellfire_citadel/magtheridons_lair/boss_magtheridon.cpp",
+      },
+    },
     ["magtheridons-lair:spawn:17256:guid-5440003"] = {
+      coordinateKind = "derived-affine",
       x = -55.6890026338577,
       y = 2.17024800000002,
     },
     ["magtheridons-lair:spawn:17256:guid-5440004"] = {
+      coordinateKind = "derived-affine",
       x = -31.9478008420944,
       y = 40.220108,
     },
     ["magtheridons-lair:spawn:17256:guid-5440005"] = {
+      coordinateKind = "derived-affine",
       x = 10.4775970264435,
       y = 23.99158,
     },
     ["magtheridons-lair:spawn:17256:guid-5440006"] = {
+      coordinateKind = "derived-affine",
       x = 10.3367436824798,
       y = -19.793976,
     },
     ["magtheridons-lair:spawn:17256:guid-5440007"] = {
+      coordinateKind = "derived-affine",
       x = -31.7643208282471,
       y = -35.8373559999999,
     },
     ["magtheridons-lair:spawn:17257:guid-5440008"] = {
+      coordinateKind = "derived-affine",
       x = -18.701285175705,
       y = 2.24030399999998,
     },
     ["magtheridons-lair:spawn:18829:guid-5440028"] = {
+      coordinateKind = "derived-affine",
       x = 2.00156172008516,
       y = -64.400744,
     },
     ["magtheridons-lair:spawn:18829:guid-5440029"] = {
+      coordinateKind = "derived-affine",
       x = 2.69767377262113,
       y = -60.935752,
     },
     ["magtheridons-lair:spawn:18829:guid-5440030"] = {
+      coordinateKind = "derived-affine",
       x = 5.55069532127382,
       y = -64.083824,
     },
     ["magtheridons-lair:spawn:18829:guid-5440031"] = {
+      coordinateKind = "derived-affine",
       x = 34.5865001792908,
       y = -3.04503200000005,
     },
     ["magtheridons-lair:spawn:18829:guid-5440032"] = {
+      coordinateKind = "derived-affine",
       x = 36.449470986557,
       y = 2.02958000000001,
     },
     ["magtheridons-lair:spawn:18829:guid-5440033"] = {
+      coordinateKind = "derived-affine",
       x = 34.3107241584778,
       y = 6.95685199999997,
     },
     ["magtheridons-lair:spawn:18829:guid-5440034"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = -49.6812368471146,
@@ -199,10 +220,12 @@ ART.MapWorldPositions["magtheridons-lair"] = {
           y = 56.22846,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = -53.9372318349838,
       y = 58.845552,
     },
     ["magtheridons-lair:spawn:18829:guid-5440035"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = -55.2338239328384,
@@ -321,10 +344,12 @@ ART.MapWorldPositions["magtheridons-lair"] = {
           y = 63.269088,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = -54.8379519029617,
       y = 60.283924,
     },
     ["magtheridons-lair:spawn:18829:guid-5440036"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = -52.1383863658905,
@@ -467,18 +492,22 @@ ART.MapWorldPositions["magtheridons-lair"] = {
           y = 53.9016,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = -53.5154131364822,
       y = 57.126956,
     },
     ["magtheridons-lair:spawn:18829:guid-5440037"] = {
+      coordinateKind = "derived-affine",
       x = -0.181294444656373,
       y = 67.185552,
     },
     ["magtheridons-lair:spawn:18829:guid-5440038"] = {
+      coordinateKind = "derived-affine",
       x = 6.12522869796751,
       y = 69.067612,
     },
     ["magtheridons-lair:spawn:18829:guid-5440039"] = {
+      coordinateKind = "derived-affine",
       x = -8.90752976989745,
       y = 68.37706,
     },

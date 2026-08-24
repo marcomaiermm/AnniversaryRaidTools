@@ -94,6 +94,46 @@ end
 
 do
   local dependencies, units = fixture()
+  dependencies.profile.npcDefaults = {}
+  dependencies.routeSteps[1].marks = { s1 = 8, s2 = 7 }
+  units.poolA = { guid = "pool-a", npcId = 100, packKey = "p",
+    candidateSpawnKeys = { "s1", "s2" } }
+  units.poolB = { guid = "pool-b", npcId = 100, packKey = "p",
+    candidateSpawnKeys = { "s1", "s2" } }
+  local resolver = resolverWith(dependencies)
+  equal(resolver:ResolveUnit("poolA"), 8, "ambiguous clone uses first planned pool marker")
+  equal(resolver:ResolveUnit("poolB"), 7, "ambiguous clone uses second planned pool marker")
+  assert(resolver.assignments["pool-a"].spawnKey == nil, "pool assignment has no fake spawn identity")
+
+  resolver:ResetActivePack()
+  dependencies.routeSteps[1].marks = {}
+  dependencies.getSpawnMarker = function(spawnKey)
+    return ({ s1 = 6, s2 = 5 })[spawnKey]
+  end
+  units.presetPool = { guid = "preset-pool", npcId = 100, packKey = "p",
+    candidateSpawnKeys = { "s1", "s2" } }
+  equal(resolver:ResolveUnit("presetPool"), 6, "preset pool markers survive without active-step marks")
+end
+
+do
+  local dependencies, units = fixture()
+  local matchCalls, legacyCalls = 0, 0
+  dependencies.getMatchForUnit = function()
+    matchCalls = matchCalls + 1
+    return { kind = "packPool", packKey = "p", candidateSpawnKeys = { "s1", "s2" } }
+  end
+  dependencies.getSpawnKeyForGuid = function()
+    legacyCalls = legacyCalls + 1
+    return "s1"
+  end
+  units.pool = { guid = "pool", npcId = 100 }
+  local resolver = resolverWith(dependencies)
+  equal(resolver:ResolveUnit("pool"), 8, "canonical match resolves planned pool marker")
+  assert(matchCalls == 1 and legacyCalls == 0, "canonical match does not invoke legacy spawn resolution")
+end
+
+do
+  local dependencies, units = fixture()
   dependencies.routeSteps[1].marks = {}
   local resolver = resolverWith(dependencies)
   local beforeAssignments, beforeMarkers = resolver.assignments, resolver.usedMarkers

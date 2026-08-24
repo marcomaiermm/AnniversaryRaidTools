@@ -73,14 +73,23 @@ def render_world_positions(snapshot: dict[str, Any], raid: dict[str, Any]) -> st
         patrol = spawn.get("patrol")
         world_patrol = [_world_position(point, bounds) for point in patrol or []]
         if world_patrol and all(point is not None for point in world_patrol):
-            position["patrol"] = world_patrol
+            position["patrolCoordinateKind"] = (
+                "raw-server"
+                if all(point["coordinateKind"] == "raw-server" for point in world_patrol)
+                else "derived-affine"
+            )
+            position["patrol"] = [
+                {key: value for key, value in point.items() if key != "coordinateKind"}
+                for point in world_patrol
+            ]
         positions[key] = position
     if not positions:
         return ""
+    positions["_meta"] = {"provenance": snapshot.get("source", {})}
     return (
         "-- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.\n"
         f"-- Generator: {GENERATOR_VERSION}\n"
-        "-- Integration-private C_Map projection inputs; raid schema v1 is unchanged.\n"
+        "-- Integration-private world-position matching inputs; raid schema v1 is unchanged.\n"
         "local ART = assert(rawget(_G, \"ART\"), \"AnniversaryRaidTools requires Core/Bootstrap.lua\")\n"
         "ART.MapWorldPositions = ART.MapWorldPositions or {}\n"
         f"ART.MapWorldPositions[{_lua_string(raid['key'])}] = {_lua_value(positions, 1)}\n"
@@ -90,13 +99,18 @@ def render_world_positions(snapshot: dict[str, Any], raid: dict[str, Any]) -> st
 
 def _world_position(point: dict[str, Any], bounds: Any) -> dict[str, Any] | None:
     if "worldX" in point and "worldY" in point:
-        return {"x": point["worldX"], "y": point["worldY"]}
+        return {
+            "coordinateKind": "raw-server",
+            "x": point["worldX"],
+            "y": point["worldY"],
+        }
     if not isinstance(bounds, dict) or "x" not in point or "y" not in point:
         return None
     left_y, right_y = bounds["leftY"], bounds["rightY"]
     margin = bounds.get("eastMarginYards", 0)
     right_y += margin if right_y >= left_y else -margin
     return {
+        "coordinateKind": "derived-affine",
         "x": bounds["topX"] + point["y"] * (bounds["bottomX"] - bounds["topX"]),
         "y": left_y + point["x"] * (right_y - left_y),
     }
@@ -107,12 +121,17 @@ def generate(source_path: str | Path = DEFAULT_SOURCE, output_path: str | Path =
 
     raid = build_raid(load_snapshot(source_path))
     rendered = render_lua(raid)
-    output = Path(output_path)
+    _write_atomic(Path(output_path), rendered)
+    return rendered
+
+
+def _write_atomic(output: Path, rendered: str) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_name(output.name + ".tmp")
     temporary.write_text(rendered, encoding="utf-8", newline="\n")
+    if output.exists():
+        os.chmod(temporary, output.stat().st_mode)
     os.replace(temporary, output)
-    return rendered
 
 
 def _first_provenance(raid: dict[str, Any]) -> dict[str, Any]:
@@ -236,15 +255,9 @@ def main(argv: list[str] | None = None) -> int:
                 return 1
         print(f"deterministic: {args.output}")
         return 0
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    temporary = args.output.with_name(args.output.name + ".tmp")
-    temporary.write_text(rendered, encoding="utf-8", newline="\n")
-    os.replace(temporary, args.output)
+    _write_atomic(args.output, rendered)
     if world_output:
-        world_output.parent.mkdir(parents=True, exist_ok=True)
-        temporary_world = world_output.with_name(world_output.name + ".tmp")
-        temporary_world.write_text(world_rendered, encoding="utf-8", newline="\n")
-        os.replace(temporary_world, world_output)
+        _write_atomic(world_output, world_rendered)
     print(f"generated: {args.output}")
     return 0
 

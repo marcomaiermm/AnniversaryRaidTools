@@ -1,25 +1,37 @@
 -- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.
 -- Generator: art-030-generator-v2
--- Integration-private C_Map projection inputs; raid schema v1 is unchanged.
+-- Integration-private world-position matching inputs; raid schema v1 is unchanged.
 local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools requires Core/Bootstrap.lua")
 ART.MapWorldPositions = ART.MapWorldPositions or {}
 ART.MapWorldPositions["black-temple"] = {
+    _meta = {
+      provenance = {
+        confidence = "candidate",
+        observedAt = "2026-08-21T20:50:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz#creature-map-564",
+      },
+    },
     ["black-temple:spawn:22841:cmangos-5640045"] = {
+      coordinateKind = "raw-server",
       x = 449.595191,
       y = 401.194283,
       z = 118.621002197266,
     },
     ["black-temple:spawn:22844:cmangos-5640046"] = {
+      coordinateKind = "raw-server",
       x = 484.263883,
       y = 425.28299,
       z = 112.866996765137,
     },
     ["black-temple:spawn:22844:cmangos-5640047"] = {
+      coordinateKind = "raw-server",
       x = 487.357879,
       y = 418.407894,
       z = 112.866996765137,
     },
     ["black-temple:spawn:22844:cmangos-5640048"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 507.028163,
@@ -54,16 +66,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 422.154892,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 514.895859,
       y = 433.657288,
       z = 112.783996582031,
     },
     ["black-temple:spawn:22844:cmangos-5640049"] = {
+      coordinateKind = "raw-server",
       x = 490.488181,
       y = 381.113304,
       z = 112.866996765137,
     },
     ["black-temple:spawn:22844:cmangos-5640050"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 527.702931,
@@ -98,11 +113,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 368.707758,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 518.02491,
       y = 368.707758,
       z = 112.783996582031,
     },
     ["black-temple:spawn:22844:cmangos-5640051"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 683.486117,
@@ -161,66 +178,79 @@ ART.MapWorldPositions["black-temple"] = {
           y = 258.429226,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 693.82002,
       y = 260.584134,
       z = 125.158996582031,
     },
     ["black-temple:spawn:22844:cmangos-5640052"] = {
+      coordinateKind = "raw-server",
       x = 774.835797,
       y = 381.817887,
       z = 112.843002319336,
     },
     ["black-temple:spawn:22844:cmangos-5640053"] = {
+      coordinateKind = "raw-server",
       x = 763.970789,
       y = 378.018829,
       z = 112.847999572754,
     },
     ["black-temple:spawn:22844:cmangos-5640054"] = {
+      coordinateKind = "raw-server",
       x = 715.509741,
       y = 365.430201,
       z = 125.125,
     },
     ["black-temple:spawn:22844:cmangos-5640055"] = {
+      coordinateKind = "raw-server",
       x = 652.665787,
       y = 387.172912,
       z = 112.769996643066,
     },
     ["black-temple:spawn:22844:cmangos-5640056"] = {
+      coordinateKind = "raw-server",
       x = 649.648115,
       y = 381.493117,
       z = 112.772003173828,
     },
     ["black-temple:spawn:22845:cmangos-5640057"] = {
+      coordinateKind = "raw-server",
       x = 490.26116,
       y = 428.239059,
       z = 112.866996765137,
     },
     ["black-temple:spawn:22845:cmangos-5640058"] = {
+      coordinateKind = "raw-server",
       x = 506.756072,
       y = 437.159011,
       z = 112.783996582031,
     },
     ["black-temple:spawn:22845:cmangos-5640059"] = {
+      coordinateKind = "raw-server",
       x = 485.418185,
       y = 382.656858,
       z = 112.866996765137,
     },
     ["black-temple:spawn:22845:cmangos-5640060"] = {
+      coordinateKind = "raw-server",
       x = 510.501918,
       y = 365.451982,
       z = 112.783996582031,
     },
     ["black-temple:spawn:22845:cmangos-5640061"] = {
+      coordinateKind = "raw-server",
       x = 695.913103,
       y = 262.71308,
       z = 125.189002990723,
     },
     ["black-temple:spawn:22845:cmangos-5640062"] = {
+      coordinateKind = "raw-server",
       x = 773.614085,
       y = 386.990138,
       z = 112.839996337891,
     },
     ["black-temple:spawn:22845:cmangos-5640063"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 725.451889,
@@ -311,51 +341,61 @@ ART.MapWorldPositions["black-temple"] = {
           y = 362.418051,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 716.349213,
       y = 362.420883,
       z = 125.139999389648,
     },
     ["black-temple:spawn:22845:cmangos-5640064"] = {
+      coordinateKind = "raw-server",
       x = 650.207053,
       y = 390.664871,
       z = 112.772003173828,
     },
     ["black-temple:spawn:22846:cmangos-5640065"] = {
+      coordinateKind = "raw-server",
       x = 492.818068,
       y = 421.65695,
       z = 112.866996765137,
     },
     ["black-temple:spawn:22846:cmangos-5640066"] = {
+      coordinateKind = "raw-server",
       x = 487.839881,
       y = 372.384869,
       z = 112.866996765137,
     },
     ["black-temple:spawn:22846:cmangos-5640067"] = {
+      coordinateKind = "raw-server",
       x = 482.936812,
       y = 375.850304,
       z = 112.866996765137,
     },
     ["black-temple:spawn:22846:cmangos-5640068"] = {
+      coordinateKind = "raw-server",
       x = 759.488007,
       y = 386.17302,
       z = 112.84700012207,
     },
     ["black-temple:spawn:22846:cmangos-5640069"] = {
+      coordinateKind = "raw-server",
       x = 715.448739,
       y = 359.429975,
       z = 125.15299987793,
     },
     ["black-temple:spawn:22846:cmangos-5640070"] = {
+      coordinateKind = "raw-server",
       x = 643.650043,
       y = 390.282141,
       z = 112.776000976562,
     },
     ["black-temple:spawn:22847:cmangos-5640071"] = {
+      coordinateKind = "raw-server",
       x = 516.830128,
       y = 434.04704,
       z = 112.783996582031,
     },
     ["black-temple:spawn:22847:cmangos-5640072"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 485.487042,
@@ -366,101 +406,121 @@ ART.MapWorldPositions["black-temple"] = {
           y = 401.098861,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 489.057198,
       y = 401.096845,
       z = 112.783996582031,
     },
     ["black-temple:spawn:22847:cmangos-5640073"] = {
+      coordinateKind = "raw-server",
       x = 499.119987,
       y = 407.097686,
       z = 112.783996582031,
     },
     ["black-temple:spawn:22847:cmangos-5640074"] = {
+      coordinateKind = "raw-server",
       x = 515.796849,
       y = 362.63031,
       z = 112.783996582031,
     },
     ["black-temple:spawn:22847:cmangos-5640075"] = {
+      coordinateKind = "raw-server",
       x = 691.420248,
       y = 258.182816,
       z = 125.153999328613,
     },
     ["black-temple:spawn:22847:cmangos-5640076"] = {
+      coordinateKind = "raw-server",
       x = 766.615126,
       y = 390.169866,
       z = 112.841003417969,
     },
     ["black-temple:spawn:22847:cmangos-5640077"] = {
+      coordinateKind = "raw-server",
       x = 641.51887,
       y = 383.699178,
       z = 112.773002624512,
     },
     ["black-temple:spawn:22848:cmangos-5640078"] = {
+      coordinateKind = "raw-server",
       x = 761.577733,
       y = 388.832077,
       z = 112.84400177002,
     },
     ["black-temple:spawn:22848:cmangos-5640079"] = {
+      coordinateKind = "raw-server",
       x = 646.239917,
       y = 391.719911,
       z = 112.775001525879,
     },
     ["black-temple:spawn:22849:cmangos-5640080"] = {
+      coordinateKind = "raw-server",
       x = 509.035045,
       y = 427.17396,
       z = 112.783996582031,
     },
     ["black-temple:spawn:22849:cmangos-5640081"] = {
+      coordinateKind = "raw-server",
       x = 510.299101,
       y = 371.44812,
       z = 112.783996582031,
     },
     ["black-temple:spawn:22849:cmangos-5640082"] = {
+      coordinateKind = "raw-server",
       x = 769.798964,
       y = 390.313842,
       z = 112.838996887207,
     },
     ["black-temple:spawn:22849:cmangos-5640083"] = {
+      coordinateKind = "raw-server",
       x = 640.785756,
       y = 387.04088,
       z = 112.775001525879,
     },
     ["black-temple:spawn:22853:cmangos-5640084"] = {
+      coordinateKind = "raw-server",
       x = 592.09802,
       y = 391.193777,
       z = 112.827003479004,
     },
     ["black-temple:spawn:22853:cmangos-5640085"] = {
+      coordinateKind = "raw-server",
       x = 708.325267,
       y = 383.917881,
       z = 119.955001831055,
     },
     ["black-temple:spawn:22853:cmangos-5640086"] = {
+      coordinateKind = "raw-server",
       x = 618.925784,
       y = 379.410978,
       z = 112.708000183105,
     },
     ["black-temple:spawn:22853:cmangos-5640087"] = {
+      coordinateKind = "raw-server",
       x = 813.051926,
       y = 402.21186,
       z = 112.833000183105,
     },
     ["black-temple:spawn:22853:cmangos-5640088"] = {
+      coordinateKind = "raw-server",
       x = 684.198016,
       y = 433.725831,
       z = 112.817001342773,
     },
     ["black-temple:spawn:22853:cmangos-5640089"] = {
+      coordinateKind = "raw-server",
       x = 801.741998,
       y = 372.737062,
       z = 112.747001647949,
     },
     ["black-temple:spawn:22853:cmangos-5640090"] = {
+      coordinateKind = "raw-server",
       x = 726.986047,
       y = 434.524151,
       z = 112.819000244141,
     },
     ["black-temple:spawn:22855:cmangos-5640091"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 608.465764,
@@ -527,11 +587,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 387.487196,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 616.50229,
       y = 383.795974,
       z = 112.710998535156,
     },
     ["black-temple:spawn:22855:cmangos-5640092"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 788.868973,
@@ -614,181 +676,217 @@ ART.MapWorldPositions["black-temple"] = {
           y = 376.321809,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 797.328054,
       y = 378.022133,
       z = 112.746002197266,
     },
     ["black-temple:spawn:22856:cmangos-5640093"] = {
+      coordinateKind = "raw-server",
       x = 497.771935,
       y = 184.165859,
       z = 94.6048965454102,
     },
     ["black-temple:spawn:22869:cmangos-5640094"] = {
+      coordinateKind = "raw-server",
       x = 596.956046,
       y = 380.583064,
       z = 112.820999145508,
     },
     ["black-temple:spawn:22869:cmangos-5640095"] = {
+      coordinateKind = "raw-server",
       x = 594.689982,
       y = 418.31516,
       z = 112.830001831055,
     },
     ["black-temple:spawn:22869:cmangos-5640096"] = {
+      coordinateKind = "raw-server",
       x = 721.226111,
       y = 385.95911,
       z = 118.671997070312,
     },
     ["black-temple:spawn:22869:cmangos-5640097"] = {
+      coordinateKind = "raw-server",
       x = 686.316245,
       y = 386.185913,
       z = 118.639999389648,
     },
     ["black-temple:spawn:22869:cmangos-5640098"] = {
+      coordinateKind = "raw-server",
       x = 612.127291,
       y = 381.354195,
       z = 112.713996887207,
     },
     ["black-temple:spawn:22869:cmangos-5640099"] = {
+      coordinateKind = "raw-server",
       x = 811.320935,
       y = 414.857134,
       z = 112.83699798584,
     },
     ["black-temple:spawn:22869:cmangos-5640100"] = {
+      coordinateKind = "raw-server",
       x = 811.060139,
       y = 372.54305,
       z = 112.828002929688,
     },
     ["black-temple:spawn:22869:cmangos-5640101"] = {
+      coordinateKind = "raw-server",
       x = 680.188007,
       y = 434.772114,
       z = 112.818000793457,
     },
     ["black-temple:spawn:22869:cmangos-5640102"] = {
+      coordinateKind = "raw-server",
       x = 794.673083,
       y = 372.557211,
       z = 112.750999450684,
     },
     ["black-temple:spawn:22869:cmangos-5640103"] = {
+      coordinateKind = "raw-server",
       x = 735.955046,
       y = 438.711972,
       z = 112.811996459961,
     },
     ["black-temple:spawn:22869:cmangos-5640104"] = {
+      coordinateKind = "raw-server",
       x = 714.325036,
       y = 435.044268,
       z = 112.819000244141,
     },
     ["black-temple:spawn:22871:cmangos-5640105"] = {
+      coordinateKind = "raw-server",
       x = 606.640778,
       y = 402.173108,
       z = 187.173004150391,
     },
     ["black-temple:spawn:22873:cmangos-5640106"] = {
+      coordinateKind = "raw-server",
       x = 306.629883,
       y = 990.98699,
       z = -62.4404983520508,
     },
     ["black-temple:spawn:22873:cmangos-5640107"] = {
+      coordinateKind = "raw-server",
       x = 306.891191,
       y = 995.664109,
       z = -62.5447998046875,
     },
     ["black-temple:spawn:22873:cmangos-5640108"] = {
+      coordinateKind = "raw-server",
       x = 454.179278,
       y = 802.71498,
       z = 12.180700302124,
     },
     ["black-temple:spawn:22873:cmangos-5640109"] = {
+      coordinateKind = "raw-server",
       x = 455.114346,
       y = 795.944993,
       z = 12.1438999176025,
     },
     ["black-temple:spawn:22874:cmangos-5640110"] = {
+      coordinateKind = "raw-server",
       x = 297.535803,
       y = 986.781079,
       z = -62.3347015380859,
     },
     ["black-temple:spawn:22874:cmangos-5640111"] = {
+      coordinateKind = "raw-server",
       x = 296.037812,
       y = 999.840878,
       z = -62.4266014099121,
     },
     ["black-temple:spawn:22874:cmangos-5640112"] = {
+      coordinateKind = "raw-server",
       x = 442.347838,
       y = 790.156877,
       z = 12.1117000579834,
     },
     ["black-temple:spawn:22875:cmangos-5640113"] = {
+      coordinateKind = "raw-server",
       x = 308.557118,
       y = 820.507045,
       z = -17.8754997253418,
     },
     ["black-temple:spawn:22875:cmangos-5640114"] = {
+      coordinateKind = "raw-server",
       x = 308.101675,
       y = 805.830968,
       z = -17.7259998321533,
     },
     ["black-temple:spawn:22875:cmangos-5640115"] = {
+      coordinateKind = "raw-server",
       x = 262.421692,
       y = 938.350112,
       z = -51.0914993286133,
     },
     ["black-temple:spawn:22875:cmangos-5640116"] = {
+      coordinateKind = "raw-server",
       x = 242.753679,
       y = 939.219898,
       z = -50.9249000549316,
     },
     ["black-temple:spawn:22876:cmangos-5640117"] = {
+      coordinateKind = "raw-server",
       x = 451.222929,
       y = 808.208085,
       z = 12.210599899292,
     },
     ["black-temple:spawn:22876:cmangos-5640118"] = {
+      coordinateKind = "raw-server",
       x = 449.290991,
       y = 790.747794,
       z = 12.1153001785278,
     },
     ["black-temple:spawn:22877:cmangos-5640119"] = {
+      coordinateKind = "raw-server",
       x = 257.513925,
       y = 1079.880065,
       z = -62.4984016418457,
     },
     ["black-temple:spawn:22877:cmangos-5640120"] = {
+      coordinateKind = "raw-server",
       x = 236.953164,
       y = 1077.159964,
       z = -62.5327987670898,
     },
     ["black-temple:spawn:22877:cmangos-5640121"] = {
+      coordinateKind = "raw-server",
       x = 448.300168,
       y = 850.005809,
       z = 12.4384002685547,
     },
     ["black-temple:spawn:22877:cmangos-5640122"] = {
+      coordinateKind = "raw-server",
       x = 422.530026,
       y = 848.089141,
       z = 12.4267997741699,
     },
     ["black-temple:spawn:22877:cmangos-5640123"] = {
+      coordinateKind = "raw-server",
       x = 253.609073,
       y = 1051.299957,
       z = -62.5467987060547,
     },
     ["black-temple:spawn:22877:cmangos-5640124"] = {
+      coordinateKind = "raw-server",
       x = 248.092706,
       y = 1057.089866,
       z = -62.5474014282227,
     },
     ["black-temple:spawn:22877:cmangos-5640125"] = {
+      coordinateKind = "raw-server",
       x = 281.542905,
       y = 818.084197,
       z = -26.2712001800537,
     },
     ["black-temple:spawn:22877:cmangos-5640126"] = {
+      coordinateKind = "raw-server",
       x = 265.161739,
       y = 815.20897,
       z = -26.797399520874,
     },
     ["black-temple:spawn:22878:cmangos-5640127"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 381.808862,
@@ -807,21 +905,25 @@ ART.MapWorldPositions["black-temple"] = {
           y = 812.852924,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 307.656308,
       y = 813.08696,
       z = -19.6296997070312,
     },
     ["black-temple:spawn:22878:cmangos-5640128"] = {
+      coordinateKind = "raw-server",
       x = 422.918295,
       y = 758.097175,
       z = 11.9359998703003,
     },
     ["black-temple:spawn:22878:cmangos-5640129"] = {
+      coordinateKind = "raw-server",
       x = 450.983788,
       y = 758.185947,
       z = 11.9377002716064,
     },
     ["black-temple:spawn:22878:cmangos-5640130"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 252.334102,
@@ -840,16 +942,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 922.295826,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 252.385154,
       y = 941.332045,
       z = -54.5928001403809,
     },
     ["black-temple:spawn:22879:cmangos-5640131"] = {
+      coordinateKind = "raw-server",
       x = 578.79107,
       y = 117.595961,
       z = 139.393997192383,
     },
     ["black-temple:spawn:22879:cmangos-5640132"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 509.639272,
@@ -888,41 +993,49 @@ ART.MapWorldPositions["black-temple"] = {
           y = 99.680721,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 513.077191,
       y = 93.76924,
       z = 164.77099609375,
     },
     ["black-temple:spawn:22879:cmangos-5640133"] = {
+      coordinateKind = "raw-server",
       x = 430.358895,
       y = 235.501924,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22879:cmangos-5640134"] = {
+      coordinateKind = "raw-server",
       x = 440.056915,
       y = 235.205865,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22879:cmangos-5640135"] = {
+      coordinateKind = "raw-server",
       x = 578.113896,
       y = 103.609121,
       z = 139.389007568359,
     },
     ["black-temple:spawn:22879:cmangos-5640136"] = {
+      coordinateKind = "raw-server",
       x = 505.964063,
       y = 141.51001,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22879:cmangos-5640137"] = {
+      coordinateKind = "raw-server",
       x = 505.479968,
       y = 139.004841,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22880:cmangos-5640138"] = {
+      coordinateKind = "raw-server",
       x = 583.478123,
       y = 120.550993,
       z = 139.399002075195,
     },
     ["black-temple:spawn:22880:cmangos-5640139"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 426.945206,
@@ -957,166 +1070,199 @@ ART.MapWorldPositions["black-temple"] = {
           y = 349.00315,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 436.431206,
       y = 349.312169,
       z = 192.755996704102,
     },
     ["black-temple:spawn:22880:cmangos-5640140"] = {
+      coordinateKind = "raw-server",
       x = 498.104925,
       y = 133.831174,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22880:cmangos-5640141"] = {
+      coordinateKind = "raw-server",
       x = 427.082123,
       y = 232.945933,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22880:cmangos-5640142"] = {
+      coordinateKind = "raw-server",
       x = 443.47407,
       y = 232.75396,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22880:cmangos-5640143"] = {
+      coordinateKind = "raw-server",
       x = 583.417121,
       y = 100.871231,
       z = 139.408996582031,
     },
     ["black-temple:spawn:22880:cmangos-5640144"] = {
+      coordinateKind = "raw-server",
       x = 528.675143,
       y = 147.083032,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22882:cmangos-5640145"] = {
+      coordinateKind = "raw-server",
       x = 525.790157,
       y = 197.840201,
       z = 164.38200378418,
     },
     ["black-temple:spawn:22882:cmangos-5640146"] = {
+      coordinateKind = "raw-server",
       x = 511.223077,
       y = 181.967994,
       z = 164.065002441406,
     },
     ["black-temple:spawn:22882:cmangos-5640147"] = {
+      coordinateKind = "raw-server",
       x = 441.89981,
       y = 358.903919,
       z = 192.832992553711,
     },
     ["black-temple:spawn:22882:cmangos-5640148"] = {
+      coordinateKind = "raw-server",
       x = 429.474999,
       y = 359.037976,
       z = 192.833999633789,
     },
     ["black-temple:spawn:22882:cmangos-5640149"] = {
+      coordinateKind = "raw-server",
       x = 444.051202,
       y = 414.985868,
       z = 192.828002929688,
     },
     ["black-temple:spawn:22882:cmangos-5640150"] = {
+      coordinateKind = "raw-server",
       x = 427.481899,
       y = 430.557122,
       z = 192.826995849609,
     },
     ["black-temple:spawn:22883:cmangos-5640151"] = {
+      coordinateKind = "raw-server",
       x = 434.831687,
       y = 895.913947,
       z = 18.3293991088867,
     },
     ["black-temple:spawn:22883:cmangos-5640152"] = {
+      coordinateKind = "raw-server",
       x = 444.954879,
       y = 899.50204,
       z = 15.795599937439,
     },
     ["black-temple:spawn:22883:cmangos-5640153"] = {
+      coordinateKind = "raw-server",
       x = 431.008788,
       y = 884.391069,
       z = 14.5479001998901,
     },
     ["black-temple:spawn:22883:cmangos-5640154"] = {
+      coordinateKind = "raw-server",
       x = 453.801757,
       y = 893.914783,
       z = 12.4862003326416,
     },
     ["black-temple:spawn:22883:cmangos-5640155"] = {
+      coordinateKind = "raw-server",
       x = 409.343678,
       y = 904.128049,
       z = 23.4477996826172,
     },
     ["black-temple:spawn:22883:cmangos-5640156"] = {
+      coordinateKind = "raw-server",
       x = 410.040949,
       y = 893.458818,
       z = 20.1793994903564,
     },
     ["black-temple:spawn:22883:cmangos-5640157"] = {
+      coordinateKind = "raw-server",
       x = 428.2721,
       y = 899.029934,
       z = 19.989200592041,
     },
     ["black-temple:spawn:22883:cmangos-5640158"] = {
+      coordinateKind = "raw-server",
       x = 443.297013,
       y = 885.281031,
       z = 12.9351997375488,
     },
     ["black-temple:spawn:22883:cmangos-5640159"] = {
+      coordinateKind = "raw-server",
       x = 446.012877,
       y = 912.213028,
       z = 15.890700340271,
     },
     ["black-temple:spawn:22883:cmangos-5640160"] = {
+      coordinateKind = "raw-server",
       x = 417.39924,
       y = 883.341945,
       z = 15.1391000747681,
     },
     ["black-temple:spawn:22883:cmangos-5640161"] = {
+      coordinateKind = "raw-server",
       x = 242.87325,
       y = 733.097987,
       z = -21.0592994689941,
     },
     ["black-temple:spawn:22883:cmangos-5640162"] = {
+      coordinateKind = "raw-server",
       x = 260.75778,
       y = 732.364049,
       z = -20.7576999664307,
     },
     ["black-temple:spawn:22883:cmangos-5640163"] = {
+      coordinateKind = "raw-server",
       x = 257.151183,
       y = 736.539024,
       z = -23.0625,
     },
     ["black-temple:spawn:22883:cmangos-5640164"] = {
+      coordinateKind = "raw-server",
       x = 254.20088,
       y = 725.918214,
       z = -17.1595993041992,
     },
     ["black-temple:spawn:22883:cmangos-5640165"] = {
+      coordinateKind = "raw-server",
       x = 248.959928,
       y = 735.245105,
       z = -22.2936992645264,
     },
     ["black-temple:spawn:22883:cmangos-5640166"] = {
+      coordinateKind = "raw-server",
       x = 240.870779,
       y = 740.207819,
       z = -25.0217990875244,
     },
     ["black-temple:spawn:22883:cmangos-5640167"] = {
+      coordinateKind = "raw-server",
       x = 241.25233,
       y = 723.484157,
       z = -15.6819000244141,
     },
     ["black-temple:spawn:22883:cmangos-5640168"] = {
+      coordinateKind = "raw-server",
       x = 262.664192,
       y = 722.704936,
       z = -15.3865995407104,
     },
     ["black-temple:spawn:22883:cmangos-5640169"] = {
+      coordinateKind = "raw-server",
       x = 262.744801,
       y = 740.508209,
       z = -25.2831001281738,
     },
     ["black-temple:spawn:22883:cmangos-5640170"] = {
+      coordinateKind = "raw-server",
       x = 251.192136,
       y = 741.956807,
       z = -26.048999786377,
     },
     ["black-temple:spawn:22883:cmangos-5640171"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 384.951284,
@@ -1175,21 +1321,25 @@ ART.MapWorldPositions["black-temple"] = {
           y = 835.33018,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 348.611911,
       y = 829.290096,
       z = 1.47172999382019,
     },
     ["black-temple:spawn:22883:cmangos-5640172"] = {
+      coordinateKind = "raw-server",
       x = 347.246926,
       y = 826.956916,
       z = 0.960461020469666,
     },
     ["black-temple:spawn:22883:cmangos-5640173"] = {
+      coordinateKind = "raw-server",
       x = 302.575903,
       y = 795.707819,
       z = -17.7537002563477,
     },
     ["black-temple:spawn:22883:cmangos-5640174"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 277.717319,
@@ -1324,11 +1474,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 794.274016,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 305.727058,
       y = 793.116841,
       z = -16.0914993286133,
     },
     ["black-temple:spawn:22883:cmangos-5640175"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 468.959676,
@@ -1423,16 +1575,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 939.14906,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 471.541863,
       y = 940.3699,
       z = 14.4427995681763,
     },
     ["black-temple:spawn:22883:cmangos-5640176"] = {
+      coordinateKind = "raw-server",
       x = 469.634108,
       y = 936.325841,
       z = 14.4427995681763,
     },
     ["black-temple:spawn:22883:cmangos-5640177"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 284.776684,
@@ -1523,21 +1678,25 @@ ART.MapWorldPositions["black-temple"] = {
           y = 973.555841,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 307.712735,
       y = 972.534066,
       z = -59.6570014953613,
     },
     ["black-temple:spawn:22883:cmangos-5640178"] = {
+      coordinateKind = "raw-server",
       x = 305.223249,
       y = 975.351905,
       z = -59.7490997314453,
     },
     ["black-temple:spawn:22883:cmangos-5640179"] = {
+      coordinateKind = "raw-server",
       x = 224.404973,
       y = 1088.66984,
       z = -60.7743988037109,
     },
     ["black-temple:spawn:22883:cmangos-5640180"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 227.513807,
@@ -1664,516 +1823,619 @@ ART.MapWorldPositions["black-temple"] = {
           y = 1085.779818,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 227.93096,
       y = 1085.869935,
       z = -60.7486000061035,
     },
     ["black-temple:spawn:22884:cmangos-5640181"] = {
+      coordinateKind = "raw-server",
       x = 247.985227,
       y = 1078.240024,
       z = -62.5470008850098,
     },
     ["black-temple:spawn:22884:cmangos-5640182"] = {
+      coordinateKind = "raw-server",
       x = 435.850723,
       y = 852.74205,
       z = 12.3240003585815,
     },
     ["black-temple:spawn:22884:cmangos-5640183"] = {
+      coordinateKind = "raw-server",
       x = 259.476092,
       y = 1059.17018,
       z = -62.49169921875,
     },
     ["black-temple:spawn:22884:cmangos-5640184"] = {
+      coordinateKind = "raw-server",
       x = 272.72021,
       y = 808.871185,
       z = -26.652099609375,
     },
     ["black-temple:spawn:22885:cmangos-5640185"] = {
+      coordinateKind = "raw-server",
       x = 302.268244,
       y = 986.682891,
       z = -62.3218002319336,
     },
     ["black-temple:spawn:22885:cmangos-5640186"] = {
+      coordinateKind = "raw-server",
       x = 301.180018,
       y = 998.611968,
       z = -62.4953002929688,
     },
     ["black-temple:spawn:22885:cmangos-5640187"] = {
+      coordinateKind = "raw-server",
       x = 436.329006,
       y = 793.070214,
       z = 12.1273002624512,
     },
     ["black-temple:spawn:22887:cmangos-5640197"] = {
+      coordinateKind = "raw-server",
       x = 434.943196,
       y = 739.254193,
       z = 15.069899559021,
     },
     ["black-temple:spawn:22898:cmangos-5640198"] = {
+      coordinateKind = "raw-server",
       x = 702.14102,
       y = 650.715038,
       z = 75.0493011474609,
     },
     ["black-temple:spawn:22917:cmangos-5640199"] = {
+      coordinateKind = "raw-server",
       x = 705.731995,
       y = 304.988007,
       z = 353.924987792969,
     },
     ["black-temple:spawn:22939:cmangos-5640200"] = {
+      coordinateKind = "raw-server",
       x = 881.887067,
       y = 339.988889,
       z = 113.825996398926,
     },
     ["black-temple:spawn:22939:cmangos-5640201"] = {
+      coordinateKind = "raw-server",
       x = 883.03704,
       y = 351.770964,
       z = 113.714996337891,
     },
     ["black-temple:spawn:22939:cmangos-5640202"] = {
+      coordinateKind = "raw-server",
       x = 884.568797,
       y = 345.706067,
       z = 112.089996337891,
     },
     ["black-temple:spawn:22939:cmangos-5640203"] = {
+      coordinateKind = "raw-server",
       x = 883.02081,
       y = 348.141845,
       z = 112.102996826172,
     },
     ["black-temple:spawn:22939:cmangos-5640204"] = {
+      coordinateKind = "raw-server",
       x = 888.302063,
       y = 339.254988,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640205"] = {
+      coordinateKind = "raw-server",
       x = 808.484023,
       y = 389.033103,
       z = 193.391998291016,
     },
     ["black-temple:spawn:22939:cmangos-5640206"] = {
+      coordinateKind = "raw-server",
       x = 835.084107,
       y = 413.322105,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22939:cmangos-5640207"] = {
+      coordinateKind = "raw-server",
       x = 848.961859,
       y = 414.603948,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22939:cmangos-5640208"] = {
+      coordinateKind = "raw-server",
       x = 848.135156,
       y = 422.60281,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22939:cmangos-5640209"] = {
+      coordinateKind = "raw-server",
       x = 847.537803,
       y = 428.223884,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22939:cmangos-5640210"] = {
+      coordinateKind = "raw-server",
       x = 841.151796,
       y = 427.398888,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22939:cmangos-5640211"] = {
+      coordinateKind = "raw-server",
       x = 805.923034,
       y = 431.700048,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22939:cmangos-5640212"] = {
+      coordinateKind = "raw-server",
       x = 812.504307,
       y = 436.191966,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22939:cmangos-5640213"] = {
+      coordinateKind = "raw-server",
       x = 821.05095,
       y = 435.742005,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22939:cmangos-5640214"] = {
+      coordinateKind = "raw-server",
       x = 821.190179,
       y = 433.759097,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22939:cmangos-5640215"] = {
+      coordinateKind = "raw-server",
       x = 816.892015,
       y = 435.385195,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22939:cmangos-5640216"] = {
+      coordinateKind = "raw-server",
       x = 965.762993,
       y = 226.072848,
       z = 192.929992675781,
     },
     ["black-temple:spawn:22939:cmangos-5640217"] = {
+      coordinateKind = "raw-server",
       x = 969.379975,
       y = 227.735093,
       z = 192.930999755859,
     },
     ["black-temple:spawn:22939:cmangos-5640218"] = {
+      coordinateKind = "raw-server",
       x = 975.124973,
       y = 250.371737,
       z = 192.910995483398,
     },
     ["black-temple:spawn:22939:cmangos-5640219"] = {
+      coordinateKind = "raw-server",
       x = 966.277066,
       y = 251.600141,
       z = 192.90299987793,
     },
     ["black-temple:spawn:22939:cmangos-5640220"] = {
+      coordinateKind = "raw-server",
       x = 968.851029,
       y = 253.210932,
       z = 192.90299987793,
     },
     ["black-temple:spawn:22939:cmangos-5640221"] = {
+      coordinateKind = "raw-server",
       x = 927.955964,
       y = 261.622898,
       z = 192.925994873047,
     },
     ["black-temple:spawn:22939:cmangos-5640222"] = {
+      coordinateKind = "raw-server",
       x = 923.213924,
       y = 261.158185,
       z = 194.266998291016,
     },
     ["black-temple:spawn:22939:cmangos-5640223"] = {
+      coordinateKind = "raw-server",
       x = 924.893117,
       y = 267.084096,
       z = 192.936004638672,
     },
     ["black-temple:spawn:22939:cmangos-5640224"] = {
+      coordinateKind = "raw-server",
       x = 927.662106,
       y = 256.886936,
       z = 192.921005249023,
     },
     ["black-temple:spawn:22939:cmangos-5640225"] = {
+      coordinateKind = "raw-server",
       x = 930.569988,
       y = 256.526214,
       z = 192.917999267578,
     },
     ["black-temple:spawn:22939:cmangos-5640226"] = {
+      coordinateKind = "raw-server",
       x = 976.600024,
       y = 305.32981,
       z = 194.863006591797,
     },
     ["black-temple:spawn:22939:cmangos-5640227"] = {
+      coordinateKind = "raw-server",
       x = 978.452894,
       y = 328.700898,
       z = 192.932006835938,
     },
     ["black-temple:spawn:22939:cmangos-5640228"] = {
+      coordinateKind = "raw-server",
       x = 969.918036,
       y = 336.365964,
       z = 192.932006835938,
     },
     ["black-temple:spawn:22939:cmangos-5640229"] = {
+      coordinateKind = "raw-server",
       x = 967.067006,
       y = 335.192806,
       z = 192.932006835938,
     },
     ["black-temple:spawn:22939:cmangos-5640230"] = {
+      coordinateKind = "raw-server",
       x = 966.990003,
       y = 306.466138,
       z = 192.925003051758,
     },
     ["black-temple:spawn:22939:cmangos-5640231"] = {
+      coordinateKind = "raw-server",
       x = 930.581982,
       y = 437.734196,
       z = 192.917999267578,
     },
     ["black-temple:spawn:22939:cmangos-5640232"] = {
+      coordinateKind = "raw-server",
       x = 949.986016,
       y = 442.796758,
       z = 192.917999267578,
     },
     ["black-temple:spawn:22939:cmangos-5640233"] = {
+      coordinateKind = "raw-server",
       x = 949.079012,
       y = 440.73317,
       z = 192.917007446289,
     },
     ["black-temple:spawn:22939:cmangos-5640234"] = {
+      coordinateKind = "raw-server",
       x = 959.668003,
       y = 437.644828,
       z = 192.917999267578,
     },
     ["black-temple:spawn:22939:cmangos-5640235"] = {
+      coordinateKind = "raw-server",
       x = 966.214936,
       y = 435.588281,
       z = 192.921005249023,
     },
     ["black-temple:spawn:22939:cmangos-5640236"] = {
+      coordinateKind = "raw-server",
       x = 917.221196,
       y = 547.540992,
       z = 139.397003173828,
     },
     ["black-temple:spawn:22939:cmangos-5640237"] = {
+      coordinateKind = "raw-server",
       x = 920.02309,
       y = 536.543063,
       z = 139.397994995117,
     },
     ["black-temple:spawn:22939:cmangos-5640238"] = {
+      coordinateKind = "raw-server",
       x = 906.720737,
       y = 535.833088,
       z = 139.389999389648,
     },
     ["black-temple:spawn:22939:cmangos-5640239"] = {
+      coordinateKind = "raw-server",
       x = 912.389806,
       y = 532.874116,
       z = 139.397994995117,
     },
     ["black-temple:spawn:22939:cmangos-5640240"] = {
+      coordinateKind = "raw-server",
       x = 909.256884,
       y = 544.807204,
       z = 139.393005371094,
     },
     ["black-temple:spawn:22939:cmangos-5640241"] = {
+      coordinateKind = "raw-server",
       x = 796.971993,
       y = 559.193816,
       z = 166.087997436523,
     },
     ["black-temple:spawn:22939:cmangos-5640242"] = {
+      coordinateKind = "raw-server",
       x = 946.992015,
       y = 349.023182,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640243"] = {
+      coordinateKind = "raw-server",
       x = 942.797871,
       y = 343.069106,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640244"] = {
+      coordinateKind = "raw-server",
       x = 946.75309,
       y = 337.613867,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640245"] = {
+      coordinateKind = "raw-server",
       x = 951.966984,
       y = 337.577036,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640246"] = {
+      coordinateKind = "raw-server",
       x = 953.662009,
       y = 343.626979,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640247"] = {
+      coordinateKind = "raw-server",
       x = 951.131945,
       y = 445.301771,
       z = 113.721000671387,
     },
     ["black-temple:spawn:22939:cmangos-5640248"] = {
+      coordinateKind = "raw-server",
       x = 953.232855,
       y = 439.355819,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640249"] = {
+      coordinateKind = "raw-server",
       x = 949.408134,
       y = 444.175734,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640250"] = {
+      coordinateKind = "raw-server",
       x = 952.636022,
       y = 441.644182,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640251"] = {
+      coordinateKind = "raw-server",
       x = 951.140101,
       y = 430.244074,
       z = 113.193000793457,
     },
     ["black-temple:spawn:22939:cmangos-5640252"] = {
+      coordinateKind = "raw-server",
       x = 911.402001,
       y = 324.034805,
       z = 192.932006835938,
     },
     ["black-temple:spawn:22939:cmangos-5640253"] = {
+      coordinateKind = "raw-server",
       x = 925.721918,
       y = 302.097938,
       z = 192.934997558594,
     },
     ["black-temple:spawn:22939:cmangos-5640254"] = {
+      coordinateKind = "raw-server",
       x = 912.913994,
       y = 318.782132,
       z = 192.923004150391,
     },
     ["black-temple:spawn:22939:cmangos-5640255"] = {
+      coordinateKind = "raw-server",
       x = 930.585101,
       y = 306.726118,
       z = 192.923004150391,
     },
     ["black-temple:spawn:22939:cmangos-5640256"] = {
+      coordinateKind = "raw-server",
       x = 925.844979,
       y = 310.248842,
       z = 192.925994873047,
     },
     ["black-temple:spawn:22939:cmangos-5640257"] = {
+      coordinateKind = "raw-server",
       x = 879.943865,
       y = 440.786837,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640258"] = {
+      coordinateKind = "raw-server",
       x = 884.05504,
       y = 435.323803,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640259"] = {
+      coordinateKind = "raw-server",
       x = 890.202214,
       y = 437.755804,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640260"] = {
+      coordinateKind = "raw-server",
       x = 891.266105,
       y = 440.285992,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640261"] = {
+      coordinateKind = "raw-server",
       x = 886.239906,
       y = 446.69879,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22939:cmangos-5640262"] = {
+      coordinateKind = "raw-server",
       x = 912.207054,
       y = 388.758905,
       z = 120.111000061035,
     },
     ["black-temple:spawn:22939:cmangos-5640263"] = {
+      coordinateKind = "raw-server",
       x = 905.505875,
       y = 399.38124,
       z = 118.324996948242,
     },
     ["black-temple:spawn:22939:cmangos-5640264"] = {
+      coordinateKind = "raw-server",
       x = 901.22993,
       y = 392.638018,
       z = 118.324996948242,
     },
     ["black-temple:spawn:22939:cmangos-5640265"] = {
+      coordinateKind = "raw-server",
       x = 907.017148,
       y = 401.944206,
       z = 118.324996948242,
     },
     ["black-temple:spawn:22939:cmangos-5640266"] = {
+      coordinateKind = "raw-server",
       x = 911.908877,
       y = 395.378095,
       z = 120.237998962402,
     },
     ["black-temple:spawn:22945:cmangos-5640267"] = {
+      coordinateKind = "raw-server",
       x = 533.512181,
       y = 133.889236,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22945:cmangos-5640268"] = {
+      coordinateKind = "raw-server",
       x = 531.759923,
       y = 140.835923,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22945:cmangos-5640269"] = {
+      coordinateKind = "raw-server",
       x = 511.127936,
       y = 197.286014,
       z = 164.065002441406,
     },
     ["black-temple:spawn:22945:cmangos-5640270"] = {
+      coordinateKind = "raw-server",
       x = 526.082853,
       y = 181.522851,
       z = 164.365005493164,
     },
     ["black-temple:spawn:22945:cmangos-5640271"] = {
+      coordinateKind = "raw-server",
       x = 437.977158,
       y = 355.096056,
       z = 192.832992553711,
     },
     ["black-temple:spawn:22945:cmangos-5640272"] = {
+      coordinateKind = "raw-server",
       x = 433.030227,
       y = 355.179892,
       z = 192.832992553711,
     },
     ["black-temple:spawn:22945:cmangos-5640273"] = {
+      coordinateKind = "raw-server",
       x = 444.679173,
       y = 430.647033,
       z = 192.826995849609,
     },
     ["black-temple:spawn:22945:cmangos-5640274"] = {
+      coordinateKind = "raw-server",
       x = 427.303964,
       y = 415.083069,
       z = 192.826995849609,
     },
     ["black-temple:spawn:22945:cmangos-5640275"] = {
+      coordinateKind = "raw-server",
       x = 501.842815,
       y = 99.737367,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22945:cmangos-5640276"] = {
+      coordinateKind = "raw-server",
       x = 506.86006,
       y = 98.476994,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22946:cmangos-5640277"] = {
+      coordinateKind = "raw-server",
       x = 524.426854,
       y = 139.527873,
       z = 164.77099609375,
     },
     ["black-temple:spawn:22946:cmangos-5640278"] = {
+      coordinateKind = "raw-server",
       x = 530.909818,
       y = 151.281916,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22946:cmangos-5640279"] = {
+      coordinateKind = "raw-server",
       x = 506.22318,
       y = 145.792919,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22946:cmangos-5640280"] = {
+      coordinateKind = "raw-server",
       x = 505.688717,
       y = 149.68922,
       z = 164.85400390625,
     },
     ["black-temple:spawn:22946:cmangos-5640281"] = {
+      coordinateKind = "raw-server",
       x = 500.955773,
       y = 104.828898,
       z = 164.77099609375,
     },
     ["black-temple:spawn:22946:cmangos-5640282"] = {
+      coordinateKind = "raw-server",
       x = 519.3598,
       y = 92.075997,
       z = 164.77099609375,
     },
     ["black-temple:spawn:22947:cmangos-5640283"] = {
+      coordinateKind = "raw-server",
       x = 945.313062,
       y = 149.07825,
       z = 197.158004760742,
     },
     ["black-temple:spawn:22948:cmangos-5640284"] = {
+      coordinateKind = "raw-server",
       x = 744.301956,
       y = 277.077087,
       z = 63.8391990661621,
     },
     ["black-temple:spawn:22949:cmangos-5640285"] = {
+      coordinateKind = "raw-server",
       x = 700.739021,
       y = 302.722109,
       z = 277.526000976562,
     },
     ["black-temple:spawn:22950:cmangos-5640286"] = {
+      coordinateKind = "raw-server",
       x = 700.791958,
       y = 307.191912,
       z = 277.526000976562,
     },
     ["black-temple:spawn:22951:cmangos-5640287"] = {
+      coordinateKind = "raw-server",
       x = 697.408914,
       y = 299.377068,
       z = 277.526000976562,
     },
     ["black-temple:spawn:22952:cmangos-5640288"] = {
+      coordinateKind = "raw-server",
       x = 697.494962,
       y = 310.651074,
       z = 277.527008056641,
     },
     ["black-temple:spawn:22953:cmangos-5640289"] = {
+      coordinateKind = "raw-server",
       x = 518.927192,
       y = 189.671849,
       z = 164.065002441406,
     },
     ["black-temple:spawn:22953:cmangos-5640290"] = {
+      coordinateKind = "raw-server",
       x = 435.888736,
       y = 422.648981,
       z = 192.826995849609,
     },
     ["black-temple:spawn:22954:cmangos-5640291"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 612.100906,
@@ -2216,11 +2478,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 715.15117,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 612.100906,
       y = 715.059108,
       z = 77.4802017211914,
     },
     ["black-temple:spawn:22954:cmangos-5640292"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 801.653836,
@@ -2255,11 +2519,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 701.624078,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 801.653836,
       y = 721.713793,
       z = 70.0796966552734,
     },
     ["black-temple:spawn:22954:cmangos-5640293"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 734.445273,
@@ -2302,11 +2568,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 833.737215,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 734.445273,
       y = 863.59286,
       z = 56.5060005187988,
     },
     ["black-temple:spawn:22954:cmangos-5640294"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 680.513098,
@@ -2349,351 +2617,421 @@ ART.MapWorldPositions["black-temple"] = {
           y = 752.594941,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 680.513098,
       y = 736.58889,
       z = 68.9803009033203,
     },
     ["black-temple:spawn:22955:cmangos-5640295"] = {
+      coordinateKind = "raw-server",
       x = 894.872026,
       y = 343.384873,
       z = 113.727996826172,
     },
     ["black-temple:spawn:22955:cmangos-5640296"] = {
+      coordinateKind = "raw-server",
       x = 893.279911,
       y = 342.049769,
       z = 113.727996826172,
     },
     ["black-temple:spawn:22955:cmangos-5640297"] = {
+      coordinateKind = "raw-server",
       x = 880.600892,
       y = 341.703083,
       z = 113.714996337891,
     },
     ["black-temple:spawn:22955:cmangos-5640298"] = {
+      coordinateKind = "raw-server",
       x = 883.915128,
       y = 353.537847,
       z = 113.797996520996,
     },
     ["black-temple:spawn:22955:cmangos-5640299"] = {
+      coordinateKind = "raw-server",
       x = 886.283913,
       y = 339.163995,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640300"] = {
+      coordinateKind = "raw-server",
       x = 832.427218,
       y = 415.579201,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22955:cmangos-5640301"] = {
+      coordinateKind = "raw-server",
       x = 837.475249,
       y = 411.585035,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22955:cmangos-5640302"] = {
+      coordinateKind = "raw-server",
       x = 845.651002,
       y = 411.058933,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22955:cmangos-5640303"] = {
+      coordinateKind = "raw-server",
       x = 848.552262,
       y = 418.432061,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22955:cmangos-5640304"] = {
+      coordinateKind = "raw-server",
       x = 844.371952,
       y = 427.698187,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22955:cmangos-5640305"] = {
+      coordinateKind = "raw-server",
       x = 808.258716,
       y = 421.167875,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22955:cmangos-5640306"] = {
+      coordinateKind = "raw-server",
       x = 806.218244,
       y = 424.75906,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22955:cmangos-5640307"] = {
+      coordinateKind = "raw-server",
       x = 806.020089,
       y = 435.315939,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22955:cmangos-5640308"] = {
+      coordinateKind = "raw-server",
       x = 803.831145,
       y = 438.217805,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22955:cmangos-5640309"] = {
+      coordinateKind = "raw-server",
       x = 810.910983,
       y = 419.657204,
       z = 192.884994506836,
     },
     ["black-temple:spawn:22955:cmangos-5640310"] = {
+      coordinateKind = "raw-server",
       x = 975.159997,
       y = 256.980095,
       z = 194.682998657227,
     },
     ["black-temple:spawn:22955:cmangos-5640311"] = {
+      coordinateKind = "raw-server",
       x = 973.111141,
       y = 246.683818,
       z = 192.917007446289,
     },
     ["black-temple:spawn:22955:cmangos-5640312"] = {
+      coordinateKind = "raw-server",
       x = 974.999993,
       y = 228.629856,
       z = 194.832992553711,
     },
     ["black-temple:spawn:22955:cmangos-5640313"] = {
+      coordinateKind = "raw-server",
       x = 976.969927,
       y = 254.809807,
       z = 194.643005371094,
     },
     ["black-temple:spawn:22955:cmangos-5640314"] = {
+      coordinateKind = "raw-server",
       x = 971.890128,
       y = 236.637771,
       z = 192.927993774414,
     },
     ["black-temple:spawn:22955:cmangos-5640315"] = {
+      coordinateKind = "raw-server",
       x = 931.370963,
       y = 262.831262,
       z = 192.925003051758,
     },
     ["black-temple:spawn:22955:cmangos-5640316"] = {
+      coordinateKind = "raw-server",
       x = 930.54504,
       y = 259.472108,
       z = 192.921997070312,
     },
     ["black-temple:spawn:22955:cmangos-5640317"] = {
+      coordinateKind = "raw-server",
       x = 924.546963,
       y = 262.721854,
       z = 192.930999755859,
     },
     ["black-temple:spawn:22955:cmangos-5640318"] = {
+      coordinateKind = "raw-server",
       x = 921.278054,
       y = 268.105058,
       z = 192.942001342773,
     },
     ["black-temple:spawn:22955:cmangos-5640319"] = {
+      coordinateKind = "raw-server",
       x = 927.949008,
       y = 253.906919,
       z = 192.917007446289,
     },
     ["black-temple:spawn:22955:cmangos-5640320"] = {
+      coordinateKind = "raw-server",
       x = 976.730042,
       y = 337.079825,
       z = 194.723007202148,
     },
     ["black-temple:spawn:22955:cmangos-5640321"] = {
+      coordinateKind = "raw-server",
       x = 970.218132,
       y = 305.897974,
       z = 192.927993774414,
     },
     ["black-temple:spawn:22955:cmangos-5640322"] = {
+      coordinateKind = "raw-server",
       x = 974.804967,
       y = 312.998127,
       z = 192.908004760742,
     },
     ["black-temple:spawn:22955:cmangos-5640323"] = {
+      coordinateKind = "raw-server",
       x = 977.032057,
       y = 331.970142,
       z = 192.932006835938,
     },
     ["black-temple:spawn:22955:cmangos-5640324"] = {
+      coordinateKind = "raw-server",
       x = 974.829915,
       y = 338.249734,
       z = 194.703002929688,
     },
     ["black-temple:spawn:22955:cmangos-5640325"] = {
+      coordinateKind = "raw-server",
       x = 930.931015,
       y = 434.173017,
       z = 192.917007446289,
     },
     ["black-temple:spawn:22955:cmangos-5640326"] = {
+      coordinateKind = "raw-server",
       x = 934.213117,
       y = 437.317146,
       z = 192.917007446289,
     },
     ["black-temple:spawn:22955:cmangos-5640327"] = {
+      coordinateKind = "raw-server",
       x = 945.593007,
       y = 441.430782,
       z = 192.917999267578,
     },
     ["black-temple:spawn:22955:cmangos-5640328"] = {
+      coordinateKind = "raw-server",
       x = 951.763082,
       y = 443.872966,
       z = 194.210998535156,
     },
     ["black-temple:spawn:22955:cmangos-5640329"] = {
+      coordinateKind = "raw-server",
       x = 962.632018,
       y = 434.822966,
       z = 192.919006347656,
     },
     ["black-temple:spawn:22955:cmangos-5640330"] = {
+      coordinateKind = "raw-server",
       x = 909.756026,
       y = 539.333147,
       z = 139.391998291016,
     },
     ["black-temple:spawn:22955:cmangos-5640331"] = {
+      coordinateKind = "raw-server",
       x = 910.570019,
       y = 546.937939,
       z = 139.395004272461,
     },
     ["black-temple:spawn:22955:cmangos-5640332"] = {
+      coordinateKind = "raw-server",
       x = 920.250708,
       y = 543.50592,
       z = 139.397003173828,
     },
     ["black-temple:spawn:22955:cmangos-5640333"] = {
+      coordinateKind = "raw-server",
       x = 915.947923,
       y = 535.893028,
       z = 139.39599609375,
     },
     ["black-temple:spawn:22955:cmangos-5640334"] = {
+      coordinateKind = "raw-server",
       x = 911.909729,
       y = 535.562949,
       z = 139.393005371094,
     },
     ["black-temple:spawn:22955:cmangos-5640335"] = {
+      coordinateKind = "raw-server",
       x = 795.437018,
       y = 557.376961,
       z = 166.13200378418,
     },
     ["black-temple:spawn:22955:cmangos-5640336"] = {
+      coordinateKind = "raw-server",
       x = 951.754926,
       y = 348.346152,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640337"] = {
+      coordinateKind = "raw-server",
       x = 949.263963,
       y = 348.149,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640338"] = {
+      coordinateKind = "raw-server",
       x = 942.840091,
       y = 348.284948,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640339"] = {
+      coordinateKind = "raw-server",
       x = 944.231902,
       y = 339.446182,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640340"] = {
+      coordinateKind = "raw-server",
       x = 953.86903,
       y = 340.12592,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640341"] = {
+      coordinateKind = "raw-server",
       x = 802.843839,
       y = 395.838819,
       z = 193.544006347656,
     },
     ["black-temple:spawn:22955:cmangos-5640342"] = {
+      coordinateKind = "raw-server",
       x = 810.668922,
       y = 386.31106,
       z = 193.475006103516,
     },
     ["black-temple:spawn:22955:cmangos-5640343"] = {
+      coordinateKind = "raw-server",
       x = 942.38407,
       y = 445.30827,
       z = 113.221000671387,
     },
     ["black-temple:spawn:22955:cmangos-5640344"] = {
+      coordinateKind = "raw-server",
       x = 950.129947,
       y = 432.0401,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640345"] = {
+      coordinateKind = "raw-server",
       x = 953.139061,
       y = 443.846968,
       z = 113.721000671387,
     },
     ["black-temple:spawn:22955:cmangos-5640346"] = {
+      coordinateKind = "raw-server",
       x = 954.071013,
       y = 437.689241,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640347"] = {
+      coordinateKind = "raw-server",
       x = 943.171131,
       y = 443.643859,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640348"] = {
+      coordinateKind = "raw-server",
       x = 933.900067,
       y = 308.750168,
       z = 194.102996826172,
     },
     ["black-temple:spawn:22955:cmangos-5640349"] = {
+      coordinateKind = "raw-server",
       x = 913.723125,
       y = 323.13625,
       z = 192.930999755859,
     },
     ["black-temple:spawn:22955:cmangos-5640350"] = {
+      coordinateKind = "raw-server",
       x = 910.666035,
       y = 321.146864,
       z = 192.932006835938,
     },
     ["black-temple:spawn:22955:cmangos-5640351"] = {
+      coordinateKind = "raw-server",
       x = 925.102056,
       y = 307.192998,
       z = 192.929992675781,
     },
     ["black-temple:spawn:22955:cmangos-5640352"] = {
+      coordinateKind = "raw-server",
       x = 914.304126,
       y = 320.68215,
       z = 192.92399597168,
     },
     ["black-temple:spawn:22955:cmangos-5640353"] = {
+      coordinateKind = "raw-server",
       x = 883.014981,
       y = 446.524877,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640354"] = {
+      coordinateKind = "raw-server",
       x = 880.049079,
       y = 444.023211,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640355"] = {
+      coordinateKind = "raw-server",
       x = 881.293736,
       y = 437.45086,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640356"] = {
+      coordinateKind = "raw-server",
       x = 888.890959,
       y = 435.963903,
       z = 111.908996582031,
     },
     ["black-temple:spawn:22955:cmangos-5640357"] = {
+      coordinateKind = "raw-server",
       x = 888.749927,
       y = 444.449,
       z = 111.907997131348,
     },
     ["black-temple:spawn:22955:cmangos-5640358"] = {
+      coordinateKind = "raw-server",
       x = 919.856977,
       y = 393.280926,
       z = 121.220001220703,
     },
     ["black-temple:spawn:22955:cmangos-5640359"] = {
+      coordinateKind = "raw-server",
       x = 916.222964,
       y = 391.677176,
       z = 121.208000183105,
     },
     ["black-temple:spawn:22955:cmangos-5640360"] = {
+      coordinateKind = "raw-server",
       x = 916.291091,
       y = 393.519241,
       z = 121.196998596191,
     },
     ["black-temple:spawn:22955:cmangos-5640361"] = {
+      coordinateKind = "raw-server",
       x = 907.537938,
       y = 381.900858,
       z = 118.324996948242,
     },
     ["black-temple:spawn:22955:cmangos-5640362"] = {
+      coordinateKind = "raw-server",
       x = 910.094869,
       y = 379.752777,
       z = 118.324996948242,
     },
     ["black-temple:spawn:22956:cmangos-5640363"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 812.522794,
@@ -2792,11 +3130,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 477.483917,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 812.466756,
       y = 489.962952,
       z = 183.292999267578,
     },
     ["black-temple:spawn:22956:cmangos-5640364"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 957.402052,
@@ -2875,11 +3215,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 351.588856,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 956.958985,
       y = 234.322869,
       z = 192.82600402832,
     },
     ["black-temple:spawn:22956:cmangos-5640365"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 931.132997,
@@ -2942,11 +3284,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 402.186854,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 942.854963,
       y = 392.529151,
       z = 192.106002807617,
     },
     ["black-temple:spawn:22956:cmangos-5640366"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 868.952939,
@@ -3025,11 +3369,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 420.649873,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 823.092,
       y = 403.861171,
       z = 192.802001953125,
     },
     ["black-temple:spawn:22956:cmangos-5640367"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 895.020035,
@@ -3176,11 +3522,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 406.641172,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 928.383919,
       y = 363.989885,
       z = 112.767997741699,
     },
     ["black-temple:spawn:22956:cmangos-5640368"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 924.041046,
@@ -3231,16 +3579,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 156.709736,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 921.76502,
       y = 166.299735,
       z = 192.824005126953,
     },
     ["black-temple:spawn:22957:cmangos-5640369"] = {
+      coordinateKind = "raw-server",
       x = 959.629141,
       y = 210.558021,
       z = 192.932006835938,
     },
     ["black-temple:spawn:22957:cmangos-5640370"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 945.65106,
@@ -3291,16 +3642,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 242.376822,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 945.65106,
       y = 224.395979,
       z = 191.207992553711,
     },
     ["black-temple:spawn:22957:cmangos-5640371"] = {
+      coordinateKind = "raw-server",
       x = 933.268931,
       y = 368.099189,
       z = 192.932006835938,
     },
     ["black-temple:spawn:22959:cmangos-5640372"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 924.151984,
@@ -3351,11 +3705,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 550.088883,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 924.151984,
       y = 545.918134,
       z = 139.304000854492,
     },
     ["black-temple:spawn:22959:cmangos-5640373"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 923.637822,
@@ -3418,11 +3774,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 527.813975,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 923.637822,
       y = 527.406944,
       z = 139.304000854492,
     },
     ["black-temple:spawn:22959:cmangos-5640374"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 898.730091,
@@ -3505,11 +3863,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 346.81173,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 898.730091,
       y = 361.795224,
       z = 112.767997741699,
     },
     ["black-temple:spawn:22959:cmangos-5640375"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 923.656031,
@@ -3684,11 +4044,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 403.238146,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 913.988917,
       y = 403.238146,
       z = 118.240997314453,
     },
     ["black-temple:spawn:22959:cmangos-5640376"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 944.06806,
@@ -3847,11 +4209,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 381.296947,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 944.06806,
       y = 389.166748,
       z = 112.767997741699,
     },
     ["black-temple:spawn:22959:cmangos-5640377"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 828.242864,
@@ -3942,11 +4306,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 414.320039,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 828.242864,
       y = 413.825932,
       z = 192.802001953125,
     },
     ["black-temple:spawn:22959:cmangos-5640378"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 951.191916,
@@ -4125,21 +4491,25 @@ ART.MapWorldPositions["black-temple"] = {
           y = 403.571787,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 951.191916,
       y = 402.940253,
       z = 112.767997741699,
     },
     ["black-temple:spawn:22960:cmangos-5640379"] = {
+      coordinateKind = "raw-server",
       x = 616.449958,
       y = 839.580028,
       z = 66.8133010864258,
     },
     ["black-temple:spawn:22960:cmangos-5640380"] = {
+      coordinateKind = "raw-server",
       x = 786.82591,
       y = 830.001168,
       z = 60.5679016113281,
     },
     ["black-temple:spawn:22960:cmangos-5640381"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 735.536858,
@@ -4166,16 +4536,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 924.489123,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 728.957791,
       y = 940.794033,
       z = 53.168701171875,
     },
     ["black-temple:spawn:22960:cmangos-5640382"] = {
+      coordinateKind = "raw-server",
       x = 734.949082,
       y = 940.352863,
       z = 53.1772003173828,
     },
     ["black-temple:spawn:22960:cmangos-5640383"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 704.467994,
@@ -4218,16 +4591,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 835.810804,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 705.368804,
       y = 820.11609,
       z = 59.2145004272461,
     },
     ["black-temple:spawn:22960:cmangos-5640384"] = {
+      coordinateKind = "raw-server",
       x = 713.873763,
       y = 808.187013,
       z = 62.2075004577637,
     },
     ["black-temple:spawn:22960:cmangos-5640385"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 784.129818,
@@ -4254,21 +4630,25 @@ ART.MapWorldPositions["black-temple"] = {
           y = 804.110785,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 786.811921,
       y = 800.185711,
       z = 64.5000991821289,
     },
     ["black-temple:spawn:22960:cmangos-5640386"] = {
+      coordinateKind = "raw-server",
       x = 791.744202,
       y = 799.359167,
       z = 64.1847991943359,
     },
     ["black-temple:spawn:22960:cmangos-5640387"] = {
+      coordinateKind = "raw-server",
       x = 645.930817,
       y = 931.850924,
       z = 55.9628982543945,
     },
     ["black-temple:spawn:22960:cmangos-5640388"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 645.013214,
@@ -4295,16 +4675,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 934.312778,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 651.328286,
       y = 924.446082,
       z = 56.9990005493164,
     },
     ["black-temple:spawn:22960:cmangos-5640389"] = {
+      coordinateKind = "raw-server",
       x = 610.981284,
       y = 784.923811,
       z = 70.8421020507812,
     },
     ["black-temple:spawn:22960:cmangos-5640390"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 611.784691,
@@ -4315,191 +4698,229 @@ ART.MapWorldPositions["black-temple"] = {
           y = 836.311156,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 611.765882,
       y = 788.251866,
       z = 70.1695022583008,
     },
     ["black-temple:spawn:22962:cmangos-5640391"] = {
+      coordinateKind = "raw-server",
       x = 931.347934,
       y = 210.267168,
       z = 192.932006835938,
     },
     ["black-temple:spawn:22962:cmangos-5640392"] = {
+      coordinateKind = "raw-server",
       x = 960.328885,
       y = 367.989781,
       z = 192.932006835938,
     },
     ["black-temple:spawn:22963:cmangos-5640393"] = {
+      coordinateKind = "raw-server",
       x = 790.155748,
       y = 902.861927,
       z = 56.3203010559082,
     },
     ["black-temple:spawn:22963:cmangos-5640394"] = {
+      coordinateKind = "raw-server",
       x = 795.557247,
       y = 917.510207,
       z = 57.1049995422363,
     },
     ["black-temple:spawn:22963:cmangos-5640395"] = {
+      coordinateKind = "raw-server",
       x = 788.732993,
       y = 909.467821,
       z = 56.1884994506836,
     },
     ["black-temple:spawn:22963:cmangos-5640396"] = {
+      coordinateKind = "raw-server",
       x = 801.312084,
       y = 916.645801,
       z = 57.2518997192383,
     },
     ["black-temple:spawn:22963:cmangos-5640397"] = {
+      coordinateKind = "raw-server",
       x = 807.242246,
       y = 907.539047,
       z = 57.0312004089355,
     },
     ["black-temple:spawn:22963:cmangos-5640398"] = {
+      coordinateKind = "raw-server",
       x = 594.880235,
       y = 902.279977,
       z = 60.2541007995605,
     },
     ["black-temple:spawn:22963:cmangos-5640399"] = {
+      coordinateKind = "raw-server",
       x = 608.116965,
       y = 898.357867,
       z = 58.8848991394043,
     },
     ["black-temple:spawn:22963:cmangos-5640400"] = {
+      coordinateKind = "raw-server",
       x = 598.983252,
       y = 897.125819,
       z = 60.3712997436523,
     },
     ["black-temple:spawn:22963:cmangos-5640401"] = {
+      coordinateKind = "raw-server",
       x = 592.187883,
       y = 893.366907,
       z = 61.8436012268066,
     },
     ["black-temple:spawn:22963:cmangos-5640402"] = {
+      coordinateKind = "raw-server",
       x = 608.456868,
       y = 905.71384,
       z = 58.3786010742188,
     },
     ["black-temple:spawn:22963:cmangos-5640403"] = {
+      coordinateKind = "raw-server",
       x = 604.805263,
       y = 895.899151,
       z = 59.4836006164551,
     },
     ["black-temple:spawn:22963:cmangos-5640404"] = {
+      coordinateKind = "raw-server",
       x = 819.5298,
       y = 954.766211,
       z = 56.1811981201172,
     },
     ["black-temple:spawn:22963:cmangos-5640405"] = {
+      coordinateKind = "raw-server",
       x = 817.771173,
       y = 936.343775,
       z = 55.8903007507324,
     },
     ["black-temple:spawn:22963:cmangos-5640406"] = {
+      coordinateKind = "raw-server",
       x = 819.105258,
       y = 947.871136,
       z = 56.3157997131348,
     },
     ["black-temple:spawn:22963:cmangos-5640407"] = {
+      coordinateKind = "raw-server",
       x = 825.766278,
       y = 929.615035,
       z = 55.4478988647461,
     },
     ["black-temple:spawn:22963:cmangos-5640408"] = {
+      coordinateKind = "raw-server",
       x = 820.02622,
       y = 931.203964,
       z = 56.3162002563477,
     },
     ["black-temple:spawn:22963:cmangos-5640409"] = {
+      coordinateKind = "raw-server",
       x = 816.922087,
       y = 941.831051,
       z = 55.9709014892578,
     },
     ["black-temple:spawn:22963:cmangos-5640410"] = {
+      coordinateKind = "raw-server",
       x = 630.328203,
       y = 972.236814,
       z = 55.6125984191895,
     },
     ["black-temple:spawn:22963:cmangos-5640411"] = {
+      coordinateKind = "raw-server",
       x = 637.091329,
       y = 971.698802,
       z = 55.3181991577148,
     },
     ["black-temple:spawn:22963:cmangos-5640412"] = {
+      coordinateKind = "raw-server",
       x = 621.506852,
       y = 973.485002,
       z = 56.0037002563477,
     },
     ["black-temple:spawn:22963:cmangos-5640413"] = {
+      coordinateKind = "raw-server",
       x = 645.457237,
       y = 975.450989,
       z = 55.4560012817383,
     },
     ["black-temple:spawn:22963:cmangos-5640414"] = {
+      coordinateKind = "raw-server",
       x = 624.682861,
       y = 970.869815,
       z = 55.9705009460449,
     },
     ["black-temple:spawn:22963:cmangos-5640415"] = {
+      coordinateKind = "raw-server",
       x = 641.105004,
       y = 973.819915,
       z = 55.3115005493164,
     },
     ["black-temple:spawn:22963:cmangos-5640416"] = {
+      coordinateKind = "raw-server",
       x = 763.725889,
       y = 768.291206,
       z = 64.8301010131836,
     },
     ["black-temple:spawn:22963:cmangos-5640417"] = {
+      coordinateKind = "raw-server",
       x = 770.036155,
       y = 781.03073,
       z = 67.0439987182617,
     },
     ["black-temple:spawn:22963:cmangos-5640418"] = {
+      coordinateKind = "raw-server",
       x = 771.916172,
       y = 786.647867,
       z = 66.1781005859375,
     },
     ["black-temple:spawn:22963:cmangos-5640419"] = {
+      coordinateKind = "raw-server",
       x = 766.070799,
       y = 761.64929,
       z = 66.0690002441406,
     },
     ["black-temple:spawn:22963:cmangos-5640420"] = {
+      coordinateKind = "raw-server",
       x = 767.071945,
       y = 754.670708,
       z = 67.7514038085938,
     },
     ["black-temple:spawn:22964:cmangos-5640421"] = {
+      coordinateKind = "raw-server",
       x = 808.968721,
       y = 489.338029,
       z = 183.805999755859,
     },
     ["black-temple:spawn:22964:cmangos-5640422"] = {
+      coordinateKind = "raw-server",
       x = 954.562057,
       y = 228.53778,
       z = 192.578994750977,
     },
     ["black-temple:spawn:22964:cmangos-5640423"] = {
+      coordinateKind = "raw-server",
       x = 941.55095,
       y = 396.389849,
       z = 192.304000854492,
     },
     ["black-temple:spawn:22964:cmangos-5640424"] = {
+      coordinateKind = "raw-server",
       x = 823.535104,
       y = 400.137144,
       z = 192.802001953125,
     },
     ["black-temple:spawn:22964:cmangos-5640425"] = {
+      coordinateKind = "raw-server",
       x = 931.421099,
       y = 361.562867,
       z = 112.767997741699,
     },
     ["black-temple:spawn:22964:cmangos-5640426"] = {
+      coordinateKind = "raw-server",
       x = 920.648117,
       y = 160.771918,
       z = 192.820999145508,
     },
     ["black-temple:spawn:22965:cmangos-5640427"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 924.151984,
@@ -4550,11 +4971,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 550.088883,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 924.151984,
       y = 545.918134,
       z = 139.304000854492,
     },
     ["black-temple:spawn:22965:cmangos-5640428"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 923.637822,
@@ -4617,11 +5040,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 527.813975,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 923.637822,
       y = 527.406944,
       z = 139.304000854492,
     },
     ["black-temple:spawn:22965:cmangos-5640429"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 898.730091,
@@ -4704,11 +5129,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 346.81173,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 898.730091,
       y = 361.795224,
       z = 112.767997741699,
     },
     ["black-temple:spawn:22965:cmangos-5640430"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 923.656031,
@@ -4883,11 +5310,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 403.238146,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 913.988917,
       y = 403.238146,
       z = 118.240997314453,
     },
     ["black-temple:spawn:22965:cmangos-5640431"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 944.06806,
@@ -5046,11 +5475,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 381.296947,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 944.06806,
       y = 389.166748,
       z = 112.767997741699,
     },
     ["black-temple:spawn:22965:cmangos-5640432"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 828.242864,
@@ -5141,11 +5572,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 414.320039,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 828.242864,
       y = 413.825932,
       z = 192.802001953125,
     },
     ["black-temple:spawn:22965:cmangos-5640433"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 951.191916,
@@ -5324,11 +5757,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 403.571787,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 951.191916,
       y = 402.940253,
       z = 112.767997741699,
     },
     ["black-temple:spawn:23018:cmangos-5640436"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 434.995019,
@@ -5363,16 +5798,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 304.883854,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 434.989242,
       y = 261.705792,
       z = 172.36799621582,
     },
     ["black-temple:spawn:23018:cmangos-5640437"] = {
+      coordinateKind = "raw-server",
       x = 439.993944,
       y = 262.252955,
       z = 172.611999511719,
     },
     ["black-temple:spawn:23018:cmangos-5640438"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 446.82493,
@@ -5455,21 +5893,25 @@ ART.MapWorldPositions["black-temple"] = {
           y = 201.821942,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 458.209851,
       y = 170.244162,
       z = 163.981002807617,
     },
     ["black-temple:spawn:23018:cmangos-5640439"] = {
+      coordinateKind = "raw-server",
       x = 436.145166,
       y = 170.476883,
       z = 163.981002807617,
     },
     ["black-temple:spawn:23018:cmangos-5640440"] = {
+      coordinateKind = "raw-server",
       x = 575.077805,
       y = 110.787112,
       z = 139.759994506836,
     },
     ["black-temple:spawn:23018:cmangos-5640441"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 593.321213,
@@ -5500,11 +5942,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 110.735187,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 586.708971,
       y = 110.746044,
       z = 139.313003540039,
     },
     ["black-temple:spawn:23028:cmangos-5640442"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 614.923082,
@@ -5535,11 +5979,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 912.426888,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 605.282874,
       y = 900.522022,
       z = 59.0442008972168,
     },
     ["black-temple:spawn:23028:cmangos-5640443"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 776.724093,
@@ -5590,11 +6036,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 744.486078,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 776.724093,
       y = 748.544877,
       z = 70.0428009033203,
     },
     ["black-temple:spawn:23028:cmangos-5640444"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 779.796101,
@@ -5661,16 +6109,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 913.99609,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 795.134048,
       y = 923.213137,
       z = 56.8142013549805,
     },
     ["black-temple:spawn:23028:cmangos-5640445"] = {
+      coordinateKind = "raw-server",
       x = 792.684867,
       y = 926.457799,
       z = 56.4392013549805,
     },
     ["black-temple:spawn:23028:cmangos-5640446"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 812.430131,
@@ -5721,11 +6172,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 959.529861,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 817.601893,
       y = 927.481816,
       z = 56.7336006164551,
     },
     ["black-temple:spawn:23028:cmangos-5640447"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 640.173965,
@@ -5768,16 +6221,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 963.168169,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 618.848086,
       y = 967.643086,
       z = 56.0339012145996,
     },
     ["black-temple:spawn:23028:cmangos-5640448"] = {
+      coordinateKind = "raw-server",
       x = 623.037086,
       y = 970.487826,
       z = 56.0675010681152,
     },
     ["black-temple:spawn:23030:cmangos-5640449"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 617.247991,
@@ -5828,11 +6284,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 860.362993,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 601.691727,
       y = 852.725909,
       z = 64.1990966796875,
     },
     ["black-temple:spawn:23030:cmangos-5640452"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 611.231845,
@@ -5883,11 +6341,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 771.720094,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 623.249358,
       y = 779.820765,
       z = 71.3501968383789,
     },
     ["black-temple:spawn:23030:cmangos-5640453"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 639.240912,
@@ -5962,11 +6422,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 806.485998,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 625.887299,
       y = 814.322146,
       z = 67.7563018798828,
     },
     ["black-temple:spawn:23030:cmangos-5640457"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 716.758,
@@ -6061,11 +6523,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 681.914709,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 716.758,
       y = 667.975689,
       z = 171.932006835938,
     },
     ["black-temple:spawn:23030:cmangos-5640458"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 772.789202,
@@ -6148,16 +6612,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 652.94133,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 697.833881,
       y = 658.571907,
       z = 181.093002319336,
     },
     ["black-temple:spawn:23030:cmangos-5640460"] = {
+      coordinateKind = "raw-server",
       x = 745.064885,
       y = 920.367052,
       z = 54.0260009765625,
     },
     ["black-temple:spawn:23030:cmangos-5640462"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 748.581836,
@@ -6248,11 +6715,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 920.324164,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 756.760017,
       y = 921.977923,
       z = 167.261001586914,
     },
     ["black-temple:spawn:23030:cmangos-5640463"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 803.376107,
@@ -6327,66 +6796,79 @@ ART.MapWorldPositions["black-temple"] = {
           y = 938.610938,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 758.652972,
       y = 869.267959,
       z = 184.505996704102,
     },
     ["black-temple:spawn:23030:cmangos-5640781"] = {
+      coordinateKind = "raw-server",
       x = 663.320944,
       y = 915.89617,
       z = 55.9440002441406,
     },
     ["black-temple:spawn:23030:cmangos-5640782"] = {
+      coordinateKind = "raw-server",
       x = 667.794764,
       y = 938.849118,
       z = 54.7873001098633,
     },
     ["black-temple:spawn:23030:cmangos-5640783"] = {
+      coordinateKind = "raw-server",
       x = 740.413053,
       y = 946.561076,
       z = 54.3400001525879,
     },
     ["black-temple:spawn:23030:cmangos-5640784"] = {
+      coordinateKind = "raw-server",
       x = 717.615172,
       y = 694.212065,
       z = 171.932006835938,
     },
     ["black-temple:spawn:23030:cmangos-5640785"] = {
+      coordinateKind = "raw-server",
       x = 717.313868,
       y = 637.740991,
       z = 171.932006835938,
     },
     ["black-temple:spawn:23030:cmangos-5640786"] = {
+      coordinateKind = "raw-server",
       x = 698.042957,
       y = 670.679763,
       z = 181.093002319336,
     },
     ["black-temple:spawn:23030:cmangos-5640787"] = {
+      coordinateKind = "raw-server",
       x = 697.538837,
       y = 641.563923,
       z = 181.093002319336,
     },
     ["black-temple:spawn:23030:cmangos-5640788"] = {
+      coordinateKind = "raw-server",
       x = 742.317893,
       y = 920.805307,
       z = 167.261001586914,
     },
     ["black-temple:spawn:23030:cmangos-5640789"] = {
+      coordinateKind = "raw-server",
       x = 781.680162,
       y = 922.137856,
       z = 167.261001586914,
     },
     ["black-temple:spawn:23030:cmangos-5640790"] = {
+      coordinateKind = "raw-server",
       x = 758.718908,
       y = 859.047713,
       z = 184.505996704102,
     },
     ["black-temple:spawn:23030:cmangos-5640791"] = {
+      coordinateKind = "raw-server",
       x = 759.226784,
       y = 884.866786,
       z = 184.505996704102,
     },
     ["black-temple:spawn:23030:cmangos-5640792"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 791.959956,
@@ -6437,11 +6919,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 864.193788,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 791.959956,
       y = 864.117853,
       z = 93.9393997192383,
     },
     ["black-temple:spawn:23030:cmangos-5640793"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 808.744068,
@@ -6512,11 +6996,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 755.088684,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 808.744068,
       y = 752.812665,
       z = 93.6921005249023,
     },
     ["black-temple:spawn:23030:cmangos-5640794"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 687.042265,
@@ -6591,51 +7077,61 @@ ART.MapWorldPositions["black-temple"] = {
           y = 879.900909,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 687.042265,
       y = 872.540004,
       z = 81.6800994873047,
     },
     ["black-temple:spawn:23047:cmangos-5640492"] = {
+      coordinateKind = "raw-server",
       x = 448.663934,
       y = 191.273987,
       z = 164.065002441406,
     },
     ["black-temple:spawn:23047:cmangos-5640493"] = {
+      coordinateKind = "raw-server",
       x = 449.336071,
       y = 187.124196,
       z = 164.065002441406,
     },
     ["black-temple:spawn:23047:cmangos-5640494"] = {
+      coordinateKind = "raw-server",
       x = 449.498929,
       y = 182.922007,
       z = 164.065002441406,
     },
     ["black-temple:spawn:23047:cmangos-5640495"] = {
+      coordinateKind = "raw-server",
       x = 448.259243,
       y = 195.734819,
       z = 164.065002441406,
     },
     ["black-temple:spawn:23047:cmangos-5640496"] = {
+      coordinateKind = "raw-server",
       x = 442.896938,
       y = 191.007188,
       z = 164.065002441406,
     },
     ["black-temple:spawn:23047:cmangos-5640497"] = {
+      coordinateKind = "raw-server",
       x = 443.343919,
       y = 186.511003,
       z = 164.065002441406,
     },
     ["black-temple:spawn:23047:cmangos-5640498"] = {
+      coordinateKind = "raw-server",
       x = 443.843125,
       y = 182.041162,
       z = 164.065002441406,
     },
     ["black-temple:spawn:23047:cmangos-5640499"] = {
+      coordinateKind = "raw-server",
       x = 442.478098,
       y = 195.177937,
       z = 164.065002441406,
     },
     ["black-temple:spawn:23049:cmangos-5640500"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 494.257904,
@@ -6654,121 +7150,145 @@ ART.MapWorldPositions["black-temple"] = {
           y = 190.091029,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 454.344922,
       y = 190.091029,
       z = 164.065002441406,
     },
     ["black-temple:spawn:23147:cmangos-5640516"] = {
+      coordinateKind = "raw-server",
       x = 432.876261,
       y = 173.829853,
       z = 164.065002441406,
     },
     ["black-temple:spawn:23147:cmangos-5640517"] = {
+      coordinateKind = "raw-server",
       x = 432.020967,
       y = 465.842838,
       z = 193.720993041992,
     },
     ["black-temple:spawn:23147:cmangos-5640518"] = {
+      coordinateKind = "raw-server",
       x = 500.866789,
       y = 137.828965,
       z = 164.85400390625,
     },
     ["black-temple:spawn:23147:cmangos-5640519"] = {
+      coordinateKind = "raw-server",
       x = 515.023087,
       y = 92.28842,
       z = 164.85400390625,
     },
     ["black-temple:spawn:23147:cmangos-5640520"] = {
+      coordinateKind = "raw-server",
       x = 499.438007,
       y = 142.883204,
       z = 164.85400390625,
     },
     ["black-temple:spawn:23147:cmangos-5640521"] = {
+      coordinateKind = "raw-server",
       x = 458.273847,
       y = 340.649907,
       z = 192.858993530273,
     },
     ["black-temple:spawn:23147:cmangos-5640522"] = {
+      coordinateKind = "raw-server",
       x = 405.81026,
       y = 372.512111,
       z = 192.858993530273,
     },
     ["black-temple:spawn:23147:cmangos-5640523"] = {
+      coordinateKind = "raw-server",
       x = 462.632092,
       y = 386.805977,
       z = 193.427993774414,
     },
     ["black-temple:spawn:23147:cmangos-5640524"] = {
+      coordinateKind = "raw-server",
       x = 441.616154,
       y = 474.767949,
       z = 193.675994873047,
     },
     ["black-temple:spawn:23147:cmangos-5640525"] = {
+      coordinateKind = "raw-server",
       x = 458.815739,
       y = 379.734982,
       z = 193.511001586914,
     },
     ["black-temple:spawn:23147:cmangos-5640526"] = {
+      coordinateKind = "raw-server",
       x = 410.084159,
       y = 411.152084,
       z = 192.84700012207,
     },
     ["black-temple:spawn:23147:cmangos-5640527"] = {
+      coordinateKind = "raw-server",
       x = 419.378937,
       y = 463.45695,
       z = 192.852005004883,
     },
     ["black-temple:spawn:23147:cmangos-5640528"] = {
+      coordinateKind = "raw-server",
       x = 459.203961,
       y = 462.205887,
       z = 192.850997924805,
     },
     ["black-temple:spawn:23147:cmangos-5640529"] = {
+      coordinateKind = "raw-server",
       x = 452.466128,
       y = 344.215173,
       z = 192.858993530273,
     },
     ["black-temple:spawn:23147:cmangos-5640530"] = {
+      coordinateKind = "raw-server",
       x = 498.777063,
       y = 108.128055,
       z = 164.85400390625,
     },
     ["black-temple:spawn:23147:cmangos-5640531"] = {
+      coordinateKind = "raw-server",
       x = 461.151999,
       y = 221.263948,
       z = 164.85400390625,
     },
     ["black-temple:spawn:23147:cmangos-5640532"] = {
+      coordinateKind = "raw-server",
       x = 411.232069,
       y = 404.021959,
       z = 192.848999023438,
     },
     ["black-temple:spawn:23147:cmangos-5640533"] = {
+      coordinateKind = "raw-server",
       x = 446.133847,
       y = 465.680836,
       z = 193.714004516602,
     },
     ["black-temple:spawn:23172:cmangos-5640537"] = {
+      coordinateKind = "raw-server",
       x = 578.528249,
       y = 404.567906,
       z = 190.725006103516,
     },
     ["black-temple:spawn:23172:cmangos-5640538"] = {
+      coordinateKind = "raw-server",
       x = 578.449103,
       y = 400.329117,
       z = 190.725006103516,
     },
     ["black-temple:spawn:23172:cmangos-5640539"] = {
+      coordinateKind = "raw-server",
       x = 537.663925,
       y = 407.443042,
       z = 193.283004760742,
     },
     ["black-temple:spawn:23172:cmangos-5640540"] = {
+      coordinateKind = "raw-server",
       x = 537.684723,
       y = 397.846027,
       z = 193.283996582031,
     },
     ["black-temple:spawn:23196:cmangos-5640541"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 881.722986,
@@ -6803,11 +7323,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 245.197195,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 881.722986,
       y = 244.052946,
       z = 84.8572998046875,
     },
     ["black-temple:spawn:23196:cmangos-5640542"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 897.759998,
@@ -6882,11 +7404,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 197.828767,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 899.033066,
       y = 197.828767,
       z = 86.1605987548828,
     },
     ["black-temple:spawn:23196:cmangos-5640543"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 822.373111,
@@ -6897,11 +7421,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 62.251546,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 825.583968,
       y = 80.210182,
       z = 112.620002746582,
     },
     ["black-temple:spawn:23196:cmangos-5640544"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 826.947952,
@@ -6928,11 +7454,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 71.479741,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 833.440912,
       y = 67.484178,
       z = 112.73999786377,
     },
     ["black-temple:spawn:23196:cmangos-5640545"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 758.393895,
@@ -6959,156 +7487,187 @@ ART.MapWorldPositions["black-temple"] = {
           y = 75.404137,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 757.810182,
       y = 69.699414,
       z = 112.736999511719,
     },
     ["black-temple:spawn:23222:cmangos-5640548"] = {
+      coordinateKind = "raw-server",
       x = 886.898052,
       y = 280.323847,
       z = 86.2443008422852,
     },
     ["black-temple:spawn:23222:cmangos-5640549"] = {
+      coordinateKind = "raw-server",
       x = 930.788043,
       y = 191.639085,
       z = 85.7245025634766,
     },
     ["black-temple:spawn:23223:cmangos-5640550"] = {
+      coordinateKind = "raw-server",
       x = 912.457014,
       y = 193.920948,
       z = 85.7245025634766,
     },
     ["black-temple:spawn:23223:cmangos-5640551"] = {
+      coordinateKind = "raw-server",
       x = 878.499973,
       y = 268.55989,
       z = 85.7519989013672,
     },
     ["black-temple:spawn:23223:cmangos-5640552"] = {
+      coordinateKind = "raw-server",
       x = 874.966914,
       y = 286.3878,
       z = 86.0022964477539,
     },
     ["black-temple:spawn:23223:cmangos-5640553"] = {
+      coordinateKind = "raw-server",
       x = 879.201212,
       y = 295.698985,
       z = 86.1832962036133,
     },
     ["black-temple:spawn:23223:cmangos-5640554"] = {
+      coordinateKind = "raw-server",
       x = 887.574107,
       y = 295.110811,
       z = 86.2443008422852,
     },
     ["black-temple:spawn:23223:cmangos-5640555"] = {
+      coordinateKind = "raw-server",
       x = 895.578194,
       y = 291.652101,
       z = 86.2443008422852,
     },
     ["black-temple:spawn:23223:cmangos-5640556"] = {
+      coordinateKind = "raw-server",
       x = 903.228024,
       y = 277.121932,
       z = 86.2441024780273,
     },
     ["black-temple:spawn:23223:cmangos-5640557"] = {
+      coordinateKind = "raw-server",
       x = 898.905302,
       y = 268.594822,
       z = 86.2441024780273,
     },
     ["black-temple:spawn:23223:cmangos-5640558"] = {
+      coordinateKind = "raw-server",
       x = 895.578754,
       y = 260.826768,
       z = 86.2442016601562,
     },
     ["black-temple:spawn:23223:cmangos-5640559"] = {
+      coordinateKind = "raw-server",
       x = 885.164262,
       y = 259.88078,
       z = 86.2345962524414,
     },
     ["black-temple:spawn:23223:cmangos-5640560"] = {
+      coordinateKind = "raw-server",
       x = 868.352993,
       y = 277.796963,
       z = 85.9681015014648,
     },
     ["black-temple:spawn:23223:cmangos-5640561"] = {
+      coordinateKind = "raw-server",
       x = 897.2549,
       y = 282.079872,
       z = 86.2442016601562,
     },
     ["black-temple:spawn:23223:cmangos-5640562"] = {
+      coordinateKind = "raw-server",
       x = 937.405982,
       y = 203.651228,
       z = 85.7246017456055,
     },
     ["black-temple:spawn:23223:cmangos-5640563"] = {
+      coordinateKind = "raw-server",
       x = 938.8249,
       y = 195.987244,
       z = 85.7246017456055,
     },
     ["black-temple:spawn:23223:cmangos-5640564"] = {
+      coordinateKind = "raw-server",
       x = 934.483947,
       y = 180.940922,
       z = 86.2441024780273,
     },
     ["black-temple:spawn:23223:cmangos-5640565"] = {
+      coordinateKind = "raw-server",
       x = 920.840025,
       y = 179.659981,
       z = 86.2441024780273,
     },
     ["black-temple:spawn:23223:cmangos-5640566"] = {
+      coordinateKind = "raw-server",
       x = 915.516023,
       y = 187.521115,
       z = 85.7245025634766,
     },
     ["black-temple:spawn:23223:cmangos-5640567"] = {
+      coordinateKind = "raw-server",
       x = 918.251909,
       y = 197.464795,
       z = 85.7245025634766,
     },
     ["black-temple:spawn:23223:cmangos-5640568"] = {
+      coordinateKind = "raw-server",
       x = 941.453077,
       y = 186.824045,
       z = 85.7245025634766,
     },
     ["black-temple:spawn:23223:cmangos-5640569"] = {
+      coordinateKind = "raw-server",
       x = 930.144912,
       y = 202.291751,
       z = 85.7246017456055,
     },
     ["black-temple:spawn:23223:cmangos-5640570"] = {
+      coordinateKind = "raw-server",
       x = 922.069913,
       y = 204.093735,
       z = 85.7246017456055,
     },
     ["black-temple:spawn:23223:cmangos-5640571"] = {
+      coordinateKind = "raw-server",
       x = 927.225995,
       y = 177.335871,
       z = 86.236198425293,
     },
     ["black-temple:spawn:23232:cmangos-5640572"] = {
+      coordinateKind = "raw-server",
       x = 927.119966,
       y = 99.138867,
       z = 112.809997558594,
     },
     ["black-temple:spawn:23232:cmangos-5640573"] = {
+      coordinateKind = "raw-server",
       x = 930.852092,
       y = 81.521996,
       z = 112.827003479004,
     },
     ["black-temple:spawn:23232:cmangos-5640574"] = {
+      coordinateKind = "raw-server",
       x = 650.592241,
       y = 81.980265,
       z = 112.802001953125,
     },
     ["black-temple:spawn:23232:cmangos-5640575"] = {
+      coordinateKind = "raw-server",
       x = 678.841038,
       y = 84.488738,
       z = 113.46900177002,
     },
     ["black-temple:spawn:23232:cmangos-5640576"] = {
+      coordinateKind = "raw-server",
       x = 690.89306,
       y = 47.773639,
       z = 113.511001586914,
     },
     ["black-temple:spawn:23232:cmangos-5640577"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 817.239213,
@@ -7159,11 +7718,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 92.718929,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 808.41916,
       y = 107.089073,
       z = 112.658996582031,
     },
     ["black-temple:spawn:23232:cmangos-5640578"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 797.713091,
@@ -7222,261 +7783,313 @@ ART.MapWorldPositions["black-temple"] = {
           y = 121.153801,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 797.713091,
       y = 119.231142,
       z = 112.186996459961,
     },
     ["black-temple:spawn:23235:cmangos-5640579"] = {
+      coordinateKind = "raw-server",
       x = 918.546007,
       y = 93.709084,
       z = 112.789001464844,
     },
     ["black-temple:spawn:23235:cmangos-5640580"] = {
+      coordinateKind = "raw-server",
       x = 923.241031,
       y = 90.319057,
       z = 112.785003662109,
     },
     ["black-temple:spawn:23235:cmangos-5640581"] = {
+      coordinateKind = "raw-server",
       x = 656.694084,
       y = 70.787961,
       z = 112.793998718262,
     },
     ["black-temple:spawn:23235:cmangos-5640582"] = {
+      coordinateKind = "raw-server",
       x = 664.081999,
       y = 61.657571,
       z = 112.827003479004,
     },
     ["black-temple:spawn:23235:cmangos-5640583"] = {
+      coordinateKind = "raw-server",
       x = 807.186814,
       y = 112.013026,
       z = 112.695999145508,
     },
     ["black-temple:spawn:23235:cmangos-5640584"] = {
+      coordinateKind = "raw-server",
       x = 798.155213,
       y = 114.149052,
       z = 112.449996948242,
     },
     ["black-temple:spawn:23235:cmangos-5640585"] = {
+      coordinateKind = "raw-server",
       x = 709.456028,
       y = 76.821231,
       z = 113.029998779297,
     },
     ["black-temple:spawn:23235:cmangos-5640586"] = {
+      coordinateKind = "raw-server",
       x = 646.651199,
       y = 61.53531,
       z = 121.63200378418,
     },
     ["black-temple:spawn:23236:cmangos-5640587"] = {
+      coordinateKind = "raw-server",
       x = 919.686899,
       y = 87.213926,
       z = 112.779998779297,
     },
     ["black-temple:spawn:23236:cmangos-5640588"] = {
+      coordinateKind = "raw-server",
       x = 938.686967,
       y = 89.578115,
       z = 112.782997131348,
     },
     ["black-temple:spawn:23236:cmangos-5640589"] = {
+      coordinateKind = "raw-server",
       x = 660.156067,
       y = 65.720033,
       z = 112.761001586914,
     },
     ["black-temple:spawn:23236:cmangos-5640590"] = {
+      coordinateKind = "raw-server",
       x = 667.294938,
       y = 57.294886,
       z = 112.825996398926,
     },
     ["black-temple:spawn:23236:cmangos-5640591"] = {
+      coordinateKind = "raw-server",
       x = 796.486903,
       y = 106.600029,
       z = 112.638000488281,
     },
     ["black-temple:spawn:23236:cmangos-5640592"] = {
+      coordinateKind = "raw-server",
       x = 790.555192,
       y = 108.105869,
       z = 112.47200012207,
     },
     ["black-temple:spawn:23236:cmangos-5640593"] = {
+      coordinateKind = "raw-server",
       x = 688.117205,
       y = 70.644458,
       z = 112.835998535156,
     },
     ["black-temple:spawn:23236:cmangos-5640594"] = {
+      coordinateKind = "raw-server",
       x = 644.340972,
       y = 78.673555,
       z = 113.071998596191,
     },
     ["black-temple:spawn:23237:cmangos-5640595"] = {
+      coordinateKind = "raw-server",
       x = 915.303006,
       y = 87.484738,
       z = 112.77799987793,
     },
     ["black-temple:spawn:23237:cmangos-5640596"] = {
+      coordinateKind = "raw-server",
       x = 934.468114,
       y = 91.081664,
       z = 112.78800201416,
     },
     ["black-temple:spawn:23237:cmangos-5640597"] = {
+      coordinateKind = "raw-server",
       x = 670.078068,
       y = 66.416307,
       z = 112.832000732422,
     },
     ["black-temple:spawn:23237:cmangos-5640598"] = {
+      coordinateKind = "raw-server",
       x = 667.718032,
       y = 72.824857,
       z = 112.813003540039,
     },
     ["black-temple:spawn:23237:cmangos-5640599"] = {
+      coordinateKind = "raw-server",
       x = 811.081019,
       y = 102.157881,
       z = 112.765998840332,
     },
     ["black-temple:spawn:23237:cmangos-5640600"] = {
+      coordinateKind = "raw-server",
       x = 789.626736,
       y = 100.289194,
       z = 112.792999267578,
     },
     ["black-temple:spawn:23237:cmangos-5640601"] = {
+      coordinateKind = "raw-server",
       x = 703.571888,
       y = 61.138316,
       z = 112.835998535156,
     },
     ["black-temple:spawn:23237:cmangos-5640602"] = {
+      coordinateKind = "raw-server",
       x = 687.661092,
       y = 100.167877,
       z = 112.813003540039,
     },
     ["black-temple:spawn:23239:cmangos-5640603"] = {
+      coordinateKind = "raw-server",
       x = 888.256878,
       y = 273.771793,
       z = 86.2442016601562,
     },
     ["black-temple:spawn:23239:cmangos-5640604"] = {
+      coordinateKind = "raw-server",
       x = 924.336104,
       y = 191.348774,
       z = 85.7246017456055,
     },
     ["black-temple:spawn:23330:cmangos-5640607"] = {
+      coordinateKind = "raw-server",
       x = 613.789177,
       y = 817.147159,
       z = 67.6669006347656,
     },
     ["black-temple:spawn:23330:cmangos-5640611"] = {
+      coordinateKind = "raw-server",
       x = 604.079107,
       y = 772.640992,
       z = 71.2590026855469,
     },
     ["black-temple:spawn:23330:cmangos-5640612"] = {
+      coordinateKind = "raw-server",
       x = 626.741087,
       y = 854.618816,
       z = 64.8690032958984,
     },
     ["black-temple:spawn:23330:cmangos-5640795"] = {
+      coordinateKind = "raw-server",
       x = 792.376856,
       y = 876.29022,
       z = 93.9393997192383,
     },
     ["black-temple:spawn:23330:cmangos-5640796"] = {
+      coordinateKind = "raw-server",
       x = 798.213049,
       y = 755.116907,
       z = 93.6921005249023,
     },
     ["black-temple:spawn:23330:cmangos-5640797"] = {
+      coordinateKind = "raw-server",
       x = 701.244963,
       y = 868.240838,
       z = 81.6800994873047,
     },
     ["black-temple:spawn:23337:cmangos-5640613"] = {
+      coordinateKind = "raw-server",
       x = 599.841773,
       y = 387.937329,
       z = 112.821998596191,
     },
     ["black-temple:spawn:23337:cmangos-5640614"] = {
+      coordinateKind = "raw-server",
       x = 599.525028,
       y = 411.44208,
       z = 112.827003479004,
     },
     ["black-temple:spawn:23337:cmangos-5640615"] = {
+      coordinateKind = "raw-server",
       x = 712.931927,
       y = 387.965103,
       z = 117.474998474121,
     },
     ["black-temple:spawn:23337:cmangos-5640616"] = {
+      coordinateKind = "raw-server",
       x = 695.155209,
       y = 388.008034,
       z = 117.502998352051,
     },
     ["black-temple:spawn:23337:cmangos-5640617"] = {
+      coordinateKind = "raw-server",
       x = 806.17609,
       y = 406.332856,
       z = 112.83699798584,
     },
     ["black-temple:spawn:23337:cmangos-5640618"] = {
+      coordinateKind = "raw-server",
       x = 805.519063,
       y = 382.136049,
       z = 112.831001281738,
     },
     ["black-temple:spawn:23337:cmangos-5640619"] = {
+      coordinateKind = "raw-server",
       x = 678.636836,
       y = 441.942884,
       z = 112.809997558594,
     },
     ["black-temple:spawn:23337:cmangos-5640620"] = {
+      coordinateKind = "raw-server",
       x = 688.857788,
       y = 439.631922,
       z = 112.817001342773,
     },
     ["black-temple:spawn:23337:cmangos-5640621"] = {
+      coordinateKind = "raw-server",
       x = 729.12981,
       y = 440.781019,
       z = 112.814002990723,
     },
     ["black-temple:spawn:23337:cmangos-5640622"] = {
+      coordinateKind = "raw-server",
       x = 718.62216,
       y = 438.793282,
       z = 112.819999694824,
     },
     ["black-temple:spawn:23339:cmangos-5640623"] = {
+      coordinateKind = "raw-server",
       x = 591.883101,
       y = 407.541869,
       z = 112.831001281738,
     },
     ["black-temple:spawn:23339:cmangos-5640624"] = {
+      coordinateKind = "raw-server",
       x = 701.024166,
       y = 383.797999,
       z = 120.051002502441,
     },
     ["black-temple:spawn:23339:cmangos-5640625"] = {
+      coordinateKind = "raw-server",
       x = 812.933841,
       y = 385.256771,
       z = 112.830001831055,
     },
     ["black-temple:spawn:23339:cmangos-5640626"] = {
+      coordinateKind = "raw-server",
       x = 671.019113,
       y = 439.207226,
       z = 112.807998657227,
     },
     ["black-temple:spawn:23339:cmangos-5640627"] = {
+      coordinateKind = "raw-server",
       x = 693.661953,
       y = 433.694919,
       z = 112.817001342773,
     },
     ["black-temple:spawn:23339:cmangos-5640628"] = {
+      coordinateKind = "raw-server",
       x = 722.55413,
       y = 433.401933,
       z = 112.817001342773,
     },
     ["black-temple:spawn:23374:cmangos-5640629"] = {
+      coordinateKind = "raw-server",
       x = 775.645048,
       y = 250.598862,
       z = 112.818000793457,
     },
     ["black-temple:spawn:23374:cmangos-5640630"] = {
+      coordinateKind = "raw-server",
       x = 772.471284,
       y = 239.6119,
       z = 112.819000244141,
     },
     ["black-temple:spawn:23374:cmangos-5640771"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 656.23488,
@@ -7511,51 +8124,61 @@ ART.MapWorldPositions["black-temple"] = {
           y = 394.985067,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 656.23488,
       y = 388.155861,
       z = 112.693000793457,
     },
     ["black-temple:spawn:23374:cmangos-5640772"] = {
+      coordinateKind = "raw-server",
       x = 631.986181,
       y = 251.527856,
       z = 112.749000549316,
     },
     ["black-temple:spawn:23374:cmangos-5640773"] = {
+      coordinateKind = "raw-server",
       x = 637.288846,
       y = 237.103899,
       z = 112.759002685547,
     },
     ["black-temple:spawn:23374:cmangos-5640774"] = {
+      coordinateKind = "raw-server",
       x = 666.900946,
       y = 290.353019,
       z = 125.255996704102,
     },
     ["black-temple:spawn:23374:cmangos-5640775"] = {
+      coordinateKind = "raw-server",
       x = 669.150732,
       y = 286.561986,
       z = 125.25700378418,
     },
     ["black-temple:spawn:23374:cmangos-5640776"] = {
+      coordinateKind = "raw-server",
       x = 740.369869,
       y = 286.297166,
       z = 125.268997192383,
     },
     ["black-temple:spawn:23374:cmangos-5640777"] = {
+      coordinateKind = "raw-server",
       x = 742.598947,
       y = 290.401169,
       z = 125.267997741699,
     },
     ["black-temple:spawn:23374:cmangos-5640778"] = {
+      coordinateKind = "raw-server",
       x = 702.749764,
       y = 352.388878,
       z = 125.265998840332,
     },
     ["black-temple:spawn:23374:cmangos-5640779"] = {
+      coordinateKind = "raw-server",
       x = 707.531957,
       y = 352.477151,
       z = 125.264999389648,
     },
     ["black-temple:spawn:23374:cmangos-5640780"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 751.69099,
@@ -7598,11 +8221,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 390.514935,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 751.69099,
       y = 380.051004,
       z = 112.767997741699,
     },
     ["black-temple:spawn:23394:cmangos-5640631"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 788.668111,
@@ -7641,16 +8266,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 175.336736,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 788.668111,
       y = 173.363057,
       z = 212.429000854492,
     },
     ["black-temple:spawn:23394:cmangos-5640632"] = {
+      coordinateKind = "raw-server",
       x = 525.924054,
       y = 357.305107,
       z = 271.467010498047,
     },
     ["black-temple:spawn:23394:cmangos-5640633"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 642.41402,
@@ -7689,16 +8317,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 173.920939,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 642.41402,
       y = 149.818053,
       z = 245.082992553711,
     },
     ["black-temple:spawn:23394:cmangos-5640634"] = {
+      coordinateKind = "raw-server",
       x = 559.848098,
       y = 357.691867,
       z = 271.467010498047,
     },
     ["black-temple:spawn:23394:cmangos-5640635"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 548.231048,
@@ -7717,11 +8348,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 205.503878,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 548.231048,
       y = 222.39491,
       z = 271.9169921875,
     },
     ["black-temple:spawn:23394:cmangos-5640636"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 696.775922,
@@ -7768,246 +8401,295 @@ ART.MapWorldPositions["black-temple"] = {
           y = 173.725078,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 696.775922,
       y = 173.015018,
       z = 232.063995361328,
     },
     ["black-temple:spawn:23397:cmangos-5640637"] = {
+      coordinateKind = "raw-server",
       x = 549.777045,
       y = 315.550988,
       z = 271.467010498047,
     },
     ["black-temple:spawn:23397:cmangos-5640638"] = {
+      coordinateKind = "raw-server",
       x = 556.27109,
       y = 309.96295,
       z = 271.696990966797,
     },
     ["black-temple:spawn:23397:cmangos-5640639"] = {
+      coordinateKind = "raw-server",
       x = 560.510931,
       y = 281.830033,
       z = 271.815002441406,
     },
     ["black-temple:spawn:23397:cmangos-5640640"] = {
+      coordinateKind = "raw-server",
       x = 566.036991,
       y = 288.194985,
       z = 271.989990234375,
     },
     ["black-temple:spawn:23397:cmangos-5640641"] = {
+      coordinateKind = "raw-server",
       x = 525.814093,
       y = 265.923006,
       z = 271.545989990234,
     },
     ["black-temple:spawn:23397:cmangos-5640642"] = {
+      coordinateKind = "raw-server",
       x = 528.666952,
       y = 271.184087,
       z = 271.471984863281,
     },
     ["black-temple:spawn:23397:cmangos-5640643"] = {
+      coordinateKind = "raw-server",
       x = 580.156987,
       y = 123.108913,
       z = 258.200988769531,
     },
     ["black-temple:spawn:23397:cmangos-5640644"] = {
+      coordinateKind = "raw-server",
       x = 569.282072,
       y = 126.172958,
       z = 258.441986083984,
     },
     ["black-temple:spawn:23398:cmangos-5640645"] = {
+      coordinateKind = "raw-server",
       x = 517.543742,
       y = 77.956511,
       z = 112.78099822998,
     },
     ["black-temple:spawn:23398:cmangos-5640646"] = {
+      coordinateKind = "raw-server",
       x = 498.549845,
       y = 76.382697,
       z = 110.898002624512,
     },
     ["black-temple:spawn:23398:cmangos-5640647"] = {
+      coordinateKind = "raw-server",
       x = 486.084804,
       y = 77.533083,
       z = 111.771003723145,
     },
     ["black-temple:spawn:23398:cmangos-5640648"] = {
+      coordinateKind = "raw-server",
       x = 628.784994,
       y = 33.767917,
       z = 112.75,
     },
     ["black-temple:spawn:23398:cmangos-5640649"] = {
+      coordinateKind = "raw-server",
       x = 617.204755,
       y = 48.198956,
       z = 112.278999328613,
     },
     ["black-temple:spawn:23398:cmangos-5640650"] = {
+      coordinateKind = "raw-server",
       x = 608.629827,
       y = 36.48126,
       z = 112.726997375488,
     },
     ["black-temple:spawn:23398:cmangos-5640651"] = {
+      coordinateKind = "raw-server",
       x = 592.223743,
       y = 50.20328,
       z = 111.998001098633,
     },
     ["black-temple:spawn:23398:cmangos-5640652"] = {
+      coordinateKind = "raw-server",
       x = 588.574838,
       y = 36.4029,
       z = 112.759002685547,
     },
     ["black-temple:spawn:23398:cmangos-5640653"] = {
+      coordinateKind = "raw-server",
       x = 579.876787,
       y = 46.001563,
       z = 112.411003112793,
     },
     ["black-temple:spawn:23398:cmangos-5640654"] = {
+      coordinateKind = "raw-server",
       x = 528.98127,
       y = 34.604389,
       z = 113.282997131348,
     },
     ["black-temple:spawn:23398:cmangos-5640655"] = {
+      coordinateKind = "raw-server",
       x = 499.390997,
       y = 44.20919,
       z = 112.806999206543,
     },
     ["black-temple:spawn:23398:cmangos-5640656"] = {
+      coordinateKind = "raw-server",
       x = 504.39481,
       y = 34.743172,
       z = 113.515998840332,
     },
     ["black-temple:spawn:23398:cmangos-5640657"] = {
+      coordinateKind = "raw-server",
       x = 477.635796,
       y = 29.272113,
       z = 112.454002380371,
     },
     ["black-temple:spawn:23398:cmangos-5640658"] = {
+      coordinateKind = "raw-server",
       x = 518.719003,
       y = 48.937242,
       z = 113.304000854492,
     },
     ["black-temple:spawn:23398:cmangos-5640659"] = {
+      coordinateKind = "raw-server",
       x = 487.847135,
       y = 50.036646,
       z = 112.473999023438,
     },
     ["black-temple:spawn:23398:cmangos-5640660"] = {
+      coordinateKind = "raw-server",
       x = 604.255058,
       y = 104.212873,
       z = 112.588996887207,
     },
     ["black-temple:spawn:23398:cmangos-5640661"] = {
+      coordinateKind = "raw-server",
       x = 592.542183,
       y = 91.377835,
       z = 112.223999023438,
     },
     ["black-temple:spawn:23398:cmangos-5640662"] = {
+      coordinateKind = "raw-server",
       x = 595.774151,
       y = 81.633308,
       z = 111.050003051758,
     },
     ["black-temple:spawn:23398:cmangos-5640663"] = {
+      coordinateKind = "raw-server",
       x = 564.630854,
       y = 69.16883,
       z = 111.734001159668,
     },
     ["black-temple:spawn:23398:cmangos-5640664"] = {
+      coordinateKind = "raw-server",
       x = 554.04511,
       y = 64.440306,
       z = 112.16300201416,
     },
     ["black-temple:spawn:23398:cmangos-5640665"] = {
+      coordinateKind = "raw-server",
       x = 527.56592,
       y = 64.323709,
       z = 113.070999145508,
     },
     ["black-temple:spawn:23398:cmangos-5640666"] = {
+      coordinateKind = "raw-server",
       x = 548.43184,
       y = 34.533582,
       z = 112.626998901367,
     },
     ["black-temple:spawn:23398:cmangos-5640667"] = {
+      coordinateKind = "raw-server",
       x = 551.084012,
       y = 48.296198,
       z = 112.564002990723,
     },
     ["black-temple:spawn:23398:cmangos-5640668"] = {
+      coordinateKind = "raw-server",
       x = 538.471223,
       y = 51.533516,
       z = 112.967002868652,
     },
     ["black-temple:spawn:23398:cmangos-5640669"] = {
+      coordinateKind = "raw-server",
       x = 513.068236,
       y = 64.599859,
       z = 112.745002746582,
     },
     ["black-temple:spawn:23398:cmangos-5640670"] = {
+      coordinateKind = "raw-server",
       x = 493.056899,
       y = 62.789547,
       z = 112.194000244141,
     },
     ["black-temple:spawn:23398:cmangos-5640671"] = {
+      coordinateKind = "raw-server",
       x = 477.475177,
       y = 68.441401,
       z = 112.075996398926,
     },
     ["black-temple:spawn:23398:cmangos-5640672"] = {
+      coordinateKind = "raw-server",
       x = 570.470222,
       y = 101.713841,
       z = 113.397003173828,
     },
     ["black-temple:spawn:23398:cmangos-5640673"] = {
+      coordinateKind = "raw-server",
       x = 571.557059,
       y = 87.806305,
       z = 111.972999572754,
     },
     ["black-temple:spawn:23398:cmangos-5640674"] = {
+      coordinateKind = "raw-server",
       x = 562.50587,
       y = 94.67652,
       z = 112.694999694824,
     },
     ["black-temple:spawn:23398:cmangos-5640675"] = {
+      coordinateKind = "raw-server",
       x = 626.016974,
       y = 82.426824,
       z = 112.75700378418,
     },
     ["black-temple:spawn:23398:cmangos-5640676"] = {
+      coordinateKind = "raw-server",
       x = 617.822047,
       y = 103.104028,
       z = 112.750999450684,
     },
     ["black-temple:spawn:23398:cmangos-5640677"] = {
+      coordinateKind = "raw-server",
       x = 617.138157,
       y = 84.321633,
       z = 112.393997192383,
     },
     ["black-temple:spawn:23398:cmangos-5640678"] = {
+      coordinateKind = "raw-server",
       x = 543.15212,
       y = 82.01142,
       z = 113.121002197266,
     },
     ["black-temple:spawn:23398:cmangos-5640679"] = {
+      coordinateKind = "raw-server",
       x = 551.741039,
       y = 91.332518,
       z = 112.708000183105,
     },
     ["black-temple:spawn:23398:cmangos-5640680"] = {
+      coordinateKind = "raw-server",
       x = 553.356743,
       y = 103.97496,
       z = 112.781997680664,
     },
     ["black-temple:spawn:23398:cmangos-5640681"] = {
+      coordinateKind = "raw-server",
       x = 616.133029,
       y = 66.157623,
       z = 112.472999572754,
     },
     ["black-temple:spawn:23398:cmangos-5640682"] = {
+      coordinateKind = "raw-server",
       x = 605.79409,
       y = 62.755559,
       z = 111.802001953125,
     },
     ["black-temple:spawn:23398:cmangos-5640683"] = {
+      coordinateKind = "raw-server",
       x = 589.602911,
       y = 70.173352,
       z = 111.759002685547,
     },
     ["black-temple:spawn:23399:cmangos-5640684"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 560.178853,
@@ -8026,11 +8708,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 104.970985,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 571.957767,
       y = 100.14097,
       z = 112.710998535156,
     },
     ["black-temple:spawn:23399:cmangos-5640685"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 474.778793,
@@ -8049,11 +8733,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 84.754503,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 489.026874,
       y = 81.416165,
       z = 110.644996643066,
     },
     ["black-temple:spawn:23399:cmangos-5640686"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 601.507186,
@@ -8072,11 +8758,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 47.330856,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 603.394879,
       y = 38.229261,
       z = 112.744003295898,
     },
     ["black-temple:spawn:23399:cmangos-5640687"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 609.315956,
@@ -8095,11 +8783,13 @@ ART.MapWorldPositions["black-temple"] = {
           y = 90.188269,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 589.924149,
       y = 92.856768,
       z = 112.924003601074,
     },
     ["black-temple:spawn:23399:cmangos-5640688"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 477.236767,
@@ -8118,31 +8808,37 @@ ART.MapWorldPositions["black-temple"] = {
           y = 48.726707,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 555.027852,
       y = 30.413058,
       z = 112.444999694824,
     },
     ["black-temple:spawn:23400:cmangos-5640689"] = {
+      coordinateKind = "raw-server",
       x = 552.19803,
       y = 308.971895,
       z = 271.552001953125,
     },
     ["black-temple:spawn:23400:cmangos-5640690"] = {
+      coordinateKind = "raw-server",
       x = 558.363009,
       y = 285.370934,
       z = 271.746002197266,
     },
     ["black-temple:spawn:23400:cmangos-5640691"] = {
+      coordinateKind = "raw-server",
       x = 526.346935,
       y = 262.832062,
       z = 271.588989257812,
     },
     ["black-temple:spawn:23400:cmangos-5640692"] = {
+      coordinateKind = "raw-server",
       x = 576.822997,
       y = 123.100034,
       z = 258.216003417969,
     },
     ["black-temple:spawn:23401:cmangos-5640693"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 574.504165,
@@ -8165,16 +8861,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 94.905464,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 583.438947,
       y = 93.326929,
       z = 112.574996948242,
     },
     ["black-temple:spawn:23401:cmangos-5640694"] = {
+      coordinateKind = "raw-server",
       x = 580.440912,
       y = 89.232368,
       z = 111.167999267578,
     },
     ["black-temple:spawn:23401:cmangos-5640695"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 589.723795,
@@ -8197,16 +8896,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 64.614492,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 590.203973,
       y = 40.289287,
       z = 112.716003417969,
     },
     ["black-temple:spawn:23401:cmangos-5640696"] = {
+      coordinateKind = "raw-server",
       x = 595.564842,
       y = 39.159671,
       z = 112.714996337891,
     },
     ["black-temple:spawn:23401:cmangos-5640697"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 486.412757,
@@ -8225,16 +8927,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 30.049108,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 512.154891,
       y = 30.049108,
       z = 113.605003356934,
     },
     ["black-temple:spawn:23401:cmangos-5640698"] = {
+      coordinateKind = "raw-server",
       x = 514.564735,
       y = 25.659515,
       z = 113.5,
     },
     ["black-temple:spawn:23401:cmangos-5640699"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 473.217934,
@@ -8249,16 +8954,19 @@ ART.MapWorldPositions["black-temple"] = {
           y = 73.525379,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 473.217934,
       y = 73.227515,
       z = 111.846000671387,
     },
     ["black-temple:spawn:23401:cmangos-5640700"] = {
+      coordinateKind = "raw-server",
       x = 476.463893,
       y = 78.328015,
       z = 111.852996826172,
     },
     ["black-temple:spawn:23401:cmangos-5640701"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 547.956139,
@@ -8341,71 +9049,85 @@ ART.MapWorldPositions["black-temple"] = {
           y = 95.441241,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 550.194172,
       y = 95.341638,
       z = 112.567001342773,
     },
     ["black-temple:spawn:23401:cmangos-5640702"] = {
+      coordinateKind = "raw-server",
       x = 545.60002,
       y = 97.618807,
       z = 112.453002929688,
     },
     ["black-temple:spawn:23402:cmangos-5640703"] = {
+      coordinateKind = "raw-server",
       x = 553.594005,
       y = 316.801102,
       z = 271.601013183594,
     },
     ["black-temple:spawn:23402:cmangos-5640704"] = {
+      coordinateKind = "raw-server",
       x = 548.835017,
       y = 311.906934,
       z = 271.467010498047,
     },
     ["black-temple:spawn:23402:cmangos-5640705"] = {
+      coordinateKind = "raw-server",
       x = 564.531055,
       y = 282.863917,
       z = 271.813995361328,
     },
     ["black-temple:spawn:23402:cmangos-5640706"] = {
+      coordinateKind = "raw-server",
       x = 526.257003,
       y = 270.118082,
       z = 271.486999511719,
     },
     ["black-temple:spawn:23402:cmangos-5640707"] = {
+      coordinateKind = "raw-server",
       x = 531.159064,
       y = 270.025113,
       z = 271.489013671875,
     },
     ["black-temple:spawn:23402:cmangos-5640708"] = {
+      coordinateKind = "raw-server",
       x = 583.172948,
       y = 120.285123,
       z = 258.162994384766,
     },
     ["black-temple:spawn:23403:cmangos-5640709"] = {
+      coordinateKind = "raw-server",
       x = 556.380029,
       y = 313.328099,
       z = 271.700012207031,
     },
     ["black-temple:spawn:23403:cmangos-5640710"] = {
+      coordinateKind = "raw-server",
       x = 563.460057,
       y = 291.497981,
       z = 271.957000732422,
     },
     ["black-temple:spawn:23403:cmangos-5640711"] = {
+      coordinateKind = "raw-server",
       x = 560.896,
       y = 290.699131,
       z = 271.861999511719,
     },
     ["black-temple:spawn:23403:cmangos-5640712"] = {
+      coordinateKind = "raw-server",
       x = 528.989069,
       y = 260.410961,
       z = 271.622985839844,
     },
     ["black-temple:spawn:23403:cmangos-5640713"] = {
+      coordinateKind = "raw-server",
       x = 566.506063,
       y = 126.475106,
       z = 258.558013916016,
     },
     ["black-temple:spawn:23403:cmangos-5640714"] = {
+      coordinateKind = "raw-server",
       x = 572.674926,
       y = 125.540981,
       z = 258.289001464844,

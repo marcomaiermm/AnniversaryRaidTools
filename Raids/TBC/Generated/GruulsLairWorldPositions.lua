@@ -1,34 +1,49 @@
 -- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.
 -- Generator: art-030-generator-v2
--- Integration-private C_Map projection inputs; raid schema v1 is unchanged.
+-- Integration-private world-position matching inputs; raid schema v1 is unchanged.
 local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools requires Core/Bootstrap.lua")
 ART.MapWorldPositions = ART.MapWorldPositions or {}
 ART.MapWorldPositions["gruuls-lair"] = {
+    _meta = {
+      provenance = {
+        confidence = "candidate",
+        observedAt = "2026-08-21T18:15:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://warcraft.wiki.gg/wiki/Gruul_the_Dragonkiller#Locations",
+      },
+    },
     ["gruuls-lair:spawn:18831:maulgar"] = {
+      coordinateKind = "derived-affine",
       x = 143.0491,
       y = 192.725875,
     },
     ["gruuls-lair:spawn:18832:krosh"] = {
+      coordinateKind = "derived-affine",
       x = 149.823,
       y = 178.01905,
     },
     ["gruuls-lair:spawn:18834:olm"] = {
+      coordinateKind = "derived-affine",
       x = 146.5211,
       y = 185.358025,
     },
     ["gruuls-lair:spawn:18835:kiggler"] = {
+      coordinateKind = "derived-affine",
       x = 145.96005,
       y = 207.2962,
     },
     ["gruuls-lair:spawn:18836:blindeye"] = {
+      coordinateKind = "derived-affine",
       x = 144.73085,
       y = 199.921,
     },
     ["gruuls-lair:spawn:19044:gruul"] = {
+      coordinateKind = "derived-affine",
       x = 238.45,
       y = 370.525,
     },
     ["gruuls-lair:spawn:19389:entrance-brute"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 70.07515,
@@ -55,22 +70,27 @@ ART.MapWorldPositions["gruuls-lair"] = {
           y = 87.783625,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 67.1292,
       y = 99.48535,
     },
     ["gruuls-lair:spawn:19389:gruul-hall-brute"] = {
+      coordinateKind = "derived-affine",
       x = 177.683,
       y = 371.9572,
     },
     ["gruuls-lair:spawn:19389:lower-corridor-brute-1"] = {
+      coordinateKind = "derived-affine",
       x = 109.35915,
       y = 281.6341,
     },
     ["gruuls-lair:spawn:19389:lower-corridor-brute-2"] = {
+      coordinateKind = "derived-affine",
       x = 95.9797,
       y = 283.051075,
     },
     ["gruuls-lair:spawn:19389:upper-corridor-brute-1"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 115.93495,
@@ -125,34 +145,42 @@ ART.MapWorldPositions["gruuls-lair"] = {
           y = 361.1359,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 121.42505,
       y = 353.773825,
     },
     ["gruuls-lair:spawn:19389:upper-corridor-brute-2"] = {
+      coordinateKind = "derived-affine",
       x = 175.19415,
       y = 365.849875,
     },
     ["gruuls-lair:spawn:19389:upper-corridor-brute-3"] = {
+      coordinateKind = "derived-affine",
       x = 177.1391,
       y = 358.689925,
     },
     ["gruuls-lair:spawn:21350:entrance-priest-1"] = {
+      coordinateKind = "derived-affine",
       x = 65.63505,
       y = 130.7029,
     },
     ["gruuls-lair:spawn:21350:entrance-priest-2"] = {
+      coordinateKind = "derived-affine",
       x = 76.6184,
       y = 129.075925,
     },
     ["gruuls-lair:spawn:21350:gruul-hall-priest-1"] = {
+      coordinateKind = "derived-affine",
       x = 101.22585,
       y = 326.935825,
     },
     ["gruuls-lair:spawn:21350:gruul-hall-priest-2"] = {
+      coordinateKind = "derived-affine",
       x = 102.66785,
       y = 335.43295,
     },
     ["gruuls-lair:spawn:21350:lower-corridor-priest"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 102.66715,
@@ -175,6 +203,7 @@ ART.MapWorldPositions["gruuls-lair"] = {
           y = 310.837225,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 102.559,
       y = 288.508975,
     },

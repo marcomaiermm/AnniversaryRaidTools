@@ -1,34 +1,49 @@
 -- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.
 -- Generator: art-030-generator-v2
--- Integration-private C_Map projection inputs; raid schema v1 is unchanged.
+-- Integration-private world-position matching inputs; raid schema v1 is unchanged.
 local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools requires Core/Bootstrap.lua")
 ART.MapWorldPositions = ART.MapWorldPositions or {}
 ART.MapWorldPositions["serpentshrine-cavern"] = {
+    _meta = {
+      provenance = {
+        confidence = "candidate",
+        observedAt = "2026-08-22T12:00:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+      },
+    },
     ["serpentshrine-cavern:spawn:21212:5480290"] = {
+      coordinateKind = "raw-server",
       x = 29.9902000427246,
       y = -922.408996582031,
     },
     ["serpentshrine-cavern:spawn:21213:5480038"] = {
+      coordinateKind = "raw-server",
       x = 370.829010009766,
       y = -723.939025878906,
     },
     ["serpentshrine-cavern:spawn:21214:5480039"] = {
+      coordinateKind = "raw-server",
       x = 456.868988037109,
       y = -539.741027832031,
     },
     ["serpentshrine-cavern:spawn:21215:5480040"] = {
+      coordinateKind = "raw-server",
       x = 376.542999267578,
       y = -438.631011962891,
     },
     ["serpentshrine-cavern:spawn:21216:5480041"] = {
+      coordinateKind = "raw-server",
       x = -239.843002319336,
       y = -366.493988037109,
     },
     ["serpentshrine-cavern:spawn:21217:5489999"] = {
+      coordinateKind = "raw-server",
       x = 38.6884002685547,
       y = -418.088989257812,
     },
     ["serpentshrine-cavern:spawn:21218:5480042"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 45.3171,
@@ -79,10 +94,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -293.826,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 41.0752983093262,
       y = -294.18798828125,
     },
     ["serpentshrine-cavern:spawn:21218:5480043"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -48.7774,
@@ -137,10 +154,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -361.391,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -52.8569984436035,
       y = -362.195007324219,
     },
     ["serpentshrine-cavern:spawn:21218:5480044"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -52.4339,
@@ -191,10 +210,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -492.298,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -57.1702003479004,
       y = -492.410003662109,
     },
     ["serpentshrine-cavern:spawn:21218:5480045"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 136.957,
@@ -245,10 +266,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -349.479,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 133.292999267578,
       y = -349.462005615234,
     },
     ["serpentshrine-cavern:spawn:21218:5480046"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 31.9125,
@@ -299,10 +322,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -557.781,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 33.2317008972168,
       y = -559.424011230469,
     },
     ["serpentshrine-cavern:spawn:21218:5480047"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 138.153,
@@ -353,70 +378,87 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -506.121,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 133.723007202148,
       y = -505.886993408203,
     },
     ["serpentshrine-cavern:spawn:21220:5480048"] = {
+      coordinateKind = "raw-server",
       x = 20.9211006164551,
       y = -306.296997070312,
     },
     ["serpentshrine-cavern:spawn:21220:5480049"] = {
+      coordinateKind = "raw-server",
       x = 30.0720996856689,
       y = -320.821990966797,
     },
     ["serpentshrine-cavern:spawn:21220:5480050"] = {
+      coordinateKind = "raw-server",
       x = -71.3031005859375,
       y = -355.720001220703,
     },
     ["serpentshrine-cavern:spawn:21220:5480051"] = {
+      coordinateKind = "raw-server",
       x = -76.6720962524414,
       y = -368.011993408203,
     },
     ["serpentshrine-cavern:spawn:21220:5480052"] = {
+      coordinateKind = "raw-server",
       x = 121.825996398926,
       y = -347.639007568359,
     },
     ["serpentshrine-cavern:spawn:21220:5480053"] = {
+      coordinateKind = "raw-server",
       x = 127.387001037598,
       y = -338.110992431641,
     },
     ["serpentshrine-cavern:spawn:21220:5480054"] = {
+      coordinateKind = "raw-server",
       x = -35.4152984619141,
       y = -486.602996826172,
     },
     ["serpentshrine-cavern:spawn:21220:5480055"] = {
+      coordinateKind = "raw-server",
       x = -44.219799041748,
       y = -500.175994873047,
     },
     ["serpentshrine-cavern:spawn:21220:5480056"] = {
+      coordinateKind = "raw-server",
       x = 58.6627998352051,
       y = -540.491027832031,
     },
     ["serpentshrine-cavern:spawn:21220:5480057"] = {
+      coordinateKind = "raw-server",
       x = 63.5665016174316,
       y = -554.997985839844,
     },
     ["serpentshrine-cavern:spawn:21220:5480058"] = {
+      coordinateKind = "raw-server",
       x = 135.162002563477,
       y = -488.740997314453,
     },
     ["serpentshrine-cavern:spawn:21220:5480059"] = {
+      coordinateKind = "raw-server",
       x = 150.003997802734,
       y = -489.222991943359,
     },
     ["serpentshrine-cavern:spawn:21221:5480060"] = {
+      coordinateKind = "raw-server",
       x = -140.307006835938,
       y = -132.246994018555,
     },
     ["serpentshrine-cavern:spawn:21221:5480061"] = {
+      coordinateKind = "raw-server",
       x = -134.455001831055,
       y = -223.091003417969,
     },
     ["serpentshrine-cavern:spawn:21221:5480062"] = {
+      coordinateKind = "raw-server",
       x = -220.848999023438,
       y = -245.839996337891,
     },
     ["serpentshrine-cavern:spawn:21228:5480063"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 250.89,
@@ -455,18 +497,22 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -678.388,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 256.464996337891,
       y = -706.843017578125,
     },
     ["serpentshrine-cavern:spawn:21228:5480064"] = {
+      coordinateKind = "raw-server",
       x = 327.460998535156,
       y = -739.088012695312,
     },
     ["serpentshrine-cavern:spawn:21228:5480065"] = {
+      coordinateKind = "raw-server",
       x = 330.756988525391,
       y = -740.643981933594,
     },
     ["serpentshrine-cavern:spawn:21228:5480066"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 354.873,
@@ -517,18 +563,22 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -757.274,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 359.994995117188,
       y = -758.372985839844,
     },
     ["serpentshrine-cavern:spawn:21228:5480067"] = {
+      coordinateKind = "raw-server",
       x = 259.709991455078,
       y = -707.203002929688,
     },
     ["serpentshrine-cavern:spawn:21228:5480068"] = {
+      coordinateKind = "raw-server",
       x = 255.598007202148,
       y = -709.888977050781,
     },
     ["serpentshrine-cavern:spawn:21228:5480069"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 325.278,
@@ -571,10 +621,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -689.507,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 329.209014892578,
       y = -696.846984863281,
     },
     ["serpentshrine-cavern:spawn:21228:5480070"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 332.099,
@@ -645,14 +697,17 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -729.049,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 329.692993164062,
       y = -738.226013183594,
     },
     ["serpentshrine-cavern:spawn:21228:5480071"] = {
+      coordinateKind = "raw-server",
       x = 331.873992919922,
       y = -743.369995117188,
     },
     ["serpentshrine-cavern:spawn:21228:5480072"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 390.854,
@@ -695,94 +750,117 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -686.702,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 406.253997802734,
       y = -687.278015136719,
     },
     ["serpentshrine-cavern:spawn:21228:5480073"] = {
+      coordinateKind = "raw-server",
       x = 407.528015136719,
       y = -685.156982421875,
     },
     ["serpentshrine-cavern:spawn:21228:5480074"] = {
+      coordinateKind = "raw-server",
       x = 363.640991210938,
       y = -755.815002441406,
     },
     ["serpentshrine-cavern:spawn:21228:5480075"] = {
+      coordinateKind = "raw-server",
       x = 363.661987304688,
       y = -760.778991699219,
     },
     ["serpentshrine-cavern:spawn:21228:5480076"] = {
+      coordinateKind = "raw-server",
       x = 259.196990966797,
       y = -711.106994628906,
     },
     ["serpentshrine-cavern:spawn:21228:5480077"] = {
+      coordinateKind = "raw-server",
       x = 328.675994873047,
       y = -695.093994140625,
     },
     ["serpentshrine-cavern:spawn:21228:5480078"] = {
+      coordinateKind = "raw-server",
       x = 331.904998779297,
       y = -694.39501953125,
     },
     ["serpentshrine-cavern:spawn:21228:5480079"] = {
+      coordinateKind = "raw-server",
       x = 327.679992675781,
       y = -689.369018554688,
     },
     ["serpentshrine-cavern:spawn:21228:5480080"] = {
+      coordinateKind = "raw-server",
       x = 408.464996337891,
       y = -688.940979003906,
     },
     ["serpentshrine-cavern:spawn:21228:5480081"] = {
+      coordinateKind = "raw-server",
       x = 362.453002929688,
       y = -759.323974609375,
     },
     ["serpentshrine-cavern:spawn:21228:5480082"] = {
+      coordinateKind = "raw-server",
       x = 409.411010742188,
       y = -689.851989746094,
     },
     ["serpentshrine-cavern:spawn:21228:5480083"] = {
+      coordinateKind = "raw-server",
       x = 258.545989990234,
       y = -713.56298828125,
     },
     ["serpentshrine-cavern:spawn:21228:5480084"] = {
+      coordinateKind = "raw-server",
       x = 325.463012695312,
       y = -739.528991699219,
     },
     ["serpentshrine-cavern:spawn:21228:5480085"] = {
+      coordinateKind = "raw-server",
       x = 262.427001953125,
       y = -710.640991210938,
     },
     ["serpentshrine-cavern:spawn:21228:5480086"] = {
+      coordinateKind = "raw-server",
       x = 335.029998779297,
       y = -694.119995117188,
     },
     ["serpentshrine-cavern:spawn:21228:5480087"] = {
+      coordinateKind = "raw-server",
       x = 327.994995117188,
       y = -692.257019042969,
     },
     ["serpentshrine-cavern:spawn:21228:5480088"] = {
+      coordinateKind = "raw-server",
       x = 328.523010253906,
       y = -741.8759765625,
     },
     ["serpentshrine-cavern:spawn:21228:5480089"] = {
+      coordinateKind = "raw-server",
       x = 408.343994140625,
       y = -683.768005371094,
     },
     ["serpentshrine-cavern:spawn:21229:5480090"] = {
+      coordinateKind = "raw-server",
       x = 214.583999633789,
       y = -251.078994750977,
     },
     ["serpentshrine-cavern:spawn:21229:5480091"] = {
+      coordinateKind = "raw-server",
       x = 232.171997070312,
       y = -439.313995361328,
     },
     ["serpentshrine-cavern:spawn:21229:5480092"] = {
+      coordinateKind = "raw-server",
       x = 214.858993530273,
       y = -505.947998046875,
     },
     ["serpentshrine-cavern:spawn:21229:5480093"] = {
+      coordinateKind = "raw-server",
       x = 299.359008789062,
       y = -359.946014404297,
     },
     ["serpentshrine-cavern:spawn:21229:5480094"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 326.328,
@@ -817,18 +895,22 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -360.006,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 329.308013916016,
       y = -359.593994140625,
     },
     ["serpentshrine-cavern:spawn:21229:5480095"] = {
+      coordinateKind = "raw-server",
       x = 305.005004882812,
       y = -379.769989013672,
     },
     ["serpentshrine-cavern:spawn:21229:5480096"] = {
+      coordinateKind = "raw-server",
       x = 354.345001220703,
       y = -319.203002929688,
     },
     ["serpentshrine-cavern:spawn:21229:5480097"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 335.811,
@@ -855,18 +937,22 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -419.451,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 328.976013183594,
       y = -418.653015136719,
     },
     ["serpentshrine-cavern:spawn:21229:5480098"] = {
+      coordinateKind = "raw-server",
       x = 360.204010009766,
       y = -321.131988525391,
     },
     ["serpentshrine-cavern:spawn:21229:5480099"] = {
+      coordinateKind = "raw-server",
       x = 334.454986572266,
       y = -435.842010498047,
     },
     ["serpentshrine-cavern:spawn:21229:5480100"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 394.227,
@@ -893,98 +979,122 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -365.096,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 390.471984863281,
       y = -373.244995117188,
     },
     ["serpentshrine-cavern:spawn:21229:5480101"] = {
+      coordinateKind = "raw-server",
       x = 400.040985107422,
       y = -358.003997802734,
     },
     ["serpentshrine-cavern:spawn:21229:5480102"] = {
+      coordinateKind = "raw-server",
       x = 352.450012207031,
       y = -507.56298828125,
     },
     ["serpentshrine-cavern:spawn:21229:5480103"] = {
+      coordinateKind = "raw-server",
       x = 198.451995849609,
       y = -626.314025878906,
     },
     ["serpentshrine-cavern:spawn:21229:5480104"] = {
+      coordinateKind = "raw-server",
       x = 421.233001708984,
       y = -425.138000488281,
     },
     ["serpentshrine-cavern:spawn:21229:5480105"] = {
+      coordinateKind = "raw-server",
       x = 427.255004882812,
       y = -425.06298828125,
     },
     ["serpentshrine-cavern:spawn:21229:5480106"] = {
+      coordinateKind = "raw-server",
       x = 430.037994384766,
       y = -408.2919921875,
     },
     ["serpentshrine-cavern:spawn:21229:5480107"] = {
+      coordinateKind = "raw-server",
       x = 434.881011962891,
       y = -412.748992919922,
     },
     ["serpentshrine-cavern:spawn:21230:5480108"] = {
+      coordinateKind = "raw-server",
       x = 219.42399597168,
       y = -253.324996948242,
     },
     ["serpentshrine-cavern:spawn:21230:5480109"] = {
+      coordinateKind = "raw-server",
       x = 213.988998413086,
       y = -255.240005493164,
     },
     ["serpentshrine-cavern:spawn:21230:5480110"] = {
+      coordinateKind = "raw-server",
       x = 223.839004516602,
       y = -437.242004394531,
     },
     ["serpentshrine-cavern:spawn:21230:5480111"] = {
+      coordinateKind = "raw-server",
       x = 226.395004272461,
       y = -442.5830078125,
     },
     ["serpentshrine-cavern:spawn:21230:5480112"] = {
+      coordinateKind = "raw-server",
       x = 226.641998291016,
       y = -500.923004150391,
     },
     ["serpentshrine-cavern:spawn:21230:5480113"] = {
+      coordinateKind = "raw-server",
       x = 219.998001098633,
       y = -507.453002929688,
     },
     ["serpentshrine-cavern:spawn:21230:5480114"] = {
+      coordinateKind = "raw-server",
       x = 303.342010498047,
       y = -369.632995605469,
     },
     ["serpentshrine-cavern:spawn:21230:5480115"] = {
+      coordinateKind = "raw-server",
       x = 334.760009765625,
       y = -346.966003417969,
     },
     ["serpentshrine-cavern:spawn:21230:5480116"] = {
+      coordinateKind = "raw-server",
       x = 347.893005371094,
       y = -319.039001464844,
     },
     ["serpentshrine-cavern:spawn:21230:5480117"] = {
+      coordinateKind = "raw-server",
       x = 331.627990722656,
       y = -430.125,
     },
     ["serpentshrine-cavern:spawn:21230:5480118"] = {
+      coordinateKind = "raw-server",
       x = 388.873992919922,
       y = -375.066986083984,
     },
     ["serpentshrine-cavern:spawn:21230:5480119"] = {
+      coordinateKind = "raw-server",
       x = 192.332992553711,
       y = -620.635986328125,
     },
     ["serpentshrine-cavern:spawn:21230:5480120"] = {
+      coordinateKind = "raw-server",
       x = 203.285995483398,
       y = -618.515014648438,
     },
     ["serpentshrine-cavern:spawn:21230:5480121"] = {
+      coordinateKind = "raw-server",
       x = 355.335998535156,
       y = -495.328002929688,
     },
     ["serpentshrine-cavern:spawn:21231:5480122"] = {
+      coordinateKind = "raw-server",
       x = 336.057006835938,
       y = -442.131011962891,
     },
     ["serpentshrine-cavern:spawn:21231:5480123"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 340.679,
@@ -1015,22 +1125,27 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -503.398,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 347.419006347656,
       y = -499.001007080078,
     },
     ["serpentshrine-cavern:spawn:21231:5480124"] = {
+      coordinateKind = "raw-server",
       x = 398.527008056641,
       y = -376.647003173828,
     },
     ["serpentshrine-cavern:spawn:21231:5480125"] = {
+      coordinateKind = "raw-server",
       x = 349.789001464844,
       y = -502.846008300781,
     },
     ["serpentshrine-cavern:spawn:21231:5480126"] = {
+      coordinateKind = "raw-server",
       x = 351.736999511719,
       y = -496.703002929688,
     },
     ["serpentshrine-cavern:spawn:21231:5480127"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 425.123,
@@ -1117,10 +1232,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -423.698,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 424.234985351562,
       y = -427.627990722656,
     },
     ["serpentshrine-cavern:spawn:21231:5480128"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 426.582,
@@ -1179,22 +1296,27 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -409.923,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 430.743988037109,
       y = -412.565002441406,
     },
     ["serpentshrine-cavern:spawn:21232:5480129"] = {
+      coordinateKind = "raw-server",
       x = 218.307006835938,
       y = -261.563995361328,
     },
     ["serpentshrine-cavern:spawn:21232:5480130"] = {
+      coordinateKind = "raw-server",
       x = 232.860000610352,
       y = -432.739990234375,
     },
     ["serpentshrine-cavern:spawn:21232:5480131"] = {
+      coordinateKind = "raw-server",
       x = 225.514007568359,
       y = -512.515014648438,
     },
     ["serpentshrine-cavern:spawn:21232:5480132"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 296.251,
@@ -1217,58 +1339,72 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -363.685,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 297.835998535156,
       y = -366.010009765625,
     },
     ["serpentshrine-cavern:spawn:21232:5480133"] = {
+      coordinateKind = "raw-server",
       x = 335.807006835938,
       y = -354.22900390625,
     },
     ["serpentshrine-cavern:spawn:21232:5480134"] = {
+      coordinateKind = "raw-server",
       x = 343.630004882812,
       y = -353.545989990234,
     },
     ["serpentshrine-cavern:spawn:21232:5480135"] = {
+      coordinateKind = "raw-server",
       x = 330.023986816406,
       y = -422.776000976562,
     },
     ["serpentshrine-cavern:spawn:21232:5480136"] = {
+      coordinateKind = "raw-server",
       x = 327.324005126953,
       y = -441.5419921875,
     },
     ["serpentshrine-cavern:spawn:21232:5480137"] = {
+      coordinateKind = "raw-server",
       x = 197.947998046875,
       y = -618.038024902344,
     },
     ["serpentshrine-cavern:spawn:21232:5480138"] = {
+      coordinateKind = "raw-server",
       x = 402.265991210938,
       y = -369.394989013672,
     },
     ["serpentshrine-cavern:spawn:21246:5480139"] = {
+      coordinateKind = "raw-server",
       x = -140.429000854492,
       y = -135.498992919922,
     },
     ["serpentshrine-cavern:spawn:21246:5480140"] = {
+      coordinateKind = "raw-server",
       x = -139.458999633789,
       y = -128.787994384766,
     },
     ["serpentshrine-cavern:spawn:21246:5480141"] = {
+      coordinateKind = "raw-server",
       x = -137.330001831055,
       y = -222.977005004883,
     },
     ["serpentshrine-cavern:spawn:21246:5480142"] = {
+      coordinateKind = "raw-server",
       x = -131.457992553711,
       y = -223.563995361328,
     },
     ["serpentshrine-cavern:spawn:21246:5480143"] = {
+      coordinateKind = "raw-server",
       x = -220.369995117188,
       y = -248.003005981445,
     },
     ["serpentshrine-cavern:spawn:21246:5480144"] = {
+      coordinateKind = "raw-server",
       x = -221.884994506836,
       y = -243.64599609375,
     },
     ["serpentshrine-cavern:spawn:21251:5480145"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -136.007,
@@ -1299,10 +1435,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -216.784,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -152.483993530273,
       y = -212.22900390625,
     },
     ["serpentshrine-cavern:spawn:21251:5480146"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -181.282,
@@ -1333,10 +1471,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -244.007,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -192.511993408203,
       y = -232.085998535156,
     },
     ["serpentshrine-cavern:spawn:21251:5480147"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 197.688,
@@ -1435,10 +1575,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -318.906,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 209.570999145508,
       y = -319.302001953125,
     },
     ["serpentshrine-cavern:spawn:21251:5480148"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 225.113,
@@ -1521,10 +1663,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -659.618,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 231.283004760742,
       y = -650.963012695312,
     },
     ["serpentshrine-cavern:spawn:21251:5480149"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 463.269,
@@ -1583,10 +1727,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -474.755,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 459.045989990234,
       y = -481.497985839844,
     },
     ["serpentshrine-cavern:spawn:21251:5480150"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 499.505,
@@ -1597,10 +1743,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -530.727,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 499.81298828125,
       y = -471.148986816406,
     },
     ["serpentshrine-cavern:spawn:21251:5480151"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 450.21,
@@ -1623,10 +1771,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -511.151,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 483.170989990234,
       y = -508.75,
     },
     ["serpentshrine-cavern:spawn:21251:5480152"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 501.283,
@@ -1645,10 +1795,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -550.918,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 500.807006835938,
       y = -556.689025878906,
     },
     ["serpentshrine-cavern:spawn:21251:5480153"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 501.806,
@@ -1707,10 +1859,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -578.104,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 516.93701171875,
       y = -578.184997558594,
     },
     ["serpentshrine-cavern:spawn:21263:5480155"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 46.68,
@@ -1721,10 +1875,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -298.409,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 46.6800003051758,
       y = -273.194000244141,
     },
     ["serpentshrine-cavern:spawn:21263:5480156"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 17.6475,
@@ -1735,10 +1891,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -300.301,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 17.6474990844727,
       y = -283.171997070312,
     },
     ["serpentshrine-cavern:spawn:21263:5480157"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 61.458,
@@ -1749,10 +1907,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -300.106,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 61.4580001831055,
       y = -280.532012939453,
     },
     ["serpentshrine-cavern:spawn:21263:5480158"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 51.644,
@@ -1763,10 +1923,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -308.956,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 44.6755981445312,
       y = -314.649993896484,
     },
     ["serpentshrine-cavern:spawn:21263:5480159"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -51.333,
@@ -1777,10 +1939,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -367.32,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -51.3330001831055,
       y = -340.183990478516,
     },
     ["serpentshrine-cavern:spawn:21263:5480160"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -26.5779,
@@ -1791,10 +1955,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -372.319,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -26.5778999328613,
       y = -376.688995361328,
     },
     ["serpentshrine-cavern:spawn:21263:5480161"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -33.319,
@@ -1805,10 +1971,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -374.926,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -33.3190002441406,
       y = -391.097991943359,
     },
     ["serpentshrine-cavern:spawn:21263:5480162"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -46.3299,
@@ -1819,10 +1987,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -375.661,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -46.3298988342285,
       y = -400.239013671875,
     },
     ["serpentshrine-cavern:spawn:21263:5480163"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -87.4249,
@@ -1833,10 +2003,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -481.853,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -87.4248962402344,
       y = -473.786987304688,
     },
     ["serpentshrine-cavern:spawn:21263:5480164"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -48.6206,
@@ -1847,10 +2019,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -479.272,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -48.6206016540527,
       y = -451.717987060547,
     },
     ["serpentshrine-cavern:spawn:21263:5480165"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -78.6161,
@@ -1861,10 +2035,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -478.444,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -78.616096496582,
       y = -459.736999511719,
     },
     ["serpentshrine-cavern:spawn:21263:5480166"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -79.4771,
@@ -1875,10 +2051,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -485.276,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -79.4770965576172,
       y = -504.286987304688,
     },
     ["serpentshrine-cavern:spawn:21263:5480167"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 119.77,
@@ -1889,10 +2067,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -355.855,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 119.769996643066,
       y = -375.648010253906,
     },
     ["serpentshrine-cavern:spawn:21263:5480168"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 13.5078,
@@ -1903,10 +2083,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -552.801,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 13.5078001022339,
       y = -540.596984863281,
     },
     ["serpentshrine-cavern:spawn:21263:5480169"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 24.5849,
@@ -1917,10 +2099,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -548.892,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 24.5848999023438,
       y = -528.47900390625,
     },
     ["serpentshrine-cavern:spawn:21263:5480170"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 10.5393,
@@ -1931,10 +2115,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -555.754,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 10.5392999649048,
       y = -557.078979492188,
     },
     ["serpentshrine-cavern:spawn:21263:5480171"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 16.2609,
@@ -1945,10 +2131,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -559.16,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 16.2609004974365,
       y = -572.052978515625,
     },
     ["serpentshrine-cavern:spawn:21263:5480172"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 111.906,
@@ -1959,10 +2147,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -511.384,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 111.90599822998,
       y = -518.52099609375,
     },
     ["serpentshrine-cavern:spawn:21263:5480173"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 164.488,
@@ -1973,10 +2163,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -350.154,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 164.488006591797,
       y = -332.018005371094,
     },
     ["serpentshrine-cavern:spawn:21263:5480174"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 171.418,
@@ -1987,10 +2179,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -354.262,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 171.417999267578,
       y = -362.239013671875,
     },
     ["serpentshrine-cavern:spawn:21263:5480175"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 163.624,
@@ -2001,10 +2195,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -356.944,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 163.623992919922,
       y = -375.524993896484,
     },
     ["serpentshrine-cavern:spawn:21263:5480176"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 119.718,
@@ -2015,10 +2211,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -513.907,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 119.718002319336,
       y = -532.422973632812,
     },
     ["serpentshrine-cavern:spawn:21263:5480177"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 149.749,
@@ -2029,10 +2227,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -513.298,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 149.748992919922,
       y = -540.398010253906,
     },
     ["serpentshrine-cavern:spawn:21263:5480178"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 171.484,
@@ -2043,58 +2243,72 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -510.101,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 171.483993530273,
       y = -518.557006835938,
     },
     ["serpentshrine-cavern:spawn:21298:5480179"] = {
+      coordinateKind = "raw-server",
       x = 211.363006591797,
       y = -260.289001464844,
     },
     ["serpentshrine-cavern:spawn:21298:5480180"] = {
+      coordinateKind = "raw-server",
       x = 223.85400390625,
       y = -256.631011962891,
     },
     ["serpentshrine-cavern:spawn:21298:5480181"] = {
+      coordinateKind = "raw-server",
       x = 219.634994506836,
       y = -440.717010498047,
     },
     ["serpentshrine-cavern:spawn:21298:5480182"] = {
+      coordinateKind = "raw-server",
       x = 225.953994750977,
       y = -430.605010986328,
     },
     ["serpentshrine-cavern:spawn:21298:5480183"] = {
+      coordinateKind = "raw-server",
       x = 219.089004516602,
       y = -500.709014892578,
     },
     ["serpentshrine-cavern:spawn:21298:5480184"] = {
+      coordinateKind = "raw-server",
       x = 218.576995849609,
       y = -512.926025390625,
     },
     ["serpentshrine-cavern:spawn:21298:5480185"] = {
+      coordinateKind = "raw-server",
       x = 257.757995605469,
       y = -273.480010986328,
     },
     ["serpentshrine-cavern:spawn:21298:5480186"] = {
+      coordinateKind = "raw-server",
       x = 257.341003417969,
       y = -257.821990966797,
     },
     ["serpentshrine-cavern:spawn:21298:5480187"] = {
+      coordinateKind = "raw-server",
       x = 194.436004638672,
       y = -615.080017089844,
     },
     ["serpentshrine-cavern:spawn:21298:5480188"] = {
+      coordinateKind = "raw-server",
       x = 203.656005859375,
       y = -624.283020019531,
     },
     ["serpentshrine-cavern:spawn:21298:5480189"] = {
+      coordinateKind = "raw-server",
       x = 254.666000366211,
       y = -661.2080078125,
     },
     ["serpentshrine-cavern:spawn:21298:5480190"] = {
+      coordinateKind = "raw-server",
       x = 239.162994384766,
       y = -672.661010742188,
     },
     ["serpentshrine-cavern:spawn:21298:5480191"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 500.599,
@@ -2121,10 +2335,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -640.451,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 500.933013916016,
       y = -629.155029296875,
     },
     ["serpentshrine-cavern:spawn:21298:5480192"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 448.98,
@@ -2151,42 +2367,52 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -724.024,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 490.39599609375,
       y = -725.054992675781,
     },
     ["serpentshrine-cavern:spawn:21299:5480193"] = {
+      coordinateKind = "raw-server",
       x = 252.869003295898,
       y = -269.442993164062,
     },
     ["serpentshrine-cavern:spawn:21299:5480194"] = {
+      coordinateKind = "raw-server",
       x = 252.658996582031,
       y = -261.040008544922,
     },
     ["serpentshrine-cavern:spawn:21299:5480195"] = {
+      coordinateKind = "raw-server",
       x = 250.705001831055,
       y = -661.083984375,
     },
     ["serpentshrine-cavern:spawn:21299:5480196"] = {
+      coordinateKind = "raw-server",
       x = 240.794006347656,
       y = -668.348022460938,
     },
     ["serpentshrine-cavern:spawn:21299:5480197"] = {
+      coordinateKind = "raw-server",
       x = 497.872009277344,
       y = -630.679992675781,
     },
     ["serpentshrine-cavern:spawn:21299:5480198"] = {
+      coordinateKind = "raw-server",
       x = 504.066009521484,
       y = -630.125,
     },
     ["serpentshrine-cavern:spawn:21299:5480199"] = {
+      coordinateKind = "raw-server",
       x = 492.640014648438,
       y = -727.161987304688,
     },
     ["serpentshrine-cavern:spawn:21299:5480200"] = {
+      coordinateKind = "raw-server",
       x = 492.002990722656,
       y = -722.513977050781,
     },
     ["serpentshrine-cavern:spawn:21301:5480201"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 50.4095,
@@ -2201,10 +2427,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -287.587,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 41.5786018371582,
       y = -282.726989746094,
     },
     ["serpentshrine-cavern:spawn:21301:5480202"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 62.6766,
@@ -2219,10 +2447,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -313.471,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 57.9761009216309,
       y = -316.598999023438,
     },
     ["serpentshrine-cavern:spawn:21301:5480203"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -39.4635,
@@ -2241,10 +2471,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -351.299,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -45.7597999572754,
       y = -352.256988525391,
     },
     ["serpentshrine-cavern:spawn:21301:5480204"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -46.0906,
@@ -2263,10 +2495,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -392.384,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -49.3138999938965,
       y = -389.476013183594,
     },
     ["serpentshrine-cavern:spawn:21301:5480205"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -67.3108,
@@ -2285,10 +2519,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -459.909,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -60.7019004821777,
       y = -461.156005859375,
     },
     ["serpentshrine-cavern:spawn:21301:5480206"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = -76.1053,
@@ -2307,10 +2543,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -481.391,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = -78.401496887207,
       y = -482.657012939453,
     },
     ["serpentshrine-cavern:spawn:21301:5480207"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 19.6877,
@@ -2325,10 +2563,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -534.194,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 24.3288993835449,
       y = -539.427001953125,
     },
     ["serpentshrine-cavern:spawn:21301:5480208"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 130.117,
@@ -2347,10 +2587,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -373.986,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 134.212997436523,
       y = -372.912994384766,
     },
     ["serpentshrine-cavern:spawn:21301:5480209"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 37.3388,
@@ -2369,10 +2611,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -571.591,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 41.5845985412598,
       y = -572.567993164062,
     },
     ["serpentshrine-cavern:spawn:21301:5480210"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 152.95,
@@ -2387,10 +2631,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -353.709,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 160.830001831055,
       y = -344.493011474609,
     },
     ["serpentshrine-cavern:spawn:21301:5480211"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 121.498,
@@ -2405,10 +2651,12 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -528.003,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 124.162002563477,
       y = -516.971984863281,
     },
     ["serpentshrine-cavern:spawn:21301:5480212"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 152.09,
@@ -2423,62 +2671,77 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -510.279,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 160.59700012207,
       y = -522.172973632812,
     },
     ["serpentshrine-cavern:spawn:21301:5480213"] = {
+      coordinateKind = "raw-server",
       x = 493.546997070312,
       y = -631.669006347656,
     },
     ["serpentshrine-cavern:spawn:21301:5480214"] = {
+      coordinateKind = "raw-server",
       x = 507.164001464844,
       y = -630.931030273438,
     },
     ["serpentshrine-cavern:spawn:21301:5480215"] = {
+      coordinateKind = "raw-server",
       x = 494.967010498047,
       y = -729.47900390625,
     },
     ["serpentshrine-cavern:spawn:21301:5480216"] = {
+      coordinateKind = "raw-server",
       x = 493.265014648438,
       y = -719.471984863281,
     },
     ["serpentshrine-cavern:spawn:21339:5480217"] = {
+      coordinateKind = "raw-server",
       x = -141.682998657227,
       y = -139.488998413086,
     },
     ["serpentshrine-cavern:spawn:21339:5480218"] = {
+      coordinateKind = "raw-server",
       x = -138.052001953125,
       y = -124.959999084473,
     },
     ["serpentshrine-cavern:spawn:21339:5480219"] = {
+      coordinateKind = "raw-server",
       x = -127.487998962402,
       y = -222.92399597168,
     },
     ["serpentshrine-cavern:spawn:21339:5480220"] = {
+      coordinateKind = "raw-server",
       x = -141.184005737305,
       y = -222.223999023438,
     },
     ["serpentshrine-cavern:spawn:21339:5480221"] = {
+      coordinateKind = "raw-server",
       x = -221.645004272461,
       y = -239.363006591797,
     },
     ["serpentshrine-cavern:spawn:21339:5480222"] = {
+      coordinateKind = "raw-server",
       x = -217.904006958008,
       y = -251.281997680664,
     },
     ["serpentshrine-cavern:spawn:21806:5480273"] = {
+      coordinateKind = "raw-server",
       x = 373.218994140625,
       y = -429.148010253906,
     },
     ["serpentshrine-cavern:spawn:21806:5480274"] = {
+      coordinateKind = "raw-server",
       x = 369.234008789062,
       y = -446.472991943359,
     },
     ["serpentshrine-cavern:spawn:21806:5480275"] = {
+      coordinateKind = "raw-server",
       x = 385.157989501953,
       y = -441.596984863281,
     },
     ["serpentshrine-cavern:spawn:21863:5480276"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 311.738,
@@ -2505,22 +2768,27 @@ ART.MapWorldPositions["serpentshrine-cavern"] = {
           y = -373.256,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 313.842010498047,
       y = -373.493011474609,
     },
     ["serpentshrine-cavern:spawn:21863:5480277"] = {
+      coordinateKind = "raw-server",
       x = 396.451995849609,
       y = -369.932006835938,
     },
     ["serpentshrine-cavern:spawn:21964:5480281"] = {
+      coordinateKind = "raw-server",
       x = 462.675994873047,
       y = -546.956970214844,
     },
     ["serpentshrine-cavern:spawn:21965:5480282"] = {
+      coordinateKind = "raw-server",
       x = 462.519012451172,
       y = -533.390991210938,
     },
     ["serpentshrine-cavern:spawn:21966:5480283"] = {
+      coordinateKind = "raw-server",
       x = 465.738006591797,
       y = -540.036010742188,
     },

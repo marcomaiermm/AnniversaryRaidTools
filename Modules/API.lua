@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Stable raid-domain API for addon consumers.
 
 local _, MDT = ...

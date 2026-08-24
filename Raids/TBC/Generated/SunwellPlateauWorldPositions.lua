@@ -1,138 +1,179 @@
 -- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.
 -- Generator: art-030-generator-v2
--- Integration-private C_Map projection inputs; raid schema v1 is unchanged.
+-- Integration-private world-position matching inputs; raid schema v1 is unchanged.
 local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools requires Core/Bootstrap.lua")
 ART.MapWorldPositions = ART.MapWorldPositions or {}
 ART.MapWorldPositions["sunwell-plateau"] = {
+    _meta = {
+      provenance = {
+        confidence = "candidate",
+        observedAt = "2026-08-22T12:00:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature",
+      },
+    },
     ["sunwell-plateau:spawn:24850:5800061"] = {
+      coordinateKind = "raw-server",
       x = 1704.2099609375,
       y = 924.757995605469,
     },
     ["sunwell-plateau:spawn:24882:5800062"] = {
+      coordinateKind = "raw-server",
       x = 1463.82995605469,
       y = 611.512023925781,
     },
     ["sunwell-plateau:spawn:24891:5800063"] = {
+      coordinateKind = "raw-server",
       x = 1709.08996582031,
       y = 927.502990722656,
     },
     ["sunwell-plateau:spawn:24892:5800064"] = {
+      coordinateKind = "raw-server",
       x = 1699.91003417969,
       y = 929.02099609375,
     },
     ["sunwell-plateau:spawn:25038:5809999"] = {
+      coordinateKind = "raw-server",
       x = 1469.842,
       y = 617.6385,
     },
     ["sunwell-plateau:spawn:25165:5800346"] = {
+      coordinateKind = "raw-server",
       x = 1814.27001953125,
       y = 626.452026367188,
     },
     ["sunwell-plateau:spawn:25166:5800347"] = {
+      coordinateKind = "raw-server",
       x = 1818.2099609375,
       y = 625.044006347656,
     },
     ["sunwell-plateau:spawn:25363:5800068"] = {
+      coordinateKind = "raw-server",
       x = 1601.5,
       y = 1012.65997314453,
     },
     ["sunwell-plateau:spawn:25363:5800069"] = {
+      coordinateKind = "raw-server",
       x = 1615.84997558594,
       y = 831.328979492188,
     },
     ["sunwell-plateau:spawn:25363:5800070"] = {
+      coordinateKind = "raw-server",
       x = 1626.43994140625,
       y = 924.52099609375,
     },
     ["sunwell-plateau:spawn:25363:5800071"] = {
+      coordinateKind = "raw-server",
       x = 1651.33996582031,
       y = 922.409973144531,
     },
     ["sunwell-plateau:spawn:25363:5800072"] = {
+      coordinateKind = "raw-server",
       x = 1655.14001464844,
       y = 923.453002929688,
     },
     ["sunwell-plateau:spawn:25363:5800073"] = {
+      coordinateKind = "raw-server",
       x = 1656.10998535156,
       y = 988.593017578125,
     },
     ["sunwell-plateau:spawn:25363:5800074"] = {
+      coordinateKind = "raw-server",
       x = 1663.21997070312,
       y = 1047.7900390625,
     },
     ["sunwell-plateau:spawn:25363:5800075"] = {
+      coordinateKind = "raw-server",
       x = 1663.31994628906,
       y = 744.10400390625,
     },
     ["sunwell-plateau:spawn:25363:5800076"] = {
+      coordinateKind = "raw-server",
       x = 1739.84997558594,
       y = 1004.78002929688,
     },
     ["sunwell-plateau:spawn:25363:5800077"] = {
+      coordinateKind = "raw-server",
       x = 1745.81005859375,
       y = 1060.31005859375,
     },
     ["sunwell-plateau:spawn:25363:5800078"] = {
+      coordinateKind = "raw-server",
       x = 1808.75,
       y = 845.278991699219,
     },
     ["sunwell-plateau:spawn:25363:5800079"] = {
+      coordinateKind = "raw-server",
       x = 1810.94995117188,
       y = 1018.30999755859,
     },
     ["sunwell-plateau:spawn:25367:5800081"] = {
+      coordinateKind = "raw-server",
       x = 1609.56005859375,
       y = 1048.21997070312,
     },
     ["sunwell-plateau:spawn:25367:5800083"] = {
+      coordinateKind = "raw-server",
       x = 1635.08996582031,
       y = 923.575988769531,
     },
     ["sunwell-plateau:spawn:25367:5800084"] = {
+      coordinateKind = "raw-server",
       x = 1636.23999023438,
       y = 927.088012695312,
     },
     ["sunwell-plateau:spawn:25367:5800085"] = {
+      coordinateKind = "raw-server",
       x = 1644.33996582031,
       y = 969.4990234375,
     },
     ["sunwell-plateau:spawn:25367:5800087"] = {
+      coordinateKind = "raw-server",
       x = 1658.56005859375,
       y = 1049.71997070312,
     },
     ["sunwell-plateau:spawn:25367:5800088"] = {
+      coordinateKind = "raw-server",
       x = 1659.48999023438,
       y = 1042.77001953125,
     },
     ["sunwell-plateau:spawn:25367:5800089"] = {
+      coordinateKind = "raw-server",
       x = 1680.0400390625,
       y = 992.159973144531,
     },
     ["sunwell-plateau:spawn:25367:5800090"] = {
+      coordinateKind = "raw-server",
       x = 1742.13000488281,
       y = 1066.91003417969,
     },
     ["sunwell-plateau:spawn:25367:5800092"] = {
+      coordinateKind = "raw-server",
       x = 1779.51000976562,
       y = 837.619018554688,
     },
     ["sunwell-plateau:spawn:25368:5800095"] = {
+      coordinateKind = "raw-server",
       x = 1628.53002929688,
       y = 929.174987792969,
     },
     ["sunwell-plateau:spawn:25368:5800096"] = {
+      coordinateKind = "raw-server",
       x = 1652.43994140625,
       y = 1052.5400390625,
     },
     ["sunwell-plateau:spawn:25368:5800097"] = {
+      coordinateKind = "raw-server",
       x = 1662.59997558594,
       y = 929.875,
     },
     ["sunwell-plateau:spawn:25369:5800098"] = {
+      coordinateKind = "raw-server",
       x = 1610.0400390625,
       y = 1005.98999023438,
     },
     ["sunwell-plateau:spawn:25369:5800099"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1612.5,
@@ -263,18 +304,22 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 1059.48,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1611.23999023438,
       y = 1054.28002929688,
     },
     ["sunwell-plateau:spawn:25369:5800100"] = {
+      coordinateKind = "raw-server",
       x = 1620.69995117188,
       y = 840.905029296875,
     },
     ["sunwell-plateau:spawn:25369:5800101"] = {
+      coordinateKind = "raw-server",
       x = 1624.69995117188,
       y = 927.244995117188,
     },
     ["sunwell-plateau:spawn:25369:5800102"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1647.32,
@@ -381,34 +426,42 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 978.115,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1646.13000488281,
       y = 975.68798828125,
     },
     ["sunwell-plateau:spawn:25369:5800103"] = {
+      coordinateKind = "raw-server",
       x = 1650.82995605469,
       y = 739.078002929688,
     },
     ["sunwell-plateau:spawn:25369:5800104"] = {
+      coordinateKind = "raw-server",
       x = 1654.78002929688,
       y = 927.182983398438,
     },
     ["sunwell-plateau:spawn:25369:5800105"] = {
+      coordinateKind = "raw-server",
       x = 1656.32995605469,
       y = 1053.60998535156,
     },
     ["sunwell-plateau:spawn:25369:5800106"] = {
+      coordinateKind = "raw-server",
       x = 1669.22998046875,
       y = 980.833984375,
     },
     ["sunwell-plateau:spawn:25369:5800107"] = {
+      coordinateKind = "raw-server",
       x = 1747.60998535156,
       y = 1066.36999511719,
     },
     ["sunwell-plateau:spawn:25369:5800109"] = {
+      coordinateKind = "raw-server",
       x = 1757.43994140625,
       y = 995.046020507812,
     },
     ["sunwell-plateau:spawn:25369:5800110"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1752.85,
@@ -471,178 +524,222 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 836.36,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1769.40002441406,
       y = 836.642028808594,
     },
     ["sunwell-plateau:spawn:25369:5800112"] = {
+      coordinateKind = "raw-server",
       x = 1799.56994628906,
       y = 851.052978515625,
     },
     ["sunwell-plateau:spawn:25369:5800113"] = {
+      coordinateKind = "raw-server",
       x = 1806.78002929688,
       y = 1008.48999023438,
     },
     ["sunwell-plateau:spawn:25370:5800091"] = {
+      coordinateKind = "raw-server",
       x = 1744.91003417969,
       y = 996.581970214844,
     },
     ["sunwell-plateau:spawn:25370:5800094"] = {
+      coordinateKind = "raw-server",
       x = 1799.23999023438,
       y = 1025.18994140625,
     },
     ["sunwell-plateau:spawn:25370:5800114"] = {
+      coordinateKind = "raw-server",
       x = 1595.11999511719,
       y = 841.763000488281,
     },
     ["sunwell-plateau:spawn:25370:5800115"] = {
+      coordinateKind = "raw-server",
       x = 1610.81994628906,
       y = 1033.81994628906,
     },
     ["sunwell-plateau:spawn:25370:5800116"] = {
+      coordinateKind = "raw-server",
       x = 1613.03002929688,
       y = 1048.25,
     },
     ["sunwell-plateau:spawn:25370:5800117"] = {
+      coordinateKind = "raw-server",
       x = 1647.80004882812,
       y = 969.468017578125,
     },
     ["sunwell-plateau:spawn:25370:5800118"] = {
+      coordinateKind = "raw-server",
       x = 1661.51000976562,
       y = 734.182006835938,
     },
     ["sunwell-plateau:spawn:25370:5800119"] = {
+      coordinateKind = "raw-server",
       x = 1665.58996582031,
       y = 926.208984375,
     },
     ["sunwell-plateau:spawn:25370:5800120"] = {
+      coordinateKind = "raw-server",
       x = 1671.59997558594,
       y = 994.734985351562,
     },
     ["sunwell-plateau:spawn:25370:5800122"] = {
+      coordinateKind = "raw-server",
       x = 1750.61999511719,
       y = 1052.43994140625,
     },
     ["sunwell-plateau:spawn:25370:5800123"] = {
+      coordinateKind = "raw-server",
       x = 1773.61999511719,
       y = 839.619018554688,
     },
     ["sunwell-plateau:spawn:25370:5800124"] = {
+      coordinateKind = "raw-server",
       x = 1800.93005371094,
       y = 825.591003417969,
     },
     ["sunwell-plateau:spawn:25371:5800080"] = {
+      coordinateKind = "raw-server",
       x = 1601.43994140625,
       y = 852.2509765625,
     },
     ["sunwell-plateau:spawn:25371:5800082"] = {
+      coordinateKind = "raw-server",
       x = 1622.06994628906,
       y = 1027.09997558594,
     },
     ["sunwell-plateau:spawn:25371:5800086"] = {
+      coordinateKind = "raw-server",
       x = 1657.56994628906,
       y = 730.234008789062,
     },
     ["sunwell-plateau:spawn:25371:5800093"] = {
+      coordinateKind = "raw-server",
       x = 1789.7900390625,
       y = 830.674011230469,
     },
     ["sunwell-plateau:spawn:25371:5800108"] = {
+      coordinateKind = "raw-server",
       x = 1754.31005859375,
       y = 1002.02001953125,
     },
     ["sunwell-plateau:spawn:25371:5800111"] = {
+      coordinateKind = "raw-server",
       x = 1798.13000488281,
       y = 1009.51000976562,
     },
     ["sunwell-plateau:spawn:25371:5800121"] = {
+      coordinateKind = "raw-server",
       x = 1740.64001464844,
       y = 1000.65002441406,
     },
     ["sunwell-plateau:spawn:25371:5800125"] = {
+      coordinateKind = "raw-server",
       x = 1805.41003417969,
       y = 1025.0400390625,
     },
     ["sunwell-plateau:spawn:25371:5800126"] = {
+      coordinateKind = "raw-server",
       x = 1600.44995117188,
       y = 1025.69995117188,
     },
     ["sunwell-plateau:spawn:25371:5800127"] = {
+      coordinateKind = "raw-server",
       x = 1602.75,
       y = 831.129028320312,
     },
     ["sunwell-plateau:spawn:25371:5800128"] = {
+      coordinateKind = "raw-server",
       x = 1611.27001953125,
       y = 1051.23999023438,
     },
     ["sunwell-plateau:spawn:25371:5800129"] = {
+      coordinateKind = "raw-server",
       x = 1616.21997070312,
       y = 850.013000488281,
     },
     ["sunwell-plateau:spawn:25371:5800130"] = {
+      coordinateKind = "raw-server",
       x = 1620.5400390625,
       y = 1011.61999511719,
     },
     ["sunwell-plateau:spawn:25371:5800131"] = {
+      coordinateKind = "raw-server",
       x = 1621.56005859375,
       y = 926.559020996094,
     },
     ["sunwell-plateau:spawn:25371:5800132"] = {
+      coordinateKind = "raw-server",
       x = 1646.09997558594,
       y = 972.482971191406,
     },
     ["sunwell-plateau:spawn:25371:5800133"] = {
+      coordinateKind = "raw-server",
       x = 1652.31994628906,
       y = 925.713989257812,
     },
     ["sunwell-plateau:spawn:25371:5800134"] = {
+      coordinateKind = "raw-server",
       x = 1653.93994140625,
       y = 1047.85998535156,
     },
     ["sunwell-plateau:spawn:25371:5800135"] = {
+      coordinateKind = "raw-server",
       x = 1656.75,
       y = 741.822998046875,
     },
     ["sunwell-plateau:spawn:25371:5800136"] = {
+      coordinateKind = "raw-server",
       x = 1662.46997070312,
       y = 748.085021972656,
     },
     ["sunwell-plateau:spawn:25371:5800137"] = {
+      coordinateKind = "raw-server",
       x = 1668.31005859375,
       y = 992.291015625,
     },
     ["sunwell-plateau:spawn:25371:5800138"] = {
+      coordinateKind = "raw-server",
       x = 1682.58996582031,
       y = 982.974975585938,
     },
     ["sunwell-plateau:spawn:25371:5800139"] = {
+      coordinateKind = "raw-server",
       x = 1740.44995117188,
       y = 992.888000488281,
     },
     ["sunwell-plateau:spawn:25371:5800140"] = {
+      coordinateKind = "raw-server",
       x = 1744.38000488281,
       y = 1054.48999023438,
     },
     ["sunwell-plateau:spawn:25371:5800141"] = {
+      coordinateKind = "raw-server",
       x = 1746.26000976562,
       y = 1070.93005371094,
     },
     ["sunwell-plateau:spawn:25371:5800142"] = {
+      coordinateKind = "raw-server",
       x = 1771.42004394531,
       y = 837.255004882812,
     },
     ["sunwell-plateau:spawn:25371:5800143"] = {
+      coordinateKind = "raw-server",
       x = 1790.5,
       y = 844.510986328125,
     },
     ["sunwell-plateau:spawn:25371:5800144"] = {
+      coordinateKind = "raw-server",
       x = 1794.17004394531,
       y = 1017.78997802734,
     },
     ["sunwell-plateau:spawn:25371:5800145"] = {
+      coordinateKind = "raw-server",
       x = 1809.88000488281,
       y = 833.401977539062,
     },
     ["sunwell-plateau:spawn:25372:5800146"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1640.14,
@@ -721,10 +818,12 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 977.482,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1650.66003417969,
       y = 980.280029296875,
     },
     ["sunwell-plateau:spawn:25372:5800147"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1683.62,
@@ -771,10 +870,12 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 1053.73,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1670.40002441406,
       y = 1050.41003417969,
     },
     ["sunwell-plateau:spawn:25372:5800148"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1738.58,
@@ -829,10 +930,12 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 1035.36,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1749.01000976562,
       y = 1040.56005859375,
     },
     ["sunwell-plateau:spawn:25372:5800149"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1750.65,
@@ -927,30 +1030,37 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 1003.47,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1752.43994140625,
       y = 994.507019042969,
     },
     ["sunwell-plateau:spawn:25373:5800317"] = {
+      coordinateKind = "raw-server",
       x = 1681.44995117188,
       y = 513.117980957031,
     },
     ["sunwell-plateau:spawn:25373:5800318"] = {
+      coordinateKind = "raw-server",
       x = 1688.98999023438,
       y = 510.252990722656,
     },
     ["sunwell-plateau:spawn:25373:5800319"] = {
+      coordinateKind = "raw-server",
       x = 1705.68994140625,
       y = 509.506988525391,
     },
     ["sunwell-plateau:spawn:25373:5800320"] = {
+      coordinateKind = "raw-server",
       x = 1712.08996582031,
       y = 513.982971191406,
     },
     ["sunwell-plateau:spawn:25373:5800332"] = {
+      coordinateKind = "raw-server",
       x = 1560.38000488281,
       y = 561.653015136719,
     },
     ["sunwell-plateau:spawn:25373:5800336"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1662.87,
@@ -969,10 +1079,12 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 507.399,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1655.46997070312,
       y = 503.243011474609,
     },
     ["sunwell-plateau:spawn:25373:5800337"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1604.47,
@@ -1015,34 +1127,42 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 584.18,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1597.16003417969,
       y = 590.005004882812,
     },
     ["sunwell-plateau:spawn:25483:5800300"] = {
+      coordinateKind = "raw-server",
       x = 1573.48999023438,
       y = 532.989990234375,
     },
     ["sunwell-plateau:spawn:25483:5800304"] = {
+      coordinateKind = "raw-server",
       x = 1652.18994140625,
       y = 508.851989746094,
     },
     ["sunwell-plateau:spawn:25483:5800308"] = {
+      coordinateKind = "raw-server",
       x = 1595.91003417969,
       y = 580.530029296875,
     },
     ["sunwell-plateau:spawn:25483:5800312"] = {
+      coordinateKind = "raw-server",
       x = 1673.78002929688,
       y = 546.547973632812,
     },
     ["sunwell-plateau:spawn:25483:5800321"] = {
+      coordinateKind = "raw-server",
       x = 1770.92004394531,
       y = 574.367004394531,
     },
     ["sunwell-plateau:spawn:25483:5800326"] = {
+      coordinateKind = "raw-server",
       x = 1817.55004882812,
       y = 593.429016113281,
     },
     ["sunwell-plateau:spawn:25483:5800330"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1761.9,
@@ -1125,70 +1245,87 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 520.432,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1744.34997558594,
       y = 534.517028808594,
     },
     ["sunwell-plateau:spawn:25484:5800322"] = {
+      coordinateKind = "raw-server",
       x = 1767.51000976562,
       y = 567.411010742188,
     },
     ["sunwell-plateau:spawn:25484:5800329"] = {
+      coordinateKind = "raw-server",
       x = 1799.9599609375,
       y = 584.969970703125,
     },
     ["sunwell-plateau:spawn:25484:5800333"] = {
+      coordinateKind = "raw-server",
       x = 1598.07995605469,
       y = 572.835998535156,
     },
     ["sunwell-plateau:spawn:25484:5800334"] = {
+      coordinateKind = "raw-server",
       x = 1628.58996582031,
       y = 612.93701171875,
     },
     ["sunwell-plateau:spawn:25484:5800335"] = {
+      coordinateKind = "raw-server",
       x = 1634.85998535156,
       y = 559.471984863281,
     },
     ["sunwell-plateau:spawn:25486:5800301"] = {
+      coordinateKind = "raw-server",
       x = 1575.0400390625,
       y = 526.22900390625,
     },
     ["sunwell-plateau:spawn:25486:5800302"] = {
+      coordinateKind = "raw-server",
       x = 1586.08996582031,
       y = 532.132995605469,
     },
     ["sunwell-plateau:spawn:25486:5800305"] = {
+      coordinateKind = "raw-server",
       x = 1642.61999511719,
       y = 500.648010253906,
     },
     ["sunwell-plateau:spawn:25486:5800306"] = {
+      coordinateKind = "raw-server",
       x = 1646.26000976562,
       y = 512.539978027344,
     },
     ["sunwell-plateau:spawn:25486:5800309"] = {
+      coordinateKind = "raw-server",
       x = 1595.82995605469,
       y = 574.953979492188,
     },
     ["sunwell-plateau:spawn:25486:5800310"] = {
+      coordinateKind = "raw-server",
       x = 1605.55004882812,
       y = 577.97998046875,
     },
     ["sunwell-plateau:spawn:25486:5800313"] = {
+      coordinateKind = "raw-server",
       x = 1668.67004394531,
       y = 547.474975585938,
     },
     ["sunwell-plateau:spawn:25486:5800314"] = {
+      coordinateKind = "raw-server",
       x = 1685.17004394531,
       y = 555.067016601562,
     },
     ["sunwell-plateau:spawn:25486:5800323"] = {
+      coordinateKind = "raw-server",
       x = 1752.68994140625,
       y = 574.163024902344,
     },
     ["sunwell-plateau:spawn:25486:5800324"] = {
+      coordinateKind = "raw-server",
       x = 1762.06994628906,
       y = 562.630004882812,
     },
     ["sunwell-plateau:spawn:25486:5800327"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1812.62,
@@ -1211,10 +1348,12 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 559.262,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1812.61999511719,
       y = 586.0419921875,
     },
     ["sunwell-plateau:spawn:25486:5800328"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1797.45,
@@ -1233,46 +1372,57 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 565.23,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1793.91003417969,
       y = 593.620971679688,
     },
     ["sunwell-plateau:spawn:25506:5800303"] = {
+      coordinateKind = "raw-server",
       x = 1578.71997070312,
       y = 536.317016601562,
     },
     ["sunwell-plateau:spawn:25506:5800307"] = {
+      coordinateKind = "raw-server",
       x = 1648.73999023438,
       y = 501.290985107422,
     },
     ["sunwell-plateau:spawn:25506:5800311"] = {
+      coordinateKind = "raw-server",
       x = 1602.71997070312,
       y = 582.549987792969,
     },
     ["sunwell-plateau:spawn:25506:5800315"] = {
+      coordinateKind = "raw-server",
       x = 1684.76000976562,
       y = 548.52001953125,
     },
     ["sunwell-plateau:spawn:25506:5800325"] = {
+      coordinateKind = "raw-server",
       x = 1759.42004394531,
       y = 579.986022949219,
     },
     ["sunwell-plateau:spawn:25506:5800331"] = {
+      coordinateKind = "raw-server",
       x = 1748.88000488281,
       y = 538.007019042969,
     },
     ["sunwell-plateau:spawn:25507:5800150"] = {
+      coordinateKind = "raw-server",
       x = 1615.63000488281,
       y = 971.505004882812,
     },
     ["sunwell-plateau:spawn:25507:5800151"] = {
+      coordinateKind = "raw-server",
       x = 1638.18994140625,
       y = 1025.72998046875,
     },
     ["sunwell-plateau:spawn:25507:5800152"] = {
+      coordinateKind = "raw-server",
       x = 1670.68994140625,
       y = 1083.32995605469,
     },
     ["sunwell-plateau:spawn:25507:5800153"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1656.96,
@@ -1319,14 +1469,17 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 898.406,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1672.40002441406,
       y = 891.099975585938,
     },
     ["sunwell-plateau:spawn:25507:5800154"] = {
+      coordinateKind = "raw-server",
       x = 1689.93005371094,
       y = 1016.29998779297,
     },
     ["sunwell-plateau:spawn:25507:5800155"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1701.2,
@@ -1369,10 +1522,12 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 749.678,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1700.76000976562,
       y = 746.330017089844,
     },
     ["sunwell-plateau:spawn:25507:5800156"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1705.29,
@@ -1407,26 +1562,32 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 986.721,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1704.5400390625,
       y = 982.236022949219,
     },
     ["sunwell-plateau:spawn:25507:5800157"] = {
+      coordinateKind = "raw-server",
       x = 1720.03002929688,
       y = 1022.79998779297,
     },
     ["sunwell-plateau:spawn:25507:5800158"] = {
+      coordinateKind = "raw-server",
       x = 1764.88000488281,
       y = 945.375,
     },
     ["sunwell-plateau:spawn:25507:5800159"] = {
+      coordinateKind = "raw-server",
       x = 1772.69995117188,
       y = 1081.98999023438,
     },
     ["sunwell-plateau:spawn:25507:5800160"] = {
+      coordinateKind = "raw-server",
       x = 1783.85998535156,
       y = 1037.2099609375,
     },
     ["sunwell-plateau:spawn:25508:5800161"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1635.73,
@@ -1453,10 +1614,12 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 691.626,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1655.09997558594,
       y = 695.947998046875,
     },
     ["sunwell-plateau:spawn:25508:5800162"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1633.08,
@@ -1491,78 +1654,97 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 567.775,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1659.11999511719,
       y = 563.588989257812,
     },
     ["sunwell-plateau:spawn:25509:5800163"] = {
+      coordinateKind = "raw-server",
       x = 1853.72998046875,
       y = 457.449005126953,
     },
     ["sunwell-plateau:spawn:25509:5800167"] = {
+      coordinateKind = "raw-server",
       x = 1917.30004882812,
       y = 517.765014648438,
     },
     ["sunwell-plateau:spawn:25588:5800353"] = {
+      coordinateKind = "raw-server",
       x = 1682.91003417969,
       y = 636.067993164062,
     },
     ["sunwell-plateau:spawn:25588:5800354"] = {
+      coordinateKind = "raw-server",
       x = 1686.33996582031,
       y = 615.607971191406,
     },
     ["sunwell-plateau:spawn:25588:5800355"] = {
+      coordinateKind = "raw-server",
       x = 1706.47998046875,
       y = 612.528991699219,
     },
     ["sunwell-plateau:spawn:25591:5800164"] = {
+      coordinateKind = "raw-server",
       x = 1871.07995605469,
       y = 594.31201171875,
     },
     ["sunwell-plateau:spawn:25591:5800168"] = {
+      coordinateKind = "raw-server",
       x = 1864.2099609375,
       y = 454.596984863281,
     },
     ["sunwell-plateau:spawn:25591:5800169"] = {
+      coordinateKind = "raw-server",
       x = 1879.16003417969,
       y = 587.700988769531,
     },
     ["sunwell-plateau:spawn:25592:5800171"] = {
+      coordinateKind = "raw-server",
       x = 1835.52001953125,
       y = 482.011993408203,
     },
     ["sunwell-plateau:spawn:25592:5800172"] = {
+      coordinateKind = "raw-server",
       x = 1843.33996582031,
       y = 693.505981445312,
     },
     ["sunwell-plateau:spawn:25592:5800173"] = {
+      coordinateKind = "raw-server",
       x = 1949.78002929688,
       y = 543.325988769531,
     },
     ["sunwell-plateau:spawn:25593:5800174"] = {
+      coordinateKind = "raw-server",
       x = 1848.08996582031,
       y = 574.601989746094,
     },
     ["sunwell-plateau:spawn:25593:5800175"] = {
+      coordinateKind = "raw-server",
       x = 1853.30004882812,
       y = 588.653015136719,
     },
     ["sunwell-plateau:spawn:25593:5800176"] = {
+      coordinateKind = "raw-server",
       x = 1860.02001953125,
       y = 596.416015625,
     },
     ["sunwell-plateau:spawn:25593:5800177"] = {
+      coordinateKind = "raw-server",
       x = 1868.2900390625,
       y = 557.044982910156,
     },
     ["sunwell-plateau:spawn:25593:5800178"] = {
+      coordinateKind = "raw-server",
       x = 1927.92004394531,
       y = 469.002990722656,
     },
     ["sunwell-plateau:spawn:25593:5800179"] = {
+      coordinateKind = "raw-server",
       x = 1939.83996582031,
       y = 479.828002929688,
     },
     ["sunwell-plateau:spawn:25595:5800180"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1938.04,
@@ -1581,10 +1763,12 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 472.648,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1917.7900390625,
       y = 478.27099609375,
     },
     ["sunwell-plateau:spawn:25595:5800181"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1927.03,
@@ -1603,50 +1787,62 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 579.316,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1923.16003417969,
       y = 567.422973632812,
     },
     ["sunwell-plateau:spawn:25597:5800165"] = {
+      coordinateKind = "raw-server",
       x = 1883.22998046875,
       y = 598.164001464844,
     },
     ["sunwell-plateau:spawn:25597:5800166"] = {
+      coordinateKind = "raw-server",
       x = 1914.77001953125,
       y = 535.848022460938,
     },
     ["sunwell-plateau:spawn:25597:5800170"] = {
+      coordinateKind = "raw-server",
       x = 1913.7900390625,
       y = 508.045013427734,
     },
     ["sunwell-plateau:spawn:25597:5800182"] = {
+      coordinateKind = "raw-server",
       x = 1830.81005859375,
       y = 692.598999023438,
     },
     ["sunwell-plateau:spawn:25597:5800183"] = {
+      coordinateKind = "raw-server",
       x = 1845.18994140625,
       y = 461.821014404297,
     },
     ["sunwell-plateau:spawn:25597:5800184"] = {
+      coordinateKind = "raw-server",
       x = 1849.57995605469,
       y = 683.481018066406,
     },
     ["sunwell-plateau:spawn:25597:5800185"] = {
+      coordinateKind = "raw-server",
       x = 1870.42004394531,
       y = 603.783020019531,
     },
     ["sunwell-plateau:spawn:25597:5800186"] = {
+      coordinateKind = "raw-server",
       x = 1916.66003417969,
       y = 526.817993164062,
     },
     ["sunwell-plateau:spawn:25597:5800187"] = {
+      coordinateKind = "raw-server",
       x = 1945.68005371094,
       y = 557.888000488281,
     },
     ["sunwell-plateau:spawn:25597:5800188"] = {
+      coordinateKind = "raw-server",
       x = 1954.7099609375,
       y = 530.528991699219,
     },
     ["sunwell-plateau:spawn:25599:5800189"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1842.34,
@@ -1681,10 +1877,12 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 551.534,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1846.56994628906,
       y = 547.898010253906,
     },
     ["sunwell-plateau:spawn:25599:5800190"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1893.47,
@@ -1727,22 +1925,27 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 489.581,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1912.81005859375,
       y = 497.630004882812,
     },
     ["sunwell-plateau:spawn:25608:5800191"] = {
+      coordinateKind = "raw-server",
       x = 1698.44995117188,
       y = 628.030029296875,
     },
     ["sunwell-plateau:spawn:25741:5800348"] = {
+      coordinateKind = "raw-server",
       x = 1816.40002441406,
       y = 625.893981933594,
     },
     ["sunwell-plateau:spawn:25837:5800316"] = {
+      coordinateKind = "raw-server",
       x = 1682.32995605469,
       y = 537.6240234375,
     },
     ["sunwell-plateau:spawn:25837:5800338"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1764.02,
@@ -1761,114 +1964,142 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 570.567,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1752.23999023438,
       y = 564.690979003906,
     },
     ["sunwell-plateau:spawn:25851:5800219"] = {
+      coordinateKind = "raw-server",
       x = 1875.18005371094,
       y = 650.10498046875,
     },
     ["sunwell-plateau:spawn:25851:5800220"] = {
+      coordinateKind = "raw-server",
       x = 1868.57995605469,
       y = 645.963012695312,
     },
     ["sunwell-plateau:spawn:25851:5800221"] = {
+      coordinateKind = "raw-server",
       x = 1863.77001953125,
       y = 653.945983886719,
     },
     ["sunwell-plateau:spawn:25851:5800222"] = {
+      coordinateKind = "raw-server",
       x = 1877.44995117188,
       y = 643.161987304688,
     },
     ["sunwell-plateau:spawn:25851:5800223"] = {
+      coordinateKind = "raw-server",
       x = 1871.05004882812,
       y = 636.768005371094,
     },
     ["sunwell-plateau:spawn:25851:5800224"] = {
+      coordinateKind = "raw-server",
       x = 1877.93005371094,
       y = 639.346984863281,
     },
     ["sunwell-plateau:spawn:25851:5800225"] = {
+      coordinateKind = "raw-server",
       x = 1880.39001464844,
       y = 580.015014648438,
     },
     ["sunwell-plateau:spawn:25851:5800226"] = {
+      coordinateKind = "raw-server",
       x = 1871.93994140625,
       y = 575.632995605469,
     },
     ["sunwell-plateau:spawn:25851:5800227"] = {
+      coordinateKind = "raw-server",
       x = 1877.94995117188,
       y = 567.179992675781,
     },
     ["sunwell-plateau:spawn:25851:5800228"] = {
+      coordinateKind = "raw-server",
       x = 1888.2099609375,
       y = 571.257019042969,
     },
     ["sunwell-plateau:spawn:25851:5800229"] = {
+      coordinateKind = "raw-server",
       x = 1885.80004882812,
       y = 564.830017089844,
     },
     ["sunwell-plateau:spawn:25851:5800230"] = {
+      coordinateKind = "raw-server",
       x = 1893.31005859375,
       y = 566.465026855469,
     },
     ["sunwell-plateau:spawn:25851:5800231"] = {
+      coordinateKind = "raw-server",
       x = 1908.92004394531,
       y = 579.565979003906,
     },
     ["sunwell-plateau:spawn:25851:5800232"] = {
+      coordinateKind = "raw-server",
       x = 1913.68005371094,
       y = 569.02099609375,
     },
     ["sunwell-plateau:spawn:25851:5800233"] = {
+      coordinateKind = "raw-server",
       x = 1929.72998046875,
       y = 569.942993164062,
     },
     ["sunwell-plateau:spawn:25851:5800234"] = {
+      coordinateKind = "raw-server",
       x = 1857.83996582031,
       y = 475.497009277344,
     },
     ["sunwell-plateau:spawn:25851:5800235"] = {
+      coordinateKind = "raw-server",
       x = 1879.30004882812,
       y = 479.714996337891,
     },
     ["sunwell-plateau:spawn:25851:5800236"] = {
+      coordinateKind = "raw-server",
       x = 1876.82995605469,
       y = 457.734008789062,
     },
     ["sunwell-plateau:spawn:25851:5800237"] = {
+      coordinateKind = "raw-server",
       x = 1900.65002441406,
       y = 470.975006103516,
     },
     ["sunwell-plateau:spawn:25851:5800238"] = {
+      coordinateKind = "raw-server",
       x = 1930.06994628906,
       y = 489.276000976562,
     },
     ["sunwell-plateau:spawn:25851:5800239"] = {
+      coordinateKind = "raw-server",
       x = 1927.28002929688,
       y = 545.872985839844,
     },
     ["sunwell-plateau:spawn:25851:5800240"] = {
+      coordinateKind = "raw-server",
       x = 1912.67004394531,
       y = 489.029998779297,
     },
     ["sunwell-plateau:spawn:25851:5800241"] = {
+      coordinateKind = "raw-server",
       x = 1938,
       y = 524.385009765625,
     },
     ["sunwell-plateau:spawn:25851:5800242"] = {
+      coordinateKind = "raw-server",
       x = 1936.83996582031,
       y = 502.303009033203,
     },
     ["sunwell-plateau:spawn:25851:5800243"] = {
+      coordinateKind = "raw-server",
       x = 1947.32995605469,
       y = 518.015991210938,
     },
     ["sunwell-plateau:spawn:25867:5800244"] = {
+      coordinateKind = "raw-server",
       x = 1632.76000976562,
       y = 930.242980957031,
     },
     ["sunwell-plateau:spawn:25867:5800245"] = {
+      coordinateKind = "raw-server",
       patrol = {
         {
           x = 1653.37,
@@ -1915,14 +2146,17 @@ ART.MapWorldPositions["sunwell-plateau"] = {
           y = 1054.83,
         },
       },
+      patrolCoordinateKind = "raw-server",
       x = 1649.61999511719,
       y = 1054.85998535156,
     },
     ["sunwell-plateau:spawn:25867:5800246"] = {
+      coordinateKind = "raw-server",
       x = 1658.88000488281,
       y = 930.783996582031,
     },
     ["sunwell-plateau:spawn:26262:5800363"] = {
+      coordinateKind = "raw-server",
       x = 1698.94995117188,
       y = 628.206970214844,
     },

@@ -1,10 +1,19 @@
 -- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.
 -- Generator: art-030-generator-v2
--- Integration-private C_Map projection inputs; raid schema v1 is unchanged.
+-- Integration-private world-position matching inputs; raid schema v1 is unchanged.
 local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools requires Core/Bootstrap.lua")
 ART.MapWorldPositions = ART.MapWorldPositions or {}
 ART.MapWorldPositions["hyjal"] = {
+    _meta = {
+      provenance = {
+        confidence = "candidate",
+        observedAt = "2026-08-21T19:30:00Z",
+        source = "derived",
+        sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/kalimdor/caverns_of_time/hyjal/hyjal.cpp",
+      },
+    },
     ["hyjal:spawn:17767:rage-winterchill-17767-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -59,10 +68,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4936.22145927197,
       y = -1449.78816,
     },
     ["hyjal:spawn:17808:anetheron-17808-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -117,10 +128,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4938.75479235791,
       y = -1446.90568,
     },
     ["hyjal:spawn:17842:azgalor-17842-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5532.46973437793,
@@ -163,10 +176,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5526.62306828223,
       y = -2409.32788,
     },
     ["hyjal:spawn:17888:kazrogal-17888-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5532.46973437793,
@@ -209,10 +224,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5526.31973497852,
       y = -2409.38311,
     },
     ["hyjal:spawn:17895:anetheron-abomination-necromancer-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -267,10 +284,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4935.93145930029,
       y = -1465.57342,
     },
     ["hyjal:spawn:17895:anetheron-abomination-necromancer-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -325,10 +344,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4932.2231263291,
       y = -1462.42005,
     },
     ["hyjal:spawn:17895:anetheron-abomination-necromancer-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -383,10 +404,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4928.16646005859,
       y = -1459.82161,
     },
     ["hyjal:spawn:17895:anetheron-abomination-necromancer-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -441,10 +464,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4924.04479379443,
       y = -1456.58671,
     },
     ["hyjal:spawn:17895:anetheron-abomination-necromancer-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -499,10 +524,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4919.92312753027,
       y = -1454.16974,
     },
     ["hyjal:spawn:17895:anetheron-abomination-necromancer-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -557,10 +584,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4915.88979459082,
       y = -1451.44506,
     },
     ["hyjal:spawn:17895:anetheron-banshee-abomination-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -615,10 +644,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4924.86646038086,
       y = -1461.74677,
     },
     ["hyjal:spawn:17895:anetheron-banshee-abomination-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -673,10 +704,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.64479402881,
       y = -1457.67027,
     },
     ["hyjal:spawn:17895:anetheron-combined-assault-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -731,10 +764,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.99146007568,
       y = -1467.12775,
     },
     ["hyjal:spawn:17895:anetheron-combined-assault-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -789,10 +824,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.84479391162,
       y = -1462.44372,
     },
     ["hyjal:spawn:17895:anetheron-combined-assault-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -847,10 +884,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4917.34646111523,
       y = -1457.29418,
     },
     ["hyjal:spawn:17895:anetheron-combined-assault-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -905,10 +944,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4911.63646167285,
       y = -1452.87052,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-abomination-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -963,10 +1004,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4928.50146002588,
       y = -1471.35416,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-abomination-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1021,10 +1064,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4924.63646040332,
       y = -1467.56433,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-abomination-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1079,10 +1124,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.0697939873,
       y = -1465.10265,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-abomination-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1137,10 +1184,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4918.2264610293,
       y = -1462.30959,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-abomination-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1195,10 +1244,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4915.25979465234,
       y = -1458.89322,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-abomination-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1253,10 +1304,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4911.42979502637,
       y = -1455.45318,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-abomination-17895-07"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1311,10 +1364,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4919.85146087061,
       y = -1469.46845,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-abomination-17895-08"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1369,10 +1424,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4914.40646140234,
       y = -1463.58514,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-banshee-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1427,10 +1484,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4933.62312619238,
       y = -1467.0094,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-banshee-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1485,10 +1544,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4930.48645983203,
       y = -1463.56936,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-banshee-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1543,10 +1604,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.57479354736,
       y = -1458.75909,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-banshee-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1601,10 +1664,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.77646058496,
       y = -1454.65103,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-banshee-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1659,10 +1724,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4919.37479425049,
       y = -1451.36879,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-banshee-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1717,10 +1784,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4915.12646133203,
       y = -1447.17657,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-crypt-necromancer-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1775,10 +1844,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.16646025391,
       y = -1470.73611,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-crypt-necromancer-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1833,10 +1904,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.13479398096,
       y = -1467.07515,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-crypt-necromancer-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1891,10 +1964,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4917.75479440869,
       y = -1462.71461,
     },
     ["hyjal:spawn:17895:anetheron-ghoul-crypt-necromancer-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -1949,10 +2024,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4913.22479485107,
       y = -1458.39089,
     },
     ["hyjal:spawn:17895:anetheron-ghouls-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -2007,10 +2084,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4932.95312625781,
       y = -1466.36242,
     },
     ["hyjal:spawn:17895:anetheron-ghouls-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -2065,10 +2144,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4929.08145996924,
       y = -1463.13804,
     },
     ["hyjal:spawn:17895:anetheron-ghouls-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -2123,10 +2204,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4924.63312707031,
       y = -1459.65066,
     },
     ["hyjal:spawn:17895:anetheron-ghouls-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -2181,10 +2264,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4920.13646084277,
       y = -1456.31845,
     },
     ["hyjal:spawn:17895:anetheron-ghouls-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -2239,10 +2324,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4916.48646119922,
       y = -1453.07303,
     },
     ["hyjal:spawn:17895:anetheron-ghouls-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -2297,10 +2384,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4938.09645908887,
       y = -1461.97032,
     },
     ["hyjal:spawn:17895:anetheron-ghouls-17895-07"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -2355,10 +2444,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4934.69979275391,
       y = -1457.4625,
     },
     ["hyjal:spawn:17895:anetheron-ghouls-17895-08"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -2413,10 +2504,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4930.07479320557,
       y = -1453.47542,
     },
     ["hyjal:spawn:17895:anetheron-ghouls-17895-09"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -2471,10 +2564,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4924.33479376611,
       y = -1449.84865,
     },
     ["hyjal:spawn:17895:anetheron-ghouls-17895-10"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -2529,10 +2624,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4920.15479417432,
       y = -1446.14298,
     },
     ["hyjal:spawn:17895:archimonde-night-elf-ghoul-abomination-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5387.5197485332,
@@ -2583,10 +2680,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -3350.2735,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5365.36475069678,
       y = -3265.31661,
     },
     ["hyjal:spawn:17895:archimonde-night-elf-ghoul-abomination-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5387.5197485332,
@@ -2637,10 +2736,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -3350.2735,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5373.56974989551,
       y = -3253.65519,
     },
     ["hyjal:spawn:17895:archimonde-night-elf-ghoul-abomination-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5387.5197485332,
@@ -2691,10 +2792,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -3350.2735,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5365.2447507085,
       y = -3255.98274,
     },
     ["hyjal:spawn:17895:archimonde-night-elf-ghouls-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5387.5197485332,
@@ -2745,10 +2848,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -3350.2735,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5382.50308235644,
       y = -3264.78009,
     },
     ["hyjal:spawn:17895:archimonde-night-elf-ghouls-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5387.5197485332,
@@ -2799,10 +2904,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -3350.2735,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5371.66641674805,
       y = -3270.57661,
     },
     ["hyjal:spawn:17895:archimonde-night-elf-ghouls-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5387.5197485332,
@@ -2853,10 +2960,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -3350.2735,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5372.94808328955,
       y = -3261.78715,
     },
     ["hyjal:spawn:17895:azgalor-aerial-ghouls-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -2911,10 +3020,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5475.59140659912,
       y = -2347.30459,
     },
     ["hyjal:spawn:17895:azgalor-aerial-ghouls-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -2969,10 +3080,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5478.96307293652,
       y = -2344.36162,
     },
     ["hyjal:spawn:17895:azgalor-aerial-ghouls-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3027,10 +3140,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5482.60973924707,
       y = -2340.64806,
     },
     ["hyjal:spawn:17895:azgalor-aerial-ghouls-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3085,10 +3200,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.74640550977,
       y = -2337.83659,
     },
     ["hyjal:spawn:17895:azgalor-aerial-ghouls-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3143,10 +3260,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5489.81473854346,
       y = -2334.20719,
     },
     ["hyjal:spawn:17895:azgalor-ghoul-infernals-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3201,10 +3320,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5472.35140691553,
       y = -2351.62042,
     },
     ["hyjal:spawn:17895:azgalor-ghoul-infernals-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3259,10 +3380,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5476.3064065293,
       y = -2348.46179,
     },
     ["hyjal:spawn:17895:azgalor-ghoul-infernals-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3317,10 +3440,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5479.43973955664,
       y = -2345.7976,
     },
     ["hyjal:spawn:17895:azgalor-ghoul-infernals-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3375,10 +3500,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5483.24973918457,
       y = -2341.57645,
     },
     ["hyjal:spawn:17895:azgalor-ghoul-infernals-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3433,10 +3560,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.85640549902,
       y = -2339.02535,
     },
     ["hyjal:spawn:17895:azgalor-ghoul-infernals-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3491,10 +3620,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5490.05640518652,
       y = -2335.26971,
     },
     ["hyjal:spawn:17895:azgalor-mixed-infernals-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3549,10 +3680,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5483.20140585596,
       y = -2341.65798,
     },
     ["hyjal:spawn:17895:azgalor-mixed-infernals-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3607,10 +3740,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5487.84140540283,
       y = -2338.56247,
     },
     ["hyjal:spawn:17895:kazrogal-abomination-assault-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3665,10 +3800,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5479.02140626416,
       y = -2348.24087,
     },
     ["hyjal:spawn:17895:kazrogal-abomination-assault-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3723,10 +3860,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5482.38307260254,
       y = -2345.79234,
     },
     ["hyjal:spawn:17895:kazrogal-abomination-assault-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3781,10 +3920,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5484.69807237646,
       y = -2343.55421,
     },
     ["hyjal:spawn:17895:kazrogal-abomination-assault-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3839,10 +3980,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5488.69140531982,
       y = -2341.1951,
     },
     ["hyjal:spawn:17895:kazrogal-combined-assault-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3897,10 +4040,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5477.64140639893,
       y = -2347.80955,
     },
     ["hyjal:spawn:17895:kazrogal-combined-assault-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -3955,10 +4100,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.96973940723,
       y = -2345.35839,
     },
     ["hyjal:spawn:17895:kazrogal-combined-assault-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4013,10 +4160,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5483.92140578564,
       y = -2342.47065,
     },
     ["hyjal:spawn:17895:kazrogal-combined-assault-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4071,10 +4220,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.8464055,
       y = -2339.7749,
     },
     ["hyjal:spawn:17895:kazrogal-crypt-assault-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4129,10 +4280,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.29640682324,
       y = -2351.69143,
     },
     ["hyjal:spawn:17895:kazrogal-crypt-assault-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4187,10 +4340,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5477.20140644189,
       y = -2348.53543,
     },
     ["hyjal:spawn:17895:kazrogal-crypt-assault-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4245,10 +4400,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.1047394917,
       y = -2346.67076,
     },
     ["hyjal:spawn:17895:kazrogal-crypt-assault-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4303,10 +4460,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5484.45973906641,
       y = -2341.67639,
     },
     ["hyjal:spawn:17895:kazrogal-crypt-assault-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4361,10 +4520,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5487.06473881201,
       y = -2340.12206,
     },
     ["hyjal:spawn:17895:kazrogal-crypt-assault-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4419,10 +4580,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5489.60640523047,
       y = -2336.18232,
     },
     ["hyjal:spawn:17895:kazrogal-frost-wyrm-assault-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4477,10 +4640,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5477.12140644971,
       y = -2349.45067,
     },
     ["hyjal:spawn:17895:kazrogal-frost-wyrm-assault-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4535,10 +4700,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.11973949023,
       y = -2346.73651,
     },
     ["hyjal:spawn:17895:kazrogal-frost-wyrm-assault-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4593,10 +4760,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5483.12140586377,
       y = -2343.02295,
     },
     ["hyjal:spawn:17895:kazrogal-frost-wyrm-assault-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4651,10 +4820,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5488.02140538525,
       y = -2340.07735,
     },
     ["hyjal:spawn:17895:kazrogal-frost-wyrm-assault-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4709,10 +4880,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5489.65307189258,
       y = -2336.67939,
     },
     ["hyjal:spawn:17895:kazrogal-frost-wyrm-assault-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4767,10 +4940,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5494.46973808887,
       y = -2332.90534,
     },
     ["hyjal:spawn:17895:kazrogal-gargoyle-introduction-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4825,10 +5000,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.61140679248,
       y = -2352.51199,
     },
     ["hyjal:spawn:17895:kazrogal-gargoyle-introduction-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4883,10 +5060,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5481.64973934082,
       y = -2345.57142,
     },
     ["hyjal:spawn:17895:kazrogal-gargoyle-introduction-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4941,10 +5120,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5484.97307234961,
       y = -2341.89468,
     },
     ["hyjal:spawn:17895:kazrogal-gargoyle-introduction-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -4999,10 +5180,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5491.62140503369,
       y = -2336.14024,
     },
     ["hyjal:spawn:17895:kazrogal-undead-vanguard-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -5057,10 +5240,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5471.86307362988,
       y = -2350.7946,
     },
     ["hyjal:spawn:17895:kazrogal-undead-vanguard-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -5115,10 +5300,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5475.72140658643,
       y = -2347.46239,
     },
     ["hyjal:spawn:17895:kazrogal-undead-vanguard-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -5173,10 +5360,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5479.37640622949,
       y = -2344.67196,
     },
     ["hyjal:spawn:17895:kazrogal-undead-vanguard-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -5231,10 +5420,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5482.70473923779,
       y = -2340.9058,
     },
     ["hyjal:spawn:17895:kazrogal-undead-vanguard-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -5289,10 +5480,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5487.00973881738,
       y = -2338.20742,
     },
     ["hyjal:spawn:17895:kazrogal-undead-vanguard-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -5347,10 +5540,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5489.93640519824,
       y = -2334.58065,
     },
     ["hyjal:spawn:17895:winterchill-abomination-necromancer-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5405,10 +5600,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.46479355811,
       y = -1471.32786,
     },
     ["hyjal:spawn:17895:winterchill-abomination-necromancer-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5463,10 +5660,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.67646059473,
       y = -1467.57748,
     },
     ["hyjal:spawn:17895:winterchill-abomination-necromancer-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5521,10 +5720,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4919.34812758643,
       y = -1463.50624,
     },
     ["hyjal:spawn:17895:winterchill-abomination-necromancer-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5579,10 +5780,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4915.95312791797,
       y = -1459.40607,
     },
     ["hyjal:spawn:17895:winterchill-combined-assault-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5637,10 +5840,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4932.01312634961,
       y = -1467.81418,
     },
     ["hyjal:spawn:17895:winterchill-combined-assault-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5695,10 +5900,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4928.31812671045,
       y = -1465.57605,
     },
     ["hyjal:spawn:17895:winterchill-combined-assault-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5753,10 +5960,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4923.6047938374,
       y = -1464.44515,
     },
     ["hyjal:spawn:17895:winterchill-combined-assault-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5811,10 +6020,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4920.15146084131,
       y = -1464.62662,
     },
     ["hyjal:spawn:17895:winterchill-combined-assault-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5869,10 +6080,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4914.40646140234,
       y = -1463.92967,
     },
     ["hyjal:spawn:17895:winterchill-combined-assault-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5927,10 +6140,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4909.19646191113,
       y = -1462.44898,
     },
     ["hyjal:spawn:17895:winterchill-crypt-necromancer-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -5985,10 +6200,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4918.1847943667,
       y = -1463.87181,
     },
     ["hyjal:spawn:17895:winterchill-crypt-necromancer-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6043,10 +6260,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.88979390723,
       y = -1466.33875,
     },
     ["hyjal:spawn:17895:winterchill-ghoul-abomination-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6101,10 +6320,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4931.50645973242,
       y = -1472.48506,
     },
     ["hyjal:spawn:17895:winterchill-ghoul-abomination-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6159,10 +6380,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4928.21812672021,
       y = -1471.18847,
     },
     ["hyjal:spawn:17895:winterchill-ghoul-abomination-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6217,10 +6440,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.38646062305,
       y = -1468.15082,
     },
     ["hyjal:spawn:17895:winterchill-ghoul-abomination-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6275,10 +6500,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4918.2714610249,
       y = -1465.52871,
     },
     ["hyjal:spawn:17895:winterchill-ghoul-abomination-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6333,10 +6560,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4915.33312797852,
       y = -1463.11963,
     },
     ["hyjal:spawn:17895:winterchill-ghoul-abomination-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6391,10 +6620,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4911.08146172705,
       y = -1458.9353,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6449,10 +6680,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4925.64312697168,
       y = -1465.15262,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6507,10 +6740,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.2564607334,
       y = -1458.84588,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6565,10 +6800,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4929.17479329346,
       y = -1460.20033,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6623,10 +6860,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4924.30646043555,
       y = -1454.58791,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6681,10 +6920,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4935.30145936182,
       y = -1457.21791,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6739,10 +6980,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4929.82979322949,
       y = -1453.71738,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-17895-07"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6797,10 +7040,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4937.89312577539,
       y = -1452.08678,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-17895-08"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6855,10 +7100,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4931.88812636182,
       y = -1447.93401,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-17895-09"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6913,10 +7160,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4925.92479361084,
       y = -1448.10233,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-17895-10"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -6971,10 +7220,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4920.874794104,
       y = -1452.35241,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-crypt-pair-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7029,10 +7280,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4916.40479454053,
       y = -1457.17846,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-crypt-pair-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7087,10 +7340,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4919.44312757715,
       y = -1460.92884,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-crypt-pair-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7145,10 +7400,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4923.72812715869,
       y = -1465.12106,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-crypt-pair-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7203,10 +7460,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.41479346533,
       y = -1469.46319,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-crypt-pair-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7261,10 +7520,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4920.34979415527,
       y = -1452.66538,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-crypt-pair-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7319,10 +7580,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4924.70812706299,
       y = -1456.02126,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-crypt-pair-17895-07"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7377,10 +7640,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4928.42146003369,
       y = -1460.3818,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-crypt-pair-17895-08"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7435,10 +7700,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4932.15145966943,
       y = -1466.4308,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-crypt-pair-17895-09"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7493,10 +7760,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4916.5197945293,
       y = -1464.83176,
     },
     ["hyjal:spawn:17895:winterchill-ghouls-crypt-pair-17895-10"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7551,10 +7820,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4920.12479417725,
       y = -1469.47634,
     },
     ["hyjal:spawn:17895:winterchill-necromancer-introduction-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7609,10 +7880,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4911.11812839014,
       y = -1459.71115,
     },
     ["hyjal:spawn:17895:winterchill-necromancer-introduction-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7667,10 +7940,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4908.97646193262,
       y = -1454.42222,
     },
     ["hyjal:spawn:17895:winterchill-necromancer-introduction-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7725,10 +8000,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4914.31979474414,
       y = -1463.95334,
     },
     ["hyjal:spawn:17895:winterchill-necromancer-introduction-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7783,10 +8060,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4917.80979440332,
       y = -1468.61633,
     },
     ["hyjal:spawn:17895:winterchill-necromancer-introduction-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7841,10 +8120,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.93312733398,
       y = -1472.08267,
     },
     ["hyjal:spawn:17895:winterchill-necromancer-introduction-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7899,10 +8180,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.5497935498,
       y = -1475.50956,
     },
     ["hyjal:spawn:17895:winterchill-split-ghoul-crypt-17895-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -7957,10 +8240,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.04479350147,
       y = -1474.1104,
     },
     ["hyjal:spawn:17895:winterchill-split-ghoul-crypt-17895-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8015,10 +8300,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4923.91812714014,
       y = -1468.85829,
     },
     ["hyjal:spawn:17895:winterchill-split-ghoul-crypt-17895-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8073,10 +8360,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4917.57979442578,
       y = -1466.54915,
     },
     ["hyjal:spawn:17895:winterchill-split-ghoul-crypt-17895-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8131,10 +8420,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4914.53479472314,
       y = -1461.69417,
     },
     ["hyjal:spawn:17895:winterchill-split-ghoul-crypt-17895-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8189,10 +8480,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4907.7747953833,
       y = -1459.87421,
     },
     ["hyjal:spawn:17895:winterchill-split-ghoul-crypt-17895-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8247,10 +8540,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4904.90646233008,
       y = -1452.64697,
     },
     ["hyjal:spawn:17897:anetheron-banshee-abomination-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8305,10 +8600,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4929.16645996094,
       y = -1466.23092,
     },
     ["hyjal:spawn:17897:anetheron-banshee-abomination-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8363,10 +8660,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4917.49812776709,
       y = -1453.8594,
     },
     ["hyjal:spawn:17897:anetheron-banshee-abomination-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8421,10 +8720,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4934.6547927583,
       y = -1462.80666,
     },
     ["hyjal:spawn:17897:anetheron-banshee-abomination-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8479,10 +8780,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4930.83645979785,
       y = -1457.36782,
     },
     ["hyjal:spawn:17897:anetheron-banshee-introduction-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8537,10 +8840,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4939.01645899902,
       y = -1460.01886,
     },
     ["hyjal:spawn:17897:anetheron-banshee-introduction-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8595,10 +8900,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4933.43312621094,
       y = -1454.7799,
     },
     ["hyjal:spawn:17897:anetheron-banshee-introduction-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8653,10 +8960,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.94479341357,
       y = -1450.73233,
     },
     ["hyjal:spawn:17897:anetheron-banshee-introduction-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8711,10 +9020,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.46146071338,
       y = -1446.548,
     },
     ["hyjal:spawn:17897:anetheron-banshee-introduction-17897-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8769,10 +9080,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4940.06145889697,
       y = -1449.49623,
     },
     ["hyjal:spawn:17897:anetheron-banshee-introduction-17897-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8827,10 +9140,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4933.43979287695,
       y = -1443.82858,
     },
     ["hyjal:spawn:17897:anetheron-combined-assault-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8885,10 +9200,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4932.79979293945,
       y = -1453.68319,
     },
     ["hyjal:spawn:17897:anetheron-combined-assault-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -8943,10 +9260,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.06312683301,
       y = -1447.71309,
     },
     ["hyjal:spawn:17897:anetheron-ghoul-crypt-necromancer-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -9001,10 +9320,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4931.6247930542,
       y = -1466.84897,
     },
     ["hyjal:spawn:17897:anetheron-ghoul-crypt-necromancer-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -9059,10 +9380,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.16812682275,
       y = -1462.7225,
     },
     ["hyjal:spawn:17897:anetheron-ghoul-crypt-necromancer-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -9117,10 +9440,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.8114606792,
       y = -1458.10685,
     },
     ["hyjal:spawn:17897:anetheron-ghoul-crypt-necromancer-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -9175,10 +9500,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4916.72479450928,
       y = -1453.31499,
     },
     ["hyjal:spawn:17897:archimonde-night-elf-crypt-fiend-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5387.5197485332,
@@ -9229,10 +9556,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -3350.2735,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5371.82808339893,
       y = -3241.77811,
     },
     ["hyjal:spawn:17897:azgalor-combined-assault-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9287,10 +9616,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5468.3714073042,
       y = -2345.78445,
     },
     ["hyjal:spawn:17897:azgalor-combined-assault-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9345,10 +9676,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.36973946582,
       y = -2335.8036,
     },
     ["hyjal:spawn:17897:azgalor-combined-assault-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9403,10 +9736,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5487.71140541553,
       y = -2329.59154,
     },
     ["hyjal:spawn:17897:azgalor-combined-assault-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9461,10 +9796,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5474.86307333691,
       y = -2339.9853,
     },
     ["hyjal:spawn:17897:azgalor-mixed-infernals-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9519,10 +9856,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.73307344727,
       y = -2340.01686,
     },
     ["hyjal:spawn:17897:azgalor-mixed-infernals-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9577,10 +9916,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.04473949756,
       y = -2334.73845,
     },
     ["hyjal:spawn:17897:kazrogal-combined-assault-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9635,10 +9976,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5464.26974103809,
       y = -2337.83659,
     },
     ["hyjal:spawn:17897:kazrogal-combined-assault-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9693,10 +10036,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5469.77640716699,
       y = -2334.36499,
     },
     ["hyjal:spawn:17897:kazrogal-combined-assault-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9751,10 +10096,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5476.49640651074,
       y = -2328.83936,
     },
     ["hyjal:spawn:17897:kazrogal-combined-assault-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9809,10 +10156,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5481.58973934668,
       y = -2323.98964,
     },
     ["hyjal:spawn:17897:kazrogal-crypt-assault-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9867,10 +10216,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5466.03974086523,
       y = -2337.4868,
     },
     ["hyjal:spawn:17897:kazrogal-crypt-assault-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9925,10 +10276,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5479.04640626172,
       y = -2326.44869,
     },
     ["hyjal:spawn:17897:kazrogal-crypt-assault-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -9983,10 +10336,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5467.45140739404,
       y = -2346.13161,
     },
     ["hyjal:spawn:17897:kazrogal-crypt-assault-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -10041,10 +10396,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5474.26640672852,
       y = -2340.53497,
     },
     ["hyjal:spawn:17897:kazrogal-crypt-assault-17897-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -10099,10 +10456,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.88973941504,
       y = -2335.36965,
     },
     ["hyjal:spawn:17897:kazrogal-crypt-assault-17897-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -10157,10 +10516,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.47640553613,
       y = -2330.09387,
     },
     ["hyjal:spawn:17897:kazrogal-gargoyle-crypt-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -10215,10 +10576,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5465.71640756348,
       y = -2337.6972,
     },
     ["hyjal:spawn:17897:kazrogal-gargoyle-crypt-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -10273,10 +10636,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5478.87473961182,
       y = -2326.19095,
     },
     ["hyjal:spawn:17897:kazrogal-gargoyle-crypt-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -10331,10 +10696,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5467.59640737988,
       y = -2345.68977,
     },
     ["hyjal:spawn:17897:kazrogal-gargoyle-crypt-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -10389,10 +10756,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.88140676611,
       y = -2340.6954,
     },
     ["hyjal:spawn:17897:kazrogal-gargoyle-crypt-17897-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -10447,10 +10816,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5481.04140606689,
       y = -2335.18029,
     },
     ["hyjal:spawn:17897:kazrogal-gargoyle-crypt-17897-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -10505,10 +10876,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5487.55307209766,
       y = -2329.35221,
     },
     ["hyjal:spawn:17897:winterchill-combined-assault-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -10563,10 +10936,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4932.5197929668,
       y = -1461.29704,
     },
     ["hyjal:spawn:17897:winterchill-combined-assault-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -10621,10 +10996,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4925.13146035498,
       y = -1458.46716,
     },
     ["hyjal:spawn:17897:winterchill-combined-assault-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -10679,10 +11056,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4917.79479440478,
       y = -1458.00954,
     },
     ["hyjal:spawn:17897:winterchill-combined-assault-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -10737,10 +11116,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4911.28479504053,
       y = -1456.81289,
     },
     ["hyjal:spawn:17897:winterchill-crypt-necromancer-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -10795,10 +11176,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4916.00146124658,
       y = -1453.61218,
     },
     ["hyjal:spawn:17897:winterchill-crypt-necromancer-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -10853,10 +11236,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4920.52146080518,
       y = -1456.23166,
     },
     ["hyjal:spawn:17897:winterchill-crypt-necromancer-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -10911,10 +11296,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4925.45646032324,
       y = -1460.96566,
     },
     ["hyjal:spawn:17897:winterchill-crypt-necromancer-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -10969,10 +11356,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4931.4564597373,
       y = -1464.96852,
     },
     ["hyjal:spawn:17897:winterchill-crypt-necromancer-17897-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11027,10 +11416,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4924.25479377393,
       y = -1449.89599,
     },
     ["hyjal:spawn:17897:winterchill-crypt-necromancer-17897-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11085,10 +11476,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4931.57479305908,
       y = -1455.19018,
     },
     ["hyjal:spawn:17897:winterchill-ghouls-crypt-pair-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11143,10 +11536,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.60146021143,
       y = -1451.20047,
     },
     ["hyjal:spawn:17897:winterchill-ghouls-crypt-pair-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11201,10 +11596,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4933.66312618848,
       y = -1459.06154,
     },
     ["hyjal:spawn:17897:winterchill-necromancer-introduction-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11259,10 +11656,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4916.11479456885,
       y = -1452.79688,
     },
     ["hyjal:spawn:17897:winterchill-necromancer-introduction-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11317,10 +11716,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.34312690332,
       y = -1453.44386,
     },
     ["hyjal:spawn:17897:winterchill-necromancer-introduction-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11375,10 +11776,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4930.88979312598,
       y = -1459.55335,
     },
     ["hyjal:spawn:17897:winterchill-necromancer-introduction-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11433,10 +11836,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4931.16479309912,
       y = -1469.0082,
     },
     ["hyjal:spawn:17897:winterchill-split-ghoul-crypt-17897-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11491,10 +11896,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4931.41479307471,
       y = -1470.5073,
     },
     ["hyjal:spawn:17897:winterchill-split-ghoul-crypt-17897-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11549,10 +11956,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.61479354346,
       y = -1465.28412,
     },
     ["hyjal:spawn:17897:winterchill-split-ghoul-crypt-17897-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11607,10 +12016,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.40812738525,
       y = -1459.50075,
     },
     ["hyjal:spawn:17897:winterchill-split-ghoul-crypt-17897-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11665,10 +12076,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4913.24479484912,
       y = -1456.57619,
     },
     ["hyjal:spawn:17897:winterchill-split-ghoul-crypt-17897-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11723,10 +12136,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4934.14645947461,
       y = -1461.47062,
     },
     ["hyjal:spawn:17897:winterchill-split-ghoul-crypt-17897-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11781,10 +12196,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.27979347852,
       y = -1453.77787,
     },
     ["hyjal:spawn:17898:anetheron-abomination-necromancer-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11839,10 +12256,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4933.28479289209,
       y = -1455.35324,
     },
     ["hyjal:spawn:17898:anetheron-abomination-necromancer-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11897,10 +12316,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.56479354834,
       y = -1450.10376,
     },
     ["hyjal:spawn:17898:anetheron-banshee-abomination-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -11955,10 +12376,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.24146024658,
       y = -1453.68582,
     },
     ["hyjal:spawn:17898:anetheron-banshee-abomination-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12013,10 +12436,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.27146073193,
       y = -1448.16282,
     },
     ["hyjal:spawn:17898:anetheron-banshee-abomination-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12071,10 +12496,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4940.83645882129,
       y = -1457.38886,
     },
     ["hyjal:spawn:17898:anetheron-banshee-abomination-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12129,10 +12556,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4936.26979260059,
       y = -1452.73639,
     },
     ["hyjal:spawn:17898:anetheron-combined-assault-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12187,10 +12616,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4932.75479294385,
       y = -1463.08807,
     },
     ["hyjal:spawn:17898:anetheron-combined-assault-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12245,10 +12676,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.72979353223,
       y = -1457.84385,
     },
     ["hyjal:spawn:17898:anetheron-combined-assault-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12303,10 +12736,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.31312739453,
       y = -1453.7016,
     },
     ["hyjal:spawn:17898:anetheron-combined-assault-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12361,10 +12796,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4914.78979469824,
       y = -1449.14118,
     },
     ["hyjal:spawn:17898:anetheron-ghoul-abomination-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12419,10 +12856,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4933.68979285254,
       y = -1466.47288,
     },
     ["hyjal:spawn:17898:anetheron-ghoul-abomination-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12477,10 +12916,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4929.33145994482,
       y = -1462.12286,
     },
     ["hyjal:spawn:17898:anetheron-ghoul-abomination-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12535,10 +12976,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.79979391602,
       y = -1456.82867,
     },
     ["hyjal:spawn:17898:anetheron-ghoul-abomination-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -12593,10 +13036,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4917.73312774414,
       y = -1452.93364,
     },
     ["hyjal:spawn:17898:archimonde-night-elf-ghoul-abomination-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5387.5197485332,
@@ -12647,10 +13092,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -3350.2735,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5361.22308443457,
       y = -3247.4405,
     },
     ["hyjal:spawn:17898:azgalor-abomination-necromancer-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -12705,10 +13152,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5466.154740854,
       y = -2337.64986,
     },
     ["hyjal:spawn:17898:azgalor-abomination-necromancer-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -12763,10 +13212,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5478.62807296924,
       y = -2326.90105,
     },
     ["hyjal:spawn:17898:azgalor-abomination-necromancer-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -12821,10 +13272,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5467.62974070996,
       y = -2346.71021,
     },
     ["hyjal:spawn:17898:azgalor-abomination-necromancer-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -12879,10 +13332,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.92974009473,
       y = -2340.97681,
     },
     ["hyjal:spawn:17898:azgalor-abomination-necromancer-17898-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -12937,10 +13392,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.4030727959,
       y = -2335.81938,
     },
     ["hyjal:spawn:17898:azgalor-abomination-necromancer-17898-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -12995,10 +13452,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5487.08640547656,
       y = -2330.16488,
     },
     ["hyjal:spawn:17898:azgalor-combined-assault-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13053,10 +13512,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5464.76474098975,
       y = -2338.00491,
     },
     ["hyjal:spawn:17898:azgalor-combined-assault-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13111,10 +13572,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5470.10474046826,
       y = -2334.5938,
     },
     ["hyjal:spawn:17898:azgalor-combined-assault-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13169,10 +13632,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5476.63640649707,
       y = -2328.7289,
     },
     ["hyjal:spawn:17898:azgalor-combined-assault-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13227,10 +13692,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5481.87973931836,
       y = -2324.21845,
     },
     ["hyjal:spawn:17898:azgalor-fel-stalker-abominations-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13285,10 +13752,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5467.10474076123,
       y = -2345.96592,
     },
     ["hyjal:spawn:17898:azgalor-fel-stalker-abominations-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13343,10 +13812,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.92640676172,
       y = -2339.62762,
     },
     ["hyjal:spawn:17898:azgalor-fel-stalker-abominations-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13401,10 +13872,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.05807282959,
       y = -2334.8305,
     },
     ["hyjal:spawn:17898:azgalor-fel-stalker-abominations-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13459,10 +13932,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5487.26807212549,
       y = -2328.80517,
     },
     ["hyjal:spawn:17898:kazrogal-abomination-assault-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13517,10 +13992,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5466.75640746191,
       y = -2338.91489,
     },
     ["hyjal:spawn:17898:kazrogal-abomination-assault-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13575,10 +14052,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5479.78307285644,
       y = -2327.74791,
     },
     ["hyjal:spawn:17898:kazrogal-abomination-assault-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13633,10 +14112,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5468.88640725391,
       y = -2347.30196,
     },
     ["hyjal:spawn:17898:kazrogal-abomination-assault-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13691,10 +14172,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5475.43807328076,
       y = -2341.75529,
     },
     ["hyjal:spawn:17898:kazrogal-abomination-assault-17898-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13749,10 +14232,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5481.99473930713,
       y = -2336.75566,
     },
     ["hyjal:spawn:17898:kazrogal-abomination-assault-17898-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13807,10 +14292,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.68140551611,
       y = -2331.73236,
     },
     ["hyjal:spawn:17898:kazrogal-combined-assault-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13865,10 +14352,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5467.85140735498,
       y = -2345.94225,
     },
     ["hyjal:spawn:17898:kazrogal-combined-assault-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13923,10 +14412,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5474.73307334961,
       y = -2339.82224,
     },
     ["hyjal:spawn:17898:kazrogal-combined-assault-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -13981,10 +14472,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5481.55807268311,
       y = -2334.81735,
     },
     ["hyjal:spawn:17898:kazrogal-combined-assault-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -14039,10 +14532,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.30640555273,
       y = -2330.13069,
     },
     ["hyjal:spawn:17898:kazrogal-frost-wyrm-assault-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -14097,10 +14592,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5468.42307396582,
       y = -2346.38672,
     },
     ["hyjal:spawn:17898:kazrogal-frost-wyrm-assault-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -14155,10 +14652,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5474.41974004687,
       y = -2340.97681,
     },
     ["hyjal:spawn:17898:kazrogal-frost-wyrm-assault-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -14213,10 +14712,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.61140610889,
       y = -2336.17969,
     },
     ["hyjal:spawn:17898:kazrogal-frost-wyrm-assault-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -14271,10 +14772,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5488.21973869922,
       y = -2329.90188,
     },
     ["hyjal:spawn:17898:kazrogal-undead-vanguard-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -14329,10 +14832,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5466.46307415723,
       y = -2345.62928,
     },
     ["hyjal:spawn:17898:kazrogal-undead-vanguard-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -14387,10 +14892,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.11640684082,
       y = -2339.41722,
     },
     ["hyjal:spawn:17898:kazrogal-undead-vanguard-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -14445,10 +14952,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.07640616113,
       y = -2333.88633,
     },
     ["hyjal:spawn:17898:kazrogal-undead-vanguard-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -14503,10 +15012,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.46640553711,
       y = -2328.4396,
     },
     ["hyjal:spawn:17898:winterchill-abomination-necromancer-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -14561,10 +15072,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4931.85312636523,
       y = -1468.377,
     },
     ["hyjal:spawn:17898:winterchill-abomination-necromancer-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -14619,10 +15132,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.9547934126,
       y = -1463.38,
     },
     ["hyjal:spawn:17898:winterchill-abomination-necromancer-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -14677,10 +15192,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4923.52479384521,
       y = -1458.93267,
     },
     ["hyjal:spawn:17898:winterchill-abomination-necromancer-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -14735,10 +15252,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4918.47646100488,
       y = -1452.94942,
     },
     ["hyjal:spawn:17898:winterchill-combined-assault-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -14793,10 +15312,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4929.80812656494,
       y = -1451.9395,
     },
     ["hyjal:spawn:17898:winterchill-combined-assault-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -14851,10 +15372,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.79312734766,
       y = -1449.96437,
     },
     ["hyjal:spawn:17898:winterchill-ghoul-abomination-17898-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -14909,10 +15432,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4934.24312613184,
       y = -1466.70695,
     },
     ["hyjal:spawn:17898:winterchill-ghoul-abomination-17898-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -14967,10 +15492,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4928.80479332959,
       y = -1464.88962,
     },
     ["hyjal:spawn:17898:winterchill-ghoul-abomination-17898-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15025,10 +15552,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.54312737207,
       y = -1460.70266,
     },
     ["hyjal:spawn:17898:winterchill-ghoul-abomination-17898-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15083,10 +15612,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4915.94979458496,
       y = -1457.02329,
     },
     ["hyjal:spawn:17898:winterchill-ghoul-abomination-17898-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15141,10 +15672,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4933.45145954248,
       y = -1458.95108,
     },
     ["hyjal:spawn:17898:winterchill-ghoul-abomination-17898-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15199,10 +15732,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.12146064893,
       y = -1453.66215,
     },
     ["hyjal:spawn:17899:anetheron-abomination-necromancer-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15257,10 +15792,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4937.40979248926,
       y = -1460.3029,
     },
     ["hyjal:spawn:17899:anetheron-abomination-necromancer-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15315,10 +15852,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4935.64479266162,
       y = -1449.2306,
     },
     ["hyjal:spawn:17899:anetheron-abomination-necromancer-17899-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15373,10 +15912,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4931.93812635693,
       y = -1446.01411,
     },
     ["hyjal:spawn:17899:anetheron-abomination-necromancer-17899-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15431,10 +15972,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4921.08979408301,
       y = -1447.40538,
     },
     ["hyjal:spawn:17899:anetheron-banshee-introduction-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15489,10 +16032,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4932.80645960547,
       y = -1464.26368,
     },
     ["hyjal:spawn:17899:anetheron-banshee-introduction-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15547,10 +16092,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.9114600835,
       y = -1459.02735,
     },
     ["hyjal:spawn:17899:anetheron-banshee-introduction-17899-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15605,10 +16152,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.83812724561,
       y = -1455.03238,
     },
     ["hyjal:spawn:17899:anetheron-banshee-introduction-17899-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15663,10 +16212,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4918.31979435352,
       y = -1451.54237,
     },
     ["hyjal:spawn:17899:anetheron-combined-assault-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15721,10 +16272,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4938.31145906787,
       y = -1447.23706,
     },
     ["hyjal:spawn:17899:anetheron-combined-assault-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15779,10 +16332,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4933.1197929082,
       y = -1442.82655,
     },
     ["hyjal:spawn:17899:anetheron-ghoul-banshee-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15837,10 +16392,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4938.14645908398,
       y = -1452.64434,
     },
     ["hyjal:spawn:17899:anetheron-ghoul-banshee-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15895,10 +16452,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4929.38479327295,
       y = -1444.1547,
     },
     ["hyjal:spawn:17899:anetheron-ghoul-crypt-necromancer-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -15953,10 +16512,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4937.74145912354,
       y = -1460.40547,
     },
     ["hyjal:spawn:17899:anetheron-ghoul-crypt-necromancer-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -16011,10 +16572,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4933.57645953027,
       y = -1456.17643,
     },
     ["hyjal:spawn:17899:anetheron-ghoul-crypt-necromancer-17899-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -16069,10 +16632,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.94146008057,
       y = -1451.02689,
     },
     ["hyjal:spawn:17899:anetheron-ghoul-crypt-necromancer-17899-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -16127,10 +16692,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4922.64479393115,
       y = -1446.12194,
     },
     ["hyjal:spawn:17899:azgalor-abomination-necromancer-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16185,10 +16752,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.37140681592,
       y = -2351.93602,
     },
     ["hyjal:spawn:17899:azgalor-abomination-necromancer-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16243,10 +16812,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5477.70307305957,
       y = -2347.94105,
     },
     ["hyjal:spawn:17899:azgalor-abomination-necromancer-17899-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16301,10 +16872,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5479.99473950244,
       y = -2346.4025,
     },
     ["hyjal:spawn:17899:azgalor-abomination-necromancer-17899-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16359,10 +16932,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5484.61473905127,
       y = -2341.58697,
     },
     ["hyjal:spawn:17899:azgalor-abomination-necromancer-17899-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16417,10 +16992,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5488.51807200342,
       y = -2338.92015,
     },
     ["hyjal:spawn:17899:azgalor-abomination-necromancer-17899-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16475,10 +17052,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5491.36640505859,
       y = -2335.84568,
     },
     ["hyjal:spawn:17899:azgalor-combined-assault-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16533,10 +17112,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5470.22640712305,
       y = -2355.76267,
     },
     ["hyjal:spawn:17899:azgalor-combined-assault-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16591,10 +17172,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5494.30973810449,
       y = -2332.58711,
     },
     ["hyjal:spawn:17899:azgalor-fel-stalker-abominations-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16649,10 +17232,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5463.57807443896,
       y = -2338.14167,
     },
     ["hyjal:spawn:17899:azgalor-fel-stalker-abominations-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16707,10 +17292,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5469.55807385498,
       y = -2334.10199,
     },
     ["hyjal:spawn:17899:azgalor-fel-stalker-abominations-17899-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16765,10 +17352,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5475.50140660791,
       y = -2328.4133,
     },
     ["hyjal:spawn:17899:azgalor-fel-stalker-abominations-17899-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16823,10 +17412,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.95140607568,
       y = -2323.1796,
     },
     ["hyjal:spawn:17899:azgalor-necromancer-banshee-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16881,10 +17472,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5476.28807319775,
       y = -2347.69646,
     },
     ["hyjal:spawn:17899:azgalor-necromancer-banshee-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16939,10 +17532,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5479.65640620215,
       y = -2344.79294,
     },
     ["hyjal:spawn:17899:azgalor-necromancer-banshee-17899-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -16997,10 +17592,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5483.33140584326,
       y = -2341.44495,
     },
     ["hyjal:spawn:17899:azgalor-necromancer-banshee-17899-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17055,10 +17652,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.86473883154,
       y = -2338.36785,
     },
     ["hyjal:spawn:17899:azgalor-necromancer-banshee-17899-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17113,10 +17712,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5490.02307185645,
       y = -2334.63851,
     },
     ["hyjal:spawn:17899:azgalor-necromancer-banshee-17899-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17171,10 +17772,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5492.84307158105,
       y = -2331.56404,
     },
     ["hyjal:spawn:17899:kazrogal-abomination-assault-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17229,10 +17832,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5472.10140693994,
       y = -2354.83428,
     },
     ["hyjal:spawn:17899:kazrogal-abomination-assault-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17287,10 +17892,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5475.09973998047,
       y = -2351.4784,
     },
     ["hyjal:spawn:17899:kazrogal-abomination-assault-17899-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17345,10 +17952,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5491.18973840918,
       y = -2337.7235,
     },
     ["hyjal:spawn:17899:kazrogal-abomination-assault-17899-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17403,10 +18012,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5493.76640482422,
       y = -2334.60432,
     },
     ["hyjal:spawn:17899:kazrogal-combined-assault-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17461,10 +18072,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5470.34640711133,
       y = -2355.11306,
     },
     ["hyjal:spawn:17899:kazrogal-combined-assault-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17519,10 +18132,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5492.64473826709,
       y = -2333.25776,
     },
     ["hyjal:spawn:17899:kazrogal-crypt-assault-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17577,10 +18192,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5471.70974031152,
       y = -2334.15985,
     },
     ["hyjal:spawn:17899:kazrogal-crypt-assault-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17635,10 +18252,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5474.81974000781,
       y = -2330.74348,
     },
     ["hyjal:spawn:17899:kazrogal-gargoyle-crypt-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17693,10 +18312,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5471.46974033496,
       y = -2334.14407,
     },
     ["hyjal:spawn:17899:kazrogal-gargoyle-crypt-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17751,10 +18372,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5474.261406729,
       y = -2331.16428,
     },
     ["hyjal:spawn:17899:kazrogal-undead-vanguard-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17809,10 +18432,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.24474016162,
       y = -2330.08861,
     },
     ["hyjal:spawn:17899:kazrogal-undead-vanguard-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -17867,10 +18492,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5476.54140650635,
       y = -2326.61964,
     },
     ["hyjal:spawn:17899:winterchill-abomination-necromancer-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -17925,10 +18552,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.55646011816,
       y = -1468.75046,
     },
     ["hyjal:spawn:17899:winterchill-abomination-necromancer-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -17983,10 +18612,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4925.60479364209,
       y = -1466.09153,
     },
     ["hyjal:spawn:17899:winterchill-abomination-necromancer-17899-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18041,10 +18672,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4919.79479420947,
       y = -1459.69274,
     },
     ["hyjal:spawn:17899:winterchill-abomination-necromancer-17899-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18099,10 +18732,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4918.62979432324,
       y = -1458.20679,
     },
     ["hyjal:spawn:17899:winterchill-combined-assault-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18157,10 +18792,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4936.59145923584,
       y = -1454.57739,
     },
     ["hyjal:spawn:17899:winterchill-combined-assault-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18215,10 +18852,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4915.96146125049,
       y = -1447.1003,
     },
     ["hyjal:spawn:17899:winterchill-crypt-necromancer-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18273,10 +18912,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4915.20479465771,
       y = -1461.17869,
     },
     ["hyjal:spawn:17899:winterchill-crypt-necromancer-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18331,10 +18972,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4912.78146156104,
       y = -1459.09836,
     },
     ["hyjal:spawn:17899:winterchill-crypt-necromancer-17899-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18389,10 +19032,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4925.97479360596,
       y = -1467.96146,
     },
     ["hyjal:spawn:17899:winterchill-crypt-necromancer-17899-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18447,10 +19092,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4930.19812652686,
       y = -1470.91495,
     },
     ["hyjal:spawn:17899:winterchill-necromancer-introduction-17899-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18505,10 +19152,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4919.98979419043,
       y = -1458.33829,
     },
     ["hyjal:spawn:17899:winterchill-necromancer-introduction-17899-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18563,10 +19212,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4923.60812717041,
       y = -1463.31951,
     },
     ["hyjal:spawn:17905:anetheron-banshee-abomination-17905-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18621,10 +19272,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4932.06979301074,
       y = -1447.26336,
     },
     ["hyjal:spawn:17905:anetheron-banshee-abomination-17905-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18679,10 +19332,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4926.96979350879,
       y = -1442.80551,
     },
     ["hyjal:spawn:17905:anetheron-banshee-introduction-17905-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18737,10 +19392,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4923.42146052197,
       y = -1463.54832,
     },
     ["hyjal:spawn:17905:anetheron-banshee-introduction-17905-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18795,10 +19452,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4918.66646098633,
       y = -1459.34558,
     },
     ["hyjal:spawn:17905:anetheron-combined-assault-17905-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18853,10 +19512,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4942.19979202148,
       y = -1453.94619,
     },
     ["hyjal:spawn:17905:anetheron-combined-assault-17905-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18911,10 +19572,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.271460146,
       y = -1438.81054,
     },
     ["hyjal:spawn:17905:anetheron-ghoul-banshee-17905-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -18969,10 +19632,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4935.25979269922,
       y = -1459.4876,
     },
     ["hyjal:spawn:17905:anetheron-ghoul-banshee-17905-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -19027,10 +19692,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4931.45979307031,
       y = -1454.23286,
     },
     ["hyjal:spawn:17905:anetheron-ghoul-banshee-17905-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -19085,10 +19752,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4927.07646016504,
       y = -1450.61135,
     },
     ["hyjal:spawn:17905:anetheron-ghoul-banshee-17905-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 4895.42979658887,
@@ -19143,10 +19812,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -1691.34314,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 4923.00979389551,
       y = -1445.80371,
     },
     ["hyjal:spawn:17905:azgalor-combined-assault-17905-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19201,10 +19872,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5479.13973958594,
       y = -2360.76756,
     },
     ["hyjal:spawn:17905:azgalor-combined-assault-17905-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19259,10 +19932,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5496.93807118115,
       y = -2341.31608,
     },
     ["hyjal:spawn:17905:azgalor-necromancer-banshee-17905-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19317,10 +19992,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5470.76807373682,
       y = -2339.72493,
     },
     ["hyjal:spawn:17905:azgalor-necromancer-banshee-17905-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19375,10 +20052,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5474.22307339941,
       y = -2336.87401,
     },
     ["hyjal:spawn:17905:azgalor-necromancer-banshee-17905-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19433,10 +20112,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5477.38140642432,
       y = -2333.67856,
     },
     ["hyjal:spawn:17905:azgalor-necromancer-banshee-17905-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19491,10 +20172,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5480.37807279834,
       y = -2330.50415,
     },
     ["hyjal:spawn:17905:azgalor-necromancer-banshee-17905-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19549,10 +20232,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5483.12640586328,
       y = -2327.91886,
     },
     ["hyjal:spawn:17905:azgalor-necromancer-banshee-17905-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19607,10 +20292,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.18640556445,
       y = -2324.22371,
     },
     ["hyjal:spawn:17905:kazrogal-combined-assault-17905-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19665,10 +20352,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.67974011914,
       y = -2351.09179,
     },
     ["hyjal:spawn:17905:kazrogal-combined-assault-17905-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19723,10 +20412,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5489.8347385415,
       y = -2336.06397,
     },
     ["hyjal:spawn:17905:kazrogal-undead-vanguard-17905-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19781,10 +20472,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5466.93974077734,
       y = -2335.50904,
     },
     ["hyjal:spawn:17905:kazrogal-undead-vanguard-17905-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -19839,10 +20532,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5470.15974046289,
       y = -2333.00002,
     },
     ["hyjal:spawn:17906:azgalor-aerial-ghouls-17906-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19853,10 +20548,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5407.95974653711,
       y = -2465.79924,
     },
     ["hyjal:spawn:17906:azgalor-aerial-ghouls-17906-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19867,10 +20564,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5436.76641039062,
       y = -2480.51409,
     },
     ["hyjal:spawn:17906:azgalor-aerial-ghouls-17906-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19881,10 +20580,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5393.46641461914,
       y = -2468.41609,
     },
     ["hyjal:spawn:17906:azgalor-aerial-ghouls-17906-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19895,10 +20596,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5433.88974400488,
       y = -2502.43777,
     },
     ["hyjal:spawn:17906:azgalor-aerial-ghouls-17906-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19909,10 +20612,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5419.36141209033,
       y = -2508.2527,
     },
     ["hyjal:spawn:17906:azgalor-aerial-ghouls-17906-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19923,10 +20628,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5449.62307580176,
       y = -2508.61827,
     },
     ["hyjal:spawn:17906:azgalor-aerial-ghouls-17906-07"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19937,10 +20644,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5389.70474831982,
       y = -2500.60466,
     },
     ["hyjal:spawn:17906:azgalor-aerial-ghouls-17906-08"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19951,10 +20660,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5435.05474389111,
       y = -2519.43546,
     },
     ["hyjal:spawn:17906:kazrogal-aerial-assault-17906-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19965,10 +20676,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5387.04641524609,
       y = -2498.87149,
     },
     ["hyjal:spawn:17906:kazrogal-aerial-assault-17906-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19979,10 +20692,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5384.1064155332,
       y = -2469.55225,
     },
     ["hyjal:spawn:17906:kazrogal-aerial-assault-17906-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -19993,10 +20708,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5434.00974399316,
       y = -2480.02228,
     },
     ["hyjal:spawn:17906:kazrogal-aerial-assault-17906-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -20007,10 +20724,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5477.95640636816,
       y = -2485.44271,
     },
     ["hyjal:spawn:17906:kazrogal-aerial-assault-17906-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -20021,10 +20740,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5425.07141153271,
       y = -2501.50675,
     },
     ["hyjal:spawn:17906:kazrogal-aerial-assault-17906-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -20035,10 +20756,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5454.33140867529,
       y = -2500.01817,
     },
     ["hyjal:spawn:17906:kazrogal-aerial-assault-17906-07"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -20049,10 +20772,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5403.73974694922,
       y = -2513.75203,
     },
     ["hyjal:spawn:17906:kazrogal-aerial-assault-17906-08"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5464.77974098828,
@@ -20063,10 +20788,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2623.45196,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5453.15640879004,
       y = -2512.28712,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-crypt-17906-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20077,10 +20804,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5793.83804218701,
       y = -2847.13609,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-crypt-17906-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20091,10 +20820,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5816.99637325879,
       y = -2880.88425,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-crypt-17906-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20105,10 +20836,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5777.43137712256,
       y = -2870.89025,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-crypt-17906-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20119,10 +20852,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5770.99637775098,
       y = -2798.01821,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-crypt-17906-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20133,10 +20868,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5781.94637668164,
       y = -2834.72249,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-crypt-17906-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20147,10 +20884,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5784.71637641113,
       y = -2777.12023,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-introduction-17906-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20161,10 +20900,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5823.99137257568,
       y = -2879.95849,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-introduction-17906-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20175,10 +20916,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5802.55637466894,
       y = -2858.03481,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-introduction-17906-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20189,10 +20932,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5776.22971057324,
       y = -2843.2621,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-introduction-17906-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20203,10 +20948,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5770.71971111133,
       y = -2804.16715,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-introduction-17906-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20217,10 +20964,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5780.82304345801,
       y = -2792.056,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-introduction-17906-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20231,10 +20980,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5786.26304292676,
       y = -2830.24886,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-introduction-17906-07"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20245,10 +20996,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5804.67804112842,
       y = -2872.81541,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-introduction-17906-08"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20259,10 +21012,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5823.60970594629,
       y = -2910.64533,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-introduction-17906-09"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20273,10 +21028,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5796.99970854492,
       y = -2884.32429,
     },
     ["hyjal:spawn:17906:kazrogal-gargoyle-introduction-17906-10"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5761.93971196875,
@@ -20287,10 +21044,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2790.39647,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5789.97970923047,
       y = -2808.89589,
     },
     ["hyjal:spawn:17907:azgalor-aerial-ghouls-17907-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5452.17974221875,
@@ -20309,10 +21068,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2672.69871,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5423.37474503174,
       y = -2503.30304,
     },
     ["hyjal:spawn:17907:kazrogal-aerial-assault-17907-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5452.17974221875,
@@ -20331,10 +21092,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2672.69871,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5448.234742604,
       y = -2436.35639,
     },
     ["hyjal:spawn:17907:kazrogal-frost-wyrm-assault-17907-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5730.09971507812,
@@ -20353,106 +21116,132 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2707.36474,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5753.52304612402,
       y = -2668.39077,
     },
     ["hyjal:spawn:17908:azgalor-fel-stalker-infernals-17908-01"] = {
+      coordinateKind = "derived-affine",
       x = 5568.69973083984,
       y = -2681.30144,
     },
     ["hyjal:spawn:17908:azgalor-fel-stalker-infernals-17908-02"] = {
+      coordinateKind = "derived-affine",
       x = 5526.44973496582,
       y = -2746.50177,
     },
     ["hyjal:spawn:17908:azgalor-fel-stalker-infernals-17908-03"] = {
+      coordinateKind = "derived-affine",
       x = 5424.92974487988,
       y = -2747.82466,
     },
     ["hyjal:spawn:17908:azgalor-fel-stalker-infernals-17908-04"] = {
+      coordinateKind = "derived-affine",
       x = 5483.14973919434,
       y = -2666.98635,
     },
     ["hyjal:spawn:17908:azgalor-fel-stalker-infernals-17908-05"] = {
+      coordinateKind = "derived-affine",
       x = 5525.86973502246,
       y = -2590.98987,
     },
     ["hyjal:spawn:17908:azgalor-fel-stalker-infernals-17908-06"] = {
+      coordinateKind = "derived-affine",
       x = 5494.2697381084,
       y = -2606.97501,
     },
     ["hyjal:spawn:17908:azgalor-fel-stalker-infernals-17908-07"] = {
+      coordinateKind = "derived-affine",
       x = 5568.69973083984,
       y = -2681.30144,
     },
     ["hyjal:spawn:17908:azgalor-fel-stalker-infernals-17908-08"] = {
+      coordinateKind = "derived-affine",
       x = 5526.44973496582,
       y = -2746.50177,
     },
     ["hyjal:spawn:17908:azgalor-ghoul-infernals-17908-01"] = {
+      coordinateKind = "derived-affine",
       x = 5568.69973083984,
       y = -2681.30144,
     },
     ["hyjal:spawn:17908:azgalor-ghoul-infernals-17908-02"] = {
+      coordinateKind = "derived-affine",
       x = 5526.44973496582,
       y = -2746.50177,
     },
     ["hyjal:spawn:17908:azgalor-ghoul-infernals-17908-03"] = {
+      coordinateKind = "derived-affine",
       x = 5424.92974487988,
       y = -2747.82466,
     },
     ["hyjal:spawn:17908:azgalor-ghoul-infernals-17908-04"] = {
+      coordinateKind = "derived-affine",
       x = 5483.14973919434,
       y = -2666.98635,
     },
     ["hyjal:spawn:17908:azgalor-ghoul-infernals-17908-05"] = {
+      coordinateKind = "derived-affine",
       x = 5525.86973502246,
       y = -2590.98987,
     },
     ["hyjal:spawn:17908:azgalor-ghoul-infernals-17908-06"] = {
+      coordinateKind = "derived-affine",
       x = 5494.2697381084,
       y = -2606.97501,
     },
     ["hyjal:spawn:17908:azgalor-ghoul-infernals-17908-07"] = {
+      coordinateKind = "derived-affine",
       x = 5568.69973083984,
       y = -2681.30144,
     },
     ["hyjal:spawn:17908:azgalor-ghoul-infernals-17908-08"] = {
+      coordinateKind = "derived-affine",
       x = 5526.44973496582,
       y = -2746.50177,
     },
     ["hyjal:spawn:17908:azgalor-mixed-infernals-17908-01"] = {
+      coordinateKind = "derived-affine",
       x = 5568.69973083984,
       y = -2681.30144,
     },
     ["hyjal:spawn:17908:azgalor-mixed-infernals-17908-02"] = {
+      coordinateKind = "derived-affine",
       x = 5526.44973496582,
       y = -2746.50177,
     },
     ["hyjal:spawn:17908:azgalor-mixed-infernals-17908-03"] = {
+      coordinateKind = "derived-affine",
       x = 5424.92974487988,
       y = -2747.82466,
     },
     ["hyjal:spawn:17908:azgalor-mixed-infernals-17908-04"] = {
+      coordinateKind = "derived-affine",
       x = 5483.14973919434,
       y = -2666.98635,
     },
     ["hyjal:spawn:17908:azgalor-mixed-infernals-17908-05"] = {
+      coordinateKind = "derived-affine",
       x = 5525.86973502246,
       y = -2590.98987,
     },
     ["hyjal:spawn:17908:azgalor-mixed-infernals-17908-06"] = {
+      coordinateKind = "derived-affine",
       x = 5494.2697381084,
       y = -2606.97501,
     },
     ["hyjal:spawn:17908:azgalor-mixed-infernals-17908-07"] = {
+      coordinateKind = "derived-affine",
       x = 5568.69973083984,
       y = -2681.30144,
     },
     ["hyjal:spawn:17908:azgalor-mixed-infernals-17908-08"] = {
+      coordinateKind = "derived-affine",
       x = 5526.44973496582,
       y = -2746.50177,
     },
     ["hyjal:spawn:17916:azgalor-combined-assault-17916-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -20507,10 +21296,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5481.61640601074,
       y = -2345.17429,
     },
     ["hyjal:spawn:17916:azgalor-combined-assault-17916-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -20565,10 +21356,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5484.13973909766,
       y = -2342.10771,
     },
     ["hyjal:spawn:17916:azgalor-combined-assault-17916-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -20623,10 +21416,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5487.89640539746,
       y = -2339.65918,
     },
     ["hyjal:spawn:17916:azgalor-combined-assault-17916-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -20681,10 +21476,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5489.72307188574,
       y = -2336.70306,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-abominations-17916-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -20739,10 +21536,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5472.75140687646,
       y = -2351.02604,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-abominations-17916-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -20797,10 +21596,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5476.25473986768,
       y = -2348.28821,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-abominations-17916-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -20855,10 +21656,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5479.85473951611,
       y = -2345.1664,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-abominations-17916-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -20913,10 +21716,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5483.46973916309,
       y = -2341.40287,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-abominations-17916-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -20971,10 +21776,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.98140548682,
       y = -2339.1437,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-abominations-17916-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -21029,10 +21836,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5490.14473851123,
       y = -2335.24867,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-infernals-17916-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -21087,10 +21896,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5473.77474010986,
       y = -2353.08796,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-infernals-17916-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -21145,10 +21956,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5478.52973964551,
       y = -2348.25139,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-infernals-17916-03"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -21203,10 +22016,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5482.05807263428,
       y = -2345.82127,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-infernals-17916-04"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -21261,10 +22076,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5483.52140582471,
       y = -2343.67256,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-infernals-17916-05"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -21319,10 +22136,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5488.20473870068,
       y = -2340.65069,
     },
     ["hyjal:spawn:17916:azgalor-fel-stalker-infernals-17916-06"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -21377,10 +22196,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5492.17140497998,
       y = -2336.3033,
     },
     ["hyjal:spawn:17916:azgalor-mixed-infernals-17916-01"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -21435,10 +22256,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5467.37140740186,
       y = -2345.67925,
     },
     ["hyjal:spawn:17916:azgalor-mixed-infernals-17916-02"] = {
+      coordinateKind = "derived-affine",
       patrol = {
         {
           x = 5496.34973790527,
@@ -21493,10 +22316,12 @@ ART.MapWorldPositions["hyjal"] = {
           y = -2594.0959,
         },
       },
+      patrolCoordinateKind = "derived-affine",
       x = 5486.38140554541,
       y = -2329.0445,
     },
     ["hyjal:spawn:17968:archimonde-17968-01"] = {
+      coordinateKind = "derived-affine",
       x = 5601.93806092725,
       y = -3431.6194,
     },

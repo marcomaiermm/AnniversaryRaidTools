@@ -23,6 +23,7 @@ end
 equal(map.raidKey, raid.key, "map raid identity")
 equal(map.mapId, raid.mapId, "map identity")
 equal(map.sublevels[1].mapId, raid.sublevels[1].mapId, "sublevel map identity")
+equal(map.sublevels[1].uiMapId, 330, "UI map identity stays separate from instance map id")
 assert(type(map.sublevels[1].asset) == "table", "map asset metadata missing")
 assert(map.sublevels[1].asset.textureFolder == "GruulsLair", "map asset folder missing")
 assert(map.sublevels[1].asset.source.sourceRef ~= nil, "map asset provenance missing")

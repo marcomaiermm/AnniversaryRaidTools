@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Route/wave editing boundary; central registration belongs to ART-070.
 
 local _, addon = ...

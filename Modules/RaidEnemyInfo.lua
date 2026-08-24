@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Feature boundary for sourced enemy information and bounded live observations.
 -- Central registration is intentionally owned by the integrator.
 

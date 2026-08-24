@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Multi-raid registration and sourced enemy-info UI adapter.
 
 local _, MDT = ...
@@ -395,10 +394,10 @@ function Integration:Initialize()
     local dependencies = markDependencies(preset, activeRaid or raids[DEFAULT_RAID_KEY], db)
     -- Only raid leaders/assistants may set raid targets inside a raid group.
     dependencies.canMark = canMarkUnits
-    -- Map live units onto planned spawn instances (position-first, id fallback).
-    dependencies.getSpawnKeyForGuid = function(_, unitToken)
+    -- Resolve one canonical exact/pool observation for each live unit.
+    dependencies.getMatchForUnit = function(_, unitToken)
       if not ART.LiveMarks then return nil end
-      return ART.LiveMarks:ResolveSpawnKey(unitToken)
+      return ART.LiveMarks:ResolveMatch(unitToken)
     end
     dependencies.allowOutsideActiveStep = true
     dependencies.getSpawnMarker = function(spawnKey)
@@ -416,6 +415,7 @@ function Integration:Initialize()
     ART.RaidMarks:Initialize({ resolver = resolver })
     ART.RaidMarks.resolver = resolver
     ART.RaidMarksUI:Initialize({ raidMarks = ART.RaidMarks })
+    ART.RaidMarksUI:RefreshPullTracker()
     -- The fresh resolver starts without an active step; restore the planned one.
     local activeStep = planner and planner.GetActiveStep and planner:GetActiveStep()
     if activeStep then ART.RaidMarks:ActivateRouteStep(activeStep.id) end

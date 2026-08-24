@@ -25,26 +25,45 @@ WoW still requires a live unit token for `SetRaidTarget`; a GUID or combat-log
 record alone cannot mark a hidden unit. Identical positionless creatures also
 cannot be mapped to physical left/right clones with certainty.
 
+The previous implementation nevertheless allocated such creatures to free
+static spawn slots in list order. That made a deterministic allocation look like
+physical identity and allowed a death to complete the wrong planned spawn.
+
 ## Decision
 
 1. **Preset-wide marks.** Existing MDT `enemyAssignments` remain the canonical
    per-clone plan. The selected pull contributes exact `spawnKeys` for matching
    and completion, but does not own those marks. Explicitly marked spawns may be
    resolved outside the active pull without changing the pull selection.
-2. **Token reconciliation.** Live marking reacts to target, mouseover, visible
+2. **Evidence-preserving spawn matches.** `SpawnMatcher` returns one of:
+   `exact`, `packPool`, or `unresolved`. Only `exact` carries a `spawnKey`.
+   `packPool` carries a pack-scoped allocation key and candidate spawn keys;
+   it never claims which physical clone was observed. Multiple matching packs
+   without spatial evidence remain unresolved. List and pull order are not
+   identity evidence.
+3. **Token reconciliation.** Live marking reacts to target, mouseover, visible
    nameplates, and `partyNtarget`/`raidNtarget`. Selecting a pull rescans every
-   currently exposed token. Positionless duplicates in one pack use a stable,
-   encounter-local GUID allocation.
-3. **Marker leases.** ART observes existing raid icons before applying new ones.
-   Current and manual marks are never displaced. An outside-pull assignment whose
-   icon is occupied remains pending and is retried after the icon holder dies.
-4. **Combat application.** Native `InCombatLockdown()` is not treated as a raid
+   currently exposed token. Positionless duplicates in one pack receive sticky
+   markers from the planned candidate-mark pool without acquiring fake spawn
+   identities. When multiple packs remain, only local target, mouseover, or
+   nameplate observations may use clear player proximity as pack evidence;
+   `partyNtarget` and `raidNtarget` never borrow the local player's position.
+4. **Marker leases.** ART observes existing raid icons before applying new ones.
+   Current and manual marks are never displaced. After `/reload`, an existing icon
+   matching the current plan reconstructs ART's ownership lease; nonmatching icons
+   remain manual. An outside-pull assignment whose icon is occupied remains pending
+   and is retried after the icon holder dies.
+5. **Combat application.** Native `InCombatLockdown()` is not treated as a raid
    marker prohibition. Explicit injected/API restrictions still fail closed.
-5. **Safe automatic progression.** A runtime pull advances only after every exact
-   planned spawn has been bound to a live GUID and confirmed dead, then the group
-   leaves combat. Successful `ENCOUNTER_END` is also authoritative. Wipes,
-   evades, partial death sets, outside-pull activity, and combat end alone do not
-   advance. Any manual pull selection immediately becomes authoritative.
+6. **Exact-and-pool pull progress.** Every observed GUID has exactly one progress
+   binding: either an exact `spawnKey` or an allocation pool. Exact deaths satisfy
+   exact requirements; pool deaths satisfy the pool's required count. A later pool
+   classification atomically replaces related exact bindings and transfers prior
+   deaths once. Unresolved observations never count. A runtime pull advances only
+   after all exact requirements and pool counts are complete and the group leaves
+   combat. Successful `ENCOUNTER_END` remains authoritative. Wipes, evades,
+   partial deaths, outside-pull activity, and combat end alone do not advance.
+   Manual pull selection immediately resets and replaces runtime progress.
 
 ## Alternatives considered
 
@@ -56,6 +75,8 @@ cannot be mapped to physical left/right clones with certainty.
   current tank assignment is safer than maximizing mark coverage.
 - **Infer exact clone identity from creature GUIDs:** rejected because server
   spawn components are not a portable mapping to ART's generated spawn keys.
+- **Allocate ambiguous GUIDs to spawn slots in pull/list order:** rejected because
+  allocation order is not evidence of physical spawn identity.
 
 ## Consequences
 
@@ -63,7 +84,9 @@ cannot be mapped to physical left/right clones with certainty.
   distant mob targeted by a raid member.
 - Accidental, explicitly planned adds can be marked without moving the pull; icon
   collisions remain pending rather than corrupting current assignments.
-- Automatic progression is deliberately conservative. Ambiguous or unseen pull
-  members require manual selection of the next pull.
+- Positionless duplicates in one known pack can be marked and can complete a
+  count-based pool without corrupting physical spawn identity.
+- Ambiguity across packs and unseen pull members remain conservative and require
+  better evidence or manual pull selection.
 - ART-0008's strict active-step restriction and combat refusal no longer apply;
   its planner input and stable-spawn principles remain valid.

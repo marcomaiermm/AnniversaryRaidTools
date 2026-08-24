@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- AnniversaryRaidTools mark resolution is deliberately independent from the WoW UI.
 
 local _, addon = ...
@@ -195,6 +194,7 @@ function Resolver:_unitInfo(unitToken)
     npcId = get("npcId", info.id or dependencies.getNpcId),
     spawnKey = get("spawnKey", dependencies.getSpawnKey),
     packKey = get("packKey", dependencies.getPackKey),
+    candidateSpawnKeys = info.candidateSpawnKeys,
     exists = info.exists,
     friendly = info.friendly,
     dead = info.dead,
@@ -202,7 +202,14 @@ function Resolver:_unitInfo(unitToken)
   }
   info.guid = info.guid or unitToken
   info.npcId = tonumber(info.npcId) or parseNpcId(info.guid)
-  if info.spawnKey == nil and type(dependencies.getSpawnKeyForGuid) == "function" then
+  if type(dependencies.getMatchForUnit) == "function" then
+    local match = dependencies.getMatchForUnit(info.guid, unitToken)
+    if type(match) == "table" then
+      info.candidateSpawnKeys = info.candidateSpawnKeys or match.candidateSpawnKeys
+      info.spawnKey = info.spawnKey or match.spawnKey
+      info.packKey = info.packKey or match.packKey
+    end
+  elseif info.spawnKey == nil and type(dependencies.getSpawnKeyForGuid) == "function" then
     info.spawnKey = dependencies.getSpawnKeyForGuid(info.guid, unitToken)
   end
   if info.packKey == nil and type(dependencies.getPackKeyForSpawn) == "function" then
@@ -278,7 +285,9 @@ function Resolver:_findPack(info)
   end
   -- A unit with a known but unmatched stable key is outside the active step;
   -- only keyless test/API inputs may use the single-pack fallback.
-  if #active == 1 and not info.packKey and not info.spawnKey then return active[1] end
+  if #active == 1 and not info.packKey and not info.spawnKey and not info.candidateSpawnKeys then
+    return active[1]
+  end
 end
 
 function Resolver:_specificMarker(step, packKey, spawnKey)
@@ -298,7 +307,20 @@ function Resolver:_specificMarker(step, packKey, spawnKey)
   end
 end
 
-function Resolver:_markerRule(packKey, npcId)
+function Resolver:_markerRule(packKey, npcId, candidateSpawnKeys)
+  if type(candidateSpawnKeys) == "table" then
+    local planned, seen = {}, {}
+    local stepMarks = type(self.activeStep) == "table" and self.activeStep.marks or nil
+    local getSpawnMarker = self.dependencies.getSpawnMarker
+    for _, spawnKey in ipairs(candidateSpawnKeys) do
+      local marker = validMarker(type(stepMarks) == "table" and stepMarks[spawnKey] or nil)
+      if not marker and type(getSpawnMarker) == "function" then marker = validMarker(getSpawnMarker(spawnKey)) end
+      if marker and not seen[marker] then
+        planned[#planned + 1], seen[marker] = marker, true
+      end
+    end
+    if #planned > 0 then return planned, "planned-spawn-pool" end
+  end
   local override = self.profile.packOverrides and self.profile.packOverrides[packKey]
   if type(override) == "table" and type(override.npcDefaults) == "table" and override.npcDefaults[npcId] ~= nil then
     return copyArray(override.npcDefaults[npcId]), "pack-npc"
@@ -340,7 +362,7 @@ function Resolver:_resolve(info, commit)
     end
   else
     local rule, hasCandidate = nil, false
-    rule, source = self:_markerRule(packKey, npcId)
+    rule, source = self:_markerRule(packKey, npcId, info.candidateSpawnKeys)
     for _, candidate in ipairs(rule) do
       candidate = validMarker(candidate)
       if candidate then

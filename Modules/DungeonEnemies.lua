@@ -673,9 +673,11 @@ local createEnemyContextMenu = function(frame)
         local iconPath = ICON_LIST[i].."16:16:|t"
         local color = CreateColor(unpack(iconColors[i]))
         local iconName = WrapTextInColor(_G["RAID_TARGET_"..i], color)
-        submenu:CreateRadio(iconPath.." "..iconName, IsSelected, SetSelected, { enemyIdx = frame.enemyIdx, cloneIdx = frame.cloneIdx, index = i })
+        submenu:CreateRadio(iconPath.." "..iconName, IsSelected, SetSelected,
+            { enemyIdx = frame.enemyIdx, cloneIdx = frame.cloneIdx, index = i })
       end
-      submenu:CreateRadio(L["None"], IsSelected, SetSelected, { enemyIdx = frame.enemyIdx, cloneIdx = frame.cloneIdx, index = 0 })
+      submenu:CreateRadio(L["None"], IsSelected, SetSelected,
+          { enemyIdx = frame.enemyIdx, cloneIdx = frame.cloneIdx, index = 0 })
       submenu:CreateButton(L["Clear all Markers"], function()
         twipe(assignments)
         notifyLiveMarkPlanChanged()
@@ -1182,6 +1184,7 @@ function MDT:DungeonEnemies_HideAllBlips()
 end
 
 function MDT:DungeonEnemies_UpdateEnemiesAsync()
+  if not MDT.dungeonEnemies_framePool or not MDT.dungeonEnemyDragPreview_framePool then return end
   collapseManualExplosion(true)
   MDT:ResetBlipHoverScales()
   MDT.dungeonEnemyDragPreview_framePool:ReleaseAll()

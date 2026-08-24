@@ -1,4 +1,3 @@
--- Made by Nnoggie, 2017-2025
 -- Quick-mark input: hovering a planner blip plus keys 1-8 or the player's own
 -- RAIDTARGET bindings assigns markers in the plan, never in the world.
 

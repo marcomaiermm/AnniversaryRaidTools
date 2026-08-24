@@ -4,6 +4,7 @@ local root = arg and arg[1] or "."
 local ART = {}
 _G.ART = ART
 assert(loadfile(root.."/Core/SpawnMatcher.lua"))("AnniversaryRaidTools", { ART = ART })
+assert(loadfile(root.."/Core/PullProgress.lua"))("AnniversaryRaidTools", { ART = ART })
 
 local function candidate(spawnKey, npcId, x, y, sublevelMapId)
   return { spawnKey = spawnKey, npcId = npcId, x = x, y = y, sublevelMapId = sublevelMapId }
@@ -24,6 +25,13 @@ end
 -- Floor gating: mismatched floors drop candidates; unknown floors stay comparable.
 local floored = { candidate("a", 100, 0, 0, 565), candidate("b", 100, 50, 50, 566) }
 assert(ART.SpawnMatcher:Resolve(floored, { npcId = 100, uiMapId = 566 }) == "b", "floor filters candidates")
+local namespaced = { { spawnKey = "ui", npcId = 100, uiMapId = 330, instanceId = 565 } }
+assert(ART.SpawnMatcher:Resolve(namespaced, { npcId = 100, uiMapId = 330 }) == "ui",
+    "UI map ids are matched in their own namespace")
+assert(ART.SpawnMatcher:Resolve(namespaced, { npcId = 100, uiMapId = 565 }) == nil,
+    "instance ids never masquerade as UI map ids")
+assert(ART.SpawnMatcher:Resolve(namespaced, { npcId = 100, uiMapId = 330, instanceId = 999 }) == nil,
+    "instance identity rejects a candidate from another instance")
 key, reason = ART.SpawnMatcher:Resolve(floored, { npcId = 100 })
 assert(key == nil and reason == "ambiguous", "unknown floor keeps all candidates")
 
@@ -33,20 +41,36 @@ assert(ART.SpawnMatcher:Resolve({ candidate("only", 100) }, { npcId = 100 }) == 
 key, reason = ART.SpawnMatcher:Resolve(
     { candidate("x1", 100), candidate("x2", 100) }, { npcId = 100 })
 assert(key == nil and reason == "ambiguous", "unpositioned duplicates refuse to guess")
+local match = ART.SpawnMatcher:ResolveMatch(
+    { candidate("x1", 100), candidate("x2", 100) }, { npcId = 100 })
+assert(match.kind == "unresolved" and match.spawnKey == nil,
+    "ambiguous observations never invent a spawn identity")
 
 -- Runtime pull steps can narrow a spatial pack to the exact selected clones.
 do
   local raid = {
+    instanceId = 565,
     packs = { p = { spawnKeys = { "selected", "sibling" } } },
     enemies = { [100] = { spawns = {
-      { key = "selected", npcId = 100, packKey = "p" },
-      { key = "sibling", npcId = 100, packKey = "p" },
+      { key = "selected", npcId = 100, packKey = "p", sublevel = 1 },
+      { key = "sibling", npcId = 100, packKey = "p", sublevel = 1 },
     } } },
   }
   local candidates = ART.SpawnMatcher:CandidatesForStep(raid, {
     packKeys = { "p" }, spawnKeys = { "selected" },
-  })
+  }, nil, { sublevels = { { uiMapId = 330 } } })
   assert(#candidates == 1 and candidates[1].spawnKey == "selected", "runtime pull uses exact spawn membership")
+  assert(candidates[1].instanceId == 565 and candidates[1].uiMapId == 330,
+      "candidate builder reads UI map identity from map definitions")
+end
+
+do
+  local derived = ART.SpawnMatcher:ResolveMatch({
+    { spawnKey = "left", npcId = 100, packKey = "p", x = 0, y = 0, originExact = false },
+    { spawnKey = "right", npcId = 100, packKey = "p", x = 100, y = 0, originExact = false },
+  }, { npcId = 100, x = 1, y = 0 })
+  assert(derived.kind == "packPool" and derived.spawnKey == nil,
+      "derived affine coordinates never create exact spawn identity")
 end
 
 -- Position matching picks the nearest instance within radius.
@@ -57,9 +81,23 @@ local spread = {
 assert(ART.SpawnMatcher:Resolve(spread, { npcId = 100, x = 12, y = 11 }) == "near",
     "nearest candidate inside radius wins")
 
+local patrolMatch = ART.SpawnMatcher:ResolveMatch({
+  { spawnKey = "patrol", npcId = 100, x = 100, y = 100,
+    patrol = { { x = 0, y = 0 }, { x = 100, y = 0 } } },
+}, { npcId = 100, x = 50, y = 2 })
+assert(patrolMatch.kind == "exact" and patrolMatch.spawnKey == "patrol"
+    and patrolMatch.reasons[1] == "patrol-position", "patrol matching uses route geometry")
+
 key, reason = ART.SpawnMatcher:Resolve(
     { candidate("spot", 100, 10, 10) }, { npcId = 100, x = 60, y = 60 })
 assert(key == nil and reason == "out-of-range", "distant unit stays unmatched")
+
+local distantPair = ART.SpawnMatcher:ResolveMatch({
+  { spawnKey = "distant-a", npcId = 100, packKey = "p", x = 100, y = 0 },
+  { spawnKey = "distant-b", npcId = 100, packKey = "p", x = 105, y = 0 },
+}, { npcId = 100, x = 0, y = 0 })
+assert(distantPair.kind == "unresolved" and distantPair.reasons[1] == "out-of-range",
+    "radius rejection wins over an ambiguous runner-up")
 
 -- The ambiguity guard refuses close calls instead of guessing.
 local tight = {
@@ -76,7 +114,7 @@ key, reason = ART.SpawnMatcher:Resolve(
     { candidate("edge", 100, 29, 0) }, { npcId = 100, x = 0, y = 0 }, { radius = 30 })
 assert(key == "edge", "radius boundary inclusive")
 
--- Chain check: the resolver consumes matcher results through getSpawnKeyForGuid.
+-- Chain check: the resolver consumes canonical structured matcher results.
 assert(loadfile(root.."/Core/MarkResolver.lua"))("AnniversaryRaidTools", { ART = ART })
 do
   local raid = {
@@ -105,8 +143,8 @@ do
           x = snapshot.x, y = snapshot.y }
     end,
     -- Mirrors the LiveMarks runtime dependency, including threshold choice.
-    getSpawnKeyForGuid = function(_, token)
-      return ART.SpawnMatcher:Resolve(candidates, snapshots[token], { radius = 200, margin = 1 })
+    getMatchForUnit = function(_, token)
+      return ART.SpawnMatcher:ResolveMatch(candidates, snapshots[token], { radius = 200, margin = 1 })
     end,
     setRaidTarget = function(token, marker) applied[token] = marker end,
   })
@@ -119,7 +157,23 @@ do
   assert(marker == nil, "ambiguous midpoint stays unmarked")
 end
 
--- Mouseover of one live pack member marks every visible member of that pack.
+do
+  ART.StaticData = { raids = {} }
+  local raid = assert(loadfile(root.."/Raids/TBC/Generated/MagtheridonsLair.lua"))()
+  assert(loadfile(root.."/Raids/TBC/Generated/MagtheridonsLairWorldPositions.lua"))()
+  local world = ART.MapWorldPositions[raid.key]
+  local allPacks = { packKeys = {} }
+  for packKey in pairs(raid.packs) do allPacks.packKeys[#allPacks.packKeys + 1] = packKey end
+  local candidates = ART.SpawnMatcher:CandidatesForStep(raid, allPacks, world)
+  local east = raid.packs["magtheridons-lair:pack:east-warders"].spawnKeys
+  local match = ART.SpawnMatcher:ResolveMatch(candidates, {
+    npcId = 18829, x = world[east[1]].x, y = world[east[1]].y, instanceId = raid.instanceId,
+  }, { allowDerived = true, margin = 1 })
+  assert(match.kind == "exact" and match.spawnKey == east[1],
+      "live unit positions select the exact Magtheridon Warder")
+end
+
+-- Live marking reconciles exact positions and explicit mouseovers.
 do
   local eventFrame = { events = {} }
   function eventFrame:RegisterEvent(event) self.events[event] = true end
@@ -208,7 +262,8 @@ do
   ART.RaidMarks = {
     initialized = true,
     ResolveUnit = function(_, token)
-      local spawnKey = ART.LiveMarks and ART.LiveMarks:ResolveSpawnKey(token)
+      local resolved = ART.LiveMarks and ART.LiveMarks:ResolveMatch(token)
+      local spawnKey = resolved and resolved.spawnKey
       local marker = activeMarks[spawnKey] or outsideMarks[spawnKey]
       return marker, { reason = marker and "planned" or "outside-active-step" }
     end,
@@ -290,7 +345,7 @@ do
       "a pending outside-pull mark applies after its marker lease is released")
 
   -- Anniversary may expose no UnitPosition for hostile NPCs. One active pack
-  -- can still map its planned instances stably onto distinct live GUIDs.
+  -- can allocate its planned markers without claiming physical clone identity.
   units = {
     first = { guid = "Creature-0-0-0-0-100-first" },
     second = { guid = "Creature-0-0-0-0-100-second" },
@@ -318,13 +373,15 @@ do
   end
   ART.MapWorldPositions.positionless = {}
   ART.LiveMarks:OnPullSelected(step, 1)
-  assert(ART.LiveMarks:ResolveSpawnKey("first") == "w1", "first positionless unit gets a planned spawn")
-  assert(ART.LiveMarks:ResolveSpawnKey("second") == "w2", "second positionless unit gets a distinct spawn")
-  assert(ART.LiveMarks:ResolveSpawnKey("first") == "w1", "positionless GUID mapping stays stable")
-  assert(ART.LiveMarks:ResolveSpawnKey("third") == "w3", "every planned positionless unit can resolve")
+  for _, token in ipairs({ "first", "second", "third" }) do
+    units.mouseover = units[token]
+    local match = ART.LiveMarks:ResolveMatch("mouseover")
+    assert(match.kind == "packPool" and match.spawnKey == nil,
+        "positionless mouseover uses a mark pool, not a fake spawn")
+  end
 
-  -- The mover waits for every exact pull member and never advances on combat
-  -- state alone. The last confirmed death advances to the next existing pull.
+  -- A mouseover pool is sufficient for marking, but not proof that deaths
+  -- belong to this physical pack.
   local inCombat = true
   _G.UnitAffectingCombat = function(token) return token == "player" and inCombat end
   local deadGuid
@@ -343,10 +400,10 @@ do
   assert(selectedPull == nil, "completed pull waits until the raid leaves combat")
   inCombat = false
   eventFrame.onEvent(eventFrame, "PLAYER_REGEN_ENABLED")
-  assert(selectedPull == 2, "all confirmed pull deaths advance to the next pull")
+  assert(selectedPull == 2, "a completed pack pool advances after combat")
 
   -- A combined pull may contain multiple positionless packs of the same NPC.
-  -- The player's world position anchors each live group to its nearest pack.
+  -- Local observations may use clear player proximity as pack evidence.
   units = {
     player = { guid = "Player-0-0", x = 0, y = 0 },
     near1 = { guid = "Creature-0-0-0-0-100-near1" },
@@ -378,30 +435,28 @@ do
     n1 = { x = 0, y = 0 }, n2 = { x = 2, y = 0 },
     f1 = { x = 100, y = 0 }, f2 = { x = 102, y = 0 },
   }
-  assert(ART.LiveMarks:ResolveSpawnKey("near1") == "n1", "near multi-pack unit resolves")
-  assert(ART.LiveMarks:ResolveSpawnKey("near2") == "n2", "near pack allocation stays distinct")
+  assert(ART.LiveMarks:ResolveMatch("near1").kind == "unresolved",
+      "positionless multi-pack target stays unresolved")
   for spawnKey in pairs(activeMarks) do activeMarks[spawnKey] = nil end
   for spawnKey, marker in pairs(step.marks) do activeMarks[spawnKey] = marker end
   markSettings.autoMark = false
   eventFrame.onEvent(eventFrame, "NAME_PLATE_UNIT_ADDED", "near1")
   eventFrame.onEvent(eventFrame, "NAME_PLATE_UNIT_ADDED", "near2")
+  local nearMatch = ART.LiveMarks:ResolveMatch("near1")
+  assert(nearMatch.kind == "packPool" and nearMatch.packKey == "near" and nearMatch.spawnKey == nil,
+      "visible nameplates use player proximity only to select their pack")
+  units.raid1target = units.far1
+  assert(ART.LiveMarks:ResolveMatch("raid1target").kind == "unresolved",
+      "raid targets never borrow the local player's position")
   units.mouseover = units.near1
-  markSettings.autoMark = true
-  eventFrame.onEvent(eventFrame, "UPDATE_MOUSEOVER_UNIT")
-  assert(liveMarkers[units.near1.guid] == 1 and liveMarkers[units.near2.guid] == 2,
-      "hover marks the visible group of a multi-pack pull")
-
+  nearMatch = ART.LiveMarks:ResolveMatch("mouseover")
+  assert(nearMatch.kind == "packPool" and nearMatch.packKey == "near" and nearMatch.spawnKey == nil,
+      "mouseover uses player proximity only to select its pack")
   units.player.x = 100
-  assert(ART.LiveMarks:ResolveSpawnKey("far1") == "f1", "far multi-pack unit resolves after moving")
-  assert(ART.LiveMarks:ResolveSpawnKey("far2") == "f2", "far pack allocation stays distinct")
-  markSettings.autoMark = false
-  eventFrame.onEvent(eventFrame, "NAME_PLATE_UNIT_ADDED", "far1")
-  eventFrame.onEvent(eventFrame, "NAME_PLATE_UNIT_ADDED", "far2")
   units.mouseover = units.far1
-  markSettings.autoMark = true
-  eventFrame.onEvent(eventFrame, "UPDATE_MOUSEOVER_UNIT")
-  assert(liveMarkers[units.far1.guid] == 3 and liveMarkers[units.far2.guid] == 4,
-      "hover marks the second visible group of a multi-pack pull")
+  local farMatch = ART.LiveMarks:ResolveMatch("mouseover")
+  assert(farMatch.kind == "packPool" and farMatch.packKey == "far" and farMatch.spawnKey == nil,
+      "moving near another group selects that pack without inventing a spawn")
 
   units = {
     first = { guid = "Creature-0-0-0-0-100-group1" },
@@ -410,10 +465,8 @@ do
     fourth = { guid = "Creature-0-0-0-0-100-group4" },
   }
   step.id = "pull-multi-without-player-position"
-  assert(ART.LiveMarks:ResolveSpawnKey("first") == "n1", "pull order resolves without player position")
-  assert(ART.LiveMarks:ResolveSpawnKey("second") == "n2", "first pack fills without player position")
-  assert(ART.LiveMarks:ResolveSpawnKey("third") == "f1", "next pack starts after the first is full")
-  assert(ART.LiveMarks:ResolveSpawnKey("fourth") == "f2", "all combined-pull mobs resolve without positions")
+  assert(ART.LiveMarks:ResolveMatch("first").kind == "unresolved",
+      "pull order never creates a physical spawn identity")
 end
 
 print("spawn matcher checks passed")

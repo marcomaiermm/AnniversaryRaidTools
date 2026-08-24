@@ -33,11 +33,13 @@ local map = {
     [1] = {
       index = 1,
       mapId = 565,
+      uiMapId = 330,
       name = "Gruul's Lair",
       transformKey = "gruuls-lair:transform:1",
       asset = {
         kind = "client-map",
         mapId = 565,
+        uiMapId = 330,
         textureFolder = "GruulsLair",
         source = assetSource,
       },
