@@ -18,6 +18,18 @@ end
 
 assert(map.raidKey == raid.key and map.mapId == raid.mapId, "map identity mismatch")
 assert(#map.sublevels == 8 and #raid.sublevels == 8, "Black Temple must expose the training grounds and seven interior floors")
+local linkCount = 0
+for sublevel, links in pairs(map.links) do
+  linkCount = linkCount + #links
+  for _, link in ipairs(links) do
+    local reverse
+    for _, candidate in ipairs(map.links[link.target] or {}) do
+      if candidate.target == sublevel then reverse = true break end
+    end
+    assert(reverse, "Black Temple floor transition has no return link")
+  end
+end
+assert(linkCount == 14 and #map.links[3] == 4, "Black Temple floor transitions missing")
 local uiMapIds = { 340, 339, 341, 342, 343, 344, 345, 346 }
 local texturePrefixes = { "BlackTemple1_", false, "BlackTemple2_", "BlackTemple3_", "BlackTemple4_",
   "BlackTemple5_", "BlackTemple6_", "BlackTemple7_" }

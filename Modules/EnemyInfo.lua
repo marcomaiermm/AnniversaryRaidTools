@@ -168,6 +168,7 @@ local function projectRaidEnemies(raid, map)
         patrol = patrol,
         artSpawnKey = spawn.key,
         artPackKey = spawn.packKey,
+        artPullGroup = raid.packs[spawn.packKey] and raid.packs[spawn.packKey].pullGroup,
         artWave = packWaves[spawn.packKey],
       }
       spawnLookup[spawn.key] = { enemyIdx = enemyIdx, cloneIdx = cloneIdx, packKey = spawn.packKey }
@@ -192,6 +193,25 @@ local function projectRaidEnemies(raid, map)
   return enemies, spawnLookup
 end
 
+local function appendMapLinks(map, pois, canvasWidth, canvasHeight)
+  local rotations = { [-2] = -math.pi / 2, [-1] = math.pi, [1] = 0, [2] = math.pi / 2 }
+  for sublevel, links in pairs(map.links or {}) do
+    for index, link in ipairs(links) do
+      pois[sublevel][#pois[sublevel] + 1] = {
+        x = link.x * canvasWidth,
+        y = -link.y * canvasHeight,
+        target = link.target,
+        direction = link.direction,
+        arrowAtlas = "Garr_LevelUpgradeArrow",
+        arrowRotation = (rotations[link.direction] or 0) + math.pi,
+        connectionIndex = index,
+        template = "MapLinkPinTemplate",
+        type = "mapLink",
+      }
+    end
+  end
+end
+
 local function publishShellData(raid, map)
   local shellIndex = SHELL_INDICES[raid.key]
   local dungeonMaps, sublevels, tileFormat, pois = {}, {}, {}, {}
@@ -213,6 +233,7 @@ local function publishShellData(raid, map)
       }
     end
   end
+  appendMapLinks(map, pois, canvasWidth, canvasHeight)
   MDT.dungeonList[shellIndex] = localize(raid.name)
   MDT.mapInfo[shellIndex] = {
     shortName = localize(raid.name), englishName = raid.name, mapID = raid.mapId, tileFormat = tileFormat,
@@ -335,16 +356,124 @@ function Integration:Initialize()
   publishRaidList(db)
   local planner
 
+  local function canMarkUnits()
+    -- Guarded globals keep the dependency usable in headless test harnesses.
+    if not (_G.IsInRaid and _G.IsInRaid()) then return true end
+    local leader = _G.UnitIsGroupLeader and _G.UnitIsGroupLeader("player")
+    local assist = _G.UnitIsGroupAssistant and _G.UnitIsGroupAssistant("player")
+    return (leader or assist) == true
+  end
+
+  local function markedStep()
+    local currentPreset = MDT:GetCurrentPreset()
+    local assignments = currentPreset and currentPreset.value.enemyAssignments or {}
+    local enemies = MDT.dungeonEnemies[db.currentDungeonIdx]
+    local step = { id = "preset-marks", label = "Preset marks", packKeys = {}, spawnKeys = {}, marks = {} }
+    local seenPacks = {}
+    for enemyIdx, enemyMarks in pairs(assignments) do
+      local data = enemies and enemies[tonumber(enemyIdx)]
+      for cloneIdx, marker in pairs(type(enemyMarks) == "table" and enemyMarks or {}) do
+        local clone = data and data.clones and data.clones[tonumber(cloneIdx)]
+        marker = tonumber(marker)
+        if clone and clone.artSpawnKey and clone.artPackKey and marker
+            and marker >= 1 and marker <= 8 and marker % 1 == 0 then
+          step.spawnKeys[#step.spawnKeys + 1] = clone.artSpawnKey
+          step.marks[clone.artSpawnKey] = marker
+          if not seenPacks[clone.artPackKey] then
+            seenPacks[clone.artPackKey] = true
+            step.packKeys[#step.packKeys + 1] = clone.artPackKey
+          end
+        end
+      end
+    end
+    table.sort(step.packKeys)
+    table.sort(step.spawnKeys)
+    return #step.spawnKeys > 0 and step or nil
+  end
+
   local function wireMarks(preset, activeRaid)
-    local resolver = ART.MarkResolver.new(markDependencies(preset, activeRaid or raids[DEFAULT_RAID_KEY], db))
+    local dependencies = markDependencies(preset, activeRaid or raids[DEFAULT_RAID_KEY], db)
+    -- Only raid leaders/assistants may set raid targets inside a raid group.
+    dependencies.canMark = canMarkUnits
+    -- Map live units onto planned spawn instances (position-first, id fallback).
+    dependencies.getSpawnKeyForGuid = function(_, unitToken)
+      if not ART.LiveMarks then return nil end
+      return ART.LiveMarks:ResolveSpawnKey(unitToken)
+    end
+    dependencies.allowOutsideActiveStep = true
+    dependencies.getSpawnMarker = function(spawnKey)
+      local step = markedStep()
+      return step and step.marks[spawnKey]
+    end
+    dependencies.getRouteStep = function(routeStepId)
+      local step = planner and planner.GetActiveStep and planner:GetActiveStep()
+      if step and step.id == routeStepId then return step end
+      for _, routeStep in ipairs(preset and preset.routeSteps or {}) do
+        if routeStep.id == routeStepId then return routeStep end
+      end
+    end
+    local resolver = ART.MarkResolver.new(dependencies)
     ART.RaidMarks:Initialize({ resolver = resolver })
     ART.RaidMarks.resolver = resolver
     ART.RaidMarksUI:Initialize({ raidMarks = ART.RaidMarks })
+    -- The fresh resolver starts without an active step; restore the planned one.
+    local activeStep = planner and planner.GetActiveStep and planner:GetActiveStep()
+    if activeStep then ART.RaidMarks:ActivateRouteStep(activeStep.id) end
+  end
+
+  local function pullPackKeys(pullIndex)
+    local currentPreset = MDT:GetCurrentPreset()
+    local pull = currentPreset.value.pulls and currentPreset.value.pulls[pullIndex]
+    if type(pull) ~= "table" then return {} end
+    local enemies = MDT.dungeonEnemies[db.currentDungeonIdx]
+    local packKeys, seen = {}, {}
+    for enemyIdx, clones in pairs(pull) do
+      -- Pulls carry non-enemy metadata keys; only numeric indexes are enemies.
+      local data = tonumber(enemyIdx) and enemies and enemies[tonumber(enemyIdx)]
+      if type(clones) == "table" and data then
+        for _, cloneIdx in ipairs(clones) do
+          local clone = data.clones and data.clones[cloneIdx]
+          local packKey = clone and clone.artPackKey
+          if packKey and not seen[packKey] then
+            seen[packKey] = true
+            packKeys[#packKeys + 1] = packKey
+          end
+        end
+      end
+    end
+    return packKeys
+  end
+
+  local function pullStep(pullIndex)
+    local currentPreset = MDT:GetCurrentPreset()
+    local pull = currentPreset.value.pulls and currentPreset.value.pulls[pullIndex]
+    local packKeys = pullPackKeys(pullIndex)
+    if type(pull) ~= "table" or #packKeys == 0 then return nil end
+    local enemies = MDT.dungeonEnemies[db.currentDungeonIdx]
+    local assignments, marks, spawnKeys = currentPreset.value.enemyAssignments or {}, {}, {}
+    for enemyIdx, clones in pairs(pull) do
+      local index = tonumber(enemyIdx)
+      local data = index and enemies and enemies[index]
+      local enemyMarks = assignments[enemyIdx] or (index and assignments[index])
+      for _, cloneIdx in ipairs(type(clones) == "table" and clones or {}) do
+        local clone = data and data.clones and data.clones[cloneIdx]
+        local marker = enemyMarks and tonumber(enemyMarks[cloneIdx])
+        if clone and clone.artSpawnKey then spawnKeys[#spawnKeys + 1] = clone.artSpawnKey end
+        if clone and clone.artSpawnKey and marker and marker >= 1 and marker <= 8 and marker % 1 == 0 then
+          marks[clone.artSpawnKey] = marker
+        end
+      end
+    end
+    return {
+      id = "pull-"..pullIndex, label = "Pull "..pullIndex,
+      packKeys = packKeys, spawnKeys = spawnKeys, marks = marks,
+    }
   end
 
   local function persist(preset, activeRaid)
     selectShell(activeRaid.key, db)
     configureWavePulls(activeRaid)
+    if activeRaid.mode == "route" and MDT.EnablePullsPerSublevel then MDT:EnablePullsPerSublevel() end
     wireMarks(preset, activeRaid)
     if not routeStore or self.preserveStoredRoutes[activeRaid.key] then return end
     local exported = routePreset:Export(preset, activeRaid)
@@ -355,6 +484,10 @@ function Integration:Initialize()
     registry = registry,
     routePreset = routePreset,
     onChange = persist,
+    getPullPackKeys = pullPackKeys,
+    getPullStep = pullStep,
+    getMarkedStep = markedStep,
+    getCurrentPullIndex = function() return MDT:GetCurrentPreset().value.currentPull end,
   })
   local raidSelect = ART.RaidSelect:Initialize({ registry = registry, planner = planner })
   wireMarks(nil, raids[DEFAULT_RAID_KEY])
@@ -417,6 +550,11 @@ function Integration:Initialize()
     current = self:GetCurrentPreset()
     if current and current.value.artWaveRaid and type(pull) == "number" then
       self:Async(function() self:DungeonEnemies_UpdateEnemiesAsync() end, "ARTWaveSelection", true)
+    end
+    local step
+    if type(pull) == "number" and planner.SyncStepFromPull then step = planner:SyncStepFromPull(pull) end
+    if type(pull) == "number" and ART.LiveMarks and ART.LiveMarks.OnPullSelected then
+      ART.LiveMarks:OnPullSelected(step or planner:GetActiveStep(), pull)
     end
     return result
   end

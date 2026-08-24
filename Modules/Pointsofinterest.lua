@@ -141,14 +141,25 @@ local function POI_SetOptions(frame, type, poi)
     frame.HighlightTexture:Hide()
     frame.target = poi.target
     frame.poi = poi
+    frame.Texture:SetRotation(0)
+    frame.HighlightTexture:SetRotation(0)
     local directionToAtlas = {
       [-1] = "poi-door-down",
       [1] = "poi-door-up",
       [-2] = "poi-door-left",
       [2] = "poi-door-right",
     }
-    frame.HighlightTexture:SetAtlas(directionToAtlas[poi.direction])
-    frame.Texture:SetAtlas(directionToAtlas[poi.direction])
+    if poi.arrowAtlas then
+      frame.HighlightTexture:SetAtlas(poi.arrowAtlas)
+      frame.Texture:SetAtlas(poi.arrowAtlas)
+      frame.HighlightTexture:SetRotation(poi.arrowRotation or 0)
+      frame.Texture:SetRotation(poi.arrowRotation or 0)
+      frame.Texture:SetVertexColor(0.2, 1, 0.2, 1)
+      frame.HighlightTexture:SetVertexColor(0.4, 1, 0.4, 1)
+    else
+      frame.HighlightTexture:SetAtlas(directionToAtlas[poi.direction])
+      frame.Texture:SetAtlas(directionToAtlas[poi.direction])
+    end
     frame:SetScript("OnClick", function()
       MDT:SetCurrentSubLevel(poi.target)
       MDT:UpdateMap()

@@ -10,6 +10,10 @@ local function read(path)
 end
 
 local loader = read("/Modules/load_modules.xml")
+local spawnMatcherPosition = assert(loader:find("<Script file='..\\Core\\SpawnMatcher.lua'/>", 1, true),
+  "SpawnMatcher.lua must be loaded by the addon")
+local liveMarksPosition = assert(loader:find("<Script file='LiveMarks.lua'/>", 1, true))
+assert(spawnMatcherPosition < liveMarksPosition, "SpawnMatcher.lua must load before LiveMarks.lua")
 local adapterPosition = assert(loader:find("<Script file='EnemyInfo.lua'/>", 1, true))
 local uiPosition = assert(loader:find("<Script file='EnemyInfoUI.lua'/>", 1, true))
 assert(adapterPosition < uiPosition, "EnemyInfoUI.lua must replace the fallback frame after raid data publication")
@@ -24,6 +28,11 @@ assert(spellWidget:find('self.expandVertical:SetShown(not self.expanded)', 1, tr
   and spellWidget:find('self.expandToggle:SetShown(not not self.description)', 1, true)
   and spellWidget:find('self.parent:DoLayout()', 1, true),
   "spell descriptions must expand below the compact spell row")
+local enemyInfoSource = read("/Modules/EnemyInfo.lua")
+assert(enemyInfoSource:find("appendMapLinks", 1, true)
+  and enemyInfoSource:find('arrowAtlas = "Garr_LevelUpgradeArrow"', 1, true)
+  and enemyInfoSource:find('type = "mapLink"', 1, true),
+  "raid floors must publish configured map links as clickable transition arrows")
 local enemyInfoDataPath = [[..\Data\EnemyInfo\GruulsLair.lua]]
 local enemyInfoDataPosition = assert(loader:find("<Script file='"..enemyInfoDataPath.."'/>", 1, true))
 assert(enemyInfoDataPosition < adapterPosition,
@@ -157,6 +166,7 @@ C_Map = {
 }
 
 load("/Core/SavedVariables.lua", addon)
+assert(addon:GetDefaultSavedVariables().global.autoMark == false, "auto marking must default to disabled")
 if mode == "invalid-store" then
   assert(saved.raidRoutes == "legacy-value" and addon:GetRaidRouteStore() == nil)
 else
@@ -220,6 +230,14 @@ assert(type(addon.dungeonMaps[161][2]) == "table"
   and addon.dungeonMaps[161][2].customTextures:match("BlackTempleTrainingGrounds$"))
 assert(#addon.dungeonSubLevels[161] == 8 and addon.dungeonSubLevels[161][2] == "Illidari Training Grounds"
   and addon.dungeonSubLevels[161][8] == "Temple Summit")
+assert(#addon.mapPOIs[161][1] == 1 and #addon.mapPOIs[161][2] == 2
+  and #addon.mapPOIs[161][3] == 4 and #addon.mapPOIs[161][4] == 1
+  and #addon.mapPOIs[161][5] == 1 and #addon.mapPOIs[161][6] == 2
+  and #addon.mapPOIs[161][7] == 2 and #addon.mapPOIs[161][8] == 1
+  and addon.mapPOIs[161][3][1].type == "mapLink"
+  and addon.mapPOIs[161][3][1].target == 2 and addon.mapPOIs[161][3][1].direction == 1
+  and addon.mapPOIs[161][3][1].arrowAtlas == "Garr_LevelUpgradeArrow"
+  and addon.mapPOIs[161][3][1].arrowRotation == math.pi)
 assert(addon.dungeonMaps[162][1] == "CoTMountHyjal" and addon.dungeonSubLevels[162][1] == "Hyjal Summit")
 assert(addon.dungeonMaps[163] == nil and addon.dungeonMaps[167] == nil)
 assert(addon.unsupportedDungeons[163] == "Not supported yet."
@@ -346,13 +364,15 @@ assert(addon:GetRaidMap("serpentshrine-cavern").mapId == 548
 assert(addon:GetRaidMap("the-eye").mapId == 550 and addon:GetRaidMap("sunwell-plateau") == nil)
 
 assert(#addon.mapPOIs[164][1] == 1 and addon.mapPOIs[164][1][1].type == "generalNote")
+local blackTempleMapLinks = { 1, 2, 4, 1, 1, 2, 2, 1 }
 for raidKey, shellIndex in pairs({ ["gruuls-lair"] = 160, ["black-temple"] = 161, hyjal = 162,
     ["magtheridons-lair"] = 164, ["serpentshrine-cavern"] = 165,
     ["the-eye"] = 166 }) do
   local raid = addon.RaidRegistry:Get(raidKey)
   for sublevel = 1, #raid.sublevels do
     local sourcePOIs, projectedPOIs = raid.pois[sublevel] or {}, addon.mapPOIs[shellIndex][sublevel]
-    assert(#projectedPOIs == #sourcePOIs)
+    local mapLinks = raidKey == "black-temple" and blackTempleMapLinks[sublevel] or 0
+    assert(#projectedPOIs == #sourcePOIs + mapLinks)
     for index, poi in ipairs(sourcePOIs) do
       local projected = projectedPOIs[index]
       assert(projected.template == "MapLinkPinTemplate" and projected.type == "generalNote"
@@ -432,6 +452,7 @@ local hyjalExport = assert(addon:SaveRaidRoute())
 assert(not addon:ClearPreset(importedHyjal, true))
 assert(addon:CreateRaidRoute("magtheridons-lair"))
 assert(saved.currentDungeonIdx == 164 and addon.RaidPlanner.raid.key == "magtheridons-lair")
+assert(addon.RaidPlanner.lastPullIndex == nil, "raid changes must discard the previous raid's pull index")
 local encounterPack = "magtheridons-lair:pack:magtheridon-encounter"
 local encounterSpawnKeys = addon.RaidRegistry:Get("magtheridons-lair").packs[encounterPack].spawnKeys
 for index, expected in ipairs({
@@ -443,6 +464,23 @@ for index, expected in ipairs({
     "magtheridons-lair:spawn:17257:guid-5440008",
   }) do assert(encounterSpawnKeys[index] == expected) end
 assert(#encounterSpawnKeys == 6)
+local channelerLookup = assert(integration.spawnLookup["magtheridons-lair"][encounterSpawnKeys[1]])
+local outsideLookup = assert(integration.spawnLookup["magtheridons-lair"][encounterSpawnKeys[2]])
+local magtheridonPreset = addon:GetCurrentPreset()
+magtheridonPreset.value.pulls[1] = { [channelerLookup.enemyIdx] = { channelerLookup.cloneIdx } }
+magtheridonPreset.value.enemyAssignments = {
+  [channelerLookup.enemyIdx] = { [channelerLookup.cloneIdx] = 8, [outsideLookup.cloneIdx] = 7 },
+}
+addon:SetSelectionToPull(1)
+local plannedPull = assert(addon.RaidPlanner:GetActiveStep(), "planned pull must be active without routeSteps")
+assert(#addon.RaidPlanner.preset.routeSteps == 0, "planned pull must not duplicate routeSteps")
+assert(plannedPull.packKeys[1] == encounterPack and plannedPull.marks[encounterSpawnKeys[1]] == 8,
+  "planned pull must expose pre-pull marks by stable spawn key")
+assert(#plannedPull.spawnKeys == 1 and plannedPull.spawnKeys[1] == encounterSpawnKeys[1],
+  "planned pull must expose exact spawn membership for safe completion")
+local presetMarks = assert(addon.RaidPlanner:GetMarkedStep())
+assert(presetMarks.marks[encounterSpawnKeys[1]] == 8 and presetMarks.marks[encounterSpawnKeys[2]] == 7,
+  "preset-wide marks must survive outside the selected pull")
 assert(integration.planner:AddRouteStep({ label = "Magtheridon", packKeys = { encounterPack } }))
 local magtheridonExport = assert(addon:SaveRaidRoute())
 assert(addon:OpenRaidRoute("magtheridons-lair") and addon.RaidPlanner.raid.key == "magtheridons-lair")
