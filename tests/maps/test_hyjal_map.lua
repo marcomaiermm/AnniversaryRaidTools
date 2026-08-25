@@ -60,7 +60,7 @@ equal(calibration.worldBounds.leftY, -4025, "world left Y")
 equal(calibration.worldBounds.rightY, -1460, "world right Y")
 equal(calibration.worldBounds.topX, 6145.8330078125, "world top X")
 equal(calibration.worldBounds.bottomX, 4479.16650390625, "world bottom X")
-equal(transform.flipX, true, "client map horizontal orientation")
+equal(calibration.flipX, true, "client map horizontal orientation")
 assert(calibration.provenance.sourceRef:find("WorldMapArea%-775"), "transform provenance URL missing")
 
 local function worldToPlanner(worldX, worldY, selected)
@@ -72,22 +72,22 @@ local function worldToPlanner(worldX, worldY, selected)
 end
 
 local archimondeX, archimondeY = worldToPlanner(5601.938, -3446.284)
-close(archimondeX, 0.22562, 0.0000005, "Archimonde absolute world x")
+close(archimondeX, 0.77438, 0.0000005, "Archimonde absolute world x")
 close(archimondeY, 0.326337, 0.0000005, "Archimonde absolute world y")
 local allianceX, allianceY = worldToPlanner(5084.06982421875, -1789.030029296875)
-close(allianceX, 0.871723, 0.0000005, "Alliance POI absolute world x")
+close(allianceX, 0.128277, 0.0000005, "Alliance POI absolute world x")
 close(allianceY, 0.637058, 0.0000005, "Alliance POI absolute world y")
 
 local adjusted = {
   mapId = 534, sublevel = 1, offsetX = 0.01, offsetY = 0.02,
-  scaleX = 0.9, scaleY = 0.8, flipY = false, tolerance = 0.0005,
+  scaleX = 0.9, scaleY = 0.8, flipX = true, flipY = false, tolerance = 0.0005,
   provenance = calibration.provenance,
 }
 local adjustedX, adjustedY = worldToPlanner(5601.938, -3446.284, adjusted)
 close(adjustedX, archimondeX * 0.9 + 0.01, 0.0000005, "non-identity absolute x")
 close(adjustedY, archimondeY * 0.8 + 0.02, 0.0000005, "non-identity absolute y")
 local sourceX, sourceY = transform.fromPlanner(534, 1, adjustedX, adjustedY, adjusted)
-close(sourceX, archimondeX, adjusted.tolerance, "non-identity x round trip")
+close(sourceX, 1 - archimondeX, adjusted.tolerance, "non-identity x round trip")
 close(sourceY, archimondeY, adjusted.tolerance, "non-identity y round trip")
 
 for _, enemy in pairs(raid.enemies) do

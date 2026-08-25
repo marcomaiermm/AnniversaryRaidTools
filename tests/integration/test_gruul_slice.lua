@@ -158,8 +158,14 @@ CombatLogGetCurrentEventInfo = function()
 end
 UIParent = region()
 CreateVector2D = function(x, y) return { x = x, y = y } end
+local hyjalMapProjectionCalls = 0
 C_Map = {
   GetMapPosFromWorldPos = function(instanceId, worldPosition, uiMapId)
+    if instanceId == 534 then
+      assert(uiMapId == 329)
+      hyjalMapProjectionCalls = hyjalMapProjectionCalls + 1
+      return uiMapId, { x = 0.050998, y = 0.750242 }
+    end
     if instanceId == 532 then
       assert(uiMapId >= 350 and uiMapId <= 366)
       return uiMapId, { x = 0.25, y = 0.75 }
@@ -192,6 +198,7 @@ for _, path in ipairs({
   "/Raids/TBC/Generated/BlackTemple.lua", "/Raids/TBC/Generated/BlackTempleWorldPositions.lua",
   "/Raids/TBC/Maps/BlackTemple.lua",
   "/Raids/TBC/Transforms/BlackTemple.lua", "/Raids/TBC/Generated/Hyjal.lua",
+  "/Raids/TBC/Generated/HyjalWorldPositions.lua",
   "/Raids/TBC/Maps/Hyjal.lua", "/Raids/TBC/Transforms/Hyjal.lua",
   "/Raids/TBC/Generated/MagtheridonsLair.lua",
   "/Raids/TBC/Maps/MagtheridonsLair.lua", "/Raids/TBC/Transforms/MagtheridonsLair.lua",
@@ -351,6 +358,9 @@ assert(not battlelord.isBoss and battlelord.displayId == 21115 and battlelord.di
 assert(feralSpirit.stealthDetect and not feralSpirit.spells[18950])
 assert(archimonde.isBoss and archimonde.displayId == 20939)
 assert(not ghoul.isBoss and ghoul.displayId == 571 and ghoul.displayId ~= archimonde.displayId)
+assert(math.abs(ghoul.clones[1].patrol[1].x - (0.050998 * 840)) < 0.001,
+  "Hyjal patrols must project CMaNGOS world positions onto the mirrored client map")
+assert(hyjalMapProjectionCalls == 0, "Hyjal must not depend on client map projection orientation")
 assert(gruul.isBoss and gruul.displayId == 18698)
 assert(gruul.health == 3414600 and gruul.level == 73 and gruul.creatureType == "Humanoid")
 assert(gruul.spells[33525] and not gruul.spells[33525].interruptible and gruul.spells[36300]

@@ -102,7 +102,8 @@ local function repositoryMetadata(raid)
 end
 
 local function mapPosition(raid, map, sublevel, raw)
-  local uiMapId = map.sublevels[sublevel] and map.sublevels[sublevel].uiMapId
+  local floor = map.sublevels[sublevel]
+  local uiMapId = floor and (floor.uiMapId or floor.asset and floor.asset.uiMapId)
   if not raw or not uiMapId then return end
   local position = MDT.Compat:GetMapPositionFromWorld(raid.instanceId, raw.x, raw.y, uiMapId)
   if not position then return end
@@ -116,9 +117,16 @@ local function mapPosition(raid, map, sublevel, raw)
   return x, y
 end
 
+local function staticMapPosition(raid, sublevel, x, y)
+  local transform = ART.MapTransforms and ART.MapTransforms[raid.key]
+  if transform and transform.flipX then x = 1 - x end
+  if transform then x, y = transform.toPlanner(raid.mapId, sublevel, x, y) end
+  return x, y
+end
+
 local function projectRaidEnemies(raid, map)
   local canvasWidth, canvasHeight = MDT:GetDefaultMapPanelSize()
-  local useStaticCoordinates = raid.key == "black-temple"
+  local useStaticCoordinates = raid.key == "black-temple" or raid.key == "hyjal"
   local npcKeys, packGroups, packKeys, packWaves = {}, {}, {}, {}
   for npcKey in pairs(raid.enemies) do npcKeys[#npcKeys + 1] = npcKey end
   for packKey in pairs(raid.packs) do packKeys[#packKeys + 1] = packKey end
@@ -137,24 +145,25 @@ local function projectRaidEnemies(raid, map)
           and ART.MapWorldPositions[raid.key][spawn.key]
       local normalizedX, normalizedY
       if useStaticCoordinates then
-        normalizedX, normalizedY = ART.MapTransforms[raid.key].toPlanner(
-          raid.mapId, spawn.sublevel, spawn.x, spawn.y)
+        normalizedX, normalizedY = staticMapPosition(raid, spawn.sublevel, spawn.x, spawn.y)
       else
         normalizedX, normalizedY = mapPosition(raid, map, spawn.sublevel, raw)
       end
-      normalizedX, normalizedY = normalizedX or spawn.x, normalizedY or spawn.y
+      if not normalizedX then
+        normalizedX, normalizedY = staticMapPosition(raid, spawn.sublevel, spawn.x, spawn.y)
+      end
       local patrol
       if spawn.patrol then
         patrol = {}
         for pointIdx, point in ipairs(spawn.patrol) do
           local patrolX, patrolY
           if useStaticCoordinates then
-            patrolX, patrolY = ART.MapTransforms[raid.key].toPlanner(
-              raid.mapId, spawn.sublevel, point.x, point.y)
+            patrolX, patrolY = staticMapPosition(raid, spawn.sublevel, point.x, point.y)
           else
             patrolX, patrolY = mapPosition(raid, map, spawn.sublevel, raw and raw.patrol and raw.patrol[pointIdx])
           end
-          patrol[pointIdx] = { x = (patrolX or point.x) * canvasWidth, y = -(patrolY or point.y) * canvasHeight }
+          if not patrolX then patrolX, patrolY = staticMapPosition(raid, spawn.sublevel, point.x, point.y) end
+          patrol[pointIdx] = { x = patrolX * canvasWidth, y = -patrolY * canvasHeight }
         end
       end
       clones[cloneIdx] = {

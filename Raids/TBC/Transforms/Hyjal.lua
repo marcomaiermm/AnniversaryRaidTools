@@ -21,6 +21,7 @@ local defaultCalibration = {
   offsetY = 0,
   scaleX = 1,
   scaleY = 1,
+  flipX = true,
   flipY = false,
   tolerance = 0.0005,
   provenance = provenance,
@@ -35,7 +36,6 @@ local defaultCalibration = {
 local transform = {
   schemaVersion = 1,
   raidKey = "hyjal",
-  flipX = true,
   calibrations = { [1] = defaultCalibration },
 }
 
@@ -62,7 +62,7 @@ function transform.toPlanner(mapId, sublevel, x, y, calibration)
   local selected, reason = calibrationFor(mapId, sublevel, calibration)
   if not selected then return nil, reason end
   if not finiteNormalized(x) or not finiteNormalized(y) then return nil, "invalid-source-coordinate" end
-  local plannerX = (x * selected.scaleX) + selected.offsetX
+  local plannerX = ((selected.flipX and (1 - x)) or x) * selected.scaleX + selected.offsetX
   local plannerY = ((selected.flipY and (1 - y)) or y) * selected.scaleY + selected.offsetY
   if not finiteNormalized(plannerX) or not finiteNormalized(plannerY) then
     return nil, "outside-normalized-coordinate-space"
@@ -76,6 +76,7 @@ function transform.fromPlanner(mapId, sublevel, x, y, calibration)
   if not finiteNormalized(x) or not finiteNormalized(y) then return nil, "invalid-planner-coordinate" end
   local sourceX = (x - selected.offsetX) / selected.scaleX
   local sourceY = (y - selected.offsetY) / selected.scaleY
+  if selected.flipX then sourceX = 1 - sourceX end
   if selected.flipY then sourceY = 1 - sourceY end
   if not finiteNormalized(sourceX) or not finiteNormalized(sourceY) then
     return nil, "outside-normalized-coordinate-space"
