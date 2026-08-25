@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Superseded by ART-0011
 
 ## Date
 

@@ -30,6 +30,25 @@ for sublevel, links in pairs(map.links) do
   end
 end
 assert(linkCount == 14 and #map.links[3] == 4, "Black Temple floor transitions missing")
+local expectedLinks = {
+  [1] = { { 0.279, 0.088, 2, -1 } },
+  [2] = { { 0.279, 0.780, 1, 1 }, { 0.690, 0.475, 3, 2 } },
+  [3] = { { 0.269, 0.228, 6, 1 }, { 0.632, 0.349, 4, 2 },
+    { 0.233, 0.516, 2, -2 }, { 0.574, 0.921, 5, -2 } },
+  [4] = { { 0.623, 0.398, 3, -2 } },
+  [5] = { { 0.690, 0.689, 3, 2 } },
+  [6] = { { 0.084, 0.471, 3, -1 }, { 0.673, 0.581, 7, 1 } },
+  [7] = { { 0.694, 0.126, 6, -1 }, { 0.475, 0.271, 8, -1 } },
+  [8] = { { 0.530, 0.103, 7, -1 } },
+}
+for sublevel, expected in pairs(expectedLinks) do
+  for index, values in ipairs(expected) do
+    local link = map.links[sublevel][index]
+    close(link.x, values[1], 0.000001, "map link x mismatch")
+    close(link.y, values[2], 0.000001, "map link y mismatch")
+    assert(link.target == values[3] and link.direction == values[4], "map link target/direction mismatch")
+  end
+end
 local uiMapIds = { 340, 339, 341, 342, 343, 344, 345, 346 }
 local texturePrefixes = { "BlackTemple1_", false, "BlackTemple2_", "BlackTemple3_", "BlackTemple4_",
   "BlackTemple5_", "BlackTemple6_", "BlackTemple7_" }

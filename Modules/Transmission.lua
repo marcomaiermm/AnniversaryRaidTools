@@ -212,7 +212,7 @@ function MDTcommsObject:OnCommReceived(prefix, message, distribution, sender)
       end
       if preset == MDT:GetCurrentPreset() then
         MDT:ReloadPullButtons()
-        MDT:SetSelectionToPull(MDT:GetCurrentPull())
+        MDT:SetSelectionToPull(MDT:GetCurrentPull(), nil, true)
         MDT:UpdateProgressbar()
       end
     end
@@ -260,6 +260,10 @@ function MDTcommsObject:OnCommReceived(prefix, message, distribution, sender)
   --live session messages that ignore concurrency from here on, we ignore our own messages
   if sender == UnitFullName("player") then return end
 
+  if prefix == MDT.liveSessionPrefixes.progress then
+    MDT:LiveSession_ReceiveProgress(message, distribution, fullName)
+    return
+  end
 
   if prefix == MDT.liveSessionPrefixes.request then
     if MDT.liveSessionActive then

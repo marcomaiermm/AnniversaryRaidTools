@@ -10,7 +10,7 @@ if addon and addon.ART == nil then addon.ART = ART end
 local provenance = {
   source = "derived",
   confidence = "review-required",
-  sourceRef = "https://gist.github.com/Stanzilla/5def6b67033a359610e6#WorldMapArea-775; candidate world Y -4025..-1460 and world X 6145.8330078125..4479.16650390625; eastern bound expanded 65 yards to retain CMaNGOS scripted wave paths",
+  sourceRef = "https://gist.github.com/Stanzilla/5def6b67033a359610e6#WorldMapArea-775; candidate world Y -4025..-1460 and world X 6145.8330078125..4479.16650390625",
   observedAt = "2026-08-21T19:30:00Z",
 }
 
@@ -29,13 +29,13 @@ local defaultCalibration = {
     rightY = -1460,
     topX = 6145.8330078125,
     bottomX = 4479.16650390625,
-    eastMarginYards = 65,
   },
 }
 
 local transform = {
   schemaVersion = 1,
   raidKey = "hyjal",
+  flipX = true,
   calibrations = { [1] = defaultCalibration },
 }
 

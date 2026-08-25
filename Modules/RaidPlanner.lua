@@ -19,7 +19,6 @@ function Planner:Initialize(dependencies)
   self.onChange = dependencies.onChange
   self.getPullPackKeys = dependencies.getPullPackKeys
   self.getPullStep = dependencies.getPullStep
-  self.getMarkedStep = dependencies.getMarkedStep
   self.getCurrentPullIndex = dependencies.getCurrentPullIndex
   self.lastPullIndex = nil
   self.initialized = true
@@ -116,11 +115,6 @@ function Planner:GetActiveStep()
     if step then return step end
   end
   return stepById(self.preset, self.preset.currentStepId)
-end
-
-function Planner:GetMarkedStep()
-  if type(self.getMarkedStep) ~= "function" then return nil end
-  return self.getMarkedStep()
 end
 
 function Planner:GetPullStep(pullIndex)
@@ -259,4 +253,114 @@ function Planner:GetSpawnMark(packKey, spawnKey)
     local marker = step.marks[spawnKey]
     if marker then return marker, step end
   end
+end
+
+local markerPriority = { [8] = 1, [7] = 2, [1] = 3, [5] = 4, [6] = 5, [3] = 6, [4] = 7, [2] = 8 }
+
+local function stepNpcSpawnKeys(planner, step, npcId)
+  local enemy = planner.raid and planner.raid.enemies and planner.raid.enemies[tostring(npcId)]
+  if not enemy then return nil, "unknown npc" end
+  local packs, keys = {}, {}
+  for _, packKey in ipairs(step.packKeys) do packs[packKey] = true end
+  for _, spawn in ipairs(enemy.spawns or {}) do
+    if packs[spawn.packKey] then keys[#keys + 1] = spawn.key end
+  end
+  return keys
+end
+
+function Planner:GetStepNpcMarks(stepId, npcId)
+  if not self.preset or not self.raid then return {} end
+  local step = stepById(self.preset, stepId)
+  if not step then return {} end
+  local keys = stepNpcSpawnKeys(self, step, tonumber(npcId))
+  local markers = {}
+  for _, spawnKey in ipairs(keys or {}) do
+    local marker = tonumber(step.marks[spawnKey])
+    if marker then markers[#markers + 1] = marker end
+  end
+  table.sort(markers, function(left, right) return markerPriority[left] < markerPriority[right] end)
+  return markers
+end
+
+function Planner:SetStepNpcMarks(stepId, npcId, markers)
+  if not self.preset or not self.raid then return nil, "no active preset" end
+  local step = stepById(self.preset, stepId)
+  if not step then return nil, "unknown route step" end
+  npcId = tonumber(npcId)
+  local spawnKeys, reason = stepNpcSpawnKeys(self, step, npcId)
+  if not spawnKeys then return nil, reason end
+  if type(markers) ~= "table" then return nil, "invalid markers" end
+
+  local normalized, seen = {}, {}
+  for _, value in ipairs(markers) do
+    local marker = tonumber(value)
+    if not marker or marker < 1 or marker > 8 or marker % 1 ~= 0 then return nil, "invalid marker" end
+    if not seen[marker] then normalized[#normalized + 1], seen[marker] = marker, true end
+  end
+  if #normalized > #spawnKeys then return nil, "too many markers" end
+
+  local previous = {}
+  for spawnKey, marker in pairs(step.marks) do previous[spawnKey] = marker end
+  for _, spawnKey in ipairs(spawnKeys) do step.marks[spawnKey] = nil end
+  for spawnKey, marker in pairs(step.marks) do
+    if seen[marker] then step.marks[spawnKey] = nil end
+  end
+  for index, marker in ipairs(normalized) do step.marks[spawnKeys[index]] = marker end
+
+  local valid, validationReason = self.presets:Validate(self.preset, self.raid)
+  if not valid then
+    for spawnKey in pairs(step.marks) do step.marks[spawnKey] = nil end
+    for spawnKey, marker in pairs(previous) do step.marks[spawnKey] = marker end
+    return nil, validationReason
+  end
+  commit(self)
+  if ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
+  return normalized
+end
+
+function Planner:GetNpcDefaultMarks(npcId)
+  local defaults = self.preset and self.preset.marking and self.preset.marking.npcDefaults
+  local markers = defaults and defaults[tonumber(npcId)]
+  local result = {}
+  for _, marker in ipairs(type(markers) == "table" and markers or {}) do
+    result[#result + 1] = tonumber(marker)
+  end
+  return result
+end
+
+function Planner:SetNpcDefaultMarks(npcId, markers)
+  if not self.preset or not self.raid then return nil, "no active preset" end
+  npcId = tonumber(npcId)
+  if not npcId or npcId % 1 ~= 0 or not self.raid.enemies[tostring(npcId)] then return nil, "unknown npc" end
+  if type(markers) ~= "table" then return nil, "invalid markers" end
+
+  local normalized, seen = {}, {}
+  for _, value in ipairs(markers) do
+    local marker = tonumber(value)
+    if not marker or marker < 1 or marker > 8 or marker % 1 ~= 0 then return nil, "invalid marker" end
+    if not seen[marker] then normalized[#normalized + 1], seen[marker] = marker, true end
+  end
+
+  local defaults = self.preset.marking.npcDefaults
+  local previous = defaults[npcId]
+  defaults[npcId] = #normalized > 0 and normalized or nil
+  local valid, reason = self.presets:Validate(self.preset, self.raid)
+  if not valid then defaults[npcId] = previous; return nil, reason end
+
+  commit(self)
+  if not self.onChange and ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
+  return normalized
+end
+
+function Planner:GetNpcDefaultMark(npcId)
+  return self:GetNpcDefaultMarks(npcId)[1]
+end
+
+function Planner:SetNpcDefaultMark(npcId, marker)
+  if marker == nil or tonumber(marker) == 0 then
+    local result, reason = self:SetNpcDefaultMarks(npcId, {})
+    return result and 0 or nil, reason
+  end
+  local result, reason = self:SetNpcDefaultMarks(npcId, { marker })
+  return result and result[1] or nil, reason
 end

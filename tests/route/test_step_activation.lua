@@ -30,8 +30,8 @@ local function spawn(npcId, id, packKey)
 end
 
 local packA, packB, packC = "test-activation:pack:a", "test-activation:pack:b", "test-activation:pack:c"
-local spawnA, spawnB, spawnB2, spawnC = spawn(100, "01", packA), spawn(200, "01", packB),
-    spawn(201, "02", packB), spawn(300, "01", packC)
+local spawnA, spawnB, spawnBAlt, spawnB2, spawnC = spawn(100, "01", packA), spawn(200, "01", packB),
+    spawn(200, "02", packB), spawn(201, "03", packB), spawn(300, "01", packC)
 local raid = {
   schemaVersion = 1,
   key = "test-activation",
@@ -43,13 +43,13 @@ local raid = {
   sublevels = { { index = 1, name = "Test Floor", mapId = 565 } },
   enemies = {
     ["100"] = { npcId = 100, name = "Mob A", spawns = { spawnA }, source = provenance() },
-    ["200"] = { npcId = 200, name = "Mob B", spawns = { spawnB }, source = provenance() },
+    ["200"] = { npcId = 200, name = "Mob B", spawns = { spawnB, spawnBAlt }, source = provenance() },
     ["201"] = { npcId = 201, name = "Mob B2", spawns = { spawnB2 }, source = provenance() },
     ["300"] = { npcId = 300, name = "Mob C", spawns = { spawnC }, source = provenance() },
   },
   packs = {
     [packA] = { key = packA, spawnKeys = { spawnA.key }, source = provenance() },
-    [packB] = { key = packB, spawnKeys = { spawnB.key, spawnB2.key }, source = provenance() },
+    [packB] = { key = packB, spawnKeys = { spawnB.key, spawnBAlt.key, spawnB2.key }, source = provenance() },
     [packC] = { key = packC, spawnKeys = { spawnC.key }, source = provenance() },
   },
   pois = { [1] = {} },
@@ -123,6 +123,29 @@ assert(not planner:IsStepPinned() and planner:GetActiveStep().id == "step-b", "u
 -- Planned marks live in the step owning the pack, preferring the active step.
 local reconciles = 0
 ART.LiveMarks = { OnPlanChanged = function() reconciles = reconciles + 1 end }
+changes = 0
+assert(planner:SetNpcDefaultMark(200, 5) == 5)
+assert(planner:GetNpcDefaultMark(200) == 5 and changes == 1,
+    "global NPC marks persist through the planner change boundary")
+local fallbackMarks = assert(planner:SetNpcDefaultMarks(200, { 8, 7, 8 }))
+assert(#fallbackMarks == 2 and fallbackMarks[1] == 8 and fallbackMarks[2] == 7,
+    "global NPC fallback marks preserve priority and remove duplicates")
+assert(#planner:GetNpcDefaultMarks(200) == 2)
+assert(planner:SetNpcDefaultMark(200, nil) == 0 and planner:GetNpcDefaultMark(200) == nil)
+local globalMark, globalReason = planner:SetNpcDefaultMark(999, 1)
+assert(globalMark == nil and globalReason == "unknown npc", "unknown NPC defaults are rejected")
+globalMark, globalReason = planner:SetNpcDefaultMark(200, 9)
+assert(globalMark == nil and globalReason == "invalid marker", "invalid NPC defaults are rejected")
+
+local stepMarkers = assert(planner:SetStepNpcMarks("step-b", 200, { 8, 7 }))
+assert(stepMarkers[1] == 8 and stepMarkers[2] == 7 and planner.preset.routeSteps[2].marks[spawnB.key] == 8
+    and planner.preset.routeSteps[2].marks[spawnBAlt.key] == 7, "step NPC marker pool is stored on deterministic spawns")
+assert(#planner:GetStepNpcMarks("step-b", 200) == 2, "step NPC marker pool roundtrips")
+local rejected, rejectedReason = planner:SetStepNpcMarks("step-b", 200, { 8, 7, 1 })
+assert(not rejected and rejectedReason == "too many markers", "step NPC marker pool cannot exceed occurrences")
+assert(planner:SetStepNpcMarks("step-b", 200, {}), "step NPC marker pool clears")
+reconciles = 0
+
 assert(planner:SetSpawnMark(packB, spawnB.key, 8) == 8, "mark assignment succeeds")
 assert(reconciles == 1, "route mark changes must reconcile live marks")
 local owner = assert(planner:GetActiveStep())

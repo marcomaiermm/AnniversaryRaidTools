@@ -10,13 +10,17 @@ local function read(path)
 end
 
 local loader = read("/Modules/load_modules.xml")
-local spawnMatcherPosition = assert(loader:find("<Script file='..\\Core\\SpawnMatcher.lua'/>", 1, true),
-  "SpawnMatcher.lua must be loaded by the addon")
-local pullProgressPosition = assert(loader:find("<Script file='..\\Core\\PullProgress.lua'/>", 1, true),
-  "PullProgress.lua must be loaded by the addon")
+local resolverPosition = assert(loader:find("<Script file='..\\Core\\MarkResolver.lua'/>", 1, true))
+local autoMarksUIPosition = assert(loader:find("<Script file='AutoMarksUI.lua'/>", 1, true))
 local liveMarksPosition = assert(loader:find("<Script file='LiveMarks.lua'/>", 1, true))
-assert(spawnMatcherPosition < liveMarksPosition and pullProgressPosition < liveMarksPosition,
-  "marking core must load before LiveMarks.lua")
+assert(resolverPosition < liveMarksPosition and autoMarksUIPosition < liveMarksPosition,
+  "mark resolver and Auto Marks UI must load before LiveMarks.lua")
+local autoMarksUISource = read("/Modules/AutoMarksUI.lua")
+assert(autoMarksUISource:find('L["Pulls"]', 1, true)
+  and autoMarksUISource:find('L["Auto Marks"]', 1, true)
+  and autoMarksUISource:find("PullButtonScrollGroup", 1, true)
+  and autoMarksUISource:find("SetNpcDefaultMark", 1, true),
+  "Auto Marks must reuse the pull side panel and persist NPC defaults")
 local adapterPosition = assert(loader:find("<Script file='EnemyInfo.lua'/>", 1, true))
 local uiPosition = assert(loader:find("<Script file='EnemyInfoUI.lua'/>", 1, true))
 assert(adapterPosition < uiPosition, "EnemyInfoUI.lua must replace the fallback frame after raid data publication")
@@ -170,6 +174,7 @@ C_Map = {
 
 load("/Core/SavedVariables.lua", addon)
 assert(addon:GetDefaultSavedVariables().global.autoMark == false, "auto marking must default to disabled")
+assert(addon:GetDefaultSavedVariables().global.autoMarkModifier == "ALT", "auto marking must default to Alt")
 if mode == "invalid-store" then
   assert(saved.raidRoutes == "legacy-value" and addon:GetRaidRouteStore() == nil)
 else
@@ -233,12 +238,16 @@ assert(type(addon.dungeonMaps[161][2]) == "table"
   and addon.dungeonMaps[161][2].customTextures:match("BlackTempleTrainingGrounds$"))
 assert(#addon.dungeonSubLevels[161] == 8 and addon.dungeonSubLevels[161][2] == "Illidari Training Grounds"
   and addon.dungeonSubLevels[161][8] == "Temple Summit")
+for sublevel, uiMapId in ipairs({ 340, 339, 341, 342, 343, 344, 345, 346 }) do
+  assert(addon.zoneIdToDungeonIdx[uiMapId] == 161 and addon.zoneIdToSublevel[uiMapId] == sublevel,
+    "Black Temple UiMap floor lookup missing")
+end
 assert(#addon.mapPOIs[161][1] == 1 and #addon.mapPOIs[161][2] == 2
   and #addon.mapPOIs[161][3] == 4 and #addon.mapPOIs[161][4] == 1
   and #addon.mapPOIs[161][5] == 1 and #addon.mapPOIs[161][6] == 2
   and #addon.mapPOIs[161][7] == 2 and #addon.mapPOIs[161][8] == 1
   and addon.mapPOIs[161][3][1].type == "mapLink"
-  and addon.mapPOIs[161][3][1].target == 2 and addon.mapPOIs[161][3][1].direction == 1
+  and addon.mapPOIs[161][3][1].target == 6 and addon.mapPOIs[161][3][1].direction == 1
   and addon.mapPOIs[161][3][1].arrowAtlas == "Garr_LevelUpgradeArrow"
   and addon.mapPOIs[161][3][1].arrowRotation == math.pi)
 assert(addon.dungeonMaps[162][1] == "CoTMountHyjal" and addon.dungeonSubLevels[162][1] == "Hyjal Summit")
@@ -446,6 +455,9 @@ addon:SetSelectionToPull(99)
 assert(addon:GetCurrentPreset().value.currentPull == 37)
 addon:SetSelectionToPull(2)
 assert(addon:GetCurrentPreset().value.currentPull == 2 and addon.waveRefreshes == 2)
+addon.RaidPlanner.lastPullIndex = 1
+addon:SetSelectionToPull(2, nil, true)
+assert(addon.RaidPlanner.lastPullIndex == 1, "passive map refresh must not advance the planner pull")
 assert(not integration.planner:AddRouteStep({ label = "immutable", packKeys = {} }))
 local winterchillInfo = assert(addon:GetRaidEnemyInfo("hyjal", 17767))
 assert(winterchillInfo.maxHealth.value == 4249000 and winterchillInfo.level.value == 73
@@ -480,10 +492,7 @@ assert(#addon.RaidPlanner.preset.routeSteps == 0, "planned pull must not duplica
 assert(plannedPull.packKeys[1] == encounterPack and plannedPull.marks[encounterSpawnKeys[1]] == 8,
   "planned pull must expose pre-pull marks by stable spawn key")
 assert(#plannedPull.spawnKeys == 1 and plannedPull.spawnKeys[1] == encounterSpawnKeys[1],
-  "planned pull must expose exact spawn membership for safe completion")
-local presetMarks = assert(addon.RaidPlanner:GetMarkedStep())
-assert(presetMarks.marks[encounterSpawnKeys[1]] == 8 and presetMarks.marks[encounterSpawnKeys[2]] == 7,
-  "preset-wide marks must survive outside the selected pull")
+  "planned pull must expose its configured spawn membership")
 assert(integration.planner:AddRouteStep({ label = "Magtheridon", packKeys = { encounterPack } }))
 local magtheridonExport = assert(addon:SaveRaidRoute())
 assert(addon:OpenRaidRoute("magtheridons-lair") and addon.RaidPlanner.raid.key == "magtheridons-lair")
@@ -519,14 +528,15 @@ end
 assert(integration.planner:AddRouteStep({ label = "High King Maulgar", packKeys = { "gruuls-lair:pack:maulgar" } }))
 assert(integration.planner:AddRouteStep({ label = "Gruul the Dragonkiller", packKeys = { "gruuls-lair:pack:gruul" } }))
 assert(#addon.RaidPlanner.preset.routeSteps == 2)
-addon.RaidPlanner.preset.marking.npcDefaults[18831] = { 1 }
+assert(addon.RaidPlanner:SetNpcDefaultMark(18831, 1) == 1)
+assert(addon.RaidPlanner:GetNpcDefaultMark(18831) == 1)
 assert(integration.planner:ReorderRouteStep(addon.RaidPlanner.preset.routeSteps[2].id, 1))
 local maulgarStep = addon.RaidPlanner.preset.routeSteps[2]
 assert(addon:ActivateRaidRouteStep(maulgarStep.id))
 local preview = addon:GetRaidMarkPreview("gruuls-lair:pack:maulgar")
 assert(preview[1] and preview[1].marker == 1)
-assert(addon:ApplyRaidMark("target"))
-assert(addon.applied and addon.applied[1] == "target" and addon.applied[2] == 1)
+local applied, reason = addon:ApplyRaidMark("target")
+assert(applied == false and reason == "mouseover-only", "public application is mouseover-only")
 assert(addon:SaveRaidRoute())
 local exported = assert(addon.RaidPlanner:Export())
 assert(saved.raidRoutes.presets["gruuls-lair"] == exported)

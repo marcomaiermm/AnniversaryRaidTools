@@ -640,7 +640,7 @@ function MDT:UpdateMap(ignoreSetSelection, ignoreReloadPullButtons, ignoreUpdate
     end
     MDT:UpdatePresetDropdownTextColor()
     if not MDT:AreFramesInitialized() then coroutine.yield() end
-    if not ignoreSetSelection then MDT:SetSelectionToPull(preset.value.currentPull) end
+    if not ignoreSetSelection then MDT:SetSelectionToPull(preset.value.currentPull, nil, true) end
     if MDT.pendingAutoPanToPull then
       local pull = MDT.pendingAutoPanToPull
       MDT.pendingAutoPanToPull = nil
@@ -675,17 +675,26 @@ end
 --ids are added in each dungeon file
 --https://wowpedia.fandom.com/wiki/UiMapID
 MDT.zoneIdToDungeonIdx = {}
+MDT.zoneIdToSublevel = {}
 
 local lastUpdatedDungeonIdx
 function MDT:CheckCurrentZone(init)
   initializeDB()
   local zoneId = MDT.Compat:GetBestMapForUnit("player")
   local dungeonIdx = MDT.zoneIdToDungeonIdx[zoneId]
-  if dungeonIdx and (not lastUpdatedDungeonIdx or dungeonIdx ~= lastUpdatedDungeonIdx) then
+  if not dungeonIdx then return end
+
+  local sublevel = MDT.zoneIdToSublevel[zoneId]
+  local dungeonChanged = db.currentDungeonIdx ~= dungeonIdx
+  if dungeonChanged or lastUpdatedDungeonIdx ~= dungeonIdx then
     lastUpdatedDungeonIdx = dungeonIdx
-    MDT:UpdateToDungeon(dungeonIdx, nil, init)
+    MDT:UpdateToDungeon(dungeonIdx, sublevel ~= nil, init)
     MDT:SetDungeonList(nil, dungeonIdx)
   end
+
+  local floorChanged = sublevel and MDT:GetCurrentSubLevel() ~= sublevel
+  if floorChanged then MDT:SetCurrentSubLevel(sublevel) end
+  if sublevel and not init and (dungeonChanged or floorChanged) then MDT:UpdateMap() end
 end
 
 function MDT:SetMapSublevel(pull)

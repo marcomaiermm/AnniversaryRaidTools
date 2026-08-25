@@ -2,41 +2,57 @@
 
 ```lua
 ---@class ARTMarkingProfile
----@field npcDefaults table<integer, integer[]> -- npcId -> ordered marker IDs
----@field packOverrides table<string, ARTMarkingPackOverride>
+---@field npcDefaults table<integer, integer[]> -- npcId -> ordered fallback marker IDs
+---@field packOverrides table<string, ARTMarkingPackOverride> -- retained for v1 import compatibility
 
 ---@class ARTMarkingPackOverride
 ---@field npcDefaults table<integer, integer[]>|nil
----@field spawns table<string, integer>|nil -- spawnKey -> marker ID
+---@field spawns table<string, integer>|nil
 ```
 
-Marker IDs are WoW raid target IDs `1..8`. Pack and spawn keys must exist in the
-preset raid. Resolution order is: active-pack spawn override, active-pack NPC rule,
-preset NPC default, no mark. A route step's `marks[spawnKey]` is treated as the most
-specific active-pack spawn override without mutating the profile. When identical
-live units in one known pack cannot be distinguished, the same planned spawn marks
-form an internal allocation pool; this does not create physical spawn identity.
-Local target, mouseover, and nameplate observations may use clear player proximity
-to select that pack, but remote group-target tokens may not.
+Marker IDs are WoW raid target IDs `1..8`. The Auto Marks UI writes a single
+marker as `{ marker }` and removes the NPC key for `None`; the existing array
+shape keeps route preset v1 import/export compatible.
 
-The core resolver exposes deterministic logic; the module wrapper exposes:
+Live resolution is deliberately limited to two layers:
+
+1. All explicit spawn markers for the hovered NPC ID in the current pull form a
+   pool ordered as Skull, Cross, Star, Moon, Square, Diamond, Triangle, Circle.
+2. If that pool is empty, `npcDefaults[npcId]` is the ordered global marker pool.
+
+An exhausted pull pool does not fall back to the global rule. Hover order assigns
+duplicate positionless NPCs without claiming a physical spawn identity. Global
+rules apply anywhere in the selected raid route preset.
+
+The planner exposes:
+
+```lua
+ART.RaidPlanner:GetNpcDefaultMark(npcId) -- marker|nil
+ART.RaidPlanner:SetNpcDefaultMark(npcId, markerOrNil) -- marker|0, reason
+ART.RaidPlanner:GetNpcDefaultMarks(npcId) -- marker[]
+ART.RaidPlanner:SetNpcDefaultMarks(npcId, markers) -- marker[]|nil, reason
+ART.RaidPlanner:GetStepNpcMarks(stepId, npcId) -- marker[]
+ART.RaidPlanner:SetStepNpcMarks(stepId, npcId, markers) -- marker[]|nil, reason
+```
+
+The step methods expose the same ordered pool for a single NPC ID inside one
+route step. Storage remains `step.marks[spawnKey]`; marker entries are assigned
+to deterministic member spawns so preset schema v1 does not change. A pool may
+not contain more markers than that NPC has spawns in the step, and a marker
+selected for one NPC is displaced from any other NPC in the same step.
+
+The resolver exposes deterministic logic through:
 
 ```lua
 ART.MarkResolver:ActivateRouteStep(routeStepId)
 ART.MarkResolver:ResolveUnit(unitToken)
-ART.MarkResolver:ApplyUnit(unitToken)
 ART.MarkResolver:ResetActivePack()
 ART.MarkResolver:OnUnitDeath(unitGuid)
 ART.MarkResolver:GetPreviewForPack(packKey)
+ART.MarkResolver:GetRuleForNpcId(npcId)
 ```
 
-For duplicate NPCs, the resolver keeps a live GUID-to-marker assignment until
-reset/death and chooses the first unused marker in rule order. An exact match uses
-its planned spawn marker; an ambiguous same-pack match distributes the candidate
-spawn markers without inventing a `spawnKey`.
-
-`ApplyUnit` is a no-op with a reason when the unit is missing, friendly, dead,
-outside the active step, all slots are exhausted, permission is absent, combat/API
-rules forbid marking, or preservation policy finds an existing marker. It never
-changes target. Step changes reset active GUID assignments. Preview has no side
-effects and follows the same precedence.
+`LiveMarks` is the only automatic application boundary. It writes only to the
+`mouseover` token after the configured deliberate gesture. Existing unit markers
+and observed foreign holders are preserved. Non-mouseover events may update
+occupancy but must never call `SetRaidTarget`.

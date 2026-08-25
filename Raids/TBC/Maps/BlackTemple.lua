@@ -57,34 +57,34 @@ local map = {
   mapId = 564,
   links = {
     [1] = {
-      { x = 0.180, y = 0.964, target = 2, direction = -1 },
+      { x = 0.279, y = 0.088, target = 2, direction = -1 },
     },
     [2] = {
-      { x = 0.279, y = 0.780, target = 1, direction = -2 },
+      { x = 0.279, y = 0.780, target = 1, direction = 1 },
       { x = 0.690, y = 0.475, target = 3, direction = 2 },
     },
     [3] = {
-      { x = 0.269, y = 0.228, target = 2, direction = 1 },
+      { x = 0.269, y = 0.228, target = 6, direction = 1 },
       { x = 0.632, y = 0.349, target = 4, direction = 2 },
-      { x = 0.233, y = 0.516, target = 6, direction = -2 },
+      { x = 0.233, y = 0.516, target = 2, direction = -2 },
       { x = 0.574, y = 0.921, target = 5, direction = -2 },
     },
     [4] = {
-      { x = 0.692, y = 0.212, target = 3, direction = 1 },
+      { x = 0.623, y = 0.398, target = 3, direction = -2 },
     },
     [5] = {
-      { x = 0.755, y = 0.689, target = 3, direction = 2 },
+      { x = 0.690, y = 0.689, target = 3, direction = 2 },
     },
     [6] = {
-      { x = 0.085, y = 0.532, target = 3, direction = -2 },
-      { x = 0.662, y = 0.511, target = 7, direction = -1 },
+      { x = 0.084, y = 0.471, target = 3, direction = -1 },
+      { x = 0.673, y = 0.581, target = 7, direction = 1 },
     },
     [7] = {
-      { x = 0.694, y = 0.126, target = 6, direction = 1 },
-      { x = 0.470, y = 0.335, target = 8, direction = 1 },
+      { x = 0.694, y = 0.126, target = 6, direction = -1 },
+      { x = 0.475, y = 0.271, target = 8, direction = -1 },
     },
     [8] = {
-      { x = 0.530, y = 0.146, target = 7, direction = 1 },
+      { x = 0.530, y = 0.103, target = 7, direction = -1 },
     },
   },
   source = source,

@@ -124,6 +124,8 @@ local function POI_SetOptions(frame, type, poi)
   frame.setAssigned = nil
   frame.setUnassigned = nil
   if frame.HighlightTexture then
+    frame.Texture:SetRotation(0)
+    frame.HighlightTexture:SetRotation(0)
     frame.HighlightTexture:SetDrawLayer("HIGHLIGHT")
     frame.HighlightTexture:Show()
     frame.Texture:SetVertexColor(1, 1, 1, 1)
@@ -141,8 +143,6 @@ local function POI_SetOptions(frame, type, poi)
     frame.HighlightTexture:Hide()
     frame.target = poi.target
     frame.poi = poi
-    frame.Texture:SetRotation(0)
-    frame.HighlightTexture:SetRotation(0)
     local directionToAtlas = {
       [-1] = "poi-door-down",
       [1] = "poi-door-up",

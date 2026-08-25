@@ -27074,7 +27074,7 @@ local raid = {
           sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/kalimdor/caverns_of_time/hyjal/hyjal.cpp",
         },
         sublevel = 1,
-        x = 0.871723,
+        x = 0.128277,
         y = 0.637058,
       },
       {
@@ -27086,7 +27086,7 @@ local raid = {
           sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/kalimdor/caverns_of_time/hyjal/hyjal.cpp",
         },
         sublevel = 1,
-        x = 0.507224,
+        x = 0.492776,
         y = 0.417176,
       },
       {
@@ -27098,7 +27098,7 @@ local raid = {
           sourceRef = "https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/kalimdor/caverns_of_time/hyjal/hyjal.cpp",
         },
         sublevel = 1,
-        x = 0.22562,
+        x = 0.77438,
         y = 0.326337,
       },
     },

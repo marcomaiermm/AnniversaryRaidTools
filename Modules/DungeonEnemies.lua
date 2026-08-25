@@ -850,7 +850,9 @@ function MDT:DisplayBlipTooltip(blip, shown)
     text = L["devModeShiftDragHint"].."\n"..L["devModeCtrlDragHint"].."\n\n"..text
   end
 
-  text = text.."\n\n["..L["Right click for more info"].."]"
+  if not blip.suppressEnemyInfoHint then
+    text = text.."\n\n["..L["Right click for more info"].."]"
+  end
   tooltip.String:SetText(text)
 
   tooltip:ClearAllPoints()
@@ -1197,6 +1199,7 @@ function MDT:DungeonEnemies_UpdateEnemiesAsync()
   preset = MDT:GetCurrentPreset()
 
   local currentSublevel = MDT:GetCurrentSubLevel()
+  local waveMode = preset.value.artWaveRaid ~= nil
   local trashMinHealth, trashMaxHealth = getTrashHealthRange(enemies)
   local overlapBuckets = {}
   local overlapCandidates = {}
@@ -1206,6 +1209,7 @@ function MDT:DungeonEnemies_UpdateEnemiesAsync()
       --check sublevel
       if (clone.sublevel == currentSublevel or (not clone.sublevel))
           and not clone.hidden
+          and not waveMode
           and (not clone.artWave or clone.artWave == preset.value.currentPull) then
         twipe(overlapCandidates)
         local bucketX = floor(clone.x / OVERLAP_BUCKET_SIZE)

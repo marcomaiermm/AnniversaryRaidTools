@@ -80,12 +80,11 @@ local function validateMap(raid, map, transform)
   return true
 end
 
-local function markDependencies(preset, raid, db)
+local function markDependencies(preset, raid)
   return {
     raid = raid,
     routeSteps = preset and preset.routeSteps or {},
     profile = preset and preset.marking or { npcDefaults = {}, packOverrides = {} },
-    settings = db and db.focusMarker,
   }
 end
 
@@ -109,8 +108,8 @@ local function mapPosition(raid, map, sublevel, raw)
   if not position then return end
   local x, y = position.x, position.y
   local transform = ART.MapTransforms and ART.MapTransforms[raid.key]
-  -- Legacy dungeon textures (Karazhan) are west-left; the Anniversary C_Map
-  -- projection returns east-right x. Mirror before the planner transform.
+  -- Some legacy map textures are west-left; the Anniversary C_Map projection
+  -- returns east-right x. Mirror before the planner transform.
   if transform and transform.flipX then x = 1 - x end
   if transform then x, y = transform.toPlanner(raid.mapId, sublevel, x, y) end
   if type(x) ~= "number" or type(y) ~= "number" or x < 0 or x > 1 or y < 0 or y > 1 then return end
@@ -247,6 +246,13 @@ local function publishShellData(raid, map)
   MDT.mapPOIs[shellIndex] = pois
   MDT.scaleMultiplier[shellIndex] = 1
   MDT.zoneIdToDungeonIdx[raid.mapId] = shellIndex
+  MDT.zoneIdToSublevel = MDT.zoneIdToSublevel or {}
+  for sublevel, floor in ipairs(map.sublevels) do
+    if floor.uiMapId then
+      MDT.zoneIdToDungeonIdx[floor.uiMapId] = shellIndex
+      MDT.zoneIdToSublevel[floor.uiMapId] = sublevel
+    end
+  end
   MDT.knownDungeons[shellIndex] = raid.name
 end
 
@@ -363,46 +369,12 @@ function Integration:Initialize()
     return (leader or assist) == true
   end
 
-  local function markedStep()
-    local currentPreset = MDT:GetCurrentPreset()
-    local assignments = currentPreset and currentPreset.value.enemyAssignments or {}
-    local enemies = MDT.dungeonEnemies[db.currentDungeonIdx]
-    local step = { id = "preset-marks", label = "Preset marks", packKeys = {}, spawnKeys = {}, marks = {} }
-    local seenPacks = {}
-    for enemyIdx, enemyMarks in pairs(assignments) do
-      local data = enemies and enemies[tonumber(enemyIdx)]
-      for cloneIdx, marker in pairs(type(enemyMarks) == "table" and enemyMarks or {}) do
-        local clone = data and data.clones and data.clones[tonumber(cloneIdx)]
-        marker = tonumber(marker)
-        if clone and clone.artSpawnKey and clone.artPackKey and marker
-            and marker >= 1 and marker <= 8 and marker % 1 == 0 then
-          step.spawnKeys[#step.spawnKeys + 1] = clone.artSpawnKey
-          step.marks[clone.artSpawnKey] = marker
-          if not seenPacks[clone.artPackKey] then
-            seenPacks[clone.artPackKey] = true
-            step.packKeys[#step.packKeys + 1] = clone.artPackKey
-          end
-        end
-      end
-    end
-    table.sort(step.packKeys)
-    table.sort(step.spawnKeys)
-    return #step.spawnKeys > 0 and step or nil
-  end
-
   local function wireMarks(preset, activeRaid)
-    local dependencies = markDependencies(preset, activeRaid or raids[DEFAULT_RAID_KEY], db)
+    local dependencies = markDependencies(preset, activeRaid or raids[DEFAULT_RAID_KEY])
     -- Only raid leaders/assistants may set raid targets inside a raid group.
     dependencies.canMark = canMarkUnits
-    -- Resolve one canonical exact/pool observation for each live unit.
-    dependencies.getMatchForUnit = function(_, unitToken)
-      if not ART.LiveMarks then return nil end
-      return ART.LiveMarks:ResolveMatch(unitToken)
-    end
-    dependencies.allowOutsideActiveStep = true
-    dependencies.getSpawnMarker = function(spawnKey)
-      local step = markedStep()
-      return step and step.marks[spawnKey]
+    dependencies.markerAvailable = function(marker, guid)
+      return ART.LiveMarks and ART.LiveMarks:IsMarkerAvailable(marker, guid) or false
     end
     dependencies.getRouteStep = function(routeStepId)
       local step = planner and planner.GetActiveStep and planner:GetActiveStep()
@@ -416,6 +388,7 @@ function Integration:Initialize()
     ART.RaidMarks.resolver = resolver
     ART.RaidMarksUI:Initialize({ raidMarks = ART.RaidMarks })
     ART.RaidMarksUI:RefreshPullTracker()
+    if ART.AutoMarksUI and ART.AutoMarksUI.Refresh then ART.AutoMarksUI:Refresh() end
     -- The fresh resolver starts without an active step; restore the planned one.
     local activeStep = planner and planner.GetActiveStep and planner:GetActiveStep()
     if activeStep then ART.RaidMarks:ActivateRouteStep(activeStep.id) end
@@ -486,7 +459,6 @@ function Integration:Initialize()
     onChange = persist,
     getPullPackKeys = pullPackKeys,
     getPullStep = pullStep,
-    getMarkedStep = markedStep,
     getCurrentPullIndex = function() return MDT:GetCurrentPreset().value.currentPull end,
   })
   local raidSelect = ART.RaidSelect:Initialize({ registry = registry, planner = planner })
@@ -542,6 +514,7 @@ function Integration:Initialize()
 
   local originalSetSelectionToPull = MDT.SetSelectionToPull
   function MDT:SetSelectionToPull(pull, ...)
+    local suppressARTSync = select(2, ...) == true
     local current = self:GetCurrentPreset()
     if current and current.value.artWaveRaid and type(pull) == "number" then
       pull = math.min(math.max(pull, 1), #current.value.pulls)
@@ -552,8 +525,10 @@ function Integration:Initialize()
       self:Async(function() self:DungeonEnemies_UpdateEnemiesAsync() end, "ARTWaveSelection", true)
     end
     local step
-    if type(pull) == "number" and planner.SyncStepFromPull then step = planner:SyncStepFromPull(pull) end
-    if type(pull) == "number" and ART.LiveMarks and ART.LiveMarks.OnPullSelected then
+    if not suppressARTSync and type(pull) == "number" and planner.SyncStepFromPull then
+      step = planner:SyncStepFromPull(pull)
+    end
+    if not suppressARTSync and type(pull) == "number" and ART.LiveMarks and ART.LiveMarks.OnPullSelected then
       ART.LiveMarks:OnPullSelected(step or planner:GetActiveStep(), pull)
     end
     return result

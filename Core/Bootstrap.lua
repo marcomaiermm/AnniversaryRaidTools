@@ -389,6 +389,7 @@ MDT.liveSessionPrefixes = {
   difficulty = "MDTLiveLvl",
   poiAssignment = "MDTPOIAssignment",
   focusMarkerAssignment = "MDTFocusMark",
+  progress = "ARTRaidProgress",
 }
 
 MDT.commsObject = MDT.commsObject or {}

@@ -34,6 +34,16 @@ equal(map.sublevels[1].asset.uiMapId, 329, "UI map identity")
 equal(map.sublevels[1].asset.textureFolder, "CoTMountHyjal", "map asset folder")
 equal(map.sublevels[1].asset.tilePrefix, "CoTMountHyjal", "map tile prefix")
 equal(map.sublevels[1].asset.noFloorPrefix, true, "no-floor-prefix asset")
+equal(#map.waveMode.groups, 5, "wave encounter group count")
+for index, expected in ipairs({
+  { "Rage Winterchill", 1, 9 }, { "Anetheron", 10, 18 }, { "Kaz'rogal", 19, 27 },
+  { "Azgalor", 28, 36 }, { "Archimonde", 37, 37 },
+}) do
+  local group = map.waveMode.groups[index]
+  equal(group.label, expected[1], "wave group label")
+  equal(group.firstWave, expected[2], "wave group start")
+  equal(group.lastWave, expected[3], "wave group end")
+end
 equal(map.source.source, "derived", "map provenance source")
 equal(map.source.confidence, "candidate", "map provenance confidence")
 equal(map.source.observedAt, "2026-08-21T19:30:00Z", "map provenance timestamp")
@@ -50,7 +60,7 @@ equal(calibration.worldBounds.leftY, -4025, "world left Y")
 equal(calibration.worldBounds.rightY, -1460, "world right Y")
 equal(calibration.worldBounds.topX, 6145.8330078125, "world top X")
 equal(calibration.worldBounds.bottomX, 4479.16650390625, "world bottom X")
-equal(calibration.worldBounds.eastMarginYards, 65, "world eastern margin")
+equal(transform.flipX, true, "client map horizontal orientation")
 assert(calibration.provenance.sourceRef:find("WorldMapArea%-775"), "transform provenance URL missing")
 
 local function worldToPlanner(worldX, worldY, selected)

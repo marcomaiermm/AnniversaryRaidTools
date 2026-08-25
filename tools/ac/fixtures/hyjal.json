@@ -10,8 +10,7 @@
       "leftY": -4025.0,
       "rightY": -1460.0,
       "topX": 6145.8330078125,
-      "bottomX": 4479.16650390625,
-      "eastMarginYards": 65
+      "bottomX": 4479.16650390625
     },
     "sourceInputs": {
       "databaseCommit": "7060a217bcf7c454db570e842cd5e2179444d768",
@@ -24221,19 +24220,19 @@
   ],
   "pois": [
     {
-      "x": 0.871723,
+      "x": 0.128277,
       "y": 0.637058,
       "sublevel": 1,
       "label": "Alliance Base"
     },
     {
-      "x": 0.507224,
+      "x": 0.492776,
       "y": 0.417176,
       "sublevel": 1,
       "label": "Horde Encampment"
     },
     {
-      "x": 0.22562,
+      "x": 0.77438,
       "y": 0.326337,
       "sublevel": 1,
       "label": "Nordrassil"

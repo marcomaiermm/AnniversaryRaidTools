@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from tools.ac.pipeline import build_raid, load_snapshot  # noqa: E402
-from tools.generator.generate import render_lua  # noqa: E402
+from tools.generator.generate import _world_position, render_lua  # noqa: E402
 from tools.validators.raid import validate_raid  # noqa: E402
 SOURCE = ROOT / "tools/ac/fixtures/hyjal.json"
 OUTPUT = ROOT / "Raids/TBC/Generated/Hyjal.lua"
@@ -100,7 +100,9 @@ def main():
  assert (m["project"],m["commit"],m["databaseVersion"])==("CMaNGOS TBC",DB_COMMIT,"TBCDB 1.11.0")
  assert (m["snapshot"],m["exportedAt"])==("hyjal-map-534-waves","2026-08-21T19:30:00Z")
  assert m["sourceInputs"]=={"databaseCommit":DB_COMMIT,"databaseVersion":"TBCDB 1.11.0","databaseUrl":DB_URL,"coreCommit":CORE_COMMIT,"coreUrl":CORE_URL}
- assert m["worldBounds"]=={"leftY":-4025.0,"rightY":-1460.0,"topX":6145.8330078125,"bottomX":4479.16650390625,"eastMarginYards":65}
+ assert m["worldBounds"]=={"leftY":-4025.0,"rightY":-1460.0,"topX":6145.8330078125,"bottomX":4479.16650390625}
+ world_patrol=_world_position({"x":.949002,"y":.750242},m["worldBounds"])
+ assert world_patrol and abs(world_patrol["x"]-4895.43)<.001 and abs(world_patrol["y"]+1590.81)<.001
  assert m["infernalTargets"]=={"relayCount":6,"databaseTargetCount":7,"eligibleTargetGuids":[5343057,5343058,5343059,5343060,5343061,5343062],"representativeIndices":[0,1,2,3,4,5,0,1]}
  assert m["archimondeEncounter"]=={"semantics":"concurrent","sourceInvasionPhases":[14,15,16],"waveId":"archimonde","packIds":["archimonde","archimonde-night-elf-ghouls","archimonde-night-elf-crypt-fiend","archimonde-night-elf-ghoul-abomination"]}
  assert raw["source"]["sourceRef"]==f"{DB_URL} | {CORE_URL}"

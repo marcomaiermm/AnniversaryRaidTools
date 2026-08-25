@@ -10,6 +10,7 @@ ART.RaidMarksUI = RaidMarksUI
 if addon and addon.RaidMarksUI == nil then addon.RaidMarksUI = RaidMarksUI end
 
 local tracker
+local L = addon.L or {}
 
 function RaidMarksUI:GetPullTrackerModel()
   local planner = ART.RaidPlanner
@@ -22,8 +23,37 @@ function RaidMarksUI:GetPullTrackerModel()
 
   local currentPreset = addon.GetCurrentPreset and addon:GetCurrentPreset()
   local value = currentPreset and currentPreset.value
-  local pullIndex = tonumber(planner.lastPullIndex or value and value.currentPull)
+  local selectedPull = tonumber(planner.lastPullIndex)
+  if self.trackerPreset ~= preset then
+    self.trackerPreset, self.trackerPullIndex, self.trackerTotalPulls = preset, nil, nil
+  end
+  local pulls = value and value.pulls or {}
+  if selectedPull or not self.trackerPullIndex then
+    self.trackerPullIndex = selectedPull or tonumber(value and value.currentPull)
+    self.trackerTotalPulls = #pulls
+  end
+  local pullIndex = self.trackerPullIndex
   if not pullIndex then return nil end
+
+  local mode, currentLabel, currentText, nextText = raid.mode
+  local totalPulls = self.trackerTotalPulls
+  if mode == "waves" then
+    totalPulls = #raid.waves
+    local definition = ART.MapDefinitions and ART.MapDefinitions[raid.key]
+    for _, group in ipairs(definition and definition.waveMode and definition.waveMode.groups or {}) do
+      if pullIndex >= group.firstWave and pullIndex <= group.lastWave then
+        local boss = pullIndex == group.lastWave
+        currentLabel = L[group.label] or group.label
+        currentText = (L[boss and "Boss" or "Wave"] or (boss and "Boss" or "Wave")).." "..pullIndex.." / "..totalPulls
+        break
+      end
+    end
+    nextText = pullIndex < totalPulls and "NEXT  "..(L["Wave"] or "Wave").." "..(pullIndex + 1).."  >" or "LAST WAVE"
+  else
+    currentLabel = "CURRENT PULL"
+    currentText = ("Pull %d / %d"):format(pullIndex, totalPulls)
+    nextText = pullIndex < totalPulls and "NEXT  Pull "..(pullIndex + 1).."  >" or "LAST PULL"
+  end
 
   local names = {}
   for _, enemy in pairs(raid.enemies or {}) do
@@ -41,12 +71,16 @@ function RaidMarksUI:GetPullTrackerModel()
     return left.marker > right.marker or left.marker == right.marker and left.name < right.name
   end)
 
-  local pulls = value and value.pulls or {}
   return {
     raidName = raid.name,
+    mode = mode,
+    showNext = mode ~= "waves",
     pullIndex = pullIndex,
-    totalPulls = #pulls,
-    nextPullIndex = pullIndex < #pulls and pullIndex + 1 or nil,
+    totalPulls = totalPulls,
+    nextPullIndex = pullIndex < totalPulls and pullIndex + 1 or nil,
+    currentLabel = currentLabel,
+    currentText = currentText,
+    nextText = nextText,
     marks = rows,
   }
 end
@@ -304,7 +338,7 @@ local function createTracker()
     frame.clear.label:SetTextColor(0.85, 0.67, 0.35)
   end)
   frame.clear:SetScript("OnClick", function()
-    if ART.LiveMarks and ART.LiveMarks.ClearWorldMarks then ART.LiveMarks:ClearWorldMarks() end
+    if ART.LiveMarks then ART.LiveMarks:ClearWorldMarks() end
   end)
 
   frame.bodyAlpha, frame.progressWidth = 1, 0
@@ -359,8 +393,10 @@ function RaidMarksUI:RefreshPullTracker()
   if not frame then return end
   frame.model = model
   frame.title:SetText(model.raidName)
-  frame.current:SetText(("Pull %d / %d"):format(model.pullIndex, model.totalPulls))
-  frame.next.label:SetText(model.nextPullIndex and "NEXT  Pull "..model.nextPullIndex.."  >" or "LAST PULL")
+  frame.currentLabel:SetText(model.currentLabel)
+  frame.current:SetText(model.currentText)
+  frame.next:SetShown(model.showNext)
+  frame.next.label:SetText(model.nextText)
   if model.nextPullIndex then
     frame.next:Enable()
     frame.next.background:SetColorTexture(0.08, 0.11, 0.16, 0.95)
@@ -403,6 +439,7 @@ function RaidMarksUI:GetPreviewForPack(packKey)
 end
 
 function RaidMarksUI:ApplyUnit(unitToken)
-  if not self.marks then return false, "not-initialized" end
-  return self.marks:ApplyUnit(unitToken)
+  if unitToken ~= "mouseover" then return false, "mouseover-only" end
+  if not ART.LiveMarks then return false, "not-initialized" end
+  return ART.LiveMarks:TryMouseover()
 end

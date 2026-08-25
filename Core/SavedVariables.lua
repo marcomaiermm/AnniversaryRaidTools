@@ -10,6 +10,7 @@ local defaultSavedVars = {
     showPullButtonHealth = false,
     autoPanToPull = true,
     autoMark = false,
+    autoMarkModifier = "ALT",
     enemyForcesTooltip = 1,
     muteXalatathVoiceLines = false,
     announceDungeonReset = false,

@@ -31,6 +31,32 @@ assert(model.pullIndex == 2 and model.totalPulls == 3 and model.nextPullIndex ==
 assert(model.marks[1].marker == 8 and model.marks[1].name == "Hellfire Channeler")
 assert(model.marks[2].marker == 5 and model.marks[2].name == "Hellfire Warder")
 
+ART.RaidPlanner.lastPullIndex = nil
+currentPreset.value.currentPull = 1
+currentPreset.value.pulls = { {} }
+model = assert(ART.RaidMarksUI:GetPullTrackerModel())
+assert(model.pullIndex == 2 and model.totalPulls == 3,
+    "passive floor changes must not advance the pull tracker")
+
+local waves = {}
+for index = 1, 37 do waves[index] = {} end
+raid.key, raid.name, raid.mapId, raid.mode, raid.waves = "hyjal", "Hyjal Summit", 534, "waves", waves
+ART.MapDefinitions = { hyjal = { waveMode = { groups = {
+  { label = "Rage Winterchill", firstWave = 1, lastWave = 9 },
+  { label = "Anetheron", firstWave = 10, lastWave = 18 },
+  { label = "Kaz'rogal", firstWave = 19, lastWave = 27 },
+  { label = "Azgalor", firstWave = 28, lastWave = 36 },
+  { label = "Archimonde", firstWave = 37, lastWave = 37 },
+} } } }
+db.currentDungeonIdx = 162
+addon.mapInfo[162] = { mapID = 534 }
+ART.RaidPlanner.lastPullIndex = 3
+model = assert(ART.RaidMarksUI:GetPullTrackerModel())
+assert(model.mode == "waves" and model.currentLabel == "Rage Winterchill")
+assert(model.currentText == "Wave 3 / 37" and model.nextText == "NEXT  Wave 4  >",
+    "Hyjal tracker presents wave progress instead of pull progress")
+assert(model.showNext == false, "automatic wave mode hides the tracker Next button")
+
 addon.PullClickAreaOnLeave = function() end
 assert(loadfile(root.."/Modules/Pulls.lua"))("AnniversaryRaidTools", addon)
 addon:SetSelectionToPull(3)

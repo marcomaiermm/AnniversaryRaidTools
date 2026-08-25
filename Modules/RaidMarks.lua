@@ -28,12 +28,8 @@ function RaidMarks:ActivateRouteStep(routeStepId)
 end
 
 function RaidMarks:ResolveUnit(unitToken)
-  return self.resolver and self.resolver:ResolveUnit(unitToken)
-end
-
-function RaidMarks:ApplyUnit(unitToken)
-  if not self.resolver then return false, "not-initialized" end
-  return self.resolver:ApplyUnit(unitToken)
+  if not self.resolver then return nil, { reason = "not-initialized" } end
+  return self.resolver:ResolveUnit(unitToken)
 end
 
 function RaidMarks:ResetActivePack()

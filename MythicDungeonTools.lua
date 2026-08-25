@@ -353,7 +353,11 @@ function MDT:ReloadPullButtons(force)
       self:PickPullButton(self:GetCurrentPreset().value.currentPull)
     end
     MDT:ColorAllPulls(nil, 0)
-    MDT:DrawAllHulls(preset.value.pulls, force)
+    if preset.value.artWaveRaid then
+      MDT:ReleaseHullTextures()
+    else
+      MDT:DrawAllHulls(preset.value.pulls, force)
+    end
   end, "ReloadPullButtons", true)
 end
 

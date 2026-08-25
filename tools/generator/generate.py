@@ -107,8 +107,6 @@ def _world_position(point: dict[str, Any], bounds: Any) -> dict[str, Any] | None
     if not isinstance(bounds, dict) or "x" not in point or "y" not in point:
         return None
     left_y, right_y = bounds["leftY"], bounds["rightY"]
-    margin = bounds.get("eastMarginYards", 0)
-    right_y += margin if right_y >= left_y else -margin
     return {
         "coordinateKind": "derived-affine",
         "x": bounds["topX"] + point["y"] * (bounds["bottomX"] - bounds["topX"]),

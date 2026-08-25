@@ -29,6 +29,15 @@ local map = {
   instanceId = 534,
   mapId = 534,
   source = source,
+  waveMode = {
+    groups = {
+      { label = "Rage Winterchill", firstWave = 1, lastWave = 9 },
+      { label = "Anetheron", firstWave = 10, lastWave = 18 },
+      { label = "Kaz'rogal", firstWave = 19, lastWave = 27 },
+      { label = "Azgalor", firstWave = 28, lastWave = 36 },
+      { label = "Archimonde", firstWave = 37, lastWave = 37 },
+    },
+  },
   sublevels = {
     [1] = {
       index = 1,

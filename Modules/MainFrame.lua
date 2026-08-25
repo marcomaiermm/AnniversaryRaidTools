@@ -77,10 +77,10 @@ function MDT:ShowInterfaceInternal(force)
   if self.main_frame:IsShown() and not force then
     MDT:HideInterface()
   else
+    self:CheckCurrentZone()
     self.main_frame:Show()
     MDT:UpdateSectionVisibility()
     MDT:RequestVersionCheck()
-    self:CheckCurrentZone()
     MDT:UpdateBottomText()
   end
 end
