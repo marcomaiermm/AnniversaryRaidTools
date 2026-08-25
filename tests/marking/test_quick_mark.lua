@@ -41,14 +41,14 @@ local blip = {
 }
 
 ART.QuickMark:Arm(blip)
-local capture = frames.MDTQuickMarkCapture
+local capture = frames.ARTQuickMarkCapture
 local expectedMarkers = { 8, 7, 1, 5, 6, 3, 4, 2 }
 for key, marker in ipairs(expectedMarkers) do
-  assert(capture.bindings[tostring(key)] == "MDTQuickMarkButton"..marker)
+  assert(capture.bindings[tostring(key)] == "ARTQuickMarkButton"..marker)
 end
-assert(capture.bindings["CTRL-F1"] == "MDTQuickMarkButton1")
+assert(capture.bindings["CTRL-F1"] == "ARTQuickMarkButton1")
 ART.QuickMark:Disarm({})
-assert(capture.bindings["1"] == "MDTQuickMarkButton8", "stale OnLeave must not clear the active blip")
+assert(capture.bindings["1"] == "ARTQuickMarkButton8", "stale OnLeave must not clear the active blip")
 frames[capture.bindings["1"]].scripts.OnClick()
 assert(ART.RaidPlanner.applied[3] == 8 and blip.updated, "key 1 must assign skull")
 ART.QuickMark:Disarm()

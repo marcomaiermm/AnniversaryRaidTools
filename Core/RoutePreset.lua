@@ -1,13 +1,9 @@
 -- Pure route-preset validation and deterministic import/export.
 
-local _, addon = ...
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local RoutePreset = ART.RoutePreset or {}
 ART.RoutePreset = RoutePreset
-if addon and addon.RoutePreset == nil then addon.RoutePreset = RoutePreset end
 
 local function array(value)
   if type(value) ~= "table" then return false end

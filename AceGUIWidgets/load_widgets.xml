@@ -1,6 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file='AceGUIWidget-MythicDungeonToolsNewPullButton.lua'/>
-	<Script file='AceGUIWidget-MythicDungeonToolsPowerButton.lua'/>
-	<Script file='AceGUIWidget-MythicDungeonToolsPullButton.lua'/>
-	<Script file='AceGUIWidget-MythicDungeonToolsSpellButton.lua'/>
+	<Script file='AceGUIWidget-AnniversaryRaidToolsNewPullButton.lua'/>
+	<Script file='AceGUIWidget-AnniversaryRaidToolsPowerButton.lua'/>
+	<Script file='AceGUIWidget-AnniversaryRaidToolsPullButton.lua'/>
+	<Script file='AceGUIWidget-AnniversaryRaidToolsSpellButton.lua'/>
 </Ui>

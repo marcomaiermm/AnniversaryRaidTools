@@ -1,4 +1,4 @@
-local _, MDT = ...
+local _, ART = ...
 
 local defaults = { enabled = false, alpha = 0.35, offsetX = 0, offsetY = 0, scaleX = 1, scaleY = 1, rotation = 0 }
 local offlineOverlays = {
@@ -9,14 +9,14 @@ local offlineOverlays = {
 }
 
 local function currentCalibration()
-  local integration = MDT:GetRaidIntegration()
+  local integration = ART:GetRaidIntegration()
   local raid = integration and integration.planner and integration.planner.raid
-  local map = raid and MDT.RaidMaps and MDT.RaidMaps[raid.key]
-  local floor = MDT:GetCurrentSubLevel()
+  local map = raid and ART.RaidMaps and ART.RaidMaps[raid.key]
+  local floor = ART:GetCurrentSubLevel()
   local sublevel = map and map.sublevels[floor]
   if not sublevel then return end
 
-  local db = MDT:GetDB()
+  local db = ART:GetDB()
   db.mapCalibration = db.mapCalibration or {}
   db.mapCalibration[raid.key] = db.mapCalibration[raid.key] or {}
   local value = db.mapCalibration[raid.key][floor]
@@ -29,16 +29,16 @@ local function currentCalibration()
 end
 
 local function hideOverlay()
-  local overlay = MDT.main_frame and MDT.main_frame.mapCalibrationOverlay
+  local overlay = ART.main_frame and ART.main_frame.mapCalibrationOverlay
   if not overlay then return end
   for _, texture in ipairs(overlay.tiles) do texture:Hide() end
 end
 
-function MDT:GetMapCalibration()
+function ART:GetMapCalibration()
   return currentCalibration()
 end
 
-function MDT:ResetMapCalibration()
+function ART:ResetMapCalibration()
   local value = currentCalibration()
   if not value then return end
   for key, default in pairs(defaults) do value[key] = default end
@@ -46,12 +46,12 @@ function MDT:ResetMapCalibration()
   self:UpdateMapCalibrationOverlay()
 end
 
-function MDT:UpdateMapCalibrationOverlay()
+function ART:UpdateMapCalibrationOverlay()
   hideOverlay()
   local value, uiMapId, raidKey, floor = currentCalibration()
-  if not value or not value.enabled or not MDT:GetDB().devMode then return end
+  if not value or not value.enabled or not ART:GetDB().devMode then return end
 
-  local frame = MDT.main_frame
+  local frame = ART.main_frame
   local overlay = frame.mapCalibrationOverlay
   if not overlay then
     overlay = CreateFrame("Frame", nil, frame.mapPanelFrame)
@@ -62,14 +62,14 @@ function MDT:UpdateMapCalibrationOverlay()
   local offline = offlineOverlays[raidKey]
   if type(offline) == "table" then offline = offline[floor] end
   if offline then
-    local canvasWidth, canvasHeight = MDT:GetDefaultMapPanelSize()
+    local canvasWidth, canvasHeight = ART:GetDefaultMapPanelSize()
     local texture = overlay.tiles[1] or overlay:CreateTexture(nil, "ARTWORK", nil, 1)
     overlay.tiles[1] = texture
     texture:ClearAllPoints()
     texture:SetPoint("CENTER", frame.mapPanelTile1, "TOPLEFT",
       (0.5 + value.offsetX) * canvasWidth, -(0.5 + value.offsetY) * canvasHeight)
     texture:SetSize(canvasWidth * value.scaleX, canvasHeight * value.scaleY)
-    texture:SetTexture(MDT.AddonPath.."Raids\\TBC\\Calibration\\"..offline.."\\overlay.png")
+    texture:SetTexture(ART.AddonPath.."Raids\\TBC\\Calibration\\"..offline.."\\overlay.png")
     texture:SetRotation(math.rad(value.rotation))
     texture:SetAlpha(value.alpha)
     texture:Show()
@@ -91,7 +91,7 @@ function MDT:UpdateMapCalibrationOverlay()
     return
   end
 
-  local canvasWidth, canvasHeight = MDT:GetDefaultMapPanelSize()
+  local canvasWidth, canvasHeight = ART:GetDefaultMapPanelSize()
   local columns = math.ceil(layer.layerWidth / layer.tileWidth)
   local angle = math.rad(value.rotation)
   local cos, sin = math.cos(angle), math.sin(angle)
@@ -117,7 +117,7 @@ function MDT:UpdateMapCalibrationOverlay()
   end
 end
 
-function MDT:PrintMapCalibration()
+function ART:PrintMapCalibration()
   local value, uiMapId, raidKey, floor = currentCalibration()
   if not value then return end
   print(string.format("ART calibration %s floor %d UiMap %d: offsetX=%.6f offsetY=%.6f scaleX=%.6f scaleY=%.6f rotation=%.3f alpha=%.2f",

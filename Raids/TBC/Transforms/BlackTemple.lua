@@ -1,11 +1,5 @@
 -- Black Temple planner coordinates generated from LibMapData world rectangles.
-local _, addon = ...
-local ART = rawget(_G, "ART")
-if not ART then
-  ART = addon and addon.ART or addon or {}
-  _G.ART = ART
-end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local worldBounds = {
   [1] = { 1252.2495784759521, 834.8330078125, -23.87053871154785, -240, -1276.1201171875, 594.8330078125 },

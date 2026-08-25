@@ -1,5 +1,5 @@
 local AceGUI = LibStub("AceGUI-3.0")
-local _, MDT = ...
+local _, ART = ...
 local db
 local tonumber, tinsert, pairs, ipairs = tonumber, table.insert, pairs, ipairs
 local UnitName, UnitGUID, UnitCreatureType, UnitHealthMax, UnitLevel = UnitName, UnitGUID, UnitCreatureType, UnitHealthMax, UnitLevel
@@ -7,45 +7,45 @@ local UnitName, UnitGUID, UnitCreatureType, UnitHealthMax, UnitLevel = UnitName,
 --[[
   Bind macros:
   1. Add clone
-  /run MDT:AddCloneAtCursorPosition()
+  /run ART:AddCloneAtCursorPosition()
   2. Add patrol point to clone
-  /run MDT:AddPatrolWaypointAtCursorPosition()
+  /run ART:AddPatrolWaypointAtCursorPosition()
   3. Add untargetable unit if needed
-  /run MDT:AddNPCFromUnit("mouseover")
+  /run ART:AddNPCFromUnit("mouseover")
 ]]
 
-function MDT:ToggleDevMode()
-  db = MDT:GetDB()
+function ART:ToggleDevMode()
+  db = ART:GetDB()
   if db.devMode then
-    MDT:Async(function()
-      MDT:DisableDevMode()
+    ART:Async(function()
+      ART:DisableDevMode()
     end, "toggleDevMode")
     return
   end
 
-  MDT:Async(function()
-    MDT:EnableDevMode()
+  ART:Async(function()
+    ART:EnableDevMode()
   end, "toggleDevMode")
 end
 
 local function syncDevModeCache()
   if not db.loadCache then return end
 
-  if db.dungeonEnemies then
-    MDT.dungeonEnemies = db.dungeonEnemies
+  if db.raidEnemies then
+    ART.raidEnemies = db.raidEnemies
   else
-    db.dungeonEnemies = MDT.dungeonEnemies
+    db.raidEnemies = ART.raidEnemies
   end
 
   if db.mapPOIs then
-    MDT.mapPOIs = db.mapPOIs
+    ART.mapPOIs = db.mapPOIs
   else
-    db.mapPOIs = MDT.mapPOIs
+    db.mapPOIs = ART.mapPOIs
   end
 end
 
-function MDT:PositionDevPanel(frame, maximized)
-  frame = frame or MDT.main_frame
+function ART:PositionDevPanel(frame, maximized)
+  frame = frame or ART.main_frame
   if not frame or not frame.devPanel then return end
   if maximized == nil then maximized = db.maximized end
 
@@ -74,50 +74,50 @@ local function syncDevPanelShowHide(devPanel, frame)
   end
 end
 
-function MDT:EnableDevMode()
-  db = MDT:GetDB()
+function ART:EnableDevMode()
+  db = ART:GetDB()
   db.devMode = true
   syncDevModeCache()
 
-  MDT:ShowInterfaceInternal(true)
+  ART:ShowInterfaceInternal(true)
 
-  local frame = MDT.main_frame
+  local frame = ART.main_frame
   if not frame then return end
 
   frame:SetScript("OnUpdate", nil)
-  MDT:HideAllBlipLabels(true)
+  ART:HideAllBlipLabels(true)
 
-  if MDT.CreateDevPanel and not frame.devPanel then
-    MDT:CreateDevPanel(frame)
+  if ART.CreateDevPanel and not frame.devPanel then
+    ART:CreateDevPanel(frame)
   end
 
   if frame.devPanel then
-    MDT:PositionDevPanel(frame)
+    ART:PositionDevPanel(frame)
   end
 
-  MDT:UpdateMap()
-  MDT:UpdateEnemyInfoFrame()
+  ART:UpdateMap()
+  ART:UpdateEnemyInfoFrame()
 end
 
-function MDT:DisableDevMode()
-  db = MDT:GetDB()
+function ART:DisableDevMode()
+  db = ART:GetDB()
   db.devMode = false
 
-  local frame = MDT.main_frame
+  local frame = ART.main_frame
   if not frame then return end
 
   if frame.devPanel then
     frame.devPanel.frame:Hide()
   end
 
-  MDT:SetUpModifiers(frame)
-  MDT:HideAllBlipLabels(true)
-  MDT:UpdateMap()
-  MDT:UpdateEnemyInfoFrame()
+  ART:SetUpModifiers(frame)
+  ART:HideAllBlipLabels(true)
+  ART:UpdateMap()
+  ART:UpdateEnemyInfoFrame()
 end
 
-function MDT:AddNPCFromUnit(unit)
-  db = MDT:GetDB()
+function ART:AddNPCFromUnit(unit)
+  db = ART:GetDB()
   local npcId
   local guid = UnitGUID(unit)
   if guid then
@@ -125,7 +125,7 @@ function MDT:AddNPCFromUnit(unit)
     npcId = tonumber(npcId)
   end
   local added
-  for _, npcData in pairs(MDT.dungeonEnemies[db.currentDungeonIdx]) do
+  for _, npcData in pairs(ART.raidEnemies[db.currentRaidIndex]) do
     if npcData.id == npcId then
       added = true; break
     end
@@ -136,15 +136,13 @@ function MDT:AddNPCFromUnit(unit)
     local npcLevel = UnitLevel(unit)
     local npcCreatureType = UnitCreatureType(unit)
     local npcScale = 1
-    local npcCount = 0
-    tinsert(MDT.dungeonEnemies[db.currentDungeonIdx], {
+    tinsert(ART.raidEnemies[db.currentRaidIndex], {
       name = npcName,
       health = npcHealth,
       level = npcLevel,
       creatureType = npcCreatureType,
       id = npcId,
       scale = npcScale,
-      count = npcCount,
       clones = {},
     })
     return npcId
@@ -158,8 +156,8 @@ local currentBossEnemyIdx = 1
 local currentCloneScale
 ---CreateDevPanel
 ---Creates the dev panel which contains buttons to add npcs, objects to the map
-function MDT:CreateDevPanel(frame)
-  db = MDT:GetDB()
+function ART:CreateDevPanel(frame)
+  db = ART:GetDB()
   frame.devPanel = AceGUI:Create("TabGroup")
   local devPanel = frame.devPanel
   devPanel.frame:SetParent(frame)
@@ -176,7 +174,7 @@ function MDT:CreateDevPanel(frame)
   )
   devPanel:SetWidth(250)
   devPanel:ClearAllPoints()
-  MDT:PositionDevPanel(frame)
+  ART:PositionDevPanel(frame)
   devPanel:SetLayout("Flow")
   if not db.devMode then devPanel.frame:Hide() end
 
@@ -217,11 +215,11 @@ function MDT:CreateDevPanel(frame)
       [1] = {
         text = "MapLink",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local links = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local links = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local posx, posy = 300, -200
           local t = tonumber(option1:GetText())
           local d = tonumber(option2:GetText())
@@ -237,18 +235,18 @@ function MDT:CreateDevPanel(frame)
                 template = "MapLinkPinTemplate",
                 type = "mapLink"
               })
-            MDT:POI_UpdateAll()
+            ART:POI_UpdateAll()
           end
         end,
       },
       [2] = {
         text = "Door",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local links = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local links = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local posx, posy = 300, -200
           local doorNameText = option3:GetText()
           local doorDescriptionText = option4:GetText()
@@ -263,17 +261,17 @@ function MDT:CreateDevPanel(frame)
               doorDescription = doorDescriptionText,
               lockpick = lockpickableStatus
             })
-          MDT:POI_UpdateAll()
+          ART:POI_UpdateAll()
         end,
       },
       [3] = {
         text = "Graveyard",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local links = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local links = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local posx, posy = 300, -200
           local graveyardDescriptionText = option5:GetText()
           tinsert(links,
@@ -284,93 +282,93 @@ function MDT:CreateDevPanel(frame)
               type = "graveyard",
               graveyardDescription = graveyardDescriptionText
             })
-          MDT:POI_UpdateAll()
+          ART:POI_UpdateAll()
         end,
       },
       [4] = {
         text = "General Note",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local posx, posy = 300, -200
           local noteText = option5:GetText()
           tinsert(pois, { x = posx, y = posy, template = "MapLinkPinTemplate", type = "generalNote", text = noteText })
-          MDT:POI_UpdateAll()
+          ART:POI_UpdateAll()
         end,
       },
       [5] = {
         text = "Heavy Cannon",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local posx, posy = 300, -200
           tinsert(pois, { x = posx, y = posy, template = "MapLinkPinTemplate", type = "heavyCannon" })
-          MDT:POI_UpdateAll()
+          ART:POI_UpdateAll()
         end,
       },
       [6] = {
         text = "Mechagon Bot",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local botType = tonumber(option1:GetText())
           local posx, posy = 400 + (30 * botType), -250
           tinsert(pois, { x = posx, y = posy, template = "MapLinkPinTemplate", type = "mechagonBot", botType = botType })
-          MDT:POI_UpdateAll()
+          ART:POI_UpdateAll()
         end,
       },
       [7] = {
         text = "Iron Docks Iron Star",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local posx, posy = 430, -250
           tinsert(pois,
             { x = posx, y = posy, template = "MapLinkPinTemplate", type = "ironDocksIronStar", starIndex = 1 })
-          MDT:POI_UpdateAll()
+          ART:POI_UpdateAll()
         end,
       },
       [8] = {
         text = "Text Frame",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local posx, posy = 430, -250
           local text = option5:GetText()
           tinsert(pois,
             { x = posx, y = posy, template = "MapLinkPinTemplate", type = "textFrame", text = text })
-          MDT:POI_UpdateAll()
+          ART:POI_UpdateAll()
         end,
       },
       [9] = {
         text = "Zoom Icon",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local posx, posy = 430, -250
 
-          local index = MDTMapPanelFrame:GetScale() - 2 -- this is the threshold after which the button should zoom out
-          local value1 = MDTMapPanelFrame:GetScale()
-          local value2 = MDTScrollFrame:GetHorizontalScroll() / MDT:GetScale()
-          local value3 = MDTScrollFrame:GetVerticalScroll() / MDT:GetScale()
+          local index = ARTMapPanelFrame:GetScale() - 2 -- this is the threshold after which the button should zoom out
+          local value1 = ARTMapPanelFrame:GetScale()
+          local value2 = ARTScrollFrame:GetHorizontalScroll() / ART:GetScale()
+          local value3 = ARTScrollFrame:GetVerticalScroll() / ART:GetScale()
           tinsert(pois,
             {
               x = posx,
@@ -382,49 +380,49 @@ function MDT:CreateDevPanel(frame)
               value2 = value2,
               value3 = value3
             })
-          MDT:POI_UpdateAll()
+          ART:POI_UpdateAll()
         end,
       },
       [10] = {
         text = "World Marker",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local posx, posy = 430, -250
           local index = tonumber(option5:GetText())
           tinsert(pois,
             { x = posx, y = posy, template = "MapLinkPinTemplate", type = "worldMarker", index = index })
-          MDT:POI_UpdateAll()
+          ART:POI_UpdateAll()
         end,
       },
       [11] = {
         text = "Brackenhide Cage",
         func = function()
-          if not MDT.mapPOIs[db.currentDungeonIdx] then MDT.mapPOIs[db.currentDungeonIdx] = {} end
-          if not MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] then
-            MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()] = {}
+          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
+          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
+            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
           end
-          local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
           local cageIndex = tonumber(option1:GetText())
           local posx, posy = 400, -250
           tinsert(pois, { x = posx, y = posy, template = "MapLinkPinTemplate", type = "brackenhideCage", cageIndex = cageIndex })
-          MDT:POI_UpdateAll()
+          ART:POI_UpdateAll()
         end,
       },
       [12] = {
         text = "Export Zoom Settings",
         func = function()
-          MDT:ExportCurrentZoomPanSettings()
+          ART:ExportCurrentZoomPanSettings()
         end,
       },
       [13] = {
         text = "Export to LUA",
         func = function()
-          local export = MDT:ExportLuaTable(MDT.mapPOIs[db.currentDungeonIdx], MDT:GetSchema("pois"))
-          MDT:ExportString(export)
+          local export = ART:ExportLuaTable(ART.mapPOIs[db.currentRaidIndex], ART:GetSchema("pois"))
+          ART:ExportString(export)
         end,
       },
       [14] = {
@@ -432,7 +430,7 @@ function MDT:CreateDevPanel(frame)
         func = function()
           local currentZoneId = C_Map.GetBestMapForUnit("player")
           if not currentZoneId then
-            print("MDT DevMode: Unable to determine current zone ID")
+            print("ART DevMode: Unable to determine current zone ID")
             return
           end
           local zones, includedZones = {}, {}
@@ -443,14 +441,14 @@ function MDT:CreateDevPanel(frame)
               includedZones[zoneId] = true
             end
           end
-          for zoneId, dungeonIdx in pairs(MDT.zoneIdToDungeonIdx) do
-            if dungeonIdx == db.currentDungeonIdx then
+          for zoneId, raidIndex in pairs(ART.zoneIdToRaidIndex) do
+            if raidIndex == db.currentRaidIndex then
               addZone(zoneId)
             end
           end
           addZone(currentZoneId)
           table.sort(zones)
-          MDT:ExportString(("local zones = { %s }"):format(table.concat(zones, ", ")))
+          ART:ExportString(("local zones = { %s }"):format(table.concat(zones, ", ")))
         end,
       },
     }
@@ -465,34 +463,31 @@ function MDT:CreateDevPanel(frame)
   -- function that draws the widgets for the second tab
   local function DrawGroup2(container)
     local editBoxes = {}
-    local countSlider
     local scaleSlider
     local dropdown
 
-    local function updateFields(health, level, creatureType, id, scale, count, idx)
+    local function updateFields(health, level, creatureType, id, scale, idx)
       if idx then
-        local data = MDT.dungeonEnemies[db.currentDungeonIdx][idx]
+        local data = ART.raidEnemies[db.currentRaidIndex][idx]
         if not data then return end
         health = data.health
         level = data.level
         creatureType = data.creatureType
         id = data.id
         scale = data.scale
-        count = data.count
       end
       editBoxes[1]:SetText(id)
       editBoxes[2]:SetText(health)
       editBoxes[3]:SetText(level)
       editBoxes[4]:SetText(creatureType)
       scaleSlider:SetValue(scale)
-      countSlider:SetValue(count)
     end
 
     local enemyInfoButton = AceGUI:Create("Button")
     enemyInfoButton:SetText("Open Enemy Info")
     enemyInfoButton:SetCallback("OnClick", function()
-      local devBlip = MDT:GetCurrentDevmodeBlip()
-      if devBlip then MDT:ShowEnemyInfoFrame(devBlip) else print("MDT DevMode: Please select a blip") end
+      local devBlip = ART:GetCurrentDevmodeBlip()
+      if devBlip then ART:ShowEnemyInfoFrame(devBlip) else print("ART DevMode: Please select a blip") end
     end)
     container:AddChild(enemyInfoButton)
 
@@ -501,8 +496,8 @@ function MDT:CreateDevPanel(frame)
     findCloneIssuesButton:SetCallback("OnClick", function()
       local issues = ""
       for i = 1, 200 do
-        local enemies = MDT.dungeonEnemies[i]
-        local dungeonIssues
+        local enemies = ART.raidEnemies[i]
+        local raidIssues
         if enemies then
           for _, enemy in pairs(enemies) do
             local l = #enemy.clones
@@ -511,16 +506,16 @@ function MDT:CreateDevPanel(frame)
               realLength = realLength + 1
             end
             if l ~= realLength then
-              dungeonIssues = dungeonIssues or ("--- "..MDT.dungeonList[i]).."\n"
-              dungeonIssues = dungeonIssues..enemy.name.."\n"
+              raidIssues = raidIssues or ("--- "..ART.raidList[i]).."\n"
+              raidIssues = raidIssues..enemy.name.."\n"
             end
           end
-          if dungeonIssues then
-            issues = issues..dungeonIssues.."\n"
+          if raidIssues then
+            issues = issues..raidIssues.."\n"
           end
         end
       end
-      MDT:ExportString(issues)
+      ART:ExportString(issues)
     end)
     container:AddChild(findCloneIssuesButton)
 
@@ -529,38 +524,38 @@ function MDT:CreateDevPanel(frame)
     findMissingLocaleButton:SetCallback("OnClick", function()
       local issues = ""
       for i = 1, 200 do
-        local enemies = MDT.dungeonEnemies[i]
-        local dungeonIssues
+        local enemies = ART.raidEnemies[i]
+        local raidIssues
         if enemies then
           for _, enemy in pairs(enemies) do
-            if not MDT.L[enemy.name] then
-              dungeonIssues = dungeonIssues or ("--- "..MDT.dungeonList[i]).."\n"
-              dungeonIssues = dungeonIssues..("L[\"%s\"] = \"%s\"\n"):format(enemy.name, enemy.name)
+            if not ART.L[enemy.name] then
+              raidIssues = raidIssues or ("--- "..ART.raidList[i]).."\n"
+              raidIssues = raidIssues..("L[\"%s\"] = \"%s\"\n"):format(enemy.name, enemy.name)
             end
           end
-          if dungeonIssues then
-            issues = issues..dungeonIssues.."\n"
+          if raidIssues then
+            issues = issues..raidIssues.."\n"
           end
         end
       end
-      MDT:ExportString(issues)
+      ART:ExportString(issues)
     end)
     container:AddChild(findMissingLocaleButton)
 
     local button3 = AceGUI:Create("Button")
     button3:SetText("Export to LUA")
     button3:SetCallback("OnClick", function()
-      MDT:CleanEnemyData(db.currentDungeonIdx)
-      local export = MDT:ExportLuaTable(MDT.dungeonEnemies[db.currentDungeonIdx], MDT:GetSchema("enemies"))
-      MDT:ExportString(export)
+      ART:CleanEnemyData(db.currentRaidIndex)
+      local export = ART:ExportLuaTable(ART.raidEnemies[db.currentRaidIndex], ART:GetSchema("enemies"))
+      ART:ExportString(export)
     end)
     container:AddChild(button3)
 
     local function updateDropdown(npcId, idx)
-      if not MDT.dungeonEnemies[db.currentDungeonIdx] then return end
+      if not ART.raidEnemies[db.currentRaidIndex] then return end
       idx = idx or 1
       local enemies = {}
-      for mobIdx, data in ipairs(MDT.dungeonEnemies[db.currentDungeonIdx]) do
+      for mobIdx, data in ipairs(ART.raidEnemies[db.currentRaidIndex]) do
         tinsert(enemies, mobIdx, data.name)
         if npcId then
           if data.id == npcId then idx = mobIdx end
@@ -569,35 +564,22 @@ function MDT:CreateDevPanel(frame)
       dropdown:SetList(enemies)
       dropdown:SetValue(idx)
       currentEnemyIdx = idx
-      updateFields(nil, nil, nil, nil, nil, nil, idx)
+      updateFields(nil, nil, nil, nil, nil, idx)
     end
 
     dropdown = AceGUI:Create("Dropdown")
     dropdown:SetCallback("OnValueChanged", function(widget, callbackName, key)
       currentEnemyIdx = key
-      updateFields(nil, nil, nil, nil, nil, nil, key)
-      local dungeonEnemyBlips = MDT:GetDungeonEnemyBlips()
-      for _, v in ipairs(dungeonEnemyBlips) do
+      updateFields(nil, nil, nil, nil, nil, key)
+      local raidEnemyBlips = ART:GetRaidEnemyBlips()
+      for _, v in ipairs(raidEnemyBlips) do
         v.devSelected = nil
       end
-      MDT:UpdateMap()
+      ART:UpdateMap()
     end)
 
     container:AddChild(dropdown)
 
-    countSlider = AceGUI:Create("Slider")
-    countSlider:SetLabel("Count")
-    countSlider:SetSliderValues(0, 15, 1)
-    countSlider:SetValue(4)
-    countSlider:SetCallback("OnMouseUp", function(widget, callbackName, value)
-      local count = tonumber(value)
-      local npcIdx = tonumber(dropdown:GetValue())
-
-      local data = MDT.dungeonEnemies[db.currentDungeonIdx][npcIdx]
-      data["count"] = value
-      MDT:UpdateMap()
-    end)
-    container:AddChild(countSlider)
     local fields = {
       [1] = "id",
       [2] = "health",
@@ -613,9 +595,9 @@ function MDT:CreateDevPanel(frame)
           value = tonumber(text)
         end
         local npcIdx = dropdown:GetValue()
-        local data = MDT.dungeonEnemies[db.currentDungeonIdx][npcIdx]
+        local data = ART.raidEnemies[db.currentRaidIndex][npcIdx]
         data[name] = value
-        MDT:UpdateMap()
+        ART:UpdateMap()
       end)
       container:AddChild(editBoxes[idx])
     end
@@ -626,16 +608,16 @@ function MDT:CreateDevPanel(frame)
     scaleSlider:SetValue(1)
     scaleSlider:SetCallback("OnMouseUp", function(widget, callbackName, value)
       local npcIdx = tonumber(dropdown:GetValue())
-      local data = MDT.dungeonEnemies[db.currentDungeonIdx][npcIdx]
+      local data = ART.raidEnemies[db.currentRaidIndex][npcIdx]
       data["scale"] = value
-      MDT:UpdateMap()
+      ART:UpdateMap()
     end)
     container:AddChild(scaleSlider)
 
     local button1 = AceGUI:Create("Button")
     button1:SetText("Create from Target")
     button1:SetCallback("OnClick", function()
-      local npcId = MDT:AddNPCFromUnit("target")
+      local npcId = ART:AddNPCFromUnit("target")
       updateDropdown(npcId)
     end)
     container:AddChild(button1)
@@ -644,12 +626,12 @@ function MDT:CreateDevPanel(frame)
     local button2 = AceGUI:Create("Button")
     button2:SetText("Make Boss")
     button2:SetCallback("OnClick", function()
-      local currentBlip = MDT:GetCurrentDevmodeBlip()
+      local currentBlip = ART:GetCurrentDevmodeBlip()
       if currentBlip then
         --encounterID
         local encounterID = EJ_GetCreatureInfo(1)
         if not encounterID then
-          print("MDT: Error - Make sure to open Encounter Journal and navigate to the boss you want to add!")
+          print("ART: Error - Make sure to open Encounter Journal and navigate to the boss you want to add!")
           return
         end
         for i = 1, 10000 do
@@ -659,7 +641,7 @@ function MDT:CreateDevPanel(frame)
             break
           end
         end
-        local data = MDT.dungeonEnemies[db.currentDungeonIdx][currentBlip.enemyIdx]
+        local data = ART.raidEnemies[db.currentRaidIndex][currentBlip.enemyIdx]
         data.isBoss = true
         local mapID = C_Map.GetBestMapForUnit("player")
         data.instanceID = mapID and EJ_GetInstanceForMap(mapID) or 0
@@ -667,7 +649,7 @@ function MDT:CreateDevPanel(frame)
         --use this data as follows:
         --if (not EncounterJournal) then LoadAddOn('Blizzard_EncounterJournal') end
         --EncounterJournal_OpenJournal(23,data.instanceID,data.encounterID)
-        MDT:UpdateMap()
+        ART:UpdateMap()
       end
     end)
     container:AddChild(button2)
@@ -693,7 +675,7 @@ function MDT:CreateDevPanel(frame)
     blipTextHiddenCheckbox:SetLabel("Hide Blip Text")
     blipTextHiddenCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
       db.devModeBlipTextHidden = value or nil
-      MDT:UpdateMap()
+      ART:UpdateMap()
     end)
     container:AddChild(blipTextHiddenCheckbox)
 
@@ -705,11 +687,11 @@ function MDT:CreateDevPanel(frame)
     cloneGroup:SetCallback("OnEnterPressed", function(widget, callbackName, text)
       local value = tonumber(text)
       if value and value > 0 then currentCloneGroup = value else currentCloneGroup = nil end
-      local currentBlip = MDT:GetCurrentDevmodeBlip()
+      local currentBlip = ART:GetCurrentDevmodeBlip()
       if currentBlip then
-        local data = MDT.dungeonEnemies[db.currentDungeonIdx][currentBlip.enemyIdx]
+        local data = ART.raidEnemies[db.currentRaidIndex][currentBlip.enemyIdx]
         data.clones[currentBlip.cloneIdx].g = currentCloneGroup
-        MDT:UpdateMap()
+        ART:UpdateMap()
       end
     end)
     container:AddChild(cloneGroup)
@@ -718,7 +700,7 @@ function MDT:CreateDevPanel(frame)
     cloneGroupMaxButton:SetText("New Group")
     cloneGroupMaxButton:SetCallback("OnClick", function(widget, callbackName)
       local maxGroup = 0
-      for _, data in pairs(MDT.dungeonEnemies[db.currentDungeonIdx]) do
+      for _, data in pairs(ART.raidEnemies[db.currentRaidIndex]) do
         for _, clone in pairs(data.clones) do
           maxGroup = (clone.g and (clone.g > maxGroup)) and clone.g or maxGroup
         end
@@ -733,15 +715,15 @@ function MDT:CreateDevPanel(frame)
     patrolCheckbox:SetLabel("Patrol")
     patrolCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
       currentPatrol = value or nil
-      local currentBlip = MDT:GetCurrentDevmodeBlip()
+      local currentBlip = ART:GetCurrentDevmodeBlip()
       if currentBlip then
-        local data = MDT.dungeonEnemies[db.currentDungeonIdx][currentBlip.enemyIdx]
+        local data = ART.raidEnemies[db.currentRaidIndex][currentBlip.enemyIdx]
         data.clones[currentBlip.cloneIdx].patrol = currentPatrol and (data.clones[currentBlip.cloneIdx].patrol or {}) or
             nil
         if not data.clones[currentBlip.cloneIdx].patrol then
           currentBlip.patrolActive = false
         end
-        MDT:UpdateMap()
+        ART:UpdateMap()
       end
     end)
     container:AddChild(patrolCheckbox)
@@ -750,10 +732,10 @@ function MDT:CreateDevPanel(frame)
     local stealthDetectCheckbox = AceGUI:Create("CheckBox")
     stealthDetectCheckbox:SetLabel("Stealth Detect")
     stealthDetectCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
-      local currentBlip = MDT:GetCurrentDevmodeBlip()
-      local data = MDT.dungeonEnemies[db.currentDungeonIdx][currentBlip.enemyIdx]
+      local currentBlip = ART:GetCurrentDevmodeBlip()
+      local data = ART.raidEnemies[db.currentRaidIndex][currentBlip.enemyIdx]
       data.stealthDetect = value or nil
-      MDT:UpdateMap()
+      ART:UpdateMap()
     end)
     container:AddChild(stealthDetectCheckbox)
 
@@ -761,10 +743,10 @@ function MDT:CreateDevPanel(frame)
     local stealthCheckbox = AceGUI:Create("CheckBox")
     stealthCheckbox:SetLabel("Stealthed")
     stealthCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
-      local currentBlip = MDT:GetCurrentDevmodeBlip()
-      local data = MDT.dungeonEnemies[db.currentDungeonIdx][currentBlip.enemyIdx]
+      local currentBlip = ART:GetCurrentDevmodeBlip()
+      local data = ART.raidEnemies[db.currentRaidIndex][currentBlip.enemyIdx]
       data.stealth = value or nil
-      MDT:UpdateMap()
+      ART:UpdateMap()
     end)
     container:AddChild(stealthCheckbox)
 
@@ -772,10 +754,10 @@ function MDT:CreateDevPanel(frame)
     local neutralCheckbox = AceGUI:Create("CheckBox")
     neutralCheckbox:SetLabel("Neutral")
     neutralCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
-      local currentBlip = MDT:GetCurrentDevmodeBlip()
-      local data = MDT.dungeonEnemies[db.currentDungeonIdx][currentBlip.enemyIdx]
+      local currentBlip = ART:GetCurrentDevmodeBlip()
+      local data = ART.raidEnemies[db.currentRaidIndex][currentBlip.enemyIdx]
       data.neutral = value or nil
-      MDT:UpdateMap()
+      ART:UpdateMap()
     end)
     container:AddChild(neutralCheckbox)
 
@@ -784,17 +766,17 @@ function MDT:CreateDevPanel(frame)
     sublevel:SetLabel("Sublevel:")
     sublevel:SetCallback("OnEnterPressed", function(widget, callbackName, text)
       local value = tonumber(text)
-      local currentBlip = MDT:GetCurrentDevmodeBlip()
+      local currentBlip = ART:GetCurrentDevmodeBlip()
       if currentBlip then
-        local data = MDT.dungeonEnemies[db.currentDungeonIdx][currentBlip.enemyIdx]
+        local data = ART.raidEnemies[db.currentRaidIndex][currentBlip.enemyIdx]
         data.clones[currentBlip.cloneIdx].sublevel = value
-        MDT:UpdateMap()
+        ART:UpdateMap()
       end
     end)
     container:AddChild(sublevel)
 
     --enter clone options into the GUI (red)
-    local currentBlip = MDT:GetCurrentDevmodeBlip()
+    local currentBlip = ART:GetCurrentDevmodeBlip()
     if currentBlip then
       cloneGroup:SetText(currentBlip.clone.g)
       currentCloneGroup = currentBlip.clone.g
@@ -819,12 +801,12 @@ function MDT:CreateDevPanel(frame)
     local toggleDevModeButton = AceGUI:Create("Button")
     toggleDevModeButton:SetText("Toggle DevMode")
     toggleDevModeButton:SetCallback("OnClick", function()
-      MDT:ToggleDevMode()
+      ART:ToggleDevMode()
     end)
     container:AddChild(toggleDevModeButton)
 
     local loadOnStartUpCheckbox = AceGUI:Create("CheckBox")
-    loadOnStartUpCheckbox:SetLabel("Load MDT on Startup")
+    loadOnStartUpCheckbox:SetLabel("Load ART on Startup")
     loadOnStartUpCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
       db.loadOnStartUp = value or nil
     end)
@@ -845,15 +827,15 @@ function MDT:CreateDevPanel(frame)
     local clearCacheButton = AceGUI:Create("Button")
     clearCacheButton:SetText("Clear Cache + DC")
     clearCacheButton:SetCallback("OnClick", function()
-      MDT:ResetDataCache()
+      ART:ResetDataCache()
     end)
     container:AddChild(clearCacheButton)
 
     local resetDbButton = AceGUI:Create("Button")
     resetDbButton:SetText("Hard Reset DB")
     resetDbButton:SetCallback("OnClick", function()
-      MDT:OpenConfirmationFrame(300, 150, "Reset MDT DB", "Confirm", "Do you want to reset MDT DB?", function()
-        MDT:HardReset()
+      ART:OpenConfirmationFrame(300, 150, "Reset ART DB", "Confirm", "Do you want to reset ART DB?", function()
+        ART:HardReset()
       end, "Cancel", nil)
     end)
     container:AddChild(resetDbButton)
@@ -867,7 +849,7 @@ function MDT:CreateDevPanel(frame)
   end
 
   local function DrawGroup4(container)
-    local value = MDT:GetMapCalibration()
+    local value = ART:GetMapCalibration()
     if not value then return end
 
     local enabled = AceGUI:Create("CheckBox")
@@ -875,7 +857,7 @@ function MDT:CreateDevPanel(frame)
     enabled:SetValue(value.enabled)
     enabled:SetCallback("OnValueChanged", function(_, _, checked)
       value.enabled = checked
-      MDT:UpdateMapCalibrationOverlay()
+      ART:UpdateMapCalibrationOverlay()
       enabled:SetValue(value.enabled)
     end)
     container:AddChild(enabled)
@@ -890,18 +872,18 @@ function MDT:CreateDevPanel(frame)
       input:SetText(value[field[1]])
       input:SetCallback("OnEnterPressed", function(_, _, text)
         value[field[1]] = tonumber(text) or value[field[1]]
-        MDT:UpdateMapCalibrationOverlay()
+        ART:UpdateMapCalibrationOverlay()
       end)
       container:AddChild(input)
     end
 
     local reset = AceGUI:Create("Button")
     reset:SetText("Reset")
-    reset:SetCallback("OnClick", function() MDT:ResetMapCalibration(); devPanel:SelectTab("tab4") end)
+    reset:SetCallback("OnClick", function() ART:ResetMapCalibration(); devPanel:SelectTab("tab4") end)
     container:AddChild(reset)
     local dump = AceGUI:Create("Button")
     dump:SetText("Print values")
-    dump:SetCallback("OnClick", function() MDT:PrintMapCalibration() end)
+    dump:SetCallback("OnClick", function() ART:PrintMapCalibration() end)
     container:AddChild(dump)
   end
 
@@ -923,10 +905,10 @@ function MDT:CreateDevPanel(frame)
   devPanel:SelectTab("tab2")
 
   --hook UpdateMap
-  local originalFunc = MDT.UpdateMap
-  function MDT:UpdateMap(...)
+  local originalFunc = ART.UpdateMap
+  function ART:UpdateMap(...)
     originalFunc(...)
-    MDT:UpdateMapCalibrationOverlay()
+    ART:UpdateMapCalibrationOverlay()
     if not db.devMode then return end
     local selectedTab
     for k, v in pairs(devPanel.tabs) do
@@ -935,27 +917,27 @@ function MDT:CreateDevPanel(frame)
       end
     end
     --currentEnemyIdx
-    local currentBlip = MDT:GetCurrentDevmodeBlip()
+    local currentBlip = ART:GetCurrentDevmodeBlip()
     if currentBlip then
       currentEnemyIdx = currentBlip.enemyIdx
     end
     devPanel:SelectTab(selectedTab)
     --show patrol
-    local dungeonEnemyBlips = MDT:GetDungeonEnemyBlips()
-    for _, v in ipairs(dungeonEnemyBlips) do
+    local raidEnemyBlips = ART:GetRaidEnemyBlips()
+    for _, v in ipairs(raidEnemyBlips) do
       v:DisplayPatrol(v.devSelected)
     end
   end
 end
 
 ---AddCloneAtCursorPosition
----Adds a clone at the cursor position to the dungeon enemy table
+---Adds a clone at the cursor position to the raid enemy table
 ---bound to hotkey and used to add new npcs to the map
-function MDT:AddCloneAtCursorPosition()
-  if not MDTScrollFrame:IsMouseOver() then return end
+function ART:AddCloneAtCursorPosition()
+  if not ARTScrollFrame:IsMouseOver() then return end
   if currentEnemyIdx then
-    local data = MDT.dungeonEnemies[db.currentDungeonIdx][currentEnemyIdx]
-    local cursorx, cursory = MDT:GetCursorPosition()
+    local data = ART.raidEnemies[db.currentRaidIndex][currentEnemyIdx]
+    local cursorx, cursory = ART:GetCursorPosition()
     local scale = self:GetScale()
     cursorx = cursorx * (1 / scale)
     cursory = cursory * (1 / scale)
@@ -963,31 +945,31 @@ function MDT:AddCloneAtCursorPosition()
       {
         x = cursorx,
         y = cursory,
-        sublevel = MDT:GetCurrentSubLevel(),
+        sublevel = ART:GetCurrentSubLevel(),
         g = currentCloneGroup,
         scale = currentCloneScale
       })
-    print(string.format("MDT: Created clone %s %d at %d,%d", data.name, #data.clones, cursorx, cursory))
-    MDT:UpdateMap()
+    print(string.format("ART: Created clone %s %d at %d,%d", data.name, #data.clones, cursorx, cursory))
+    ART:UpdateMap()
   end
 end
 
 ---AddPatrolWaypointAtCursorPosition
 ---Adds a patrol waypoint to the selected enemy
-function MDT:AddPatrolWaypointAtCursorPosition()
-  if not MDTScrollFrame:IsMouseOver() then return end
-  local currentBlip = MDT:GetCurrentDevmodeBlip()
+function ART:AddPatrolWaypointAtCursorPosition()
+  if not ARTScrollFrame:IsMouseOver() then return end
+  local currentBlip = ART:GetCurrentDevmodeBlip()
   if currentBlip then
-    local data = MDT.dungeonEnemies[db.currentDungeonIdx][currentBlip.enemyIdx]
+    local data = ART.raidEnemies[db.currentRaidIndex][currentBlip.enemyIdx]
     local cloneData = data.clones[currentBlip.cloneIdx]
     cloneData.patrol = cloneData.patrol or {}
     cloneData.patrol[1] = { x = cloneData.x, y = cloneData.y }
-    local cursorx, cursory = MDT:GetCursorPosition()
-    local scale = MDT:GetScale()
+    local cursorx, cursory = ART:GetCursorPosition()
+    local scale = ART:GetScale()
     cursorx = cursorx * (1 / scale)
     cursory = cursory * (1 / scale)
     --snap onto other waypoints
-    local patrolBlips = MDT:GetPatrolBlips()
+    local patrolBlips = ART:GetPatrolBlips()
     for idx, waypoint in pairs(patrolBlips) do
       if waypoint:IsMouseOver() then
         cursorx = waypoint.x
@@ -1000,7 +982,7 @@ function MDT:AddPatrolWaypointAtCursorPosition()
       cursory = currentBlip.clone.y
     end
     tinsert(cloneData.patrol, { x = cursorx, y = cursory })
-    print(string.format("MDT: Created Waypoint %d of %s %d at %d,%d", 1, data.name, #cloneData.patrol, cursorx, cursory))
-    MDT:UpdateMap()
+    print(string.format("ART: Created Waypoint %d of %s %d at %d,%d", 1, data.name, #cloneData.patrol, cursorx, cursory))
+    ART:UpdateMap()
   end
 end

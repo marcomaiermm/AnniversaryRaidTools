@@ -24,7 +24,7 @@ local function testFunc()
   end)
 end
 
----@type MDTTest
+---@type ARTTest
 local test = {
   name = "Resize",
   func = testFunc,

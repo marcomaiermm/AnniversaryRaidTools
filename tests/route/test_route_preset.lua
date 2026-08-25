@@ -4,8 +4,7 @@ local root = arg and arg[1] or "."
 local ART = {}
 _G.ART = ART
 ART.StaticData = { raids = {} }
-local addon = { ART = ART }
-local function load(path) return assert(loadfile(root..path))("AnniversaryRaidTools", addon) end
+local function load(path) return assert(loadfile(root..path))("AnniversaryRaidTools", ART) end
 
 load("/Core/RaidRegistry.lua")
 load("/Core/RoutePreset.lua")

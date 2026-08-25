@@ -1,7 +1,7 @@
 local root = arg and arg[1] or "."
 local ART = {}
 _G.ART = ART
-assert(loadfile(root.."/Core/MarkResolver.lua"))("AnniversaryRaidTools", { ART = ART })
+assert(loadfile(root.."/Core/MarkResolver.lua"))("AnniversaryRaidTools", ART)
 
 local units = {}
 local raid = {

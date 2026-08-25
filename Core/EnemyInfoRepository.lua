@@ -1,13 +1,9 @@
 -- Enemy metadata boundary for AnniversaryRaidTools.
 
-local _, addon = ...
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local Repository = ART.EnemyInfoRepository or {}
 ART.EnemyInfoRepository = Repository
-if addon and addon.EnemyInfoRepository == nil then addon.EnemyInfoRepository = Repository end
 
 local type, tonumber, tostring = type, tonumber, tostring
 local pairs = pairs

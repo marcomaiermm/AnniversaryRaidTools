@@ -1,11 +1,5 @@
 -- Black Temple client-map inventory; floor alignment remains candidate for 20505/20506.
-local addonName, addon = ...
-local ART = rawget(_G, "ART")
-if not ART then
-  ART = addon and addon.ART or addon or {}
-  _G.ART = ART
-end
-if addon and addon.ART == nil then addon.ART = ART end
+local addonName, ART = ...
 
 local source = {
   source = "client-data",

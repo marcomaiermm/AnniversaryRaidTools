@@ -1,27 +1,22 @@
-local _, MDT = ...
-local L = MDT.L
+local _, ART = ...
+local L = ART.L
 
 local defaultSavedVars = {
   global = {
     toolbarExpanded = true,
     scale = 1,
     nonFullscreenScale = 1.4,
-    useForcesCount = false, -- replaces percent in pull buttons with count
     showPullButtonHealth = false,
     autoPanToPull = true,
     autoMark = false,
     autoMarkModifier = "ALT",
-    enemyForcesTooltip = 1,
-    muteXalatathVoiceLines = false,
-    announceDungeonReset = false,
-    currentDifficulty = 10,
+    announceInstanceReset = false,
     xoffset = -80,
     yoffset = -100,
     anchorFrom = "TOP",
     anchorTo = "TOP",
     minimap = {
       hide = false,
-      compartmentHide = false,
     },
     toolbar = {
       color = { r = 1, g = 1, b = 1, a = 1 },
@@ -32,24 +27,8 @@ local defaultSavedVars = {
     alwaysOverwriteRoutesByUID = false,
     fadeOutDuringCombat = false,
     fadeOutAlpha = 0.5,
-    focusMarker = {
-      announceReadyCheck = false,
-      useMacro = false,
-      disableTargetMarkerInRaid = false,
-      preserveExistingTargetMarkers = true,
-      suppressNotifications = false,
-      assignments = {},
-    },
     combatLogging = {
       enabled = false,
-      content = {
-        lfr = false,
-        normal = false,
-        heroic = false,
-        mythic = false,
-        mythic_dungeon = false,
-        mythic_plus = false,
-      },
     },
     colorPaletteInfo = {
       autoColoring = true,
@@ -58,11 +37,8 @@ local defaultSavedVars = {
       customPaletteValues = {},
       numberCustomColors = 12,
     },
-    currentDungeonIdx = 160, -- set this one every new season
+    currentRaidIndex = 160,
     currentSection = "maps",
-    latestDungeonSeen = 0,
-    selectedDungeonList = 1,
-    prePatchWarningSeenFor = 0,
   },
 }
 
@@ -91,17 +67,17 @@ local function initializeRaidRouteStore(global)
   return store
 end
 
-function MDT:GetDefaultSavedVariables()
+function ART:GetDefaultSavedVariables()
   return defaultSavedVars
 end
 
-function MDT:InitializeSavedVariables()
+function ART:InitializeSavedVariables()
   if db then return db end
   db = LibStub("AceDB-3.0"):New("AnniversaryRaidToolsDB", defaultSavedVars).global
   if not db then return end
 
-  for dungeonIdx, presetIdx in pairs(db.currentPreset) do
-    if presetIdx <= 0 then db.currentPreset[dungeonIdx] = 1 end
+  for raidIndex, presetIdx in pairs(db.currentPreset) do
+    if presetIdx <= 0 then db.currentPreset[raidIndex] = 1 end
   end
 
   raidRouteStore = initializeRaidRouteStore(db)
@@ -109,25 +85,23 @@ function MDT:InitializeSavedVariables()
   return db
 end
 
-function MDT:GetDB()
+function ART:GetDB()
   return db
 end
 
-function MDT:GetRaidRouteStore()
+function ART:GetRaidRouteStore()
   return raidRouteStore
 end
 
---/run MDT:ResetDataCache();
-function MDT:ResetDataCache()
-  db.dungeonEnemies = nil
+function ART:ResetDataCache()
+  db.raidEnemies = nil
   db.mapPOIs = nil
   ReloadUI()
 end
 
-function MDT:HardReset()
+function ART:HardReset()
   AnniversaryRaidToolsDB = nil
-  MythicDungeonToolsDB = nil
   ReloadUI()
 end
 
-MDT:InitializeSavedVariables()
+ART:InitializeSavedVariables()

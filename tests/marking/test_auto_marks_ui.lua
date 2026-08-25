@@ -45,10 +45,13 @@ _G.CreateFrame = function() return frame() end
 _G.SetPortraitTextureFromCreatureDisplayID = function(texture, displayId) texture.displayId = displayId end
 for marker = 1, 8 do _G["RAID_TARGET_"..marker] = tostring(marker) end
 
-local saved = { autoMark = false, autoMarkModifier = "ALT", currentDungeonIdx = 160 }
+local saved = { autoMark = false, autoMarkModifier = "ALT", currentRaidIndex = 160 }
 local selected
 local tooltipCall
 local ART = {
+  L = setmetatable({}, { __index = function(_, key) return key end }),
+  mapInfo = { [160] = { mapID = 565 } },
+  main_frame = { Show = function() end },
   RaidPlanner = {
     raid = {
       mapId = 565,
@@ -62,24 +65,18 @@ local ART = {
   },
 }
 _G.ART = ART
-local MDT = {
-  ART = ART,
-  L = setmetatable({}, { __index = function(_, key) return key end }),
-  mapInfo = { [160] = { mapID = 565 } },
-  main_frame = { Show = function() end },
-}
-function MDT:GetDB() return saved end
-function MDT:GetCurrentSection() return "maps" end
-function MDT:UpdateSectionVisibility() end
-function MDT:DisplayBlipTooltip(anchor, shown) tooltipCall = { anchor, shown } end
-function MDT:MakePullSelectionButtons(sidePanel)
+function ART:GetDB() return saved end
+function ART:GetCurrentSection() return "maps" end
+function ART:UpdateSectionVisibility() end
+function ART:DisplayBlipTooltip(anchor, shown) tooltipCall = { anchor, shown } end
+function ART:MakePullSelectionButtons(sidePanel)
   sidePanel.PullButtonScrollGroup = AceGUI:Create("SimpleGroup")
 end
-MDT.main_frame.sidePanel = {}
+ART.main_frame.sidePanel = {}
 
-assert(loadfile(root.."/Modules/AutoMarksUI.lua"))("AnniversaryRaidTools", MDT)
-MDT:MakePullSelectionButtons(MDT.main_frame.sidePanel)
-local sidePanel = MDT.main_frame.sidePanel
+assert(loadfile(root.."/Modules/AutoMarksUI.lua"))("AnniversaryRaidTools", ART)
+ART:MakePullSelectionButtons(ART.main_frame.sidePanel)
+local sidePanel = ART.main_frame.sidePanel
 assert(sidePanel.markingTabBar and sidePanel.AutoMarksGroup, "side-panel tabs are created")
 
 ART.AutoMarksUI:SetTab("autoMarks")

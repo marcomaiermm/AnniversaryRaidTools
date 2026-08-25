@@ -48,7 +48,7 @@ gesture or invented spatial evidence.
   discovery should not mutate shared raid state.
 - **Out-of-combat-only marking:** rejected because boss adds still need free
   markers during combat.
-- **Automatic pull progression:** rejected because MDT pull selection is manual
+- **Automatic pull progression:** rejected because ART pull selection is manual
   and death inference cannot reliably distinguish completion, wipes, or evades.
 
 ## Consequences

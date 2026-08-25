@@ -1,11 +1,5 @@
 -- Karazhan client-map inventory for TBC Anniversary 20505/20506.
-local _, addon = ...
-local ART = rawget(_G, "ART")
-if not ART then
-  ART = addon and addon.ART or addon or {}
-  _G.ART = ART
-end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local source = {
   source = "client-data",

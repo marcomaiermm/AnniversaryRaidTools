@@ -1,5 +1,5 @@
-local UIAddonName, MDT = ...
-local L = MDT.L
+local UIAddonName, ART = ...
+local L = ART.L
 
 local pairs, CreateFrame = pairs, CreateFrame
 
@@ -8,47 +8,47 @@ local asyncConfig = {
   maxTime = 40,
   maxTimeCombat = 8,
   errorHandler = function(msg, stackTrace, name)
-    MDT:OnError(msg, stackTrace, name)
+    ART:OnError(msg, stackTrace, name)
   end,
 }
-MDT.asyncHandler = LibStub("LibAsync"):GetHandler(asyncConfig)
+ART.asyncHandler = LibStub("LibAsync"):GetHandler(asyncConfig)
 
-function MDT:Async(func, name, singleton)
-  MDT.asyncHandler:Async(func, name, singleton)
+function ART:Async(func, name, singleton)
+  ART.asyncHandler:Async(func, name, singleton)
 end
 
-function MDT:CancelAsync(name)
-  MDT.asyncHandler:CancelAsync(name)
+function ART:CancelAsync(name)
+  ART.asyncHandler:CancelAsync(name)
 end
 
 local db
-function MDT:HandleSlashCommand(cmd, editbox)
+function ART:HandleSlashCommand(cmd, editbox)
   cmd = cmd:lower()
   local rqst, arg = strsplit(' ', cmd)
   if rqst == "devmode" then
-    if MDT.ToggleDevMode then MDT:ToggleDevMode() end
+    if ART.ToggleDevMode then ART:ToggleDevMode() end
   elseif rqst == "reset" then
-    MDT:ResetMainFramePos()
+    ART:ResetMainFramePos()
   elseif rqst == "hardreset" then
     if arg == "force" then
-      MDT:HardReset()
+      ART:HardReset()
     else
-      MDT:Async(function()
-        MDT:OpenConfirmationFrame(450, 150, L["hardResetPromptTitle"], L["Delete"], L["hardResetPrompt"], MDT.HardReset)
+      ART:Async(function()
+        ART:OpenConfirmationFrame(450, 150, L["hardResetPromptTitle"], L["Delete"], L["hardResetPrompt"], ART.HardReset)
       end, "hardReset")
     end
   elseif rqst == "minimap" then
     if db.minimap.hide then
-      MDT:ShowMinimapButton()
+      ART:ShowMinimapButton()
     else
-      MDT:HideMinimapButton()
+      ART:HideMinimapButton()
     end
   elseif rqst == "test" then
-    if MDT.test and MDT.test.RunAllTests then
-      MDT:OpenConfirmationFrame(450, 150, "MDT Test", "Run", "Run all tests?", MDT.test.RunAllTests)
+    if ART.test and ART.test.RunAllTests then
+      ART:OpenConfirmationFrame(450, 150, "ART Test", "Run", "Run all tests?", ART.test.RunAllTests)
     end
   else
-    MDT:Async(function() MDT:ShowInterfaceInternal() end, "showInterface")
+    ART:Async(function() ART:ShowInterfaceInternal() end, "showInterface")
   end
 end
 
@@ -59,58 +59,56 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
   if event == "ADDON_LOADED" then
     local addon = ...
     if addon ~= UIAddonName then return end
-    MDT:AttachCoreAPI()
-    db = MDT:InitializeRuntime()
+    ART:AttachCoreAPI()
+    db = ART:InitializeRuntime()
     self:UnregisterEvent("ADDON_LOADED")
   elseif event == "GROUP_ROSTER_UPDATE" then
-    MDT.GROUP_ROSTER_UPDATE()
+    ART.GROUP_ROSTER_UPDATE()
   end
 end)
 
 local last = 0
-function MDT.GROUP_ROSTER_UPDATE()
+function ART.GROUP_ROSTER_UPDATE()
   --check not more than once per second (blizzard event spam)
   local now = GetTime()
   if last < now - 1 then
-    if not MDT.main_frame then return end
+    if not ART.main_frame then return end
     local inGroup = UnitInRaid("player") or IsInGroup()
-    MDT.main_frame.LinkToChatButton:SetDisabled(not inGroup)
-    MDT.main_frame.LiveSessionButton:SetDisabled(not inGroup)
+    ART.main_frame.LinkToChatButton:SetDisabled(not inGroup)
+    ART.main_frame.LiveSessionButton:SetDisabled(not inGroup)
     if inGroup then
-      MDT.main_frame.LinkToChatButton.text:SetTextColor(1, 0.8196, 0)
-      if MDT.liveSessionActive then
-        MDT.main_frame.LiveSessionButton:SetText(L["*Live*"])
-        MDT.main_frame.LiveSessionButton.text:SetTextColor(0, 1, 0)
+      ART.main_frame.LinkToChatButton.text:SetTextColor(1, 0.8196, 0)
+      if ART.liveSessionActive then
+        ART.main_frame.LiveSessionButton:SetText(L["*Live*"])
+        ART.main_frame.LiveSessionButton.text:SetTextColor(0, 1, 0)
       else
-        MDT.main_frame.LiveSessionButton:SetText(L["Live"])
-        MDT.main_frame.LiveSessionButton.text:SetTextColor(1, 0.8196, 0)
+        ART.main_frame.LiveSessionButton:SetText(L["Live"])
+        ART.main_frame.LiveSessionButton.text:SetTextColor(1, 0.8196, 0)
       end
     else
-      MDT.main_frame.LinkToChatButton.text:SetTextColor(0.5, 0.5, 0.5)
-      MDT.main_frame.LiveSessionButton.text:SetTextColor(0.5, 0.5, 0.5)
+      ART.main_frame.LinkToChatButton.text:SetTextColor(0.5, 0.5, 0.5)
+      ART.main_frame.LiveSessionButton.text:SetTextColor(0.5, 0.5, 0.5)
     end
     last = now
   end
 end
 
 local initStarted
-function MDT:StartMainFrameInitialization()
+function ART:StartMainFrameInitialization()
   if initStarted then return end
   initStarted = true
-  for _, module in pairs(MDT.modules) do
+  for _, module in pairs(ART.modules) do
     if module.OnInitialize then
       module:OnInitialize()
     end
   end
-  MDT:RegisterErrorHandledFunctions()
-  MDT:CheckSeenDungeonLists()
-
+  ART:RegisterErrorHandledFunctions()
   -- request spell info for all teleports, so icons are instantly working
-  for _, mapInfo in pairs(MDT.mapInfo) do
+  for _, mapInfo in pairs(ART.mapInfo) do
     if mapInfo.teleportId then
-      MDT.Compat:RequestLoadSpellData(mapInfo.teleportId)
+      ART.Compat:RequestLoadSpellData(mapInfo.teleportId)
     end
   end
 
-  MDT:InitializeMainFrame()
+  ART:InitializeMainFrame()
 end

@@ -31,7 +31,7 @@ physical identity and allowed a death to complete the wrong planned spawn.
 
 ## Decision
 
-1. **Preset-wide marks.** Existing MDT `enemyAssignments` remain the canonical
+1. **Preset-wide marks.** Existing ART `enemyAssignments` remain the canonical
    per-clone plan. The selected pull contributes exact `spawnKeys` for matching
    and completion, but does not own those marks. Explicitly marked spawns may be
    resolved outside the active pull without changing the pull selection.

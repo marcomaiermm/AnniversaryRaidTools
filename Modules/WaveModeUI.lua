@@ -1,6 +1,5 @@
-local _, MDT = ...
-local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools bootstrap is required")
-local L = MDT.L
+local _, ART = ...
+local L = ART.L
 
 local WaveModeUI = ART.WaveModeUI or {}
 ART.WaveModeUI = WaveModeUI
@@ -15,9 +14,9 @@ local function slug(value)
 end
 
 local function activeMap()
-  local planner, db = ART.RaidPlanner, MDT.GetDB and MDT:GetDB()
+  local planner, db = ART.RaidPlanner, ART.GetDB and ART:GetDB()
   if not (planner and planner.raid and db) then return end
-  local mapInfo = MDT.mapInfo and MDT.mapInfo[db.currentDungeonIdx]
+  local mapInfo = ART.mapInfo and ART.mapInfo[db.currentRaidIndex]
   if not mapInfo or mapInfo.mapID ~= planner.raid.mapId then return end
   return ART.MapDefinitions and ART.MapDefinitions[planner.raid.key]
 end
@@ -43,7 +42,7 @@ end
 function WaveModeUI:IsHyjalRuntimeActive()
   if type(GetInstanceInfo) ~= "function" or select(8, GetInstanceInfo()) ~= HYJAL_INSTANCE_ID
       or not self:IsActive() then return false end
-  local preset = MDT.GetCurrentPreset and MDT:GetCurrentPreset()
+  local preset = ART.GetCurrentPreset and ART:GetCurrentPreset()
   return preset and preset.value and preset.value.artWaveRaid == "hyjal"
 end
 
@@ -52,16 +51,16 @@ function WaveModeUI:ResetHyjalRuntime()
 end
 
 local function mapPlanningOpen()
-  local frame = MDT.main_frame
+  local frame = ART.main_frame
   return frame and type(frame.IsShown) == "function" and frame:IsShown()
-      and (not MDT.IsMapSectionActive or MDT:IsMapSectionActive())
+      and (not ART.IsMapSectionActive or ART:IsMapSectionActive())
 end
 
 local function selectRuntimeWave(index)
   if mapPlanningOpen() then return false end
-  local preset = MDT:GetCurrentPreset()
+  local preset = ART:GetCurrentPreset()
   if tonumber(preset.value.currentPull) == index then return false end
-  MDT:SetSelectionToPull(index)
+  ART:SetSelectionToPull(index)
   return true
 end
 
@@ -70,7 +69,7 @@ function WaveModeUI:HandleHyjalWave(localWave)
   if not self:IsHyjalRuntimeActive() or not localWave or localWave % 1 ~= 0
       or localWave < 1 or localWave > 8 then return false end
   local groups = activeMap().waveMode.groups
-  local currentWave = tonumber(MDT:GetCurrentPreset().value.currentPull) or 1
+  local currentWave = tonumber(ART:GetCurrentPreset().value.currentPull) or 1
   local currentGroup, currentGroupIndex = groupFor(groups, currentWave)
   if not runtimeGroup then
     runtimeGroup = currentGroupIndex or 1
@@ -129,7 +128,7 @@ end
 function WaveModeUI:BuildModel()
   if not self:IsActive() then return nil end
   local planner, map = ART.RaidPlanner, activeMap()
-  local value = MDT:GetCurrentPreset().value
+  local value = ART:GetCurrentPreset().value
   local waveIndex = math.min(math.max(tonumber(value.currentPull) or 1, 1), #planner.raid.waves)
   local wave, step = planner.raid.waves[waveIndex], planner.preset.routeSteps[waveIndex]
   local group, groupIndex = groupFor(map.waveMode.groups, waveIndex)
@@ -137,8 +136,8 @@ function WaveModeUI:BuildModel()
 
   local activePacks = {}
   for _, packKey in ipairs(wave.packKeys) do activePacks[packKey] = true end
-  local canvasWidth, canvasHeight = MDT:GetDefaultMapPanelSize()
-  local projectedEnemies = MDT.dungeonEnemies and MDT.dungeonEnemies[MDT:GetDB().currentDungeonIdx]
+  local canvasWidth, canvasHeight = ART:GetDefaultMapPanelSize()
+  local projectedEnemies = ART.raidEnemies and ART.raidEnemies[ART:GetDB().currentRaidIndex]
   local spawnLookup = ART.MultiRaidIntegration and ART.MultiRaidIntegration.spawnLookup
       and ART.MultiRaidIntegration.spawnLookup[planner.raid.key]
   local enemies, pathsBySignature = {}, {}
@@ -237,7 +236,7 @@ function WaveModeUI:CreateSidePanel(sidePanel)
 end
 
 function WaveModeUI:RefreshSidePanel(model)
-  local sidePanel = MDT.main_frame and MDT.main_frame.sidePanel
+  local sidePanel = ART.main_frame and ART.main_frame.sidePanel
   local frame = sidePanel and sidePanel.WaveModeGroup
   if not frame then return end
   if not model then frame:Hide(); return end
@@ -272,7 +271,7 @@ function WaveModeUI:RefreshSidePanel(model)
         local waveButton = frame.waveButtons[waveButtonIndex]
         if not waveButton then
           waveButton = createListButton(frame.content, 24)
-          waveButton:SetScript("OnClick", function(item) MDT:SetSelectionToPull(item.waveIndex) end)
+          waveButton:SetScript("OnClick", function(item) ART:SetSelectionToPull(item.waveIndex) end)
           frame.waveButtons[waveButtonIndex] = waveButton
         end
         local selected = waveIndex == model.waveIndex
@@ -307,7 +306,7 @@ end
 
 function WaveModeUI:CreateMapCard()
   if self.card or type(CreateFrame) ~= "function" then return end
-  local parent = MDT.main_frame and MDT.main_frame.scrollFrame
+  local parent = ART.main_frame and ART.main_frame.scrollFrame
   if not parent then return end
   local card = CreateFrame("Frame", nil, parent, "BackdropTemplate")
   card:SetSize(372, 112)
@@ -343,13 +342,13 @@ function WaveModeUI:CreateMapCard()
   card.previous:SetSize(28, 24)
   card.previous:SetPoint("TOPRIGHT", -45, -10)
   card.previous:SetText("<")
-  card.previous:SetScript("OnClick", function() if card.model.waveIndex > 1 then MDT:SetSelectionToPull(card.model.waveIndex - 1) end end)
+  card.previous:SetScript("OnClick", function() if card.model.waveIndex > 1 then ART:SetSelectionToPull(card.model.waveIndex - 1) end end)
   card.next = CreateFrame("Button", nil, card, "UIPanelButtonTemplate")
   card.next:SetSize(28, 24)
   card.next:SetPoint("TOPRIGHT", -13, -10)
   card.next:SetText(">")
   card.next:SetScript("OnClick", function()
-    if card.model.waveIndex < card.model.totalWaves then MDT:SetSelectionToPull(card.model.waveIndex + 1) end
+    if card.model.waveIndex < card.model.totalWaves then ART:SetSelectionToPull(card.model.waveIndex + 1) end
   end)
   card.rows = {}
   card:Hide()
@@ -367,10 +366,10 @@ function WaveModeUI:CreateCardRow(card, index)
   row.portrait.icon = row.portrait:CreateTexture(nil, "ARTWORK")
   row.portrait.icon:SetAllPoints()
   row.portrait:SetScript("OnEnter", function(button)
-    if MDT.DisplayBlipTooltip then MDT:DisplayBlipTooltip(button, true) end
+    if ART.DisplayBlipTooltip then ART:DisplayBlipTooltip(button, true) end
   end)
   row.portrait:SetScript("OnLeave", function(button)
-    if MDT.DisplayBlipTooltip then MDT:DisplayBlipTooltip(button, false) end
+    if ART.DisplayBlipTooltip then ART:DisplayBlipTooltip(button, false) end
   end)
   row.name = row:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
   row.name:SetPoint("LEFT", row.portrait, "RIGHT", 7, 0)
@@ -442,22 +441,22 @@ end
 
 function WaveModeUI:RefreshRoutes(model)
   self:HideRoutes()
-  if not model or type(DrawLine) ~= "function" or not MDT.main_frame.mapPanelFrame then return end
+  if not model or type(DrawLine) ~= "function" or not ART.main_frame.mapPanelFrame then return end
   self.routeLines, self.routeArrows = self.routeLines or {}, self.routeArrows or {}
-  local width, height = MDT:GetDefaultMapPanelSize()
-  local scale, lineIndex = MDT:GetScale(), 0
+  local width, height = ART:GetDefaultMapPanelSize()
+  local scale, lineIndex = ART:GetScale(), 0
   for pathIndex, path in ipairs(model.paths) do
     local points = path.points
     for index = 2, #points do
       lineIndex = lineIndex + 1
       local line = self.routeLines[lineIndex]
       if not line then
-        line = MDT.main_frame.mapPanelFrame:CreateTexture(nil, "OVERLAY")
-        line:SetTexture(MDT.AddonPath.."Textures\\Square_White")
+        line = ART.main_frame.mapPanelFrame:CreateTexture(nil, "OVERLAY")
+        line:SetTexture(ART.AddonPath.."Textures\\Square_White")
         self.routeLines[lineIndex] = line
       end
       line:SetVertexColor(0.12, 0.62, 1, pathIndex == 1 and 0.92 or 0.48)
-      DrawLine(line, MDT.main_frame.mapPanelTile1, points[index - 1].x * width * scale,
+      DrawLine(line, ART.main_frame.mapPanelTile1, points[index - 1].x * width * scale,
           -points[index - 1].y * height * scale, points[index].x * width * scale,
           -points[index].y * height * scale, (pathIndex == 1 and 3 or 2) * scale, 1, "TOPLEFT")
       line:Show()
@@ -465,14 +464,14 @@ function WaveModeUI:RefreshRoutes(model)
     if #points > 1 then
       local arrow = self.routeArrows[pathIndex]
       if not arrow then
-        arrow = MDT.main_frame.mapPanelFrame:CreateTexture(nil, "OVERLAY")
+        arrow = ART.main_frame.mapPanelFrame:CreateTexture(nil, "OVERLAY")
         arrow:SetAtlas("Garr_LevelUpgradeArrow")
         arrow:SetSize(18, 18)
         self.routeArrows[pathIndex] = arrow
       end
       local previous, last = points[#points - 1], points[#points]
       arrow:ClearAllPoints()
-      arrow:SetPoint("CENTER", MDT.main_frame.mapPanelTile1, "TOPLEFT", last.x * width * scale, -last.y * height * scale)
+      arrow:SetPoint("CENTER", ART.main_frame.mapPanelTile1, "TOPLEFT", last.x * width * scale, -last.y * height * scale)
       arrow:SetRotation(math.atan2(-(last.y - previous.y), last.x - previous.x) - math.pi / 2)
       arrow:SetVertexColor(0.2, 0.75, 1, pathIndex == 1 and 1 or 0.6)
       arrow:Show()
@@ -480,15 +479,15 @@ function WaveModeUI:RefreshRoutes(model)
   end
   if model.camp then
     if not self.campMarker then
-      self.campMarker = MDT.main_frame.mapPanelFrame:CreateTexture(nil, "OVERLAY")
+      self.campMarker = ART.main_frame.mapPanelFrame:CreateTexture(nil, "OVERLAY")
       self.campMarker:SetTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
       self.campMarker:SetSize(34, 34)
       self.campMarker:SetVertexColor(1, 0.72, 0.16, 0.95)
-      self.campLabel = MDT.main_frame.mapPanelFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+      self.campLabel = ART.main_frame.mapPanelFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
       self.campLabel:SetTextColor(1, 0.78, 0.25)
     end
     self.campMarker:ClearAllPoints()
-    self.campMarker:SetPoint("CENTER", MDT.main_frame.mapPanelTile1, "TOPLEFT", model.camp.x * width * scale,
+    self.campMarker:SetPoint("CENTER", ART.main_frame.mapPanelTile1, "TOPLEFT", model.camp.x * width * scale,
         -model.camp.y * height * scale)
     self.campLabel:ClearAllPoints()
     self.campLabel:SetPoint("BOTTOM", self.campMarker, "TOP", 0, 2)
@@ -499,7 +498,7 @@ function WaveModeUI:RefreshRoutes(model)
 end
 
 function WaveModeUI:Refresh()
-  local mainFrame = MDT.main_frame
+  local mainFrame = ART.main_frame
   if mainFrame and mainFrame ~= self.runtimeHookFrame and type(mainFrame.HookScript) == "function" then
     self.runtimeHookFrame = mainFrame
     mainFrame:HookScript("OnHide", function() WaveModeUI:ReadHyjalWave() end)
@@ -508,27 +507,27 @@ function WaveModeUI:Refresh()
   self:RefreshSidePanel(model)
   self:RefreshCard(model)
   self:RefreshRoutes(model)
-  local sidePanel = MDT.main_frame and MDT.main_frame.sidePanel
+  local sidePanel = ART.main_frame and ART.main_frame.sidePanel
   if sidePanel and sidePanel.WaveModeGroup and not model then sidePanel.WaveModeGroup:Hide() end
   return model
 end
 
-local originalMakePullSelectionButtons = MDT.MakePullSelectionButtons
-function MDT:MakePullSelectionButtons(sidePanel)
+local originalMakePullSelectionButtons = ART.MakePullSelectionButtons
+function ART:MakePullSelectionButtons(sidePanel)
   local result = originalMakePullSelectionButtons(self, sidePanel)
   WaveModeUI:CreateSidePanel(sidePanel)
   return result
 end
 
-local originalSetSelectionToPull = MDT.SetSelectionToPull
-function MDT:SetSelectionToPull(...)
+local originalSetSelectionToPull = ART.SetSelectionToPull
+function ART:SetSelectionToPull(...)
   local result = originalSetSelectionToPull(self, ...)
   WaveModeUI:Refresh()
   return result
 end
 
-local originalUpdateMap = MDT.UpdateMap
-function MDT:UpdateMap(...)
+local originalUpdateMap = ART.UpdateMap
+function ART:UpdateMap(...)
   local result = originalUpdateMap(self, ...)
   WaveModeUI:Refresh()
   WaveModeUI:ReadHyjalWave()

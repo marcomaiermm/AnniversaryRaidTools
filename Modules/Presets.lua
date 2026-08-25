@@ -1,23 +1,23 @@
-local _, MDT = ...
-local L = MDT.L
+local _, ART = ...
+local L = ART.L
 
 local tremove, tonumber, pairs = table.remove, tonumber, pairs
-local defaultSavedVars = MDT:GetDefaultSavedVariables()
+local defaultSavedVars = ART:GetDefaultSavedVariables()
 local db
 
 local function initializeDB()
-  db = db or MDT:GetDB()
+  db = db or ART:GetDB()
 end
 
-function MDT:UpdatePresetDropDown()
+function ART:UpdatePresetDropDown()
   initializeDB()
-  local dropdown = MDT.main_frame.sidePanel.WidgetGroup.PresetDropDown
+  local dropdown = ART.main_frame.sidePanel.WidgetGroup.PresetDropDown
   local presetList = {}
-  for k, v in pairs(db.presets[db.currentDungeonIdx]) do
-    presetList[k] = MDT:GetPresetDropdownText(v)
+  for k, v in pairs(db.presets[db.currentRaidIndex]) do
+    presetList[k] = ART:GetPresetDropdownText(v)
   end
   dropdown:SetList(presetList)
-  dropdown:SetValue(db.currentPreset[db.currentDungeonIdx])
+  dropdown:SetValue(db.currentPreset[db.currentRaidIndex])
   dropdown:ClearFocus()
 end
 
@@ -37,7 +37,7 @@ local raidClassColorKeyByClassIndex = {
   [13] = "EVOKER",
 }
 
-function MDT:GetCurrentRouteAuthor()
+function ART:GetCurrentRouteAuthor()
   local name, realm = UnitFullName("player")
   local _, _, classIdx = UnitClass("player")
   if not name or not classIdx then return end
@@ -49,7 +49,7 @@ function MDT:GetCurrentRouteAuthor()
   }
 end
 
-function MDT:EnsurePresetCreatedBy(preset, force)
+function ART:EnsurePresetCreatedBy(preset, force)
   if preset.text == L["Default"] then
     preset.createdBy = nil
     return
@@ -59,11 +59,11 @@ function MDT:EnsurePresetCreatedBy(preset, force)
   if author then preset.createdBy = author end
 end
 
-function MDT:GetClassFileByIndex(classIdx)
+function ART:GetClassFileByIndex(classIdx)
   return raidClassColorKeyByClassIndex[tonumber(classIdx)]
 end
 
-function MDT:GetClassColoredRouteAuthorName(createdBy)
+function ART:GetClassColoredRouteAuthorName(createdBy)
   if type(createdBy) ~= "table" or type(createdBy.name) ~= "string" then return end
   local classFile = self:GetClassFileByIndex(createdBy.classIdx)
   if not classFile then return end
@@ -72,7 +72,7 @@ function MDT:GetClassColoredRouteAuthorName(createdBy)
   return WrapTextInColorCode(createdBy.name, classHexString)
 end
 
-function MDT:GetPresetDropdownText(preset)
+function ART:GetPresetDropdownText(preset)
   local text = preset.text or ""
   local authorName = self:GetClassColoredRouteAuthorName(preset.createdBy)
   if authorName then
@@ -81,25 +81,25 @@ function MDT:GetPresetDropdownText(preset)
   return text
 end
 
-function MDT:UpdatePresetDropdownTextColor(forceReset)
+function ART:UpdatePresetDropdownTextColor(forceReset)
   local preset = self:GetCurrentPreset()
   local livePreset = self:GetCurrentLivePreset()
   if self.liveSessionActive and preset == livePreset and (not forceReset) then
-    local dropdown = MDT.main_frame.sidePanel.WidgetGroup.PresetDropDown
+    local dropdown = ART.main_frame.sidePanel.WidgetGroup.PresetDropDown
     dropdown.text:SetTextColor(0, 1, 0, 1)
   else
-    local dropdown = MDT.main_frame.sidePanel.WidgetGroup.PresetDropDown
+    local dropdown = ART.main_frame.sidePanel.WidgetGroup.PresetDropDown
     dropdown.text:SetTextColor(1, 1, 1, 1)
   end
 end
 
 ---Returns the current preset
-function MDT:GetCurrentPreset()
+function ART:GetCurrentPreset()
   initializeDB()
-  return db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]]
+  return db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]]
 end
 
-function MDT:GetCurrentLivePreset()
+function ART:GetCurrentLivePreset()
   initializeDB()
   if not self.livePresetUID then return end
   if self.liveUpdateFrameOpen then
@@ -109,7 +109,7 @@ function MDT:GetCurrentLivePreset()
       end
     end
   end
-  for dungeonIdx, presets in pairs(db.presets) do
+  for raidIndex, presets in pairs(db.presets) do
     for presetIdx, preset in pairs(presets) do
       if preset.uid and preset.uid == self.livePresetUID then
         return preset, presetIdx
@@ -118,16 +118,16 @@ function MDT:GetCurrentLivePreset()
   end
 end
 
-function MDT:ReturnToLivePreset()
+function ART:ReturnToLivePreset()
   local preset, presetIdx = self:GetCurrentLivePreset()
   ---@diagnostic disable-next-line: need-check-nil
-  self:UpdateToDungeon(preset.value.currentDungeonIdx, true)
-  db.currentPreset[db.currentDungeonIdx] = presetIdx
+  self:UpdateToRaid(preset.value.currentRaidIndex, true)
+  db.currentPreset[db.currentRaidIndex] = presetIdx
   self:UpdatePresetDropDown()
   self:UpdateMap()
 end
 
-function MDT:SetLivePreset()
+function ART:SetLivePreset()
   local preset = self:GetCurrentPreset()
   local callback = function()
     self:SetUniqueID(preset)
@@ -137,24 +137,19 @@ function MDT:SetLivePreset()
     self.main_frame.setLivePresetButton:Hide()
     self.main_frame.liveReturnButton:Hide()
   end
-  MDT:CheckPresetSize(callback)
+  ART:CheckPresetSize(callback)
 end
 
 ---Makes sure profiles are valid and have their fields set
-function MDT:NormalizeCurrentPreset()
+function ART:NormalizeCurrentPreset()
   initializeDB()
-  --dungeonIdx doesnt exist
-  local seasonList = MDT:GetSeasonList()
   if db.alwaysOverwriteRoutesByUID == nil then db.alwaysOverwriteRoutesByUID = false end
-  db.selectedDungeonList = db.selectedDungeonList or defaultSavedVars.global.selectedDungeonList
-  if not MDT.dungeonList[db.currentDungeonIdx] or string.find(MDT.dungeonList[db.currentDungeonIdx], ">") or
-      not db.selectedDungeonList or not seasonList[db.selectedDungeonList] then
-    db.currentDungeonIdx = defaultSavedVars.global.currentDungeonIdx
-    db.selectedDungeonList = defaultSavedVars.global.selectedDungeonList
+  if not ART.raidList[db.currentRaidIndex] then
+    db.currentRaidIndex = defaultSavedVars.global.currentRaidIndex
   end
-  local preset = MDT:GetCurrentPreset()
+  local preset = ART:GetCurrentPreset()
   if preset.value == 0 then --<New Preset> as selected preset
-    db.presets[db.currentDungeonIdx] = {
+    db.presets[db.currentRaidIndex] = {
       [1] = {
         text = L["Default"],
         value = {},
@@ -163,8 +158,8 @@ function MDT:NormalizeCurrentPreset()
       },
       [2] = { text = L["<New Preset>"], value = 0 },
     }
-    db.currentPreset[db.currentDungeonIdx] = 1
-    preset = MDT:GetCurrentPreset()
+    db.currentPreset[db.currentRaidIndex] = 1
+    preset = ART:GetCurrentPreset()
   end
   if preset.objects then
     local isValid = true
@@ -178,21 +173,21 @@ function MDT:NormalizeCurrentPreset()
     end
   end
   preset.week = nil
-  db.currentPreset[db.currentDungeonIdx] = db.currentPreset[db.currentDungeonIdx] or 1
-  db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentDungeonIdx = db.currentDungeonIdx
-  db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentSublevel = db.presets[
-  db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentSublevel or 1
-  db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentPull = db.presets[
-  db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentPull or 1
-  db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.pulls = db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.pulls or {}
+  db.currentPreset[db.currentRaidIndex] = db.currentPreset[db.currentRaidIndex] or 1
+  db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentRaidIndex = db.currentRaidIndex
+  db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentSublevel = db.presets[
+  db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentSublevel or 1
+  db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentPull = db.presets[
+  db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentPull or 1
+  db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls = db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls or {}
   -- make sure, that at least 1 pull exists
-  if #db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.pulls == 0 then
-    db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.pulls[1] = {}
+  if #db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls == 0 then
+    db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls[1] = {}
   end
   --ensure that there exists a map for the current sublevel
-  local sublevel = MDT:GetCurrentSubLevel()
-  if not MDT.dungeonMaps[db.currentDungeonIdx][sublevel] then
-    db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentSublevel = 1
+  local sublevel = ART:GetCurrentSubLevel()
+  if not ART.raidMaps[db.currentRaidIndex][sublevel] then
+    db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentSublevel = 1
   end
 
   --ensure the pulls table is not fully corrupted
@@ -222,15 +217,15 @@ function MDT:NormalizeCurrentPreset()
 
   -- Set current pull to last pull, if the actual current pull does not exists anymore
   if not
-      db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.pulls[
-      db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentPull] then
-    db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.currentPull = #
-        db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.pulls
+      db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls[
+      db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentPull] then
+    db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentPull = #
+        db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls
   end
 
-  for k, v in pairs(db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.pulls) do
+  for k, v in pairs(db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls) do
     if k == 0 then
-      db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.pulls[0] = nil
+      db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls[0] = nil
       break
     end
   end
@@ -240,12 +235,12 @@ function MDT:NormalizeCurrentPreset()
     for enemyIdx, clones in pairs(pull) do
       if tonumber(enemyIdx) then
         --enemy does not exist at all anymore
-        if not MDT.dungeonEnemies[db.currentDungeonIdx][enemyIdx] then
+        if not ART.raidEnemies[db.currentRaidIndex][enemyIdx] then
           pull[enemyIdx] = nil
         else
           --only clones
           for k, v in pairs(clones) do
-            if not MDT.dungeonEnemies[db.currentDungeonIdx][enemyIdx]["clones"][v] then
+            if not ART.raidEnemies[db.currentRaidIndex][enemyIdx]["clones"][v] then
               clones[k] = nil
             end
           end
@@ -255,105 +250,103 @@ function MDT:NormalizeCurrentPreset()
     pull["color"] = pull["color"] or "228b22"
   end
 
-  preset.difficulty = preset.difficulty or db.currentDifficulty
-
-  --make sure sublevel actually exists for the dungeon
+  --make sure sublevel actually exists for the raid
   --this might have been caused by bugged dropdowns in the past
   local maxSublevel = -1
-  for _, _ in pairs(MDT.dungeonMaps[db.currentDungeonIdx]) do
+  for _, _ in pairs(ART.raidMaps[db.currentRaidIndex]) do
     maxSublevel = maxSublevel + 1
   end
   if preset.value.currentSublevel > maxSublevel then preset.value.currentSublevel = maxSublevel end
 end
 
-function MDT:EnsureDBTables()
+function ART:EnsureDBTables()
   return self:NormalizeCurrentPreset()
 end
 
-function MDT:DeletePreset(index)
+function ART:DeletePreset(index)
   initializeDB()
   if index == 1 then return end
-  tremove(db.presets[db.currentDungeonIdx], index)
-  db.currentPreset[db.currentDungeonIdx] = index - 1
-  MDT:UpdatePresetDropDown()
-  MDT:UpdateMap()
+  tremove(db.presets[db.currentRaidIndex], index)
+  db.currentPreset[db.currentRaidIndex] = index - 1
+  ART:UpdatePresetDropDown()
+  ART:UpdateMap()
 end
 
----Counts the number of presets of the current dungeon
-function MDT:CountPresets()
+---Counts the number of presets of the current raid
+function ART:CountPresets()
   initializeDB()
-  return #db.presets[db.currentDungeonIdx] - 2
+  return #db.presets[db.currentRaidIndex] - 2
 end
 
----Deletes all presets from the current dungeon
-function MDT:DeleteAllPresets()
+---Deletes all presets from the current raid
+function ART:DeleteAllPresets()
   initializeDB()
-  local countPresets = #db.presets[db.currentDungeonIdx] - 1
+  local countPresets = #db.presets[db.currentRaidIndex] - 1
   for i = countPresets, 2, -1 do
-    tremove(db.presets[db.currentDungeonIdx], i)
-    db.currentPreset[db.currentDungeonIdx] = i - 1
+    tremove(db.presets[db.currentRaidIndex], i)
+    db.currentPreset[db.currentRaidIndex] = i - 1
   end
-  MDT:UpdatePresetDropDown()
-  MDT:UpdateMap()
+  ART:UpdatePresetDropDown()
+  ART:UpdateMap()
 end
 
-function MDT:ClearPreset(preset, silent)
+function ART:ClearPreset(preset, silent)
   if preset == self:GetCurrentPreset() then silent = false end
   table.wipe(preset.value.pulls)
   preset.value.currentPull = 1
-  --MDT:DeleteAllPresetObjects()
+  --ART:DeleteAllPresetObjects()
   self:EnsureDBTables()
   if not silent then
     self:UpdateMap()
     self:ReloadPullButtons()
   end
-  MDT:ColorPull()
+  ART:ColorPull()
 end
 
-function MDT:CreateNewPreset(name)
+function ART:CreateNewPreset(name)
   initializeDB()
   if name == "<New Preset>" then
-    MDT.main_frame.presetCreationLabel:SetText(string.format(L["Cannot create preset '%s'"], name))
-    MDT.main_frame.presetCreationCreateButton:SetDisabled(true)
-    MDT.main_frame.presetCreationCreateButton.text:SetTextColor(0.5, 0.5, 0.5)
-    MDT.main_frame.presetCreationFrame:DoLayout()
+    ART.main_frame.presetCreationLabel:SetText(string.format(L["Cannot create preset '%s'"], name))
+    ART.main_frame.presetCreationCreateButton:SetDisabled(true)
+    ART.main_frame.presetCreationCreateButton.text:SetTextColor(0.5, 0.5, 0.5)
+    ART.main_frame.presetCreationFrame:DoLayout()
     return
   end
   local duplicate = false
   local countPresets = 0
-  for k, v in pairs(db.presets[db.currentDungeonIdx]) do
+  for k, v in pairs(db.presets[db.currentRaidIndex]) do
     countPresets = countPresets + 1
     if v.text == name then duplicate = true end
   end
   if duplicate == false then
-    db.presets[db.currentDungeonIdx][countPresets + 1] = db.presets[db.currentDungeonIdx][countPresets] --put <New Preset> at the end of the list
+    db.presets[db.currentRaidIndex][countPresets + 1] = db.presets[db.currentRaidIndex][countPresets] --put <New Preset> at the end of the list
 
-    local startingPointPresetIdx = MDT.main_frame.PresetCreationDropDown:GetValue() - 1
+    local startingPointPresetIdx = ART.main_frame.PresetCreationDropDown:GetValue() - 1
     if startingPointPresetIdx > 0 then
-      db.presets[db.currentDungeonIdx][countPresets] = CopyTable(db.presets[db.currentDungeonIdx][
+      db.presets[db.currentRaidIndex][countPresets] = CopyTable(db.presets[db.currentRaidIndex][
       startingPointPresetIdx])
-      db.presets[db.currentDungeonIdx][countPresets].text = name
-      db.presets[db.currentDungeonIdx][countPresets].uid = nil
+      db.presets[db.currentRaidIndex][countPresets].text = name
+      db.presets[db.currentRaidIndex][countPresets].uid = nil
     else
-      db.presets[db.currentDungeonIdx][countPresets] = { text = name, value = {} }
+      db.presets[db.currentRaidIndex][countPresets] = { text = name, value = {} }
     end
 
-    db.currentPreset[db.currentDungeonIdx] = countPresets
-    MDT:EnsurePresetCreatedBy(db.presets[db.currentDungeonIdx][countPresets], true)
-    MDT.main_frame.presetCreationFrame:Hide()
-    MDT:UpdatePresetDropDown()
-    MDT:UpdateMap()
-    MDT:SetPresetColorPaletteInfo()
-    MDT:ColorAllPulls()
+    db.currentPreset[db.currentRaidIndex] = countPresets
+    ART:EnsurePresetCreatedBy(db.presets[db.currentRaidIndex][countPresets], true)
+    ART.main_frame.presetCreationFrame:Hide()
+    ART:UpdatePresetDropDown()
+    ART:UpdateMap()
+    ART:SetPresetColorPaletteInfo()
+    ART:ColorAllPulls()
   else
-    MDT.main_frame.presetCreationLabel:SetText(string.format(L["Preset '%s' already exists"], name))
-    MDT.main_frame.presetCreationCreateButton:SetDisabled(true)
-    MDT.main_frame.presetCreationCreateButton.text:SetTextColor(0.5, 0.5, 0.5)
-    MDT.main_frame.presetCreationFrame:DoLayout()
+    ART.main_frame.presetCreationLabel:SetText(string.format(L["Preset '%s' already exists"], name))
+    ART.main_frame.presetCreationCreateButton:SetDisabled(true)
+    ART.main_frame.presetCreationCreateButton.text:SetTextColor(0.5, 0.5, 0.5)
+    ART.main_frame.presetCreationFrame:DoLayout()
   end
 end
 
-function MDT:SanitizePresetName(text)
+function ART:SanitizePresetName(text)
   initializeDB()
   --check if name is valid, block button if so, unblock if valid
   if text == "<New Preset>" then
@@ -361,7 +354,7 @@ function MDT:SanitizePresetName(text)
   else
     local duplicate = false
     local countPresets = 0
-    for k, v in pairs(db.presets[db.currentDungeonIdx]) do
+    for k, v in pairs(db.presets[db.currentRaidIndex]) do
       countPresets = countPresets + 1
       if v.text == text then duplicate = true end
     end
@@ -369,41 +362,39 @@ function MDT:SanitizePresetName(text)
   end
 end
 
-function MDT:ValidateImportPreset(preset, allowKnownDungeon)
+function ART:ValidateImportPreset(preset, allowKnownRaid)
   if type(preset) ~= "table" then return false end
   if not preset.text then return false end
   if not preset.value then return false end
   if type(preset.text) ~= "string" then return false end
   if type(preset.value) ~= "table" then return false end
-  if not preset.value.currentDungeonIdx then return false end
+  if not preset.value.currentRaidIndex then return false end
   if not preset.value.currentPull then return false end
   if not preset.value.currentSublevel then return false end
   if not preset.value.pulls then return false end
   if type(preset.value.pulls) ~= "table" then return false end
-  if not MDT.dungeonList[preset.value.currentDungeonIdx] and
-      not (allowKnownDungeon and MDT.knownDungeons and MDT.knownDungeons[preset.value.currentDungeonIdx]) then
+  if not ART.raidList[preset.value.currentRaidIndex] and
+      not (allowKnownRaid and ART.knownRaids and ART.knownRaids[preset.value.currentRaidIndex]) then
     return false
   end
   return true
 end
 
-function MDT:ImportPreset(preset, fromLiveSession)
+function ART:ImportPreset(preset, fromLiveSession)
   initializeDB()
-  if not MDT:AreFramesInitialized() then
-    MDT:RunAfterFramesInitialized(function()
-      MDT:ImportPreset(preset, fromLiveSession)
+  if not ART:AreFramesInitialized() then
+    ART:RunAfterFramesInitialized(function()
+      ART:ImportPreset(preset, fromLiveSession)
     end)
     return
   end
 
-  --change dungeon to dungeon of the new preset
-  MDT:SetDungeonList(nil, preset.value.currentDungeonIdx)
-  MDT:UpdateDungeonDropDown()
-  MDT:UpdateToDungeon(preset.value.currentDungeonIdx, true)
+  --change raid to raid of the new preset
+  ART:UpdateToRaid(preset.value.currentRaidIndex, true)
   --search for uid
   local updateIndex
   local duplicatePreset
-  for k, v in pairs(db.presets[db.currentDungeonIdx]) do
+  for k, v in pairs(db.presets[db.currentRaidIndex]) do
     if preset.uid and v.uid and v.uid == preset.uid then
       updateIndex = k
       duplicatePreset = v
@@ -433,8 +424,8 @@ function MDT:ImportPreset(preset, fromLiveSession)
 
   local updateCallback = function()
     clearConfirmationCloseCallback()
-    db.presets[db.currentDungeonIdx][updateIndex] = preset
-    db.currentPreset[db.currentDungeonIdx] = updateIndex
+    db.presets[db.currentRaidIndex][updateIndex] = preset
+    db.currentPreset[db.currentRaidIndex] = updateIndex
     finishImport()
   end
 
@@ -442,7 +433,7 @@ function MDT:ImportPreset(preset, fromLiveSession)
     clearConfirmationCloseCallback()
     local name = preset.text
     local num = 2
-    for k, v in pairs(db.presets[db.currentDungeonIdx]) do
+    for k, v in pairs(db.presets[db.currentRaidIndex]) do
       if name == v.text then
         name = preset.text.." "..num
         num = num + 1
@@ -451,18 +442,18 @@ function MDT:ImportPreset(preset, fromLiveSession)
     preset.text = name
     if fromLiveSession then
       if not preserveUid and duplicatePreset then duplicatePreset.uid = nil end
-      MDT:SetUniqueID(preset)
+      ART:SetUniqueID(preset)
     else
       if not preserveUid then preset.uid = nil end
-      MDT:SetUniqueID(preset)
+      ART:SetUniqueID(preset)
     end
     local countPresets = 0
-    for k, v in pairs(db.presets[db.currentDungeonIdx]) do
+    for k, v in pairs(db.presets[db.currentRaidIndex]) do
       countPresets = countPresets + 1
     end
-    db.presets[db.currentDungeonIdx][countPresets + 1] = db.presets[db.currentDungeonIdx][countPresets] --put <New Preset> at the end of the list
-    db.presets[db.currentDungeonIdx][countPresets] = preset
-    db.currentPreset[db.currentDungeonIdx] = countPresets
+    db.presets[db.currentRaidIndex][countPresets + 1] = db.presets[db.currentRaidIndex][countPresets] --put <New Preset> at the end of the list
+    db.presets[db.currentRaidIndex][countPresets] = preset
+    db.currentPreset[db.currentRaidIndex] = countPresets
     finishImport()
   end
   local closeCallback = function()
@@ -506,8 +497,8 @@ end
 
 ---Saves currently selected automatic coloring settings to the current
 ---This can be achieved easier, but it will increase the export text length significantly for non custom palettes.
-function MDT:SetPresetColorPaletteInfo()
-  local preset = MDT:GetCurrentPreset()
+function ART:SetPresetColorPaletteInfo()
+  local preset = ART:GetCurrentPreset()
   preset.colorPaletteInfo = {}
   preset.colorPaletteInfo.autoColoring = db.colorPaletteInfo.autoColoring
   if preset.colorPaletteInfo.autoColoring then
@@ -518,26 +509,26 @@ function MDT:SetPresetColorPaletteInfo()
     end
   end
   --Code below works, but in most cases it saves more data to the preset and thereby significantly increases the export string length
-  --MDT:GetCurrentPreset().colorPaletteInfo = db.colorPaletteInfo
+  --ART:GetCurrentPreset().colorPaletteInfo = db.colorPaletteInfo
 end
 
-function MDT:GetPresetColorPaletteInfo(preset)
-  preset = preset or MDT:GetCurrentPreset()
+function ART:GetPresetColorPaletteInfo(preset)
+  preset = preset or ART:GetCurrentPreset()
   if not preset.colorPaletteInfo then
-    MDT:SetPresetColorPaletteInfo()
+    ART:SetPresetColorPaletteInfo()
   end
   return preset.colorPaletteInfo
 end
 
-function MDT:RenamePreset(renameText, takeOwnership)
+function ART:RenamePreset(renameText, takeOwnership)
   initializeDB()
-  local preset = db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]]
+  local preset = db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]]
   preset.text = renameText
   if takeOwnership then
-    MDT:EnsurePresetCreatedBy(preset, true)
+    ART:EnsurePresetCreatedBy(preset, true)
     preset.uid = nil
-    MDT:SetUniqueID(preset)
+    ART:SetUniqueID(preset)
   end
-  MDT.main_frame.RenameFrame:Hide()
-  MDT:UpdatePresetDropDown()
+  ART.main_frame.RenameFrame:Hide()
+  ART:UpdatePresetDropDown()
 end

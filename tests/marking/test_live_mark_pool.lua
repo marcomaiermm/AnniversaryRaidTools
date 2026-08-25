@@ -61,9 +61,9 @@ end
 
 local settings = { autoMark = true, autoMarkModifier = "ALT" }
 ART.GetDB = function() return settings end
-assert(loadfile(root.."/Core/MarkResolver.lua"))("AnniversaryRaidTools", { ART = ART })
-assert(loadfile(root.."/Modules/RaidMarks.lua"))("AnniversaryRaidTools", { ART = ART })
-assert(loadfile(root.."/Modules/LiveMarks.lua"))("AnniversaryRaidTools", { ART = ART })
+assert(loadfile(root.."/Core/MarkResolver.lua"))("AnniversaryRaidTools", ART)
+assert(loadfile(root.."/Modules/RaidMarks.lua"))("AnniversaryRaidTools", ART)
+assert(loadfile(root.."/Modules/LiveMarks.lua"))("AnniversaryRaidTools", ART)
 
 local raid = { enemies = {
   ["100"] = { spawns = { { key = "s1", npcId = 100 }, { key = "s2", npcId = 100 } } },

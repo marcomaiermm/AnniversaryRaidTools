@@ -1,5 +1,5 @@
-local _, MDT = ...
-local L = MDT.L
+local _, ART = ...
+local L = ART.L
 local objectDrawLayer = "OVERLAY"
 local AceGUI = LibStub("AceGUI-3.0")
 
@@ -10,13 +10,13 @@ local twipe, tinsert, tremove, pi, max, pairs, ipairs, GameTooltip =
 local activeTextures = {}
 local texturePool = {}
 local noteFramePool
-MDT.presetObjectActiveTextures = activeTextures
-MDT.drawingActive = false
+ART.presetObjectActiveTextures = activeTextures
+ART.drawingActive = false
 
 local function getTexture()
   local size = #texturePool
   if size == 0 then
-    return MDT.main_frame.mapPanelFrame:CreateTexture(nil, "OVERLAY", nil, 0)
+    return ART.main_frame.mapPanelFrame:CreateTexture(nil, "OVERLAY", nil, 0)
   else
     local tex = texturePool[size]
     tremove(texturePool, size)
@@ -29,7 +29,7 @@ local function getTexture()
   end
 end
 
-function MDT:AcquirePresetObjectTexture()
+function ART:AcquirePresetObjectTexture()
   return getTexture()
 end
 
@@ -39,7 +39,7 @@ local function releaseTexture(tex)
 end
 
 ---ReleaseAllActiveTextures
-function MDT:ReleaseAllActiveTextures()
+function ART:ReleaseAllActiveTextures()
   for k, tex in pairs(activeTextures) do
     releaseTexture(tex)
   end
@@ -47,7 +47,7 @@ function MDT:ReleaseAllActiveTextures()
   if noteFramePool then noteFramePool:ReleaseAll() end
 end
 
-function MDT:SetPresetNotesMovable(movable)
+function ART:SetPresetNotesMovable(movable)
   if not noteFramePool then return end
   if movable then
     for _, note in pairs(noteFramePool.active) do
@@ -56,9 +56,9 @@ function MDT:SetPresetNotesMovable(movable)
       local xOffset, yOffset
 
       note:SetScript("OnMouseDown", function()
-        local currentPreset = MDT:GetCurrentPreset()
-        local x, y = MDT:GetCursorPosition()
-        local scale = MDT:GetScale()
+        local currentPreset = ART:GetCurrentPreset()
+        local x, y = ART:GetCursorPosition()
+        local scale = ART:GetScale()
         x = x * (1 / scale)
         y = y * (1 / scale)
         local nx = currentPreset.objects[note.objectIndex].d[1]
@@ -71,17 +71,17 @@ function MDT:SetPresetNotesMovable(movable)
       end)
       note:SetScript("OnDragStop", function()
         note:StopMovingOrSizing()
-        local x, y = MDT:GetCursorPosition()
-        local scale = MDT:GetScale()
+        local x, y = ART:GetCursorPosition()
+        local scale = ART:GetScale()
         x = x * (1 / scale)
         y = y * (1 / scale)
-        local currentPreset = MDT:GetCurrentPreset()
+        local currentPreset = ART:GetCurrentPreset()
         currentPreset.objects[note.objectIndex].d[1] = x - xOffset
         currentPreset.objects[note.objectIndex].d[2] = y - yOffset
-        if MDT.liveSessionActive then
-          MDT:LiveSession_SendNoteCommand("move", note.objectIndex, x - xOffset, y - yOffset)
+        if ART.liveSessionActive then
+          ART:LiveSession_SendNoteCommand("move", note.objectIndex, x - xOffset, y - yOffset)
         end
-        MDT:DrawAllPresetObjects()
+        ART:DrawAllPresetObjects()
       end)
     end
   else
@@ -93,7 +93,7 @@ function MDT:SetPresetNotesMovable(movable)
 end
 
 ---scale if preset comes from live session
-function MDT:StorePresetObject(obj, ignoreScale, preset)
+function ART:StorePresetObject(obj, ignoreScale, preset)
   --adjust scale
   if not ignoreScale then
     local scale = self:GetScale()
@@ -124,7 +124,7 @@ function MDT:StorePresetObject(obj, ignoreScale, preset)
 end
 
 ---excluding notes, these are handled in OverrideScrollFrameScripts
-function MDT:UpdatePresetObjectOffsets(idx, x, y, preset, silent)
+function ART:UpdatePresetObjectOffsets(idx, x, y, preset, silent)
   --adjust coords to scale
   local scale = self:GetScale()
   x = self:Round(x * (1 / scale), 1)
@@ -146,8 +146,8 @@ function MDT:UpdatePresetObjectOffsets(idx, x, y, preset, silent)
 end
 
 ---Draws all Preset objects on the map canvas/sublevel
-function MDT:DrawAllPresetObjects()
-  MDT:Async(function()
+function ART:DrawAllPresetObjects()
+  ART:Async(function()
     self:ReleaseAllActiveTextures()
     coroutine.yield()
     local scale = self:GetScale()
@@ -162,7 +162,7 @@ function MDT:DrawAllPresetObjects()
 end
 
 ---Draws specific preset object
-function MDT:DrawPresetObject(obj, objectIndex, scale, currentPreset, currentSublevel)
+function ART:DrawPresetObject(obj, objectIndex, scale, currentPreset, currentSublevel)
   if not objectIndex then
     for oIndex, o in pairs(currentPreset.objects) do
       if o == obj then
@@ -239,7 +239,7 @@ function MDT:DrawPresetObject(obj, objectIndex, scale, currentPreset, currentSub
 end
 
 ---Deletes objects from the current preset in the current sublevel
-function MDT:DeletePresetObjects(preset, silent)
+function ART:DeletePresetObjects(preset, silent)
   preset = preset or self:GetCurrentPreset()
   if preset == self:GetCurrentPreset() then silent = false end
   local currentSublevel = self:GetCurrentSubLevel()
@@ -252,9 +252,9 @@ function MDT:DeletePresetObjects(preset, silent)
 end
 
 ---Undo the latest drawing
-function MDT:PresetObjectStepBack(preset, silent, ignoreLiveSession)
+function ART:PresetObjectStepBack(preset, silent, ignoreLiveSession)
   --keybind can be pressed before the frames are initialized
-  if not MDT:AreFramesInitialized() then return end
+  if not ART:AreFramesInitialized() then return end
   preset = preset or self:GetCurrentPreset()
   if preset == self:GetCurrentPreset() then silent = false end
   preset.objects = preset.objects or {}
@@ -275,9 +275,9 @@ function MDT:PresetObjectStepBack(preset, silent, ignoreLiveSession)
 end
 
 ---Redo the latest drawing
-function MDT:PresetObjectStepForward(preset, silent, ignoreLiveSession)
-  if not MDT:AreFramesInitialized() then return end
-  preset = preset or MDT:GetCurrentPreset()
+function ART:PresetObjectStepForward(preset, silent, ignoreLiveSession)
+  if not ART:AreFramesInitialized() then return end
+  preset = preset or ART:GetCurrentPreset()
   if preset == self:GetCurrentPreset() then silent = false end
   preset.objects = preset.objects or {}
   local length = 0
@@ -299,17 +299,17 @@ end
 ---StartMovingObject
 local objectIndex
 local originalX, originalY
-function MDT:StartMovingObject()
+function ART:StartMovingObject()
   --we have to redraw all objects first, as the objectIndex needs to be set on every texture
-  MDT:DrawAllPresetObjects()
-  MDT.drawingActive = true
-  local frame = MDT.main_frame
-  objectIndex = MDT:GetHighestPresetObjectIndexAtCursor()
-  local startx, starty = MDT:GetCursorPosition()
-  originalX, originalY = MDT:GetCursorPosition()
+  ART:DrawAllPresetObjects()
+  ART.drawingActive = true
+  local frame = ART.main_frame
+  objectIndex = ART:GetHighestPresetObjectIndexAtCursor()
+  local startx, starty = ART:GetCursorPosition()
+  originalX, originalY = ART:GetCursorPosition()
   frame.toolbar:SetScript("OnUpdate", function(self, tick)
-    if not MDTScrollFrame:IsMouseOver() then return end
-    local x, y = MDT:GetCursorPosition()
+    if not ARTScrollFrame:IsMouseOver() then return end
+    local x, y = ART:GetCursorPosition()
     if x ~= startx or y ~= starty then
       for j, tex in pairs(activeTextures) do
         if tex.objectIndex == objectIndex then
@@ -319,14 +319,14 @@ function MDT:StartMovingObject()
           end
         end
       end
-      startx, starty = MDT:GetCursorPosition()
+      startx, starty = ART:GetCursorPosition()
     end
   end)
 end
 
 ---HideAllPresetObjects
 ---Hide textures during rescaling
-function MDT:HideAllPresetObjects()
+function ART:HideAllPresetObjects()
   --drawings
   for _, tex in pairs(activeTextures) do
     tex:Hide()
@@ -340,20 +340,20 @@ function MDT:HideAllPresetObjects()
 end
 
 ---StopMovingDrawing
-function MDT:StopMovingObject()
-  local frame = MDT.main_frame
+function ART:StopMovingObject()
+  local frame = ART.main_frame
   frame.toolbar:SetScript("OnUpdate", nil)
   if objectIndex then
-    local newX, newY = MDT:GetCursorPosition()
-    MDT:UpdatePresetObjectOffsets(objectIndex, originalX - newX, originalY - newY)
+    local newX, newY = ART:GetCursorPosition()
+    ART:UpdatePresetObjectOffsets(objectIndex, originalX - newX, originalY - newY)
     if self.liveSessionActive then self:LiveSession_SendObjectOffsets(objectIndex, originalX - newX, originalY - newY) end
   end
   objectIndex = nil
-  MDT.drawingActive = false
+  ART.drawingActive = false
 end
 
 ---GetHighestPresetObjectIndexAtCursor
-function MDT:GetHighestPresetObjectIndexAtCursor()
+function ART:GetHighestPresetObjectIndexAtCursor()
   local currentSublevel = -8
   local highestTexture
   for k, v in pairs(activeTextures) do
@@ -372,18 +372,18 @@ end
 
 ---StartEraserDrawing
 local changedObjects = {}
-function MDT:StartEraserDrawing()
-  MDT:DrawAllPresetObjects()
-  MDT.drawingActive = true
-  local frame = MDT.main_frame
+function ART:StartEraserDrawing()
+  ART:DrawAllPresetObjects()
+  ART.drawingActive = true
+  local frame = ART.main_frame
   local startx, starty
-  local scale = MDT:GetScale()
+  local scale = ART:GetScale()
   twipe(changedObjects)
   frame.toolbar:SetScript("OnUpdate", function(self, tick)
-    if not MDTScrollFrame:IsMouseOver() then return end
-    local x, y = MDT:GetCursorPosition()
+    if not ARTScrollFrame:IsMouseOver() then return end
+    local x, y = ART:GetCursorPosition()
     if x ~= startx or y ~= starty then
-      local highestObjectIdx = MDT:GetHighestPresetObjectIndexAtCursor()
+      local highestObjectIdx = ART:GetHighestPresetObjectIndexAtCursor()
       for j, tex in pairs(activeTextures) do
         if tex:IsMouseOver() and tex:IsShown() and tex.objectIndex == highestObjectIdx then --tex.coords means this is a line
           tex:Hide()
@@ -398,7 +398,7 @@ function MDT:StartEraserDrawing()
               end
             end
             --delete saved lines
-            local currentPreset = MDT:GetCurrentPreset()
+            local currentPreset = ART:GetCurrentPreset()
             for objectIndex, obj in pairs(currentPreset.objects) do
               if objectIndex == highestObjectIdx then
                 for coordIdx, coord in pairs(obj.l) do
@@ -421,25 +421,25 @@ function MDT:StartEraserDrawing()
 end
 
 ---StopEraserDrawing
-function MDT:StopEraserDrawing()
-  local frame = MDT.main_frame
+function ART:StopEraserDrawing()
+  local frame = ART.main_frame
   frame.toolbar:SetScript("OnUpdate", nil)
   if self.liveSessionActive then self:LiveSession_SendUpdatedObjects(changedObjects) end
-  MDT:DrawAllPresetObjects()
-  MDT.drawingActive = false
+  ART:DrawAllPresetObjects()
+  ART.drawingActive = false
 end
 
 ---DrawCircle
-function MDT:DrawCircle(x, y, size, color, layer, layerSublevel, isOwn, objectIndex, tex, noinsert, extrax, extray)
+function ART:DrawCircle(x, y, size, color, layer, layerSublevel, isOwn, objectIndex, tex, noinsert, extrax, extray)
   local circle = tex or getTexture()
   if not layer then layer = objectDrawLayer end
   circle:SetDrawLayer(layer, layerSublevel)
-  circle:SetTexture(MDT.AddonPath.."Textures\\Circle_White")
+  circle:SetTexture(ART.AddonPath.."Textures\\Circle_White")
   circle:SetVertexColor(color.r, color.g, color.b, color.a)
   circle:SetWidth(1.1 * size)
   circle:SetHeight(1.1 * size)
   circle:ClearAllPoints()
-  circle:SetPoint("CENTER", MDT.main_frame.mapPanelTile1, "TOPLEFT", x, y)
+  circle:SetPoint("CENTER", ART.main_frame.mapPanelTile1, "TOPLEFT", x, y)
   circle:Show()
   circle.isOwn = isOwn
   circle.objectIndex = objectIndex
@@ -450,12 +450,12 @@ function MDT:DrawCircle(x, y, size, color, layer, layerSublevel, isOwn, objectIn
 end
 
 ---DrawLine
-function MDT:DrawLine(x, y, a, b, size, color, smooth, layer, layerSublevel, lineFactor, isOwn, objectIndex)
+function ART:DrawLine(x, y, a, b, size, color, smooth, layer, layerSublevel, lineFactor, isOwn, objectIndex)
   local line = getTexture()
   if not layer then layer = objectDrawLayer end
-  line:SetTexture(MDT.AddonPath.."Textures\\Square_White")
+  line:SetTexture(ART.AddonPath.."Textures\\Square_White")
   line:SetVertexColor(color.r, color.g, color.b, color.a)
-  DrawLine(line, MDT.main_frame.mapPanelTile1, x, y, a, b, size, lineFactor and lineFactor or 1.1, "TOPLEFT")
+  DrawLine(line, ART.main_frame.mapPanelTile1, x, y, a, b, size, lineFactor and lineFactor or 1.1, "TOPLEFT")
   line:SetDrawLayer(layer, layerSublevel)
   line:Show()
   line.isOwn = isOwn
@@ -463,22 +463,22 @@ function MDT:DrawLine(x, y, a, b, size, color, smooth, layer, layerSublevel, lin
   line.coords = { x, y, a, b }
   tinsert(activeTextures, line)
   if smooth == true then
-    MDT:DrawCircle(x, y, size, color, layer, layerSublevel, isOwn, objectIndex)
+    ART:DrawCircle(x, y, size, color, layer, layerSublevel, isOwn, objectIndex)
   end
 end
 
 ---DrawTriangle
-function MDT:DrawTriangle(x, y, rotation, size, color, layer, layerSublevel, isOwn, objectIndex)
+function ART:DrawTriangle(x, y, rotation, size, color, layer, layerSublevel, isOwn, objectIndex)
   local triangle = getTexture()
   if not layer then layer = objectDrawLayer end
-  triangle:SetTexture(MDT.AddonPath.."Textures\\triangle")
+  triangle:SetTexture(ART.AddonPath.."Textures\\triangle")
   triangle:SetVertexColor(color.r, color.g, color.b, color.a)
   triangle:Show()
   triangle:SetWidth(size)
   triangle:SetHeight(size)
   triangle:SetRotation(rotation + pi)
   triangle:ClearAllPoints()
-  triangle:SetPoint("CENTER", MDT.main_frame.mapPanelTile1, "TOPLEFT", x, y)
+  triangle:SetPoint("CENTER", ART.main_frame.mapPanelTile1, "TOPLEFT", x, y)
   triangle:SetDrawLayer(layer, layerSublevel)
   triangle.isOwn = isOwn
   triangle.objectIndex = objectIndex
@@ -489,21 +489,21 @@ local noteEditbox
 
 --store text in nobj
 local function updateNoteObjText(text, note)
-  local currentPreset = MDT:GetCurrentPreset()
+  local currentPreset = ART:GetCurrentPreset()
   currentPreset.objects[note.objectIndex].d[5] = text
-  if MDT.liveSessionActive then MDT:LiveSession_SendNoteCommand("text", note.objectIndex, text) end
+  if ART.liveSessionActive then ART:LiveSession_SendNoteCommand("text", note.objectIndex, text) end
 end
 
 local function deleteNoteObj(note)
-  local currentPreset = MDT:GetCurrentPreset()
+  local currentPreset = ART:GetCurrentPreset()
   tremove(currentPreset.objects, note.objectIndex)
-  if MDT.liveSessionActive then MDT:LiveSession_SendNoteCommand("delete", note.objectIndex, "0") end
-  MDT:DrawAllPresetObjects()
+  if ART.liveSessionActive then ART:LiveSession_SendNoteCommand("delete", note.objectIndex, "0") end
+  ART:DrawAllPresetObjects()
 end
 
 local function makeNoteEditbox()
   local editbox = AceGUI:Create("SimpleGroup")
-  editbox.frame:SetParent(MDT.main_frame)
+  editbox.frame:SetParent(ART.main_frame)
   editbox:SetWidth(240)
   editbox:SetHeight(120)
   editbox.frame:SetFrameStrata("DIALOG")
@@ -511,7 +511,7 @@ local function makeNoteEditbox()
   if not editbox.frame.SetBackdrop then
     Mixin(editbox.frame, BackdropTemplateMixin)
   end
-  editbox.frame:SetBackdropColor(unpack(MDT.BackdropColor))
+  editbox.frame:SetBackdropColor(unpack(ART.BackdropColor))
   editbox:SetLayout("Flow")
   editbox.multiBox = AceGUI:Create("MultiLineEditBox")
   editbox.multiBox:SetLabel(L["Note Text:"])
@@ -538,10 +538,10 @@ local function makeNoteEditbox()
     ]]
   editbox.frame:Hide()
   editbox:AddChild(editbox.multiBox)
-  MDT:FixAceGUIShowHide(editbox, nil, nil, true)
+  ART:FixAceGUIShowHide(editbox, nil, nil, true)
   editbox.frame:SetScript("OnShow", function()
-    hooksecurefunc(MDT, "MouseDownHook", function() editbox.frame:Hide() end)
-    hooksecurefunc(MDT, "ZoomMap", function() editbox.frame:Hide() end)
+    hooksecurefunc(ART, "MouseDownHook", function() editbox.frame:Hide() end)
+    hooksecurefunc(ART, "ZoomMap", function() editbox.frame:Hide() end)
   end)
 
   return editbox
@@ -550,7 +550,7 @@ end
 local currentNote
 
 local function openContextMenu()
-  MDT:CreateContextMenu(MDT.main_frame, function(ownerRegion, rootDescription)
+  ART:CreateContextMenu(ART.main_frame, function(ownerRegion, rootDescription)
     rootDescription:CreateButton(L["Edit"], function()
       currentNote:OpenEditBox()
     end)
@@ -572,17 +572,17 @@ local function POIButton_CalculateNumericTexCoords(index, color)
 end
 
 ---DrawNote
-function MDT:DrawNote(x, y, text, objectIndex)
+function ART:DrawNote(x, y, text, objectIndex)
   if not noteFramePool then
-    noteFramePool = MDT.CreateFramePool("Button", MDT.main_frame.mapPanelFrame, "QuestPinTemplate")
+    noteFramePool = ART.CreateFramePool("Button", ART.main_frame.mapPanelFrame, "QuestPinTemplate")
   end
-  local scale = MDT:GetScale()
+  local scale = ART:GetScale()
   --setup
   local note = noteFramePool:Acquire()
   note.noteIdx = #noteFramePool.active
   note.objectIndex = objectIndex
   note:ClearAllPoints()
-  note:SetPoint("CENTER", MDT.main_frame.mapPanelTile1, "TOPLEFT", x, y)
+  note:SetPoint("CENTER", ART.main_frame.mapPanelTile1, "TOPLEFT", x, y)
   note:SetSize(12 * scale, 12 * scale)
   local idx = note.noteIdx % 25
   if idx == 0 then idx = 1 end

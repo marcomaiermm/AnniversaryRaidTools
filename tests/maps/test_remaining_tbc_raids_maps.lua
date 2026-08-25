@@ -2,15 +2,14 @@
 local root = arg and arg[1] or "."
 local ART = { StaticData = { raids = {} } }
 _G.ART = ART
-local addon = { ART = ART }
 local raids = {
   { "SerpentshrineCavern", "serpentshrine-cavern", 548, { 332 }, { "CoilfangReservoir1_" } },
   { "TheEye", "the-eye", 550, { 334 }, { "TempestKeep1_" } },
   { "SunwellPlateau", "sunwell-plateau", 580, { 335, 336 }, { "SunwellPlateau", "SunwellPlateau1_" } },
 }
 for _, spec in ipairs(raids) do
-  local map = assert(loadfile(root.."/Raids/TBC/Maps/"..spec[1]..".lua"))("AnniversaryRaidTools", addon)
-  local transform = assert(loadfile(root.."/Raids/TBC/Transforms/"..spec[1]..".lua"))("AnniversaryRaidTools", addon)
+  local map = assert(loadfile(root.."/Raids/TBC/Maps/"..spec[1]..".lua"))("AnniversaryRaidTools", ART)
+  local transform = assert(loadfile(root.."/Raids/TBC/Transforms/"..spec[1]..".lua"))("AnniversaryRaidTools", ART)
   local raid = assert(loadfile(root.."/Raids/TBC/Generated/"..spec[1]..".lua"))()
   assert(map.raidKey == spec[2] and map.mapId == spec[3] and #map.sublevels == #spec[4])
   for floor, uiMapId in ipairs(spec[4]) do

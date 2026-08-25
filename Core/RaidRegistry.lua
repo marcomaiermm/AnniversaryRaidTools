@@ -1,13 +1,9 @@
 -- Validated, stable-keyed raid definition registry.
 
-local _, addon = ...
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local Registry = ART.RaidRegistry or {}
 ART.RaidRegistry = Registry
-if addon and addon.RaidRegistry == nil then addon.RaidRegistry = Registry end
 
 local sources = { azerothcore = true, ["live-observed"] = true, manual = true, ["client-data"] = true, derived = true }
 local confidence = { verified = true, high = true, candidate = true, ["review-required"] = true }

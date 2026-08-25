@@ -1,7 +1,7 @@
 # AnniversaryRaidTools Agent Rules
 
 AnniversaryRaidTools is a raid-route planner for the WoW TBC Anniversary clients
-`20505` and `20506`. It is derived from Nnoggie's Mythic Dungeon Tools
+`20505` and `20506`.
 
 ## 1. Think Before Coding
 

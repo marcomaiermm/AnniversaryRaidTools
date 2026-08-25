@@ -3,7 +3,6 @@
 -- Source: TBC candidate snapshot; not Anniversary-verified.
 -- SourceRef: https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/outland/hellfire_citadel/magtheridons_lair/magtheridons_lair.cpp | https://github.com/cmangos/mangos-tbc/blob/adbc7f747a3a5c4741a012d86f6cd8112238b5bc/src/game/AI/ScriptDevAI/scripts/outland/hellfire_citadel/magtheridons_lair/boss_magtheridon.cpp
 -- ObservedAt: 2026-08-21T21:30:00Z
--- Nnoggie's Mythic Dungeon Tools attribution and GPL-2.0 terms remain in the repository.
 local raid = {
   schemaVersion = 1,
   key = "magtheridons-lair",

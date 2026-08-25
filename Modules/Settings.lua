@@ -1,5 +1,5 @@
-local _, MDT = ...
-local L = MDT.L
+local _, ART = ...
+local L = ART.L
 local mainFrameStrata = "HIGH"
 local panelHeight = 30
 
@@ -15,55 +15,42 @@ local colorPaletteNames = {
   [6] = L["Custom"],
 }
 
-local enemyForcesTooltipIcon = "|T"..MDT.AddonPath.."Textures\\MDTMinimap:0:0|t"
-local enemyForcesTooltipLabel = L["Enemy Info NPC Enemy Forces"]
-local enemyForcesTooltipOptions = {
-  [1] = "None",
-  [2] = enemyForcesTooltipIcon..enemyForcesTooltipLabel..": 1.2% (5)",
-  [3] = enemyForcesTooltipIcon..enemyForcesTooltipLabel..": 5",
-  [4] = enemyForcesTooltipIcon..enemyForcesTooltipLabel..": 1.2%",
-  [5] = enemyForcesTooltipIcon.."1.2% (5)",
-  [6] = enemyForcesTooltipIcon.."5",
-  [7] = enemyForcesTooltipIcon.."1.2%",
-}
-local enemyForcesTooltipOptionOrder = { 1, 2, 4, 3, 5, 7, 6 }
-
-MDT:RegisterNavigationSection({
+ART:RegisterNavigationSection({
   key = "settings",
   name = L["Settings"],
   tooltip = L["Settings"],
-  texture = "Interface\\AddOns\\"..MDT.AddonName.."\\Textures\\icons",
+  texture = "Interface\\AddOns\\"..ART.AddonName.."\\Textures\\icons",
   texCoords = { 0, 0.25, 0.25, 0.5 },
   iconSize = 25,
   iconOffsetX = 0.75,
   onShow = function()
-    MDT:Settings_RefreshLayout()
+    ART:Settings_RefreshLayout()
   end,
 })
 
-function MDT:ToggleSettingsDialog()
-  local db = MDT:GetDB()
+function ART:ToggleSettingsDialog()
+  local db = ART:GetDB()
   if not db then return end
 
-  if not MDT.main_frame.settingsFrame then
-    MDT:MakeSettingsFrame(MDT.main_frame)
+  if not ART.main_frame.settingsFrame then
+    ART:MakeSettingsFrame(ART.main_frame)
   end
-  MDT:SetCurrentSection("settings")
+  ART:SetCurrentSection("settings")
   if db.colorPaletteInfo.colorPaletteIdx == 6 then
-    MDT:OpenCustomColorsDialog()
+    ART:OpenCustomColorsDialog()
   end
 end
 
-function MDT:OpenCustomColorsDialog()
-  if not MDT.main_frame.settingsFrame then
-    MDT:MakeSettingsFrame(MDT.main_frame)
+function ART:OpenCustomColorsDialog()
+  if not ART.main_frame.settingsFrame then
+    ART:MakeSettingsFrame(ART.main_frame)
   end
-  MDT:SetCurrentSection("settings")
-  MDT:Settings_RefreshLayout()
+  ART:SetCurrentSection("settings")
+  ART:Settings_RefreshLayout()
 end
 
-function MDT:Settings_RefreshLayout()
-  local frame = MDT.main_frame
+function ART:Settings_RefreshLayout()
+  local frame = ART.main_frame
   if not frame or not frame.settingsFrame then return end
 
   frame.settingsFrame.frame:Show()
@@ -82,8 +69,8 @@ function MDT:Settings_RefreshLayout()
 end
 
 ---creates frame housing settings for user customized color palette
-function MDT:MakeCustomColorFrame(frame)
-  local db = MDT:GetDB()
+function ART:MakeCustomColorFrame(frame)
+  local db = ART:GetDB()
   if not db then return end
 
   --Base frame for custom palette setup
@@ -114,10 +101,10 @@ function MDT:MakeCustomColorFrame(frame)
     else
       db.colorPaletteInfo.numberCustomColors = value
     end
-    MDT:SetPresetColorPaletteInfo()
-    MDT:ReloadPullButtons()
-    MDT:MakeCustomColorFrame(frame)
-    MDT:OpenCustomColorsDialog()
+    ART:SetPresetColorPaletteInfo()
+    ART:ReloadPullButtons()
+    ART:MakeCustomColorFrame(frame)
+    ART:OpenCustomColorsDialog()
   end)
 
   --Loop to create as many colorpickers as requested limited by db.colorPaletteInfo.numberCustomColors
@@ -136,8 +123,8 @@ function MDT:MakeCustomColorFrame(frame)
     frame.CustomColorFrame.ColorPicker[i]:SetHeight(15)
     frame.CustomColorFrame.ColorPicker[i]:SetCallback("OnValueChanged", function(widget, event, r, g, b)
       db.colorPaletteInfo.customPaletteValues[i] = { r, g, b }
-      MDT:SetPresetColorPaletteInfo()
-      MDT:ReloadPullButtons()
+      ART:SetPresetColorPaletteInfo()
+      ART:ReloadPullButtons()
     end)
     frame.CustomColorFrame:AddChild(frame.CustomColorFrame.ColorPicker[i])
   end
@@ -146,10 +133,10 @@ function MDT:MakeCustomColorFrame(frame)
   end
 end
 
-function MDT:MakeSettingsFrame(frame)
+function ART:MakeSettingsFrame(frame)
   if frame.settingsFrame then return end
 
-  local db = MDT:GetDB()
+  local db = ART:GetDB()
   if not db then return end
 
   local parentFrame = frame.sectionContentFrames and frame.sectionContentFrames.settings or frame
@@ -200,30 +187,18 @@ function MDT:MakeSettingsFrame(frame)
   frame.minimapCheckbox:SetWidth(settingWidth)
   frame.minimapCheckbox:SetValue(not db.minimap.hide)
   frame.minimapCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
-    if value then MDT:ShowMinimapButton() else MDT:HideMinimapButton() end
+    if value then ART:ShowMinimapButton() else ART:HideMinimapButton() end
   end)
   frame.settingsGeneralColumn:AddChild(frame.minimapCheckbox)
 
-  frame.compartmentCheckbox = AceGUI:Create("CheckBox")
-  frame.compartmentCheckbox:SetLabel(L["Enable Compartment Button"])
-  frame.compartmentCheckbox:SetWidth(settingWidth)
-  frame.compartmentCheckbox:SetValue(not db.minimap.compartmentHide)
-  frame.compartmentCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
-    MDT:SetCompartmentButtonShown(value)
+  frame.combatLoggingCheckbox = AceGUI:Create("CheckBox")
+  frame.combatLoggingCheckbox:SetLabel(L["Automatic combat logging in raids"])
+  frame.combatLoggingCheckbox:SetWidth(settingWidth)
+  frame.combatLoggingCheckbox:SetValue(db.combatLogging.enabled == true)
+  frame.combatLoggingCheckbox:SetCallback("OnValueChanged", function(_, _, value)
+    ART:CombatLogging_SetEnabled(value)
   end)
-  if MDT:IsRetail() then
-    frame.settingsGeneralColumn:AddChild(frame.compartmentCheckbox)
-  end
-
-  frame.forcesCheckbox = AceGUI:Create("CheckBox")
-  frame.forcesCheckbox:SetLabel(L["Use forces count"])
-  frame.forcesCheckbox:SetWidth(settingWidth)
-  frame.forcesCheckbox:SetValue(db.useForcesCount)
-  frame.forcesCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
-    db.useForcesCount = value
-    MDT:ReloadPullButtons()
-  end)
-  frame.settingsGeneralColumn:AddChild(frame.forcesCheckbox)
+  frame.settingsGeneralColumn:AddChild(frame.combatLoggingCheckbox)
 
   frame.pullButtonHealthCheckbox = AceGUI:Create("CheckBox")
   frame.pullButtonHealthCheckbox:SetLabel(L["Show pull health"])
@@ -231,7 +206,7 @@ function MDT:MakeSettingsFrame(frame)
   frame.pullButtonHealthCheckbox:SetValue(db.showPullButtonHealth)
   frame.pullButtonHealthCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
     db.showPullButtonHealth = value
-    MDT:ReloadPullButtons()
+    ART:ReloadPullButtons()
   end)
   frame.settingsGeneralColumn:AddChild(frame.pullButtonHealthCheckbox)
 
@@ -244,17 +219,6 @@ function MDT:MakeSettingsFrame(frame)
   end)
   frame.settingsGeneralColumn:AddChild(frame.autoPanToPullCheckbox)
 
-  frame.enemyForcesTooltipDropdown = AceGUI:Create("Dropdown")
-  frame.enemyForcesTooltipDropdown:SetList(enemyForcesTooltipOptions, enemyForcesTooltipOptionOrder)
-  frame.enemyForcesTooltipDropdown:SetLabel(L["Enemy forces in tooltips"])
-  frame.enemyForcesTooltipDropdown:SetWidth(settingWidth)
-  frame.enemyForcesTooltipDropdown:SetValue(db.enemyForcesTooltip)
-  frame.enemyForcesTooltipDropdown:SetCallback("OnValueChanged", function(widget, callbackName, value)
-    db.enemyForcesTooltip = value
-    if value ~= 1 then MDT:EnableEnemyForcesTooltip() end
-  end)
-  frame.settingsGeneralColumn:AddChild(frame.enemyForcesTooltipDropdown)
-
   frame.alwaysOverwriteRoutesByUIDCheckbox = AceGUI:Create("CheckBox")
   frame.alwaysOverwriteRoutesByUIDCheckbox:SetLabel(L["Always overwrite matching routes on import"])
   frame.alwaysOverwriteRoutesByUIDCheckbox:SetWidth(settingWidth)
@@ -264,27 +228,15 @@ function MDT:MakeSettingsFrame(frame)
   end)
   frame.settingsGeneralColumn:AddChild(frame.alwaysOverwriteRoutesByUIDCheckbox)
 
-  frame.muteXalatathVoiceLinesCheckbox = AceGUI:Create("CheckBox")
-  frame.muteXalatathVoiceLinesCheckbox:SetLabel(L["Mute Xal'atath Voice Lines"])
-  frame.muteXalatathVoiceLinesCheckbox:SetWidth(settingWidth)
-  frame.muteXalatathVoiceLinesCheckbox:SetValue(db.muteXalatathVoiceLines == true)
-  frame.muteXalatathVoiceLinesCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
-    db.muteXalatathVoiceLines = value
-    MDT:SetXalatathVoiceLinesMuted(value)
+  frame.announceInstanceResetCheckbox = AceGUI:Create("CheckBox")
+  frame.announceInstanceResetCheckbox:SetLabel(L["announceInstanceReset"])
+  frame.announceInstanceResetCheckbox:SetWidth(settingWidth)
+  frame.announceInstanceResetCheckbox:SetValue(db.announceInstanceReset == true)
+  frame.announceInstanceResetCheckbox:SetCallback("OnValueChanged", function(_, _, value)
+    db.announceInstanceReset = value
+    if value then ART:EnableInstanceResetAnnounceHook() end
   end)
-  if MDT:IsRetail() then
-    frame.settingsGeneralColumn:AddChild(frame.muteXalatathVoiceLinesCheckbox)
-  end
-
-  frame.announceDungeonResetCheckbox = AceGUI:Create("CheckBox")
-  frame.announceDungeonResetCheckbox:SetLabel(L["announceDungeonReset"])
-  frame.announceDungeonResetCheckbox:SetWidth(settingWidth)
-  frame.announceDungeonResetCheckbox:SetValue(db.announceDungeonReset == true)
-  frame.announceDungeonResetCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
-    db.announceDungeonReset = value
-    if value then MDT:EnableDungeonResetAnnounceHook() end
-  end)
-  frame.settingsGeneralColumn:AddChild(frame.announceDungeonResetCheckbox)
+  frame.settingsGeneralColumn:AddChild(frame.announceInstanceResetCheckbox)
 
   frame.fadeOutCheckbox = AceGUI:Create("CheckBox")
   frame.fadeOutCheckbox:SetLabel(L["Make window transparent in combat"])
@@ -293,7 +245,7 @@ function MDT:MakeSettingsFrame(frame)
   frame.fadeOutCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
     db.fadeOutDuringCombat = value
     frame.fadeOutAlphaSlider:SetDisabled(not value)
-    MDT:UpdateFadeEventRegistration()
+    ART:UpdateFadeEventRegistration()
   end)
   frame.settingsGeneralColumn:AddChild(frame.fadeOutCheckbox)
 
@@ -319,10 +271,10 @@ function MDT:MakeSettingsFrame(frame)
   frame.AutomaticColorsCheck:SetValue(db.colorPaletteInfo.autoColoring)
   frame.AutomaticColorsCheck:SetCallback("OnValueChanged", function(widget, callbackName, value)
     db.colorPaletteInfo.autoColoring = value
-    MDT:SetPresetColorPaletteInfo()
+    ART:SetPresetColorPaletteInfo()
     frame.toggleForceColorBlindMode:SetDisabled(not value)
     if value then
-      MDT:ReloadPullButtons(true)
+      ART:ReloadPullButtons(true)
     end
   end)
   frame.settingsColorsColumn:AddChild(frame.AutomaticColorsCheck)
@@ -334,8 +286,8 @@ function MDT:MakeSettingsFrame(frame)
   frame.toggleForceColorBlindMode:SetValue(db.colorPaletteInfo.forceColorBlindMode)
   frame.toggleForceColorBlindMode:SetCallback("OnValueChanged", function(widget, callbackName, value)
     db.colorPaletteInfo.forceColorBlindMode = value
-    MDT:SetPresetColorPaletteInfo()
-    MDT:ReloadPullButtons(true)
+    ART:SetPresetColorPaletteInfo()
+    ART:ReloadPullButtons(true)
   end)
   frame.settingsColorsColumn:AddChild(frame.toggleForceColorBlindMode)
 
@@ -347,12 +299,12 @@ function MDT:MakeSettingsFrame(frame)
   frame.PaletteSelectDropdown:SetCallback("OnValueChanged", function(widget, callbackName, value)
     if value == 6 then
       db.colorPaletteInfo.colorPaletteIdx = value
-      MDT:OpenCustomColorsDialog()
+      ART:OpenCustomColorsDialog()
     else
       db.colorPaletteInfo.colorPaletteIdx = value
     end
-    MDT:SetPresetColorPaletteInfo()
-    MDT:ReloadPullButtons(true)
+    ART:SetPresetColorPaletteInfo()
+    ART:ReloadPullButtons(true)
   end)
   frame.settingsColorsColumn:AddChild(frame.PaletteSelectDropdown)
 
@@ -367,13 +319,15 @@ function MDT:MakeSettingsFrame(frame)
       frame.AutomaticColorsCheck:SetValue(db.colorPaletteInfo.autoColoring)
       frame.toggleForceColorBlindMode:SetDisabled(false)
     end
-    MDT:SetPresetColorPaletteInfo()
-    MDT:ReloadPullButtons(true)
+    ART:SetPresetColorPaletteInfo()
+    ART:ReloadPullButtons(true)
   end)
   frame.settingsColorsColumn:AddChild(frame.button)
 
-  MDT:MakeCustomColorFrame(frame.settingsFrame)
+  ART:MakeCustomColorFrame(frame.settingsFrame)
 
+  -- Language switching is not supported yet.
+  --[[
   frame.localeHeading = AceGUI:Create("Heading")
   frame.localeHeading:SetText(L["Language"])
   frame.localeHeading:SetFullWidth(true)
@@ -399,6 +353,7 @@ function MDT:MakeSettingsFrame(frame)
     frame.localeLabel:SetText(L["localeButtonTooltip2"])
   end
   frame.settingsGeneralColumn:AddChild(frame.localeLabel)
+  ]]
 
-  MDT:Settings_RefreshLayout()
+  ART:Settings_RefreshLayout()
 end

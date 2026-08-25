@@ -5,24 +5,19 @@ Interface **20505** and **20506**. Keep the client error reporter enabled. A
 step passes only when the expected result occurs with no Lua error, taint
 warning, stuck loading spinner, or duplicate UI/event handler.
 
-## 1. Fresh install and migration
+## 1. Fresh install
 
-- [ ] Enable `AnniversaryRaidTools` and its UI addon; log in, `/reload`, and
+- [ ] Enable `AnniversaryRaidTools`; log in, `/reload`, and
       confirm the addon reaches the world without an error.
 - [ ] On a disposable character/profile, verify the initial addon database is
       created and a Gruul's Lair raid can be selected.
-- [ ] On a backup of a pre-ART profile containing `MythicDungeonToolsDB`, enable
-      ART and reload. Confirm the migration preserves supported settings and
-      routes, creates `AnniversaryRaidToolsDB`, and does not delete the legacy
-      root until the migration boundary says it is safe.
+- [ ] Start once with an old or incompatible `AnniversaryRaidToolsDB` and confirm
+      ART replaces it with the current clean schema without a Lua error.
 
-## 2. Startup, close, reload, and disabled UI
+## 2. Startup, close, and reload
 
 - [ ] Run `/art`; open the planner, close it, reopen it, and `/reload` while it
       is open. The UI remains usable and handlers are not duplicated.
-- [ ] Disable the UI addon, reload, and run `/art`. Confirm the addon fails
-      safely with an actionable enable/reload prompt rather than a Lua error.
-      Re-enable it and reload before continuing.
 - [ ] Run `/art minimap` twice and verify the minimap button hides then returns;
       click it to open the planner.
 

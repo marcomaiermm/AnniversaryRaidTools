@@ -3,7 +3,6 @@
 -- Source: TBC candidate snapshot; not Anniversary-verified.
 -- SourceRef: https://github.com/cmangos/tbc-db/blob/7060a217bcf7c454db570e842cd5e2179444d768/Full_DB/TBCDB_1.11.0_Vengeance_One_A_Cmangos_Story.sql.gz#creature-map-564
 -- ObservedAt: 2026-08-21T20:50:00Z
--- Nnoggie's Mythic Dungeon Tools attribution and GPL-2.0 terms remain in the repository.
 local raid = {
   schemaVersion = 1,
   key = "black-temple",

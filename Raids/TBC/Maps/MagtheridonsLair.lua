@@ -1,11 +1,5 @@
 -- Magtheridon's Lair client-map metadata; Anniversary verification remains pending.
-local _, addon = ...
-local ART = rawget(_G, "ART")
-if not ART then
-  ART = addon and addon.ART or addon or {}
-  _G.ART = ART
-end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local source = {
   source = "derived",
@@ -17,7 +11,7 @@ local source = {
 local assetSource = {
   source = "client-data",
   confidence = "candidate",
-  sourceRef = "https://github.com/Babilounet/SimpleDungeonMap/blob/b41181588b98391e160a0bd25531de45e5360381/DungeonData.lua#L38",
+      sourceRef = "https://github.com/Babilounet/SimpleDungeonMap/blob/b41181588b98391e160a0bd25531de45e5360381/DungeonData.lua#L38",
   observedAt = "2026-08-21T21:30:00Z",
 }
 

@@ -1,13 +1,7 @@
 -- Pure normalized-coordinate transform for the candidate Gruul's Lair map.
 -- The affine knobs are intentionally explicit: client calibration may replace them
 -- after manual checks on Anniversary clients 20505 and 20506.
-local _, addon = ...
-local ART = rawget(_G, "ART")
-if not ART then
-  ART = addon and addon.ART or addon or {}
-  _G.ART = ART
-end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local provenance = {
   source = "derived",

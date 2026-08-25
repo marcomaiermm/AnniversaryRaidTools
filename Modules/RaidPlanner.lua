@@ -1,13 +1,9 @@
 -- Route/wave editing boundary; central registration belongs to ART-070.
 
-local _, addon = ...
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local Planner = ART.RaidPlanner or {}
 ART.RaidPlanner = Planner
-if addon and addon.RaidPlanner == nil then addon.RaidPlanner = Planner end
 
 function Planner:Initialize(dependencies)
   if self.initialized then return self end

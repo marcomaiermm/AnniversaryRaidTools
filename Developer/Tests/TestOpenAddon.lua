@@ -10,10 +10,10 @@ end
 
 local function testFunc()
   if addon.main_frame and addon.main_frame:IsShown() then return end
-  FireUnprotectedSlashCommand("/mdt")
+  FireUnprotectedSlashCommand("/art")
 end
 
----@type MDTTest
+---@type ARTTest
 local test = {
   name = "Open AddOn",
   func = testFunc,

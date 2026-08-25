@@ -1,8 +1,7 @@
-local _, MDT = ...
-local L = MDT.L
-local MDTcommsObject = MDT.commsObject
+local _, ART = ...
+local L = ART.L
+local ARTcommsObject = ART.commsObject
 local twipe, tinsert = table.wipe, table.insert
-local ART = rawget(_G, "ART") or MDT.ART
 
 local timer
 local requestTimer
@@ -28,13 +27,13 @@ local function raidRank(name)
   return -1
 end
 
-function MDT:LiveSession_CanControlProgress(name)
+function ART:LiveSession_CanControlProgress(name)
   if not (type(IsInRaid) == "function" and IsInRaid()) then return false end
   if name then return raidRank(name) >= 1 end
   return UnitIsGroupLeader("player") == true or UnitIsGroupAssistant("player") == true
 end
 
-function MDT:LiveSession_GetPreferredSession(sessions)
+function ART:LiveSession_GetPreferredSession(sessions)
   table.sort(sessions, function(left, right)
     local leftRank, rightRank = raidRank(left[1]), raidRank(right[1])
     if leftRank ~= rightRank then return leftRank > rightRank end
@@ -43,29 +42,29 @@ function MDT:LiveSession_GetPreferredSession(sessions)
   return sessions[1]
 end
 
-function MDT:LiveSession_SendProgress(index)
+function ART:LiveSession_SendProgress(index)
   local preset, distribution = self:GetCurrentPreset(), self:IsPlayerInGroup()
   if not self.liveSessionActive or distribution ~= "RAID" or not self:LiveSession_CanControlProgress()
       or not preset or preset.uid ~= self.livePresetUID or type(index) ~= "number" or index % 1 ~= 0
       or index < 1 or index > #(preset.value.pulls or {}) then return false end
   local raid = ART and ART.RaidPlanner and ART.RaidPlanner.raid
   if not raid then return false end
-  MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.progress, self:TableToString({
-    version = 1, kind = "selection", raidKey = raid.key, dungeonIndex = preset.value.currentDungeonIdx,
+  ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.progress, self:TableToString({
+    version = 1, kind = "selection", raidKey = raid.key, raidIndex = preset.value.currentRaidIndex,
     presetUID = preset.uid, index = index,
   }), distribution, nil, "ALERT")
   return true
 end
 
-function MDT:LiveSession_ReceiveProgress(message, distribution, sender)
+function ART:LiveSession_ReceiveProgress(message, distribution, sender)
   if not self.liveSessionActive or distribution ~= "RAID" or sender == fullName("player")
       or not self:LiveSession_CanControlProgress(sender) then return false end
   local payload = type(message) == "table" and message or self:StringToTable(message, false)
   local preset = self:GetCurrentLivePreset()
   if type(payload) ~= "table" or payload.version ~= 1 or payload.kind ~= "selection"
-      or type(payload.raidKey) ~= "string" or type(payload.dungeonIndex) ~= "number"
+      or type(payload.raidKey) ~= "string" or type(payload.raidIndex) ~= "number"
       or type(payload.index) ~= "number" or payload.index % 1 ~= 0 or not preset or not preset.value
-      or payload.dungeonIndex ~= preset.value.currentDungeonIdx or payload.index < 1
+      or payload.raidIndex ~= preset.value.currentRaidIndex or payload.index < 1
       or payload.index > #(preset.value.pulls or {}) then return false end
   local waveRaid = preset.value.artWaveRaid
   if waveRaid then
@@ -84,8 +83,8 @@ function MDT:LiveSession_ReceiveProgress(message, distribution, sender)
   return true
 end
 
-local originalSetSelectionToPull = MDT.SetSelectionToPull
-function MDT:SetSelectionToPull(pull, ...)
+local originalSetSelectionToPull = ART.SetSelectionToPull
+function ART:SetSelectionToPull(pull, ...)
   local result = originalSetSelectionToPull(self, pull, ...)
   local passive = select(2, ...) == true
   if type(pull) == "number" and not passive and not self.applyingLiveProgress then
@@ -94,7 +93,7 @@ function MDT:SetSelectionToPull(pull, ...)
   return result
 end
 
-function MDT:LiveSession_CheckRaidPrompt()
+function ART:LiveSession_CheckRaidPrompt()
   if not (type(IsInRaid) == "function" and IsInRaid()) then
     raidPrompted = nil
     if self.raidPromptLiveSession and self.liveSessionActive then self:LiveSession_Disable() end
@@ -103,9 +102,9 @@ function MDT:LiveSession_CheckRaidPrompt()
   end
   if self.liveSessionActive then raidPrompted = true return false end
   local zoneId = self.Compat and self.Compat:GetBestMapForUnit("player")
-  local dungeonIndex = zoneId and self.zoneIdToDungeonIdx and self.zoneIdToDungeonIdx[zoneId]
-  if not dungeonIndex or not self.mapInfo or not self.mapInfo[dungeonIndex]
-      or (self.unsupportedDungeons and self.unsupportedDungeons[dungeonIndex])
+  local raidIndex = zoneId and self.zoneIdToRaidIndex and self.zoneIdToRaidIndex[zoneId]
+  if not raidIndex or not self.mapInfo or not self.mapInfo[raidIndex]
+      or (self.unsupportedRaids and self.unsupportedRaids[raidIndex])
       or raidPrompted then return false end
   raidPrompted = true
   self:OpenConfirmationFrame(430, 150, L["Raid progress sync"], L["Enable"], L["raidProgressSyncPrompt"], function()
@@ -121,7 +120,7 @@ function MDT:LiveSession_CheckRaidPrompt()
 end
 
 ---LiveSession_Enable
-function MDT:LiveSession_Enable()
+function ART:LiveSession_Enable()
   if self.liveSessionActive then return end
   self.main_frame.LiveSessionButton:SetText(L["*Live*"])
   self.main_frame.LiveSessionButton.text:SetTextColor(0, 1, 0)
@@ -141,32 +140,32 @@ function MDT:LiveSession_Enable()
       self.liveSessionRequested = false
       local distribution = self:IsPlayerInGroup()
       local preset = self:GetCurrentPreset()
-      local prefix = "[MDTLive: "
-      local dungeon = self:GetDungeonName(preset.value.currentDungeonIdx)
+      local prefix = "[ARTLive: "
+      local raid = self:GetRaidName(preset.value.currentRaidIndex)
       local presetName = preset.text
       local name, realm = UnitFullName("player")
       local fullName = name.."+"..realm
-      MDT.Compat:SendChatMessage(prefix..fullName.." - "..dungeon..": "..presetName.."]", distribution)
+      ART.Compat:SendChatMessage(prefix..fullName.." - "..raid..": "..presetName.."]", distribution)
     end
     local cancelCallback = function()
-      MDT:LiveSession_Disable()
+      ART:LiveSession_Disable()
     end
     local fireCancelOnClose = true
-    MDT:CheckPresetSize(callback, cancelCallback, fireCancelOnClose)
+    ART:CheckPresetSize(callback, cancelCallback, fireCancelOnClose)
   end)
 end
 
 ---LiveSession_Disable
-function MDT:LiveSession_Disable()
-  local widget = MDT.main_frame.LiveSessionButton
+function ART:LiveSession_Disable()
+  local widget = ART.main_frame.LiveSessionButton
   widget.text:SetTextColor(widget.normalTextColor.r, widget.normalTextColor.g, widget.normalTextColor.b)
   widget.text:SetText(L["Live"])
-  MDT.main_frame.LinkToChatButton:SetDisabled(false)
+  ART.main_frame.LinkToChatButton:SetDisabled(false)
   self.main_frame.LinkToChatButton.text:SetTextColor(1, 0.8196, 0)
-  local db = MDT:GetDB()
-  if db.presets[db.currentDungeonIdx][1] == MDT:GetCurrentPreset() then
-    MDT.main_frame.sidePanelDeleteButton:SetDisabled(true)
-    MDT.main_frame.sidePanelDeleteButton.text:SetTextColor(0.5, 0.5, 0.5)
+  local db = ART:GetDB()
+  if db.presets[db.currentRaidIndex][1] == ART:GetCurrentPreset() then
+    ART.main_frame.sidePanelDeleteButton:SetDisabled(true)
+    ART.main_frame.sidePanelDeleteButton.text:SetTextColor(0.5, 0.5, 0.5)
   else
     self.main_frame.sidePanelDeleteButton:SetDisabled(false)
     self.main_frame.sidePanelDeleteButton.text:SetTextColor(1, 0.8196, 0)
@@ -187,30 +186,30 @@ end
 
 ---Notify specific group member that my live session is active
 local lastNotify
-function MDT:LiveSession_NotifyEnabled()
+function ART:LiveSession_NotifyEnabled()
   local now = GetTime()
   if not lastNotify or lastNotify < now - 0.2 then
     lastNotify = now
     local distribution = self:IsPlayerInGroup()
     if (not distribution) or (not self.liveSessionActive) then return end
     local uid = self.livePresetUID
-    MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.enabled, uid, distribution, nil, "ALERT")
+    ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.enabled, uid, distribution, nil, "ALERT")
   end
   --self:SendToGroup(self:IsPlayerInGroup(),true,self:GetCurrentLivePreset())
 end
 
 ---Send a request to the group to send notify messages for active sessions
-function MDT:LiveSession_RequestSession()
+function ART:LiveSession_RequestSession()
   local distribution = self:IsPlayerInGroup()
   if (not distribution) or (not self.liveSessionActive) then return end
   self.liveSessionRequested = true
   self.liveSessionActiveSessions = self.liveSessionActiveSessions or {}
   twipe(self.liveSessionActiveSessions)
   tinsert(self.liveSessionActiveSessions, { fullName("player"), self.livePresetUID })
-  MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.request, "0", distribution, nil, "ALERT")
+  ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.request, "0", distribution, nil, "ALERT")
 end
 
-function MDT:LiveSession_SessionFound(sender, uid)
+function ART:LiveSession_SessionFound(sender, uid)
   local fullNamePlayer = fullName("player")
 
   for _, session in ipairs(self.liveSessionActiveSessions) do
@@ -229,7 +228,7 @@ function MDT:LiveSession_SessionFound(sender, uid)
         self.main_frame.SendingStatusBar:SetValue(0 / 1)
         self.main_frame.SendingStatusBar.value:SetText(L["Receiving: ..."])
         if not self.main_frame.LoadingSpinner then
-          self.main_frame.LoadingSpinner = CreateFrame("Frame", "MDTLoadingSpinner", self.main_frame)
+          self.main_frame.LoadingSpinner = CreateFrame("Frame", "ARTLoadingSpinner", self.main_frame)
           self.main_frame.LoadingSpinner:SetPoint("CENTER", self.main_frame, "CENTER")
           self.main_frame.LoadingSpinner:SetSize(60, 60)
           self.main_frame.LoadingSpinner.Anim = { Play = function() end, Stop = function() end }
@@ -251,114 +250,109 @@ function MDT:LiveSession_SessionFound(sender, uid)
   tinsert(self.liveSessionActiveSessions, { sender, uid })
 end
 
-function MDT:LiveSession_RequestPreset(fullName)
+function ART:LiveSession_RequestPreset(fullName)
   local distribution = self:IsPlayerInGroup()
   if (not distribution) or (not self.liveSessionActive) then return end
-  MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.reqPre, fullName, distribution, nil, "ALERT")
+  ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.reqPre, fullName, distribution, nil, "ALERT")
 end
 
 ---Sends a map ping
-function MDT:LiveSession_SendPing(x, y, sublevel)
+function ART:LiveSession_SendPing(x, y, sublevel)
   --only send ping if we are in the livesession preset
   if self:GetCurrentPreset().uid == self.livePresetUID then
     local distribution = self:IsPlayerInGroup()
     if distribution then
       local scale = self:GetScale()
-      MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.ping, x * (1 / scale)..":"..y * (1 / scale)..
+      ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.ping, x * (1 / scale)..":"..y * (1 / scale)..
         ":"..sublevel, distribution, nil, "ALERT")
     end
   end
 end
 
 ---Sends a preset object
-function MDT:LiveSession_SendObject(obj)
+function ART:LiveSession_SendObject(obj)
   if self:GetCurrentPreset().uid == self.livePresetUID then
     local distribution = self:IsPlayerInGroup()
     if distribution then
-      local export = MDT:TableToString(obj)
+      local export = ART:TableToString(obj)
       local silent, fromLiveSession = true, true
-      MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.obj, export, distribution, nil, "BULK", MDT.displaySendingProgress,
+      ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.obj, export, distribution, nil, "BULK", ART.displaySendingProgress,
         { distribution, nil, silent, fromLiveSession })
     end
   end
 end
 
 ---Sends updated object offsets (move object)
-function MDT:LiveSession_SendObjectOffsets(objIdx, x, y)
+function ART:LiveSession_SendObjectOffsets(objIdx, x, y)
   if self:GetCurrentPreset().uid == self.livePresetUID then
     local distribution = self:IsPlayerInGroup()
     if distribution then
-      MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.objOff, objIdx..":"..x..":"..y, distribution, nil,
+      ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.objOff, objIdx..":"..x..":"..y, distribution, nil,
         "ALERT")
     end
   end
 end
 
 ---Sends updated objects - instead of sending an update every time we erase a part of an object we send one message after mouse up
-function MDT:LiveSession_SendUpdatedObjects(changedObjects)
+function ART:LiveSession_SendUpdatedObjects(changedObjects)
   if self:GetCurrentPreset().uid == self.livePresetUID then
     local distribution = self:IsPlayerInGroup()
     if distribution then
-      local export = MDT:TableToString(changedObjects)
-      MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.objChg, export, distribution, nil, "ALERT")
+      local export = ART:TableToString(changedObjects)
+      ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.objChg, export, distribution, nil, "ALERT")
     end
   end
 end
 
 ---Sends various commands: delete all drawings, clear preset, undo, redo
-function MDT:LiveSession_SendCommand(cmd)
+function ART:LiveSession_SendCommand(cmd)
   if self:GetCurrentPreset().uid == self.livePresetUID then
     local distribution = self:IsPlayerInGroup()
     if distribution then
-      MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.cmd, cmd, distribution, nil, "ALERT")
+      ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.cmd, cmd, distribution, nil, "ALERT")
     end
   end
 end
 
 ---Sends a note text update
-function MDT:LiveSession_SendNoteCommand(cmd, noteIdx, text, y)
+function ART:LiveSession_SendNoteCommand(cmd, noteIdx, text, y)
   if self:GetCurrentPreset().uid == self.livePresetUID then
     local distribution = self:IsPlayerInGroup()
     if distribution then
       text = text..":"..(y or "0")
-      MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.note, cmd..":"..noteIdx..":"..text, distribution,
+      ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.note, cmd..":"..noteIdx..":"..text, distribution,
         nil, "ALERT")
     end
   end
 end
 
 ---Sends a new preset to be used as the new live session preset
-function MDT:LiveSession_SendPreset(preset)
+function ART:LiveSession_SendPreset(preset)
   local distribution = self:IsPlayerInGroup()
   if distribution then
     self:SetUniqueID(preset)
     self:EnsurePresetCreatedBy(preset)
-    local export = MDT:TableToString(preset)
+    local export = ART:TableToString(preset)
     local silent, fromLiveSession = true, true
-    MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.preset, export, distribution, nil, "BULK", MDT.displaySendingProgress,
+    ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.preset, export, distribution, nil, "BULK", ART.displaySendingProgress,
       { distribution, preset, silent, fromLiveSession })
   end
 end
 
----Sends the legacy pull payload consumed by the existing transmission receiver.
-function MDT:LiveSession_SendPulls(pulls)
+---Sends the current pull payload consumed by the transmission receiver.
+function ART:LiveSession_SendPulls(pulls)
   local distribution = self:IsPlayerInGroup()
   if distribution then
-    local msg = MDT:TableToString(pulls)
-    MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.pull, msg, distribution, nil, "ALERT")
+    local msg = ART:TableToString(pulls)
+    ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.pull, msg, distribution, nil, "ALERT")
   end
 end
 
--- Kept only for old widget callers until ART-070 removes the legacy control.
-function MDT:LiveSession_SendDifficulty()
-  return false, "not-applicable"
-end
-
-function MDT:LiveSession_SendPOIAssignment(sublevel, poiIdx, value)
+function ART:LiveSession_SendPOIAssignment(sublevel, poiIdx, value)
   local distribution = self:IsPlayerInGroup()
   if distribution then
-    local export = MDT:TableToString({ sublevel, poiIdx, value })
-    MDTcommsObject:SendCommMessage(self.liveSessionPrefixes.poiAssignment, export, distribution, nil, "ALERT")
+    local export = ART:TableToString({ sublevel, poiIdx, value })
+    ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.poiAssignment, export, distribution, nil, "ALERT")
   end
 end
 
@@ -368,6 +362,6 @@ if type(CreateFrame) == "function" then
   raidPromptFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
   raidPromptFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
   raidPromptFrame:SetScript("OnEvent", function()
-    C_Timer.After(0.5, function() MDT:LiveSession_CheckRaidPrompt() end)
+    C_Timer.After(0.5, function() ART:LiveSession_CheckRaidPrompt() end)
   end)
 end

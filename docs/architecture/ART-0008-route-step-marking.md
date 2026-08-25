@@ -52,7 +52,7 @@ Constraints:
    pack. Every world change still passes through `MarkResolver:ApplyUnit`; the
    resolver refuses fresh assignments in combat. Position matching is preferred,
    with the existing unambiguous npc-id fallback when measurement data is absent.
-5. **Legacy compatibility.** Non-ART presets keep MDT `enemyAssignments`
+5. **Legacy compatibility.** Non-ART presets keep ART `enemyAssignments`
    behavior; ART blips render markers from `step.marks` with legacy fallback.
 
 ## Alternatives considered

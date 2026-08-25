@@ -1,28 +1,28 @@
-local _, MDT = ...
+local _, ART = ...
 local slen = string.len
 
--- The purpose of these functions is to provide a much better way to export the dungeon data lua tables to their string representations.
+-- The purpose of these functions is to provide a much better way to export the raid data lua tables to their string representations.
 -- Using standard tShow functions does not work well because index and field orders are not
 -- preserved. The resulting data would always be in a non deterministic order and even small changes in the data cause
 -- the export to look completely different.
--- We want to instead have a consistent way to export the dungeon data that makes versioning easier.
+-- We want to instead have a consistent way to export the raid data that makes versioning easier.
 -- If for example x and y position change then only those values will change in the otherwise identical
--- dungeon data string representation. This will make it easier to compare dungeon data between versions.
+-- raid data string representation. This will make it easier to compare raid data between versions.
 
 --- @param export string
-function MDT:ExportString(export)
+function ART:ExportString(export)
   if not export then return end
-  MDT:Async(function()
-    MDT:ShowInterfaceInternal(true)
-    local exportFrame = MDT.main_frame.ExportFrame
-    local editBox = MDT.main_frame.ExportFrameEditbox
+  ART:Async(function()
+    ART:ShowInterfaceInternal(true)
+    local exportFrame = ART.main_frame.ExportFrame
+    local editBox = ART.main_frame.ExportFrameEditbox
     exportFrame:ClearAllPoints()
     exportFrame:Show()
-    exportFrame:SetPoint("CENTER", MDT.main_frame, "CENTER", 0, 50)
+    exportFrame:SetPoint("CENTER", ART.main_frame, "CENTER", 0, 50)
     editBox:SetText(export)
     editBox:HighlightText(0, slen(export))
     editBox:SetFocus()
-    MDT.copyHelper:SmartShow(MDT.main_frame, 0, 50)
+    ART.copyHelper:SmartShow(ART.main_frame, 0, 50)
   end, "exportString")
 end
 
@@ -56,7 +56,7 @@ local function recursiveExport(obj, schema, indentCount)
   local actualObjectType = type(obj)
   if schema.type == "schemaArray" then
     if actualObjectType ~= "table" then
-      print("MDT recursiveExport: Error in "..schema.name..": Expected table, got "..actualObjectType.." (field: "..schema.name.."; value: "..tostring(obj)..")")
+      print("ART recursiveExport: Error in "..schema.name..": Expected table, got "..actualObjectType.." (field: "..schema.name.."; value: "..tostring(obj)..")")
       return "\"Error: Expected table, got "..actualObjectType.." (value: "..tostring(obj)..")\";\n"
     end
     res = res.."{\n"
@@ -80,7 +80,7 @@ local function recursiveExport(obj, schema, indentCount)
         if valueType == "table" then
           valueType = "array"
         end
-        print("MDT recursiveExport: Error: Non schema field "..key.." of type "..valueType.." in "..(schema.name or "unnamed schema").." (field: "..key.."; value: "..tostring(value)..")")
+        print("ART recursiveExport: Error: Non schema field "..key.." of type "..valueType.." in "..(schema.name or "unnamed schema").." (field: "..key.."; value: "..tostring(value)..")")
         res = res..getIndent(indentCount + 1).."[\""..key.."\"] = "
         res = res..recursiveExport(value, { type = valueType }, indentCount + 1)
       end
@@ -88,7 +88,7 @@ local function recursiveExport(obj, schema, indentCount)
     return res..getIndent(indentCount).."};\n"
   elseif schema.type == "array" then
     if actualObjectType ~= "table" then
-      print("MDT recursiveExport: Error: Expected table, got "..actualObjectType.." (value: "..tostring(obj)..")")
+      print("ART recursiveExport: Error: Expected table, got "..actualObjectType.." (value: "..tostring(obj)..")")
       return "\"Error: Expected table, got "..actualObjectType.." (value: "..tostring(obj)..")\";\n"
     end
     res = res.."{\n"
@@ -100,7 +100,7 @@ local function recursiveExport(obj, schema, indentCount)
     end
     return res..getIndent(indentCount).."};\n"
   elseif actualObjectType ~= schema.type then
-    print("MDT recursiveExport: Error: Expected "..schema.type..", got "..actualObjectType.." (field: "..schema.name.."; value: "..tostring(obj)..")")
+    print("ART recursiveExport: Error: Expected "..schema.type..", got "..actualObjectType.." (field: "..schema.name.."; value: "..tostring(obj)..")")
     return "\"TYPEERROR: "..
         schema.type.." expected, "..actualObjectType.." found".." (value: "..tostring(obj)..")\";\n"
   elseif schema.type == "string" then
@@ -113,9 +113,9 @@ local function recursiveExport(obj, schema, indentCount)
   end
 end
 
-function MDT:ExportLuaTable(obj, schema)
+function ART:ExportLuaTable(obj, schema)
   if not obj then
-    print("MDT: ExportLuaTable: obj is nil")
+    print("ART: ExportLuaTable: obj is nil")
     return
   end
   return (schema.name or "local table").." = "..recursiveExport(obj, schema, 0)

@@ -1,27 +1,23 @@
 -- UI adapter for raid marks. Central registration belongs to the integrator.
 
-local _, addon = ...
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local RaidMarksUI = ART.RaidMarksUI or {}
 ART.RaidMarksUI = RaidMarksUI
-if addon and addon.RaidMarksUI == nil then addon.RaidMarksUI = RaidMarksUI end
 
 local tracker
-local L = addon.L or {}
+local L = ART.L or {}
 
 function RaidMarksUI:GetPullTrackerModel()
   local planner = ART.RaidPlanner
   local raid, preset = planner and planner.raid, planner and planner.preset
   if not raid or not preset then return nil end
 
-  local db = addon.GetDB and addon:GetDB()
-  local mapInfo = db and addon.mapInfo and addon.mapInfo[db.currentDungeonIdx]
+  local db = ART.GetDB and ART:GetDB()
+  local mapInfo = db and ART.mapInfo and ART.mapInfo[db.currentRaidIndex]
   if mapInfo and mapInfo.mapID ~= raid.mapId then return nil end
 
-  local currentPreset = addon.GetCurrentPreset and addon:GetCurrentPreset()
+  local currentPreset = ART.GetCurrentPreset and ART:GetCurrentPreset()
   local value = currentPreset and currentPreset.value
   local selectedPull = tonumber(planner.lastPullIndex)
   if self.trackerPreset ~= preset then
@@ -215,11 +211,11 @@ local function createTracker()
     local pullIndex = frame.model and frame.model.pullIndex
     if not pullIndex then return end
     local selectPull = function()
-      if addon.SetSelectionToPull then addon:SetSelectionToPull(pullIndex) end
+      if ART.SetSelectionToPull then ART:SetSelectionToPull(pullIndex) end
     end
     selectPull()
-    if addon.ShowInterface then addon:ShowInterface(true) end
-    if addon.RunAfterFramesInitialized then addon:RunAfterFramesInitialized(selectPull) end
+    if ART.ShowInterface then ART:ShowInterface(true) end
+    if ART.RunAfterFramesInitialized then ART:RunAfterFramesInitialized(selectPull) end
   end)
   frame.status.background = frame.status:CreateTexture(nil, "BACKGROUND")
   frame.status.background:SetPoint("TOPLEFT", 6, -6)
@@ -271,7 +267,7 @@ local function createTracker()
   end)
   frame.next:SetScript("OnClick", function()
     local nextPull = frame.model and frame.model.nextPullIndex
-    if nextPull and addon.SetSelectionToPull then addon:SetSelectionToPull(nextPull) end
+    if nextPull and ART.SetSelectionToPull then ART:SetSelectionToPull(nextPull) end
   end)
 
   frame.progressBackground = frame.status:CreateTexture(nil, "ARTWORK")

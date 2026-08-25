@@ -1,4 +1,4 @@
-local _, MDT = ...
+local _, ART = ...
 
 local framePools = {}
 
@@ -14,7 +14,7 @@ local overrides = {
   }
 }
 
-function MDT.CreateFramePool(frametype, parent, template)
+function ART.CreateFramePool(frametype, parent, template)
   local pool = {
     active = {},
     inactive = {},
@@ -44,6 +44,6 @@ function MDT.CreateFramePool(frametype, parent, template)
   return pool
 end
 
-function MDT.GetFramePool(template)
+function ART.GetFramePool(template)
   return framePools[template]
 end

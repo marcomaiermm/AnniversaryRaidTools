@@ -1,7 +1,6 @@
 -- Sourced AzerothCore candidate data; not Anniversary-verified.
 -- SourceRef: fixture://azerothcore/gruuls-lair-v1
 -- ObservedAt: 2026-08-21T00:00:00Z
--- Nnoggie's Mythic Dungeon Tools attribution and GPL-2.0 terms remain in the repository.
 
 local source = {
   source = "azerothcore",

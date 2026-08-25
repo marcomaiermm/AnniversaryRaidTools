@@ -1,8 +1,8 @@
 local _, addon = ...
-local MDT = addon
+local ART = addon
 
 local function testFunc()
-  local frame = MDT.main_frame
+  local frame = ART.main_frame
   local deleteButton = frame.sidePanelDeleteButton.frame
   local okayButton = frame.DeleteConfirmationFrame.OkayButton.frame
   deleteButton:Click()
@@ -11,7 +11,7 @@ local function testFunc()
   end)
 end
 
----@type MDTTest
+---@type ARTTest
 local test = {
   name = "Delete Route",
   func = testFunc,

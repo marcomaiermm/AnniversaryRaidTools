@@ -1,16 +1,16 @@
-local _, MDT = ...
+local _, ART = ...
 local AceGUI = LibStub("AceGUI-3.0")
-local L = MDT.L
+local L = ART.L
 local tinsert, slen = table.insert, string.len
 
--- handle most mdt errors internally and provide an easy way for users to report these errors
+-- handle most art errors internally and provide an easy way for users to report these errors
 
 local caughtErrors = {}
 
 local function getDiagnostics()
-  local presetExport = MDT:TableToString(MDT:GetCurrentPreset())
+  local presetExport = ART:TableToString(ART:GetCurrentPreset())
   ---@diagnostic disable-next-line: redundant-parameter
-  local addonVersion = MDT.Compat:GetAddOnMetadata(MDT.AddonName, "Version") or "unknown"
+  local addonVersion = ART.Compat:GetAddOnMetadata(ART.AddonName, "Version") or "unknown"
   local locale = GetLocale()
   local dateString = date("%d/%m/%y %H:%M:%S")
   local gameVersion = select(4, GetBuildInfo())
@@ -27,9 +27,9 @@ local function getDiagnostics()
   }
   local region = regions[regionId] or "UNKNOWN"
   local combatState = InCombatLockdown() and "In combat" or "Out of combat"
-  local mapID = MDT.Compat:GetBestMapForUnit("player")
-  local mapInfo = mapID and MDT.Compat:GetMapInfo(mapID)
-  local parentInfo = mapInfo and mapInfo.parentMapID and MDT.Compat:GetMapInfo(mapInfo.parentMapID)
+  local mapID = ART.Compat:GetBestMapForUnit("player")
+  local mapInfo = mapID and ART.Compat:GetMapInfo(mapID)
+  local parentInfo = mapInfo and mapInfo.parentMapID and ART.Compat:GetMapInfo(mapInfo.parentMapID)
   local zoneInfo = format("Zone: %s (%s)", parentInfo and parentInfo.name or "unknown", mapID or "unknown")
   return {
     presetExport = presetExport,
@@ -47,85 +47,51 @@ end
 
 local hasShown = false
 
-function MDT:DisplayErrors(force)
+function ART:DisplayErrors(force)
   if not force and hasShown then return end
   hasShown = true
   if #caughtErrors == 0 then return end
-  if MDT.initSpinner then
-    MDT.initSpinner:Hide()
-    MDT.initSpinner.Anim:Stop()
+  if ART.initSpinner then
+    ART.initSpinner:Hide()
+    ART.initSpinner.Anim:Stop()
   end
 
   local function startCopyAction(editBox, copyButton, text)
     editBox:HighlightText(0, slen(text))
     editBox:SetFocus()
     copyButton:SetDisabled(true)
-    if not MDT.copyHelper then
-      MDT:MakeCopyHelper(MDT.errorFrame.frame)
+    if not ART.copyHelper then
+      ART:MakeCopyHelper(ART.errorFrame.frame)
     end
-    MDT.copyHelper:SmartShow(MDT.errorFrame.frame, 0, 0)
+    ART.copyHelper:SmartShow(ART.errorFrame.frame, 0, 0)
   end
 
   local function stopCopyAction(copyButton)
     copyButton:SetDisabled(false)
-    MDT.copyHelper:SmartHide()
+    ART.copyHelper:SmartHide()
   end
 
   local errorBoxText = ""
 
-  if not MDT.errorFrame then
-    MDT.errorFrame = AceGUI:Create("Frame")
-    _G["MDTErrorFrame"] = MDT.errorFrame.frame
-    tinsert(UISpecialFrames, "MDTErrorFrame")
-    local errorFrame = MDT.errorFrame
-    if not MDT.copyHelper then MDT:MakeCopyHelper(errorFrame.frame) end
+  if not ART.errorFrame then
+    ART.errorFrame = AceGUI:Create("Frame")
+    _G["ARTErrorFrame"] = ART.errorFrame.frame
+    tinsert(UISpecialFrames, "ARTErrorFrame")
+    local errorFrame = ART.errorFrame
+    if not ART.copyHelper then ART:MakeCopyHelper(errorFrame.frame) end
     errorFrame:EnableResize(false)
     errorFrame:SetWidth(800)
     errorFrame:SetHeight(600)
     errorFrame:EnableResize(false)
     errorFrame:SetLayout("Flow")
     errorFrame:SetCallback("OnClose", function(widget) end)
-    errorFrame:SetTitle(L["MDT Error"])
+    errorFrame:SetTitle(L["ART Error"])
     errorFrame.label = AceGUI:Create("Label")
     errorFrame.label:SetWidth(800)
     errorFrame.label:SetFontObject("GameFontNormalLarge")
     errorFrame.label.label:SetTextColor(1, 0, 0)
     errorFrame.label:SetText(L["errorLabel1"].."\n"..L["errorLabel2"])
     errorFrame:AddChild(errorFrame.label)
-
-    for _, dest in ipairs(MDT.externalLinks) do
-      errorFrame[dest.name.."EditBox"] = AceGUI:Create("EditBox")
-      local editBox = errorFrame[dest.name.."EditBox"]
-      local copyButton
-      editBox:SetLabel(dest.name..":")
-      editBox:DisableButton(true)
-      editBox:SetText(dest.url)
-      editBox:SetCallback("OnTextChanged", function()
-        editBox:SetText(dest.url)
-      end)
-
-      editBox:SetWidth(400)
-      editBox.editbox:HookScript('OnEditFocusLost', function()
-        stopCopyAction(copyButton)
-      end);
-      editBox.editbox:SetScript('OnKeyUp', function(_, key)
-        if (MDT.copyHelper:WasControlKeyDown() and key == 'C') then
-          MDT.copyHelper:SmartFadeOut()
-          editBox:ClearFocus();
-        else
-          MDT.copyHelper:SmartHide()
-        end
-      end);
-      errorFrame[dest.name.."CopyButton"] = AceGUI:Create("Button")
-      copyButton = errorFrame[dest.name.."CopyButton"]
-      copyButton:SetText(L["Copy"])
-      copyButton:SetWidth(100)
-      copyButton:SetCallback("OnClick", function(widget, callbackName, value)
-        startCopyAction(editBox, copyButton, dest.url)
-      end)
-      errorFrame:AddChild(editBox)
-      errorFrame:AddChild(copyButton)
-    end
 
     local errorBox, errorBoxCopyButton
     errorFrame.errorBox = AceGUI:Create("MultiLineEditBox")
@@ -141,11 +107,11 @@ function MDT:DisplayErrors(force)
       stopCopyAction(errorBoxCopyButton)
     end);
     errorBox.editBox:SetScript('OnKeyUp', function(_, key)
-      if (MDT.copyHelper:WasControlKeyDown() and key == 'C') then
-        MDT.copyHelper:SmartFadeOut()
+      if (ART.copyHelper:WasControlKeyDown() and key == 'C') then
+        ART.copyHelper:SmartFadeOut()
         errorBox:ClearFocus();
       else
-        MDT.copyHelper:SmartHide()
+        ART.copyHelper:SmartHide()
       end
     end);
 
@@ -162,35 +128,14 @@ function MDT:DisplayErrors(force)
     hardResetButton:SetText(L["hardResetButton"])
     hardResetButton:SetHeight(40)
     hardResetButton:SetCallback("OnClick", function(widget, callbackName, value)
-      MDT:Async(function()
-        MDT:OpenConfirmationFrame(450, 150, L["hardResetPromptTitle"], L["Delete"], L["hardResetPrompt"], MDT.HardReset)
+      ART:Async(function()
+        ART:OpenConfirmationFrame(450, 150, L["hardResetPromptTitle"], L["Delete"], L["hardResetPrompt"], ART.HardReset)
       end, "hardReset")
     end)
 
     errorFrame:AddChild(errorFrame.errorBox)
     errorFrame:AddChild(errorFrame.errorBoxCopyButton)
     errorFrame:AddChild(errorFrame.hardResetButton)
-    MDT:RunAfterFramesInitialized(function()
-      --error button
-      local errorButton = AceGUI:Create("Icon")
-      errorButton:SetImage(MDT.AddonPath.."Textures\\icons", 0.76, 1, 0.25, 0.5)
-      errorButton:SetCallback("OnClick", function(widget, callbackName)
-        MDT:DisplayErrors("true")
-      end)
-      errorButton.tooltipText = L["encounteredErrors"]
-      errorButton:SetWidth(24)
-      errorButton:SetImageSize(20, 20)
-      errorButton:SetCallback("OnEnter", function(widget, callbackName)
-        MDT:ToggleToolbarTooltip(true, widget, "ANCHOR_TOPLEFT")
-      end)
-      errorButton:SetCallback("OnLeave", function()
-        MDT:ToggleToolbarTooltip(false)
-      end)
-
-      local externalButtonGroup = MDT.main_frame.externalButtonGroup
-      externalButtonGroup:AddChild(errorButton)
-      MDT:FixAceGUIShowHide(externalButtonGroup, MDT.main_frame)
-    end)
   end
 
   for _, error in ipairs(caughtErrors) do
@@ -198,7 +143,7 @@ function MDT:DisplayErrors(force)
   end
   --add diagnostics
   local diagnostics = getDiagnostics()
-  errorBoxText = errorBoxText.."\n"..diagnostics.dateString.."\nMDT: "..diagnostics.addonVersion.."\nClient: "..diagnostics.gameVersion.." "..diagnostics.locale.."\nCharacter: "..diagnostics.name.."-"..diagnostics.realm.." ("..diagnostics.region..")"
+  errorBoxText = errorBoxText.."\n"..diagnostics.dateString.."\nART: "..diagnostics.addonVersion.."\nClient: "..diagnostics.gameVersion.." "..diagnostics.locale.."\nCharacter: "..diagnostics.name.."-"..diagnostics.realm.." ("..diagnostics.region..")"
   errorBoxText = errorBoxText.."\n"..diagnostics.combatState.."\n"..diagnostics.zoneInfo.."\n"
   errorBoxText = errorBoxText.."\nRoute:\n"..diagnostics.presetExport
   errorBoxText = errorBoxText.."\nStacktraces\n\n"
@@ -206,12 +151,12 @@ function MDT:DisplayErrors(force)
     errorBoxText = errorBoxText..error.stackTrace.."\n"
   end
 
-  MDT.errorFrame.errorBox:SetText(errorBoxText)
-  if MDT.main_frame then
-    MDT.errorFrame.frame:SetParent(MDT.main_frame)
+  ART.errorFrame.errorBox:SetText(errorBoxText)
+  if ART.main_frame then
+    ART.errorFrame.frame:SetParent(ART.main_frame)
   end
-  MDT.errorFrame.frame:SetFrameStrata("DIALOG")
-  MDT.errorFrame:Show()
+  ART.errorFrame.frame:SetFrameStrata("DIALOG")
+  ART.errorFrame:Show()
 end
 
 local numError = 0
@@ -232,43 +177,43 @@ local function onError(msg, stackTrace, name)
   local stackTraceValue = stackTrace and name..":\n"..stackTrace
   tinsert(caughtErrors, { message = e, stackTrace = stackTraceValue, count = 1 })
   addTrace = true
-  if MDT.errorTimer then MDT.errorTimer:Cancel() end
-  MDT.errorTimer = C_Timer.NewTimer(0.5, function()
-    MDT:DisplayErrors(true)
+  if ART.errorTimer then ART.errorTimer:Cancel() end
+  ART.errorTimer = C_Timer.NewTimer(0.5, function()
+    ART:DisplayErrors(true)
   end)
   --if spam erroring then show errors early otherwise risk error display never showing
   if numError > 100 then
-    MDT:DisplayErrors(true)
+    ART:DisplayErrors(true)
   end
   return false
 end
 
 --accessible function for errors in coroutines
-function MDT:OnError(msg, stackTrace, name)
+function ART:OnError(msg, stackTrace, name)
   onError(msg, stackTrace, name)
 end
 
-function MDT:GetErrors()
+function ART:GetErrors()
   return caughtErrors
 end
 
-function MDT:RegisterErrorHandledFunctions()
+function ART:RegisterErrorHandledFunctions()
   --register all functions except the ones that have to run as coroutines
   local blacklisted = {
-    ["DungeonEnemies_UpdateSelected"] = true,
-    ["DungeonEnemies_UpdateEnemiesAsync"] = true,
+    ["RaidEnemies_UpdateSelected"] = true,
+    ["RaidEnemies_UpdateEnemiesAsync"] = true,
     ["ReloadPullButtons"] = true,
     ["DrawAllPresetObjects"] = true,
     ["AddPull"] = true,
     ["ClearPull"] = true,
     ["ShowInterfaceInternal"] = true,
     ["InitializeMainFrame"] = true,
-    ["UpdateToDungeon"] = true,
+    ["UpdateToRaid"] = true,
     ["UpdateMap"] = true,
     ["MovePullUp"] = true,
     ["ShowInterface"] = true,
     ["DeletePull"] = true,
-    ["ExportDungeonDataIncrementally"] = true,
+    ["ExportRaidDataIncrementally"] = true,
     ["DrawAllHulls"] = true,
     ["ExportString"] = true,
     ["Async"] = true,
@@ -276,7 +221,7 @@ function MDT:RegisterErrorHandledFunctions()
     ["OnError"] = true,
   }
   local tablesToAdd = {
-    MDT, MDTDungeonEnemyMixin
+    ART, ARTRaidEnemyMixin
   }
   for k, table in pairs(tablesToAdd) do
     for funcName, func in pairs(table) do

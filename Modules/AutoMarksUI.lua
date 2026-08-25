@@ -1,6 +1,5 @@
-local _, MDT = ...
-local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools bootstrap is required")
-local L = MDT.L
+local _, ART = ...
+local L = ART.L
 local AceGUI = LibStub("AceGUI-3.0")
 
 local AutoMarksUI = ART.AutoMarksUI or { selectedTab = "pulls" }
@@ -14,9 +13,9 @@ local modifierOptions = {
 local modifierOrder = { "NONE", "SHIFT", "CTRL", "ALT" }
 
 local function raidIsActive()
-  local planner, db = ART.RaidPlanner, MDT:GetDB()
+  local planner, db = ART.RaidPlanner, ART:GetDB()
   if not (planner and planner.raid and db) then return false end
-  local mapInfo = MDT.mapInfo and MDT.mapInfo[db.currentDungeonIdx]
+  local mapInfo = ART.mapInfo and ART.mapInfo[db.currentRaidIndex]
   return mapInfo and mapInfo.mapID == planner.raid.mapId
 end
 
@@ -34,7 +33,7 @@ local function showPullContent(sidePanel, shown)
 end
 
 function AutoMarksUI:SetTab(tab)
-  local sidePanel = MDT.main_frame and MDT.main_frame.sidePanel
+  local sidePanel = ART.main_frame and ART.main_frame.sidePanel
   if not (sidePanel and sidePanel.AutoMarksGroup) then return end
   self.selectedTab = tab == "autoMarks" and "autoMarks" or "pulls"
   local autoMarks = self.selectedTab == "autoMarks"
@@ -46,7 +45,7 @@ function AutoMarksUI:SetTab(tab)
 end
 
 local function addControls(container)
-  local db = MDT:GetDB()
+  local db = ART:GetDB()
   local enabled = AceGUI:Create("CheckBox")
   enabled:SetLabel(L["Auto Mark"])
   enabled:SetFullWidth(true)
@@ -115,10 +114,10 @@ local function addEnemyRows(container, planner)
     npcIcon.frame.clone, npcIcon.frame.cloneIdx = {}, ""
     npcIcon.frame.suppressEnemyInfoHint = true
     npcIcon:SetCallback("OnEnter", function()
-      if MDT.DisplayBlipTooltip then MDT:DisplayBlipTooltip(npcIcon.frame, true) end
+      if ART.DisplayBlipTooltip then ART:DisplayBlipTooltip(npcIcon.frame, true) end
     end)
     npcIcon:SetCallback("OnLeave", function()
-      if MDT.DisplayBlipTooltip then MDT:DisplayBlipTooltip(npcIcon.frame, false) end
+      if ART.DisplayBlipTooltip then ART:DisplayBlipTooltip(npcIcon.frame, false) end
     end)
     row:AddChild(npcIcon)
 
@@ -147,7 +146,7 @@ local function addEnemyRows(container, planner)
 end
 
 function AutoMarksUI:Refresh()
-  local sidePanel = MDT.main_frame and MDT.main_frame.sidePanel
+  local sidePanel = ART.main_frame and ART.main_frame.sidePanel
   if not (sidePanel and sidePanel.AutoMarksGroup) then return end
   self:UpdateAvailability()
   if not raidIsActive() or self.selectedTab ~= "autoMarks" then return end
@@ -159,9 +158,9 @@ function AutoMarksUI:Refresh()
 end
 
 function AutoMarksUI:UpdateAvailability()
-  local sidePanel = MDT.main_frame and MDT.main_frame.sidePanel
+  local sidePanel = ART.main_frame and ART.main_frame.sidePanel
   if not (sidePanel and sidePanel.markingTabBar) then return end
-  local available = MDT:GetCurrentSection() == "maps" and raidIsActive()
+  local available = ART:GetCurrentSection() == "maps" and raidIsActive()
   sidePanel.markingTabBar:SetShown(available)
   if available then
     local autoMarks = self.selectedTab == "autoMarks"
@@ -172,7 +171,7 @@ function AutoMarksUI:UpdateAvailability()
   else
     sidePanel.AutoMarksGroup.frame:Hide()
     if sidePanel.WaveModeGroup then sidePanel.WaveModeGroup:Hide() end
-    if MDT:GetCurrentSection() == "maps" then showPullContent(sidePanel, true) end
+    if ART:GetCurrentSection() == "maps" then showPullContent(sidePanel, true) end
   end
 end
 
@@ -202,7 +201,7 @@ function AutoMarksUI:Create(sidePanel)
   sidePanel.AutoMarksGroup:SetLayout("List")
   sidePanel.AutoMarksGroup.frame:Hide()
 
-  local mainFrame, originalShow = MDT.main_frame, MDT.main_frame.Show
+  local mainFrame, originalShow = ART.main_frame, ART.main_frame.Show
   function mainFrame:Show(...)
     local result = originalShow(self, ...)
     AutoMarksUI:UpdateAvailability()
@@ -211,14 +210,14 @@ function AutoMarksUI:Create(sidePanel)
   self:UpdateAvailability()
 end
 
-local originalMakePullSelectionButtons = MDT.MakePullSelectionButtons
-function MDT:MakePullSelectionButtons(sidePanel)
+local originalMakePullSelectionButtons = ART.MakePullSelectionButtons
+function ART:MakePullSelectionButtons(sidePanel)
   originalMakePullSelectionButtons(self, sidePanel)
   AutoMarksUI:Create(sidePanel)
 end
 
-local originalUpdateSectionVisibility = MDT.UpdateSectionVisibility
-function MDT:UpdateSectionVisibility(...)
+local originalUpdateSectionVisibility = ART.UpdateSectionVisibility
+function ART:UpdateSectionVisibility(...)
   local result = originalUpdateSectionVisibility(self, ...)
   AutoMarksUI:UpdateAvailability()
   return result

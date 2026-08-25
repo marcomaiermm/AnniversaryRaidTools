@@ -1,9 +1,6 @@
 -- Live raid targets are set only from an intentional mouseover gesture.
 
-local _, addon = ...
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local LiveMarks = ART.LiveMarks or {}
 ART.LiveMarks = LiveMarks
@@ -233,7 +230,7 @@ local function observeTargetEvent(unitToken)
 end
 
 if type(CreateFrame) == "function" then
-  local eventFrame = CreateFrame("Frame", "MDTLiveMarksEventFrame", UIParent)
+  local eventFrame = CreateFrame("Frame", "ARTLiveMarksEventFrame", UIParent)
   for _, event in ipairs({
     "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "PLAYER_TARGET_CHANGED", "UNIT_TARGET",
     "NAME_PLATE_UNIT_ADDED", "NAME_PLATE_UNIT_REMOVED", "COMBAT_LOG_EVENT_UNFILTERED",

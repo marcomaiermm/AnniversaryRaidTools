@@ -1,13 +1,9 @@
 -- Bounded combat-log observation recorder. It has no UI or registration side effects.
 
-local _, addon = ...
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local RecorderAPI = ART.RaidRecorder or {}
 ART.RaidRecorder = RecorderAPI
-if addon and addon.RaidRecorder == nil then addon.RaidRecorder = RecorderAPI end
 
 local type, tonumber, tostring = type, tonumber, tostring
 local pairs, select = pairs, select

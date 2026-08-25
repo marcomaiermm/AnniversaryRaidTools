@@ -15,15 +15,12 @@ ART.RaidPlanner = {
   GetActiveStep = function() return step end,
 }
 
-local db = { currentDungeonIdx = 164 }
+local db = { currentRaidIndex = 164 }
 local currentPreset = { value = { currentPull = 2, pulls = { {}, {}, {} } } }
-local addon = {
-  ART = ART,
-  mapInfo = { [164] = { mapID = 544 } },
-  GetDB = function() return db end,
-  GetCurrentPreset = function() return currentPreset end,
-}
-assert(loadfile(root.."/Modules/RaidMarksUI.lua"))("AnniversaryRaidTools", addon)
+ART.mapInfo = { [164] = { mapID = 544 } }
+function ART:GetDB() return db end
+function ART:GetCurrentPreset() return currentPreset end
+assert(loadfile(root.."/Modules/RaidMarksUI.lua"))("AnniversaryRaidTools", ART)
 
 local model = assert(ART.RaidMarksUI:GetPullTrackerModel())
 assert(model.raidName == "Magtheridon's Lair")
@@ -48,8 +45,8 @@ ART.MapDefinitions = { hyjal = { waveMode = { groups = {
   { label = "Azgalor", firstWave = 28, lastWave = 36 },
   { label = "Archimonde", firstWave = 37, lastWave = 37 },
 } } } }
-db.currentDungeonIdx = 162
-addon.mapInfo[162] = { mapID = 534 }
+db.currentRaidIndex = 162
+ART.mapInfo[162] = { mapID = 534 }
 ART.RaidPlanner.lastPullIndex = 3
 model = assert(ART.RaidMarksUI:GetPullTrackerModel())
 assert(model.mode == "waves" and model.currentLabel == "Rage Winterchill")
@@ -57,14 +54,14 @@ assert(model.currentText == "Wave 3 / 37" and model.nextText == "NEXT  Wave 4  >
     "Hyjal tracker presents wave progress instead of pull progress")
 assert(model.showNext == false, "automatic wave mode hides the tracker Next button")
 
-addon.PullClickAreaOnLeave = function() end
-assert(loadfile(root.."/Modules/Pulls.lua"))("AnniversaryRaidTools", addon)
-addon:SetSelectionToPull(3)
+ART.PullClickAreaOnLeave = function() end
+assert(loadfile(root.."/Modules/Pulls.lua"))("AnniversaryRaidTools", ART)
+ART:SetSelectionToPull(3)
 assert(currentPreset.value.currentPull == 3 and currentPreset.value.selection[1] == 3,
     "pull selection works without the main planner frame")
 
-db.currentDungeonIdx = 1
-addon.mapInfo[1] = { mapID = 999 }
+db.currentRaidIndex = 1
+ART.mapInfo[1] = { mapID = 999 }
 assert(ART.RaidMarksUI:GetPullTrackerModel() == nil, "tracker hides outside the active raid")
 
 print("pull tracker checks passed")

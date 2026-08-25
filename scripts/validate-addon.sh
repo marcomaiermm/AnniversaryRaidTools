@@ -154,9 +154,9 @@ check_load_order() {
   check_order "$root_toc" "libs/load_core_libs.xml" "BuildCheck.lua"
   check_order "$root_toc" "BuildCheck.lua" "Core/Compat.lua"
   check_order "$root_toc" "Core/Compat.lua" "Core/Bootstrap.lua"
-  check_order "$root_toc" "Core/Bootstrap.lua" "MythicDungeonTools_UI/Bootstrap.lua"
-  check_order "$root_toc" "Core/SavedVariables.lua" "MythicDungeonTools.lua"
-  check_order "$root_toc" "MythicDungeonTools.lua" "Core/Lifecycle.lua"
+  check_order "$root_toc" "Core/Bootstrap.lua" "AnniversaryRaidTools_UI/Bootstrap.lua"
+  check_order "$root_toc" "Core/SavedVariables.lua" "AnniversaryRaidTools.lua"
+  check_order "$root_toc" "AnniversaryRaidTools.lua" "Core/Lifecycle.lua"
   check_order "$root_toc" "Core/Lifecycle.lua" "Modules/load_modules.xml"
 }
 
@@ -190,7 +190,7 @@ check_lua_syntax() {
 }
 
 check_banned_domain_tokens() {
-  # Legacy MDT UI retains old dungeon terminology; scan only the new raid-domain
+  # Legacy ART UI retains old raid terminology; scan only the new raid-domain
   # boundary so the guard catches regressions without rewriting inherited UI.
   local file rel hits
   while IFS= read -r -d '' file; do
@@ -203,10 +203,23 @@ check_banned_domain_tokens() {
     fi
   done < <(
     find "$ROOT/Core" -maxdepth 1 -type f \( -name 'RaidRegistry.lua' -o -name 'RoutePreset.lua' -o -name 'MarkResolver.lua' -o -name 'EnemyInfoRepository.lua' \) -print0
-    find "$ROOT/Modules" -maxdepth 1 -type f \( -name 'Raid*.lua' -o -name 'LiveSession.lua' -o -name 'EnemyForces.lua' -o -name 'API.lua' \) -print0
+    find "$ROOT/Modules" -maxdepth 1 -type f \( -name 'Raid*.lua' -o -name 'LiveSession.lua' -o -name 'API.lua' \) -print0
     find "$ROOT/Developer" -maxdepth 1 -type f -name 'RaidRecorder.lua' -print0
     find "$ROOT/Raids/TBC" -type f -name '*.lua' -print0
   )
+}
+
+check_removed_features() {
+  local pattern hits
+  pattern='Mythic''DungeonTools|Mythic Dungeon Tools|(^|[^A-Za-z])MDT([^A-Za-z]|$)|enemy[Ff]orces|focus[Mm]arker|github[.]com|discord[.]gg|patreon[.]com'
+  hits=$(grep -RInE "$pattern" "$ROOT/Core" "$ROOT/Modules" "$ROOT/Locales" \
+    "$ROOT/AnniversaryRaidTools.lua" "$ROOT/AnniversaryRaidTools_UI" \
+    "$ROOT/README.md" "$ROOT/CONTRIBUTING.md" "$ROOT/AnniversaryRaidTools.toc" 2>/dev/null || true)
+  if [[ -n $hits ]]; then
+    fail "removed feature/reference returned: $(printf '%s' "$hits" | head -n 10 | tr '\n' ' ')"
+  else
+    pass "removed features and project links remain absent"
+  fi
 }
 
 run_lua_test() {
@@ -263,15 +276,6 @@ run_discovered_tests() {
     category_found[$category]=1
   done < <(find "$ROOT/tests" -type f \( -name '*.lua' -o -name '*.py' \) -not -path '*/__pycache__/*' -print0 2>/dev/null | sort -z)
 
-  # The compatibility mock is an existing load-on-demand/startup gate, not a
-  # feature test directory, so keep it in the matrix explicitly.
-  if [[ -f "$ROOT/scripts/test_plugin_compat.lua" ]]; then
-    run_lua_test "$ROOT/scripts/test_plugin_compat.lua" lua5.1
-    run_lua_test "$ROOT/scripts/test_plugin_compat.lua" luajit
-  else
-    fail "missing startup compatibility test: scripts/test_plugin_compat.lua"
-  fi
-
   for category in data maps marking enemy-info route integration; do
     if [[ ${category_found[$category]} == 1 ]]; then
       pass "test category discovered: $category"
@@ -289,6 +293,7 @@ check_load_order
 check_library_load_split
 check_lua_syntax
 check_banned_domain_tokens
+check_removed_features
 run_discovered_tests
 
 printf '\nSummary: %d passed, %d skipped, %d failed\n' "$passes" "$skips" "$failures"

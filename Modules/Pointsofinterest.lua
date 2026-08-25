@@ -1,15 +1,15 @@
-local _, MDT = ...
-local L = MDT.L
+local _, ART = ...
+local L = ART.L
 local db
 local tinsert, slen, pairs, tremove, twipe = table.insert, string.len, pairs, table.remove, table.wipe
 
 local points = {}
 
-function MDT:POI_CreateFramePools()
-  MDT.CreateFramePool("Button", MDT.main_frame.mapPanelFrame, "MapLinkPinTemplate")
-  MDT.CreateFramePool("Button", MDT.main_frame.mapPanelFrame, "DeathReleasePinTemplate")
-  MDT.CreateFramePool("Button", MDT.main_frame.mapPanelFrame, "VignettePinTemplate")
-  MDT.CreateFramePool("Frame", MDT.main_frame.mapPanelFrame, "MDTAnimatedLineTemplate")
+function ART:POI_CreateFramePools()
+  ART.CreateFramePool("Button", ART.main_frame.mapPanelFrame, "MapLinkPinTemplate")
+  ART.CreateFramePool("Button", ART.main_frame.mapPanelFrame, "DeathReleasePinTemplate")
+  ART.CreateFramePool("Button", ART.main_frame.mapPanelFrame, "VignettePinTemplate")
+  ART.CreateFramePool("Frame", ART.main_frame.mapPanelFrame, "ARTAnimatedLineTemplate")
 end
 
 local function formatPoiString(formattedText)
@@ -29,11 +29,11 @@ local function POI_SetDevOptions(frame, poi)
   frame:SetScript("OnMouseDown", function(self, button)
     if IsControlKeyDown() and poi.type == "mechagonBot" then
       if poi.botTypeIndex then return end
-      local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+      local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
       local poiData = pois[frame.poiIdx]
       mechagonBotTypeIndexCounter[poi.botType] = mechagonBotTypeIndexCounter[poi.botType] + 1
       poiData.botTypeIndex = mechagonBotTypeIndexCounter[poi.botType]
-      MDT:UpdateMap()
+      ART:UpdateMap()
       return
     end
 
@@ -42,41 +42,41 @@ local function POI_SetDevOptions(frame, poi)
       self.isMoving = true
     end
     if button == "RightButton" then
-      local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+      local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
       tremove(pois, self.poiIdx)
-      MDT:UpdateMap()
+      ART:UpdateMap()
     end
   end)
   frame:SetScript("OnMouseUp", function(self, button)
     if button == "LeftButton" and self.isMoving then
       self.isMoving = false
       self:StopMovingOrSizing()
-      local newx, newy = MDT:GetCursorPosition()
-      local scale = MDT:GetScale()
+      local newx, newy = ART:GetCursorPosition()
+      local scale = ART:GetScale()
       newx = newx * (1 / scale)
       newy = newy * (1 / scale)
-      local pois = MDT.mapPOIs[db.currentDungeonIdx][MDT:GetCurrentSubLevel()]
+      local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
       pois[self.poiIdx].x = newx
       pois[self.poiIdx].y = newy
       self:ClearAllPoints()
-      MDT:UpdateMap()
+      ART:UpdateMap()
     end
   end)
   frame:SetScript("OnClick", nil)
 end
 
 local createPlayerAssignmentContextMenu = function(frame)
-  MDT:CreateContextMenu(MDT.main_frame, function(ownerRegion, rootDescription)
+  ART:CreateContextMenu(ART.main_frame, function(ownerRegion, rootDescription)
     rootDescription:CreateTitle(L["dropdownAssignPlayer"])
 
-    local group = MDT.U.GetGroupMembers()
+    local group = ART.U.GetGroupMembers()
     for _, player in pairs(group) do
       local function IsSelected(p)
         return frame.playerAssignmentString:GetText() == p
       end
       local function SetSelected(p)
         frame.playerAssignmentString:SetText(p)
-        MDT:POI_SetPOIAssignment(MDT:GetCurrentSubLevel(), frame.poiIdx, p)
+        ART:POI_SetPOIAssignment(ART:GetCurrentSubLevel(), frame.poiIdx, p)
         if frame.setAssigned then
           frame.setAssigned()
         end
@@ -84,7 +84,7 @@ local createPlayerAssignmentContextMenu = function(frame)
       rootDescription:CreateRadio(player, IsSelected, SetSelected, player)
     end
 
-    local classStrings = MDT.U.GetClassColoredClassNames()
+    local classStrings = ART.U.GetClassColoredClassNames()
 
     for _, classString in pairs(classStrings) do
       local function IsSelected(p)
@@ -92,7 +92,7 @@ local createPlayerAssignmentContextMenu = function(frame)
       end
       local function SetSelected(p)
         frame.playerAssignmentString:SetText(p)
-        MDT:POI_SetPOIAssignment(MDT:GetCurrentSubLevel(), frame.poiIdx, p)
+        ART:POI_SetPOIAssignment(ART:GetCurrentSubLevel(), frame.poiIdx, p)
         if frame.setAssigned then
           frame.setAssigned()
         end
@@ -102,7 +102,7 @@ local createPlayerAssignmentContextMenu = function(frame)
 
     rootDescription:CreateButton(L["dropdownClear"], function()
       frame.playerAssignmentString:SetText()
-      MDT:POI_SetPOIAssignment(MDT:GetCurrentSubLevel(), frame.poiIdx, nil)
+      ART:POI_SetPOIAssignment(ART:GetCurrentSubLevel(), frame.poiIdx, nil)
       if frame.setUnassigned then
         frame.setUnassigned()
       end
@@ -161,12 +161,12 @@ local function POI_SetOptions(frame, type, poi)
       frame.Texture:SetAtlas(directionToAtlas[poi.direction])
     end
     frame:SetScript("OnClick", function()
-      MDT:SetCurrentSubLevel(poi.target)
-      MDT:UpdateMap()
+      ART:SetCurrentSubLevel(poi.target)
+      ART:UpdateMap()
     end)
     frame:SetScript("OnEnter", function()
       GameTooltip:SetOwner(UIParent, "ANCHOR_CURSOR")
-      GameTooltip:AddLine(MDT:GetDungeonSublevels()[db.currentDungeonIdx][poi.target], 1, 1, 1, 1)
+      GameTooltip:AddLine(ART:GetRaidFloors()[db.currentRaidIndex][poi.target], 1, 1, 1, 1)
       if db.devMode then GameTooltip:AddLine(frame.poi.connectionIndex, 1, 1, 1, 1) end
       GameTooltip:Show()
       frame.HighlightTexture:Show()
@@ -440,7 +440,7 @@ local function POI_SetOptions(frame, type, poi)
     frame.playerAssignmentString:SetJustifyV("MIDDLE")
     frame.playerAssignmentString:SetPoint(poi.textAnchor or "LEFT", frame, poi.textAnchorTo or "RIGHT", 0, 0)
     frame.playerAssignmentString:SetTextColor(1, 1, 1, 1)
-    frame.playerAssignmentString:SetText(MDT:POI_GetPOIAssignment(MDT:GetCurrentSubLevel(), frame.poiIdx))
+    frame.playerAssignmentString:SetText(ART:POI_GetPOIAssignment(ART:GetCurrentSubLevel(), frame.poiIdx))
     frame.playerAssignmentString:SetScale(0.25)
     frame.playerAssignmentString:Show()
 
@@ -477,7 +477,7 @@ local function POI_SetOptions(frame, type, poi)
     frame.playerAssignmentString:SetJustifyV("MIDDLE")
     frame.playerAssignmentString:SetPoint(poi.textAnchor or "LEFT", frame, poi.textAnchorTo or "RIGHT", 0, 0)
     frame.playerAssignmentString:SetTextColor(1, 1, 1, 1)
-    frame.playerAssignmentString:SetText(MDT:POI_GetPOIAssignment(MDT:GetCurrentSubLevel(), frame.poiIdx))
+    frame.playerAssignmentString:SetText(ART:POI_GetPOIAssignment(ART:GetCurrentSubLevel(), frame.poiIdx))
     frame.playerAssignmentString:SetScale(0.4)
     frame.playerAssignmentString:Show()
 
@@ -498,7 +498,7 @@ local function POI_SetOptions(frame, type, poi)
     end)
   end
   if type == "brackenhideCage" then
-    local assignment = MDT:POI_GetPOIAssignment(MDT:GetCurrentSubLevel(), frame.poiIdx)
+    local assignment = ART:POI_GetPOIAssignment(ART:GetCurrentSubLevel(), frame.poiIdx)
     frame.HighlightTexture:SetAtlas("vignettelootelite-locked")
     frame.Texture:SetAtlas("vignettelootelite-locked")
 
@@ -551,7 +551,7 @@ local function POI_SetOptions(frame, type, poi)
     end)
   end
   if type == "neltharusChain" then
-    local assignment = MDT:POI_GetPOIAssignment(MDT:GetCurrentSubLevel(), frame.poiIdx)
+    local assignment = ART:POI_GetPOIAssignment(ART:GetCurrentSubLevel(), frame.poiIdx)
     frame.HighlightTexture:SetAtlas("QuestObjective")
     frame.Texture:SetAtlas("QuestObjective")
 
@@ -661,7 +661,7 @@ local function POI_SetOptions(frame, type, poi)
     end)
   end
   if type == "nwItem" then
-    local assignment = MDT:POI_GetPOIAssignment(MDT:GetCurrentSubLevel(), frame.poiIdx)
+    local assignment = ART:POI_GetPOIAssignment(ART:GetCurrentSubLevel(), frame.poiIdx)
     local itemInfo = {
       [1] = {
         name = L["Bloody Javelin"],
@@ -1167,7 +1167,7 @@ local function POI_SetOptions(frame, type, poi)
   end
   if type == "genericAssignablePOI" then
     local info = poi.info
-    local assignment = MDT:POI_GetPOIAssignment(MDT:GetCurrentSubLevel(), frame.poiIdx)
+    local assignment = ART:POI_GetPOIAssignment(ART:GetCurrentSubLevel(), frame.poiIdx)
     local size = info.size or 12
 
     if info.atlas then
@@ -1256,9 +1256,9 @@ local function POI_SetOptions(frame, type, poi)
       frame.HighlightTexture:Hide()
     end)
   end
-  if type == "dungeonEntrance" then
-    frame.HighlightTexture:SetAtlas("Dungeon")
-    frame.Texture:SetAtlas("Dungeon")
+  if type == "raidEntrance" then
+    frame.HighlightTexture:SetAtlas("Raid")
+    frame.Texture:SetAtlas("Raid")
     local sizeMult = poi.sizeMult or 1
     local size = 32 * sizeMult
     frame:SetSize(size, size)
@@ -1266,7 +1266,7 @@ local function POI_SetOptions(frame, type, poi)
     frame.HighlightTexture:SetSize(size, size)
     frame:SetScript("OnEnter", function()
       GameTooltip:SetOwner(UIParent, "ANCHOR_CURSOR")
-      GameTooltip_SetTitle(GameTooltip, L["Dungeon Entrance"])
+      GameTooltip_SetTitle(GameTooltip, L["Raid Entrance"])
       GameTooltip:Show()
       frame.HighlightTexture:Show()
     end)
@@ -1309,15 +1309,15 @@ local function POI_SetOptions(frame, type, poi)
     frame.HighlightTexture:SetSize(size, size)
 
     local function shouldZoomIn()
-      local currentScale = MDTMapPanelFrame:GetScale()
+      local currentScale = ARTMapPanelFrame:GetScale()
       return currentScale < poi.index
     end
 
     frame:SetScript("OnClick", function()
       if shouldZoomIn() then
-        MDT:SetViewPortPosition(poi.value1, poi.value2, poi.value3)
+        ART:SetViewPortPosition(poi.value1, poi.value2, poi.value3)
       else
-        MDT:ZoomMapToDefault()
+        ART:ZoomMapToDefault()
       end
     end)
     frame:SetScript("OnEnter", function()
@@ -1333,7 +1333,7 @@ local function POI_SetOptions(frame, type, poi)
   end
 
   --fullscreen sizes
-  local scale = MDT:GetScale()
+  local scale = ART:GetScale()
   frame:SetSize(frame:GetWidth() * scale, frame:GetHeight() * scale)
   if frame.Texture then frame.Texture:SetSize(frame.Texture:GetWidth() * scale, frame.Texture:GetHeight() * scale) end
   if frame.HighlightTexture then
@@ -1346,39 +1346,39 @@ end
 
 ---POI_HideAllPoints
 ---Used to hide all POIs during scaling changes to the map
-function MDT:POI_HideAllPoints()
+function ART:POI_HideAllPoints()
   for _, poiFrame in pairs(points) do
     poiFrame:Hide()
   end
 end
 
 ---POI_UpdateAll
-function MDT:POI_UpdateAll()
+function ART:POI_UpdateAll()
   twipe(points)
-  db = MDT:GetDB()
-  MDT.GetFramePool("MapLinkPinTemplate"):ReleaseAll()
-  MDT.GetFramePool("DeathReleasePinTemplate"):ReleaseAll()
-  MDT.GetFramePool("VignettePinTemplate"):ReleaseAll()
-  if not MDT.mapPOIs[db.currentDungeonIdx] then return end
-  local currentSublevel = MDT:GetCurrentSubLevel()
-  local pois = MDT.mapPOIs[db.currentDungeonIdx][currentSublevel]
+  db = ART:GetDB()
+  ART.GetFramePool("MapLinkPinTemplate"):ReleaseAll()
+  ART.GetFramePool("DeathReleasePinTemplate"):ReleaseAll()
+  ART.GetFramePool("VignettePinTemplate"):ReleaseAll()
+  if not ART.mapPOIs[db.currentRaidIndex] then return end
+  local currentSublevel = ART:GetCurrentSubLevel()
+  local pois = ART.mapPOIs[db.currentRaidIndex][currentSublevel]
   if not pois then return end
-  local scale = MDT:GetScale()
+  local scale = ART:GetScale()
   for poiIdx, poi in pairs(pois) do
-    local poiFrame = MDT.GetFramePool(poi.template or "MapLinkPinTemplate"):Acquire()
+    local poiFrame = ART.GetFramePool(poi.template or "MapLinkPinTemplate"):Acquire()
     if poiFrame.playerAssignmentString then poiFrame.playerAssignmentString:Hide() end
     poiFrame.poiIdx = poiIdx
     POI_SetOptions(poiFrame, poi.type, poi)
     poiFrame.x = poi.x
     poiFrame.y = poi.y
     poiFrame:ClearAllPoints()
-    poiFrame:SetPoint("CENTER", MDT.main_frame.mapPanelTile1, "TOPLEFT", poi.x * scale, poi.y * scale)
+    poiFrame:SetPoint("CENTER", ART.main_frame.mapPanelTile1, "TOPLEFT", poi.x * scale, poi.y * scale)
     if not poiFrame.defaultHidden or db.devMode then poiFrame:Show() end
     tinsert(points, poiFrame)
   end
 end
 
-function MDT:POI_GetFrameForPOI(poiIdx)
+function ART:POI_GetFrameForPOI(poiIdx)
   for _, poiFrame in pairs(points) do
     if poiFrame.poiIdx == poiIdx then
       return poiFrame
@@ -1424,8 +1424,8 @@ local function animateLine(self, elapsed)
       t = t - 1
     end
     tX, tY = getPointAlongALine(self:GetParent(), self.frameOneX, self.frameOneY, self.frameTwoX, self.frameTwoY, t)
-    tex:SetPoint("TOPLEFT", MDT.main_frame.mapPanelTile1, "TOPLEFT", tX - (self.sizeX / 2), tY - (self.sizeY / 2))
-    tex:SetPoint("BOTTOMRIGHT", MDT.main_frame.mapPanelTile1, "TOPLEFT", tX + (self.sizeX / 2), tY + (self.sizeY / 2))
+    tex:SetPoint("TOPLEFT", ART.main_frame.mapPanelTile1, "TOPLEFT", tX - (self.sizeX / 2), tY - (self.sizeY / 2))
+    tex:SetPoint("BOTTOMRIGHT", ART.main_frame.mapPanelTile1, "TOPLEFT", tX + (self.sizeX / 2), tY + (self.sizeY / 2))
     tex:SetPoint("CENTER", tX, tY)
     tex:SetRotation(rotation)
     tex:SetVertexColor(self.color[1], self.color[2], self.color[3], self.color[4])
@@ -1445,18 +1445,18 @@ local function animateLine(self, elapsed)
 end
 
 local function createAnimatedLine(parent)
-  local animatedLine = MDT.GetFramePool("MDTAnimatedLineTemplate"):Acquire()
+  local animatedLine = ART.GetFramePool("ARTAnimatedLineTemplate"):Acquire()
   animatedLine:Show()
   animatedLine.phase = 0
   animatedLine.frames = {}
   return animatedLine
 end
 
-function MDT:ShowAnimatedLine(parent, frame1, frame2, sizeX, sizeY, gap, color, speed, selected, animatedLine)
+function ART:ShowAnimatedLine(parent, frame1, frame2, sizeX, sizeY, gap, color, speed, selected, animatedLine)
   if not (frame1 and frame2 and (not frame1:IsForbidden()) and (not frame1:IsForbidden())) then
     return nil
   end
-  texturePool = texturePool or CreateTexturePool(MDT.main_frame.mapPanelFrame, "OVERLAY", 7, nil)
+  texturePool = texturePool or CreateTexturePool(ART.main_frame.mapPanelFrame, "OVERLAY", 7, nil)
   animatedLine = animatedLine or createAnimatedLine(parent)
   animatedLine.frame1 = frame1
   animatedLine.frame2 = frame2
@@ -1467,8 +1467,8 @@ function MDT:ShowAnimatedLine(parent, frame1, frame2, sizeX, sizeY, gap, color, 
   animatedLine.color = color and color or { 1, 1, 1, 1, 0.2 }
   if selected then animatedLine.color = { 0.5, 1, 0.1, 1 } end
 
-  local scale = MDT:GetScale()
-  local mapSizex, mapSizey = MDT:GetDefaultMapPanelSize()
+  local scale = ART:GetScale()
+  local mapSizex, mapSizey = ART:GetDefaultMapPanelSize()
   animatedLine.frameOneX = ((mapSizex / 2) + frame1.x) * scale
   animatedLine.frameOneY = ((mapSizey / 2) + frame1.y) * scale
   animatedLine.frameTwoX = ((mapSizex / 2) + (frame2.adjustedX or frame2.x)) * scale
@@ -1482,8 +1482,8 @@ function MDT:ShowAnimatedLine(parent, frame1, frame2, sizeX, sizeY, gap, color, 
   return animatedLine
 end
 
-function MDT:KillAllAnimatedLines()
-  local linePool = MDT.GetFramePool("MDTAnimatedLineTemplate")
+function ART:KillAllAnimatedLines()
+  local linePool = ART.GetFramePool("ARTAnimatedLineTemplate")
   local activeLines = linePool.active
   for _, animatedLine in pairs(activeLines) do
     animatedLine:SetScript("onUpdate", nil)
@@ -1502,7 +1502,7 @@ function MDT:KillAllAnimatedLines()
   linePool:ReleaseAll()
 end
 
-function MDT:HideAnimatedLine(animatedLine)
+function ART:HideAnimatedLine(animatedLine)
   if not animatedLine then return end
   for i = 1, #animatedLine.frames do
     animatedLine.frames[i]:ClearAllPoints()
@@ -1511,21 +1511,21 @@ function MDT:HideAnimatedLine(animatedLine)
   animatedLine:Hide()
 end
 
-function MDT:POI_CreateDropDown(frame)
-  frame.poiDropDown = CreateFrame("frame", "MDTPullButtonsOptionsDropDown", nil, "UIDropDownMenuTemplate")
+function ART:POI_CreateDropDown(frame)
+  frame.poiDropDown = CreateFrame("frame", "ARTPullButtonsOptionsDropDown", nil, "UIDropDownMenuTemplate")
 end
 
-function MDT:POI_SetPOIAssignment(sublevel, poiIdx, value)
-  MDT:GetCurrentPreset().value.poiAssignments = MDT:GetCurrentPreset().value.poiAssignments or {}
-  MDT:GetCurrentPreset().value.poiAssignments[sublevel] = MDT:GetCurrentPreset().value.poiAssignments[sublevel] or {}
-  MDT:GetCurrentPreset().value.poiAssignments[sublevel][poiIdx] = value
-  if MDT.liveSessionActive and MDT:GetCurrentPreset().uid == MDT.livePresetUID then
-    MDT:LiveSession_SendPOIAssignment(sublevel, poiIdx, value)
+function ART:POI_SetPOIAssignment(sublevel, poiIdx, value)
+  ART:GetCurrentPreset().value.poiAssignments = ART:GetCurrentPreset().value.poiAssignments or {}
+  ART:GetCurrentPreset().value.poiAssignments[sublevel] = ART:GetCurrentPreset().value.poiAssignments[sublevel] or {}
+  ART:GetCurrentPreset().value.poiAssignments[sublevel][poiIdx] = value
+  if ART.liveSessionActive and ART:GetCurrentPreset().uid == ART.livePresetUID then
+    ART:LiveSession_SendPOIAssignment(sublevel, poiIdx, value)
   end
 end
 
-function MDT:POI_GetPOIAssignment(sublevelIdx, poiIdx)
-  local sublevels = MDT:GetCurrentPreset().value.poiAssignments
+function ART:POI_GetPOIAssignment(sublevelIdx, poiIdx)
+  local sublevels = ART:GetCurrentPreset().value.poiAssignments
   if not sublevels then return end
   local assignments = sublevels[sublevelIdx]
   if not assignments then return end

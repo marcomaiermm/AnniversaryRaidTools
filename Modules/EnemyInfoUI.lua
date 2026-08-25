@@ -1,7 +1,7 @@
 -- Restored from the fork's pre-raid-planner EnemyInfo module (ebe8a6e0).
--- Raid publication remains in EnemyInfo.lua; this file only owns the existing MDT UI.
-local _, MDT = ...
-local L = MDT.L
+-- Raid publication remains in EnemyInfo.lua; this file only owns the existing ART UI.
+local _, ART = ...
+local L = ART.L
 local AceGUI = LibStub("AceGUI-3.0")
 local db
 local tinsert = table.insert
@@ -50,9 +50,9 @@ end)
 local currentTab = "tab1"
 local function MakeEnemeyInfoFrame()
   local f = AceGUI:Create("Frame")
-  f.frame:SetParent(MDT.main_frame)
+  f.frame:SetParent(ART.main_frame)
   f.frame:SetFrameStrata("DIALOG")
-  MDT.enemyInfoFrame = f
+  ART.enemyInfoFrame = f
   f:SetTitle(L["Enemy Info"])
   f:EnableResize(false)
   f.frame:SetMovable(false)
@@ -63,10 +63,10 @@ local function MakeEnemeyInfoFrame()
 
   end)
   f.frame:ClearAllPoints()
-  f.frame:SetAllPoints(MDTScrollFrame)
+  f.frame:SetAllPoints(ARTScrollFrame)
 
-  local originalHide = MDT.main_frame.Hide
-  function MDT.main_frame:Hide(...)
+  local originalHide = ART.main_frame.Hide
+  function ART.main_frame:Hide(...)
     f.frame:Hide()
     return originalHide(self, ...);
   end
@@ -101,7 +101,7 @@ local function MakeEnemeyInfoFrame()
     f.enemyDropDown = AceGUI:Create("Dropdown")
     local enemyDropDown = f.enemyDropDown
     enemyDropDown:SetCallback("OnValueChanged", function(widget, callbackName, key)
-      MDT:UpdateEnemyInfoFrame(key)
+      ART:UpdateEnemyInfoFrame(key)
     end)
 
     --model
@@ -128,7 +128,7 @@ local function MakeEnemeyInfoFrame()
     modelContainer:AddChild(modelDummyIcon)
     model:ClearAllPoints()
     model:SetPoint("BOTTOM", modelContainer.frame, "BOTTOM", 0, 10)
-    MDT:FixAceGUIShowHide(model, modelContainer.frame, true)
+    ART:FixAceGUIShowHide(model, modelContainer.frame, true)
 
     f.characteristicsContainer = AceGUI:Create("InlineGroup")
     if not f.characteristicsContainer.frame.SetBackdrop then
@@ -211,14 +211,6 @@ local function MakeEnemeyInfoFrame()
       self:SetText(self.defaultText)
     end)
     f.enemyDataContainer:AddChild(f.enemyDataContainer.levelEditBox)
-
-    f.enemyDataContainer.countEditBox = AceGUI:Create("EditBox")
-    f.enemyDataContainer.countEditBox:SetLabel(L["Enemy Info NPC Enemy Forces"])
-    f.enemyDataContainer.countEditBox:DisableButton(true)
-    f.enemyDataContainer.countEditBox:SetCallback("OnTextChanged", function(self)
-      self:SetText(self.defaultText)
-    end)
-    f.enemyDataContainer:AddChild(f.enemyDataContainer.countEditBox)
 
     f.enemyDataContainer.stealthCheckBox = AceGUI:Create("CheckBox")
     f.enemyDataContainer.stealthCheckBox:SetLabel(L["Enemy Info NPC Stealth"])
@@ -315,7 +307,7 @@ local function MakeEnemeyInfoFrame()
       local distribution = (UnitInRaid("player") and "RAID") or (IsInGroup() and "PARTY")
       if not distribution then return end
       local enemyName = f.enemyDropDown.text:GetText()
-      C_ChatInfo.SendChatMessage(string.format(L["MDT: Spells for %s:"], enemyName), distribution)
+      C_ChatInfo.SendChatMessage(string.format(L["ART: Spells for %s:"], enemyName), distribution)
       for i, child in pairs(f.spellScroll.children) do
         local link = C_Spell.GetSpellLink(child.spellId)
         C_ChatInfo.SendChatMessage(i..". "..link, distribution)
@@ -457,17 +449,17 @@ local spellBlacklist = {
   --[X]  = true,
 }
 local lastEnemyIdx
-function MDT:GetEnemyInfoEnemyIdx()
+function ART:GetEnemyInfoEnemyIdx()
   return lastEnemyIdx
 end
 
-function MDT:UpdateEnemyInfoFrame(enemyIdx)
+function ART:UpdateEnemyInfoFrame(enemyIdx)
   if not enemyIdx then enemyIdx = lastEnemyIdx end
   lastEnemyIdx = enemyIdx
   if not enemyIdx then return end
-  local data = MDT.dungeonEnemies[db.currentDungeonIdx][enemyIdx]
+  local data = ART.raidEnemies[db.currentRaidIndex][enemyIdx]
   if not data then return end
-  local f = MDT.EnemyInfoFrame
+  local f = ART.EnemyInfoFrame
   f:SetTitle(L[data.name])
   f.model:SetDisplayInfo(data.displayId or 39490)
   if f.model.ResetModel then f.model:ResetModel() end
@@ -494,7 +486,7 @@ function MDT:UpdateEnemyInfoFrame(enemyIdx)
   f.powerScrollContainer:SetWidth(math.min(f.leftContainer.frame:GetWidth() - 20, 248))
 
   local enemies = {}
-  for mobIdx, edata in ipairs(MDT.dungeonEnemies[db.currentDungeonIdx]) do
+  for mobIdx, edata in ipairs(ART.raidEnemies[db.currentRaidIndex]) do
     tinsert(enemies, mobIdx, L[edata.name])
   end
   f.enemyDropDown:SetList(enemies)
@@ -525,7 +517,7 @@ function MDT:UpdateEnemyInfoFrame(enemyIdx)
     end
   end
 
-  MDT:UpdateEnemyInfoData(enemyIdx)
+  ART:UpdateEnemyInfoData(enemyIdx)
 
   --ace is finicky
   f.rightContainer:PauseLayout()
@@ -545,7 +537,7 @@ function MDT:UpdateEnemyInfoFrame(enemyIdx)
     local spellIds = {}
     -- Insert all spell IDs into the table
     for spellId in pairs(data.spells) do
-      if MDT:GetDB().devMode or not spellBlacklist[spellId] then
+      if ART:GetDB().devMode or not spellBlacklist[spellId] then
         table.insert(spellIds, spellId)
       end
     end
@@ -555,7 +547,7 @@ function MDT:UpdateEnemyInfoFrame(enemyIdx)
     -- Create spell buttons in sorted order
     for _, spellId in ipairs(spellIds) do
       local spellData = data.spells[spellId]
-      local spellButton = AceGUI:Create("MDTSpellButton")
+      local spellButton = AceGUI:Create("ARTSpellButton")
       spellButton:SetSpell(spellId, spellData)
       spellButton:Initialize()
       spellButton:Enable()
@@ -568,7 +560,7 @@ function MDT:UpdateEnemyInfoFrame(enemyIdx)
   if data.powers then
     for powerSpellId, powerData in pairs(data.powers) do
       ---@diagnostic disable-next-line: param-type-mismatch
-      local powerButton = AceGUI:Create("MDTPowerButton")
+      local powerButton = AceGUI:Create("ARTPowerButton")
       powerButton:SetSpell(powerSpellId, powerData)
       powerButton:Initialize()
       powerButton:Enable()
@@ -581,20 +573,19 @@ function MDT:UpdateEnemyInfoFrame(enemyIdx)
   f.rightContainer:DoLayout()
 end
 
-function MDT:UpdateEnemyInfoData(enemyIdx)
-  local f = MDT.EnemyInfoFrame
+function ART:UpdateEnemyInfoData(enemyIdx)
+  local f = ART.EnemyInfoFrame
   if not enemyIdx then enemyIdx = lastEnemyIdx end
   if not enemyIdx then return end
-  local data = MDT.dungeonEnemies[db.currentDungeonIdx][enemyIdx]
+  local data = ART.raidEnemies[db.currentRaidIndex][enemyIdx]
   --data
   f.enemyDataContainer.nameEditBox:SetText(L[data.name])
   f.enemyDataContainer.nameEditBox.defaultText = data.name
   f.enemyDataContainer.idEditBox:SetText(data.id)
   f.enemyDataContainer.idEditBox.defaultText = data.id
 
-  local boss = data.isBoss or false
-  local health = MDT:CalculateEnemyHealth(boss, data.health, db.currentDifficulty, data.ignoreFortified)
-  local healthText = MDT:FormatEnemyHealth(health)
+  local health = ART:CalculateEnemyHealth(data.isBoss or false, data.health)
+  local healthText = ART:FormatEnemyHealth(health)
 
   f.enemyDataContainer.healthEditBox:SetText(healthText)
   f.enemyDataContainer.healthEditBox.defaultText = healthText
@@ -603,24 +594,17 @@ function MDT:UpdateEnemyInfoData(enemyIdx)
   f.enemyDataContainer.creatureTypeEditBox.defaultText = data.creatureType
   f.enemyDataContainer.levelEditBox:SetText(data.level)
   f.enemyDataContainer.levelEditBox.defaultText = data.level
-  f.enemyDataContainer.countEditBox:SetText(data.count)
-  f.enemyDataContainer.countEditBox.defaultText = data.count
   f.enemyDataContainer.stealthCheckBox:SetValue(data.stealth)
   f.enemyDataContainer.stealthCheckBox.defaultValue = data.stealth
   f.enemyDataContainer.stealthDetectCheckBox:SetValue(data.stealthDetect)
   f.enemyDataContainer.stealthDetectCheckBox.defaultValue = data.stealthDetect
 
-  local level = db.currentDifficulty
-  local healthLabel = string.format(L["Enemy Info NPC Health Level"], level)
-  if level >= 10 then
-    healthLabel = string.format(L["Enemy Info NPC Health"], level, L["Fortified"].."/"..L["Tyrannical"])
-  end
-  f.enemyDataContainer.healthEditBox:SetLabel(healthLabel)
+  f.enemyDataContainer.healthEditBox:SetLabel(L["Enemy Info NPC Health"])
 end
 
-function MDT:ShowEnemyInfoFrame(blip)
-  db = MDT:GetDB()
-  MDT.EnemyInfoFrame = MDT.EnemyInfoFrame or MakeEnemeyInfoFrame()
-  MDT:UpdateEnemyInfoFrame(blip.enemyIdx)
-  MDT.EnemyInfoFrame:Show()
+function ART:ShowEnemyInfoFrame(blip)
+  db = ART:GetDB()
+  ART.EnemyInfoFrame = ART.EnemyInfoFrame or MakeEnemeyInfoFrame()
+  ART:UpdateEnemyInfoFrame(blip.enemyIdx)
+  ART.EnemyInfoFrame:Show()
 end

@@ -1,8 +1,5 @@
 -- Candidate client-map calibration; tune with Developer/MapCalibration.lua.
-local _, addon = ...
-local ART = rawget(_G, "ART")
-if not ART then ART = addon and addon.ART or addon or {}; _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 local provenance = { source = "derived", confidence = "review-required", sourceRef = "derived-from:client-ui-map", observedAt = "2026-08-22T12:00:00Z" }
 local transform = { schemaVersion = 1, raidKey = "sunwell-plateau", calibrations = {
   [1] = { mapId = 580, sublevel = 1, offsetX = 0, offsetY = 0, scaleX = 1, scaleY = 1, flipY = false, tolerance = 0.0005, provenance = provenance },

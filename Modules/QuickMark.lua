@@ -1,10 +1,7 @@
 -- Quick-mark input: hovering a planner blip plus keys 1-8 or the player's own
 -- RAIDTARGET bindings assigns markers in the plan, never in the world.
 
-local _, addon = ...
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local QuickMark = ART.QuickMark or {}
 ART.QuickMark = QuickMark
@@ -33,14 +30,14 @@ end
 
 local function ensureCaptureFrame()
   if captureFrame then return captureFrame end
-  captureFrame = CreateFrame("Frame", "MDTQuickMarkCapture", UIParent)
+  captureFrame = CreateFrame("Frame", "ARTQuickMarkCapture", UIParent)
   captureFrame:SetSize(1, 1)
   captureFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", -200, 200)
   captureFrame:SetAlpha(0)
   captureFrame:EnableMouse(false)
   for marker = 1, 8 do
     local marker = marker
-    local button = CreateFrame("Button", "MDTQuickMarkButton"..marker, captureFrame)
+    local button = CreateFrame("Button", "ARTQuickMarkButton"..marker, captureFrame)
     button:SetScript("OnClick", function() assignMarker(marker) end)
     captureButtons[marker] = button
   end

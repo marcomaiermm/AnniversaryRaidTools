@@ -5,7 +5,7 @@ local path = root.."/Data/EnemyInfo/GruulsLair.lua"
 local ART = { StaticData = { enemyInfo = {} } }
 _G.ART = ART
 
-local enemyInfo = assert(loadfile(path))("AnniversaryRaidTools", { ART = ART })
+local enemyInfo = assert(loadfile(path))("AnniversaryRaidTools", ART)
 assert(enemyInfo == ART.StaticData.enemyInfo["gruuls-lair"], "publication must preserve record identity")
 assert(enemyInfo.enemies[18831].name.source == enemyInfo.source, "published value must be the returned record")
 

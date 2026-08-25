@@ -3,7 +3,6 @@
 -- Source: TBC candidate snapshot; not Anniversary-verified.
 -- SourceRef: https://github.com/cmangos/tbc-db/tree/da2de07e6606d495872c3fd92ba8363cf79f43c9#creature
 -- ObservedAt: 2026-08-22T12:00:00Z
--- Nnoggie's Mythic Dungeon Tools attribution and GPL-2.0 terms remain in the repository.
 local raid = {
   schemaVersion = 1,
   key = "serpentshrine-cavern",

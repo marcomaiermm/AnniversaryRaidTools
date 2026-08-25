@@ -1,4 +1,4 @@
---- @class MDTTest
+--- @class ARTTest
 --- @field name string
 --- @field func function
 --- @field duration number

@@ -1,42 +1,14 @@
-local _, MDT = ...
+local _, ART = ...
 
 local tinsert, tremove, tonumber, pairs, ipairs = table.insert, table.remove, tonumber, pairs, ipairs
 local db
 
 local function initializeDB()
-  db = db or MDT:GetDB()
-end
-
----Legacy selection count; route persistence uses stable pack keys instead.
-function MDT:CountForces(currentPull, currentOnly)
-  initializeDB()
-  --count up to and including the currently selected pull
-  currentPull = currentPull or 1000
-  local preset = self:GetCurrentPreset()
-  local pullCurrent = 0
-  for pullIdx, pull in pairs(preset.value.pulls) do
-    if not currentOnly or (currentOnly and pullIdx == currentPull) then
-      if pullIdx <= currentPull then
-        for enemyIdx, clones in pairs(pull) do
-          if tonumber(enemyIdx) then
-            for k, v in pairs(clones) do
-              if MDT:IsCloneIncluded(enemyIdx, v) then
-                local count = self.dungeonEnemies[db.currentDungeonIdx][enemyIdx].count
-                pullCurrent = pullCurrent + count
-              end
-            end
-          end
-        end
-      else
-        break
-      end
-    end
-  end
-  return pullCurrent
+  db = db or ART:GetDB()
 end
 
 ---Adds up health of all enemies in the current pull
-function MDT:SumCurrentPullHealth(currentPull)
+function ART:SumCurrentPullHealth(currentPull)
   initializeDB()
   currentPull = currentPull or 1000
   local preset = self:GetCurrentPreset()
@@ -47,8 +19,8 @@ function MDT:SumCurrentPullHealth(currentPull)
   for enemyIdx, clones in pairs(pull) do
     if tonumber(enemyIdx) then
       for k, v in pairs(clones) do
-        if MDT:IsCloneIncluded(enemyIdx, v) then
-          local data = self.dungeonEnemies[db.currentDungeonIdx][enemyIdx]
+        if ART:IsCloneIncluded(enemyIdx, v) then
+          local data = self.raidEnemies[db.currentRaidIndex][enemyIdx]
           local health = self:CalculateEnemyHealth(false, data.health)
           totalHealth = totalHealth + health
         end
@@ -59,21 +31,21 @@ function MDT:SumCurrentPullHealth(currentPull)
 end
 
 ---Checks if the specified clone is part of the current map configuration
-function MDT:IsCloneIncluded(enemyIdx, cloneIdx)
+function ART:IsCloneIncluded(enemyIdx, cloneIdx)
   initializeDB()
-  local enemy = MDT.dungeonEnemies[db.currentDungeonIdx][enemyIdx]
+  local enemy = ART.raidEnemies[db.currentRaidIndex][enemyIdx]
   local clone = enemy and enemy["clones"][cloneIdx]
   if not clone then return false end
   return true
 end
 
 ---Returns the current pull of the currently active preset
-function MDT:GetCurrentPull()
-  local selection = MDT:GetSelection()
+function ART:GetCurrentPull()
+  local selection = ART:GetSelection()
   return selection[#selection]
 end
 
-function MDT:EnablePullsPerSublevel()
+function ART:EnablePullsPerSublevel()
   initializeDB()
   local value = self:GetCurrentPreset().value
   local currentSublevel = value.currentSublevel or 1
@@ -84,7 +56,7 @@ function MDT:EnablePullsPerSublevel()
       for key, item in pairs(pull) do
         local enemyIdx = tonumber(key)
         if enemyIdx and type(item) == "table" then
-          local enemy = self.dungeonEnemies[db.currentDungeonIdx] and self.dungeonEnemies[db.currentDungeonIdx][enemyIdx]
+          local enemy = self.raidEnemies[db.currentRaidIndex] and self.raidEnemies[db.currentRaidIndex][enemyIdx]
           for _, cloneIdx in ipairs(item) do
             local clone = enemy and enemy.clones and enemy.clones[cloneIdx]
             local sublevel = clone and clone.sublevel or currentSublevel
@@ -117,7 +89,7 @@ function MDT:EnablePullsPerSublevel()
   value.selection = { value.currentPull }
 end
 
-function MDT:SetPullSublevel(sublevel)
+function ART:SetPullSublevel(sublevel)
   local value = self:GetCurrentPreset().value
   if not value.pullsBySublevel then value.currentSublevel = sublevel; return end
   value.pullsBySublevel[value.currentSublevel] = value.pulls
@@ -130,7 +102,7 @@ function MDT:SetPullSublevel(sublevel)
   value.selection = { value.currentPull }
 end
 
----Stores r g b values for coloring pulls with MDT:ColorPull()
+---Stores r g b values for coloring pulls with ART:ColorPull()
 local colorPaletteValues = {
   [1] = { --Rainbow values
     [1] = { [1] = 0.2446, [2] = 1, [3] = 0.2446 },
@@ -186,10 +158,10 @@ local colorPaletteValues = {
 }
 
 ---Function executes full coloring of a pull and it's blips
-function MDT:ColorPull(colorValues, pullIdx, preset, bypass, exportColorBlind) -- bypass can be passed as true to color even when automatic coloring is toggled off
+function ART:ColorPull(colorValues, pullIdx, preset, bypass, exportColorBlind) -- bypass can be passed as true to color even when automatic coloring is toggled off
   initializeDB()
-  local colorPaletteInfo = MDT:GetPresetColorPaletteInfo(preset)
-  local pullIdx = pullIdx or MDT:GetCurrentPull()
+  local colorPaletteInfo = ART:GetPresetColorPaletteInfo(preset)
+  local pullIdx = pullIdx or ART:GetCurrentPull()
   if (pullIdx) then
     local colorValues
     local numberColors
@@ -208,25 +180,25 @@ function MDT:ColorPull(colorValues, pullIdx, preset, bypass, exportColorBlind) -
       local colorIdx = (pullIdx - 1) % numberColors + 1
       r, g, b = colorValues[colorIdx][1], colorValues[colorIdx][2], colorValues[colorIdx][3]
 
-      MDT:DungeonEnemies_SetPullColor(pullIdx, r, g, b)
-      MDT:UpdatePullButtonColor(pullIdx, r, g, b)
-      MDT:DungeonEnemies_UpdateBlipColors(pullIdx, r, g, b)
+      ART:RaidEnemies_SetPullColor(pullIdx, r, g, b)
+      ART:UpdatePullButtonColor(pullIdx, r, g, b)
+      ART:RaidEnemies_UpdateBlipColors(pullIdx, r, g, b)
     end
   end
 end
 
 ---Loops over all pulls in a preset and colors them
-function MDT:ColorAllPulls(colorValues, startFrom, bypass, exportColorBlind)
+function ART:ColorAllPulls(colorValues, startFrom, bypass, exportColorBlind)
   local preset = self:GetCurrentPreset()
   local startFrom = startFrom or 0
   for pullIdx, _ in pairs(preset.value.pulls) do
     if pullIdx >= startFrom then
-      MDT:ColorPull(colorValues, pullIdx, preset, bypass, exportColorBlind)
+      ART:ColorPull(colorValues, pullIdx, preset, bypass, exportColorBlind)
     end
   end
 end
 
-function MDT:PresetsAddPull(index, data, preset)
+function ART:PresetsAddPull(index, data, preset)
   preset = preset or self:GetCurrentPreset()
   if not data then data = {} end
   if index then
@@ -245,7 +217,7 @@ end
 ---@param destination number The pull index, where the merged pull shall be inserted.
 ---
 ---@author Dradux
-function MDT:PresetsMergePulls(pulls, destination)
+function ART:PresetsMergePulls(pulls, destination)
   if type(pulls) == "number" then
     pulls = { pulls, destination }
   end
@@ -305,7 +277,7 @@ function MDT:PresetsMergePulls(pulls, destination)
   return index
 end
 
-function MDT:PresetsDeletePull(p, preset)
+function ART:PresetsDeletePull(p, preset)
   preset = preset or self:GetCurrentPreset()
   if p == preset.value.currentPull then
     preset.value.currentPull = math.max(p - 1, 1)
@@ -313,26 +285,26 @@ function MDT:PresetsDeletePull(p, preset)
   tremove(preset.value.pulls, p)
 end
 
-function MDT:GetPulls(preset)
+function ART:GetPulls(preset)
   preset = preset or self:GetCurrentPreset()
   return preset.value.pulls
 end
 
-function MDT:GetPullsNum(preset)
+function ART:GetPullsNum(preset)
   preset = preset or self:GetCurrentPreset()
   return #preset.value.pulls
 end
 
-function MDT:PresetsSwapPulls(p1, p2)
+function ART:PresetsSwapPulls(p1, p2)
   local pulls = self:GetCurrentPreset().value.pulls
   pulls[p1], pulls[p2] = pulls[p2], pulls[p1]
 end
 
-function MDT:SetSelectionToPull(pull, ignoreHulls)
+function ART:SetSelectionToPull(pull, ignoreHulls)
   --if pull is not specified set pull to last pull in preset (for adding new pulls)
   if not pull then
     local count = 0
-    for k, v in pairs(MDT:GetCurrentPreset().value.pulls) do
+    for k, v in pairs(ART:GetCurrentPreset().value.pulls) do
       count = count + 1
     end
     pull = count
@@ -340,64 +312,63 @@ function MDT:SetSelectionToPull(pull, ignoreHulls)
 
   --SaveCurrentPresetPull
   if type(pull) == "number" and pull > 0 then
-    MDT:GetCurrentPreset().value.currentPull = pull
-    MDT:GetCurrentPreset().value.selection = { pull }
-    if MDT.main_frame and MDT.main_frame.sidePanel then
-      MDT:PickPullButton(pull)
-      MDT:DungeonEnemies_UpdateSelected(pull, nil, ignoreHulls)
+    ART:GetCurrentPreset().value.currentPull = pull
+    ART:GetCurrentPreset().value.selection = { pull }
+    if ART.main_frame and ART.main_frame.sidePanel then
+      ART:PickPullButton(pull)
+      ART:RaidEnemies_UpdateSelected(pull, nil, ignoreHulls)
     end
   elseif type(pull) == "table" then
-    MDT:GetCurrentPreset().value.currentPull = pull[#pull]
-    MDT:GetCurrentPreset().value.selection = pull
+    ART:GetCurrentPreset().value.currentPull = pull[#pull]
+    ART:GetCurrentPreset().value.selection = pull
 
-    if MDT.main_frame and MDT.main_frame.sidePanel then
-      MDT:ClearPullButtonPicks()
-      for _, pullIdx in ipairs(MDT:GetSelection()) do
-        MDT:PickPullButton(pullIdx, true)
-        MDT:DungeonEnemies_UpdateSelected(pullIdx, nil, ignoreHulls)
+    if ART.main_frame and ART.main_frame.sidePanel then
+      ART:ClearPullButtonPicks()
+      for _, pullIdx in ipairs(ART:GetSelection()) do
+        ART:PickPullButton(pullIdx, true)
+        ART:RaidEnemies_UpdateSelected(pullIdx, nil, ignoreHulls)
       end
     end
   end
-  MDT:PullClickAreaOnLeave()
+  ART:PullClickAreaOnLeave()
 end
 
 ---Creates a new pull in the current preset and calls ReloadPullButtons to reflect the change in the scrollframe
-function MDT:AddPull(index)
-  MDT:PresetsAddPull(index)
-  MDT:ReloadPullButtons()
-  MDT:SetSelectionToPull(index)
+function ART:AddPull(index)
+  ART:PresetsAddPull(index)
+  ART:ReloadPullButtons()
+  ART:SetSelectionToPull(index)
 end
 
 ---Clears all the npcs out of a pull
-function MDT:ClearPull(index)
+function ART:ClearPull(index)
   initializeDB()
-  table.wipe(db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].value.pulls[index])
-  MDT:EnsureDBTables()
-  MDT:ReloadPullButtons()
-  MDT:SetSelectionToPull(index)
+  table.wipe(db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls[index])
+  ART:EnsureDBTables()
+  ART:ReloadPullButtons()
+  ART:SetSelectionToPull(index)
 end
 
 ---Moves the selected pull up
-function MDT:MovePullUp(index)
-  MDT:PresetsSwapPulls(index, index - 1)
-  MDT:ReloadPullButtons()
-  MDT:SetSelectionToPull(index - 1)
+function ART:MovePullUp(index)
+  ART:PresetsSwapPulls(index, index - 1)
+  ART:ReloadPullButtons()
+  ART:SetSelectionToPull(index - 1)
 end
 
 ---Moves the selected pull down
-function MDT:MovePullDown(index)
-  MDT:PresetsSwapPulls(index, index + 1)
-  MDT:ReloadPullButtons()
-  MDT:SetSelectionToPull(index + 1)
+function ART:MovePullDown(index)
+  ART:PresetsSwapPulls(index, index + 1)
+  ART:ReloadPullButtons()
+  ART:SetSelectionToPull(index + 1)
 end
 
 ---Deletes the selected pull and makes sure that a pull will be selected afterwards
-function MDT:DeletePull(index)
+function ART:DeletePull(index)
   local pulls = self:GetPulls()
   if #pulls == 1 then return end
   self:PresetsDeletePull(index)
   self:ReloadPullButtons()
-  self:UpdateProgressbar()
   local pullCount = 0
   for k, v in pairs(pulls) do
     pullCount = pullCount + 1
@@ -406,16 +377,16 @@ function MDT:DeletePull(index)
   self:SetSelectionToPull(index)
 end
 
-function MDT:GetSelection()
-  if not MDT:GetCurrentPreset().value.selection or #MDT:GetCurrentPreset().value.selection == 0 then
-    MDT:GetCurrentPreset().value.selection = { MDT:GetCurrentPreset().value.currentPull }
+function ART:GetSelection()
+  if not ART:GetCurrentPreset().value.selection or #ART:GetCurrentPreset().value.selection == 0 then
+    ART:GetCurrentPreset().value.selection = { ART:GetCurrentPreset().value.currentPull }
   end
 
-  return MDT:GetCurrentPreset().value.selection
+  return ART:GetCurrentPreset().value.selection
 end
 
-function MDT:CopyPullOptions(sourceIdx, destinationIdx)
-  local preset = MDT:GetCurrentPreset()
+function ART:CopyPullOptions(sourceIdx, destinationIdx)
+  local preset = ART:GetCurrentPreset()
   local pulls = preset.value.pulls
   local source = pulls[sourceIdx]
   local destination = pulls[destinationIdx]

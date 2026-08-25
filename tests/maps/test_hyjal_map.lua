@@ -3,9 +3,8 @@
 local root = arg and arg[1] or "."
 local ART = { StaticData = { raids = {} } }
 _G.ART = ART
-local addon = { ART = ART }
-local map = assert(loadfile(root.."/Raids/TBC/Maps/Hyjal.lua"))("AnniversaryRaidTools", addon)
-local transform = assert(loadfile(root.."/Raids/TBC/Transforms/Hyjal.lua"))("AnniversaryRaidTools", addon)
+local map = assert(loadfile(root.."/Raids/TBC/Maps/Hyjal.lua"))("AnniversaryRaidTools", ART)
+local transform = assert(loadfile(root.."/Raids/TBC/Transforms/Hyjal.lua"))("AnniversaryRaidTools", ART)
 local raid = assert(loadfile(root.."/Raids/TBC/Generated/Hyjal.lua"))()
 
 local function equal(actual, expected, message)

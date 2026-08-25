@@ -6,8 +6,8 @@ _G.ART = ART
 ART.StaticData = { enemyInfo = {} }
 local load = function(path) return assert(loadfile(root..path)) end
 
-local repositoryAPI = load("/Core/EnemyInfoRepository.lua")("AnniversaryRaidTools", { ART = ART })
-local recorderAPI = load("/Developer/RaidRecorder.lua")("AnniversaryRaidTools", { ART = ART })
+local repositoryAPI = load("/Core/EnemyInfoRepository.lua")("AnniversaryRaidTools", ART)
+local recorderAPI = load("/Developer/RaidRecorder.lua")("AnniversaryRaidTools", ART)
 local repository = repositoryAPI.new({ data = load("/Data/EnemyInfo/GruulsLair.lua")() })
 local recorder = recorderAPI.new({
   repository = repository,

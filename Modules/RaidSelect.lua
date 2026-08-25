@@ -1,13 +1,9 @@
 -- Raid selection boundary; central registration belongs to ART-070.
 
-local _, addon = ...
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local RaidSelect = ART.RaidSelect or {}
 ART.RaidSelect = RaidSelect
-if addon and addon.RaidSelect == nil then addon.RaidSelect = RaidSelect end
 
 function RaidSelect:Initialize(dependencies)
   if self.initialized then return self end

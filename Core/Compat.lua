@@ -1,9 +1,9 @@
-local addonName, MDT = ...
-local API = MDT.API
+local addonName, ART = ...
+local API = ART.API
 
 local Compat = {}
-MDT.Compat = Compat
-MDT.AddonPath = "Interface\\AddOns\\"..addonName.."\\"
+ART.Compat = Compat
+ART.AddonPath = "Interface\\AddOns\\"..addonName.."\\"
 API.Compat = Compat
 
 local addons = C_AddOns or {}

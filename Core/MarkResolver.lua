@@ -1,14 +1,9 @@
 -- Pure pull/global NPC mark resolution. Live unit discovery belongs to LiveMarks.
 
-local _, addon = ...
-
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local MarkResolver = ART.MarkResolver or {}
 ART.MarkResolver = MarkResolver
-if addon and addon.MarkResolver == nil then addon.MarkResolver = MarkResolver end
 
 local MARKER_ORDER = { 8, 7, 1, 5, 6, 3, 4, 2 }
 local MARKER_PRIORITY = {}

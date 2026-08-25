@@ -1,60 +1,60 @@
-local _, MDT = ...
-local L = MDT.L
+local _, ART = ...
+local L = ART.L
 
 local tremove, tonumber, pairs, ipairs = table.remove, tonumber, pairs, ipairs
 local AceGUI = LibStub("AceGUI-3.0")
 local db
 
 local function initializeDB()
-  db = db or MDT:GetDB()
+  db = db or ART:GetDB()
 end
 
-function MDT:CheckPresetSize(callback, cancelCallback, fireCancelOnClose)
+function ART:CheckPresetSize(callback, cancelCallback, fireCancelOnClose)
   local presetSize = #self:TableToString(self:GetCurrentPreset())
   if presetSize > 3500 then
     local timeToSend = 1 + math.max(presetSize - 2550, 0) / 255
     local prompt = string.format(L["LargePresetWarning"], timeToSend, "\n", "\n", "\n")
-    MDT:OpenConfirmationFrame(450, 150, L["Sharing large preset"], "Share", prompt, callback, nil, cancelCallback, fireCancelOnClose)
+    ART:OpenConfirmationFrame(450, 150, L["Sharing large preset"], "Share", prompt, callback, nil, cancelCallback, fireCancelOnClose)
   else
     callback()
   end
 end
 
-function MDT:HideAllDialogs()
-  if MDT.main_frame then
-    MDT.main_frame.presetCreationFrame:Hide()
-    MDT.main_frame.presetImportFrame:Hide()
-    MDT.main_frame.ExportFrame:Hide()
-    MDT.main_frame.RenameFrame:Hide()
-    MDT.main_frame.ClearConfirmationFrame:Hide()
-    MDT.main_frame.DeleteConfirmationFrame:Hide()
-    if MDT.main_frame.ConfirmationFrame then MDT.main_frame.ConfirmationFrame:Hide() end
-    if MDT.versionCheckFrame then MDT.versionCheckFrame:Hide() end
-    if MDT.externalLinkCopyFrame then MDT.externalLinkCopyFrame:Hide() end
+function ART:HideAllDialogs()
+  if ART.main_frame then
+    ART.main_frame.presetCreationFrame:Hide()
+    ART.main_frame.presetImportFrame:Hide()
+    ART.main_frame.ExportFrame:Hide()
+    ART.main_frame.RenameFrame:Hide()
+    ART.main_frame.ClearConfirmationFrame:Hide()
+    ART.main_frame.DeleteConfirmationFrame:Hide()
+    if ART.main_frame.ConfirmationFrame then ART.main_frame.ConfirmationFrame:Hide() end
+    if ART.versionCheckFrame then ART.versionCheckFrame:Hide() end
+    if ART.externalLinkCopyFrame then ART.externalLinkCopyFrame:Hide() end
   end
-  if MDT.copyHelper then MDT.copyHelper:SmartHide() end
-  if MDT.tempConfirmationFrame then MDT.tempConfirmationFrame:Hide() end
+  if ART.copyHelper then ART.copyHelper:SmartHide() end
+  if ART.tempConfirmationFrame then ART.tempConfirmationFrame:Hide() end
 end
 
-function MDT:OpenImportPresetDialog()
-  MDT:HideAllDialogs()
-  MDT.main_frame.presetImportFrame:ClearAllPoints()
-  MDT.main_frame.presetImportFrame:SetPoint("CENTER", MDT.main_frame, "CENTER", 0, 50)
-  MDT.main_frame.presetImportFrame:Show()
-  MDT.main_frame.presetImportBox:SetText("")
-  MDT.main_frame.presetImportBox:SetFocus()
-  MDT.main_frame.presetImportLabel:SetText(nil)
+function ART:OpenImportPresetDialog()
+  ART:HideAllDialogs()
+  ART.main_frame.presetImportFrame:ClearAllPoints()
+  ART.main_frame.presetImportFrame:SetPoint("CENTER", ART.main_frame, "CENTER", 0, 50)
+  ART.main_frame.presetImportFrame:Show()
+  ART.main_frame.presetImportBox:SetText("")
+  ART.main_frame.presetImportBox:SetFocus()
+  ART.main_frame.presetImportLabel:SetText(nil)
 end
 
-function MDT:OpenNewPresetDialog()
+function ART:OpenNewPresetDialog()
   initializeDB()
-  MDT:HideAllDialogs()
+  ART:HideAllDialogs()
   local presetList = {}
   local highestIndex = 1
   local countPresets = 0
-  for k, v in pairs(db.presets[db.currentDungeonIdx]) do
+  for k, v in pairs(db.presets[db.currentRaidIndex]) do
     if v.text ~= L["<New Preset>"] then
-      table.insert(presetList, k, MDT:GetPresetDropdownText(v))
+      table.insert(presetList, k, ART:GetPresetDropdownText(v))
       local indexNumber = tonumber(v.text:match("^"..L["defaultPresetName"].."%s*(%d+)$"))
       if indexNumber and indexNumber > highestIndex then
         highestIndex = indexNumber
@@ -64,31 +64,31 @@ function MDT:OpenNewPresetDialog()
   end
   local newIndex = math.max(highestIndex, countPresets - 1)
   table.insert(presetList, 1, L["Empty"])
-  MDT.main_frame.PresetCreationDropDown:SetList(presetList)
-  MDT.main_frame.PresetCreationDropDown:SetValue(1)
-  MDT.main_frame.PresetCreationEditbox:SetText(L["defaultPresetName"].." "..newIndex + 1)
-  MDT.main_frame.presetCreationFrame:ClearAllPoints()
-  MDT.main_frame.presetCreationFrame:SetPoint("CENTER", MDT.main_frame, "CENTER", 0, 50)
-  MDT.main_frame.presetCreationFrame:SetStatusText("")
-  MDT.main_frame.presetCreationFrame:Show()
-  MDT.main_frame.presetCreationCreateButton:SetDisabled(false)
-  MDT.main_frame.presetCreationCreateButton.text:SetTextColor(1, 0.8196, 0)
-  MDT.main_frame.PresetCreationEditbox:SetFocus()
-  MDT.main_frame.PresetCreationEditbox:HighlightText(0, 50)
-  MDT.main_frame.presetImportBox:SetText("")
+  ART.main_frame.PresetCreationDropDown:SetList(presetList)
+  ART.main_frame.PresetCreationDropDown:SetValue(1)
+  ART.main_frame.PresetCreationEditbox:SetText(L["defaultPresetName"].." "..newIndex + 1)
+  ART.main_frame.presetCreationFrame:ClearAllPoints()
+  ART.main_frame.presetCreationFrame:SetPoint("CENTER", ART.main_frame, "CENTER", 0, 50)
+  ART.main_frame.presetCreationFrame:SetStatusText("")
+  ART.main_frame.presetCreationFrame:Show()
+  ART.main_frame.presetCreationCreateButton:SetDisabled(false)
+  ART.main_frame.presetCreationCreateButton.text:SetTextColor(1, 0.8196, 0)
+  ART.main_frame.PresetCreationEditbox:SetFocus()
+  ART.main_frame.PresetCreationEditbox:HighlightText(0, 50)
+  ART.main_frame.presetImportBox:SetText("")
 end
 
-function MDT:OpenClearPresetDialog()
+function ART:OpenClearPresetDialog()
   initializeDB()
-  MDT:HideAllDialogs()
-  MDT.main_frame.ClearConfirmationFrame:ClearAllPoints()
-  MDT.main_frame.ClearConfirmationFrame:SetPoint("CENTER", MDT.main_frame, "CENTER", 0, 50)
-  local currentPresetName = db.presets[db.currentDungeonIdx][db.currentPreset[db.currentDungeonIdx]].text
-  MDT.main_frame.ClearConfirmationFrame.label:SetText(string.format(L["Reset %s?"], currentPresetName))
-  MDT.main_frame.ClearConfirmationFrame:Show()
+  ART:HideAllDialogs()
+  ART.main_frame.ClearConfirmationFrame:ClearAllPoints()
+  ART.main_frame.ClearConfirmationFrame:SetPoint("CENTER", ART.main_frame, "CENTER", 0, 50)
+  local currentPresetName = db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].text
+  ART.main_frame.ClearConfirmationFrame.label:SetText(string.format(L["Reset %s?"], currentPresetName))
+  ART.main_frame.ClearConfirmationFrame:Show()
 end
 
-function MDT:MakePresetImportFrame(frame)
+function ART:MakePresetImportFrame(frame)
   initializeDB()
   frame.presetImportFrame = AceGUI:Create("Frame")
   frame.presetImportFrame.frame:SetParent(frame)
@@ -99,10 +99,10 @@ function MDT:MakePresetImportFrame(frame)
   frame.presetImportFrame:EnableResize(false)
   frame.presetImportFrame:SetLayout("Flow")
   frame.presetImportFrame:SetCallback("OnClose", function(widget)
-    MDT:UpdatePresetDropDown()
-    if db.currentPreset[db.currentDungeonIdx] ~= 1 then
-      MDT.main_frame.sidePanelDeleteButton:SetDisabled(false)
-      MDT.main_frame.sidePanelDeleteButton.text:SetTextColor(1, 0.8196, 0)
+    ART:UpdatePresetDropDown()
+    if db.currentPreset[db.currentRaidIndex] ~= 1 then
+      ART.main_frame.sidePanelDeleteButton:SetDisabled(false)
+      ART.main_frame.sidePanelDeleteButton.text:SetTextColor(1, 0.8196, 0)
     end
   end)
   frame.presetImportFrame.statustext:GetParent():Hide()
@@ -129,19 +129,19 @@ function MDT:MakePresetImportFrame(frame)
     editbox.editbox:SetMaxBytes(IMPORT_EXPORT_EDIT_MAX_BYTES)
     isPasting = false
     if InCombatLockdown() then
-      print('MDT: '..L["Cannot import while in combat"])
-      MDT:HideAllDialogs()
+      print('ART: '..L["Cannot import while in combat"])
+      ART:HideAllDialogs()
       return
     end
     if pasteCharCount > 10 then
       local pasteString = strtrim(table.concat(pasteBuffer))
       editbox:SetText(string.sub(pasteString, 1, 2000));
-      local newPreset = MDT:StringToTable(pasteString, true)
-      if MDT:ValidateImportPreset(newPreset) then
-        MDT.main_frame.presetImportFrame:Hide()
-        MDT:ImportPreset(newPreset)
+      local newPreset = ART:StringToTable(pasteString, true)
+      if ART:ValidateImportPreset(newPreset) then
+        ART.main_frame.presetImportFrame:Hide()
+        ART:ImportPreset(newPreset)
         if db.colorPaletteInfo.forceColorBlindMode then
-          MDT:ColorAllPulls()
+          ART:ColorAllPulls()
         end
       else
         frame.presetImportLabel:SetText(L["Invalid import string"])
@@ -172,16 +172,16 @@ function MDT:MakePresetImportFrame(frame)
   importButton:SetWidth(100)
   importButton:SetCallback("OnClick", function()
     if InCombatLockdown() then
-      print('MDT: '..L["Cannot import while in combat"])
-      MDT:HideAllDialogs()
+      print('ART: '..L["Cannot import while in combat"])
+      ART:HideAllDialogs()
       return
     end
-    local newPreset = MDT:StringToTable(importString, true)
-    if MDT:ValidateImportPreset(newPreset) then
-      MDT:HideAllDialogs()
-      MDT:ImportPreset(newPreset)
+    local newPreset = ART:StringToTable(importString, true)
+    if ART:ValidateImportPreset(newPreset) then
+      ART:HideAllDialogs()
+      ART:ImportPreset(newPreset)
       if db.colorPaletteInfo.forceColorBlindMode then
-        MDT:ColorAllPulls()
+        ART:ColorAllPulls()
       end
     else
       frame.presetImportLabel:SetText(L["Invalid import string"])
@@ -195,9 +195,9 @@ function MDT:MakePresetImportFrame(frame)
     inspectButton:SetText("Inspect")
     inspectButton:SetWidth(100)
     inspectButton:SetCallback("OnClick", function()
-      local newPreset = MDT:StringToTable(importString, true)
+      local newPreset = ART:StringToTable(importString, true)
       if not DevTool and not DevTool.AddData then
-        print("MDT: Install Dev Tool to inspect route")
+        print("ART: Install Dev Tool to inspect route")
       else
         DevTool:AddData(newPreset)
       end
@@ -207,7 +207,7 @@ function MDT:MakePresetImportFrame(frame)
   frame.presetImportFrame:Hide()
 end
 
-function MDT:MakePresetCreationFrame(frame)
+function ART:MakePresetCreationFrame(frame)
   initializeDB()
   frame.presetCreationFrame = AceGUI:Create("Frame")
   frame.presetCreationFrame.frame:SetParent(frame)
@@ -219,10 +219,10 @@ function MDT:MakePresetCreationFrame(frame)
   --frame.presetCreationFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
   frame.presetCreationFrame:SetLayout("Flow")
   frame.presetCreationFrame:SetCallback("OnClose", function(widget)
-    MDT:UpdatePresetDropDown()
-    if db.currentPreset[db.currentDungeonIdx] ~= 1 then
-      MDT.main_frame.sidePanelDeleteButton:SetDisabled(false)
-      MDT.main_frame.sidePanelDeleteButton.text:SetTextColor(1, 0.8196, 0)
+    ART:UpdatePresetDropDown()
+    if db.currentPreset[db.currentRaidIndex] ~= 1 then
+      ART.main_frame.sidePanelDeleteButton:SetDisabled(false)
+      ART.main_frame.sidePanelDeleteButton.text:SetTextColor(1, 0.8196, 0)
     end
   end)
   frame.presetCreationFrame.statustext:GetParent():Hide()
@@ -232,7 +232,7 @@ function MDT:MakePresetCreationFrame(frame)
   frame.PresetCreationEditbox:SetWidth(255)
   frame.PresetCreationEditbox:SetCallback("OnTextChanged", function(widget, event, text)
     --check if name is valid, block button if so, unblock if valid
-    if MDT:SanitizePresetName(text) then
+    if ART:SanitizePresetName(text) then
       frame.presetCreationLabel:SetText(nil)
       frame.presetCreationCreateButton:SetDisabled(false)
       frame.presetCreationCreateButton.text:SetTextColor(1, 0.8196, 0)
@@ -245,8 +245,8 @@ function MDT:MakePresetCreationFrame(frame)
   end)
   frame.PresetCreationEditbox:SetCallback("OnEnterPressed", function(widget, event, text)
     local name = frame.PresetCreationEditbox:GetText()
-    if MDT:SanitizePresetName(name) then
-      MDT:CreateNewPreset(name)
+    if ART:SanitizePresetName(name) then
+      ART:CreateNewPreset(name)
     end
   end)
   frame.presetCreationFrame:AddChild(frame.PresetCreationEditbox)
@@ -256,7 +256,7 @@ function MDT:MakePresetCreationFrame(frame)
   frame.presetCreationCreateButton:SetWidth(100)
   frame.presetCreationCreateButton:SetCallback("OnClick", function()
     local name = frame.PresetCreationEditbox:GetText()
-    MDT:CreateNewPreset(name)
+    ART:CreateNewPreset(name)
   end)
   frame.presetCreationFrame:AddChild(frame.presetCreationCreateButton)
 
@@ -275,7 +275,7 @@ function MDT:MakePresetCreationFrame(frame)
   frame.presetCreationFrame:Hide()
 end
 
-function MDT:MakeRenameFrame(frame)
+function ART:MakeRenameFrame(frame)
   frame.RenameFrame = AceGUI:Create("Frame")
   frame.RenameFrame.frame:SetParent(frame)
   frame.RenameFrame.frame:SetFrameStrata("DIALOG")
@@ -296,7 +296,7 @@ function MDT:MakeRenameFrame(frame)
   frame.RenameFrame.Editbox:SetWidth(200)
   frame.RenameFrame.Editbox:SetCallback("OnTextChanged", function(widget, event, text)
     --check if name is valid, block button if so, unblock if valid
-    if MDT:SanitizePresetName(text) then
+    if ART:SanitizePresetName(text) then
       frame.RenameFrame.PresetRenameLabel:SetText(nil)
       frame.RenameFrame.RenameButton:SetDisabled(false)
       frame.RenameFrame.RenameButton.text:SetTextColor(1, 0.8196, 0)
@@ -310,8 +310,8 @@ function MDT:MakeRenameFrame(frame)
     frame.RenameFrame:DoLayout()
   end)
   frame.RenameFrame.Editbox:SetCallback("OnEnterPressed", function(widget, event, text)
-    if MDT:SanitizePresetName(renameText) then
-      MDT:RenamePreset(renameText, frame.RenameFrame.TakeOwnershipCheckbox:GetValue())
+    if ART:SanitizePresetName(renameText) then
+      ART:RenamePreset(renameText, frame.RenameFrame.TakeOwnershipCheckbox:GetValue())
     end
   end)
   frame.RenameFrame.Editbox:DisableButton(true)
@@ -327,7 +327,7 @@ function MDT:MakeRenameFrame(frame)
   frame.RenameFrame.RenameButton:SetText(L["Rename"])
   frame.RenameFrame.RenameButton:SetWidth(100)
   frame.RenameFrame.RenameButton:SetCallback("OnClick", function()
-    MDT:RenamePreset(renameText, frame.RenameFrame.TakeOwnershipCheckbox:GetValue())
+    ART:RenamePreset(renameText, frame.RenameFrame.TakeOwnershipCheckbox:GetValue())
   end)
   frame.RenameFrame:AddChild(frame.RenameFrame.RenameButton)
 
@@ -339,7 +339,7 @@ function MDT:MakeRenameFrame(frame)
 end
 
 ---Creates the frame used to export presets to a string which can be uploaded to text sharing websites like pastebin
-function MDT:MakeExportFrame(frame)
+function ART:MakeExportFrame(frame)
   frame.ExportFrame = AceGUI:Create("Frame")
   frame.ExportFrame.frame:SetParent(frame)
   frame.ExportFrame.frame:SetFrameStrata("DIALOG")
@@ -364,17 +364,17 @@ function MDT:MakeExportFrame(frame)
 
   local selectAllButton
   frame.ExportFrameEditbox.editBox:HookScript('OnEditFocusLost', function()
-    MDT.copyHelper:Hide()
+    ART.copyHelper:Hide()
   end);
 
   frame.ExportFrameEditbox.editBox:SetScript('OnKeyUp', function(_, key)
-    if (MDT.copyHelper:WasControlKeyDown() and key == 'A') then
+    if (ART.copyHelper:WasControlKeyDown() and key == 'A') then
       return
     end
-    if (MDT.copyHelper:WasControlKeyDown() and key == 'C') then
+    if (ART.copyHelper:WasControlKeyDown() and key == 'C') then
       frame.ExportFrameEditbox:ClearFocus();
       frame.ExportFrame:Hide()
-      MDT.copyHelper:SmartFadeOut()
+      ART.copyHelper:SmartFadeOut()
       return
     end
   end);
@@ -385,7 +385,7 @@ function MDT:MakeExportFrame(frame)
   selectAllButton:SetHeight(40)
   selectAllButton:SetCallback("OnClick", function(widget, callbackName, value)
     frame.ExportFrameEditbox:SelectAll()
-    MDT.copyHelper:SmartShow(frame, 0, 50)
+    ART.copyHelper:SmartShow(frame, 0, 50)
   end)
 
   frame.ExportFrame:AddChild(frame.ExportFrameEditbox)
@@ -395,7 +395,7 @@ end
 
 ---MakeDeleteConfirmationFrame
 ---Creates the delete confirmation dialog that pops up when a user wants to delete a preset
-function MDT:MakeDeleteConfirmationFrame(frame)
+function ART:MakeDeleteConfirmationFrame(frame)
   initializeDB()
   frame.DeleteConfirmationFrame = AceGUI:Create("Frame")
   frame.DeleteConfirmationFrame.frame:SetParent(frame)
@@ -420,7 +420,7 @@ function MDT:MakeDeleteConfirmationFrame(frame)
   frame.DeleteConfirmationFrame.OkayButton:SetText(L["Delete"])
   frame.DeleteConfirmationFrame.OkayButton:SetWidth(100)
   frame.DeleteConfirmationFrame.OkayButton:SetCallback("OnClick", function()
-    MDT:DeletePreset(db.currentPreset[db.currentDungeonIdx])
+    ART:DeletePreset(db.currentPreset[db.currentRaidIndex])
     frame.DeleteConfirmationFrame:Hide()
   end)
   frame.DeleteConfirmationFrame.CancelButton = AceGUI:Create("Button")
@@ -436,7 +436,7 @@ function MDT:MakeDeleteConfirmationFrame(frame)
 end
 
 ---Creates the clear confirmation dialog that pops up when a user wants to clear a preset
-function MDT:MakeClearConfirmationFrame(frame)
+function ART:MakeClearConfirmationFrame(frame)
   frame.ClearConfirmationFrame = AceGUI:Create("Frame")
   frame.ClearConfirmationFrame.frame:SetParent(frame)
   frame.ClearConfirmationFrame.frame:SetFrameStrata("DIALOG")
@@ -462,7 +462,7 @@ function MDT:MakeClearConfirmationFrame(frame)
   frame.ClearConfirmationFrame.OkayButton:SetCallback("OnClick", function()
     self:ClearPreset(self:GetCurrentPreset())
     if self.liveSessionActive and self:GetCurrentPreset().uid == self.livePresetUID then
-      MDT:LiveSession_SendCommand(
+      ART:LiveSession_SendCommand(
         "clear")
     end
     frame.ClearConfirmationFrame:Hide()
@@ -500,23 +500,23 @@ local function removeConfirmationCheckbox(f)
 end
 
 ---Creates a generic dialog that pops up when a user wants needs confirmation for an action
-function MDT:OpenConfirmationFrame(width, height, title, buttonText, prompt, callback, buttonText2, callback2,
+function ART:OpenConfirmationFrame(width, height, title, buttonText, prompt, callback, buttonText2, callback2,
                                    fireCancelOnClose, checkboxText, checkboxValue, checkboxCallback)
   local f
-  if MDT.main_frame then
-    f = MDT.main_frame.ConfirmationFrame
+  if ART.main_frame then
+    f = ART.main_frame.ConfirmationFrame
   else
-    f = MDT.tempConfirmationFrame
+    f = ART.tempConfirmationFrame
   end
   if not f then
-    if MDT.main_frame then
-      MDT.main_frame.ConfirmationFrame = AceGUI:Create("Frame")
-      MDT.main_frame.ConfirmationFrame.frame:SetParent(MDT.main_frame)
-      MDT.main_frame.ConfirmationFrame.frame:SetFrameStrata("DIALOG")
-      f = MDT.main_frame.ConfirmationFrame
+    if ART.main_frame then
+      ART.main_frame.ConfirmationFrame = AceGUI:Create("Frame")
+      ART.main_frame.ConfirmationFrame.frame:SetParent(ART.main_frame)
+      ART.main_frame.ConfirmationFrame.frame:SetFrameStrata("DIALOG")
+      f = ART.main_frame.ConfirmationFrame
     else
-      MDT.tempConfirmationFrame = AceGUI:Create("Frame")
-      f = MDT.tempConfirmationFrame
+      ART.tempConfirmationFrame = AceGUI:Create("Frame")
+      f = ART.tempConfirmationFrame
     end
     f:EnableResize(false)
     f:SetLayout("Flow")
@@ -541,7 +541,7 @@ function MDT:OpenConfirmationFrame(width, height, title, buttonText, prompt, cal
     f.CancelButton:SetText(L["Cancel"])
     f.CancelButton:SetWidth(100)
     f.CancelButton:SetCallback("OnClick", function()
-      if MDT.main_frame then MDT:HideAllDialogs() else f:Hide() end
+      if ART.main_frame then ART:HideAllDialogs() else f:Hide() end
     end)
     f:AddChild(f.CancelButton)
   end
@@ -552,7 +552,7 @@ function MDT:OpenConfirmationFrame(width, height, title, buttonText, prompt, cal
   f.OkayButton:SetText(buttonText)
   f.OkayButton:SetCallback("OnClick", function()
     if callback then callback() end
-    MDT:HideAllDialogs()
+    ART:HideAllDialogs()
   end)
   if checkboxText then
     addConfirmationCheckbox(f)
@@ -577,11 +577,11 @@ function MDT:OpenConfirmationFrame(width, height, title, buttonText, prompt, cal
   if callback2 then
     f.CancelButton:SetCallback("OnClick", function()
       callback2()
-      MDT:HideAllDialogs()
+      ART:HideAllDialogs()
     end)
   else
     f.CancelButton:SetCallback("OnClick", function()
-      if MDT.main_frame then MDT:HideAllDialogs() else f:Hide() end
+      if ART.main_frame then ART:HideAllDialogs() else f:Hide() end
     end)
   end
   if fireCancelOnClose and callback2 then
@@ -592,9 +592,9 @@ function MDT:OpenConfirmationFrame(width, height, title, buttonText, prompt, cal
     f:SetCallback("OnClose", function(widget)
     end)
   end
-  if MDT.main_frame then MDT:HideAllDialogs() end
+  if ART.main_frame then ART:HideAllDialogs() end
   f:ClearAllPoints()
-  f:SetPoint("CENTER", MDT.main_frame or UIParent, "CENTER", 0, 50)
+  f:SetPoint("CENTER", ART.main_frame or UIParent, "CENTER", 0, 50)
   f.label:SetText(prompt)
   f:Show()
   f:DoLayout()

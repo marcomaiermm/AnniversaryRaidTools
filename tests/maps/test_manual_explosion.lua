@@ -1,10 +1,10 @@
 local root = arg[1] or "."
-local file = assert(io.open(root.."/Modules/DungeonEnemies.lua", "rb"))
+local file = assert(io.open(root.."/Modules/RaidEnemies.lua", "rb"))
 local source = file:read("*a")
 file:close()
 
 local definitionStart = assert(source:find("local blipScaleAnimations", 1, true))
-local definitionEnd = assert(source:find("function MDT:DoFramesOverlap", definitionStart, true))
+local definitionEnd = assert(source:find("function ART:DoFramesOverlap", definitionStart, true))
 local definition = source:sub(definitionStart, definitionEnd - 1)
 local chunk = assert(loadstring(definition))
 local mapTile = {}
@@ -26,7 +26,7 @@ environment = {
   MANUAL_EXPLOSION_GAP = 1,
   MANUAL_EXPLOSION_ANIMATION_DURATION = 0.12,
   HOVER_SCALE_ANIMATION_DURATION = 0.12,
-  MDT = {
+  ART = {
     main_frame = { mapPanelTile1 = mapTile },
     GetScale = function() return 1 end,
     DoFramesOverlap = function(_, left, right) return left ~= right end,
@@ -54,7 +54,7 @@ environment = {
 setfenv(chunk, setmetatable(environment, { __index = _G }))
 chunk()
 
-environment.MDT:SetManualExplosionHover(anchor)
+environment.ART:SetManualExplosionHover(anchor)
 environment.shiftDown = true
 frames[1].OnEvent(nil, nil, "LSHIFT", 1)
 frames[2].OnUpdate(nil, 0.12)

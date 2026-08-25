@@ -1,12 +1,6 @@
 -- Battle for Mount Hyjal map metadata. Asset and coordinates remain candidates
 -- until verified on Anniversary clients 20505 and 20506.
-local _, addon = ...
-local ART = rawget(_G, "ART")
-if not ART then
-  ART = addon and addon.ART or addon or {}
-  _G.ART = ART
-end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local source = {
   source = "derived",
@@ -19,7 +13,7 @@ local source = {
 local assetSource = {
   source = "client-data",
   confidence = "candidate",
-  sourceRef = "https://github.com/Babilounet/SimpleDungeonMap/blob/b41181588b98391e160a0bd25531de45e5360381/DungeonData.lua",
+      sourceRef = "https://github.com/Babilounet/SimpleDungeonMap/blob/b41181588b98391e160a0bd25531de45e5360381/DungeonData.lua",
   observedAt = "2026-08-21T19:30:00Z",
 }
 

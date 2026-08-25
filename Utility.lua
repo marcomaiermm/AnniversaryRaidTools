@@ -1,6 +1,6 @@
-local _, MDT = ...
-MDT.U = {}
-local U = MDT.U
+local _, ART = ...
+ART.U = {}
+local U = ART.U
 local tinsert = table.insert
 
 U.count_if = function(t, func)

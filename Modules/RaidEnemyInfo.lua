@@ -1,14 +1,10 @@
 -- Feature boundary for sourced enemy information and bounded live observations.
 -- Central registration is intentionally owned by the integrator.
 
-local _, addon = ...
-local ART = rawget(_G, "ART") or (addon and addon.ART) or addon or {}
-if not rawget(_G, "ART") then _G.ART = ART end
-if addon and addon.ART == nil then addon.ART = ART end
+local _, ART = ...
 
 local RaidEnemyInfo = ART.RaidEnemyInfo or {}
 ART.RaidEnemyInfo = RaidEnemyInfo
-if addon and addon.RaidEnemyInfo == nil then addon.RaidEnemyInfo = RaidEnemyInfo end
 
 local type, pcall, select = type, pcall, select
 

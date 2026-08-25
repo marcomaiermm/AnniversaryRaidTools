@@ -62,7 +62,7 @@ them after dependency contracts are verified.
 
 ## Compatibility gates
 
-- Fresh install and migrated MDT-derived SavedVariables load without Lua errors.
+- Fresh install and migrated ART-derived SavedVariables load without Lua errors.
 - The integrated UI opens without a second addon folder.
 - `/art`, reload, minimap, and route import/export work on `20505` and `20506`.
 - No unwrapped Retail-only API occurs on the startup/open/close path.

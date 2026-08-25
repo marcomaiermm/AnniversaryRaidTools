@@ -23,96 +23,96 @@ function UnitIsGroupLeader(unit) return units[unit] and units[unit].leader == tr
 function UnitIsGroupAssistant(unit) return units[unit] and units[unit].assistant == true end
 
 local sent, selected, selectedFloor, prompt, initialized = {}, nil, nil, nil, false
-local livePreset = { uid = "route-a", value = { currentDungeonIdx = 161, currentPull = 2, pulls = { {}, {}, {} } } }
+local livePreset = { uid = "route-a", value = { currentRaidIndex = 161, currentPull = 2, pulls = { {}, {}, {} } } }
 local currentPreset = livePreset
-local MDT = {
+local ART = {
   L = setmetatable({}, { __index = function(_, key) return key end }),
-  ART = { RaidPlanner = { raid = { key = "black-temple", mode = "route" } } },
+  RaidPlanner = { raid = { key = "black-temple", mode = "route" } },
   liveSessionActive = true,
   livePresetUID = "route-a",
   liveSessionPrefixes = { progress = "ARTRaidProgress" },
   commsObject = { SendCommMessage = function(_, ...) sent[#sent + 1] = { ... } end },
   Compat = { GetBestMapForUnit = function() return zoneId end },
-  zoneIdToDungeonIdx = { [339] = 161 },
+  zoneIdToRaidIndex = { [339] = 161 },
   mapInfo = { [161] = { mapID = 564 } },
 }
-_G.ART = MDT.ART
-function MDT:GetCurrentPreset() return currentPreset end
-function MDT:GetCurrentLivePreset() return livePreset end
-function MDT:IsPlayerInGroup() return "RAID" end
-function MDT:TableToString(value) return value end
-function MDT:StringToTable(value) return value end
-function MDT:SetMapSublevel(index) selectedFloor = index end
-function MDT:SetSelectionToPull(index) selected = index end
-function MDT:OpenConfirmationFrame(_, _, _, _, _, callback) prompt = callback end
-function MDT:RunAfterFramesInitialized(callback) self.afterFrames = callback end
-function MDT:StartMainFrameInitialization() initialized = true; self.afterFrames() end
-function MDT:LiveSession_Enable() self.enabledFromPrompt = true end
+_G.ART = ART
+function ART:GetCurrentPreset() return currentPreset end
+function ART:GetCurrentLivePreset() return livePreset end
+function ART:IsPlayerInGroup() return "RAID" end
+function ART:TableToString(value) return value end
+function ART:StringToTable(value) return value end
+function ART:SetMapSublevel(index) selectedFloor = index end
+function ART:SetSelectionToPull(index) selected = index end
+function ART:OpenConfirmationFrame(_, _, _, _, _, callback) prompt = callback end
+function ART:RunAfterFramesInitialized(callback) self.afterFrames = callback end
+function ART:StartMainFrameInitialization() initialized = true; self.afterFrames() end
+function ART:LiveSession_Enable() self.enabledFromPrompt = true end
 
-assert(loadfile(root.."/Modules/LiveSession.lua"))("AnniversaryRaidTools", MDT)
+assert(loadfile(root.."/Modules/LiveSession.lua"))("AnniversaryRaidTools", ART)
 
-assert(MDT:LiveSession_CanControlProgress("Leader-Realm"))
-assert(MDT:LiveSession_CanControlProgress("Assist-Realm"))
-assert(not MDT:LiveSession_CanControlProgress("Member-Realm"))
+assert(ART:LiveSession_CanControlProgress("Leader-Realm"))
+assert(ART:LiveSession_CanControlProgress("Assist-Realm"))
+assert(not ART:LiveSession_CanControlProgress("Member-Realm"))
 
-assert(MDT:LiveSession_SendProgress(3))
+assert(ART:LiveSession_SendProgress(3))
 assert(#sent == 1 and sent[1][1] == "ARTRaidProgress" and sent[1][3] == "RAID")
 local payload = sent[1][2]
 assert(payload.version == 1 and payload.kind == "selection" and payload.raidKey == "black-temple")
-assert(payload.presetUID == "route-a" and payload.dungeonIndex == 161 and payload.index == 3)
+assert(payload.presetUID == "route-a" and payload.raidIndex == 161 and payload.index == 3)
 units.player.leader = false
-assert(not MDT:LiveSession_SendProgress(2), "raid members cannot broadcast progress")
+assert(not ART:LiveSession_SendProgress(2), "raid members cannot broadcast progress")
 units.player.leader = true
 
-MDT:SetSelectionToPull(2)
+ART:SetSelectionToPull(2)
 assert(#sent == 2 and sent[2][2].index == 2, "explicit selection broadcasts progress")
-MDT:SetSelectionToPull(1, nil, true)
+ART:SetSelectionToPull(1, nil, true)
 assert(#sent == 2, "passive selection does not broadcast progress")
-MDT.applyingLiveProgress = true
-MDT:SetSelectionToPull(1)
-MDT.applyingLiveProgress = nil
+ART.applyingLiveProgress = true
+ART:SetSelectionToPull(1)
+ART.applyingLiveProgress = nil
 assert(#sent == 2, "received selection does not echo")
 
 selected, selectedFloor = nil, nil
-assert(MDT:LiveSession_ReceiveProgress(payload, "RAID", "Assist-Realm"))
+assert(ART:LiveSession_ReceiveProgress(payload, "RAID", "Assist-Realm"))
 assert(selected == 3 and selectedFloor == 3 and livePreset.value.currentPull == 3)
-assert(MDT.applyingLiveProgress == nil, "remote selection guard must be released")
-assert(not MDT:LiveSession_ReceiveProgress(payload, "RAID", "Member-Realm"))
+assert(ART.applyingLiveProgress == nil, "remote selection guard must be released")
+assert(not ART:LiveSession_ReceiveProgress(payload, "RAID", "Member-Realm"))
 
 local wrongRoute = {
-  version = 1, kind = "selection", raidKey = "black-temple", dungeonIndex = 161, presetUID = "other", index = 1,
+  version = 1, kind = "selection", raidKey = "black-temple", raidIndex = 161, presetUID = "other", index = 1,
 }
-assert(not MDT:LiveSession_ReceiveProgress(wrongRoute, "RAID", "Assist-Realm"))
-currentPreset = { uid = "browsed-route", value = { currentDungeonIdx = 161, pulls = { {} } } }
+assert(not ART:LiveSession_ReceiveProgress(wrongRoute, "RAID", "Assist-Realm"))
+currentPreset = { uid = "browsed-route", value = { currentRaidIndex = 161, pulls = { {} } } }
 selected, selectedFloor = nil, nil
-assert(MDT:LiveSession_ReceiveProgress(payload, "RAID", "Assist-Realm"))
+assert(ART:LiveSession_ReceiveProgress(payload, "RAID", "Assist-Realm"))
 assert(selected == nil and selectedFloor == nil and livePreset.value.currentPull == 3,
     "remote progress updates the live preset without replacing the browsed route")
 currentPreset = livePreset
-MDT.ART.RaidPlanner.raid = { key = "hyjal", mode = "waves" }
-livePreset.value.artWaveRaid, livePreset.value.currentDungeonIdx = "hyjal", 162
-assert(MDT:LiveSession_ReceiveProgress({
-  version = 1, kind = "selection", raidKey = "hyjal", dungeonIndex = 162, presetUID = "other", index = 1,
+ART.RaidPlanner.raid = { key = "hyjal", mode = "waves" }
+livePreset.value.artWaveRaid, livePreset.value.currentRaidIndex = "hyjal", 162
+assert(ART:LiveSession_ReceiveProgress({
+  version = 1, kind = "selection", raidKey = "hyjal", raidIndex = 162, presetUID = "other", index = 1,
 }, "RAID", "Assist-Realm"), "wave raids synchronize by raid and wave index")
-assert(not MDT:LiveSession_ReceiveProgress({
-  version = 1, kind = "selection", raidKey = "hyjal", dungeonIndex = 162, presetUID = "other", index = 99,
+assert(not ART:LiveSession_ReceiveProgress({
+  version = 1, kind = "selection", raidKey = "hyjal", raidIndex = 162, presetUID = "other", index = 99,
 }, "RAID", "Assist-Realm"))
 
-local preferred = MDT:LiveSession_GetPreferredSession({
+local preferred = ART:LiveSession_GetPreferredSession({
   { "Member-Realm", "member" }, { "Assist-Realm", "assist" }, { "Leader-Realm", "leader" },
 })
 assert(preferred[1] == "Leader-Realm", "raid leader owns simultaneous live-session discovery")
 
-MDT.liveSessionActive = false
-function MDT:LiveSession_Enable() self.enabledFromPrompt = true end
-assert(MDT:LiveSession_CheckRaidPrompt() and prompt, "supported raid entry prompts once")
-assert(not MDT:LiveSession_CheckRaidPrompt(), "same raid group is not prompted twice")
+ART.liveSessionActive = false
+function ART:LiveSession_Enable() self.enabledFromPrompt = true end
+assert(ART:LiveSession_CheckRaidPrompt() and prompt, "supported raid entry prompts once")
+assert(not ART:LiveSession_CheckRaidPrompt(), "same raid group is not prompted twice")
 prompt()
-assert(initialized and MDT.enabledFromPrompt, "accepting initializes hidden UI and enables Live Session")
+assert(initialized and ART.enabledFromPrompt, "accepting initializes hidden UI and enables Live Session")
 inRaid = false
-MDT:LiveSession_CheckRaidPrompt()
+ART:LiveSession_CheckRaidPrompt()
 inRaid = true
-assert(MDT:LiveSession_CheckRaidPrompt(), "leaving the raid group resets consent")
+assert(ART:LiveSession_CheckRaidPrompt(), "leaving the raid group resets consent")
 
 local bootstrap = assert(io.open(root.."/Core/Bootstrap.lua", "rb"))
 local bootstrapSource = bootstrap:read("*a")
@@ -123,7 +123,7 @@ local transmissionSource = transmission:read("*a")
 transmission:close()
 assert(transmissionSource:find("LiveSession_ReceiveProgress(message, distribution, fullName)", 1, true),
     "central comm receiver must dispatch live progress")
-assert(transmissionSource:find("SetSelectionToPull(MDT:GetCurrentPull(), nil, true)", 1, true),
+assert(transmissionSource:find("SetSelectionToPull(ART:GetCurrentPull(), nil, true)", 1, true),
     "received pull data must not echo a progress broadcast")
 
 print("live progress sync checks passed")

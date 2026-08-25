@@ -1,14 +1,14 @@
 local _, addon = ...
-local MDT = addon
+local ART = addon
 addon.test = {}
 local T = addon.test
 
---- @type MDTTest[]
+--- @type ARTTest[]
 T.testList = {}
 
 local function snapshotErrors()
   local snapshot = {}
-  for _, errorInfo in ipairs(MDT:GetErrors()) do
+  for _, errorInfo in ipairs(ART:GetErrors()) do
     snapshot[errorInfo.message] = errorInfo.count or 1
   end
   return snapshot
@@ -16,7 +16,7 @@ end
 
 local function getNewErrors(snapshot)
   local newErrors = {}
-  for _, errorInfo in ipairs(MDT:GetErrors()) do
+  for _, errorInfo in ipairs(ART:GetErrors()) do
     if (errorInfo.count or 1) > (snapshot[errorInfo.message] or 0) then
       newErrors[#newErrors + 1] = errorInfo
     end

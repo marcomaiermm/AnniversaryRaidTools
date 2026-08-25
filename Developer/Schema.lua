@@ -1,4 +1,4 @@
-local _, MDT = ...
+local _, ART = ...
 
 -- A Schema describes the structure of a table. In it you can define how
 -- lua tables should be exported to their string representation. This makes it possible to
@@ -7,7 +7,7 @@ local _, MDT = ...
 
 local schemas = {
   ["pois"] = {
-    name = "MDT.mapPOIs[dungeonIndex]",
+    name = "ART.mapPOIs[raidIndex]",
     type = "array",
     fields = {
       type = "array",
@@ -28,10 +28,6 @@ local schemas = {
           },
           {
             name = "y",
-            type = "number"
-          },
-          {
-            name = "difficulty",
             type = "number"
           },
           {
@@ -64,10 +60,6 @@ local schemas = {
           },
           {
             name = "npcId",
-            type = "number"
-          },
-          {
-            name = "season",
             type = "number"
           },
           {
@@ -203,7 +195,7 @@ local schemas = {
     },
   },
   ["enemies"] = {
-    name = "MDT.dungeonEnemies[dungeonIndex]",
+    name = "ART.raidEnemies[raidIndex]",
     type = "array",
     fields = {
       type = "schemaArray",
@@ -223,10 +215,6 @@ local schemas = {
         {
           name = "health",
           type = "number"
-        },
-        {
-          name = "ignoreFortified",
-          type = "boolean"
         },
         {
           name = "scale",
@@ -502,6 +490,6 @@ local schemas = {
 }
 
 --- @param schemaName "enemies" | "pois"
-function MDT:GetSchema(schemaName)
+function ART:GetSchema(schemaName)
   return schemas[schemaName]
 end

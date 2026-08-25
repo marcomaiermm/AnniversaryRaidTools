@@ -4,7 +4,7 @@ local function testFunc()
 
 end
 
----@type MDTTest
+---@type ARTTest
 local test = {
   name = "Example",
   func = testFunc,

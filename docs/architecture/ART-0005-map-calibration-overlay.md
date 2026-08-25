@@ -21,7 +21,7 @@ Calibration is stored per raid and sublevel as normalized X/Y offsets, independe
 X/Y scale, rotation, and alpha. It is diagnostic evidence only: changing overlay
 values does not move spawns or alter published map transforms.
 
-Where dungeon `UiMap` art is unavailable through `C_Map`, the overlay uses
+Where raid `UiMap` art is unavailable through `C_Map`, the overlay uses
 offline composites of pinned Anniversary CASC minimap tiles. Karazhan, Hyjal, and
 Sunwell use these local diagnostic assets. Black Temple currently exposes only
 the unencrypted outdoor/training-ground region, so that composite is limited to
