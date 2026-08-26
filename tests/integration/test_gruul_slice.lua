@@ -176,6 +176,7 @@ C_Map = {
 load("/Core/SavedVariables.lua", addon)
 assert(addon:GetDefaultSavedVariables().global.autoMark == false, "auto marking must default to disabled")
 assert(addon:GetDefaultSavedVariables().global.autoMarkModifier == "ALT", "auto marking must default to Alt")
+assert(addon:GetDefaultSavedVariables().global.showPullTracker == true, "pull tracker must default to visible")
 if mode == "invalid-store" then
   assert(saved.raidRoutes == "legacy-value" and addon:GetRaidRouteStore() == nil)
 else

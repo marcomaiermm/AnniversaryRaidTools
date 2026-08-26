@@ -206,13 +206,13 @@ local function createTracker()
 
   frame.title = frame.header:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
   frame.title:SetPoint("LEFT", 18, 1)
-  frame.title:SetPoint("RIGHT", -38, 1)
+  frame.title:SetPoint("RIGHT", -64, 1)
   frame.title:SetJustifyH("LEFT")
   frame.title:SetTextColor(1, 0.82, 0.18)
 
   frame.toggle = CreateFrame("Button", nil, frame.header, "BackdropTemplate")
   frame.toggle:SetSize(22, 22)
-  frame.toggle:SetPoint("RIGHT", -3, 1)
+  frame.toggle:SetPoint("RIGHT", -29, 1)
   frame.toggle:SetBackdrop({
     bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
     edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", edgeSize = 8,
@@ -226,6 +226,34 @@ local function createTracker()
   frame.toggle:SetScript("OnEnter", function() frame.toggle.text:SetTextColor(1, 0.9, 0.45) end)
   frame.toggle:SetScript("OnLeave", function() frame.toggle.text:SetTextColor(0.82, 0.67, 0.25) end)
   frame.toggle:SetScript("OnClick", function() setExpanded(frame, not frame.expanded, true) end)
+
+  frame.close = CreateFrame("Button", nil, frame.header, "BackdropTemplate")
+  frame.close:SetSize(22, 22)
+  frame.close:SetPoint("RIGHT", -3, 1)
+  frame.close:SetBackdrop({
+    bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
+    edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", edgeSize = 8,
+    insets = { left = 2, right = 2, top = 2, bottom = 2 },
+  })
+  frame.close:SetBackdropColor(0.06, 0.04, 0.01, 0.95)
+  frame.close:SetBackdropBorderColor(0.78, 0.57, 0.15, 0.9)
+  frame.close.text = frame.close:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+  frame.close.text:SetAllPoints()
+  frame.close.text:SetText("×")
+  frame.close.text:SetTextColor(0.82, 0.67, 0.25)
+  frame.close:SetScript("OnEnter", function(button)
+    button.text:SetTextColor(1, 0.9, 0.45)
+    if GameTooltip then
+      GameTooltip:SetOwner(button, "ANCHOR_BOTTOMLEFT")
+      GameTooltip:SetText("Hide widget - enable it again in ART settings")
+      GameTooltip:Show()
+    end
+  end)
+  frame.close:SetScript("OnLeave", function(button)
+    button.text:SetTextColor(0.82, 0.67, 0.25)
+    if GameTooltip then GameTooltip:Hide() end
+  end)
+  frame.close:SetScript("OnClick", function() RaidMarksUI:SetPullTrackerShown(false) end)
 
   frame.status = CreateFrame("Button", nil, frame, "BackdropTemplate")
   frame.status:SetPoint("TOPLEFT", 8, -40)
@@ -537,6 +565,8 @@ local function renderRow(row, mark)
 end
 
 function RaidMarksUI:RefreshPullTracker()
+  local db = ART.GetDB and ART:GetDB()
+  if db and db.showPullTracker == false then if tracker then tracker:Hide() end return end
   local model = self:GetPullTrackerModel()
   if not model then if tracker then tracker:Hide() end return end
   if not ART.LiveMarks then return model end
@@ -568,6 +598,15 @@ function RaidMarksUI:RefreshPullTracker()
   setExpanded(frame, frame.expanded ~= false, false)
   frame:Show()
   return model
+end
+
+function RaidMarksUI:SetPullTrackerShown(shown)
+  local db = ART.GetDB and ART:GetDB()
+  if not db then return end
+  db.showPullTracker = not not shown
+  local checkbox = ART.main_frame and ART.main_frame.pullTrackerCheckbox
+  if checkbox then checkbox:SetValue(db.showPullTracker) end
+  if shown then self:RefreshPullTracker() elseif tracker then tracker:Hide() end
 end
 
 function RaidMarksUI:Initialize(dependencies)

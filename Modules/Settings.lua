@@ -210,6 +210,15 @@ function ART:MakeSettingsFrame(frame)
   end)
   frame.settingsGeneralColumn:AddChild(frame.pullButtonHealthCheckbox)
 
+  frame.pullTrackerCheckbox = AceGUI:Create("CheckBox")
+  frame.pullTrackerCheckbox:SetLabel("Show current pull widget")
+  frame.pullTrackerCheckbox:SetWidth(settingWidth)
+  frame.pullTrackerCheckbox:SetValue(db.showPullTracker ~= false)
+  frame.pullTrackerCheckbox:SetCallback("OnValueChanged", function(_, _, value)
+    if ART.RaidMarksUI then ART.RaidMarksUI:SetPullTrackerShown(value) end
+  end)
+  frame.settingsGeneralColumn:AddChild(frame.pullTrackerCheckbox)
+
   frame.autoPanToPullCheckbox = AceGUI:Create("CheckBox")
   frame.autoPanToPullCheckbox:SetLabel(L["Auto pan to selected pull"])
   frame.autoPanToPullCheckbox:SetWidth(settingWidth)

@@ -22,6 +22,11 @@ function ART:GetDB() return db end
 function ART:GetCurrentPreset() return currentPreset end
 assert(loadfile(root.."/Modules/RaidMarksUI.lua"))("AnniversaryRaidTools", ART)
 
+db.showPullTracker = false
+assert(ART.RaidMarksUI:RefreshPullTracker() == nil, "disabled tracker stays hidden on refresh")
+ART.RaidMarksUI:SetPullTrackerShown(true)
+assert(db.showPullTracker == true, "tracker visibility setting can re-enable it")
+
 local model = assert(ART.RaidMarksUI:GetPullTrackerModel())
 assert(model.raidName == "Magtheridon's Lair")
 assert(model.pullIndex == 2 and model.totalPulls == 3 and model.nextPullIndex == 3)

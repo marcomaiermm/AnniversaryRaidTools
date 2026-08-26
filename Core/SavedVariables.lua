@@ -7,6 +7,7 @@ local defaultSavedVars = {
     scale = 1,
     nonFullscreenScale = 1.4,
     showPullButtonHealth = false,
+    showPullTracker = true,
     autoPanToPull = true,
     autoMark = false,
     autoMarkModifier = "ALT",
