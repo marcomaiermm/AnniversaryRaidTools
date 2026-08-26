@@ -25,7 +25,7 @@ fi
 if [[ ! -f $ROOT/AnniversaryRaidTools.toc || ! -f $UI_ROOT/AnniversaryRaidTools_UI.toc ]]; then
   fail "release must contain core and load-on-demand UI manifests"
 fi
-if ! grep -q '^## LoadOnDemand: 1$' "$UI_ROOT/AnniversaryRaidTools_UI.toc"; then
+if ! tr -d '\r' < "$UI_ROOT/AnniversaryRaidTools_UI.toc" | grep -q '^## LoadOnDemand: 1$'; then
   fail "UI release manifest is not load-on-demand"
 fi
 if [[ -e $ROOT/.github || -e $UI_ROOT/.github ]]; then fail "forbidden release path: .github"; fi

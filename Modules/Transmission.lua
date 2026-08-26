@@ -371,7 +371,7 @@ local function displaySendingProgress(userArgs, bytesSent, bytesToSend, didSend)
     ART.main_frame.SendingStatusBar:Hide()
     --output chat link
     if didSend ~= false and not silent and preset then
-      local prefix = "[ART_v2: "
+      local prefix = "[ART: "
       local raid = ART:GetRaidName(preset.value.currentRaidIndex, true)
       local presetName = preset.text
       local name, realm = UnitFullName("player")

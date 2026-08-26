@@ -1,3 +1,11 @@
 ## 1.0.0 (2026-08-26)
 
-- Added TBC Anniversary raid planning support.
+- Added interactive raid maps and route planning for Gruul's Lair, Magtheridon's Lair,
+  Serpentshrine Cavern, The Eye, Battle for Mount Hyjal and Black Temple.
+- Added floor-scoped pulls and Auto Marks with configurable mouseover modifiers.
+- Added pull-specific and raid-wide crowd-control assignments with class-colored assignees.
+- Added the Active Pull tracker with merged pull and global assignments.
+- Added live sharing for presets, pulls, raid progress, assignments, notes and drawings.
+- Added clickable chat links for sharing and importing presets with raid members.
+- Added export/import support and load-on-demand UI startup.
+- Added compatibility and validation coverage for TBC Anniversary interfaces 20505 and 20506.

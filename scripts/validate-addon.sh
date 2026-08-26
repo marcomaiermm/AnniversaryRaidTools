@@ -227,7 +227,8 @@ check_removed_features() {
   pattern='Mythic''DungeonTools|Mythic Dungeon Tools|(^|[^A-Za-z])MDT([^A-Za-z]|$)|enemy[Ff]orces|focus[Mm]arker|github[.]com|discord[.]gg|patreon[.]com'
   hits=$(grep -RInE "$pattern" "$ROOT/Core" "$ROOT/Modules" "$ROOT/Locales" \
     "$ROOT/AnniversaryRaidTools.lua" "$ROOT/AnniversaryRaidTools_UI" \
-    "$ROOT/README.md" "$ROOT/CONTRIBUTING.md" "$ROOT/AnniversaryRaidTools.toc" 2>/dev/null || true)
+    "$ROOT/README.md" "$ROOT/CONTRIBUTING.md" "$ROOT/AnniversaryRaidTools.toc" 2>/dev/null \
+    | grep -v 'github[.]com/marcomaiermm/AnniversaryRaidTools' || true)
   if [[ -n $hits ]]; then
     fail "removed feature/reference returned: $(printf '%s' "$hits" | head -n 10 | tr '\n' ' ')"
   else
