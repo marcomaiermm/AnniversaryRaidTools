@@ -4,6 +4,26 @@ ignore:
   - pkgmeta.yaml
   - cspell.json
   - AGENTS.md
+  - CONTRIBUTING.md
   - scripts
   - Developer
+  - docs
+  - tests
+  - tools
+  - Raids/TBC/Calibration
+  - Raids/TBC/Generated/BlackTempleWorldPositions.lua
+  - Raids/TBC/Generated/HyjalWorldPositions.lua
+  - Raids/TBC/Generated/Karazhan.lua
+  - Raids/TBC/Generated/KarazhanWorldPositions.lua
+  - Raids/TBC/Generated/SunwellPlateau.lua
+  - Raids/TBC/Generated/SunwellPlateauWorldPositions.lua
+  - Raids/TBC/Maps/Karazhan.lua
+  - Raids/TBC/Maps/SunwellPlateau.lua
+  - Raids/TBC/Transforms/Karazhan.lua
+  - Raids/TBC/Transforms/SunwellPlateau.lua
+  - Textures/ARTFull.tga
+  - Textures/ARTLogo.png
+  - Textures/ARTMinimap.tga
 enable-nolib-creation: no
+move-folders:
+  AnniversaryRaidTools/AnniversaryRaidTools_UI: AnniversaryRaidTools_UI

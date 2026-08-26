@@ -1,9 +1,11 @@
 local root = arg and arg[1] or "."
 local ART = {}
 _G.ART = ART
+wipe = wipe or function(value) for key in pairs(value) do value[key] = nil end end
 
 local eventFrame = { events = {} }
 function eventFrame:RegisterEvent(event) self.events[event] = true end
+function eventFrame:UnregisterEvent(event) self.events[event] = nil end
 function eventFrame:SetScript(_, script) self.onEvent = script end
 _G.CreateFrame = function() return eventFrame end
 _G.UIParent = {}
@@ -168,5 +170,11 @@ assert(liveMarkers[units.one.guid] == 1, "manual clear resets resolver assignmen
 assert(eventFrame.events.UPDATE_MOUSEOVER_UNIT and eventFrame.events.MODIFIER_STATE_CHANGED)
 assert(not eventFrame.events.PLAYER_REGEN_ENABLED and not eventFrame.events.ENCOUNTER_END,
     "live marking has no automatic pull progression events")
+assert(ART.LiveMarks:SetDebugMode(true) and ART.LiveMarks.debugMode)
+assert(not ART.LiveMarks:SetDebugMode(false) and not ART.LiveMarks.debugMode)
+assert(not SLASH_ARTMARKDEBUG1 and not SlashCmdList.ARTMARKDEBUG,
+    "marks debug no longer registers a separate slash command")
+ART.LiveMarks:SetEnabled(false)
+assert(next(eventFrame.events) == nil, "disabled live marking must unregister all runtime events")
 
 print("intentional mouseover marking checks passed")

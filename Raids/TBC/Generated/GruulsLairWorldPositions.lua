@@ -1,7 +1,7 @@
 -- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.
 -- Generator: art-030-generator-v2
 -- Integration-private world-position matching inputs; raid schema v1 is unchanged.
-local ART = assert(rawget(_G, "ART"), "AnniversaryRaidTools requires Core/Bootstrap.lua")
+local _, ART = ...
 ART.MapWorldPositions = ART.MapWorldPositions or {}
 ART.MapWorldPositions["gruuls-lair"] = {
     _meta = {

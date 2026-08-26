@@ -3,12 +3,11 @@ local L = ART.L
 local API = ART.API
 local Compat = ART.Compat
 
-_G.ART = ART
 ART.StaticData = ART.StaticData or {}
 ART.StaticData.raids = ART.StaticData.raids or {}
 ART.StaticData.enemyInfo = ART.StaticData.enemyInfo or {}
 
-local UI_ADDON_NAME = addonName
+local UI_ADDON_NAME = "AnniversaryRaidTools_UI"
 local UI_DISABLED_POPUP = "ART_UI_DISABLED"
 local coreDefaults = {
   announceInstanceReset = false,
@@ -217,7 +216,7 @@ local minimapKey = "AnniversaryRaidTools"
 local dataBroker = LibStub("LibDataBroker-1.1"):NewDataObject(minimapKey, {
   type = "data source",
   text = "Anniversary Raid Tools",
-  icon = ART.AddonPath.."Textures\\ARTMinimap",
+  icon = ART.AddonPath.."Textures\\ARTLogo",
   OnClick = function(_, button)
     if button == "RightButton" then
       if db.minimap.lock then
@@ -302,6 +301,7 @@ ART.liveSessionPrefixes = {
   reqPre = "ARTLiveReqPre",
   poiAssignment = "ARTPOIAssignment",
   progress = "ARTRaidProgress",
+  ccAssignment = "ARTCCAssign",
 }
 
 ART.commsObject = ART.commsObject or {}

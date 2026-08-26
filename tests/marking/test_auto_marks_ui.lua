@@ -48,6 +48,7 @@ for marker = 1, 8 do _G["RAID_TARGET_"..marker] = tostring(marker) end
 local saved = { autoMark = false, autoMarkModifier = "ALT", currentRaidIndex = 160 }
 local selected
 local tooltipCall
+local liveMarksEnabled
 local ART = {
   L = setmetatable({}, { __index = function(_, key) return key end }),
   mapInfo = { [160] = { mapID = 565 } },
@@ -64,6 +65,7 @@ local ART = {
     SetNpcDefaultMarks = function(_, npcId, markers) selected = { npcId, markers } end,
   },
 }
+ART.LiveMarks = { SetEnabled = function(_, enabled) liveMarksEnabled = enabled end }
 _G.ART = ART
 function ART:GetDB() return saved end
 function ART:GetCurrentSection() return "maps" end
@@ -88,7 +90,8 @@ local enable, modifier, scroll = sidePanel.AutoMarksGroup.children[1], sidePanel
     sidePanel.AutoMarksGroup.children[4]
 enable.callbacks.OnValueChanged(nil, nil, true)
 modifier.callbacks.OnValueChanged(nil, nil, "CTRL")
-assert(saved.autoMark == true and saved.autoMarkModifier == "CTRL", "activation controls update settings")
+assert(saved.autoMark == true and saved.autoMarkModifier == "CTRL" and liveMarksEnabled == true,
+    "activation controls update settings and runtime registration")
 assert(#scroll.children == 2 and scroll.children[1].children[1].image.displayId == 1000,
     "NPC rows are sorted alphabetically and render their portrait")
 local firstRow = scroll.children[1]

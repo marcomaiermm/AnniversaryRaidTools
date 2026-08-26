@@ -5,7 +5,7 @@ local ART = { StaticData = { raids = {} } }
 _G.ART = ART
 local map = assert(loadfile(root.."/Raids/TBC/Maps/Hyjal.lua"))("AnniversaryRaidTools", ART)
 local transform = assert(loadfile(root.."/Raids/TBC/Transforms/Hyjal.lua"))("AnniversaryRaidTools", ART)
-local raid = assert(loadfile(root.."/Raids/TBC/Generated/Hyjal.lua"))()
+local raid = assert(loadfile(root.."/Raids/TBC/Generated/Hyjal.lua"))("AnniversaryRaidTools_UI", ART)
 
 local function equal(actual, expected, message)
   assert(actual == expected, (message or "values differ")..": got "..tostring(actual)..", expected "..tostring(expected))

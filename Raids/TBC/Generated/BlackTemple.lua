@@ -19288,7 +19288,7 @@ local raid = {
     [8] = {},
   },
 }
-local ART = rawget(_G, "ART")
+local _, ART = ...
 if type(ART) ~= "table" then
   error("AnniversaryRaidTools static data requires Core/Bootstrap.lua to initialize ART", 2)
 end

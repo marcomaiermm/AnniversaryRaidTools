@@ -42,7 +42,7 @@ def render_lua(raid: dict[str, Any]) -> str:
         + "local raid = "
         + _lua_value(raid, 0)
         + "\n"
-        + "local ART = rawget(_G, \"ART\")\n"
+        + "local _, ART = ...\n"
         + "if type(ART) ~= \"table\" then\n"
         + "  error(\"AnniversaryRaidTools static data requires Core/Bootstrap.lua to initialize ART\", 2)\n"
         + "end\n"
@@ -89,7 +89,7 @@ def render_world_positions(snapshot: dict[str, Any], raid: dict[str, Any]) -> st
         "-- GENERATED FILE. Do not edit; rerun tools/generator/generate.py.\n"
         f"-- Generator: {GENERATOR_VERSION}\n"
         "-- Integration-private world-position matching inputs; raid schema v1 is unchanged.\n"
-        "local ART = assert(rawget(_G, \"ART\"), \"AnniversaryRaidTools requires Core/Bootstrap.lua\")\n"
+        "local _, ART = ...\n"
         "ART.MapWorldPositions = ART.MapWorldPositions or {}\n"
         f"ART.MapWorldPositions[{_lua_string(raid['key'])}] = {_lua_value(positions, 1)}\n"
         f"return ART.MapWorldPositions[{_lua_string(raid['key'])}]\n"

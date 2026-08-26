@@ -151,13 +151,26 @@ check_order() {
 
 check_load_order() {
   local root_toc="$ROOT/AnniversaryRaidTools.toc"
+  local ui_toc="$ROOT/AnniversaryRaidTools_UI/AnniversaryRaidTools_UI.toc"
   check_order "$root_toc" "libs/load_core_libs.xml" "BuildCheck.lua"
   check_order "$root_toc" "BuildCheck.lua" "Core/Compat.lua"
   check_order "$root_toc" "Core/Compat.lua" "Core/Bootstrap.lua"
-  check_order "$root_toc" "Core/Bootstrap.lua" "AnniversaryRaidTools_UI/Bootstrap.lua"
-  check_order "$root_toc" "Core/SavedVariables.lua" "AnniversaryRaidTools.lua"
-  check_order "$root_toc" "AnniversaryRaidTools.lua" "Core/Lifecycle.lua"
-  check_order "$root_toc" "Core/Lifecycle.lua" "Modules/load_modules.xml"
+  check_order "$root_toc" "Core/Bootstrap.lua" "Core/CombatLogging.lua"
+  check_order "$ui_toc" "../AnniversaryRaidTools/libs/load_libs.xml" "Bootstrap.lua"
+  check_order "$ui_toc" "../AnniversaryRaidTools/Core/SavedVariables.lua" "../AnniversaryRaidTools/AnniversaryRaidTools.lua"
+  check_order "$ui_toc" "../AnniversaryRaidTools/AnniversaryRaidTools.lua" "../AnniversaryRaidTools/Core/Lifecycle.lua"
+  check_order "$ui_toc" "../AnniversaryRaidTools/Core/Lifecycle.lua" "../AnniversaryRaidTools/Modules/load_modules.xml"
+
+  if grep -q '^## LoadOnDemand: 1$' "$ui_toc" && grep -q '^## Dependencies: AnniversaryRaidTools$' "$ui_toc"; then
+    pass "UI manifest is load-on-demand and depends on the core addon"
+  else
+    fail "UI manifest must be load-on-demand and depend on AnniversaryRaidTools"
+  fi
+  if grep -Eq '^(libs\\load_libs|AnniversaryRaidTools_UI\\Bootstrap|Modules\\load_modules)[.]' "$root_toc"; then
+    fail "core manifest still loads UI files"
+  else
+    pass "core manifest contains no UI load entries"
+  fi
 }
 
 check_library_load_split() {
@@ -219,6 +232,18 @@ check_removed_features() {
     fail "removed feature/reference returned: $(printf '%s' "$hits" | head -n 10 | tr '\n' ' ')"
   else
     pass "removed features and project links remain absent"
+  fi
+}
+
+check_private_namespace() {
+  local hits
+  hits=$(grep -RInE '(_G[.]ART|rawget[(]_G,[[:space:]]*"ART"[)])' \
+    "$ROOT/Core" "$ROOT/Modules" "$ROOT/Data" "$ROOT/Raids" \
+    "$ROOT/AnniversaryRaidTools.lua" "$ROOT/AnniversaryRaidTools_UI" 2>/dev/null || true)
+  if [[ -n $hits ]]; then
+    fail "private addon namespace leaked through _G.ART: $(printf '%s' "$hits" | head -n 10 | tr '\n' ' ')"
+  else
+    pass "runtime files use private addon namespaces"
   fi
 }
 
@@ -294,6 +319,7 @@ check_library_load_split
 check_lua_syntax
 check_banned_domain_tokens
 check_removed_features
+check_private_namespace
 run_discovered_tests
 
 printf '\nSummary: %d passed, %d skipped, %d failed\n' "$passes" "$skips" "$failures"

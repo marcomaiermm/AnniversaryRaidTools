@@ -378,6 +378,7 @@ function ART:OverrideScrollframeScripts()
       if scrollFrame.zoomedIn then
         scrollFrame.panning = true;
         scrollFrame.cursorX, scrollFrame.cursorY = GetCursorPosition()
+        ART:StartPanUpdates(scrollFrame)
       end
       scrollFrame.oldX = scrollFrame.cursorX
       scrollFrame.oldY = scrollFrame.cursorY

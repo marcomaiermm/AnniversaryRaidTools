@@ -258,7 +258,8 @@ function ART:SetScale(scale)
   end
   for i = 1, 10 do
     for j = 1, 15 do
-      f["largeMapPanelTile"..i..j]:SetSize(newSizex / 15, newSizex / 15)
+      local tile = f["largeMapPanelTile"..i..j]
+      if tile then tile:SetSize(newSizex / 15, newSizex / 15) end
     end
   end
   f.scrollFrame:SetVerticalScroll(oldScrollValues.oldScrollV * (newSizey / oldScrollValues.oldSizeY))
@@ -365,7 +366,7 @@ function ART:MakeTopBottomTextures(frame)
     frame.topPanelString:Show()
     frame.topPanelString:SetFont(frame.topPanelString:GetFont() or '', 20, '')
     frame.topPanelLogo = frame.topPanel:CreateTexture(nil, "ARTWORK", nil, 7)
-    frame.topPanelLogo:SetTexture("Interface\\AddOns\\"..ART.AddonName.."\\Textures\\ARTFull")
+    frame.topPanelLogo:SetTexture("Interface\\AddOns\\"..ART.AddonName.."\\Textures\\ARTLogo")
     frame.topPanelLogo:SetWidth(30)
     frame.topPanelLogo:SetHeight(30)
     frame.topPanelLogo:SetPoint("RIGHT", frame.topPanelString, "LEFT", -5, -1)

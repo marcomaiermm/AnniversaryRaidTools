@@ -247,8 +247,6 @@ local function publishShellData(raid, map)
   }
   ART.raidMaps[shellIndex] = raidMaps
   ART.raidFloors[shellIndex] = sublevels
-  Integration.spawnLookup[raid.key] = {}
-  ART.raidEnemies[shellIndex], Integration.spawnLookup[raid.key] = projectRaidEnemies(raid, map)
   ART.mapPOIs[shellIndex] = pois
   ART.scaleMultiplier[shellIndex] = 1
   ART.zoneIdToRaidIndex[raid.mapId] = shellIndex
@@ -260,6 +258,22 @@ local function publishShellData(raid, map)
     end
   end
   ART.knownRaids[shellIndex] = raid.name
+end
+
+function Integration:ProjectRaid(raidKey)
+  if self.projectedRaidKey == raidKey then return ART.raidEnemies[SHELL_INDICES[raidKey]] end
+  local raid, map = self.raids and self.raids[raidKey], self.maps and self.maps[raidKey]
+  if not raid or not map then return nil, "unknown raid" end
+
+  local enemies, lookup = projectRaidEnemies(raid, map)
+  if self.projectedRaidKey then
+    ART.raidEnemies[SHELL_INDICES[self.projectedRaidKey]] = nil
+    self.spawnLookup[self.projectedRaidKey] = nil
+  end
+  ART.raidEnemies[SHELL_INDICES[raidKey]] = enemies
+  self.spawnLookup[raidKey] = lookup
+  self.projectedRaidKey = raidKey
+  return enemies
 end
 
 local function publishUnsupportedRaids()
@@ -279,6 +293,7 @@ end
 local function configureWavePulls(raid, preset)
   if raid.mode ~= "waves" then return end
   preset = preset or ART:GetCurrentPreset()
+  local previousPulls = preset and preset.value and preset.value.pulls or {}
   local pulls, lookup = {}, Integration.spawnLookup[raid.key]
   for waveIndex, wave in ipairs(raid.waves) do
     local pull = {}
@@ -291,6 +306,7 @@ local function configureWavePulls(raid, preset)
         end
       end
     end
+    pull.artCCAssignments = previousPulls[waveIndex] and previousPulls[waveIndex].artCCAssignments or nil
     pulls[waveIndex] = pull
   end
   preset.value.pulls = pulls
@@ -302,6 +318,8 @@ end
 local function selectShell(raidKey, db)
   local shellIndex = SHELL_INDICES[raidKey]
   if not shellIndex then return nil, "unknown raid" end
+  local projected, reason = Integration:ProjectRaid(raidKey)
+  if not projected then return nil, reason end
   db.currentRaidIndex = shellIndex
   return shellIndex
 end
@@ -328,8 +346,9 @@ local function wireMapSelection()
   Integration.originalUpdateToRaid = ART.UpdateToRaid
   function ART:UpdateToRaid(raidIndex, ...)
     if self.unsupportedRaids[raidIndex] then return nil, "unsupported-raid" end
-    local result = Integration.originalUpdateToRaid(self, raidIndex, ...)
     local raidKey = raidKeyForShell(raidIndex)
+    if raidKey then Integration:ProjectRaid(raidKey) end
+    local result = Integration.originalUpdateToRaid(self, raidIndex, ...)
     if raidKey and (not Integration.planner.raid or Integration.planner.raid.key ~= raidKey) then
       self:OpenRaidRoute(raidKey)
     end
@@ -359,9 +378,12 @@ function Integration:Initialize()
   local db = ART:GetDB()
   local routeStore = ART:GetRaidRouteStore()
   self.spawnLookup = {}
+  self.raids = raids
+  self.maps = maps
   for _, raidKey in ipairs(RAID_KEYS) do publishShellData(raids[raidKey], maps[raidKey]) end
   publishUnsupportedRaids()
   publishRaidList(db)
+  selectShell(raidKeyForShell(db.currentRaidIndex) or DEFAULT_RAID_KEY, db)
   local planner
 
   local function canMarkUnits()
@@ -510,7 +532,7 @@ function Integration:Initialize()
   self.raidMarks = ART.RaidMarks
   self.raidMarksUI = ART.RaidMarksUI
   self.enemyInfo = enemyInfo
-  self.maps = ART.MapDefinitions
+  self.maps = maps
   self.transforms = ART.MapTransforms
   self.initialized = true
   wireMapSelection()
@@ -523,6 +545,7 @@ function Integration:Initialize()
       pull = math.min(math.max(pull, 1), #current.value.pulls)
     end
     local result = originalSetSelectionToPull(self, pull, ...)
+    if ART.CCAssignments then ART.CCAssignments:RefreshEventRegistration() end
     current = self:GetCurrentPreset()
     if current and current.value.artWaveRaid and type(pull) == "number" then
       self:Async(function() self:RaidEnemies_UpdateEnemiesAsync() end, "ARTWaveSelection", true)

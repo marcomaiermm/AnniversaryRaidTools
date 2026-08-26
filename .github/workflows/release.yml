@@ -1,42 +1,59 @@
-# description of this workflow, can be anything you want
 name: Package and release
 
-# we need to let GitHub know _when_ we want to release, typically only when we create a new tag.
-# this will target only tags, and not all pushes to the master branch.
-# this part can be heavily customized to your liking, like targeting only tags that match a certain word,
-# other branches or even pullrequests.
 on:
   push:
     tags:
-      - '**'
+      - 'v*.*.*'
 
-# a workflow is built up as jobs, and within these jobs are steps
+permissions:
+  contents: write
+
 jobs:
-
-  # "release" is a job, you can name it anything you want
   release:
-
-    # we can run our steps on pretty much anything, but the "ubuntu-latest" image is a safe bet
     runs-on: ubuntu-22.04
 
-    # specify the environment variables used by the packager, matching the secrets from the project on GitHub
     env:
       CF_API_KEY: ${{ secrets.CF_API_KEY }}
-      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}  # "GITHUB_TOKEN" is a secret always provided to the workflow
-                                                 # for your own token, the name cannot start with "GITHUB_"
+      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
       WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
 
-    # "steps" holds a list of all the steps needed to package and release our AddOn
     steps:
-
-      # we first have to clone the AddOn project, this is a required step
       - name: Clone project
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0  # gets entire git history, needed for automatic changelogs
+          fetch-depth: 0
 
-      # once cloned, we just run the GitHub Action for the packager project
+      - name: Validate release tag and TOC version
+        shell: bash
+        run: |
+          if [[ ! "$GITHUB_REF_NAME" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            echo "Release tag must match vX.Y.Z: $GITHUB_REF_NAME" >&2
+            exit 1
+          fi
+          tag_version=${GITHUB_REF_NAME#v}
+          toc_version=$(sed -n 's/^## Version:[[:space:]]*//p' AnniversaryRaidTools.toc | tr -d '\r')
+          if [[ "$toc_version" != "$tag_version" ]]; then
+            echo "TOC version $toc_version does not match tag $GITHUB_REF_NAME" >&2
+            exit 1
+          fi
+
+      - name: Install validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes lua5.1 luajit
+
+      - name: Validate source
+        run: ./scripts/validate-addon.sh
+
+      - name: Stage cleaned release bundle
+        uses: BigWigsMods/packager@v2
+        with:
+          args: -d -z -w 0 -l
+
+      - name: Audit cleaned release bundle
+        run: ./scripts/validate-release.sh .release/AnniversaryRaidTools
+
       - name: Package and release
         uses: BigWigsMods/packager@v2
         with:
-          args: -w 0 -l
+          args: -c -o -w 0 -l

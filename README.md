@@ -1,57 +1,57 @@
-# Anniversary Raid Tools
+<p align="center">
+  <img src="Textures/ARTLogo.png" alt="Anniversary Raid Tools logo" width="320">
+</p>
 
-Anniversary Raid Tools (ART) is a raid-route planner for the WoW TBC
-Anniversary clients `20505` and `20506`. It includes the TBC raids from
-Karazhan through Sunwell Plateau.
+<p align="center">
+  <a href="https://github.com/marcomaiermm/AnniversaryRaidTools/releases/latest"><img src="https://img.shields.io/github/v/release/marcomaiermm/AnniversaryRaidTools?display_name=tag&sort=semver" alt="Latest release"></a>
+  <a href="https://github.com/marcomaiermm/AnniversaryRaidTools/actions/workflows/release.yml"><img src="https://github.com/marcomaiermm/AnniversaryRaidTools/actions/workflows/release.yml/badge.svg" alt="Package and release status"></a>
+  <img src="https://img.shields.io/badge/WoW-TBC%20Anniversary-c79c6e" alt="WoW TBC Anniversary">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/marcomaiermm/AnniversaryRaidTools" alt="License"></a>
+</p>
 
-## Install
+<h1 align="center">Anniversary Raid Tools</h1>
 
-1. Copy the repository to
-   `World of Warcraft/_anniversary_/Interface/AddOns/AnniversaryRaidTools`.
-2. Enable **Anniversary Raid Tools** in the character-selection addon list.
+<p align="center">
+  Raid route planning and live mark coordination for WoW TBC Anniversary.
+</p>
 
-## Use
+## Features
+
+- Interactive raid maps with enemies, packs and patrol routes.
+- Route planning for freely composed pulls.
+- Wave planning for Battle for Mount Hyjal.
+- Pull-specific and raid-wide target markers.
+- Intentional mouseover marking that preserves existing raid marks.
+- Live synchronization of routes and raid progress.
+
+## Supported Raids
+
+- Gruul's Lair
+- Magtheridon's Lair
+- Serpentshrine Cavern
+- The Eye
+- Battle for Mount Hyjal
+- Black Temple
+
+ART supports the TBC Anniversary client interfaces `20505` and `20506`.
+
+## Usage
 
 - `/art` opens the planner.
 - `/art minimap` toggles the minimap button.
 - `/anniversaryraidtools` is an alias for `/art`.
-- Developer mode provides a **Calibration** panel that overlays live `C_Map`
-  tiles on every supported raid floor for map alignment.
 
-ART supports two planning modes:
+## Development
 
-- **Route:** compose and order spatial raid packs.
-- **Waves:** annotate raid-defined waves without changing their identity or
-  composition.
-
-## Validate
-
-The validation matrix requires Bash, Python 3, `realpath`, Lua 5.1, and LuaJIT.
+Run the validation matrix with Bash, Python 3, Lua 5.1 and LuaJIT:
 
 ```sh
 ./scripts/validate-addon.sh
 ```
 
-Client behavior must also pass the
-[manual smoke protocol](scripts/smoke-clients.md) on both supported interfaces.
-
-## Architecture
-
-- [Architecture decisions](docs/architecture/README.md) record why durable or
-  expensive-to-reverse choices were made.
-- [Data contracts](docs/contracts/) define the versioned runtime and persistence
-  boundaries.
-The main runtime boundaries are bootstrap/client compatibility, validated raid
-data, route presets, planner UI, deterministic marking, enemy information, and
-their integration wiring. See
-[ART-0003](docs/architecture/ART-0003-module-boundaries.md) for ownership rules.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md). Generated files under
-`Raids/TBC/Generated/` must not be edited by hand.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development rules. Generated files
+under `Raids/TBC/Generated/` must not be edited manually.
 
 ## License
 
-ART is distributed under [GPL-2.0](LICENSE). Copyright and attribution notices
-are preserved in the source and license files.
+Anniversary Raid Tools is distributed under [GPL-2.0](LICENSE).

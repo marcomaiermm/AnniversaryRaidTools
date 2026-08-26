@@ -6,7 +6,7 @@ local ART = {
 _G.ART = ART
 
 local map = assert(loadfile(root.."/Raids/TBC/Maps/Hyjal.lua"))("AnniversaryRaidTools", ART)
-local raid = assert(loadfile(root.."/Raids/TBC/Generated/Hyjal.lua"))()
+local raid = assert(loadfile(root.."/Raids/TBC/Generated/Hyjal.lua"))("AnniversaryRaidTools_UI", ART)
 local preset = { routeSteps = {} }
 for index, wave in ipairs(raid.waves) do
   preset.routeSteps[index] = { id = "wave-"..index, waveKey = wave.waveKey, packKeys = wave.packKeys, marks = {} }
@@ -33,6 +33,11 @@ function ART:GetDefaultMapPanelSize() return 1000, 1000 end
 function ART:SetSelectionToPull(index) current.value.currentPull = index end
 function ART:UpdateMap() end
 function ART:MakePullSelectionButtons() end
+local runtimeFrame = { events = {} }
+function runtimeFrame:RegisterEvent(event) self.events[event] = true end
+function runtimeFrame:UnregisterEvent(event) self.events[event] = nil end
+function runtimeFrame:SetScript(_, callback) self.onEvent = callback end
+function CreateFrame() return runtimeFrame end
 
 ART.raidEnemies = { [162] = {} }
 ART.MultiRaidIntegration = { spawnLookup = { hyjal = {} } }
@@ -60,6 +65,8 @@ end
 assert(loadfile(root.."/Modules/WaveModeUI.lua"))("AnniversaryRaidTools", ART)
 local ui = ART.WaveModeUI
 assert(ui:IsActive(), "Hyjal wave mode activates from raid mode and map metadata")
+assert(runtimeFrame.events.COMBAT_LOG_EVENT_UNFILTERED,
+    "Hyjal combat logging activates only for the active runtime")
 
 local model = assert(ui:BuildModel())
 assert(model.waveIndex == 1 and model.group.label == "Rage Winterchill" and model.groupWave == 1)
@@ -121,7 +128,11 @@ instanceId = 544
 widgetText = "Wave 6/8"
 assert(not ui:ReadHyjalWave() and current.value.currentPull == 5,
     "the Hyjal widget never changes a route outside the Hyjal instance")
+ui:RefreshEventRegistration()
+assert(not runtimeFrame.events.COMBAT_LOG_EVENT_UNFILTERED,
+    "Hyjal combat logging unregisters outside the raid")
 instanceId = 534
+ui:RefreshEventRegistration()
 widgetText = "invalid"
 assert(not ui:ReadHyjalWave() and current.value.currentPull == 5, "malformed widget text is ignored")
 
@@ -148,6 +159,11 @@ local enemies = assert(io.open(root.."/Modules/RaidEnemies.lua", "rb"))
 local enemySource = enemies:read("*a")
 enemies:close()
 assert(enemySource:find("and not waveMode", 1, true), "wave raids must suppress normal enemy blips")
+local integration = assert(io.open(root.."/Modules/EnemyInfo.lua", "rb"))
+local integrationSource = integration:read("*a")
+integration:close()
+assert(integrationSource:find("previousPulls[waveIndex].artCCAssignments", 1, true),
+    "immutable Hyjal pull rebuilds must retain wave CC assignments")
 local waveUI = assert(io.open(root.."/Modules/WaveModeUI.lua", "rb"))
 local waveSource = waveUI:read("*a")
 waveUI:close()

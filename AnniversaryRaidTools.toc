@@ -7,19 +7,13 @@
 ## OptionalDeps: !!AddonLocale, LibStub, Ace3
 ## SavedVariables: AnniversaryRaidToolsDB
 ## LoadSavedVariablesFirst: 1
-## IconTexture: Interface\AddOns\AnniversaryRaidTools\Textures\ARTFull
+## IconTexture: Interface\AddOns\AnniversaryRaidTools\Textures\ARTLogo
 
 libs\load_core_libs.xml
 BuildCheck.lua
 Core\Compat.lua
 Core\Bootstrap.lua
 Core\CombatLogging.lua
-libs\load_libs.xml
-AnniversaryRaidTools_UI\Bootstrap.lua
-locales.xml
-AceGUIWidgets\load_widgets.xml
-Utility.lua
-Core\SavedVariables.lua
-AnniversaryRaidTools.lua
-Core\Lifecycle.lua
-Modules\load_modules.xml
+#@do-not-package@
+Developer\PerformanceProfiler.lua
+#@end-do-not-package@

@@ -25,9 +25,12 @@
 	<Script file='ErrorHandling.lua'/>
 	<Script file='InGameChangeLog.lua'/>
 	<Script file='VersionCheck.lua'/>
+	<!--@do-not-package@-->
 	<Include file='..\Developer\load_developer.xml'/>
 	<Script file='..\Developer\RaidRecorder.lua'/>
+	<!--@end-do-not-package@-->
 	<Script file='RaidPlanner.lua'/>
+	<Script file='CCAssignments.lua'/>
 	<Script file='RaidSelect.lua'/>
 	<Script file='RaidMarks.lua'/>
 	<Script file='RaidMarksUI.lua'/>
@@ -41,11 +44,15 @@
 	<Script file='..\Raids\TBC\Maps\GruulsLair.lua'/>
 	<Script file='..\Raids\TBC\Transforms\GruulsLair.lua'/>
 	<Script file='..\Raids\TBC\Generated\BlackTemple.lua'/>
+	<!--@do-not-package@-->
 	<Script file='..\Raids\TBC\Generated\BlackTempleWorldPositions.lua'/>
+	<!--@end-do-not-package@-->
 	<Script file='..\Raids\TBC\Maps\BlackTemple.lua'/>
 	<Script file='..\Raids\TBC\Transforms\BlackTemple.lua'/>
 	<Script file='..\Raids\TBC\Generated\Hyjal.lua'/>
+	<!--@do-not-package@-->
 	<Script file='..\Raids\TBC\Generated\HyjalWorldPositions.lua'/>
+	<!--@end-do-not-package@-->
 	<Script file='..\Raids\TBC\Maps\Hyjal.lua'/>
 	<Script file='..\Raids\TBC\Transforms\Hyjal.lua'/>
 	<Script file='..\Raids\TBC\Generated\MagtheridonsLair.lua'/>

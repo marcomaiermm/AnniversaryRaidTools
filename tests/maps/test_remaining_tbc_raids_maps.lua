@@ -10,7 +10,7 @@ local raids = {
 for _, spec in ipairs(raids) do
   local map = assert(loadfile(root.."/Raids/TBC/Maps/"..spec[1]..".lua"))("AnniversaryRaidTools", ART)
   local transform = assert(loadfile(root.."/Raids/TBC/Transforms/"..spec[1]..".lua"))("AnniversaryRaidTools", ART)
-  local raid = assert(loadfile(root.."/Raids/TBC/Generated/"..spec[1]..".lua"))()
+  local raid = assert(loadfile(root.."/Raids/TBC/Generated/"..spec[1]..".lua"))("AnniversaryRaidTools_UI", ART)
   assert(map.raidKey == spec[2] and map.mapId == spec[3] and #map.sublevels == #spec[4])
   for floor, uiMapId in ipairs(spec[4]) do
     assert(map.sublevels[floor].asset.uiMapId == uiMapId)

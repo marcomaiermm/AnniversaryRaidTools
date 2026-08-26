@@ -52,7 +52,7 @@ function ART:EnablePullsPerSublevel()
   if not value.pullsBySublevel then
     local pullsBySublevel = {}
     for _, pull in ipairs(value.pulls or {}) do
-      local split, options = {}, {}
+      local split, options, ccAssignments = {}, {}, nil
       for key, item in pairs(pull) do
         local enemyIdx = tonumber(key)
         if enemyIdx and type(item) == "table" then
@@ -64,6 +64,8 @@ function ART:EnablePullsPerSublevel()
             split[sublevel][enemyIdx] = split[sublevel][enemyIdx] or {}
             tinsert(split[sublevel][enemyIdx], cloneIdx)
           end
+        elseif key == "artCCAssignments" then
+          ccAssignments = item
         else
           options[key] = item
         end
@@ -71,6 +73,19 @@ function ART:EnablePullsPerSublevel()
       if next(split) then
         for sublevel, floorPull in pairs(split) do
           for key, item in pairs(options) do floorPull[key] = item end
+          if type(ccAssignments) == "table" then
+            local floorAssignments = {}
+            for spawnKey, assignment in pairs(ccAssignments) do
+              for _, enemy in pairs(self.raidEnemies[db.currentRaidIndex] or {}) do
+                for _, clone in ipairs(enemy.clones or {}) do
+                  if clone.artSpawnKey == spawnKey and clone.sublevel == sublevel then
+                    floorAssignments[spawnKey] = assignment
+                  end
+                end
+              end
+            end
+            if next(floorAssignments) then floorPull.artCCAssignments = floorAssignments end
+          end
           pullsBySublevel[sublevel] = pullsBySublevel[sublevel] or {}
           tinsert(pullsBySublevel[sublevel], floorPull)
         end
@@ -229,6 +244,8 @@ function ART:PresetsMergePulls(pulls, destination)
   local count_if = self.U.count_if
 
   local newPull = {}
+  local destinationPull = self:GetCurrentPreset().value.pulls[destination]
+  local destinationCC = destinationPull and destinationPull.artCCAssignments
   local removed_pulls = {}
 
   for _, pullIdx in ipairs(pulls) do
@@ -256,6 +273,9 @@ function ART:PresetsMergePulls(pulls, destination)
             end
           end
         end
+      elseif enemyIdx == "artCCAssignments" then
+        newPull.artCCAssignments = newPull.artCCAssignments or {}
+        for spawnKey, assignment in pairs(clones) do newPull.artCCAssignments[spawnKey] = assignment end
       else
         -- it's another pull option like color
         local optionName = enemyIdx
@@ -273,6 +293,10 @@ function ART:PresetsMergePulls(pulls, destination)
   end)
 
   local index = destination - offset
+  if destinationCC then
+    newPull.artCCAssignments = newPull.artCCAssignments or {}
+    for spawnKey, assignment in pairs(destinationCC) do newPull.artCCAssignments[spawnKey] = assignment end
+  end
   self:PresetsAddPull(index, newPull)
   return index
 end
@@ -394,7 +418,7 @@ function ART:CopyPullOptions(sourceIdx, destinationIdx)
   if source and destination then
     for optionName, optionValue in pairs(source) do
       -- Assure, that it is an option and not an enemy index
-      if not string.match(optionName, "^%d+$") then
+      if optionName ~= "artCCAssignments" and not string.match(optionName, "^%d+$") then
         destination[optionName] = optionValue
       end
     end

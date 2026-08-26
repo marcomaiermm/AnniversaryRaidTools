@@ -97,6 +97,7 @@ function ART:EnableDevMode()
 
   ART:UpdateMap()
   ART:UpdateEnemyInfoFrame()
+  print("|cffffd100ART:|r Debug mode enabled.")
 end
 
 function ART:DisableDevMode()
@@ -114,6 +115,7 @@ function ART:DisableDevMode()
   ART:HideAllBlipLabels(true)
   ART:UpdateMap()
   ART:UpdateEnemyInfoFrame()
+  print("|cffffd100ART:|r Debug mode disabled.")
 end
 
 function ART:AddNPCFromUnit(unit)
@@ -799,7 +801,7 @@ function ART:CreateDevPanel(frame)
 
   local function DrawGroup3(container)
     local toggleDevModeButton = AceGUI:Create("Button")
-    toggleDevModeButton:SetText("Toggle DevMode")
+    toggleDevModeButton:SetText("Toggle Debug Mode")
     toggleDevModeButton:SetCallback("OnClick", function()
       ART:ToggleDevMode()
     end)
@@ -814,7 +816,7 @@ function ART:CreateDevPanel(frame)
     container:AddChild(loadOnStartUpCheckbox)
 
     local loadCacheCheckbox = AceGUI:Create("CheckBox")
-    loadCacheCheckbox:SetLabel("Load Cache in devmode")
+    loadCacheCheckbox:SetLabel("Load Cache in debug mode")
     loadCacheCheckbox:SetCallback("OnValueChanged", function(widget, callbackName, value)
       db.loadCache = value or nil
       if value then

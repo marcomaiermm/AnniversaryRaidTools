@@ -69,6 +69,20 @@ function ART:OnPanFadeOut(deltaTime)
   end
 end
 
+local function updatePan(self, elapsed)
+  if self.panning or self.wasPanningLastFrame then
+    ART:OnPan(GetCursorPosition())
+  end
+  ART:OnPanFadeOut(elapsed)
+  if not self.panning and not self.wasPanningLastFrame and not self.isFadeOutPanning then
+    self:SetScript("OnUpdate", nil)
+  end
+end
+
+function ART:StartPanUpdates(scrollFrame)
+  scrollFrame:SetScript("OnUpdate", updatePan)
+end
+
 function ART:ExportCurrentZoomPanSettings()
   local zoom = ARTMapPanelFrame:GetScale()
   local panH = ARTScrollFrame:GetHorizontalScroll() / ART:GetScale()
@@ -271,6 +285,7 @@ ART.OnMouseDown = function(self, button)
   if scrollFrame.zoomedIn then
     scrollFrame.panning = true
     scrollFrame.cursorX, scrollFrame.cursorY = GetCursorPosition()
+    ART:StartPanUpdates(scrollFrame)
   end
   scrollFrame.oldX = scrollFrame.cursorX
   scrollFrame.oldY = scrollFrame.cursorY
@@ -367,12 +382,6 @@ function ART:MakeMapTexture(frame)
     frame.scrollFrame:SetScript("OnMouseUp", ART.OnMouseUp)
 
 
-    frame.scrollFrame:SetScript("OnUpdate", function(self, elapsed)
-      local x, y = GetCursorPosition()
-      ART:OnPan(x, y)
-      ART:OnPanFadeOut(elapsed)
-    end)
-
     if frame.mapPanelFrame == nil then
       frame.mapPanelFrame = CreateFrame("frame", "ARTMapPanelFrame", nil)
       frame.mapPanelFrame:ClearAllPoints()
@@ -401,33 +410,33 @@ function ART:MakeMapTexture(frame)
     frame.mapPanelTile11:SetPoint("TOPLEFT", frame.mapPanelTile10, "TOPRIGHT")
     frame.mapPanelTile12:SetPoint("TOPLEFT", frame.mapPanelTile11, "TOPRIGHT")
 
-    --create the 150 large map tiles
-    for i = 1, 10 do
-      for j = 1, 15 do
-        frame["largeMapPanelTile"..i..j] = frame.mapPanelFrame:CreateTexture("ARTLargeMapPanelTile"..i..j, "BACKGROUND")
-        local tile = frame["largeMapPanelTile"..i..j]
-        tile:SetDrawLayer(canvasDrawLayer, 5)
-        tile:SetSize(frame:GetWidth() / 15, frame:GetWidth() / 15)
-        if i == 1 and j == 1 then
-          --to mapPanel
-          tile:SetPoint("TOPLEFT", frame.mapPanelFrame, "TOPLEFT", 0, 0)
-        elseif j == 1 then
-          --to tile above
-          tile:SetPoint("TOPLEFT", frame["largeMapPanelTile"..(i - 1)..j], "BOTTOMLEFT", 0, 0)
-        else
-          --to tile to the left
-          tile:SetPoint("TOPLEFT", frame["largeMapPanelTile"..i..(j - 1)], "TOPRIGHT", 0, 0)
-        end
-        tile:SetColorTexture(i / 10, j / 10, 0, 1)
-        tile:Hide()
-      end
-    end
-
     frame.scrollFrame:SetScrollChild(frame.mapPanelFrame)
     frame.scrollFrame.cursorX = 0
     frame.scrollFrame.cursorY = 0
     frame.scrollFrame.queuedDeltaX = 0;
     frame.scrollFrame.queuedDeltaY = 0;
+  end
+end
+
+function ART:EnsureLargeMapTiles(frame)
+  if frame.largeMapTilesCreated then return end
+  frame.largeMapTilesCreated = true
+  for i = 1, 10 do
+    for j = 1, 15 do
+      local key = "largeMapPanelTile"..i..j
+      local tile = frame.mapPanelFrame:CreateTexture("ARTLargeMapPanelTile"..i..j, "BACKGROUND")
+      frame[key] = tile
+      tile:SetDrawLayer(canvasDrawLayer, 5)
+      tile:SetSize(frame:GetWidth() / 15, frame:GetWidth() / 15)
+      if i == 1 and j == 1 then
+        tile:SetPoint("TOPLEFT", frame.mapPanelFrame, "TOPLEFT", 0, 0)
+      elseif j == 1 then
+        tile:SetPoint("TOPLEFT", frame["largeMapPanelTile"..(i - 1)..j], "BOTTOMLEFT", 0, 0)
+      else
+        tile:SetPoint("TOPLEFT", frame["largeMapPanelTile"..i..(j - 1)], "TOPRIGHT", 0, 0)
+      end
+      tile:Hide()
+    end
   end
 end
 
@@ -468,18 +477,21 @@ function ART:UpdateMap(ignoreSetSelection, ignoreReloadPullButtons, ignoreUpdate
       end
     end
     if not ART:AreFramesInitialized() then coroutine.yield() end
+    if tileFormat == 15 then ART:EnsureLargeMapTiles(frame) end
     for i = 1, 10 do
       for j = 1, 15 do
+        local tile = frame["largeMapPanelTile"..i..j]
         if tileFormat == 15 then
           local texName = path..textureInfo..((i - 1) * 15 + j)
-          frame["largeMapPanelTile"..i..j]:SetTexture(texName)
-          frame["largeMapPanelTile"..i..j]:Show()
-        else
-          frame["largeMapPanelTile"..i..j]:Hide()
+          tile:SetTexture(texName)
+          tile:Show()
+        elseif tile then
+          tile:Hide()
         end
       end
     end
   elseif type(textureInfo) == "table" then --textures from custom files
+    ART:EnsureLargeMapTiles(frame)
     local sublevel = preset.value.currentSublevel
     for i = 1, 12 do
       if frame["mapPanelTile"..i] then

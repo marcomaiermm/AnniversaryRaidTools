@@ -42,7 +42,7 @@ local defaultSavedVars = {
   },
 }
 
-for i = 1, 200 do
+for i = 160, 167 do
   defaultSavedVars.global.presets[i] = {
     [1] = {
       text = L["Default"],

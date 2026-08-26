@@ -202,7 +202,7 @@ function ART:NormalizeCurrentPreset()
       --fix wrong indexes of clones within pulls
       for enemyIdx, clones in pairs(pull) do
         local assignmentIdx = 1
-        if type(clones) == "table" then
+        if tonumber(enemyIdx) and type(clones) == "table" then
           for actualIndex, cloneIdx in pairs(clones) do
             if actualIndex ~= assignmentIdx then
               clones[assignmentIdx] = cloneIdx
@@ -249,6 +249,7 @@ function ART:NormalizeCurrentPreset()
     end
     pull["color"] = pull["color"] or "228b22"
   end
+  if ART.CCAssignments then ART.CCAssignments:NormalizePreset(preset) end
 
   --make sure sublevel actually exists for the raid
   --this might have been caused by bugged dropdowns in the past
@@ -377,6 +378,7 @@ function ART:ValidateImportPreset(preset, allowKnownRaid)
       not (allowKnownRaid and ART.knownRaids and ART.knownRaids[preset.value.currentRaidIndex]) then
     return false
   end
+  if ART.CCAssignments then ART.CCAssignments:NormalizePreset(preset) end
   return true
 end
 

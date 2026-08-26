@@ -5,6 +5,11 @@ local tonumber, tinsert, pairs, ipairs, tostring, twipe, max, min, abs, sqrt, tr
     DrawLine
 local L = ART.L
 local blips = {}
+local blipsByEnemy = {}
+local blipsBySpawnKey = {}
+local blipsByGroup = {}
+local blipsByPullGroup = {}
+local blipIndexGeneration = 0
 local preset
 local patrolColor = { 0, 0.5, 1, 0.8 }
 local OVERLAP_BUCKET_SIZE = 9
@@ -17,9 +22,73 @@ local MANUAL_EXPLOSION_ANIMATION_DURATION = 0.12
 local HOVER_SCALE = 1.2
 local HOVER_SCALE_ANIMATION_DURATION = 0.12
 
+local function appendIndex(index, key, blip)
+  if key == nil then return end
+  index[key] = index[key] or {}
+  tinsert(index[key], blip)
+end
+
+local function clearBlipIndexes()
+  twipe(blips)
+  twipe(blipsByEnemy)
+  twipe(blipsBySpawnKey)
+  twipe(blipsByGroup)
+  twipe(blipsByPullGroup)
+  blipIndexGeneration = blipIndexGeneration + 1
+end
+
+local function indexBlip(blip)
+  if blip.artIndexGeneration == blipIndexGeneration then return end
+  blip.artIndexGeneration = blipIndexGeneration
+  tinsert(blips, blip)
+  blipsByEnemy[blip.enemyIdx] = blipsByEnemy[blip.enemyIdx] or {}
+  blipsByEnemy[blip.enemyIdx][blip.cloneIdx] = blip
+  if blip.clone.artSpawnKey then blipsBySpawnKey[blip.clone.artSpawnKey] = blip end
+  appendIndex(blipsByGroup, blip.clone.g, blip)
+  if blip.clone.artPullGroup then
+    appendIndex(blipsByPullGroup, blip.clone.artPullGroup..":"..tostring(blip.clone.sublevel), blip)
+  end
+end
+
+local function getLinkedBlips(blip)
+  local linked, seen = {}, {}
+  local function append(candidates)
+    for _, candidate in ipairs(candidates or {}) do
+      if not seen[candidate] then
+        seen[candidate] = true
+        tinsert(linked, candidate)
+      end
+    end
+  end
+  if db and db.devMode then
+    for _, candidate in ipairs(blips) do
+      local sameGroup = blip.clone.g and candidate.clone.g == blip.clone.g
+      local samePullGroup = blip.clone.artPullGroup == candidate.clone.artPullGroup
+          and blip.clone.artPullGroup ~= nil and blip.clone.sublevel == candidate.clone.sublevel
+      if (sameGroup or samePullGroup) and not seen[candidate] then
+        seen[candidate] = true
+        tinsert(linked, candidate)
+      end
+    end
+    return linked
+  end
+  append(blipsByGroup[blip.clone.g])
+  if blip.clone.artPullGroup then
+    append(blipsByPullGroup[blip.clone.artPullGroup..":"..tostring(blip.clone.sublevel)])
+  end
+  return linked
+end
+
 local function notifyLiveMarkPlanChanged()
-  local art = rawget(_G, "ART")
-  if art and art.LiveMarks and art.LiveMarks.OnPlanChanged then art.LiveMarks:OnPlanChanged() end
+  if ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
+end
+
+local function findLegacyBlip(enemyIdx, cloneIdx)
+  local blip = blipsByEnemy[enemyIdx] and blipsByEnemy[enemyIdx][cloneIdx]
+  if blip then return blip end
+  for _, candidate in ipairs(blips) do
+    if candidate.enemyIdx == enemyIdx and candidate.cloneIdx == cloneIdx then return candidate end
+  end
 end
 
 function ART:GetRaidEnemyBlips()
@@ -36,11 +105,10 @@ function ART:SetLegacyBlipMark(enemyIdx, cloneIdx, marker)
       for _, otherCloneIdx in ipairs(type(cloneIndexes) == "table" and cloneIndexes or {}) do
         if assignments[otherEnemyIdx] and assignments[otherEnemyIdx][otherCloneIdx] == marker then
           assignments[otherEnemyIdx][otherCloneIdx] = nil
-          for _, blip in pairs(blips) do
-            if blip.enemyIdx == otherEnemyIdx and blip.cloneIdx == otherCloneIdx then
-              blip.assignment = nil
-              blip.texture_OverlayIcon:Hide()
-            end
+          local blip = findLegacyBlip(otherEnemyIdx, otherCloneIdx)
+          if blip then
+            blip.assignment = nil
+            blip.texture_OverlayIcon:Hide()
           end
         end
       end
@@ -53,11 +121,10 @@ end
 
 function ART:HideDisplacedSpawnMarks(spawnKeys)
   for _, spawnKey in ipairs(spawnKeys or {}) do
-    for _, blip in pairs(blips) do
-      if blip.clone and blip.clone.artSpawnKey == spawnKey then
-        blip.assignment = nil
-        blip.texture_OverlayIcon:Hide()
-      end
+    local blip = blipsBySpawnKey[spawnKey]
+    if blip then
+      blip.assignment = nil
+      blip.texture_OverlayIcon:Hide()
     end
   end
 end
@@ -358,6 +425,8 @@ local defaultSizes = {
   ["texture_DragRight"] = 8,
   ["texture_DragUp"] = 8,
   ["texture_OverlayIcon"] = 12,
+  ["texture_CCIcon"] = 9,
+  ["mask_CCIconMask"] = 9,
   ["mask_PortraitMask"] = 20,
 }
 
@@ -499,7 +568,8 @@ end
 local function getDraggedBlips(blip, ignoreGrouped)
   local draggedBlips = { blip }
   if ignoreGrouped or not blip.clone.g then return draggedBlips end
-  for _, otherBlip in pairs(blips) do
+  local candidates = db and db.devMode and blips or blipsByGroup[blip.clone.g] or {}
+  for _, otherBlip in ipairs(candidates) do
     if otherBlip ~= blip and otherBlip.clone.g == blip.clone.g and otherBlip:IsShown() and otherBlip:IsEnabled() then
       tinsert(draggedBlips, otherBlip)
     end
@@ -529,12 +599,14 @@ local function setUpMouseHandlers(self)
   end)
   local tempPulls
   local targetPull
+  local pullCenters
   local dragPreviewIgnoreGrouped
   local dragPreviewHullState
   self:SetScript("OnDragStart", function()
     local x, y, scale
     local dragTargetUpdateElapsed = DRAG_TARGET_UPDATE_INTERVAL
     preset = ART:GetCurrentPreset()
+    pullCenters = ART:GetPullCenters(preset.value.pulls)
     tempPulls = CopyTable(preset.value.pulls)
     targetPull = nil
     dragPreviewHullState = nil
@@ -559,7 +631,7 @@ local function setUpMouseHandlers(self)
         if dragTargetUpdateElapsed < DRAG_TARGET_UPDATE_INTERVAL then return end
         dragTargetUpdateElapsed = 0
         --find closest pull and measure distance
-        local pullIdx, centerX, centerY = ART:FindClosestPull(x, y)
+        local pullIdx, centerX, centerY = ART:FindClosestPull(x, y, pullCenters)
         if not centerX then
           targetPull = nil
           return
@@ -620,6 +692,7 @@ local createEnemyContextMenu = function(frame)
       and #planner:FindStepsForPack(frame.clone.artPackKey) > 0
   ART:CreateContextMenu(ART.main_frame, function(ownerRegion, rootDescription)
     rootDescription:CreateTitle(L[frame.data.name])
+    local ccSetMarker
 
     if useRouteMarks then
       local packKey, spawnKey = frame.clone.artPackKey, frame.clone.artSpawnKey
@@ -631,6 +704,12 @@ local createEnemyContextMenu = function(frame)
         local _, displaced = planner:SetSpawnMark(packKey, spawnKey, data.index ~= 0 and data.index or nil)
         ART:HideDisplacedSpawnMarks(displaced)
         frame:SetUp(frame.data, frame.clone)
+      end
+      ccSetMarker = function(marker)
+        local applied, displaced = planner:SetSpawnMark(packKey, spawnKey, marker)
+        ART:HideDisplacedSpawnMarks(displaced)
+        frame:SetUp(frame.data, frame.clone)
+        return applied ~= nil
       end
       local submenu = rootDescription:CreateButton(L["Set Target Marker"], function() end);
       for i = 1, 8 do
@@ -652,6 +731,11 @@ local createEnemyContextMenu = function(frame)
           ART:OpenConfirmationFrame(450, 150, L["Warning"], L["Okay"], L["assignmentWarning"])
           db.hasSeenAssignmentWarning = true
         end
+      end
+      ccSetMarker = function(marker)
+        ART:SetLegacyBlipMark(frame.enemyIdx, frame.cloneIdx, marker)
+        frame:SetUp(frame.data, frame.clone)
+        return true
       end
       local submenu = rootDescription:CreateButton(L["Set Target Marker"], function() end);
       for i = 1, 8 do
@@ -679,6 +763,7 @@ local createEnemyContextMenu = function(frame)
         end, "ClearAllMarkers")
       end)
     end
+    if ART.CCAssignments then ART.CCAssignments:AddNpcMenu(rootDescription, frame, ccSetMarker) end
     rootDescription:CreateButton(L["Open Enemy Info"], function()
       ART:ShowEnemyInfoFrame(frame)
     end)
@@ -1105,7 +1190,7 @@ function ARTRaidEnemyMixin:SetUp(data, clone, overlapCandidates, currentPreset, 
   self.clone = clone
   self:Show()
   self:SetScript("OnUpdate", nil)
-  tinsert(blips, self)
+  indexBlip(self)
   local portrait = data.iconTexture or data.displayId or 39490
   local portraitIsTexture = data.iconTexture and true or false
   if self.portrait ~= portrait or self.portraitIsTexture ~= portraitIsTexture then
@@ -1142,6 +1227,7 @@ function ARTRaidEnemyMixin:SetUp(data, clone, overlapCandidates, currentPreset, 
       self.texture_OverlayIcon:Hide()
     end
   end
+  if ART.CCAssignments then ART.CCAssignments:UpdateBlipBadge(self) end
   if db.devMode then
     blipDevModeSetup(self)
     self.devModeSetup = true
@@ -1157,6 +1243,7 @@ function ART:RaidEnemies_HideAllBlips()
   ART:ResetBlipHoverScales()
   ART.raidEnemyDragPreview_framePool:ReleaseAll()
   ART.raidEnemies_framePool:ReleaseAll()
+  clearBlipIndexes()
 end
 
 function ART:RaidEnemies_UpdateEnemiesAsync()
@@ -1166,7 +1253,7 @@ function ART:RaidEnemies_UpdateEnemiesAsync()
   ART.raidEnemyDragPreview_framePool:ReleaseAll()
   ART.raidEnemies_framePool:ReleaseAll()
   coroutine.yield()
-  twipe(blips)
+  clearBlipIndexes()
   if not db then db = ART:GetDB() end
   local enemies = ART.raidEnemies[db.currentRaidIndex]
   if not enemies then return end
@@ -1230,11 +1317,7 @@ function ART:RaidEnemies_CreateFramePools()
 end
 
 function ART:GetBlip(enemyIdx, cloneIdx)
-  for blipIdx, blip in pairs(blips) do
-    if blip.enemyIdx == enemyIdx and blip.cloneIdx == cloneIdx then
-      return blip
-    end
-  end
+  return blipsByEnemy[enemyIdx] and blipsByEnemy[enemyIdx][cloneIdx]
 end
 
 local function isCloneConstrained(clone)
@@ -1296,12 +1379,8 @@ function ART:RaidEnemies_AddOrRemoveBlipToCurrentPull(blip, add, ignoreGrouped, 
   end
   --linked npcs
   if not ignoreGrouped then
-    for idx, otherBlip in pairs(blips) do
-      local samePack = blip.clone.g and otherBlip.clone.g == blip.clone.g
-      local samePullGroup = blip.clone.artPullGroup
-          and otherBlip.clone.artPullGroup == blip.clone.artPullGroup
-          and otherBlip.clone.sublevel == blip.clone.sublevel
-      if (samePack or samePullGroup) and blip ~= otherBlip then
+    for _, otherBlip in ipairs(getLinkedBlips(blip)) do
+      if blip ~= otherBlip then
         self:RaidEnemies_AddOrRemoveBlipToCurrentPull(otherBlip, add, true, pulls, pull, ignoreUpdates)
       end
     end
@@ -1318,14 +1397,10 @@ function ART:RaidEnemies_UpdateBlipColors(pull, r, g, b, pulls)
   for enemyIdx, clones in pairs(p) do
     if tonumber(enemyIdx) then
       for _, cloneIdx in pairs(clones) do
-        for _, blip in pairs(blips) do
-          if (blip.enemyIdx == enemyIdx) and (blip.cloneIdx == cloneIdx) then
-            if not db.devMode then
-              blip.texture_Portrait:SetVertexColor(r, g, b, 1)
-              blip.texture_SelectedHighlight:SetVertexColor(r, g, b, 0.7)
-            end
-            break
-          end
+        local blip = ART:GetBlip(enemyIdx, cloneIdx)
+        if blip and not db.devMode then
+          blip.texture_Portrait:SetVertexColor(r, g, b, 1)
+          blip.texture_SelectedHighlight:SetVertexColor(r, g, b, 0.7)
         end
       end
     end
@@ -1351,19 +1426,15 @@ function ART:RaidEnemies_UpdateSelected(pull, pulls, ignoreHulls)
     for enemyIdx, clones in pairs(p) do
       if tonumber(enemyIdx) then
         for _, cloneIdx in pairs(clones) do
-          for _, blip in pairs(blips) do
-            if (blip.enemyIdx == enemyIdx) and (blip.cloneIdx == cloneIdx) then
-              blip.texture_SelectedHighlight:Show()
-              blip.selected = true
-              if not db.devMode then
-                blip.texture_Portrait:SetVertexColor(r, g, b, 1)
-                blip.texture_SelectedHighlight:SetVertexColor(r, g, b, 0.7)
-              end
-              if pullIdx == pull then
-                blip.texture_PullIndicator:Show()
-              end
-              break
+          local blip = ART:GetBlip(enemyIdx, cloneIdx)
+          if blip then
+            blip.texture_SelectedHighlight:Show()
+            blip.selected = true
+            if not db.devMode then
+              blip.texture_Portrait:SetVertexColor(r, g, b, 1)
+              blip.texture_SelectedHighlight:SetVertexColor(r, g, b, 0.7)
             end
+            if pullIdx == pull then blip.texture_PullIndicator:Show() end
           end
         end
       end

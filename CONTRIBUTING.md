@@ -4,6 +4,10 @@ Run `./scripts/validate-addon.sh` before submitting a change. Changes affecting
 client behavior must also follow `scripts/smoke-clients.md` on interfaces `20505`
 and `20506`.
 
+The interface is a separate load-on-demand addon. In a local WoW checkout,
+run `./scripts/link-dev-ui.sh` once to expose the nested UI folder as the
+required sibling addon.
+
 - This repository comes with a `.editorconfig` file, so the following requirements will be taken care of if you have [EditorConfig](https://editorconfig.org/) installed. An editorconfig plugin for your specific editor is recommended.
   - Tabs consist of 2 spaces.
   - Files are ending with a newline.

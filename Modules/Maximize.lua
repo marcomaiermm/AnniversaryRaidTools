@@ -43,7 +43,8 @@ function ART:Maximize()
   end
   for i = 1, 10 do
     for j = 1, 15 do
-      f["largeMapPanelTile"..i..j]:SetSize(newSizex / 15, newSizex / 15)
+      local tile = f["largeMapPanelTile"..i..j]
+      if tile then tile:SetSize(newSizex / 15, newSizex / 15) end
     end
   end
   f.scrollFrame:SetVerticalScroll(oldScrollV * (newSizey / oldSizeY))
@@ -86,7 +87,8 @@ function ART:Minimize()
   end
   for i = 1, 10 do
     for j = 1, 15 do
-      f["largeMapPanelTile"..i..j]:SetSize(newSizex / 15, newSizex / 15)
+      local tile = f["largeMapPanelTile"..i..j]
+      if tile then tile:SetSize(newSizex / 15, newSizex / 15) end
     end
   end
   f.scrollFrame:SetVerticalScroll(oldScrollV * (newSizey / oldSizeY))

@@ -25,8 +25,12 @@ local db
 function ART:HandleSlashCommand(cmd, editbox)
   cmd = cmd:lower()
   local rqst, arg = strsplit(' ', cmd)
-  if rqst == "devmode" then
+  if rqst == "debug" then
     if ART.ToggleDevMode then ART:ToggleDevMode() end
+  elseif rqst == "debug:cc" then
+    if ART.CCAssignments and ART.CCAssignments.SetDebugMode then ART.CCAssignments:SetDebugMode() end
+  elseif rqst == "debug:marks" then
+    if ART.LiveMarks and ART.LiveMarks.SetDebugMode then ART.LiveMarks:SetDebugMode() end
   elseif rqst == "reset" then
     ART:ResetMainFramePos()
   elseif rqst == "hardreset" then

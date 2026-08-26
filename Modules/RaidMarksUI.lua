@@ -51,24 +51,29 @@ function RaidMarksUI:GetPullTrackerModel()
     nextText = pullIndex < totalPulls and "NEXT  Pull "..(pullIndex + 1).."  >" or "LAST PULL"
   end
 
-  local names = {}
-  for _, enemy in pairs(raid.enemies or {}) do
-    for _, spawn in ipairs(enemy.spawns or {}) do names[spawn.key] = enemy.name end
-  end
-  local rows = {}
-  local step = planner.GetActiveStep and planner:GetActiveStep()
-  for spawnKey, marker in pairs(step and step.marks or {}) do
-    marker = tonumber(marker)
-    if marker and marker >= 1 and marker <= 8 then
-      rows[#rows + 1] = { marker = marker, name = names[spawnKey] or spawnKey }
+  local rows
+  if ART.CCAssignments then
+    rows = ART.CCAssignments:GetAssignmentRows(pullIndex)
+  else
+    local names = {}
+    for _, enemy in pairs(raid.enemies or {}) do
+      for _, spawn in ipairs(enemy.spawns or {}) do names[spawn.key] = enemy.name end
     end
+    rows = {}
+    local step = planner.GetActiveStep and planner:GetActiveStep()
+    for spawnKey, marker in pairs(step and step.marks or {}) do
+      marker = tonumber(marker)
+      if marker and marker >= 1 and marker <= 8 then
+        rows[#rows + 1] = { marker = marker, name = names[spawnKey] or spawnKey }
+      end
+    end
+    table.sort(rows, function(left, right)
+      return left.marker > right.marker or left.marker == right.marker and left.name < right.name
+    end)
   end
-  table.sort(rows, function(left, right)
-    return left.marker > right.marker or left.marker == right.marker and left.name < right.name
-  end)
 
   return {
-    raidName = raid.name,
+    raidName = raid.name..(ART.CCAssignments and ART.CCAssignments.debugMode and " |cffffd100[CC DEBUG]|r" or ""),
     mode = mode,
     showNext = mode ~= "waves",
     pullIndex = pullIndex,
@@ -77,6 +82,7 @@ function RaidMarksUI:GetPullTrackerModel()
     currentLabel = currentLabel,
     currentText = currentText,
     nextText = nextText,
+    debugCC = ART.CCAssignments and ART.CCAssignments.debugMode == true,
     marks = rows,
   }
 end
@@ -84,6 +90,7 @@ end
 local function showBody(frame, shown)
   frame.status:SetShown(shown)
   frame.assignments:SetShown(shown)
+  frame.debugCC:SetShown(shown and frame.model.debugCC)
   frame.clear:SetShown(shown)
   frame.empty:SetShown(shown and #frame.model.marks == 0)
   for _, row in ipairs(frame.rows) do row:SetShown(shown and row.used) end
@@ -92,6 +99,7 @@ end
 local function setBodyAlpha(frame, alpha)
   frame.status:SetAlpha(alpha)
   frame.assignments:SetAlpha(alpha)
+  frame.debugCC:SetAlpha(alpha)
   frame.clear:SetAlpha(alpha)
   frame.empty:SetAlpha(alpha)
   for _, row in ipairs(frame.rows) do row:SetAlpha(alpha) end
@@ -99,7 +107,7 @@ local function setBodyAlpha(frame, alpha)
 end
 
 local function expandedHeight(frame)
-  return 170 + math.max(1, #frame.model.marks) * 22
+  return 170 + math.max(1, math.min(8, #frame.model.marks)) * 22
 end
 
 local function anchorAtHeader(frame)
@@ -123,6 +131,34 @@ local function setExpanded(frame, expanded, animate)
     setBodyAlpha(frame, targetAlpha)
     if not expanded then showBody(frame, false) end
   end
+end
+
+local function updateRuntime(item)
+  local runtime = item.runtime
+  if not runtime then item:SetScript("OnUpdate", nil); return end
+  local now = GetTime()
+  if ART.CCAssignments and (not runtime.nextAuraSync or runtime.nextAuraSync <= now) then
+    local previousExpires = runtime.expires
+    runtime.nextAuraSync = now + 0.5
+    ART.CCAssignments:SyncAura(runtime)
+    if runtime.expires ~= previousExpires then
+      if item.cooldown.SetCooldown then item.cooldown:SetCooldown(runtime.started, runtime.duration)
+      elseif CooldownFrame_Set then CooldownFrame_Set(item.cooldown, runtime.started, runtime.duration, true) end
+    end
+  end
+  local remaining = math.max(0, runtime.expires - now)
+  if remaining <= 0 then
+    item.runtime = nil
+    item:SetScript("OnUpdate", nil)
+    item.timer:SetText("")
+    item.cooldown:Hide()
+    item.ccIcon:SetDesaturated(true)
+    item.ccIcon:SetAlpha(0.25)
+    if item.normalPlayerColor then item.player:SetTextColor(unpack(item.normalPlayerColor)) end
+    return
+  end
+  item.timer:SetText(math.ceil(remaining))
+  if remaining <= 5 then item.timer:SetTextColor(1, 0.15, 0.08) else item.timer:SetTextColor(1, 0.82, 0.18) end
 end
 
 local function createTracker()
@@ -282,21 +318,68 @@ local function createTracker()
 
   frame.assignments = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
   frame.assignments:SetPoint("TOPLEFT", 12, -112)
-  frame.assignments:SetText("MARK ASSIGNMENTS")
+  frame.assignments:SetText("ASSIGNMENTS")
   frame.assignments:SetTextColor(0.92, 0.72, 0.26)
+
+  frame.debugCC = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+  frame.debugCC:SetSize(76, 20)
+  frame.debugCC:SetPoint("TOPRIGHT", -12, -105)
+  frame.debugCC:SetText("FIRE CC")
+  frame.debugCC:SetScript("OnClick", function()
+    if ART.CCAssignments then ART.CCAssignments:FireFirstDebugCC(frame.model.pullIndex) end
+  end)
 
   frame.rows = {}
   for index = 1, 8 do
-    local row = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    local row = CreateFrame("Frame", nil, frame)
     row:SetPoint("TOPLEFT", 16, -130 - (index - 1) * 22)
-    row:SetPoint("RIGHT", -12, 0)
-    row:SetJustifyH("LEFT")
+    row:SetSize(272, 20)
+    row.marker = row:CreateTexture(nil, "OVERLAY")
+    row.marker:SetSize(16, 16)
+    row.marker:SetPoint("LEFT", 0, 0)
+    row.npc = row:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    row.npc:SetPoint("LEFT", row.marker, "RIGHT", 6, 0)
+    row.npc:SetJustifyH("LEFT")
+    if row.npc.SetWordWrap then row.npc:SetWordWrap(false) end
+    row.npcHitbox = CreateFrame("Frame", nil, row)
+    row.npcHitbox:SetAllPoints(row.npc)
+    row.npcHitbox:EnableMouse(true)
+    row.npcHitbox:SetScript("OnEnter", function(hitbox)
+      if not row.npcTruncated or not GameTooltip then return end
+      GameTooltip:SetOwner(hitbox, "ANCHOR_CURSOR_RIGHT")
+      GameTooltip:SetText(row.npcFullName)
+      GameTooltip:Show()
+      hitbox.tooltipShown = true
+    end)
+    row.npcHitbox:SetScript("OnLeave", function(hitbox)
+      if hitbox.tooltipShown and GameTooltip then GameTooltip:Hide() end
+      hitbox.tooltipShown = nil
+    end)
+    row.ccIcon = row:CreateTexture(nil, "ARTWORK")
+    row.ccIcon:SetSize(20, 20)
+    if row.CreateMaskTexture and row.ccIcon.AddMaskTexture then
+      row.ccMask = row:CreateMaskTexture()
+      row.ccMask:SetTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMask")
+      row.ccMask:SetAllPoints(row.ccIcon)
+      row.ccIcon:AddMaskTexture(row.ccMask)
+    end
+    row.cooldown = CreateFrame("Cooldown", nil, row, "CooldownFrameTemplate")
+    row.cooldown:SetAllPoints(row.ccIcon)
+    if row.cooldown.SetDrawEdge then row.cooldown:SetDrawEdge(false) end
+    if row.cooldown.SetDrawBling then row.cooldown:SetDrawBling(false) end
+    row.timer = row.cooldown:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    row.timer:SetPoint("CENTER", row.ccIcon, "CENTER", 0, 0)
+    row.player = row:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+    row.player:SetPoint("RIGHT", row, "RIGHT", 0, 0)
+    row.player:SetJustifyH("RIGHT")
+    if row.player.SetWordWrap then row.player:SetWordWrap(false) end
+    row.ccIcon:SetPoint("RIGHT", row.player, "LEFT", -5, 0)
     frame.rows[index] = row
   end
 
   frame.empty = frame:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
   frame.empty:SetPoint("TOPLEFT", 16, -132)
-  frame.empty:SetText("No marks assigned")
+  frame.empty:SetText("No assignments")
 
   frame.clear = CreateFrame("Button", nil, frame, "BackdropTemplate")
   frame.clear:SetSize(284, 26)
@@ -381,6 +464,78 @@ local function createTracker()
   return frame
 end
 
+local function truncateUtf8(text, limit)
+  text = tostring(text or "")
+  local position, count = 1, 0
+  while position <= #text and count < limit do
+    local byte = text:byte(position)
+    position = position + (byte < 128 and 1 or byte < 224 and 2 or byte < 240 and 3 or 4)
+    count = count + 1
+  end
+  if position <= #text then return text:sub(1, position - 1).."…", true end
+  return text, false
+end
+
+local function renderRow(row, mark)
+  row.marker:SetTexture(("Interface\\TargetingFrame\\UI-RaidTargetingIcon_%d"):format(mark.marker))
+  row.runtime = mark.runtime
+  local assignment = mark.assignment
+  row.npcFullName = tostring(mark.name or "")
+  row.npc:ClearAllPoints()
+  row.npc:SetPoint("LEFT", row.marker, "RIGHT", 6, 0)
+  row.npc:SetPoint("RIGHT", row, "CENTER", -6, 0)
+  local npcText, npcTruncated = truncateUtf8(row.npcFullName, 18)
+  row.npc:SetText(npcText)
+  row.npcTruncated = npcTruncated
+      or row.npc.GetStringWidth and row.npc.GetWidth and row.npc:GetStringWidth() > row.npc:GetWidth()
+  if not assignment or not ART.CCAssignments then
+    row.runtime = nil
+    row:SetScript("OnUpdate", nil)
+    row.ccIcon:Hide(); row.cooldown:Hide(); row.timer:Hide(); row.player:Hide()
+    return
+  end
+
+  local definition = ART.CCAssignments.catalog[assignment.ccKey]
+  row.ccIcon:Show(); row.timer:Show(); row.player:Show()
+  row.ccIcon:SetTexture(definition.icon)
+  local runtime = mark.runtime
+  if runtime and runtime.expires > GetTime() then
+    row:SetScript("OnUpdate", updateRuntime)
+    row.ccIcon:SetDesaturated(false)
+    row.ccIcon:SetAlpha(1)
+    row.cooldown:Show()
+    if row.cooldown.SetCooldown then
+      row.cooldown:SetCooldown(runtime.started, runtime.duration)
+    elseif CooldownFrame_Set then
+      CooldownFrame_Set(row.cooldown, runtime.started, runtime.duration, true)
+    end
+  else
+    row.runtime = nil
+    row:SetScript("OnUpdate", nil)
+    row.ccIcon:SetDesaturated(true)
+    row.ccIcon:SetAlpha(0.25)
+    row.cooldown:Hide()
+    row.timer:SetText("")
+  end
+  local roster = ART.CCAssignments:FindRosterPlayer(assignment.assignee.name)
+  local name = roster and roster.displayName
+      or tostring(assignment.assignee.name):match("^[^-]+") or assignment.assignee.name
+  row.player:SetText(truncateUtf8(name, 12))
+  local color = RAID_CLASS_COLORS and RAID_CLASS_COLORS[assignment.assignee.classFile]
+  if not roster or roster.online == false then
+    row.normalPlayerColor = { 0.45, 0.45, 0.45 }
+  elseif color then
+    row.normalPlayerColor = { color.r, color.g, color.b }
+  else
+    row.normalPlayerColor = { 1, 1, 1 }
+  end
+  if runtime and runtime.wrongCaster then
+    row.player:SetTextColor(1, 0.82, 0)
+  else
+    row.player:SetTextColor(unpack(row.normalPlayerColor))
+  end
+end
+
 function RaidMarksUI:RefreshPullTracker()
   local model = self:GetPullTrackerModel()
   if not model then if tracker then tracker:Hide() end return end
@@ -406,13 +561,10 @@ function RaidMarksUI:RefreshPullTracker()
   for index, row in ipairs(frame.rows) do
     local mark = model.marks[index]
     row.used = mark ~= nil
-    if mark then
-      row:SetText(("|TInterface\\TargetingFrame\\UI-RaidTargetingIcon_%d:16:16:0:0|t  %s")
-          :format(mark.marker, mark.name))
-    end
+    if mark then renderRow(row, mark) else row.runtime = nil; row:SetScript("OnUpdate", nil) end
   end
   frame.clear:ClearAllPoints()
-  frame.clear:SetPoint("TOPLEFT", 8, -140 - math.max(1, #model.marks) * 22)
+  frame.clear:SetPoint("TOPLEFT", 8, -140 - math.max(1, math.min(8, #model.marks)) * 22)
   setExpanded(frame, frame.expanded ~= false, false)
   frame:Show()
   return model

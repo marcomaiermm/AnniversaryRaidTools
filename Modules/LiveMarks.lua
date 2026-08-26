@@ -8,6 +8,11 @@ ART.LiveMarks = LiveMarks
 local visibleNameplates = {}
 local markerLeaseByIndex, markerByGuid, artMarkerByGuid = {}, {}, {}
 local artSourceByGuid, artStepByGuid = {}, {}
+local EVENTS = {
+  "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "PLAYER_TARGET_CHANGED", "UNIT_TARGET",
+  "NAME_PLATE_UNIT_ADDED", "NAME_PLATE_UNIT_REMOVED", "COMBAT_LOG_EVENT_UNFILTERED",
+  "RAID_TARGET_UPDATE", "GROUP_ROSTER_UPDATE",
+}
 
 local function db()
   return ART.GetDB and ART.GetDB()
@@ -155,6 +160,7 @@ local function reclaimOwnedCandidate(candidates)
 end
 
 function LiveMarks:TryMouseover()
+  if self.debugMode then self:PrintDebugMouseover() end
   local settings = db()
   if not (settings and settings.autoMark == true) then return false, "disabled" end
   if not modifierDown() then return false, "modifier" end
@@ -189,6 +195,23 @@ function LiveMarks:TryMouseover()
   local step = planner and planner.GetActiveStep and planner:GetActiveStep()
   artStepByGuid[guid] = step and step.id
   return true, marker, result
+end
+
+function LiveMarks:PrintDebugMouseover()
+  local guid = type(UnitGUID) == "function" and UnitGUID("mouseover")
+  local npcId = parseNpcId(guid)
+  local resolver = ART.RaidMarks and ART.RaidMarks.resolver
+  local candidates, source = resolver and resolver:GetRuleForNpcId(npcId)
+  print(("ART marks | npc=%s source=%s candidates=%s modifier=%s"):format(
+      tostring(npcId), tostring(source), table.concat(candidates or {}, ","), modifier()))
+end
+
+function LiveMarks:SetDebugMode(enabled)
+  self.debugMode = enabled == nil and not self.debugMode or enabled == true
+  print(self.debugMode and "|cffffd100ART:|r Marks debug enabled."
+      or "|cffffd100ART:|r Marks debug disabled.")
+  if self.debugMode then self:PrintDebugMouseover() end
+  return self.debugMode
 end
 
 function LiveMarks:ClearWorldMarks()
@@ -231,11 +254,6 @@ end
 
 if type(CreateFrame) == "function" then
   local eventFrame = CreateFrame("Frame", "ARTLiveMarksEventFrame", UIParent)
-  for _, event in ipairs({
-    "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "PLAYER_TARGET_CHANGED", "UNIT_TARGET",
-    "NAME_PLATE_UNIT_ADDED", "NAME_PLATE_UNIT_REMOVED", "COMBAT_LOG_EVENT_UNFILTERED",
-    "RAID_TARGET_UPDATE", "GROUP_ROSTER_UPDATE",
-  }) do eventFrame:RegisterEvent(event) end
   eventFrame:SetScript("OnEvent", function(_, event, ...)
     local unitToken = ...
     if event == "UPDATE_MOUSEOVER_UNIT" then
@@ -264,16 +282,19 @@ if type(CreateFrame) == "function" then
   LiveMarks.eventFrame = eventFrame
 end
 
-SLASH_ARTMARKDEBUG1 = "/artmarkdebug"
-SlashCmdList.ARTMARKDEBUG = function()
-  local settings = db()
-  if not (settings and settings.devMode) then print("ART mark debug requires devMode."); return end
-  local guid = type(UnitGUID) == "function" and UnitGUID("mouseover")
-  local npcId = parseNpcId(guid)
-  local resolver = ART.RaidMarks and ART.RaidMarks.resolver
-  local candidates, source = resolver and resolver:GetRuleForNpcId(npcId)
-  print(("ART mouseover | npc=%s source=%s candidates=%s modifier=%s"):format(
-      tostring(npcId), tostring(source), table.concat(candidates or {}, ","), modifier()))
+function LiveMarks:SetEnabled(enabled)
+  enabled = enabled == true
+  if self.enabled == enabled then return end
+  self.enabled = enabled
+  local frame = self.eventFrame
+  if not frame then return end
+  for _, event in ipairs(EVENTS) do
+    if enabled then frame:RegisterEvent(event)
+    elseif frame.UnregisterEvent then frame:UnregisterEvent(event) end
+  end
+  if not enabled then wipe(visibleNameplates) end
 end
+
+LiveMarks:SetEnabled(db() and db().autoMark == true)
 
 ART.LiveMarks = LiveMarks

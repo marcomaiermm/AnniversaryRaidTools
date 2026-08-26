@@ -4,7 +4,7 @@ local ART = { StaticData = { raids = {} } }
 _G.ART = ART
 local map = assert(loadfile(root.."/Raids/TBC/Maps/BlackTemple.lua"))("AnniversaryRaidTools", ART)
 local transform = assert(loadfile(root.."/Raids/TBC/Transforms/BlackTemple.lua"))("AnniversaryRaidTools", ART)
-local raid = assert(loadfile(root.."/Raids/TBC/Generated/BlackTemple.lua"))()
+local raid = assert(loadfile(root.."/Raids/TBC/Generated/BlackTemple.lua"))("AnniversaryRaidTools_UI", ART)
 
 local function close(actual, expected, tolerance, message)
   assert(math.abs(actual - expected) <= tolerance,

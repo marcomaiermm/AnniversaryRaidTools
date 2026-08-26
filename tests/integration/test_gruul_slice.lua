@@ -98,7 +98,6 @@ local addon = {
   knownRaids = {},
   navigationSectionLookup = {},
 }
-_G.ART = addon
 function addon:RegisterNavigationSection(section) self.navigationSectionLookup[section.key] = section return section end
 function addon:GetNavigationSection(key) return self.navigationSectionLookup[key] end
 function addon:SetCurrentSection(key) saved.currentSection = key end
@@ -203,12 +202,12 @@ for _, path in ipairs({
   "/Raids/TBC/Generated/TheEye.lua", "/Raids/TBC/Generated/TheEyeWorldPositions.lua",
   "/Raids/TBC/Maps/TheEye.lua", "/Raids/TBC/Transforms/TheEye.lua",
 }) do load(path, addon) end
-assert(_G.ART.StaticData.raids["gruuls-lair"] and _G.ART.StaticData.raids["black-temple"]
-  and _G.ART.StaticData.raids.hyjal and not _G.ART.StaticData.raids.karazhan
-  and _G.ART.StaticData.raids["magtheridons-lair"]
-  and _G.ART.StaticData.raids["serpentshrine-cavern"] and _G.ART.StaticData.raids["the-eye"]
-  and not _G.ART.StaticData.raids["sunwell-plateau"] and _G.ART.StaticData.enemyInfo["gruuls-lair"])
-for _, raid in pairs(_G.ART.StaticData.raids) do
+assert(addon.StaticData.raids["gruuls-lair"] and addon.StaticData.raids["black-temple"]
+  and addon.StaticData.raids.hyjal and not addon.StaticData.raids.karazhan
+  and addon.StaticData.raids["magtheridons-lair"]
+  and addon.StaticData.raids["serpentshrine-cavern"] and addon.StaticData.raids["the-eye"]
+  and not addon.StaticData.raids["sunwell-plateau"] and addon.StaticData.enemyInfo["gruuls-lair"])
+for _, raid in pairs(addon.StaticData.raids) do
   for _, floorPOIs in pairs(raid.pois or {}) do
     for _, poi in ipairs(floorPOIs) do
       local assignment = "L["..string.format("%q", poi.label).."]"
@@ -216,8 +215,8 @@ for _, raid in pairs(_G.ART.StaticData.raids) do
     end
   end
 end
-if mode == "missing-enemy" then _G.ART.StaticData.enemyInfo["gruuls-lair"] = nil end
-if mode == "invalid-enemy" then _G.ART.StaticData.enemyInfo["gruuls-lair"].source.confidence = "verified" end
+if mode == "missing-enemy" then addon.StaticData.enemyInfo["gruuls-lair"] = nil end
+if mode == "invalid-enemy" then addon.StaticData.enemyInfo["gruuls-lair"].source.confidence = "verified" end
 load("/Modules/EnemyInfo.lua", addon)
 
 local integration = assert(addon:GetRaidIntegration())
@@ -278,7 +277,8 @@ if mode == "invalid-store" then
 end
 
 local cloneCount, patrolCount, gruulClone, gruulDisplayId, gruulCreatureType, entrancePatrol = 0, 0
-for _, enemy in ipairs(addon.raidEnemies[160]) do
+local projectedEnemies = { [160] = addon.raidEnemies[160] }
+for _, enemy in ipairs(projectedEnemies[160]) do
   cloneCount = cloneCount + #enemy.clones
   for _, clone in ipairs(enemy.clones) do
     if clone.patrol then patrolCount = patrolCount + 1 end
@@ -297,22 +297,27 @@ assert(math.abs(entrancePatrol[1].y + (0.764071 * 555)) < 0.001)
 local x, y = addon:GetRaidMapTransform().toPlanner(565, 1, 0.199, 0.283)
 assert(x == 0.199 and y == 0.283)
 
-local function projectedCounts(shellIndex)
+local previousShellIndex = 160
+local function projectedCounts(raidKey, shellIndex)
+  assert(integration:ProjectRaid(raidKey))
+  assert(addon.raidEnemies[previousShellIndex] == nil, "previous raid projection must be evicted")
+  projectedEnemies[shellIndex] = addon.raidEnemies[shellIndex]
+  previousShellIndex = shellIndex
   local spawns, patrols = 0, 0
-  for _, enemy in ipairs(addon.raidEnemies[shellIndex]) do
+  for _, enemy in ipairs(projectedEnemies[shellIndex]) do
     spawns = spawns + #enemy.clones
     for _, clone in ipairs(enemy.clones) do if clone.patrol then patrols = patrols + 1 end end
   end
   return spawns, patrols
 end
-local btSpawns, btPatrols = projectedCounts(161)
-local hyjalSpawns, hyjalPatrols = projectedCounts(162)
-local magtheridonSpawns, magtheridonPatrols = projectedCounts(164)
-local sscSpawns, sscPatrols = projectedCounts(165)
-local eyeSpawns, eyePatrols = projectedCounts(166)
+local btSpawns, btPatrols = projectedCounts("black-temple", 161)
+local hyjalSpawns, hyjalPatrols = projectedCounts("hyjal", 162)
+local magtheridonSpawns, magtheridonPatrols = projectedCounts("magtheridons-lair", 164)
+local sscSpawns, sscPatrols = projectedCounts("serpentshrine-cavern", 165)
+local eyeSpawns, eyePatrols = projectedCounts("the-eye", 166)
 assert(btSpawns == 626 and btPatrols == 88)
 local hiddenSkyStalkers = 0
-for _, enemy in ipairs(addon.raidEnemies[161]) do
+for _, enemy in ipairs(projectedEnemies[161]) do
   for _, clone in ipairs(enemy.clones) do
     if clone.hidden then hiddenSkyStalkers = hiddenSkyStalkers + 1 end
   end
@@ -323,7 +328,7 @@ assert(magtheridonSpawns == 18 and magtheridonPatrols == 3)
 assert(sscSpawns == 194 and sscPatrols == 66)
 assert(eyeSpawns == 187 and eyePatrols == 14)
 for _, shellIndex in ipairs({ 160, 161, 162, 164, 165, 166 }) do
-  for _, enemy in ipairs(addon.raidEnemies[shellIndex]) do
+  for _, enemy in ipairs(projectedEnemies[shellIndex]) do
     assert(enemy.displayId and enemy.displayId > 0, "missing pinned display ID for NPC "..enemy.id)
     assert(enemy.health and enemy.health > 1, "missing AzerothCore health for NPC "..enemy.id)
     assert(enemy.level and enemy.level >= 70, "missing AzerothCore level for NPC "..enemy.id)
@@ -333,7 +338,7 @@ for _, shellIndex in ipairs({ 160, 161, 162, 164, 165, 166 }) do
   end
 end
 local function enemyById(shellIndex, npcId)
-  for _, enemy in ipairs(addon.raidEnemies[shellIndex]) do if enemy.id == npcId then return enemy end end
+  for _, enemy in ipairs(projectedEnemies[shellIndex]) do if enemy.id == npcId then return enemy end end
 end
 local najentus, battlelord = assert(enemyById(161, 22887)), assert(enemyById(161, 22844))
 local feralSpirit = assert(enemyById(161, 22849))
@@ -364,7 +369,7 @@ assert(not lairBrute.isBoss and lairBrute.displayId == 18356)
 assert(lairBrute.health == 298298 and lairBrute.level == 72)
 assert(magtheridon.isBoss and magtheridon.displayId == 18527)
 assert(not channeler.isBoss and channeler.displayId == 9865)
-for _, enemy in ipairs(addon.raidEnemies[164]) do
+for _, enemy in ipairs(projectedEnemies[164]) do
   assert(enemy.isBoss == (enemy.id == 17257), "Magtheridon boss classification: "..enemy.id)
 end
 assert(addon:GetRaidMap("black-temple").mapId == 564 and addon:GetRaidMapTransform("black-temple").raidKey == "black-temple")

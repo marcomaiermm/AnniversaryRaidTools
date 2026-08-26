@@ -5,7 +5,7 @@ file:close()
 
 local ART = { L = {} }
 local reconciles = 0
-_G.ART = { LiveMarks = { OnPlanChanged = function() reconciles = reconciles + 1 end } }
+ART.LiveMarks = { OnPlanChanged = function() reconciles = reconciles + 1 end }
 local preset = {
   value = {
     enemyAssignments = { [1] = { [1] = 3 }, [2] = { [1] = 3 }, [3] = { [1] = 4 }, [4] = { [1] = 3 } },

@@ -24,6 +24,16 @@ local environment = {
   preset = { value = { currentPull = 1, pulls = {} } },
   blips = { first, linked, otherFloor },
   isCloneConstrained = function() return false end,
+  getLinkedBlips = function(selected)
+    local matches = {}
+    for _, candidate in ipairs({ first, linked, otherFloor }) do
+      local samePack = selected.clone.g and candidate.clone.g == selected.clone.g
+      local samePullGroup = selected.clone.artPullGroup == candidate.clone.artPullGroup
+          and selected.clone.sublevel == candidate.clone.sublevel
+      if samePack or samePullGroup then matches[#matches + 1] = candidate end
+    end
+    return matches
+  end,
   pairs = pairs,
   tinsert = table.insert,
   tremove = table.remove,

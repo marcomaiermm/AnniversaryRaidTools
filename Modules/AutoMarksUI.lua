@@ -50,7 +50,10 @@ local function addControls(container)
   enabled:SetLabel(L["Auto Mark"])
   enabled:SetFullWidth(true)
   enabled:SetValue(db.autoMark == true)
-  enabled:SetCallback("OnValueChanged", function(_, _, value) db.autoMark = value == true end)
+  enabled:SetCallback("OnValueChanged", function(_, _, value)
+    db.autoMark = value == true
+    if ART.LiveMarks then ART.LiveMarks:SetEnabled(db.autoMark) end
+  end)
   container:AddChild(enabled)
 
   local modifier = AceGUI:Create("Dropdown")
@@ -75,6 +78,7 @@ local function sortedEnemies(raid)
       npcId = tonumber(enemy.npcId) or tonumber(npcKey),
       name = L[enemy.name] or enemy.name or tostring(npcKey),
       displayId = enemy.displayId,
+      definition = enemy,
       tooltipData = {
         id = tonumber(enemy.npcId) or tonumber(npcKey),
         name = enemy.name,
@@ -123,21 +127,49 @@ local function addEnemyRows(container, planner)
 
     local selected = {}
     for _, marker in ipairs(planner:GetNpcDefaultMarks(enemy.npcId)) do selected[marker] = true end
+    local function persistMarkers()
+      local markers = {}
+      for _, candidate in ipairs(markerOrder) do
+        if selected[candidate] then markers[#markers + 1] = candidate end
+      end
+      planner:SetNpcDefaultMarks(enemy.npcId, markers)
+    end
     for _, marker in ipairs(markerOrder) do
       local icon = AceGUI:Create("Icon")
       icon:SetImage(("Interface\\TargetingFrame\\UI-RaidTargetingIcon_%d"):format(marker))
       icon:SetImageSize(20, 20)
       icon:SetWidth(24)
       icon:SetHeight(30)
+      if icon.frame.RegisterForClicks then icon.frame:RegisterForClicks("LeftButtonUp", "RightButtonUp") end
       icon.image:SetAlpha(selected[marker] and 1 or 0.2)
-      icon:SetCallback("OnClick", function()
+      local default = ART.CCAssignments and ART.CCAssignments:GetDefaultAssignment(
+          ART:GetCurrentPreset(), enemy.npcId, marker)
+      if default and icon.frame.CreateTexture then
+        local badge = icon.frame:CreateTexture(nil, "OVERLAY")
+        local texture, coords = ART.CCAssignments:GetClassIcon(default.assignee.classFile)
+        badge:SetTexture(texture)
+        if coords then badge:SetTexCoord(unpack(coords)) end
+        badge:SetSize(10, 10)
+        badge:SetPoint("TOPRIGHT", icon.image, "TOPRIGHT", 3, 3)
+        if icon.frame.CreateMaskTexture and badge.AddMaskTexture then
+          local mask = icon.frame:CreateMaskTexture()
+          mask:SetTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMask")
+          mask:SetAllPoints(badge)
+          badge:AddMaskTexture(mask)
+          icon.classBadgeMask = mask
+        end
+        icon.classBadge = badge
+      end
+      icon:SetCallback("OnClick", function(_, _, button)
+        if button == "RightButton" and ART.CCAssignments then
+          ART.CCAssignments:OpenDefaultMenu(icon.frame, enemy, marker, function()
+            if not selected[marker] then selected[marker] = true; persistMarkers() end
+          end)
+          return
+        end
         selected[marker] = not selected[marker]
         icon.image:SetAlpha(selected[marker] and 1 or 0.2)
-        local markers = {}
-        for _, candidate in ipairs(markerOrder) do
-          if selected[candidate] then markers[#markers + 1] = candidate end
-        end
-        planner:SetNpcDefaultMarks(enemy.npcId, markers)
+        persistMarkers()
       end)
       row:AddChild(icon)
     end
@@ -151,6 +183,7 @@ function AutoMarksUI:Refresh()
   self:UpdateAvailability()
   if not raidIsActive() or self.selectedTab ~= "autoMarks" then return end
   local container, planner = sidePanel.AutoMarksGroup, ART.RaidPlanner
+  if ART.CCAssignments then ART.CCAssignments:EnsureDefaultMarkers() end
   container:ReleaseChildren()
   addControls(container)
   addEnemyRows(container, planner)

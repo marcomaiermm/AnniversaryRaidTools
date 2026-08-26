@@ -3,5 +3,6 @@
 	<Script file='MapCalibration.lua'/>
 	<Script file='ExportLua.lua'/>
 	<Script file='Schema.lua'/>
+	<Script file='PerformanceProfilerUI.lua'/>
 	<Include file='Tests\load_tests.xml'/>
 </Ui>

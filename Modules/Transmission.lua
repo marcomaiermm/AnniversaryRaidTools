@@ -202,6 +202,11 @@ function ARTcommsObject:OnCommReceived(prefix, message, distribution, sender)
     return
   end
 
+  if prefix == ART.liveSessionPrefixes.ccAssignment then
+    if ART.CCAssignments then ART.CCAssignments:ReceiveChange(message, distribution, fullName) end
+    return
+  end
+
   if prefix == ART.liveSessionPrefixes.request then
     if ART.liveSessionActive then
       ART:LiveSession_NotifyEnabled()

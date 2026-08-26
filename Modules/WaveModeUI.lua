@@ -50,6 +50,15 @@ function WaveModeUI:ResetHyjalRuntime()
   runtimeGroup, pendingGroup, previousLocalWave = nil, nil, nil
 end
 
+function WaveModeUI:RefreshEventRegistration()
+  local active = self:IsHyjalRuntimeActive()
+  if self.combatLogActive == active then return end
+  self.combatLogActive = active
+  if not self.runtimeFrame then return end
+  if active then self.runtimeFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+  elseif self.runtimeFrame.UnregisterEvent then self.runtimeFrame:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED") end
+end
+
 local function mapPlanningOpen()
   local frame = ART.main_frame
   return frame and type(frame.IsShown) == "function" and frame:IsShown()
@@ -531,6 +540,7 @@ function ART:UpdateMap(...)
   local result = originalUpdateMap(self, ...)
   WaveModeUI:Refresh()
   WaveModeUI:ReadHyjalWave()
+  WaveModeUI:RefreshEventRegistration()
   if ART.AutoMarksUI and ART.AutoMarksUI.UpdateAvailability then ART.AutoMarksUI:UpdateAvailability() end
   return result
 end
@@ -539,22 +549,23 @@ end
 if type(CreateFrame) == "function" then
   local runtimeFrame = CreateFrame("Frame")
   runtimeFrame:RegisterEvent("UPDATE_UI_WIDGET")
-  runtimeFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
   runtimeFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
   runtimeFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
   runtimeFrame:SetScript("OnEvent", function(_, event, ...)
     if event == "UPDATE_UI_WIDGET" then
       local widget = ...
       if type(widget) == "table" and widget.widgetID == HYJAL_WAVE_WIDGET_ID then WaveModeUI:ReadHyjalWave() end
-    elseif event == "COMBAT_LOG_EVENT_UNFILTERED" and WaveModeUI:IsHyjalRuntimeActive() then
+    elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
       local _, subevent, _, sourceGuid, _, _, _, destGuid = CombatLogGetCurrentEventInfo()
       local sourceNpc, destNpc = npcIdFromGuid(sourceGuid), npcIdFromGuid(destGuid)
       local bossNpc = hyjalBossGroup[sourceNpc] and sourceNpc or hyjalBossGroup[destNpc] and destNpc
       if bossNpc then WaveModeUI:HandleHyjalBoss(bossNpc, subevent == "UNIT_DIED" and bossNpc == destNpc) end
     else
       WaveModeUI:ResetHyjalRuntime()
+      WaveModeUI:RefreshEventRegistration()
       if C_Timer and C_Timer.After then C_Timer.After(0.5, function() WaveModeUI:ReadHyjalWave() end) end
     end
   end)
   WaveModeUI.runtimeFrame = runtimeFrame
+  WaveModeUI:RefreshEventRegistration()
 end

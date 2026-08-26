@@ -302,18 +302,16 @@ function ART:DrawHull(vertices, pullColor, pullIdx)
   end
 end
 
-local function getPullVertices(p, blips)
+local function getPullVertices(p)
   local vertices = {}
   for enemyIdx, clones in pairs(p) do
     if tonumber(enemyIdx) then
       for _, cloneIdx in pairs(clones) do
         if ART:IsCloneIncluded(enemyIdx, cloneIdx) then
-          for _, blip in pairs(blips) do
-            if (blip.enemyIdx == enemyIdx) and (blip.cloneIdx == cloneIdx) then
-              local endX, endY = select(4, blip:GetPoint())
-              table.insert(vertices, { endX, endY, blip.normalScale })
-              break
-            end
+          local blip = ART:GetBlip(enemyIdx, cloneIdx)
+          if blip then
+            local endX, endY = select(4, blip:GetPoint())
+            table.insert(vertices, { endX, endY, blip.normalScale })
           end
         end
       end
@@ -422,11 +420,10 @@ function ART:DrawAllHulls(pulls, force)
       ART:ReleaseHullTextures(pullsToRelease)
     end
 
-    local blips = ART:GetRaidEnemyBlips()
     local vertices
     for pullIdx, p in pairs(pullsToDraw) do
       local r, g, b = ART:RaidEnemies_GetPullColor(pullIdx, pullsToDraw)
-      vertices = getPullVertices(p, blips)
+      vertices = getPullVertices(p)
       ART:DrawHull(vertices, { r = r, g = g, b = b, a = 1 }, pullIdx)
       ART:DrawHullFontString(vertices, pullIdx)
       coroutine.yield()
@@ -435,14 +432,11 @@ function ART:DrawAllHulls(pulls, force)
   end, "DrawAllHulls", true)
 end
 
-function ART:FindClosestPull(x, y)
-  local preset = ART:GetCurrentPreset()
-  local blips = ART:GetRaidEnemyBlips()
+function ART:GetPullCenters(pulls)
   local vertices, hull, center
   local centers = {}
-  --1. construct all hulls of pulls in this sublevel
-  for pullIdx, p in pairs(preset.value.pulls) do
-    vertices = getPullVertices(p, blips)
+  for pullIdx, p in pairs(pulls or ART:GetCurrentPreset().value.pulls) do
+    vertices = getPullVertices(p)
     hull = convex_hull(vertices)
     --2. get centroid of each pull
     if hull and hull[#hull] then
@@ -462,7 +456,11 @@ function ART:FindClosestPull(x, y)
       end
     end
   end
-  --3. find closest centroid
+  return centers
+end
+
+function ART:FindClosestPull(x, y, centers)
+  centers = centers or self:GetPullCenters()
   local centerDist = math.huge
   local centerIndex
   for k, center in pairs(centers) do
