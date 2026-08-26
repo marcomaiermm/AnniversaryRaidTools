@@ -235,8 +235,6 @@ function LiveMarks:OnPlanChanged()
   end
   local tracker = ART.RaidMarksUI
   if tracker and tracker.RefreshPullTracker then tracker:RefreshPullTracker() end
-  local ui = ART.AutoMarksUI
-  if ui and ui.Refresh then ui:Refresh() end
 end
 
 function LiveMarks:OnPullSelected()

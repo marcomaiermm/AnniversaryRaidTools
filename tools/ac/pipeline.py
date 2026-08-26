@@ -209,8 +209,9 @@ def _normalize_snapshot(payload: dict[str, Any]) -> dict[str, Any]:
         scale = metadata.get("scale")
         if not isinstance(scale, (int, float)) or isinstance(scale, bool) or scale <= 0:
             raise SnapshotError(f"npcs.{npc_id}.scale must be a positive number")
-        if metadata.get("stealthDetect") is not None and not isinstance(metadata["stealthDetect"], bool):
-            raise SnapshotError(f"npcs.{npc_id}.stealthDetect must be a boolean")
+        for field in ("stealth", "stealthDetect"):
+            if metadata.get(field) is not None and not isinstance(metadata[field], bool):
+                raise SnapshotError(f"npcs.{npc_id}.{field} must be a boolean")
         spells = metadata.get("spells")
         if spells is not None:
             if not isinstance(spells, dict):

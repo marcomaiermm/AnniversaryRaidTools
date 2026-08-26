@@ -98,6 +98,7 @@ def main() -> None:
     for npc_id in ("22849", "22878", "22946"):
         assert raid["enemies"][npc_id]["stealthDetect"] is True
         assert 18950 not in raid["enemies"][npc_id]["spells"]
+    assert raid["enemies"]["23374"]["stealth"] is True
 
     rendered = render_lua(raid)
     assert rendered == render_lua(build_raid(load_snapshot(SOURCE)))

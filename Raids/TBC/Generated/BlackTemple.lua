@@ -14327,6 +14327,7 @@ local raid = {
         [41190] = {},
         [41191] = {},
       },
+      stealth = true,
     },
     ["23394"] = {
       characteristics = {},

@@ -71,23 +71,28 @@ local function addControls(container)
   container:AddChild(note)
 end
 
-local function sortedEnemies(raid)
+local function sortedEnemies(raid, sublevel)
   local enemies = {}
   for npcKey, enemy in pairs(raid and raid.enemies or {}) do
-    enemies[#enemies + 1] = {
-      npcId = tonumber(enemy.npcId) or tonumber(npcKey),
-      name = L[enemy.name] or enemy.name or tostring(npcKey),
-      displayId = enemy.displayId,
-      definition = enemy,
-      tooltipData = {
-        id = tonumber(enemy.npcId) or tonumber(npcKey),
-        name = enemy.name,
-        health = enemy.health,
-        level = enemy.level,
-        creatureType = enemy.creatureType,
-        isBoss = enemy.isBoss,
-      },
-    }
+    for _, spawn in ipairs(enemy.spawns or {}) do
+      if spawn.sublevel == sublevel then
+        enemies[#enemies + 1] = {
+          npcId = tonumber(enemy.npcId) or tonumber(npcKey),
+          name = L[enemy.name] or enemy.name or tostring(npcKey),
+          displayId = enemy.displayId,
+          definition = enemy,
+          tooltipData = {
+            id = tonumber(enemy.npcId) or tonumber(npcKey),
+            name = enemy.name,
+            health = enemy.health,
+            level = enemy.level,
+            creatureType = enemy.creatureType,
+            isBoss = enemy.isBoss,
+          },
+        }
+        break
+      end
+    end
   end
   table.sort(enemies, function(left, right)
     if left.name == right.name then return left.npcId < right.npcId end
@@ -103,7 +108,7 @@ local function addEnemyRows(container, planner)
   scroll:SetHeight(300)
   container:AddChild(scroll)
 
-  for _, enemy in ipairs(sortedEnemies(planner.raid)) do
+  for _, enemy in ipairs(sortedEnemies(planner.raid, ART:GetCurrentSubLevel())) do
     local row = AceGUI:Create("SimpleGroup")
     row:SetLayout("Flow")
     row:SetFullWidth(true)
@@ -253,5 +258,12 @@ local originalUpdateSectionVisibility = ART.UpdateSectionVisibility
 function ART:UpdateSectionVisibility(...)
   local result = originalUpdateSectionVisibility(self, ...)
   AutoMarksUI:UpdateAvailability()
+  return result
+end
+
+local originalSetCurrentSubLevel = ART.SetCurrentSubLevel
+function ART:SetCurrentSubLevel(...)
+  local result = originalSetCurrentSubLevel(self, ...)
+  AutoMarksUI:Refresh()
   return result
 end

@@ -1226,6 +1226,7 @@
       "creatureType": "Humanoid",
       "displayId": 21442,
       "scale": 1.0,
+      "stealth": true,
       "spells": {
         "34189": {},
         "34654": {},

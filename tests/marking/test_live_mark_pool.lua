@@ -127,7 +127,10 @@ hover("combatFree")
 assert(liveMarkers[units.combatFree.guid] == 2, "a free marker may be assigned in combat")
 
 step.id, step.marks = "pull-2", { s5 = 2, s6 = 5 }
+local autoMarksRefreshes = 0
+ART.AutoMarksUI = { Refresh = function() autoMarksRefreshes = autoMarksRefreshes + 1 end }
 ART.LiveMarks:OnPullSelected()
+assert(autoMarksRefreshes == 0, "route mark changes must not rebuild the Auto Marks NPC list")
 hover("combatBlocked")
 assert(liveMarkers[units.combatBlocked.guid] == nil and liveMarkers[units.global.guid] == 5,
     "combat never moves an ART-owned occupied marker")

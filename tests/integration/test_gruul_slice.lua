@@ -342,7 +342,7 @@ local function enemyById(shellIndex, npcId)
   for _, enemy in ipairs(projectedEnemies[shellIndex]) do if enemy.id == npcId then return enemy end end
 end
 local najentus, battlelord = assert(enemyById(161, 22887)), assert(enemyById(161, 22844))
-local feralSpirit = assert(enemyById(161, 22849))
+local feralSpirit, ashtongueStalker = assert(enemyById(161, 22849)), assert(enemyById(161, 23374))
 local archimonde, ghoul = assert(enemyById(162, 17968)), assert(enemyById(162, 17895))
 local gruul, lairBrute = assert(enemyById(160, 19044)), assert(enemyById(160, 19389))
 local magtheridon, channeler = assert(enemyById(164, 17257)), assert(enemyById(164, 17256))
@@ -353,6 +353,7 @@ assert(math.abs(najentus.clones[1].x - (0.428721 * 840)) < 0.001)
 assert(math.abs(najentus.clones[1].y + (0.191523 * 555)) < 0.001)
 assert(not battlelord.isBoss and battlelord.displayId == 21115 and battlelord.displayId ~= najentus.displayId)
 assert(feralSpirit.stealthDetect and not feralSpirit.spells[18950])
+assert(ashtongueStalker.stealth, "Ashtongue Stalkers must render as stealthed")
 assert(archimonde.isBoss and archimonde.displayId == 20939)
 assert(not ghoul.isBoss and ghoul.displayId == 571 and ghoul.displayId ~= archimonde.displayId)
 assert(math.abs(ghoul.clones[1].patrol[1].x - (0.050998 * 840)) < 0.001,

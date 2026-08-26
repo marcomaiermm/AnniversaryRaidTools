@@ -49,6 +49,7 @@ local saved = { autoMark = false, autoMarkModifier = "ALT", currentRaidIndex = 1
 local selected
 local tooltipCall
 local liveMarksEnabled
+local currentSublevel = 1
 local ART = {
   L = setmetatable({}, { __index = function(_, key) return key end }),
   mapInfo = { [160] = { mapID = 565 } },
@@ -57,8 +58,8 @@ local ART = {
     raid = {
       mapId = 565,
       enemies = {
-        ["200"] = { npcId = 200, name = "Zulu", displayId = 2000 },
-        ["100"] = { npcId = 100, name = "Alpha", displayId = 1000 },
+        ["200"] = { npcId = 200, name = "Zulu", displayId = 2000, spawns = { { sublevel = 2 } } },
+        ["100"] = { npcId = 100, name = "Alpha", displayId = 1000, spawns = { { sublevel = 1 } } },
       },
     },
     GetNpcDefaultMarks = function(_, npcId) return npcId == 100 and { 7, 5 } or {} end,
@@ -68,6 +69,8 @@ local ART = {
 ART.LiveMarks = { SetEnabled = function(_, enabled) liveMarksEnabled = enabled end }
 _G.ART = ART
 function ART:GetDB() return saved end
+function ART:GetCurrentSubLevel() return currentSublevel end
+function ART:SetCurrentSubLevel(sublevel) currentSublevel = sublevel end
 function ART:GetCurrentSection() return "maps" end
 function ART:UpdateSectionVisibility() end
 function ART:DisplayBlipTooltip(anchor, shown) tooltipCall = { anchor, shown } end
@@ -92,8 +95,8 @@ enable.callbacks.OnValueChanged(nil, nil, true)
 modifier.callbacks.OnValueChanged(nil, nil, "CTRL")
 assert(saved.autoMark == true and saved.autoMarkModifier == "CTRL" and liveMarksEnabled == true,
     "activation controls update settings and runtime registration")
-assert(#scroll.children == 2 and scroll.children[1].children[1].image.displayId == 1000,
-    "NPC rows are sorted alphabetically and render their portrait")
+assert(#scroll.children == 1 and scroll.children[1].children[1].image.displayId == 1000,
+    "Auto Marks renders only NPCs from the current floor")
 local firstRow = scroll.children[1]
 firstRow.children[1].callbacks.OnEnter()
 assert(tooltipCall[1] == firstRow.children[1].frame and tooltipCall[2] == true
@@ -107,6 +110,11 @@ firstRow.children[2].callbacks.OnClick()
 assert(selected[1] == 100 and selected[2][1] == 8 and selected[2][2] == 7 and selected[2][3] == 5,
     "marker toggle persists the visible fallback priority")
 assert(firstRow.children[2].image.alpha == 1, "marker toggle updates its selected opacity immediately")
+
+ART:SetCurrentSubLevel(2)
+scroll = sidePanel.AutoMarksGroup.children[4]
+assert(#scroll.children == 1 and scroll.children[1].children[1].image.displayId == 2000,
+    "changing floors refreshes Auto Marks with that floor's NPCs")
 
 ART.AutoMarksUI:SetTab("pulls")
 assert(sidePanel.PullButtonScrollGroup.frame.shown == true and sidePanel.AutoMarksGroup.frame.shown == false)

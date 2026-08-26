@@ -191,6 +191,7 @@ local function projectRaidEnemies(raid, map)
           or assert(enemy.displayId, "missing enemy display ID: "..enemy.npcId),
       spells = enemy.spells,
       characteristics = enemy.characteristics,
+      stealth = enemy.stealth,
       stealthDetect = enemy.stealthDetect,
       clones = clones,
     }

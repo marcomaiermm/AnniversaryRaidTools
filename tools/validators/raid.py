@@ -97,8 +97,9 @@ def validate_raid(raid: Any) -> list[str]:
             not isinstance(scale, (int, float)) or isinstance(scale, bool) or scale <= 0
         ):
             errors.append(f"enemy {enemy_key!r}.scale must be a positive number")
-        if enemy.get("stealthDetect") is not None and not isinstance(enemy["stealthDetect"], bool):
-            errors.append(f"enemy {enemy_key!r}.stealthDetect must be a boolean")
+        for field in ("stealth", "stealthDetect"):
+            if enemy.get(field) is not None and not isinstance(enemy[field], bool):
+                errors.append(f"enemy {enemy_key!r}.{field} must be a boolean")
         spells = enemy.get("spells")
         if spells is not None and not isinstance(spells, dict):
             errors.append(f"enemy {enemy_key!r}.spells must be an object")
