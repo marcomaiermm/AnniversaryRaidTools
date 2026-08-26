@@ -1,14 +1,4 @@
-## Unreleased
-
-- Added a local 8-group raid roster with guild autocomplete and current-raid loading.
-- Added preset-wide player marks with export, import, Live Session sync, and automatic application.
-- Added optional class-compatible CC roles to global player marks.
-- Added Pull > floor All Mark > global player mark precedence in the Active Pull tracker.
-- Merged lower-priority CC roles into higher-priority marker rows when their own CC is unset.
-- Removed stale pull CC assignments when their mark or pull membership is removed.
-- Scoped NPC marker and CC defaults to individual raid floors with legacy preset migration.
-
-## 1.0.0 (2026-08-26)
+## 1.0.0 (2026-08-27)
 
 - Added interactive raid maps and route planning for Gruul's Lair, Magtheridon's Lair,
   Serpentshrine Cavern, The Eye, Battle for Mount Hyjal and Black Temple.
@@ -19,3 +9,13 @@
 - Added clickable chat links for sharing and importing presets with raid members.
 - Added export/import support and load-on-demand UI startup.
 - Added compatibility and validation coverage for TBC Anniversary interfaces 20505 and 20506.
+- Added a local 8-group raid roster with guild autocomplete and current-raid loading.
+- Added preset-wide player marks with export, import, Live Session sync, and automatic application.
+- Added optional class-compatible CC roles to global player marks.
+- Added Pull > floor All Mark > global player mark precedence in the Active Pull tracker.
+- Merged lower-priority CC roles into higher-priority marker rows when their own CC is unset.
+- Scoped NPC marker and CC defaults to individual raid floors with legacy preset migration.
+- Added per-NPC, active-pull and current-floor marker clearing with matching CC cleanup.
+- Preserved Auto Marks scrolling during marker and CC edits and avoided unnecessary map-blip rebuilds.
+- Fixed stale Active Pull assignments after pull, floor and raid changes.
+- Fixed Quick Mark binding cleanup to avoid protected-action errors during combat.
