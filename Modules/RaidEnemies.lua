@@ -594,9 +594,6 @@ end
 local DRAG_TARGET_UPDATE_INTERVAL = 0.1
 
 local function setUpMouseHandlers(self)
-  self:SetScript("OnMouseDown", function(self, button)
-
-  end)
   local tempPulls
   local targetPull
   local pullCenters
@@ -1306,6 +1303,12 @@ function ART:RaidEnemies_UpdateEnemiesAsync()
         coroutine.yield()
       end
     end
+  end
+end
+
+function ART:RaidEnemies_UpdateCCBadges()
+  for _, frame in ipairs(ART.raidEnemies_framePool and ART.raidEnemies_framePool.active or {}) do
+    ART.CCAssignments:UpdateBlipBadge(frame)
   end
 end
 

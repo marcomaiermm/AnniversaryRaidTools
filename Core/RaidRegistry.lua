@@ -181,12 +181,10 @@ function Registry:Initialize(dependencies)
   return self
 end
 
-function Registry.new(first, second)
-  local dependencies = second or (first ~= Registry and first or nil)
+function Registry.new(dependencies)
   local instance = setmetatable({}, { __index = Registry })
   return instance:Initialize(dependencies)
 end
-Registry.New = Registry.new
 
 function Registry:Register(raid)
   if not self.initialized then self:Initialize() end

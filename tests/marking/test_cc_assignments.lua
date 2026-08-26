@@ -34,12 +34,15 @@ function eventFrame:SetScript(_, callback) self.onEvent = callback end
 function CreateFrame() return eventFrame end
 
 local spawn = { key = "raid:spawn:100:a", npcId = 100, packKey = "raid:pack:a", sublevel = 1 }
+local otherSpawn = { key = "raid:spawn:101:a", npcId = 101, packKey = "raid:pack:b", sublevel = 1 }
 local enemy = {
   npcId = 100, name = "Test Controller", characteristics = { Polymorph = true, Sap = true },
   spawns = { spawn },
 }
-local raid = { key = "raid", mapId = 1, instanceId = 1, sublevels = { {} }, enemies = { ["100"] = enemy } }
-local pull = { [1] = { 1 } }
+local otherEnemy = { npcId = 101, name = "Other Target", characteristics = {}, spawns = { otherSpawn } }
+local raid = { key = "raid", mapId = 1, instanceId = 1, sublevels = { {} },
+  enemies = { ["100"] = enemy, ["101"] = otherEnemy } }
+local pull = { [1] = { 1 }, [2] = { 1 } }
 local preset = {
   uid = "route-a",
   value = { currentRaidIndex = 1, currentSublevel = 1, currentPull = 1, pulls = { pull } },
@@ -50,7 +53,8 @@ local ART = {
   raidEnemies = { [1] = { [1] = {
     id = 100, name = enemy.name, characteristics = enemy.characteristics,
     clones = { { artSpawnKey = spawn.key, sublevel = 1 } },
-  } } },
+  }, [2] = { id = 101, name = otherEnemy.name, characteristics = {},
+    clones = { { artSpawnKey = otherSpawn.key, sublevel = 1 } } } } },
   RaidRegistry = {
     Get = function(_, key) return key == "raid" and raid or nil end,
     GetAll = function() return { raid } end,
@@ -87,6 +91,21 @@ CC:RefreshEventRegistration()
 assert(eventFrame.events.COMBAT_LOG_EVENT_UNFILTERED,
     "CC combat logging activates for assignments in the current raid")
 assert(CC:GetEffectiveAssignment(preset, 1, spawn.key, 100, 8).ccKey == "SAP")
+local rows = CC:GetAssignmentRows(1)
+assert(#rows == 1 and rows[1].marker == 8 and rows[1].assignment.ccKey == "SAP" and not rows[1].global,
+    "matching pull and global NPC marks merge the global CC into the pull row")
+local originalGetPullStep = ART.RaidPlanner.GetPullStep
+ART.RaidPlanner.GetPullStep = function() return { marks = {} } end
+ART.RaidPlanner.GetNpcDefaultMarks = function() return { 8 } end
+rows = CC:GetAssignmentRows(1)
+assert(#rows == 1 and rows[1].global and rows[1].assignment.ccKey == "SAP",
+    "a global CC on a free marker appears as a global Active Pull row")
+ART.RaidPlanner.GetPullStep = function() return { marks = { [otherSpawn.key] = 8 } } end
+rows = CC:GetAssignmentRows(1)
+assert(#rows == 1 and rows[1].spawnKey == otherSpawn.key and not rows[1].global,
+    "an occupied pull marker suppresses a global assignment for another NPC")
+ART.RaidPlanner.GetPullStep = originalGetPullStep
+ART.RaidPlanner.GetNpcDefaultMarks = function(self, npcId) return self.preset.marking.npcDefaults[npcId] or {} end
 assert(CC:SetPullAssignment(preset, 1, spawn.key, 8, mage, true, raid))
 assert(CC:GetEffectiveAssignment(preset, 1, spawn.key, 100, 8).ccKey == "POLYMORPH",
     "pull assignment overrides the raid default")
@@ -101,7 +120,7 @@ assert(not CC:IsEligible(trap, enemy), "Freezing Trap remains hidden for bosses"
 enemy.isBoss = nil
 
 assert(CC:SetPullAssignment(preset, 1, spawn.key, 8, mage, true, raid))
-local rows = CC:GetAssignmentRows(1)
+rows = CC:GetAssignmentRows(1)
 assert(#rows == 1 and rows[1].marker == 8 and rows[1].assignment.ccKey == "POLYMORPH")
 
 CC:HandleCombatLog(0, "SPELL_AURA_APPLIED", false, "Player-1", "Mage-Realm", 0, 0,
@@ -162,6 +181,19 @@ local crossMenu = findButton(unmarkedMenu, "UI-RaidTargetingIcon_7")
 assert(crossMenu and findButton(crossMenu, "Polymorph"),
     "unmarked NPCs expose marker, CC, then player choices")
 
+local defaultMenu, defaultMenuChange = nil, true
+function ART:CreateContextMenu(_, generator)
+  defaultMenu = menuNode()
+  generator(nil, defaultMenu)
+end
+CC:OpenDefaultMenu({}, enemy, 8, function(assignment) defaultMenuChange = assignment or false end)
+local ccForMarker = findButton(defaultMenu, "CC for")
+assert(ccForMarker and findButton(defaultMenu, "Remove CC assignment"),
+    "assigned Auto Marks expose a clear action beside the CC submenu")
+findButton(defaultMenu, "Remove CC assignment").callback()
+assert(defaultMenuChange == false and not CC:GetDefaultAssignment(preset, 100, 8),
+    "the visible clear action removes the assignment and notifies Auto Marks")
+
 local savedAssignment, sentBeforeTest = pull.artCCAssignments[spawn.key], #sent
 assert(CC:SetDebugMode(true) and #CC:GetRoster() == 7, "CC debug provides a solo fake roster")
 assert(CC:FindRosterPlayer("ARTTestMage-Test").displayName == "Test Mage",
@@ -175,6 +207,12 @@ local trackerRefreshes, autoMarksRefreshes, enemyRefreshes = 0, 0, 0
 ART.RaidMarksUI = { RefreshPullTracker = function() trackerRefreshes = trackerRefreshes + 1 end }
 ART.AutoMarksUI = { Refresh = function() autoMarksRefreshes = autoMarksRefreshes + 1 end }
 ART.RaidEnemies_UpdateEnemiesAsync = function() enemyRefreshes = enemyRefreshes + 1 end
+local badgeRefreshes = 0
+ART.RaidEnemies_UpdateCCBadges = function() badgeRefreshes = badgeRefreshes + 1 end
+CC:RefreshDefaultUI()
+assert(enemyRefreshes == 0 and autoMarksRefreshes == 0 and badgeRefreshes == 1,
+    "Auto Marks CC changes update only active map badges without rebuilding UI or NPC blips")
+trackerRefreshes = 0
 assert(CC:FireFirstDebugCC(1))
 assert(CC:GetRuntime(100, 8).duration == 10 and not CC:GetRuntime(100, 8).wrongCaster,
     "the debug button path drives the real runtime timer state")
@@ -183,6 +221,15 @@ assert(trackerRefreshes == 1 and autoMarksRefreshes == 0 and enemyRefreshes == 0
 assert(not CC:SetDebugMode(false))
 assert(CC:GetPullAssignment(preset, 1, spawn.key).assignee.name == savedAssignment.assignee.name,
     "leaving CC debug restores the saved assignment")
+
+trackerRefreshes, autoMarksRefreshes, enemyRefreshes, badgeRefreshes = 0, 0, 0, 0
+assert(CC:ReceiveChange({
+  version = 1, raidKey = "raid", raidIndex = 1, presetUID = "route-a", sublevel = 1,
+  scope = "default", operation = "set",
+  target = { npcId = 100, marker = 8, assignment = mage },
+}, "RAID", "Assist-Realm"))
+assert(autoMarksRefreshes == 1 and badgeRefreshes == 1 and enemyRefreshes == 0,
+    "remote global CC changes rebuild Auto Marks once and update map badges without rebuilding NPCs")
 
 local lifecycle = assert(io.open(root.."/Core/Lifecycle.lua", "r"))
 local commands = lifecycle:read("*a")
@@ -198,10 +245,10 @@ ART.AutoMarksUI = { Refresh = function()
   refreshCalls = refreshCalls + 1
   CC:EnsureDefaultMarkers(preset)
 end }
-ART.LiveMarks = { OnPlanChanged = function() ART.AutoMarksUI:Refresh() end }
+ART.LiveMarks = { OnPlanChanged = function() end }
 CC:EnsureDefaultMarkers(preset)
 assert(refreshCalls == 0, "ensuring CC defaults must not recursively refresh the marks UI")
-assert(CC:SetDefaultAssignment(preset, 100, 8, rogue, true, raid) and refreshCalls == 1,
-    "changing a CC default refreshes the marks plan exactly once")
+assert(CC:SetDefaultAssignment(preset, 100, 8, rogue, true, raid) and refreshCalls == 0,
+    "changing a CC default does not rebuild the Auto Marks list")
 
 print("CC assignment checks passed")

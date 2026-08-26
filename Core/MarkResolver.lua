@@ -241,8 +241,7 @@ end
 local singleton = MarkResolver._singleton or Resolver.new()
 MarkResolver._singleton = singleton
 
-function MarkResolver.new(first, second) return Resolver.new(second or first) end
-MarkResolver.New = MarkResolver.new
+function MarkResolver.new(dependencies) return Resolver.new(dependencies) end
 function MarkResolver:Initialize(dependencies) self._singleton = Resolver.new(dependencies); return self._singleton end
 function MarkResolver:ActivateRouteStep(routeStepId) return self._singleton:ActivateRouteStep(routeStepId) end
 function MarkResolver:ResolveUnit(unitToken) return self._singleton:ResolveUnit(unitToken) end

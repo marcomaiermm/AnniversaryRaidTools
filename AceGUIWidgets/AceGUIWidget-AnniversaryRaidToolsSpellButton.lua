@@ -331,8 +331,6 @@ local function Constructor()
 
   button.description = {}
 
-  button:SetScript("OnEnter", function() end)
-  button:SetScript("OnLeave", function() end)
 
   local widget = {
     frame = button,

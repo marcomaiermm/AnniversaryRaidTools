@@ -4,6 +4,7 @@ local AceGUI = LibStub("AceGUI-3.0")
 
 local AutoMarksUI = ART.AutoMarksUI or { selectedTab = "pulls" }
 ART.AutoMarksUI = AutoMarksUI
+AutoMarksUI.scrollStatus = AutoMarksUI.scrollStatus or {}
 
 local markerOrder = { 8, 7, 1, 5, 6, 3, 4, 2 }
 
@@ -101,11 +102,38 @@ local function sortedEnemies(raid, sublevel)
   return enemies
 end
 
+local function showDefaultAssignment(icon, assignment)
+  if not assignment then
+    if icon.ccBadge then icon.ccBadge:Hide() end
+    icon:SetCallback("OnEnter", nil)
+    icon:SetCallback("OnLeave", nil)
+    return
+  end
+  local badge = icon.ccBadge
+  if not badge then
+    badge = icon.frame:CreateTexture(nil, "OVERLAY")
+    badge:SetSize(10, 10)
+    badge:SetPoint("TOPRIGHT", icon.image, "TOPRIGHT", 3, 3)
+    icon.ccBadge = badge
+  end
+  badge:SetTexture(ART.CCAssignments.catalog[assignment.ccKey].icon)
+  badge:Show()
+  icon:SetCallback("OnEnter", function()
+    local color = RAID_CLASS_COLORS and RAID_CLASS_COLORS[assignment.assignee.classFile]
+    local name = assignment.assignee.name:match("^[^-]+") or assignment.assignee.name
+    GameTooltip:SetOwner(icon.frame, "ANCHOR_CURSOR")
+    GameTooltip:AddLine(name, color and color.r or 1, color and color.g or 1, color and color.b or 1)
+    GameTooltip:Show()
+  end)
+  icon:SetCallback("OnLeave", function() GameTooltip:Hide() end)
+end
+
 local function addEnemyRows(container, planner)
   local scroll = AceGUI:Create("ScrollFrame")
   scroll:SetLayout("List")
   scroll:SetFullWidth(true)
   scroll:SetHeight(300)
+  scroll:SetStatusTable(AutoMarksUI.scrollStatus)
   container:AddChild(scroll)
 
   for _, enemy in ipairs(sortedEnemies(planner.raid, ART:GetCurrentSubLevel())) do
@@ -150,30 +178,29 @@ local function addEnemyRows(container, planner)
       local default = ART.CCAssignments and ART.CCAssignments:GetDefaultAssignment(
           ART:GetCurrentPreset(), enemy.npcId, marker)
       if default and icon.frame.CreateTexture then
-        local badge = icon.frame:CreateTexture(nil, "OVERLAY")
-        local texture, coords = ART.CCAssignments:GetClassIcon(default.assignee.classFile)
-        badge:SetTexture(texture)
-        if coords then badge:SetTexCoord(unpack(coords)) end
-        badge:SetSize(10, 10)
-        badge:SetPoint("TOPRIGHT", icon.image, "TOPRIGHT", 3, 3)
-        if icon.frame.CreateMaskTexture and badge.AddMaskTexture then
-          local mask = icon.frame:CreateMaskTexture()
-          mask:SetTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMask")
-          mask:SetAllPoints(badge)
-          badge:AddMaskTexture(mask)
-          icon.classBadgeMask = mask
-        end
-        icon.classBadge = badge
+        showDefaultAssignment(icon, default)
+      elseif icon.ccBadge then
+        showDefaultAssignment(icon)
       end
       icon:SetCallback("OnClick", function(_, _, button)
         if button == "RightButton" and ART.CCAssignments then
-          ART.CCAssignments:OpenDefaultMenu(icon.frame, enemy, marker, function()
-            if not selected[marker] then selected[marker] = true; persistMarkers() end
+          ART.CCAssignments:OpenDefaultMenu(icon.frame, enemy, marker, function(assignment)
+            if assignment and not selected[marker] then
+              selected[marker] = true
+              icon.image:SetAlpha(1)
+            end
+            default = assignment
+            showDefaultAssignment(icon, assignment)
           end)
           return
         end
         selected[marker] = not selected[marker]
         icon.image:SetAlpha(selected[marker] and 1 or 0.2)
+        if not selected[marker] and default and ART.CCAssignments then
+          ART.CCAssignments:ClearDefaultAssignment(ART:GetCurrentPreset(), enemy.npcId, marker)
+          default = nil
+          showDefaultAssignment(icon)
+        end
         persistMarkers()
       end)
       row:AddChild(icon)
@@ -265,5 +292,6 @@ local originalSetCurrentSubLevel = ART.SetCurrentSubLevel
 function ART:SetCurrentSubLevel(...)
   local result = originalSetCurrentSubLevel(self, ...)
   AutoMarksUI:Refresh()
+  if ART.RaidMarksUI then ART.RaidMarksUI:ResetPullTracker() end
   return result
 end

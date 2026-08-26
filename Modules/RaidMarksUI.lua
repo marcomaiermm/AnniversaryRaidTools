@@ -8,6 +8,12 @@ ART.RaidMarksUI = RaidMarksUI
 local tracker
 local L = ART.L or {}
 
+function RaidMarksUI:ResetPullTracker()
+  self.trackerPreset, self.trackerPullIndex, self.trackerTotalPulls = nil, nil, nil
+  if ART.RaidPlanner then ART.RaidPlanner.lastPullIndex = nil end
+  return self:RefreshPullTracker()
+end
+
 function RaidMarksUI:GetPullTrackerModel()
   local planner = ART.RaidPlanner
   local raid, preset = planner and planner.raid, planner and planner.preset
@@ -514,6 +520,12 @@ local function renderRow(row, mark)
   row.npc:SetPoint("RIGHT", row, "CENTER", -6, 0)
   local npcText, npcTruncated = truncateUtf8(row.npcFullName, 18)
   row.npc:SetText(npcText)
+  if mark.global then
+    local color = NORMAL_FONT_COLOR or { r = 1, g = 0.82, b = 0 }
+    row.npc:SetTextColor(color.r, color.g, color.b)
+  else
+    row.npc:SetTextColor(1, 1, 1)
+  end
   row.npcTruncated = npcTruncated
       or row.npc.GetStringWidth and row.npc.GetWidth and row.npc:GetStringWidth() > row.npc:GetWidth()
   if not assignment or not ART.CCAssignments then

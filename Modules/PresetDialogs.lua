@@ -284,9 +284,6 @@ function ART:MakeRenameFrame(frame)
   frame.RenameFrame:SetHeight(180)
   frame.RenameFrame:EnableResize(false)
   frame.RenameFrame:SetLayout("Flow")
-  frame.RenameFrame:SetCallback("OnClose", function(widget)
-
-  end)
   frame.RenameFrame.statustext:GetParent():Hide()
   frame.RenameFrame:Hide()
 
@@ -405,9 +402,6 @@ function ART:MakeDeleteConfirmationFrame(frame)
   frame.DeleteConfirmationFrame:SetHeight(120)
   frame.DeleteConfirmationFrame:EnableResize(false)
   frame.DeleteConfirmationFrame:SetLayout("Flow")
-  frame.DeleteConfirmationFrame:SetCallback("OnClose", function(widget)
-
-  end)
   frame.DeleteConfirmationFrame.statustext:GetParent():Hide()
 
   frame.DeleteConfirmationFrame.label = AceGUI:Create("Label")
@@ -445,9 +439,6 @@ function ART:MakeClearConfirmationFrame(frame)
   frame.ClearConfirmationFrame:SetHeight(120)
   frame.ClearConfirmationFrame:EnableResize(false)
   frame.ClearConfirmationFrame:SetLayout("Flow")
-  frame.ClearConfirmationFrame:SetCallback("OnClose", function(widget)
-
-  end)
   frame.ClearConfirmationFrame.statustext:GetParent():Hide()
 
   frame.ClearConfirmationFrame.label = AceGUI:Create("Label")
@@ -520,8 +511,6 @@ function ART:OpenConfirmationFrame(width, height, title, buttonText, prompt, cal
     end
     f:EnableResize(false)
     f:SetLayout("Flow")
-    f:SetCallback("OnClose", function(widget)
-    end)
     f.statustext:GetParent():Hide()
 
     f.label = AceGUI:Create("Label")
@@ -563,8 +552,6 @@ function ART:OpenConfirmationFrame(width, height, title, buttonText, prompt, cal
     end)
     f.CheckBox.frame:Show()
   else
-    f.CheckBox:SetCallback("OnValueChanged", function()
-    end)
     f.CheckBox:SetLabel("")
     f.CheckBox:SetValue(false)
     removeConfirmationCheckbox(f)
@@ -589,8 +576,6 @@ function ART:OpenConfirmationFrame(width, height, title, buttonText, prompt, cal
       callback2()
     end)
   else
-    f:SetCallback("OnClose", function(widget)
-    end)
   end
   if ART.main_frame then ART:HideAllDialogs() end
   f:ClearAllPoints()

@@ -299,7 +299,6 @@ ART.liveSessionPrefixes = {
   free = "ARTLiveFree",
   bora = "ARTLiveBora",
   reqPre = "ARTLiveReqPre",
-  poiAssignment = "ARTPOIAssignment",
   progress = "ARTRaidProgress",
   ccAssignment = "ARTCCAssign",
 }

@@ -185,5 +185,4 @@
             </Layer>
         </Layers>
     </Frame>
-    <Frame name="ARTAnimatedLineTemplate" virtual="true"/>
 </Ui>

@@ -176,24 +176,6 @@ function ARTcommsObject:OnCommReceived(prefix, message, distribution, sender)
     end
   end
 
-  if prefix == ART.liveSessionPrefixes.poiAssignment then
-    if ART.liveSessionActive then
-      local preset = ART:GetCurrentLivePreset()
-      local deserialized = ART:StringToTable(message, false)
-      if deserialized and type(deserialized) == "table" then
-        local sublevel, poiIdx, value = unpack(deserialized)
-        preset.value.poiAssignments = preset.value.poiAssignments or {}
-        preset.value.poiAssignments[sublevel] = preset.value.poiAssignments[sublevel] or {}
-        preset.value.poiAssignments[sublevel][poiIdx] = value
-        ART:UpdateMap()
-        if sender ~= UnitFullName("player") and ART:GetCurrentSubLevel() == sublevel then
-          local poiFrame = ART:POI_GetFrameForPOI(poiIdx)
-          if poiFrame then UIFrameFlash(poiFrame, 0.5, 1, 1, true, 1, 0); end
-        end
-      end
-    end
-  end
-
   --live session messages that ignore concurrency from here on, we ignore our own messages
   if sender == UnitFullName("player") then return end
 

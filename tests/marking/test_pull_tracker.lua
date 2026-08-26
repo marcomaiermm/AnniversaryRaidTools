@@ -33,12 +33,34 @@ assert(model.pullIndex == 2 and model.totalPulls == 3 and model.nextPullIndex ==
 assert(model.marks[1].marker == 8 and model.marks[1].name == "Hellfire Channeler")
 assert(model.marks[2].marker == 5 and model.marks[2].name == "Hellfire Warder")
 
+ART.CCAssignments = {
+  GetAssignmentRows = function(_, pullIndex)
+    return { { marker = 8, name = ART.RaidPlanner.raid.name.."-"..pullIndex } }
+  end,
+}
+
 ART.RaidPlanner.lastPullIndex = nil
 currentPreset.value.currentPull = 1
 currentPreset.value.pulls = { {} }
+ART.RaidMarksUI:ResetPullTracker()
 model = assert(ART.RaidMarksUI:GetPullTrackerModel())
-assert(model.pullIndex == 2 and model.totalPulls == 3,
-    "passive floor changes must not advance the pull tracker")
+assert(model.pullIndex == 1 and model.totalPulls == 1 and model.marks[1].name == "Magtheridon's Lair-1",
+    "floor changes rebuild the tracker from that floor's current pull")
+
+local secondRaid = { name = "Black Temple", mapId = 564, enemies = {} }
+ART.RaidPlanner.raid, ART.RaidPlanner.preset = secondRaid, {}
+currentPreset = { value = { currentPull = 1, pulls = { {}, {} } } }
+db.currentRaidIndex = 165
+ART.mapInfo[165] = { mapID = 564 }
+model = assert(ART.RaidMarksUI:GetPullTrackerModel())
+assert(model.raidName == "Black Temple" and model.totalPulls == 2
+    and model.marks[1].name == "Black Temple-1",
+    "raid changes discard cached pull and assignment rows")
+
+ART.RaidPlanner.raid, ART.RaidPlanner.preset = raid, ART.RaidPlanner.preset
+raid.mapId = 544
+currentPreset = { value = { currentPull = 1, pulls = { {} } } }
+db.currentRaidIndex = 164
 
 local waves = {}
 for index = 1, 37 do waves[index] = {} end

@@ -951,12 +951,6 @@ local function Constructor()
   pullNumber:SetJustifyH("CENTER");
   pullNumber:SetPoint("LEFT", button, "LEFT", 5, 0);
 
-  button:SetScript("OnEnter", function()
-
-  end);
-  button:SetScript("OnLeave", function()
-
-  end);
 
   --enemy portraits
   local enemyPortraits = {}

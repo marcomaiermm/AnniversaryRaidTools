@@ -315,6 +315,12 @@ function CC:RefreshUI()
   end
 end
 
+function CC:RefreshDefaultUI()
+  self:RefreshEventRegistration()
+  self:RefreshTracker()
+  if ART.RaidEnemies_UpdateCCBadges then ART:RaidEnemies_UpdateCCBadges() end
+end
+
 function CC:SetDebugMode(enabled)
   self.debugMode = enabled == nil and not self.debugMode or enabled == true
   wipe(self.testPullAssignments)
@@ -405,7 +411,7 @@ function CC:SetDefaultAssignment(preset, npcId, marker, assignment, silent, raid
     self.testDefaultAssignments[preset] = self.testDefaultAssignments[preset] or {}
     self.testDefaultAssignments[preset][npcId] = self.testDefaultAssignments[preset][npcId] or {}
     self.testDefaultAssignments[preset][npcId][marker] = assignment
-    self:RefreshUI()
+    self:RefreshDefaultUI()
     return assignment
   end
   local value = preset.value
@@ -416,7 +422,7 @@ function CC:SetDefaultAssignment(preset, npcId, marker, assignment, silent, raid
   if ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
   if not silent then
     self:SendChange(preset, "default", "set", { npcId = npcId, marker = marker, assignment = assignment })
-    self:RefreshUI()
+    self:RefreshDefaultUI()
   end
   return assignment
 end
@@ -427,7 +433,7 @@ function CC:ClearDefaultAssignment(preset, npcId, marker, silent)
     self.testDefaultAssignments[preset] = self.testDefaultAssignments[preset] or {}
     self.testDefaultAssignments[preset][npcId] = self.testDefaultAssignments[preset][npcId] or {}
     self.testDefaultAssignments[preset][npcId][marker] = false
-    self:RefreshUI()
+    self:RefreshDefaultUI()
     return true
   end
   local defaults = preset and preset.value and preset.value.artCCDefaults
@@ -437,7 +443,7 @@ function CC:ClearDefaultAssignment(preset, npcId, marker, silent)
   if not next(defaults) then preset.value.artCCDefaults = nil end
   if not silent then
     self:SendChange(preset, "default", "clear", { npcId = npcId, marker = marker })
-    self:RefreshUI()
+    self:RefreshDefaultUI()
   end
   return true
 end
@@ -549,7 +555,7 @@ function CC:AddNpcMenu(root, frame, setMarker)
   end
 end
 
-function CC:OpenDefaultMenu(owner, enemy, marker, enableMarker)
+function CC:OpenDefaultMenu(owner, enemy, marker, assignmentChanged)
   ART:CreateContextMenu(owner, function(_, root)
     root:CreateTitle(enemy.name)
     local menu = root:CreateButton(("CC for |TInterface\\TargetingFrame\\UI-RaidTargetingIcon_%d:16:16|t")
@@ -557,16 +563,16 @@ function CC:OpenDefaultMenu(owner, enemy, marker, enableMarker)
     if not CC:CanEdit() then menu:CreateTitle("Raid lead or assist required"); return end
     local preset = ART:GetCurrentPreset()
     if CC:GetDefaultAssignment(preset, enemy.npcId, marker) then
-      menu:CreateButton("Remove raid default", function()
-        CC:ClearDefaultAssignment(preset, enemy.npcId, marker)
+      root:CreateButton("Remove CC assignment", function()
+        if CC:ClearDefaultAssignment(preset, enemy.npcId, marker) then assignmentChanged(nil) end
       end)
-      menu:CreateDivider()
+      root:CreateDivider()
     end
     CC:AddChoices(menu, enemy.definition or enemy, function(definition, player)
-      enableMarker()
-      CC:SetDefaultAssignment(preset, enemy.npcId, marker, {
+      local assignment = {
         ccKey = definition.key, assignee = { name = player.name, classFile = player.classFile },
-      })
+      }
+      if CC:SetDefaultAssignment(preset, enemy.npcId, marker, assignment) then assignmentChanged(assignment) end
     end)
   end)
 end
@@ -587,7 +593,7 @@ function CC:GetAssignmentRows(pullIndex)
   local active = planner and planner.GetActiveStep and planner:GetActiveStep()
   if active and (active.id == "pull-"..pullIndex or planner.IsStepPinned and planner:IsStepPinned()) then step = active end
   if not raid or not step then return {} end
-  local rows, explicitNpc, names = {}, {}, {}
+  local rows, usedMarkers, names = {}, {}, {}
   for npcKey, enemy in pairs(raid.enemies or {}) do
     names[tonumber(enemy.npcId) or tonumber(npcKey)] = enemy.name
   end
@@ -595,7 +601,7 @@ function CC:GetAssignmentRows(pullIndex)
     local _, enemy, npcId = self:FindSpawn(raid, spawnKey)
     local normalizedMarker = validMarker(marker)
     if enemy and normalizedMarker then
-      explicitNpc[npcId] = true
+      usedMarkers[normalizedMarker] = true
       rows[#rows + 1] = {
         key = spawnKey, spawnKey = spawnKey, npcId = npcId, marker = normalizedMarker,
         name = enemy.name,
@@ -603,21 +609,20 @@ function CC:GetAssignmentRows(pullIndex)
       }
     end
   end
-  local seen = {}
-  for _, row in ipairs(rows) do seen[row.npcId..":"..row.marker] = true end
   local pull = preset.value.pulls and preset.value.pulls[pullIndex]
   local enemies = ART.raidEnemies and ART.raidEnemies[preset.value.currentRaidIndex]
   for enemyIdx, clones in pairs(type(pull) == "table" and pull or {}) do
     local projected = tonumber(enemyIdx) and enemies and enemies[tonumber(enemyIdx)]
     local npcId = projected and tonumber(projected.id)
-    if npcId and not explicitNpc[npcId] then
+    if npcId then
       for _, marker in ipairs(planner:GetNpcDefaultMarks(npcId)) do
-        local key = npcId..":"..marker
-        if not seen[key] then
-          seen[key] = true
+        marker = validMarker(marker)
+        local assignment = marker and self:GetDefaultAssignment(preset, npcId, marker)
+        if assignment and not usedMarkers[marker] then
+          usedMarkers[marker] = true
           rows[#rows + 1] = {
-            key = key, npcId = npcId, marker = marker, name = names[npcId] or projected.name,
-            assignment = self:GetDefaultAssignment(preset, npcId, marker),
+            key = npcId..":"..marker, npcId = npcId, marker = marker,
+            name = names[npcId] or projected.name, assignment = assignment, global = true,
           }
         end
       end
@@ -796,13 +801,15 @@ function CC:ReceiveChange(message, distribution, sender)
       result = self:SetDefaultAssignment(preset, target.npcId, target.marker, target.assignment, true, raid)
     end
   end
-  if result and preset == ART:GetCurrentPreset() then self:RefreshUI() end
+  if result and preset == ART:GetCurrentPreset() then
+    if payload.scope == "default" then
+      if ART.AutoMarksUI and ART.AutoMarksUI.Refresh then ART.AutoMarksUI:Refresh() end
+      self:RefreshDefaultUI()
+    else
+      self:RefreshUI()
+    end
+  end
   return result and true or false
-end
-
-function CC:GetClassIcon(classFile)
-  return "Interface\\GLUES\\CHARACTERCREATE\\UI-CHARACTERCREATE-CLASSES",
-      CLASS_ICON_TCOORDS and CLASS_ICON_TCOORDS[classFile]
 end
 
 function CC:UpdateBlipBadge(frame)

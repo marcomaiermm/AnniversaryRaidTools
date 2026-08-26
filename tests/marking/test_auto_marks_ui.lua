@@ -13,6 +13,16 @@ local function frame()
   function value:Hide() self.shown = false end
   function value:Enable() self.enabled = true end
   function value:Disable() self.enabled = false end
+  function value:CreateTexture()
+    local texture = { shown = true }
+    for _, method in ipairs({ "SetTexCoord", "SetSize", "SetPoint" }) do
+      texture[method] = function() end
+    end
+    function texture:SetTexture(value) self.texture = value end
+    function texture:Show() self.shown = true end
+    function texture:Hide() self.shown = false end
+    return texture
+  end
   return value
 end
 
@@ -29,6 +39,7 @@ function widgetMethods:SetPoint(...) self.frame:SetPoint(...) end
 function widgetMethods:AddChild(child) self.children[#self.children + 1] = child end
 function widgetMethods:ReleaseChildren() self.children = {} end
 function widgetMethods:SetCallback(event, callback) self.callbacks[event] = callback end
+function widgetMethods:SetStatusTable(status) self.status = status end
 function widgetMethods:DoLayout() end
 
 local AceGUI = {}
@@ -43,6 +54,13 @@ end
 _G.LibStub = function(name) assert(name == "AceGUI-3.0"); return AceGUI end
 _G.CreateFrame = function() return frame() end
 _G.SetPortraitTextureFromCreatureDisplayID = function(texture, displayId) texture.displayId = displayId end
+_G.RAID_CLASS_COLORS = { MAGE = { r = 0.25, g = 0.78, b = 0.92 } }
+_G.GameTooltip = {
+  SetOwner = function(self, owner) self.owner = owner end,
+  AddLine = function(self, text, r, g, b) self.line = { text, r, g, b } end,
+  Show = function(self) self.shown = true end,
+  Hide = function(self) self.shown = false end,
+}
 for marker = 1, 8 do _G["RAID_TARGET_"..marker] = tostring(marker) end
 
 local saved = { autoMark = false, autoMarkModifier = "ALT", currentRaidIndex = 160 }
@@ -67,8 +85,26 @@ local ART = {
   },
 }
 ART.LiveMarks = { SetEnabled = function(_, enabled) liveMarksEnabled = enabled end }
+local clearedDefault
+local menuAssignmentChanged
+local defaultAssignment = { ccKey = "POLYMORPH", assignee = { name = "Mage-Realm", classFile = "MAGE" } }
+ART.CCAssignments = {
+  catalog = { POLYMORPH = { icon = "Interface\\Icons\\Spell_Nature_Polymorph" } },
+  EnsureDefaultMarkers = function() end,
+  GetDefaultAssignment = function(_, _, npcId, marker)
+    if npcId == 100 and marker == 7 then return defaultAssignment end
+  end,
+  ClearDefaultAssignment = function(_, _, npcId, marker)
+    clearedDefault, defaultAssignment = { npcId, marker }, nil
+    return true
+  end,
+  OpenDefaultMenu = function(_, _, _, _, assignmentChanged)
+    menuAssignmentChanged = assignmentChanged
+  end,
+}
 _G.ART = ART
 function ART:GetDB() return saved end
+function ART:GetCurrentPreset() return { value = {} } end
 function ART:GetCurrentSubLevel() return currentSublevel end
 function ART:SetCurrentSubLevel(sublevel) currentSublevel = sublevel end
 function ART:GetCurrentSection() return "maps" end
@@ -106,10 +142,35 @@ assert(tooltipCall[2] == false, "NPC portrait hides the map model tooltip on lea
 assert(#firstRow.children == 9, "each NPC row contains eight marker toggles")
 assert(firstRow.children[2].image.alpha == 0.2 and firstRow.children[3].image.alpha == 1
     and firstRow.children[5].image.alpha == 1, "stored fallback markers show selected opacity")
+firstRow.children[3].callbacks.OnEnter()
+assert(GameTooltip.line[1] == "Mage" and GameTooltip.line[2] == RAID_CLASS_COLORS.MAGE.r
+    and GameTooltip.line[3] == RAID_CLASS_COLORS.MAGE.g and GameTooltip.line[4] == RAID_CLASS_COLORS.MAGE.b,
+    "CC badge tooltip shows the class-colored assignee")
+firstRow.children[3].callbacks.OnLeave()
+assert(GameTooltip.shown == false, "CC badge tooltip hides on leave")
+assert(firstRow.children[3].ccBadge.texture == "Interface\\Icons\\Spell_Nature_Polymorph",
+    "CC badge uses the assigned crowd-control icon")
+firstRow.children[3].callbacks.OnClick()
+assert(clearedDefault and clearedDefault[1] == 100 and clearedDefault[2] == 7,
+    "deselecting a marker clears its CC default")
+assert(sidePanel.AutoMarksGroup.children[4] == scroll,
+    "marker clicks do not rebuild the Auto Marks list")
+assert(firstRow.children[3].ccBadge.shown == false,
+    "clearing the CC default hides its class badge")
+scroll.status.scrollvalue, scroll.status.offset = 640, -120
+firstRow.children[2].callbacks.OnClick(nil, nil, "RightButton")
+menuAssignmentChanged({ ccKey = "POLYMORPH", assignee = { name = "Mage-Realm", classFile = "MAGE" } })
+assert(sidePanel.AutoMarksGroup.children[4] == scroll and firstRow.children[2].ccBadge.shown
+    and scroll.status.scrollvalue == 640 and scroll.status.offset == -120,
+    "assigning CC updates the badge without replacing or moving the scroll list")
 firstRow.children[2].callbacks.OnClick()
-assert(selected[1] == 100 and selected[2][1] == 8 and selected[2][2] == 7 and selected[2][3] == 5,
+assert(selected[1] == 100 and selected[2][1] == 5,
     "marker toggle persists the visible fallback priority")
-assert(firstRow.children[2].image.alpha == 1, "marker toggle updates its selected opacity immediately")
+assert(firstRow.children[2].image.alpha == 0.2, "marker toggle updates its selected opacity immediately")
+
+assert(sidePanel.AutoMarksGroup.children[4] == scroll
+    and scroll.status.scrollvalue == 640 and scroll.status.offset == -120,
+    "marker changes preserve the exact scroll widget and position")
 
 ART:SetCurrentSubLevel(2)
 scroll = sidePanel.AutoMarksGroup.children[4]

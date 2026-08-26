@@ -168,7 +168,7 @@ function ART:CreateDevPanel(frame)
 
   devPanel:SetTabs(
     {
-      { text = "POI/Zoom",  value = "tab1" },
+      { text = "POI",       value = "tab1" },
       { text = "Enemy",     value = "tab2" },
       { text = "Manage DB", value = "tab3" },
       { text = "Calibration", value = "tab4" },
@@ -184,250 +184,73 @@ function ART:CreateDevPanel(frame)
 
   -- function that draws the widgets for the first tab
   local function DrawGroup1(container)
-    --mapLink Options
-    local option1 = AceGUI:Create("EditBox")
-    option1:SetLabel("Target Floor / Bot Index")
-    option1:SetText(1)
-    local option2 = AceGUI:Create("EditBox")
-    option2:SetLabel("Direction 1up -1d 2r -2l")
-    option2:SetText(1)
-    container:AddChild(option1)
-    container:AddChild(option2)
+    local targetFloor = AceGUI:Create("EditBox")
+    targetFloor:SetLabel("Target Floor")
+    targetFloor:SetText(1)
+    container:AddChild(targetFloor)
 
-    --door options
-    local option3 = AceGUI:Create("EditBox")
-    option3:SetLabel("Door Name / Connected Index")
-    option3:SetText("")
-    local option4 = AceGUI:Create("EditBox")
-    option4:SetLabel("Door Descripting")
-    option4:SetText("")
-    local lockedCheckbox = AceGUI:Create("CheckBox")
-    lockedCheckbox:SetLabel("Lockpickable")
-    container:AddChild(option3)
-    container:AddChild(option4)
-    container:AddChild(lockedCheckbox)
+    local direction = AceGUI:Create("EditBox")
+    direction:SetLabel("Direction 1up -1d 2r -2l")
+    direction:SetText(1)
+    container:AddChild(direction)
 
-    --graveyard options
-    local option5 = AceGUI:Create("EditBox")
-    option5:SetLabel("Graveyard Description / General Note Text")
-    option5:SetText("")
-    container:AddChild(option5)
+    local connectionIndex = AceGUI:Create("EditBox")
+    connectionIndex:SetLabel("Connected Index")
+    connectionIndex:SetText("")
+    container:AddChild(connectionIndex)
+
+    local noteText = AceGUI:Create("EditBox")
+    noteText:SetLabel("General Note Text")
+    noteText:SetText("")
+    container:AddChild(noteText)
+
+    local function currentPOIs()
+      ART.mapPOIs[db.currentRaidIndex] = ART.mapPOIs[db.currentRaidIndex] or {}
+      local raidPOIs = ART.mapPOIs[db.currentRaidIndex]
+      raidPOIs[ART:GetCurrentSubLevel()] = raidPOIs[ART:GetCurrentSubLevel()] or {}
+      return raidPOIs[ART:GetCurrentSubLevel()]
+    end
 
     local buttons = {
-      [1] = {
+      {
         text = "MapLink",
         func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local links = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local posx, posy = 300, -200
-          local t = tonumber(option1:GetText())
-          local d = tonumber(option2:GetText())
-          local c = tonumber(option3:GetText())
-          if t and d then
-            tinsert(links,
-              {
-                x = posx,
-                y = posy,
-                target = t,
-                direction = d,
-                connectionIndex = c,
-                template = "MapLinkPinTemplate",
-                type = "mapLink"
-              })
-            ART:POI_UpdateAll()
-          end
-        end,
-      },
-      [2] = {
-        text = "Door",
-        func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local links = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local posx, posy = 300, -200
-          local doorNameText = option3:GetText()
-          local doorDescriptionText = option4:GetText()
-          local lockpickableStatus = lockedCheckbox:GetValue() or nil
-          tinsert(links,
-            {
-              x = posx,
-              y = posy,
-              template = "MapLinkPinTemplate",
-              type = "door",
-              doorName = doorNameText,
-              doorDescription = doorDescriptionText,
-              lockpick = lockpickableStatus
-            })
+          local target = tonumber(targetFloor:GetText())
+          local arrowDirection = tonumber(direction:GetText())
+          if not target or not arrowDirection then return end
+          tinsert(currentPOIs(), {
+            x = 300,
+            y = -200,
+            target = target,
+            direction = arrowDirection,
+            connectionIndex = tonumber(connectionIndex:GetText()),
+            template = "MapLinkPinTemplate",
+            type = "mapLink",
+          })
           ART:POI_UpdateAll()
         end,
       },
-      [3] = {
-        text = "Graveyard",
-        func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local links = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local posx, posy = 300, -200
-          local graveyardDescriptionText = option5:GetText()
-          tinsert(links,
-            {
-              x = posx,
-              y = posy,
-              template = "DeathReleasePinTemplate",
-              type = "graveyard",
-              graveyardDescription = graveyardDescriptionText
-            })
-          ART:POI_UpdateAll()
-        end,
-      },
-      [4] = {
+      {
         text = "General Note",
         func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local posx, posy = 300, -200
-          local noteText = option5:GetText()
-          tinsert(pois, { x = posx, y = posy, template = "MapLinkPinTemplate", type = "generalNote", text = noteText })
+          tinsert(currentPOIs(), {
+            x = 300,
+            y = -200,
+            template = "MapLinkPinTemplate",
+            type = "generalNote",
+            text = noteText:GetText(),
+          })
           ART:POI_UpdateAll()
         end,
       },
-      [5] = {
-        text = "Heavy Cannon",
-        func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local posx, posy = 300, -200
-          tinsert(pois, { x = posx, y = posy, template = "MapLinkPinTemplate", type = "heavyCannon" })
-          ART:POI_UpdateAll()
-        end,
-      },
-      [6] = {
-        text = "Mechagon Bot",
-        func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local botType = tonumber(option1:GetText())
-          local posx, posy = 400 + (30 * botType), -250
-          tinsert(pois, { x = posx, y = posy, template = "MapLinkPinTemplate", type = "mechagonBot", botType = botType })
-          ART:POI_UpdateAll()
-        end,
-      },
-      [7] = {
-        text = "Iron Docks Iron Star",
-        func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local posx, posy = 430, -250
-          tinsert(pois,
-            { x = posx, y = posy, template = "MapLinkPinTemplate", type = "ironDocksIronStar", starIndex = 1 })
-          ART:POI_UpdateAll()
-        end,
-      },
-      [8] = {
-        text = "Text Frame",
-        func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local posx, posy = 430, -250
-          local text = option5:GetText()
-          tinsert(pois,
-            { x = posx, y = posy, template = "MapLinkPinTemplate", type = "textFrame", text = text })
-          ART:POI_UpdateAll()
-        end,
-      },
-      [9] = {
-        text = "Zoom Icon",
-        func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local posx, posy = 430, -250
-
-          local index = ARTMapPanelFrame:GetScale() - 2 -- this is the threshold after which the button should zoom out
-          local value1 = ARTMapPanelFrame:GetScale()
-          local value2 = ARTScrollFrame:GetHorizontalScroll() / ART:GetScale()
-          local value3 = ARTScrollFrame:GetVerticalScroll() / ART:GetScale()
-          tinsert(pois,
-            {
-              x = posx,
-              y = posy,
-              template = "MapLinkPinTemplate",
-              type = "zoom",
-              index = index,
-              value1 = value1,
-              value2 = value2,
-              value3 = value3
-            })
-          ART:POI_UpdateAll()
-        end,
-      },
-      [10] = {
-        text = "World Marker",
-        func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local posx, posy = 430, -250
-          local index = tonumber(option5:GetText())
-          tinsert(pois,
-            { x = posx, y = posy, template = "MapLinkPinTemplate", type = "worldMarker", index = index })
-          ART:POI_UpdateAll()
-        end,
-      },
-      [11] = {
-        text = "Brackenhide Cage",
-        func = function()
-          if not ART.mapPOIs[db.currentRaidIndex] then ART.mapPOIs[db.currentRaidIndex] = {} end
-          if not ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] then
-            ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()] = {}
-          end
-          local pois = ART.mapPOIs[db.currentRaidIndex][ART:GetCurrentSubLevel()]
-          local cageIndex = tonumber(option1:GetText())
-          local posx, posy = 400, -250
-          tinsert(pois, { x = posx, y = posy, template = "MapLinkPinTemplate", type = "brackenhideCage", cageIndex = cageIndex })
-          ART:POI_UpdateAll()
-        end,
-      },
-      [12] = {
-        text = "Export Zoom Settings",
-        func = function()
-          ART:ExportCurrentZoomPanSettings()
-        end,
-      },
-      [13] = {
+      {
         text = "Export to LUA",
         func = function()
           local export = ART:ExportLuaTable(ART.mapPOIs[db.currentRaidIndex], ART:GetSchema("pois"))
           ART:ExportString(export)
         end,
       },
-      [14] = {
+      {
         text = "Export Current Zone ID",
         func = function()
           local currentZoneId = C_Map.GetBestMapForUnit("player")
@@ -444,9 +267,7 @@ function ART:CreateDevPanel(frame)
             end
           end
           for zoneId, raidIndex in pairs(ART.zoneIdToRaidIndex) do
-            if raidIndex == db.currentRaidIndex then
-              addZone(zoneId)
-            end
+            if raidIndex == db.currentRaidIndex then addZone(zoneId) end
           end
           addZone(currentZoneId)
           table.sort(zones)
@@ -454,7 +275,7 @@ function ART:CreateDevPanel(frame)
         end,
       },
     }
-    for buttonIdx, buttonData in ipairs(buttons) do
+    for _, buttonData in ipairs(buttons) do
       local button = AceGUI:Create("Button")
       button:SetText(buttonData.text)
       button:SetCallback("OnClick", buttonData.func)

@@ -106,12 +106,6 @@ local function Constructor()
 
   button.description = {};
 
-  button:SetScript("OnEnter", function()
-
-  end);
-  button:SetScript("OnLeave", function()
-
-  end);
 
   local pullNumber = button:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   pullNumber:SetHeight(18)

@@ -59,9 +59,6 @@ local function MakeEnemeyInfoFrame()
   function f.frame:StartMoving() end
 
   f:SetLayout("Fill")
-  f:SetCallback("OnClose", function(widget)
-
-  end)
   f.frame:ClearAllPoints()
   f.frame:SetAllPoints(ARTScrollFrame)
 
@@ -326,19 +323,10 @@ local function MakeEnemeyInfoFrame()
     container:AddChild(rightContainer)
   end
 
-  --Damage Calc
-  local function DrawGroup2(container)
-
-  end
-
   -- Callback function for OnGroupSelected
   local function SelectGroup(container, event, group)
     container:ReleaseChildren()
-    if group == "tab1" then
-      DrawGroup1(container)
-    elseif group == "tab2" then
-      DrawGroup2(container)
-    end
+    if group == "tab1" then DrawGroup1(container) end
     currentTab = group
   end
 

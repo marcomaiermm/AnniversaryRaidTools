@@ -291,9 +291,7 @@ function RoutePreset:Initialize(dependencies)
   return self
 end
 
-function RoutePreset.new(first, second)
-  local dependencies = second or (first ~= RoutePreset and first or nil)
+function RoutePreset.new(dependencies)
   local instance = setmetatable({}, { __index = RoutePreset })
   return instance:Initialize(dependencies)
 end
-RoutePreset.New = RoutePreset.new

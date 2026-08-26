@@ -414,7 +414,6 @@ function Integration:Initialize()
     ART.RaidMarks.resolver = resolver
     ART.RaidMarksUI:Initialize({ raidMarks = ART.RaidMarks })
     ART.RaidMarksUI:RefreshPullTracker()
-    if ART.AutoMarksUI and ART.AutoMarksUI.Refresh then ART.AutoMarksUI:Refresh() end
     -- The fresh resolver starts without an active step; restore the planned one.
     local activeStep = planner and planner.GetActiveStep and planner:GetActiveStep()
     if activeStep then ART.RaidMarks:ActivateRouteStep(activeStep.id) end

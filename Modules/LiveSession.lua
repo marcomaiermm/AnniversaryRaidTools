@@ -348,14 +348,6 @@ function ART:LiveSession_SendPulls(pulls)
   end
 end
 
-function ART:LiveSession_SendPOIAssignment(sublevel, poiIdx, value)
-  local distribution = self:IsPlayerInGroup()
-  if distribution then
-    local export = ART:TableToString({ sublevel, poiIdx, value })
-    ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.poiAssignment, export, distribution, nil, "ALERT")
-  end
-end
-
 if type(CreateFrame) == "function" then
   local raidPromptFrame = CreateFrame("Frame")
   raidPromptFrame:RegisterEvent("GROUP_ROSTER_UPDATE")
