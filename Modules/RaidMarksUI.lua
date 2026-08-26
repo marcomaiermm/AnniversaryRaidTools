@@ -379,9 +379,10 @@ local function createTracker()
     row.npcHitbox:SetAllPoints(row.npc)
     row.npcHitbox:EnableMouse(true)
     row.npcHitbox:SetScript("OnEnter", function(hitbox)
-      if not row.npcTruncated or not GameTooltip then return end
+      if not (row.npcTruncated or row.tooltipStatus) or not GameTooltip then return end
       GameTooltip:SetOwner(hitbox, "ANCHOR_CURSOR_RIGHT")
       GameTooltip:SetText(row.npcFullName)
+      if row.tooltipStatus then GameTooltip:AddLine(row.tooltipStatus, 0.65, 0.65, 0.65) end
       GameTooltip:Show()
       hitbox.tooltipShown = true
     end)
@@ -514,13 +515,20 @@ local function renderRow(row, mark)
   row.marker:SetTexture(("Interface\\TargetingFrame\\UI-RaidTargetingIcon_%d"):format(mark.marker))
   row.runtime = mark.runtime
   local assignment = mark.assignment
-  row.npcFullName = tostring(mark.name or "")
+  local definition = assignment and ART.CCAssignments and ART.CCAssignments.catalog[assignment.ccKey]
+  row.npcFullName = tostring(mark.playerGlobal and definition and definition.label or mark.name or "")
   row.npc:ClearAllPoints()
   row.npc:SetPoint("LEFT", row.marker, "RIGHT", 6, 0)
   row.npc:SetPoint("RIGHT", row, "CENTER", -6, 0)
   local npcText, npcTruncated = truncateUtf8(row.npcFullName, 18)
   row.npc:SetText(npcText)
-  if mark.global then
+  row.tooltipStatus = nil
+  if mark.playerGlobal and mark.player then
+    local color = RAID_CLASS_COLORS and RAID_CLASS_COLORS[mark.player.classFile]
+    row.npc:SetTextColor(color and color.r or 1, color and color.g or 1, color and color.b or 1)
+    local roster = ART.CCAssignments and ART.CCAssignments:FindRosterPlayer(mark.player.name)
+    if not roster or not roster.unit then row.tooltipStatus = "Not in raid" end
+  elseif mark.global then
     local color = NORMAL_FONT_COLOR or { r = 1, g = 0.82, b = 0 }
     row.npc:SetTextColor(color.r, color.g, color.b)
   else
@@ -535,7 +543,6 @@ local function renderRow(row, mark)
     return
   end
 
-  local definition = ART.CCAssignments.catalog[assignment.ccKey]
   row.ccIcon:Show(); row.timer:Show(); row.player:Show()
   row.ccIcon:SetTexture(definition.icon)
   local runtime = mark.runtime

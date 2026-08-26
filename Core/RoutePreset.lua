@@ -52,6 +52,19 @@ local function validateMarking(marking, raid, spawns)
     end
     for _, marker in ipairs(markers) do if not validMarker(marker) then return nil, "invalid marker" end end
   end
+  if marking.floorNpcDefaults ~= nil then
+    if type(marking.floorNpcDefaults) ~= "table" then return nil, "invalid floor NPC rules" end
+    for sublevel, defaults in pairs(marking.floorNpcDefaults) do
+      if type(sublevel) ~= "number" or sublevel % 1 ~= 0 or not raid.sublevels[sublevel]
+          or type(defaults) ~= "table" then return nil, "invalid floor NPC rules" end
+      for npcId, markers in pairs(defaults) do
+        if type(npcId) ~= "number" or npcId % 1 ~= 0 or not raid.enemies[tostring(npcId)] or not array(markers) then
+          return nil, "invalid floor NPC marking rule"
+        end
+        for _, marker in ipairs(markers) do if not validMarker(marker) then return nil, "invalid marker" end end
+      end
+    end
+  end
   for packKey, override in pairs(marking.packOverrides) do
     if not raid.packs[packKey] or type(override) ~= "table" then return nil, "invalid pack marking override" end
     if override.npcDefaults ~= nil then
@@ -126,7 +139,7 @@ function RoutePreset:Create(raid)
   assert(type(raid) == "table", "RoutePreset.Create requires a raid")
   local preset = {
     schemaVersion = 1, raidKey = raid.key, currentSublevel = 1,
-    routeSteps = {}, marking = { npcDefaults = {}, packOverrides = {} },
+    routeSteps = {}, marking = { npcDefaults = {}, floorNpcDefaults = {}, packOverrides = {} },
     currentStepId = nil, currentStepPinned = false,
   }
   if raid.mode == "waves" then
@@ -276,6 +289,23 @@ function RoutePreset:Import(value, registry)
   if type(candidate) ~= "table" then return nil, "preset must be a table" end
   local raid = registry and registry.Get and registry:Get(candidate.raidKey)
   if not raid then return nil, "unknown raid" end
+  local marking = candidate.marking
+  if type(marking) == "table" then
+    marking.floorNpcDefaults = type(marking.floorNpcDefaults) == "table" and marking.floorNpcDefaults or {}
+    for npcId, markers in pairs(type(marking.npcDefaults) == "table" and marking.npcDefaults or {}) do
+      local enemy = raid.enemies and raid.enemies[tostring(tonumber(npcId))]
+      for _, spawn in ipairs(enemy and enemy.spawns or {}) do
+        local sublevel = tonumber(spawn.sublevel)
+        if sublevel and raid.sublevels[sublevel] then
+          marking.floorNpcDefaults[sublevel] = marking.floorNpcDefaults[sublevel] or {}
+          if marking.floorNpcDefaults[sublevel][tonumber(npcId)] == nil then
+            marking.floorNpcDefaults[sublevel][tonumber(npcId)] = copy(markers)
+          end
+        end
+      end
+    end
+    marking.npcDefaults = {}
+  end
   local valid
   valid, reason = self:Validate(candidate, raid)
   if not valid then return nil, reason end

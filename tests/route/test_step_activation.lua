@@ -4,6 +4,10 @@ local root = arg and arg[1] or "."
 local ART = {}
 _G.ART = ART
 ART.StaticData = { raids = {} }
+ART.CCAssignments = {
+  ClearPullAssignment = function(_, _, _, spawnKey) ART.clearedPullCC = spawnKey return true end,
+}
+function ART:GetCurrentPreset() return { value = { pulls = { {} }, currentPull = 1 } } end
 local function load(path) return assert(loadfile(root..path))("AnniversaryRaidTools", ART) end
 
 load("/Core/RaidRegistry.lua")
@@ -39,7 +43,10 @@ local raid = {
   instanceId = 9003,
   mapId = 565,
   mode = "route",
-  sublevels = { { index = 1, name = "Test Floor", mapId = 565 } },
+  sublevels = {
+    { index = 1, name = "Test Floor", mapId = 565 },
+    { index = 2, name = "Other Floor", mapId = 566 },
+  },
   enemies = {
     ["100"] = { npcId = 100, name = "Mob A", spawns = { spawnA }, source = provenance() },
     ["200"] = { npcId = 200, name = "Mob B", spawns = { spawnB, spawnBAlt }, source = provenance() },
@@ -66,6 +73,7 @@ planner:Initialize({
   routePreset = presets,
   onChange = function() changes = changes + 1 end,
   getPullPackKeys = function(pullIndex) return pullPackKeys[pullIndex] end,
+  getCurrentPullIndex = function() return 1 end,
 })
 
 -- Fresh presets start in auto mode with no pinned step.
@@ -125,7 +133,16 @@ ART.LiveMarks = { OnPlanChanged = function() reconciles = reconciles + 1 end }
 changes = 0
 assert(planner:SetNpcDefaultMark(200, 5) == 5)
 assert(planner:GetNpcDefaultMark(200) == 5 and changes == 1,
-    "global NPC marks persist through the planner change boundary")
+    "floor NPC marks persist through the planner change boundary")
+preset.currentSublevel = 2
+assert(planner:GetNpcDefaultMark(200) == nil, "NPC defaults do not leak onto another floor")
+assert(planner:SetNpcDefaultMark(200, 3) == 3)
+preset.currentSublevel = 1
+assert(planner:GetNpcDefaultMark(200) == 5, "switching back restores the first floor rule")
+assert(planner:SetNpcDefaultMark(201, 5) == 5)
+assert(planner:GetNpcDefaultMark(200) == nil and planner:GetNpcDefaultMark(201) == 5,
+    "one floor marker can belong to only one NPC rule")
+assert(planner:SetNpcDefaultMark(200, 5) == 5)
 local fallbackMarks = assert(planner:SetNpcDefaultMarks(200, { 8, 7, 8 }))
 assert(#fallbackMarks == 2 and fallbackMarks[1] == 8 and fallbackMarks[2] == 7,
     "global NPC fallback marks preserve priority and remove duplicates")
@@ -135,6 +152,15 @@ local globalMark, globalReason = planner:SetNpcDefaultMark(999, 1)
 assert(globalMark == nil and globalReason == "unknown npc", "unknown NPC defaults are rejected")
 globalMark, globalReason = planner:SetNpcDefaultMark(200, 9)
 assert(globalMark == nil and globalReason == "invalid marker", "invalid NPC defaults are rejected")
+assert(planner:SetNpcDefaultMark(200, 8) == 8)
+preset.currentSublevel = 2
+assert(planner:SetNpcDefaultMark(200, 7) == 7)
+preset.currentSublevel = 1
+assert(planner:ClearFloorDefaultMarks() and planner:GetNpcDefaultMark(200) == nil,
+    "clearing floor marks removes every NPC rule on the active floor")
+preset.currentSublevel = 2
+assert(planner:GetNpcDefaultMark(200) == 7, "clearing floor marks preserves other floors")
+preset.currentSublevel = 1
 
 local stepMarkers = assert(planner:SetStepNpcMarks("step-b", 200, { 8, 7 }))
 assert(stepMarkers[1] == 8 and stepMarkers[2] == 7 and planner.preset.routeSteps[2].marks[spawnB.key] == 8
@@ -162,6 +188,7 @@ assert(planner.preset.routeSteps[4].marks[spawnB.key] == 3, "shared pack prefers
 assert(planner.preset.routeSteps[2].marks[spawnB.key] == 8, "other step marks stay untouched")
 assert(planner:SetSpawnMark(packB, spawnB.key, 0) == 0)
 assert(planner.preset.routeSteps[4].marks[spawnB.key] == nil, "marker zero removes the mark")
+assert(ART.clearedPullCC == spawnB.key, "removing a route pull mark also removes its CC assignment")
 
 local mark, reason = planner:SetSpawnMark("test-activation:pack:none", spawnB.key, 1)
 assert(not mark and reason == "pack-without-step", "packless spawns reject marks")

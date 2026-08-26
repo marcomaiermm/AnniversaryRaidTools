@@ -45,7 +45,7 @@ function AutoMarksUI:SetTab(tab)
   if autoMarks then self:Refresh() end
 end
 
-local function addControls(container)
+local function addControls(container, planner)
   local db = ART:GetDB()
   local enabled = AceGUI:Create("CheckBox")
   enabled:SetLabel(L["Auto Mark"])
@@ -70,6 +70,19 @@ local function addControls(container)
   note:SetColor(0.75, 0.75, 0.75)
   note:SetFullWidth(true)
   container:AddChild(note)
+
+  local clear = AceGUI:Create("Button")
+  clear:SetText(L["Clear All Marks"])
+  clear:SetFullWidth(true)
+  clear:SetCallback("OnClick", function()
+    local sublevel = ART:GetCurrentSubLevel()
+    planner:ClearFloorDefaultMarks(sublevel)
+    if ART.CCAssignments then
+      ART.CCAssignments:ClearFloorAssignments(ART:GetCurrentPreset(), sublevel)
+    end
+    AutoMarksUI:Refresh()
+  end)
+  container:AddChild(clear)
 end
 
 local function sortedEnemies(raid, sublevel)
@@ -217,7 +230,7 @@ function AutoMarksUI:Refresh()
   local container, planner = sidePanel.AutoMarksGroup, ART.RaidPlanner
   if ART.CCAssignments then ART.CCAssignments:EnsureDefaultMarkers() end
   container:ReleaseChildren()
-  addControls(container)
+  addControls(container, planner)
   addEnemyRows(container, planner)
   container:DoLayout()
 end
@@ -292,6 +305,7 @@ local originalSetCurrentSubLevel = ART.SetCurrentSubLevel
 function ART:SetCurrentSubLevel(...)
   local result = originalSetCurrentSubLevel(self, ...)
   AutoMarksUI:Refresh()
+  if ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
   if ART.RaidMarksUI then ART.RaidMarksUI:ResetPullTracker() end
   return result
 end

@@ -16,12 +16,14 @@ local UI_ADDON_NAME = "AnniversaryRaidTools_UI"
 local UI_DISABLED_POPUP = "ART_UI_DISABLED"
 local coreDefaults = {
   announceInstanceReset = false,
+  autoMark = false,
   minimap = {
     hide = false,
   },
   combatLogging = {
     enabled = false,
   },
+  roster = { slots = {} },
 }
 
 local function applyDefaults(target, defaults)
@@ -306,6 +308,7 @@ ART.liveSessionPrefixes = {
   reqPre = "ARTLiveReqPre",
   progress = "ARTRaidProgress",
   ccAssignment = "ARTCCAssign",
+  playerMark = "ARTPlayerMark",
 }
 
 ART.commsObject = ART.commsObject or {}
@@ -407,8 +410,25 @@ end)
 
 local eventFrame = CreateFrame("Frame")
 eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
-eventFrame:SetScript("OnEvent", function(self)
-  ART:RefreshMinimapButton()
-  if db.loadOnStartUp and db.devMode then ART:ShowInterface(true) end
-  self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+eventFrame:RegisterEvent("GROUP_ROSTER_UPDATE")
+local function hasPlayerMarks()
+  local raidIndex = db.currentRaidIndex
+  local presetIndex = raidIndex and db.currentPreset and db.currentPreset[raidIndex]
+  local preset = presetIndex and db.presets and db.presets[raidIndex] and db.presets[raidIndex][presetIndex]
+  local marks = preset and preset.value and preset.value.artPlayerMarks
+  return type(marks) == "table" and next(marks) ~= nil
+end
+local function loadPlayerMarksInRaid()
+  if db.autoMark == true and type(IsInRaid) == "function" and IsInRaid() and hasPlayerMarks() then
+    ART:LoadUI("roster-marks")
+  end
+end
+eventFrame:SetScript("OnEvent", function(self, event)
+  if event == "PLAYER_ENTERING_WORLD" then
+    ART:RefreshMinimapButton()
+    if db.loadOnStartUp and db.devMode then ART:ShowInterface(true) end
+    loadPlayerMarksInRaid()
+  elseif event == "GROUP_ROSTER_UPDATE" then
+    loadPlayerMarksInRaid()
+  end
 end)

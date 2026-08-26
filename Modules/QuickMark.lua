@@ -11,6 +11,10 @@ local captureFrame
 local captureButtons = {}
 local markerByNumberKey = { 8, 7, 1, 5, 6, 3, 4, 2 }
 
+local function canChangeBindings()
+  return type(InCombatLockdown) ~= "function" or not InCombatLockdown()
+end
+
 local function assignMarker(marker)
   if not hoveredBlip or not hoveredBlip.clone then return false end
   local planner = ART.RaidPlanner
@@ -46,6 +50,7 @@ end
 
 function QuickMark:Arm(blip)
   hoveredBlip = blip
+  if not canChangeBindings() then return false end
   local frame = ensureCaptureFrame()
   ClearOverrideBindings(frame)
   for marker, button in ipairs(captureButtons) do
@@ -61,7 +66,7 @@ end
 function QuickMark:Disarm(blip)
   if blip and hoveredBlip ~= blip then return end
   hoveredBlip = nil
-  if captureFrame then ClearOverrideBindings(captureFrame) end
+  if captureFrame and canChangeBindings() then ClearOverrideBindings(captureFrame) end
 end
 
 ART.QuickMark = QuickMark

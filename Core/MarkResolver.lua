@@ -162,7 +162,11 @@ function Resolver:GetRuleForNpcId(npcId)
     return pullMarkers, "pull"
   end
 
-  local defaults = self.profile and self.profile.npcDefaults
+  local sublevel = type(self.dependencies.getCurrentSublevel) == "function"
+      and tonumber(self.dependencies.getCurrentSublevel()) or nil
+  local defaults = sublevel and self.profile and self.profile.floorNpcDefaults
+      and self.profile.floorNpcDefaults[sublevel]
+      or self.profile and self.profile.npcDefaults
   local globalMarkers = copyMarkers(type(defaults) == "table" and defaults[npcId] or nil)
   if #globalMarkers > 0 then return globalMarkers, "global" end
   return {}, "none"

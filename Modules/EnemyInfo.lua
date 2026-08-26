@@ -89,6 +89,10 @@ local function markDependencies(preset, raid)
     raid = raid,
     routeSteps = preset and preset.routeSteps or {},
     profile = preset and preset.marking or { npcDefaults = {}, packOverrides = {} },
+    getCurrentSublevel = function()
+      return ART.GetCurrentSubLevel and ART:GetCurrentSubLevel()
+          or preset and preset.currentSublevel
+    end,
   }
 end
 

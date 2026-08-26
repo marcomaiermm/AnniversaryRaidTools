@@ -211,6 +211,13 @@ function Planner:SetSpawnMark(packKey, spawnKey, marker)
     for _, key in ipairs(displaced) do target.marks[key] = marker end
     return nil, reason
   end
+  if (marker == nil or marker == 0) and ART.CCAssignments and ART.GetCurrentPreset then
+    local pullIndex = self.lastPullIndex
+        or (type(self.getCurrentPullIndex) == "function" and self.getCurrentPullIndex())
+    if pullIndex then
+      ART.CCAssignments:ClearPullAssignment(ART:GetCurrentPreset(), pullIndex, spawnKey, true)
+    end
+  end
   commit(self)
   if ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
   return marker, displaced
@@ -315,7 +322,10 @@ function Planner:SetStepNpcMarks(stepId, npcId, markers)
 end
 
 function Planner:GetNpcDefaultMarks(npcId)
-  local defaults = self.preset and self.preset.marking and self.preset.marking.npcDefaults
+  local sublevel = ART.GetCurrentSubLevel and ART:GetCurrentSubLevel()
+      or self.preset and self.preset.currentSublevel
+  local marking = self.preset and self.preset.marking
+  local defaults = marking and marking.floorNpcDefaults and marking.floorNpcDefaults[tonumber(sublevel)]
   local markers = defaults and defaults[tonumber(npcId)]
   local result = {}
   for _, marker in ipairs(type(markers) == "table" and markers or {}) do
@@ -337,15 +347,51 @@ function Planner:SetNpcDefaultMarks(npcId, markers)
     if not seen[marker] then normalized[#normalized + 1], seen[marker] = marker, true end
   end
 
-  local defaults = self.preset.marking.npcDefaults
-  local previous = defaults[npcId]
+  local sublevel = ART.GetCurrentSubLevel and ART:GetCurrentSubLevel() or self.preset.currentSublevel
+  sublevel = tonumber(sublevel)
+  if not sublevel or not self.raid.sublevels[sublevel] then return nil, "invalid sublevel" end
+  self.preset.marking.floorNpcDefaults = self.preset.marking.floorNpcDefaults or {}
+  self.preset.marking.floorNpcDefaults[sublevel] = self.preset.marking.floorNpcDefaults[sublevel] or {}
+  local defaults = self.preset.marking.floorNpcDefaults[sublevel]
+  local previous = {}
+  for otherNpcId, values in pairs(defaults) do
+    previous[otherNpcId] = {}
+    for index, value in ipairs(values) do previous[otherNpcId][index] = value end
+  end
+  for otherNpcId, values in pairs(defaults) do
+    if otherNpcId ~= npcId then
+      local kept = {}
+      for _, value in ipairs(values) do if not seen[value] then kept[#kept + 1] = value end end
+      defaults[otherNpcId] = #kept > 0 and kept or nil
+    end
+  end
   defaults[npcId] = #normalized > 0 and normalized or nil
   local valid, reason = self.presets:Validate(self.preset, self.raid)
-  if not valid then defaults[npcId] = previous; return nil, reason end
+  if not valid then
+    for key in pairs(defaults) do defaults[key] = nil end
+    for key, values in pairs(previous) do defaults[key] = values end
+    return nil, reason
+  end
 
   commit(self)
   if not self.onChange and ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
   return normalized
+end
+
+function Planner:ClearFloorDefaultMarks(sublevel)
+  if not self.preset or not self.raid then return nil, "no active preset" end
+  sublevel = tonumber(sublevel) or tonumber(ART.GetCurrentSubLevel and ART:GetCurrentSubLevel())
+      or tonumber(self.preset.currentSublevel)
+  if not sublevel or not self.raid.sublevels[sublevel] then return nil, "invalid sublevel" end
+  local floors = self.preset.marking and self.preset.marking.floorNpcDefaults
+  if type(floors) ~= "table" or floors[sublevel] == nil then return true end
+  local previous = floors[sublevel]
+  floors[sublevel] = nil
+  local valid, reason = self.presets:Validate(self.preset, self.raid)
+  if not valid then floors[sublevel] = previous return nil, reason end
+  commit(self)
+  if not self.onChange and ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
+  return true
 end
 
 function Planner:GetNpcDefaultMark(npcId)

@@ -8,10 +8,11 @@ ART.LiveMarks = LiveMarks
 local visibleNameplates = {}
 local markerLeaseByIndex, markerByGuid, artMarkerByGuid = {}, {}, {}
 local artSourceByGuid, artStepByGuid = {}, {}
+local managedPlayerByMarker = {}
 local EVENTS = {
   "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "PLAYER_TARGET_CHANGED", "UNIT_TARGET",
   "NAME_PLATE_UNIT_ADDED", "NAME_PLATE_UNIT_REMOVED", "COMBAT_LOG_EVENT_UNFILTERED",
-  "RAID_TARGET_UPDATE", "GROUP_ROSTER_UPDATE",
+  "RAID_TARGET_UPDATE", "GROUP_ROSTER_UPDATE", "PLAYER_ENTERING_WORLD",
 }
 
 local function db()
@@ -116,6 +117,9 @@ local function knownUnitTokens()
   for index = 1, 5 do tokens[#tokens + 1] = "boss"..index end
   for index = 1, 4 do tokens[#tokens + 1] = "party"..index.."target" end
   for index = 1, 40 do tokens[#tokens + 1] = "raid"..index.."target" end
+  for index = 1, 4 do tokens[#tokens + 1] = "party"..index end
+  for index = 1, 40 do tokens[#tokens + 1] = "raid"..index end
+  tokens[#tokens + 1] = "player"
   return tokens
 end
 
@@ -126,6 +130,83 @@ end
 function LiveMarks:IsMarkerAvailable(marker, guid)
   local owner = markerLeaseByIndex[tonumber(marker)]
   return owner == nil or owner == guid
+end
+
+local function fullName(unit)
+  if type(UnitFullName) ~= "function" then return end
+  local name, realm = UnitFullName(unit)
+  if not name then return end
+  if not realm or realm == "" then _, realm = UnitFullName("player") end
+  return name..(realm and realm ~= "" and "-"..realm or "")
+end
+
+local function groupUnitForName(name)
+  if type(name) ~= "string" then return end
+  local wanted = name:lower()
+  local units = { "player" }
+  for index = 1, 4 do units[#units + 1] = "party"..index end
+  for index = 1, 40 do units[#units + 1] = "raid"..index end
+  for _, unit in ipairs(units) do
+    local candidate = fullName(unit)
+    if candidate and candidate:lower() == wanted then return unit end
+  end
+end
+
+function LiveMarks:ReconcilePlayerMarks()
+  local settings = db()
+  local unitGuid = rawget(_G, "UnitGUID")
+  if not (settings and settings.autoMark == true) or not canMarkUnits()
+      or type(rawget(_G, "SetRaidTarget")) ~= "function"
+      or type(unitGuid) ~= "function" then return false end
+  self:ObserveKnownUnits()
+  local desired = {}
+  local assignments = ART.CCAssignments
+  for _, row in ipairs(assignments and assignments.GetAssignmentRows
+      and assignments:GetAssignmentRows() or {}) do
+    if row.playerGlobal and row.player then desired[row.marker] = row.player end
+  end
+
+  local setRaidTarget = rawget(_G, "SetRaidTarget")
+  for marker, guid in pairs(managedPlayerByMarker) do
+    local player = desired[marker]
+    local unit = player and groupUnitForName(player.name)
+    if not unit or unitGuid(unit) ~= guid then
+      local ownedUnit
+      for index = 1, 40 do
+        local candidate = "raid"..index
+        if unitGuid(candidate) == guid then ownedUnit = candidate break end
+      end
+      if not ownedUnit then
+        for index = 1, 4 do
+          local candidate = "party"..index
+          if unitGuid(candidate) == guid then ownedUnit = candidate break end
+        end
+      end
+      if unitGuid("player") == guid then ownedUnit = "player" end
+      if ownedUnit and tonumber(GetRaidTargetIndex and GetRaidTargetIndex(ownedUnit) or 0) == marker then
+        setRaidTarget(ownedUnit, 0)
+      end
+      forgetGuid(guid)
+      managedPlayerByMarker[marker] = nil
+    end
+  end
+
+  for marker, player in pairs(desired) do
+    local unit = groupUnitForName(player.name)
+    local guid = unit and unitGuid(unit)
+    if guid then
+      local _, currentMarker = observeMarker(unit)
+      if currentMarker == marker then
+        managedPlayerByMarker[marker] = guid
+      elseif currentMarker == 0 and self:IsMarkerAvailable(marker, guid) then
+        if setRaidTarget(unit, marker) ~= false then
+          markerLeaseByIndex[marker], markerByGuid[guid], artMarkerByGuid[guid] = guid, marker, marker
+          artSourceByGuid[guid], managedPlayerByMarker[marker] = "player", guid
+        end
+      end
+    end
+  end
+  return true
 end
 
 local function eligibleMouseover()
@@ -223,6 +304,10 @@ function LiveMarks:ClearWorldMarks()
   for guid in pairs(artMarkerByGuid) do artMarkerByGuid[guid] = nil end
   for guid in pairs(artSourceByGuid) do artSourceByGuid[guid] = nil end
   for guid in pairs(artStepByGuid) do artStepByGuid[guid] = nil end
+  for marker in pairs(managedPlayerByMarker) do managedPlayerByMarker[marker] = nil end
+  if ART.CCAssignments and ART.CCAssignments.ClearActivePullAssignments then
+    ART.CCAssignments:ClearActivePullAssignments()
+  end
   if ART.RaidMarks and ART.RaidMarks.initialized then ART.RaidMarks:ResetActivePack() end
   return true
 end
@@ -233,6 +318,7 @@ function LiveMarks:OnPlanChanged()
     local step = planner and planner:GetActiveStep()
     if step then marks:ActivateRouteStep(step.id) else marks:ActivateRouteStep(nil) end
   end
+  self:ReconcilePlayerMarks()
   local tracker = ART.RaidMarksUI
   if tracker and tracker.RefreshPullTracker then tracker:RefreshPullTracker() end
 end
@@ -273,8 +359,10 @@ if type(CreateFrame) == "function" then
         forgetGuid(destGuid)
         releaseResolverAssignment(destGuid)
       end
-    elseif event == "RAID_TARGET_UPDATE" or event == "GROUP_ROSTER_UPDATE" then
+    elseif event == "RAID_TARGET_UPDATE" or event == "GROUP_ROSTER_UPDATE"
+        or event == "PLAYER_ENTERING_WORLD" then
       LiveMarks:ObserveKnownUnits()
+      LiveMarks:ReconcilePlayerMarks()
     end
   end)
   LiveMarks.eventFrame = eventFrame

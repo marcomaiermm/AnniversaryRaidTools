@@ -114,6 +114,15 @@ local function assignmentCopy(value)
   return { ccKey = value.ccKey, assignee = { name = name, classFile = classFile } }
 end
 
+local function playerCopy(value)
+  if type(value) ~= "table" or type(value.name) ~= "string" or value.name == "" or #value.name > 80
+      or type(value.classFile) ~= "string" then return end
+  local player = { name = value.name, classFile = value.classFile }
+  local definition = value.ccKey and catalog[value.ccKey]
+  if definition and definition.classFile == value.classFile then player.ccKey = value.ccKey end
+  return player
+end
+
 function CC:GetRaidForPreset(preset, raidKey)
   local registry = ART.RaidRegistry
   if raidKey and registry and registry.Get then return registry:Get(raidKey) end
@@ -196,6 +205,7 @@ end
 
 function CC:GetRoster()
   if self.debugMode then return TEST_PLAYERS end
+  if ART.Roster and ART.Roster.GetPlayers then return ART.Roster:GetPlayers(true) end
   local result, units = {}, {}
   if type(IsInRaid) == "function" and IsInRaid() then
     for index = 1, (GetNumGroupMembers and GetNumGroupMembers() or 0) do units[#units + 1] = "raid"..index end
@@ -249,13 +259,21 @@ function CC:GetPullAssignment(preset, pullIndex, spawnKey)
   return assignmentCopy(type(pull) == "table" and pull.artCCAssignments and pull.artCCAssignments[spawnKey])
 end
 
-function CC:GetDefaultAssignment(preset, npcId, marker)
+local function assignmentSublevel(preset, sublevel)
+  return tonumber(sublevel) or tonumber(ART.GetCurrentSubLevel and ART:GetCurrentSubLevel())
+      or tonumber(preset and preset.value and preset.value.currentSublevel) or 1
+end
+
+function CC:GetDefaultAssignment(preset, npcId, marker, sublevel)
+  sublevel = assignmentSublevel(preset, sublevel)
   if self.debugMode then
-    local defaults = self.testDefaultAssignments[preset]
+    local floors = self.testDefaultAssignments[preset]
+    local defaults = floors and floors[sublevel]
     local markers = defaults and defaults[tonumber(npcId)]
     if markers and markers[validMarker(marker)] ~= nil then return assignmentCopy(markers[validMarker(marker)]) end
   end
-  local defaults = preset and preset.value and preset.value.artCCDefaults
+  local floors = preset and preset.value and preset.value.artCCFloorDefaults
+  local defaults = floors and floors[sublevel]
   return assignmentCopy(defaults and defaults[tonumber(npcId)] and defaults[tonumber(npcId)][validMarker(marker)])
 end
 
@@ -269,23 +287,44 @@ function CC:NormalizePreset(preset, raid)
   if type(value) ~= "table" then return false end
   raid = raid or self:GetRaidForPreset(preset)
   if not raid then return false end
-  local defaults = {}
+  local sourceFloors = type(value.artCCFloorDefaults) == "table" and value.artCCFloorDefaults or {}
   for npcId, markers in pairs(type(value.artCCDefaults) == "table" and value.artCCDefaults or {}) do
-    local enemy = raid and raid.enemies and raid.enemies[tostring(tonumber(npcId))]
-    if enemy and type(markers) == "table" then
-      local normalized = {}
-      for marker, assignment in pairs(markers) do
-        local normalizedMarker = validMarker(marker)
-        local normalizedAssignment = assignmentCopy(assignment)
-        if normalizedMarker and normalizedAssignment
-            and self:IsEligible(catalog[normalizedAssignment.ccKey], enemy) then
-          normalized[normalizedMarker] = normalizedAssignment
-        end
-      end
-      if next(normalized) then defaults[tonumber(npcId)] = normalized end
+    local enemy = raid.enemies and raid.enemies[tostring(tonumber(npcId))]
+    local floors = {}
+    for _, spawn in ipairs(enemy and enemy.spawns or {}) do
+      local sublevel = tonumber(spawn.sublevel)
+      if sublevel then floors[sublevel] = true end
+    end
+    for sublevel in pairs(floors) do
+      sourceFloors[sublevel] = sourceFloors[sublevel] or {}
+      sourceFloors[sublevel][tonumber(npcId)] = sourceFloors[sublevel][tonumber(npcId)] or markers
     end
   end
-  value.artCCDefaults = next(defaults) and defaults or nil
+  local floorDefaults = {}
+  for sublevel, defaults in pairs(sourceFloors) do
+    sublevel = tonumber(sublevel)
+    if sublevel and raid.sublevels and raid.sublevels[sublevel] and type(defaults) == "table" then
+      local normalizedFloor = {}
+      for npcId, markers in pairs(defaults) do
+        local enemy = raid.enemies and raid.enemies[tostring(tonumber(npcId))]
+        if enemy and type(markers) == "table" then
+          local normalized = {}
+          for marker, assignment in pairs(markers) do
+            local normalizedMarker = validMarker(marker)
+            local normalizedAssignment = assignmentCopy(assignment)
+            if normalizedMarker and normalizedAssignment
+                and self:IsEligible(catalog[normalizedAssignment.ccKey], enemy) then
+              normalized[normalizedMarker] = normalizedAssignment
+            end
+          end
+          if next(normalized) then normalizedFloor[tonumber(npcId)] = normalized end
+        end
+      end
+      if next(normalizedFloor) then floorDefaults[sublevel] = normalizedFloor end
+    end
+  end
+  value.artCCFloorDefaults = next(floorDefaults) and floorDefaults or nil
+  value.artCCDefaults = nil
   for pullIndex, pull in ipairs(type(value.pulls) == "table" and value.pulls or {}) do
     local normalized = {}
     for spawnKey, assignment in pairs(type(pull.artCCAssignments) == "table" and pull.artCCAssignments or {}) do
@@ -401,23 +440,52 @@ function CC:ClearPullAssignment(preset, pullIndex, spawnKey, silent)
   return true
 end
 
-function CC:SetDefaultAssignment(preset, npcId, marker, assignment, silent, raid)
+function CC:ClearActivePullAssignments()
+  local preset, pullIndex = ART:GetCurrentPreset(), self:GetActivePullIndex()
+  local pull = preset and preset.value and preset.value.pulls and preset.value.pulls[pullIndex]
+  local assignments = type(pull) == "table" and pull.artCCAssignments
+  local spawnKeys = {}
+  for spawnKey in pairs(type(assignments) == "table" and assignments or {}) do spawnKeys[spawnKey] = true end
+  if self.debugMode then
+    local debugAssignments = self.testPullAssignments[preset]
+    debugAssignments = debugAssignments and debugAssignments[pullIndex]
+    for spawnKey in pairs(debugAssignments or {}) do spawnKeys[spawnKey] = true end
+    if not next(spawnKeys) then return false end
+    self.testPullAssignments[preset] = self.testPullAssignments[preset] or {}
+    self.testPullAssignments[preset][pullIndex] = self.testPullAssignments[preset][pullIndex] or {}
+    for spawnKey in pairs(spawnKeys) do self.testPullAssignments[preset][pullIndex][spawnKey] = false end
+    self:RefreshDefaultUI()
+    return true
+  end
+  if not next(spawnKeys) then return false end
+  for spawnKey in pairs(spawnKeys) do
+    self:ClearPullAssignment(preset, pullIndex, spawnKey, true)
+    self:SendChange(preset, "pull", "clear", { pullIndex = pullIndex, spawnKey = spawnKey })
+  end
+  self:RefreshDefaultUI()
+  return true
+end
+
+function CC:SetDefaultAssignment(preset, npcId, marker, assignment, silent, raid, sublevel)
   npcId, marker, assignment = tonumber(npcId), validMarker(marker), assignmentCopy(assignment)
+  sublevel = assignmentSublevel(preset, sublevel)
   raid = raid or self:GetRaidForPreset(preset)
   local enemy = raid and raid.enemies and raid.enemies[tostring(npcId)]
   if not npcId or not marker or not assignment or not enemy
       or not self:IsEligible(catalog[assignment.ccKey], enemy) then return false end
   if self.debugMode and not silent then
     self.testDefaultAssignments[preset] = self.testDefaultAssignments[preset] or {}
-    self.testDefaultAssignments[preset][npcId] = self.testDefaultAssignments[preset][npcId] or {}
-    self.testDefaultAssignments[preset][npcId][marker] = assignment
+    self.testDefaultAssignments[preset][sublevel] = self.testDefaultAssignments[preset][sublevel] or {}
+    self.testDefaultAssignments[preset][sublevel][npcId] = self.testDefaultAssignments[preset][sublevel][npcId] or {}
+    self.testDefaultAssignments[preset][sublevel][npcId][marker] = assignment
     self:RefreshDefaultUI()
     return assignment
   end
   local value = preset.value
-  value.artCCDefaults = value.artCCDefaults or {}
-  value.artCCDefaults[npcId] = value.artCCDefaults[npcId] or {}
-  value.artCCDefaults[npcId][marker] = assignment
+  value.artCCFloorDefaults = value.artCCFloorDefaults or {}
+  value.artCCFloorDefaults[sublevel] = value.artCCFloorDefaults[sublevel] or {}
+  value.artCCFloorDefaults[sublevel][npcId] = value.artCCFloorDefaults[sublevel][npcId] or {}
+  value.artCCFloorDefaults[sublevel][npcId][marker] = assignment
   self:EnsureDefaultMarkers(preset)
   if ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
   if not silent then
@@ -427,22 +495,69 @@ function CC:SetDefaultAssignment(preset, npcId, marker, assignment, silent, raid
   return assignment
 end
 
-function CC:ClearDefaultAssignment(preset, npcId, marker, silent)
+function CC:ClearDefaultAssignment(preset, npcId, marker, silent, sublevel)
   npcId, marker = tonumber(npcId), validMarker(marker)
+  sublevel = assignmentSublevel(preset, sublevel)
   if self.debugMode and not silent then
     self.testDefaultAssignments[preset] = self.testDefaultAssignments[preset] or {}
-    self.testDefaultAssignments[preset][npcId] = self.testDefaultAssignments[preset][npcId] or {}
-    self.testDefaultAssignments[preset][npcId][marker] = false
+    self.testDefaultAssignments[preset][sublevel] = self.testDefaultAssignments[preset][sublevel] or {}
+    self.testDefaultAssignments[preset][sublevel][npcId] = self.testDefaultAssignments[preset][sublevel][npcId] or {}
+    self.testDefaultAssignments[preset][sublevel][npcId][marker] = false
     self:RefreshDefaultUI()
     return true
   end
-  local defaults = preset and preset.value and preset.value.artCCDefaults
+  local floors = preset and preset.value and preset.value.artCCFloorDefaults
+  local defaults = floors and floors[sublevel]
   if not defaults or not defaults[npcId] or not defaults[npcId][marker] then return false end
   defaults[npcId][marker] = nil
   if not next(defaults[npcId]) then defaults[npcId] = nil end
-  if not next(defaults) then preset.value.artCCDefaults = nil end
+  if not next(defaults) then floors[sublevel] = nil end
+  if not next(floors) then preset.value.artCCFloorDefaults = nil end
   if not silent then
     self:SendChange(preset, "default", "clear", { npcId = npcId, marker = marker })
+    self:RefreshDefaultUI()
+  end
+  return true
+end
+
+function CC:ClearFloorAssignments(preset, sublevel, silent)
+  sublevel = assignmentSublevel(preset, sublevel)
+  local floors = preset and preset.value and preset.value.artCCFloorDefaults
+  local defaults = floors and floors[sublevel]
+  if self.debugMode and not silent then
+    local debugFloors = self.testDefaultAssignments[preset]
+    local debugDefaults = debugFloors and debugFloors[sublevel]
+    local targets = {}
+    for npcId, markers in pairs(type(defaults) == "table" and defaults or {}) do
+      targets[npcId] = targets[npcId] or {}
+      for marker in pairs(markers) do targets[npcId][marker] = true end
+    end
+    for npcId, markers in pairs(type(debugDefaults) == "table" and debugDefaults or {}) do
+      targets[npcId] = targets[npcId] or {}
+      for marker in pairs(markers) do targets[npcId][marker] = true end
+    end
+    if not next(targets) then return false end
+    self.testDefaultAssignments[preset] = self.testDefaultAssignments[preset] or {}
+    self.testDefaultAssignments[preset][sublevel] = self.testDefaultAssignments[preset][sublevel] or {}
+    for npcId, markers in pairs(targets) do
+      self.testDefaultAssignments[preset][sublevel][npcId] =
+          self.testDefaultAssignments[preset][sublevel][npcId] or {}
+      for marker in pairs(markers) do self.testDefaultAssignments[preset][sublevel][npcId][marker] = false end
+    end
+    self:RefreshDefaultUI()
+    return true
+  end
+  if type(defaults) ~= "table" then return false end
+  local targets = {}
+  for npcId, markers in pairs(defaults) do
+    for marker in pairs(markers) do targets[#targets + 1] = { npcId = npcId, marker = marker } end
+  end
+  floors[sublevel] = nil
+  if not next(floors) then preset.value.artCCFloorDefaults = nil end
+  if not silent then
+    for _, target in ipairs(targets) do
+      self:SendChange(preset, "default", "clear", target)
+    end
     self:RefreshDefaultUI()
   end
   return true
@@ -452,8 +567,12 @@ function CC:EnsureDefaultMarkers(preset)
   preset = preset or (ART.GetCurrentPreset and ART:GetCurrentPreset())
   local planner = ART.RaidPlanner
   if not planner or not planner.preset or not planner.preset.marking or not preset or preset ~= ART:GetCurrentPreset() then return end
-  local npcDefaults = planner.preset.marking.npcDefaults
-  for npcId, markers in pairs(preset.value.artCCDefaults or {}) do
+  local sublevel = assignmentSublevel(preset)
+  planner.preset.marking.floorNpcDefaults = planner.preset.marking.floorNpcDefaults or {}
+  local npcDefaults = planner.preset.marking.floorNpcDefaults[sublevel] or {}
+  planner.preset.marking.floorNpcDefaults[sublevel] = npcDefaults
+  local floorDefaults = preset.value.artCCFloorDefaults and preset.value.artCCFloorDefaults[sublevel]
+  for npcId, markers in pairs(floorDefaults or {}) do
     local selected = {}
     for _, marker in ipairs(npcDefaults[npcId] or {}) do selected[marker] = true end
     for marker in pairs(markers) do selected[marker] = true end
@@ -499,7 +618,8 @@ function CC:GetUsedMarkers(pullIndex)
   local used, planner = {}, ART.RaidPlanner
   local step = planner and planner.GetPullStep and planner:GetPullStep(pullIndex)
   local active = planner and planner.GetActiveStep and planner:GetActiveStep()
-  if active and (active.id == "pull-"..pullIndex or planner.IsStepPinned and planner:IsStepPinned()) then step = active end
+  if active and ((pullIndex and active.id == "pull-"..pullIndex)
+      or planner.IsStepPinned and planner:IsStepPinned()) then step = active end
   for _, marker in pairs(step and step.marks or {}) do
     local normalized = validMarker(marker)
     if normalized then used[normalized] = true end
@@ -588,28 +708,31 @@ function CC:GetAssignmentRows(pullIndex)
   local preset, planner = ART:GetCurrentPreset(), ART.RaidPlanner
   local raid = planner and planner.raid
   pullIndex = pullIndex or self:GetActivePullIndex()
-  if not pullIndex then return {} end
-  local step = planner and planner.GetPullStep and planner:GetPullStep(pullIndex)
+  local step = pullIndex and planner and planner.GetPullStep and planner:GetPullStep(pullIndex)
   local active = planner and planner.GetActiveStep and planner:GetActiveStep()
   if active and (active.id == "pull-"..pullIndex or planner.IsStepPinned and planner:IsStepPinned()) then step = active end
-  if not raid or not step then return {} end
-  local rows, usedMarkers, names = {}, {}, {}
+  if not raid or not preset or type(preset.value) ~= "table" then return {} end
+  step = step or { marks = {} }
+  local rows, usedMarkers, names, floorByMarker, globalByMarker = {}, {}, {}, {}, {}
   for npcKey, enemy in pairs(raid.enemies or {}) do
     names[tonumber(enemy.npcId) or tonumber(npcKey)] = enemy.name
   end
-  for spawnKey, marker in pairs(step.marks or {}) do
-    local _, enemy, npcId = self:FindSpawn(raid, spawnKey)
-    local normalizedMarker = validMarker(marker)
-    if enemy and normalizedMarker then
-      usedMarkers[normalizedMarker] = true
-      rows[#rows + 1] = {
-        key = spawnKey, spawnKey = spawnKey, npcId = npcId, marker = normalizedMarker,
-        name = enemy.name,
-        assignment = self:GetEffectiveAssignment(preset, pullIndex, spawnKey, npcId, normalizedMarker),
+
+  for marker, player in pairs(type(preset.value.artPlayerMarks) == "table" and preset.value.artPlayerMarks or {}) do
+    marker, player = validMarker(marker), playerCopy(player)
+    if marker and player then
+      globalByMarker[marker] = {
+        key = "player:"..marker, marker = marker, name = player.name,
+        player = player, playerGlobal = true,
+        assignment = player.ccKey and {
+          ccKey = player.ccKey,
+          assignee = { name = player.name, classFile = player.classFile },
+        } or nil,
       }
     end
   end
-  local pull = preset.value.pulls and preset.value.pulls[pullIndex]
+
+  local pull = pullIndex and preset.value.pulls and preset.value.pulls[pullIndex]
   local enemies = ART.raidEnemies and ART.raidEnemies[preset.value.currentRaidIndex]
   for enemyIdx, clones in pairs(type(pull) == "table" and pull or {}) do
     local projected = tonumber(enemyIdx) and enemies and enemies[tonumber(enemyIdx)]
@@ -617,16 +740,41 @@ function CC:GetAssignmentRows(pullIndex)
     if npcId then
       for _, marker in ipairs(planner:GetNpcDefaultMarks(npcId)) do
         marker = validMarker(marker)
-        local assignment = marker and self:GetDefaultAssignment(preset, npcId, marker)
-        if assignment and not usedMarkers[marker] then
-          usedMarkers[marker] = true
-          rows[#rows + 1] = {
+        if marker then
+          floorByMarker[marker] = {
             key = npcId..":"..marker, npcId = npcId, marker = marker,
-            name = names[npcId] or projected.name, assignment = assignment, global = true,
+            name = names[npcId] or projected.name,
+            assignment = self:GetDefaultAssignment(preset, npcId, marker), global = true,
           }
         end
       end
     end
+  end
+
+  for spawnKey, marker in pairs(step.marks or {}) do
+    local _, enemy, npcId = self:FindSpawn(raid, spawnKey)
+    local normalizedMarker = validMarker(marker)
+    if enemy and normalizedMarker then
+      local floor, global = floorByMarker[normalizedMarker], globalByMarker[normalizedMarker]
+      usedMarkers[normalizedMarker] = true
+      rows[#rows + 1] = {
+        key = spawnKey, spawnKey = spawnKey, npcId = npcId, marker = normalizedMarker,
+        name = enemy.name,
+        assignment = self:GetEffectiveAssignment(preset, pullIndex, spawnKey, npcId, normalizedMarker)
+            or floor and floor.assignment or global and global.assignment,
+      }
+    end
+  end
+
+  for marker, floor in pairs(floorByMarker) do
+    if not usedMarkers[marker] then
+      usedMarkers[marker] = true
+      floor.assignment = floor.assignment or globalByMarker[marker] and globalByMarker[marker].assignment
+      rows[#rows + 1] = floor
+    end
+  end
+  for marker, global in pairs(globalByMarker) do
+    if not usedMarkers[marker] then rows[#rows + 1] = global end
   end
   local priority = {}; for index, marker in ipairs(MARKER_ORDER) do priority[marker] = index end
   table.sort(rows, function(left, right)
@@ -796,9 +944,10 @@ function CC:ReceiveChange(message, distribution, sender)
     end
   elseif payload.scope == "default" then
     if payload.operation == "clear" then
-      result = self:ClearDefaultAssignment(preset, target.npcId, target.marker, true)
+      result = self:ClearDefaultAssignment(preset, target.npcId, target.marker, true, payload.sublevel)
     elseif payload.operation == "set" then
-      result = self:SetDefaultAssignment(preset, target.npcId, target.marker, target.assignment, true, raid)
+      result = self:SetDefaultAssignment(preset, target.npcId, target.marker, target.assignment, true, raid,
+        payload.sublevel)
     end
   end
   if result and preset == ART:GetCurrentPreset() then
@@ -838,9 +987,14 @@ function CC:RefreshEventRegistration()
   local preset = ART.GetCurrentPreset and ART:GetCurrentPreset()
   local value = preset and preset.value
   local pull = value and value.pulls and value.pulls[self:GetActivePullIndex()]
+  local hasGlobalCC = false
+  for _, player in pairs(type(value and value.artPlayerMarks) == "table" and value.artPlayerMarks or {}) do
+    if playerCopy(player) and player.ccKey then hasGlobalCC = true break end
+  end
   local hasAssignments = type(pull) == "table" and type(pull.artCCAssignments) == "table"
       and next(pull.artCCAssignments) ~= nil
-      or type(value and value.artCCDefaults) == "table" and next(value.artCCDefaults) ~= nil
+      or type(value and value.artCCFloorDefaults) == "table" and next(value.artCCFloorDefaults) ~= nil
+      or hasGlobalCC
   local raid = ART.RaidPlanner and ART.RaidPlanner.raid
   local inRaid = raid and type(GetInstanceInfo) == "function" and select(8, GetInstanceInfo()) == raid.instanceId
   local active = hasAssignments and inRaid or false

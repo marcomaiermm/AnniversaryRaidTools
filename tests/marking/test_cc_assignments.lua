@@ -40,7 +40,7 @@ local enemy = {
   spawns = { spawn },
 }
 local otherEnemy = { npcId = 101, name = "Other Target", characteristics = {}, spawns = { otherSpawn } }
-local raid = { key = "raid", mapId = 1, instanceId = 1, sublevels = { {} },
+local raid = { key = "raid", mapId = 1, instanceId = 1, sublevels = { {}, {} },
   enemies = { ["100"] = enemy, ["101"] = otherEnemy } }
 local pull = { [1] = { 1 }, [2] = { 1 } }
 local preset = {
@@ -73,6 +73,7 @@ local ART = {
 _G.ART = ART
 function ART:GetDB() return { currentRaidIndex = 1 } end
 function ART:GetCurrentPreset() return preset end
+function ART:GetCurrentSubLevel() return preset.value.currentSublevel end
 function ART:GetCurrentLivePreset() return preset end
 function ART:LiveSession_CanControlProgress() return true end
 function ART:IsPlayerInGroup() return "RAID" end
@@ -87,6 +88,10 @@ assert(not eventFrame.events.COMBAT_LOG_EVENT_UNFILTERED,
 local mage = { ccKey = "POLYMORPH", assignee = { name = "Mage-Realm", classFile = "MAGE" } }
 local rogue = { ccKey = "SAP", assignee = { name = "Rogue-Realm", classFile = "ROGUE" } }
 assert(CC:SetDefaultAssignment(preset, 100, 8, rogue, true, raid))
+assert(CC:GetDefaultAssignment(preset, 100, 8).ccKey == "SAP")
+preset.value.currentSublevel = 2
+assert(not CC:GetDefaultAssignment(preset, 100, 8), "floor CC defaults do not leak onto another floor")
+preset.value.currentSublevel = 1
 CC:RefreshEventRegistration()
 assert(eventFrame.events.COMBAT_LOG_EVENT_UNFILTERED,
     "CC combat logging activates for assignments in the current raid")
@@ -96,16 +101,66 @@ assert(#rows == 1 and rows[1].marker == 8 and rows[1].assignment.ccKey == "SAP" 
     "matching pull and global NPC marks merge the global CC into the pull row")
 local originalGetPullStep = ART.RaidPlanner.GetPullStep
 ART.RaidPlanner.GetPullStep = function() return { marks = {} } end
-ART.RaidPlanner.GetNpcDefaultMarks = function() return { 8 } end
+ART.RaidPlanner.GetNpcDefaultMarks = function(_, npcId) return npcId == 100 and { 8 } or {} end
 rows = CC:GetAssignmentRows(1)
 assert(#rows == 1 and rows[1].global and rows[1].assignment.ccKey == "SAP",
     "a global CC on a free marker appears as a global Active Pull row")
 ART.RaidPlanner.GetPullStep = function() return { marks = { [otherSpawn.key] = 8 } } end
 rows = CC:GetAssignmentRows(1)
-assert(#rows == 1 and rows[1].spawnKey == otherSpawn.key and not rows[1].global,
-    "an occupied pull marker suppresses a global assignment for another NPC")
+assert(#rows == 1 and rows[1].spawnKey == otherSpawn.key and not rows[1].global
+    and rows[1].assignment and rows[1].assignment.ccKey == "SAP",
+    "a pull mark inherits the lower-priority floor CC on the same marker")
 ART.RaidPlanner.GetPullStep = originalGetPullStep
 ART.RaidPlanner.GetNpcDefaultMarks = function(self, npcId) return self.preset.marking.npcDefaults[npcId] or {} end
+
+preset.value.artPlayerMarks = {
+  [1] = { name = mage.assignee.name, classFile = mage.assignee.classFile, ccKey = "POLYMORPH" },
+}
+rows = CC:GetAssignmentRows(1)
+local playerRow
+for _, row in ipairs(rows) do if row.marker == 1 then playerRow = row end end
+assert(playerRow and playerRow.playerGlobal and playerRow.name == "Mage-Realm"
+    and playerRow.assignment and playerRow.assignment.ccKey == "POLYMORPH",
+    "a free marker exposes its preset-wide player and CC assignment")
+ART.RaidPlanner.GetPullStep = function() return { marks = { [otherSpawn.key] = 1 } } end
+rows = CC:GetAssignmentRows(1)
+for _, row in ipairs(rows) do
+  assert(not row.playerGlobal, "a pull marker suppresses the lower-priority player mark")
+end
+assert(#rows == 1 and rows[1].assignment and rows[1].assignment.ccKey == "POLYMORPH"
+    and rows[1].assignment.assignee.name == "Mage-Realm",
+    "a pull mark without CC inherits the global CC and assignee on that marker")
+
+assert(CC:SetDefaultAssignment(preset, 100, 1, rogue, true, raid))
+ART.RaidPlanner.GetNpcDefaultMarks = function(_, npcId) return npcId == 100 and { 1 } or {} end
+rows = CC:GetAssignmentRows(1)
+assert(rows[1].assignment.ccKey == "SAP" and rows[1].assignment.assignee.name == "Rogue-Realm",
+    "a floor CC wins over the global CC when a pull only owns the marker")
+
+pull.artCCAssignments = { [spawn.key] = mage }
+ART.RaidPlanner.GetPullStep = function() return { marks = { [spawn.key] = 1 } } end
+rows = CC:GetAssignmentRows(1)
+assert(rows[1].assignment.ccKey == "POLYMORPH" and rows[1].assignment.assignee.name == "Mage-Realm",
+    "a pull CC wins over floor and global CC on the same marker")
+pull.artCCAssignments = nil
+assert(CC:ClearDefaultAssignment(preset, 100, 1, true))
+ART.RaidPlanner.GetPullStep = originalGetPullStep
+rows = CC:GetAssignmentRows(1)
+local floorRow
+for _, row in ipairs(rows) do
+  if row.marker == 1 then floorRow = row end
+  assert(not row.playerGlobal, "an active-pull floor rule suppresses the global player mark")
+end
+assert(floorRow and floorRow.global and floorRow.npcId == 100
+    and floorRow.assignment and floorRow.assignment.ccKey == "POLYMORPH",
+    "a floor mark without CC inherits the global CC on the same marker")
+ART.RaidPlanner.GetNpcDefaultMarks = function(self, npcId) return self.preset.marking.npcDefaults[npcId] or {} end
+ART.RaidPlanner.GetPullStep = function() return nil end
+rows = CC:GetAssignmentRows(1)
+assert(#rows == 1 and rows[1].playerGlobal,
+    "global player marks remain active when the selected pull has no route step")
+ART.RaidPlanner.GetPullStep = originalGetPullStep
+preset.value.artPlayerMarks = nil
 assert(CC:SetPullAssignment(preset, 1, spawn.key, 8, mage, true, raid))
 assert(CC:GetEffectiveAssignment(preset, 1, spawn.key, 100, 8).ccKey == "POLYMORPH",
     "pull assignment overrides the raid default")
@@ -122,6 +177,9 @@ enemy.isBoss = nil
 assert(CC:SetPullAssignment(preset, 1, spawn.key, 8, mage, true, raid))
 rows = CC:GetAssignmentRows(1)
 assert(#rows == 1 and rows[1].marker == 8 and rows[1].assignment.ccKey == "POLYMORPH")
+assert(CC:ClearActivePullAssignments() and not pull.artCCAssignments,
+    "clearing marks removes every CC assignment from the active pull")
+assert(CC:SetPullAssignment(preset, 1, spawn.key, 8, mage, true, raid))
 
 CC:HandleCombatLog(0, "SPELL_AURA_APPLIED", false, "Player-1", "Mage-Realm", 0, 0,
     "Creature-0-0-0-0-100-1", "Test Controller", 0, 128, 12826)
@@ -149,10 +207,27 @@ assert(CC:GetPullAssignment(preset, 1, spawn.key).ccKey == "POLYMORPH" and #sent
     "authorized remote assignments apply without echo")
 
 pull.artCCAssignments.bad = { ccKey = "UNKNOWN", assignee = { name = "x", classFile = "MAGE" } }
-preset.value.artCCDefaults[999] = { [9] = mage }
+preset.value.artCCFloorDefaults[1][999] = { [9] = mage }
 CC:NormalizePreset(preset, raid)
-assert(not pull.artCCAssignments.bad and not preset.value.artCCDefaults[999],
+assert(not pull.artCCAssignments.bad and not preset.value.artCCFloorDefaults[1][999],
     "normalization removes invalid imported assignments without touching valid entries")
+local legacyPreset = { value = { currentSublevel = 1, pulls = {}, artCCDefaults = {
+  [100] = { [8] = rogue },
+} } }
+enemy.spawns[2] = { key = "raid:spawn:100:b", npcId = 100, sublevel = 2 }
+assert(CC:NormalizePreset(legacyPreset, raid))
+assert(legacyPreset.value.artCCFloorDefaults[1][100][8].ccKey == "SAP"
+    and legacyPreset.value.artCCFloorDefaults[2][100][8].ccKey == "SAP"
+    and legacyPreset.value.artCCDefaults == nil,
+    "legacy CC defaults migrate to every NPC floor and clear their old storage")
+enemy.spawns[2] = nil
+local bulkPreset = { value = { currentSublevel = 1, artCCFloorDefaults = {
+  [1] = { [100] = { [8] = rogue } }, [2] = { [100] = { [8] = mage } },
+} } }
+assert(CC:ClearFloorAssignments(bulkPreset, 1, true)
+    and not bulkPreset.value.artCCFloorDefaults[1]
+    and bulkPreset.value.artCCFloorDefaults[2][100][8].ccKey == "POLYMORPH",
+    "clearing floor marks removes CC defaults only from that floor")
 
 local function menuNode()
   local node = { buttons = {} }
@@ -196,6 +271,10 @@ assert(defaultMenuChange == false and not CC:GetDefaultAssignment(preset, 100, 8
 
 local savedAssignment, sentBeforeTest = pull.artCCAssignments[spawn.key], #sent
 assert(CC:SetDebugMode(true) and #CC:GetRoster() == 7, "CC debug provides a solo fake roster")
+assert(CC:SetDefaultAssignment(preset, 100, 8, mage, false, raid)
+    and CC:ClearFloorAssignments(preset, 1)
+    and not CC:GetDefaultAssignment(preset, 100, 8),
+    "clearing floor marks also suppresses local debug CC defaults")
 assert(CC:FindRosterPlayer("ARTTestMage-Test").displayName == "Test Mage",
     "debug assignees expose readable display names")
 local testRogue = { ccKey = "SAP", assignee = { name = "ARTTestRogue-Test", classFile = "ROGUE" } }
@@ -203,6 +282,10 @@ assert(CC:SetPullAssignment(preset, 1, spawn.key, 8, testRogue, false, raid))
 assert(CC:GetPullAssignment(preset, 1, spawn.key).assignee.name == "ARTTestRogue-Test"
     and pull.artCCAssignments[spawn.key] == savedAssignment and #sent == sentBeforeTest,
     "debug assignments are local and are not synced or saved")
+assert(CC:ClearActivePullAssignments() and not CC:GetPullAssignment(preset, 1, spawn.key)
+    and pull.artCCAssignments[spawn.key] == savedAssignment,
+    "CLEAR MARKS suppresses debug CC assignments without changing the saved route")
+assert(CC:SetPullAssignment(preset, 1, spawn.key, 8, testRogue, false, raid))
 local trackerRefreshes, autoMarksRefreshes, enemyRefreshes = 0, 0, 0
 ART.RaidMarksUI = { RefreshPullTracker = function() trackerRefreshes = trackerRefreshes + 1 end }
 ART.AutoMarksUI = { Refresh = function() autoMarksRefreshes = autoMarksRefreshes + 1 end }
@@ -218,6 +301,16 @@ assert(CC:GetRuntime(100, 8).duration == 10 and not CC:GetRuntime(100, 8).wrongC
     "the debug button path drives the real runtime timer state")
 assert(trackerRefreshes == 1 and autoMarksRefreshes == 0 and enemyRefreshes == 0,
     "firing a runtime CC must refresh only the pull tracker")
+pull.artCCAssignments = nil
+preset.value.artPlayerMarks = {
+  [1] = { name = mage.assignee.name, classFile = mage.assignee.classFile, ccKey = "POLYMORPH" },
+}
+ART.RaidPlanner.GetPullStep = function() return { marks = {} } end
+assert(CC:FireFirstDebugCC(1) and CC:GetAssignmentRows(1)[1].runtime,
+    "FIRE CC exposes its timer for a free global CC assignment")
+ART.RaidPlanner.GetPullStep = originalGetPullStep
+preset.value.artPlayerMarks = nil
+pull.artCCAssignments = { [spawn.key] = savedAssignment }
 assert(not CC:SetDebugMode(false))
 assert(CC:GetPullAssignment(preset, 1, spawn.key).assignee.name == savedAssignment.assignee.name,
     "leaving CC debug restores the saved assignment")

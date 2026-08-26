@@ -65,6 +65,7 @@ for marker = 1, 8 do _G["RAID_TARGET_"..marker] = tostring(marker) end
 
 local saved = { autoMark = false, autoMarkModifier = "ALT", currentRaidIndex = 160 }
 local selected
+local clearedFloorMarks, clearedFloorCC
 local tooltipCall
 local liveMarksEnabled
 local currentSublevel = 1
@@ -82,6 +83,7 @@ local ART = {
     },
     GetNpcDefaultMarks = function(_, npcId) return npcId == 100 and { 7, 5 } or {} end,
     SetNpcDefaultMarks = function(_, npcId, markers) selected = { npcId, markers } end,
+    ClearFloorDefaultMarks = function(_, sublevel) clearedFloorMarks = sublevel return true end,
   },
 }
 ART.LiveMarks = { SetEnabled = function(_, enabled) liveMarksEnabled = enabled end }
@@ -101,6 +103,7 @@ ART.CCAssignments = {
   OpenDefaultMenu = function(_, _, _, _, assignmentChanged)
     menuAssignmentChanged = assignmentChanged
   end,
+  ClearFloorAssignments = function(_, _, sublevel) clearedFloorCC = sublevel return true end,
 }
 _G.ART = ART
 function ART:GetDB() return saved end
@@ -123,10 +126,11 @@ assert(sidePanel.markingTabBar and sidePanel.AutoMarksGroup, "side-panel tabs ar
 ART.AutoMarksUI:SetTab("autoMarks")
 assert(sidePanel.PullButtonScrollGroup.frame.shown == false and sidePanel.AutoMarksGroup.frame.shown == true,
     "Auto Marks replaces only the pull list")
-assert(#sidePanel.AutoMarksGroup.children == 4, "controls and NPC list render")
+assert(#sidePanel.AutoMarksGroup.children == 5, "controls, floor clear action, and NPC list render")
 
-local enable, modifier, scroll = sidePanel.AutoMarksGroup.children[1], sidePanel.AutoMarksGroup.children[2],
-    sidePanel.AutoMarksGroup.children[4]
+local enable, modifier, clear, scroll = sidePanel.AutoMarksGroup.children[1], sidePanel.AutoMarksGroup.children[2],
+    sidePanel.AutoMarksGroup.children[4], sidePanel.AutoMarksGroup.children[5]
+assert(clear.text == "Clear All Marks", "floor clear action is explicitly labeled")
 enable.callbacks.OnValueChanged(nil, nil, true)
 modifier.callbacks.OnValueChanged(nil, nil, "CTRL")
 assert(saved.autoMark == true and saved.autoMarkModifier == "CTRL" and liveMarksEnabled == true,
@@ -153,14 +157,14 @@ assert(firstRow.children[3].ccBadge.texture == "Interface\\Icons\\Spell_Nature_P
 firstRow.children[3].callbacks.OnClick()
 assert(clearedDefault and clearedDefault[1] == 100 and clearedDefault[2] == 7,
     "deselecting a marker clears its CC default")
-assert(sidePanel.AutoMarksGroup.children[4] == scroll,
+assert(sidePanel.AutoMarksGroup.children[5] == scroll,
     "marker clicks do not rebuild the Auto Marks list")
 assert(firstRow.children[3].ccBadge.shown == false,
     "clearing the CC default hides its class badge")
 scroll.status.scrollvalue, scroll.status.offset = 640, -120
 firstRow.children[2].callbacks.OnClick(nil, nil, "RightButton")
 menuAssignmentChanged({ ccKey = "POLYMORPH", assignee = { name = "Mage-Realm", classFile = "MAGE" } })
-assert(sidePanel.AutoMarksGroup.children[4] == scroll and firstRow.children[2].ccBadge.shown
+assert(sidePanel.AutoMarksGroup.children[5] == scroll and firstRow.children[2].ccBadge.shown
     and scroll.status.scrollvalue == 640 and scroll.status.offset == -120,
     "assigning CC updates the badge without replacing or moving the scroll list")
 firstRow.children[2].callbacks.OnClick()
@@ -168,12 +172,16 @@ assert(selected[1] == 100 and selected[2][1] == 5,
     "marker toggle persists the visible fallback priority")
 assert(firstRow.children[2].image.alpha == 0.2, "marker toggle updates its selected opacity immediately")
 
-assert(sidePanel.AutoMarksGroup.children[4] == scroll
+assert(sidePanel.AutoMarksGroup.children[5] == scroll
     and scroll.status.scrollvalue == 640 and scroll.status.offset == -120,
     "marker changes preserve the exact scroll widget and position")
+clear.callbacks.OnClick()
+assert(clearedFloorMarks == 1 and clearedFloorCC == 1
+    and sidePanel.AutoMarksGroup.children[5] ~= scroll,
+    "floor clear action removes visible-floor marks and CC assignments, then refreshes the list")
 
 ART:SetCurrentSubLevel(2)
-scroll = sidePanel.AutoMarksGroup.children[4]
+scroll = sidePanel.AutoMarksGroup.children[5]
 assert(#scroll.children == 1 and scroll.children[1].children[1].image.displayId == 2000,
     "changing floors refreshes Auto Marks with that floor's NPCs")
 

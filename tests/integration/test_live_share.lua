@@ -60,6 +60,7 @@ local prefixes = {
   cmd = "ARTLiveCmd", note = "ARTLiveNote", preset = "ARTLivePreset",
   pull = "ARTLivePull", free = "ARTLiveFree", bora = "ARTLiveBora",
   reqPre = "ARTLiveReqPre", progress = "ARTRaidProgress", ccAssignment = "ARTCCAssign",
+  playerMark = "ARTPlayerMark",
 }
 local livePreset = {
   uid = "route-live", text = "Live Route",
@@ -124,6 +125,9 @@ function ART:LiveSession_ReceiveProgress(message, distribution, sender)
 end
 ART.CCAssignments = { ReceiveChange = function(_, message, distribution, sender)
   record("cc", message, distribution, sender)
+end }
+ART.Roster = { ReceiveChange = function(_, message, distribution, sender)
+  record("playerMark", message, distribution, sender)
 end }
 
 assert(loadfile(root.."/Modules/LiveSession.lua"))("AnniversaryRaidTools", ART)
@@ -221,15 +225,20 @@ assert(livePreset.value.pulls == wavePulls, "wave pulls reject manual pull-list 
 livePreset.value.artWaveRaid = nil
 
 -- Progress and CC payloads are dispatched with normalized full sender names.
-local progressPayload, ccPayload = { index = 1 }, { operation = "set" }
+local progressPayload, ccPayload, playerMarkPayload = { index = 1 }, { operation = "set" }, { marker = 1 }
 fromAssist(prefixes.progress, progressPayload)
 fromAssist(prefixes.ccAssignment, ccPayload)
+fromAssist(prefixes.playerMark, playerMarkPayload)
 assert(count("progress") == 1 and calls.progress[1][1] == progressPayload
     and calls.progress[1][3] == "Assist-Realm")
 assert(count("cc") == 1 and calls.cc[1][1] == ccPayload and calls.cc[1][3] == "Assist-Realm")
+assert(count("playerMark") == 1 and calls.playerMark[1][1] == playerMarkPayload
+    and calls.playerMark[1][3] == "Assist-Realm")
 receive(ART.commsObject, prefixes.progress, progressPayload, "RAID", "Leader")
 receive(ART.commsObject, prefixes.ccAssignment, ccPayload, "RAID", "Leader")
-assert(count("progress") == 1 and count("cc") == 1, "self-originated live mutations are ignored")
+receive(ART.commsObject, prefixes.playerMark, playerMarkPayload, "RAID", "Leader")
+assert(count("progress") == 1 and count("cc") == 1 and count("playerMark") == 1,
+    "self-originated live mutations are ignored")
 
 -- Map pings are scaled locally and constrained to the live route and current floor.
 fromAssist(prefixes.ping, "4:6:1")

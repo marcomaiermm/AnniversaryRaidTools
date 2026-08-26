@@ -41,7 +41,10 @@ local function raid(mode)
     instanceId = mode == "route" and 9001 or 9002,
     mapId = 565,
     mode = mode,
-    sublevels = { { index = 1, name = "Test Floor", mapId = 565 } },
+    sublevels = {
+      { index = 1, name = "Test Floor", mapId = 565 },
+      { index = 2, name = "Other Floor", mapId = 566 },
+    },
     enemies = {
       ["100"] = { npcId = 100, name = "Test Mob", spawns = { spawnA, spawnB }, source = provenance() },
       ["200"] = { npcId = 200, name = "Test Caster", spawns = { spawnC }, source = provenance() },
@@ -53,6 +56,7 @@ local function raid(mode)
     pois = { [1] = {} },
   }
   if mode == "waves" then
+    spawnC.sublevel = 2
     result.waves = {
       { waveKey = "wave-a", camp = "entrance", packKeys = { packA }, source = provenance() },
       { waveKey = "wave-b", camp = "bridge", packKeys = { packB }, source = provenance() },
@@ -135,5 +139,14 @@ assert(not mismatch and mismatchReason:find("wave composition", 1, true), "wave 
 waves.routeSteps[1].packKeys = originalPack
 assert(presets:Validate(waves, wavesRaid))
 assert(presets:Import(assert(presets:Export(waves, wavesRaid)), registry))
+
+local legacy = presets:Create(wavesRaid)
+legacy.marking.floorNpcDefaults = nil
+legacy.marking.npcDefaults = { [100] = { 1 }, [200] = { 2 } }
+local migrated = assert(presets:Import(legacy, registry))
+assert(migrated.marking.floorNpcDefaults[1][100][1] == 1
+    and migrated.marking.floorNpcDefaults[2][200][1] == 2,
+    "legacy NPC defaults migrate onto every floor containing that NPC")
+assert(next(migrated.marking.npcDefaults) == nil, "legacy defaults are cleared after migration")
 
 print("route/waves preset checks passed")

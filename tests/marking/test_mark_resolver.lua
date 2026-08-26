@@ -16,10 +16,16 @@ local raid = {
 }
 local step = { id = "pull-1", packKeys = { "p" }, marks = { s1 = 1, s2 = 8 } }
 local blocked = {}
+local currentFloor = 1
 local resolver = ART.MarkResolver.new({
   raid = raid,
   routeSteps = { step },
-  profile = { npcDefaults = { [100] = { 3, 4 }, [200] = { 5 } }, packOverrides = {} },
+  profile = {
+    npcDefaults = {},
+    floorNpcDefaults = { [1] = { [100] = { 3, 4 }, [200] = { 5 } }, [2] = { [200] = { 6 } } },
+    packOverrides = {},
+  },
+  getCurrentSublevel = function() return currentFloor end,
   getUnitInfo = function(token) return units[token] end,
   unitExists = function(token) return units[token] ~= nil end,
   markerAvailable = function(marker) return not blocked[marker] end,
@@ -56,6 +62,10 @@ assert(marker == nil and result.reason == "slots-exhausted", "global fallbacks s
 units.outside = { guid = "outside", npcId = 200 }
 marker, result = resolver:ResolveUnit("outside")
 assert(marker == 5 and result.source == "global", "global rules are raid-wide")
+resolver:ResetActivePack()
+currentFloor = 2
+assert(resolver:ResolveUnit("outside") == 6, "floor defaults switch with the active floor")
+currentFloor = 1
 
 assert(resolver:ActivateRouteStep(nil) == false)
 resolver:ResetActivePack()

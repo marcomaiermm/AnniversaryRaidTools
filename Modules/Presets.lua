@@ -255,6 +255,7 @@ function ART:NormalizeCurrentPreset()
     pull["color"] = pull["color"] or "228b22"
   end
   if ART.CCAssignments then ART.CCAssignments:NormalizePreset(preset) end
+  if ART.Roster then ART.Roster:NormalizePreset(preset) end
 
   --make sure sublevel actually exists for the raid
   --this might have been caused by bugged dropdowns in the past
@@ -384,6 +385,7 @@ function ART:ValidateImportPreset(preset, allowKnownRaid)
     return false
   end
   if ART.CCAssignments then ART.CCAssignments:NormalizePreset(preset) end
+  if ART.Roster then ART.Roster:NormalizePreset(preset) end
   return true
 end
 

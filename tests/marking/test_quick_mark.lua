@@ -1,5 +1,6 @@
 local root = arg[1] or "."
 local frames = {}
+local inCombat = false
 
 UIParent = {}
 function CreateFrame(_, name)
@@ -13,8 +14,15 @@ function CreateFrame(_, name)
   frames[name] = frame
   return frame
 end
-function ClearOverrideBindings(owner) owner.bindings = {} end
-function SetOverrideBindingClick(owner, _, key, buttonName) owner.bindings[key] = buttonName end
+function InCombatLockdown() return inCombat end
+function ClearOverrideBindings(owner)
+  assert(not inCombat, "ClearOverrideBindings called in combat")
+  owner.bindings = {}
+end
+function SetOverrideBindingClick(owner, _, key, buttonName)
+  assert(not inCombat, "SetOverrideBindingClick called in combat")
+  owner.bindings[key] = buttonName
+end
 function GetBindingKey(binding) return binding == "RAIDTARGET1" and "CTRL-F1" or nil end
 
 ART = {
@@ -61,5 +69,10 @@ ART.QuickMark:Arm(blip)
 frames[capture.bindings["1"]].scripts.OnClick()
 assert(ART.legacyApplied[1] == 2 and ART.legacyApplied[2] == 3 and ART.legacyApplied[3] == 8 and blip.updated)
 ART.QuickMark:Disarm(blip)
+
+inCombat = true
+ART.QuickMark:Arm(blip)
+ART.QuickMark:Disarm(blip)
+inCombat = false
 
 print("quick mark checks passed")

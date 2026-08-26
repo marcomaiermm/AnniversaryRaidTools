@@ -50,6 +50,7 @@ _G.GetRaidTargetIndex = function(token)
 end
 _G.SetRaidTarget = function(token, marker)
   local guid = assert(units[token] and units[token].guid)
+  if marker == 0 then liveMarkers[guid] = nil return end
   for otherGuid, otherMarker in pairs(liveMarkers) do
     if otherGuid ~= guid and otherMarker == marker then liveMarkers[otherGuid] = nil end
   end
@@ -159,6 +160,37 @@ hover("permission")
 assert(liveMarkers[units.permission.guid] == 6, "raid assistants may mark")
 inRaid, isAssistant = false, false
 
+units.raid1 = { guid = "Player-0-0-0-0-1-Mage" }
+units.raid2 = { guid = "Player-0-0-0-0-2-Other" }
+_G.GetNumGroupMembers = function() return 2 end
+_G.UnitFullName = function(token)
+  if token == "raid1" then return "Mage", "Realm" end
+  if token == "raid2" then return "Other", "Realm" end
+  if token == "player" then return "Leader", "Realm" end
+end
+local playerSuppressed, clearedAssignments = false, 0
+ART.CCAssignments = { GetAssignmentRows = function()
+  if playerSuppressed then return { { marker = 1, npcId = 100, name = "Enemy" } } end
+  return { { marker = 1, playerGlobal = true, player = { name = "Mage-Realm", classFile = "MAGE" } } }
+end, ClearActivePullAssignments = function() clearedAssignments = clearedAssignments + 1 end }
+inRaid, isAssistant = true, true
+eventFrame.onEvent(eventFrame, "GROUP_ROSTER_UPDATE")
+assert(liveMarkers[units.raid1.guid] == 1, "a free global player mark is applied to its raid member")
+playerSuppressed = true
+ART.LiveMarks:OnPlanChanged()
+assert(liveMarkers[units.raid1.guid] == nil, "a higher-priority NPC mark removes the managed player mark")
+playerSuppressed = false
+ART.LiveMarks:OnPlanChanged()
+assert(liveMarkers[units.raid1.guid] == 1, "the player mark returns when the higher-priority mark is free")
+liveMarkers[units.raid2.guid] = 7
+ART.CCAssignments.GetAssignmentRows = function()
+  return { { marker = 7, playerGlobal = true, player = { name = "Mage-Realm", classFile = "MAGE" } } }
+end
+ART.LiveMarks:ReconcilePlayerMarks()
+assert(liveMarkers[units.raid2.guid] == 7 and liveMarkers[units.raid1.guid] == nil,
+    "global player reconciliation never displaces a foreign marker holder")
+inRaid, isAssistant = false, false
+
 settings.autoMark = false
 units.disabled = { guid = "Creature-0-0-0-0-200-disabled" }
 hover("disabled")
@@ -166,6 +198,7 @@ assert(liveMarkers[units.disabled.guid] == nil, "disabled auto marking is inert"
 
 assert(ART.LiveMarks:ClearWorldMarks())
 assert(clearedMarks == 1 and next(liveMarkers) == nil, "manual clear removes all world marks")
+assert(clearedAssignments == 1, "manual clear also removes active-pull CC assignments")
 settings.autoMark, altDown = true, true
 hover("one")
 assert(liveMarkers[units.one.guid] == 1, "manual clear resets resolver assignments")

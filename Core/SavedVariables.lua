@@ -28,6 +28,7 @@ local defaultSavedVars = {
       color = { r = 1, g = 1, b = 1, a = 1 },
       brushSize = 3,
     },
+    roster = { slots = {} },
     presets = {},
     currentPreset = {},
     alwaysOverwriteRoutesByUID = false,

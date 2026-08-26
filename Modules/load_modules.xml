@@ -23,6 +23,7 @@ Modified for Anniversary Raid Tools beginning 2026-08-21.
 	<Script file='Transmission.lua'/>
 	<Script file='NavigationSidebar.lua'/>
 	<Script file='Settings.lua'/>
+	<Script file='Roster.lua'/>
 	<Script file='LiveSession.lua'/>
 	<Script file='Maximize.lua'/>
 	<Script file='API.lua'/>

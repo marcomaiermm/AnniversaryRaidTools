@@ -121,6 +121,11 @@ function ART:SetLegacyBlipMark(enemyIdx, cloneIdx, marker)
   end
   assignments[enemyIdx] = assignments[enemyIdx] or {}
   assignments[enemyIdx][cloneIdx] = marker
+  if not marker and self.CCAssignments then
+    local blip = findLegacyBlip(enemyIdx, cloneIdx)
+    local spawnKey = blip and blip.clone and blip.clone.artSpawnKey
+    if spawnKey then self.CCAssignments:ClearPullAssignment(preset, self:GetCurrentPull(), spawnKey, true) end
+  end
   notifyLiveMarkPlanChanged()
 end
 
@@ -694,7 +699,7 @@ local createEnemyContextMenu = function(frame)
       and #planner:FindStepsForPack(frame.clone.artPackKey) > 0
   ART:CreateContextMenu(ART.main_frame, function(ownerRegion, rootDescription)
     rootDescription:CreateTitle(L[frame.data.name])
-    local ccSetMarker
+    local ccSetMarker, clearMarker, markerMenu
 
     if useRouteMarks then
       local packKey, spawnKey = frame.clone.artPackKey, frame.clone.artSpawnKey
@@ -713,14 +718,17 @@ local createEnemyContextMenu = function(frame)
         frame:SetUp(frame.data, frame.clone)
         return applied ~= nil
       end
-      local submenu = rootDescription:CreateButton(L["Set Target Marker"], function() end);
+      markerMenu = rootDescription:CreateButton(L["Set Target Marker"], function() end);
       for i = 1, 8 do
         local iconPath = ICON_LIST[i].."16:16:|t"
         local color = CreateColor(unpack(iconColors[i]))
         local iconName = WrapTextInColor(_G["RAID_TARGET_"..i], color)
-        submenu:CreateRadio(iconPath.." "..iconName, IsSelected, SetSelected, { index = i })
+        markerMenu:CreateRadio(iconPath.." "..iconName, IsSelected, SetSelected, { index = i })
       end
-      submenu:CreateRadio(L["None"], IsSelected, SetSelected, { index = 0 })
+      clearMarker = function()
+        planner:SetSpawnMark(packKey, spawnKey, nil)
+        frame:SetUp(frame.data, frame.clone)
+      end
     else
       local function IsSelected(data)
         local assignment = assignments[data.enemyIdx] and assignments[data.enemyIdx][data.cloneIdx]
@@ -739,27 +747,31 @@ local createEnemyContextMenu = function(frame)
         frame:SetUp(frame.data, frame.clone)
         return true
       end
-      local submenu = rootDescription:CreateButton(L["Set Target Marker"], function() end);
+      markerMenu = rootDescription:CreateButton(L["Set Target Marker"], function() end);
       for i = 1, 8 do
         local iconPath = ICON_LIST[i].."16:16:|t"
         local color = CreateColor(unpack(iconColors[i]))
         local iconName = WrapTextInColor(_G["RAID_TARGET_"..i], color)
-        submenu:CreateRadio(iconPath.." "..iconName, IsSelected, SetSelected,
+        markerMenu:CreateRadio(iconPath.." "..iconName, IsSelected, SetSelected,
             { enemyIdx = frame.enemyIdx, cloneIdx = frame.cloneIdx, index = i })
       end
-      submenu:CreateRadio(L["None"], IsSelected, SetSelected,
-          { enemyIdx = frame.enemyIdx, cloneIdx = frame.cloneIdx, index = 0 })
-      submenu:CreateButton(L["Clear all Markers"], function()
-        twipe(assignments)
-        notifyLiveMarkPlanChanged()
+      clearMarker = function()
+        ART:SetLegacyBlipMark(frame.enemyIdx, frame.cloneIdx, nil)
+        frame:SetUp(frame.data, frame.clone)
+      end
+    end
+    markerMenu:CreateButton(L["Clear Mark"], clearMarker)
+    if useRouteMarks then
+      rootDescription:CreateButton(L["Clear all Markers"], function()
+        planner:ClearAllSpawnMarks()
         ART:Async(function()
           ART:RaidEnemies_UpdateEnemiesAsync()
         end, "ClearAllMarkers")
       end)
-    end
-    if useRouteMarks then
+    else
       rootDescription:CreateButton(L["Clear all Markers"], function()
-        planner:ClearAllSpawnMarks()
+        twipe(assignments)
+        notifyLiveMarkPlanChanged()
         ART:Async(function()
           ART:RaidEnemies_UpdateEnemiesAsync()
         end, "ClearAllMarkers")
@@ -1350,8 +1362,10 @@ end
 ---Adds or removes an enemy clone and all it's linked npcs to the currently selected pull
 function ART:RaidEnemies_AddOrRemoveBlipToCurrentPull(blip, add, ignoreGrouped, pulls, pull, ignoreUpdates)
   local preset = self:GetCurrentPreset()
+  local storedPulls = pulls == nil
   local enemyIdx = blip.enemyIdx
   local cloneIdx = blip.cloneIdx
+  local spawnKey = blip.clone and blip.clone.artSpawnKey
   pull = pull or preset.value.currentPull
   pulls = pulls or preset.value.pulls or {}
   pulls[pull] = pulls[pull] or {}
@@ -1362,6 +1376,11 @@ function ART:RaidEnemies_AddOrRemoveBlipToCurrentPull(blip, add, ignoreGrouped, 
       for k, v in pairs(p[enemyIdx]) do
         if v == cloneIdx then
           tremove(pulls[pullIdx][enemyIdx], k)
+          local assignments = p.artCCAssignments
+          if spawnKey and assignments then
+            assignments[spawnKey] = nil
+            if not next(assignments) then p.artCCAssignments = nil end
+          end
         end
       end
     end
@@ -1384,6 +1403,11 @@ function ART:RaidEnemies_AddOrRemoveBlipToCurrentPull(blip, add, ignoreGrouped, 
         tremove(pulls[pull][enemyIdx], k)
       end
     end
+    local assignments = pulls[pull].artCCAssignments
+    if spawnKey and assignments then
+      assignments[spawnKey] = nil
+      if not next(assignments) then pulls[pull].artCCAssignments = nil end
+    end
   end
   --linked npcs
   if not ignoreGrouped then
@@ -1393,6 +1417,7 @@ function ART:RaidEnemies_AddOrRemoveBlipToCurrentPull(blip, add, ignoreGrouped, 
       end
     end
   end
+  if storedPulls and not ignoreUpdates then notifyLiveMarkPlanChanged() end
   -- if not ignoreUpdates then self:UpdatePullButtonNPCData(pull) end
 end
 

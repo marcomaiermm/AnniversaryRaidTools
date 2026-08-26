@@ -18,11 +18,12 @@ define exact data shapes and validation rules.
 | [ART-0008](ART-0008-route-step-marking.md) | Superseded by ART-0010 | Route-step marking and activation |
 | [ART-0009](ART-0009-spatial-packs-and-pull-linking.md) | Accepted | Spatial packs and pull linking |
 | [ART-0010](ART-0010-preset-wide-live-marking.md) | Superseded by ART-0011 | Preset-wide token reconciliation and automatic progress |
-| [ART-0011](ART-0011-intentional-mouseover-marking.md) | Accepted | Intentional mouseover marking with pull/global precedence |
+| [ART-0011](ART-0011-intentional-mouseover-marking.md) | Superseded by ART-0016 | Intentional mouseover marking with pull/global precedence |
 | [ART-0012](ART-0012-hyjal-wave-mode.md) | Accepted | Hyjal wave composition and approximate route presentation |
 | [ART-0013](ART-0013-live-raid-progress-sync.md) | Accepted | Authorized pull and wave synchronization through Live Sessions |
 | [ART-0014](ART-0014-cc-assignments.md) | Accepted | Marker-keyed pull/default CC assignments and local aura tracking |
 | [ART-0015](ART-0015-load-on-demand-performance.md) | Accepted | Load-on-demand UI and active raid projection |
+| [ART-0016](ART-0016-roster-and-layered-marks.md) | Accepted | Local roster, player marks, and three-layer mark precedence |
 
 ## Convention
 

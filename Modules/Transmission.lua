@@ -194,6 +194,11 @@ function ARTcommsObject:OnCommReceived(prefix, message, distribution, sender)
     return
   end
 
+  if prefix == ART.liveSessionPrefixes.playerMark then
+    if ART.Roster then ART.Roster:ReceiveChange(message, distribution, fullName) end
+    return
+  end
+
   if prefix == ART.liveSessionPrefixes.request then
     if ART.liveSessionActive then
       ART:LiveSession_NotifyEnabled()
