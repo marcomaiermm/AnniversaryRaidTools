@@ -1,5 +1,5 @@
 -- Black Temple client-map inventory; floor alignment remains candidate for 20505/20506.
-local addonName, ART = ...
+local _, ART = ...
 
 local source = {
   source = "client-data",
@@ -20,7 +20,7 @@ local floors = {
 }
 
 local clientTextureFloors = { 1, nil, 2, 3, 4, 5, 6, 7 }
-local trainingGroundsTextures = "Interface\\AddOns\\"..addonName.."\\Raids\\TBC\\Textures\\BlackTempleTrainingGrounds"
+local trainingGroundsTextures = ART.AddonPath.."Raids\\TBC\\Textures\\BlackTempleTrainingGrounds"
 
 local sublevels = {}
 for index, floor in ipairs(floors) do

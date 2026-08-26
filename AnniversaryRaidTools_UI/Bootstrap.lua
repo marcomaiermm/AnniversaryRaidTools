@@ -2,6 +2,10 @@ local addonName, ART = ...
 local API = assert(_G.AnniversaryRaidToolsAPI,
   "Anniversary Raid Tools UI requires Anniversary Raid Tools")
 
+ART.StaticData = ART.StaticData or {}
+ART.StaticData.raids = ART.StaticData.raids or {}
+ART.StaticData.enemyInfo = ART.StaticData.enemyInfo or {}
+
 ART.UIAddonName = addonName
 ART.AddonName = API:GetAddonName()
 ART.AddonPath = API:GetAddonPath()

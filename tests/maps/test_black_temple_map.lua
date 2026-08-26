@@ -1,8 +1,11 @@
 -- Pure-Lua ART-080 Black Temple map and transform checks.
 local root = arg and arg[1] or "."
-local ART = { StaticData = { raids = {} } }
+local ART = {
+  AddonPath = "Interface\\AddOns\\AnniversaryRaidTools\\",
+  StaticData = { raids = {} },
+}
 _G.ART = ART
-local map = assert(loadfile(root.."/Raids/TBC/Maps/BlackTemple.lua"))("AnniversaryRaidTools", ART)
+local map = assert(loadfile(root.."/Raids/TBC/Maps/BlackTemple.lua"))("AnniversaryRaidTools_UI", ART)
 local transform = assert(loadfile(root.."/Raids/TBC/Transforms/BlackTemple.lua"))("AnniversaryRaidTools", ART)
 local raid = assert(loadfile(root.."/Raids/TBC/Generated/BlackTemple.lua"))("AnniversaryRaidTools_UI", ART)
 
@@ -79,7 +82,8 @@ for sublevel = 1, 8 do
   assert(floor.asset.textureFolder == "BlackTemple", "asset folder mismatch")
   if sublevel == 2 then
     assert(floor.asset.texturePrefix == nil, "training grounds must not claim a missing client texture")
-    assert(floor.asset.customTextures:match("BlackTempleTrainingGrounds$"), "training grounds custom texture missing")
+    assert(floor.asset.customTextures == ART.AddonPath.."Raids\\TBC\\Textures\\BlackTempleTrainingGrounds",
+      "training grounds custom texture must resolve through the core addon")
   else
     assert(floor.asset.texturePrefix == texturePrefixes[sublevel], "client texture prefix mismatch")
   end
