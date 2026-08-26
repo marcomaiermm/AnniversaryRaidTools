@@ -228,11 +228,51 @@ check_removed_features() {
   hits=$(grep -RInE "$pattern" "$ROOT/Core" "$ROOT/Modules" "$ROOT/Locales" \
     "$ROOT/AnniversaryRaidTools.lua" "$ROOT/AnniversaryRaidTools_UI" \
     "$ROOT/README.md" "$ROOT/CONTRIBUTING.md" "$ROOT/AnniversaryRaidTools.toc" 2>/dev/null \
+    | grep -v 'SPDX-FileCopyrightText: 2018-2026 Nnoggie and Mythic Dungeon Tools contributors' \
     | grep -v 'github[.]com/marcomaiermm/AnniversaryRaidTools' || true)
   if [[ -n $hits ]]; then
     fail "removed feature/reference returned: $(printf '%s' "$hits" | head -n 10 | tr '\n' ' ')"
   else
     pass "removed features and project links remain absent"
+  fi
+}
+
+check_mdt_provenance() {
+  local manifest="$ROOT/docs/contracts/mdt-derived-files.txt"
+  local file marker missing=0
+  local -a markers=(
+    "SPDX-FileCopyrightText: 2018-2026 Nnoggie and Mythic Dungeon Tools contributors"
+    "SPDX-FileCopyrightText: 2026 pyresin and Anniversary Raid Tools contributors"
+    "SPDX-License-Identifier: GPL-2.0-only"
+    "Modified for Anniversary Raid Tools beginning 2026-08-21."
+  )
+
+  if [[ ! -f $ROOT/NOTICE || ! -f $manifest ]]; then
+    fail "MDT provenance requires NOTICE and docs/contracts/mdt-derived-files.txt"
+    return
+  fi
+  for marker in "Nnoggie" "Mythic Dungeon Tools" "GPL-2.0"; do
+    if ! grep -Fq "$marker" "$ROOT/NOTICE"; then
+      fail "NOTICE is missing provenance marker: $marker"
+      missing=1
+    fi
+  done
+  while IFS= read -r file; do
+    [[ -z $file || $file == \#* ]] && continue
+    if [[ ! -f $ROOT/$file ]]; then
+      fail "MDT-derived source manifest entry missing: $file"
+      missing=1
+      continue
+    fi
+    for marker in "${markers[@]}"; do
+      if ! grep -Fq "$marker" "$ROOT/$file"; then
+        fail "$file is missing provenance marker: $marker"
+        missing=1
+      fi
+    done
+  done < "$manifest"
+  if [[ $missing == 0 ]]; then
+    pass "MDT-derived sources retain SPDX, authorship and modification notices"
   fi
 }
 
@@ -320,6 +360,7 @@ check_library_load_split
 check_lua_syntax
 check_banned_domain_tokens
 check_removed_features
+check_mdt_provenance
 check_private_namespace
 run_discovered_tests
 

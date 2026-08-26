@@ -1,4 +1,9 @@
 local _, ART = ...
+-- SPDX-FileCopyrightText: 2018-2026 Nnoggie and Mythic Dungeon Tools contributors
+-- SPDX-FileCopyrightText: 2026 pyresin and Anniversary Raid Tools contributors
+-- SPDX-License-Identifier: GPL-2.0-only
+-- Modified for Anniversary Raid Tools beginning 2026-08-21.
+
 local db
 local tonumber, tinsert, pairs, ipairs, tostring, twipe, max, min, abs, sqrt, tremove, floor, DrawLine = tonumber,
     table.insert, pairs, ipairs, tostring, table.wipe, math.max, math.min, math.abs, math.sqrt, table.remove, math.floor,
