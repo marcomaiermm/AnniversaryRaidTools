@@ -12,6 +12,11 @@ local timer
 local requestTimer
 local raidPrompted
 
+function ART:LiveSession_SetUID(uid)
+  self.livePresetUID = uid
+  if self.liveSessionActive then self:GetDB().liveSessionUID = uid end
+end
+
 local function fullName(unit)
   local name, realm = UnitFullName(unit)
   if not name then return end
@@ -125,8 +130,10 @@ function ART:LiveSession_CheckRaidPrompt()
 end
 
 ---LiveSession_Enable
-function ART:LiveSession_Enable()
+function ART:LiveSession_Enable(restoring)
   if self.liveSessionActive then return end
+  local preset = restoring and self:GetCurrentLivePreset() or self:GetCurrentPreset()
+  if not preset then return false end
   self.main_frame.LiveSessionButton:SetText(L["*Live*"])
   self.main_frame.LiveSessionButton.text:SetTextColor(0, 1, 0)
   self.main_frame.LinkToChatButton:SetDisabled(true)
@@ -134,12 +141,13 @@ function ART:LiveSession_Enable()
   self.main_frame.sidePanelDeleteButton:SetDisabled(true)
   self.main_frame.sidePanelDeleteButton.text:SetTextColor(0.5, 0.5, 0.5)
   self.liveSessionActive = true
-  self:SetUniqueID(self:GetCurrentPreset())
-  self:EnsurePresetCreatedBy(self:GetCurrentPreset())
-  self.livePresetUID = self:GetCurrentPreset().uid
+  self:SetUniqueID(preset)
+  self:EnsurePresetCreatedBy(preset)
+  self:LiveSession_SetUID(preset.uid)
   -- The local session must participate so simultaneous joins choose the same ranked owner.
   self:LiveSession_RequestSession()
   self:UpdatePresetDropdownTextColor()
+  if restoring then return true end
   timer = C_Timer.NewTimer(2, function()
     local callback = function()
       self.liveSessionRequested = false
@@ -158,6 +166,24 @@ function ART:LiveSession_Enable()
     local fireCancelOnClose = true
     ART:CheckPresetSize(callback, cancelCallback, fireCancelOnClose)
   end)
+  return true
+end
+
+function ART:LiveSession_Restore()
+  local uid = self:GetDB().liveSessionUID
+  if type(uid) ~= "string" or uid == "" or self.liveSessionActive then return false end
+  self.livePresetUID = uid
+  if not self:GetCurrentLivePreset() then
+    self:GetDB().liveSessionUID, self.livePresetUID = nil, nil
+    return false
+  end
+  self:RunAfterFramesInitialized(function()
+    if self:GetDB().liveSessionUID ~= uid or self.liveSessionActive then return end
+    self:ReturnToLivePreset()
+    self:LiveSession_Enable(true)
+  end)
+  self:StartMainFrameInitialization()
+  return true
 end
 
 ---LiveSession_Disable
@@ -176,6 +202,7 @@ function ART:LiveSession_Disable()
     self.main_frame.sidePanelDeleteButton.text:SetTextColor(1, 0.8196, 0)
   end
   self.liveSessionActive = false
+  self:GetDB().liveSessionUID = nil
   self.liveSessionAcceptingPreset = false
   self:UpdatePresetDropdownTextColor()
   self.main_frame.liveReturnButton:Hide()
@@ -244,7 +271,7 @@ function ART:LiveSession_SessionFound(sender, uid)
 
         self.liveSessionRequested = false
         self:LiveSession_RequestPreset(preferred[1])
-        self.livePresetUID = preferred[2]
+        self:LiveSession_SetUID(preferred[2])
       else
         self.liveSessionAcceptingPreset = false
         self.liveSessionRequested = false
@@ -341,7 +368,31 @@ function ART:LiveSession_SendPreset(preset)
     local silent, fromLiveSession = true, true
     ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.preset, export, distribution, nil, "BULK", ART.displaySendingProgress,
       { distribution, preset, silent, fromLiveSession })
+    self:LiveSession_SendRoute()
   end
+end
+
+function ART:LiveSession_SendRoute(route)
+  local preset, distribution = self:GetCurrentPreset(), self:IsPlayerInGroup()
+  if self.applyingLiveRoute or not self.liveSessionActive or distribution ~= "RAID"
+      or not self:LiveSession_CanControlProgress() or not preset or preset.uid ~= self.livePresetUID then return false end
+  route = route or (self.RaidPlanner and self.RaidPlanner.Export and self.RaidPlanner:Export())
+  if type(route) ~= "table" then return false end
+  ARTcommsObject:SendCommMessage(self.liveSessionPrefixes.route, self:TableToString(route), distribution, nil, "BULK")
+  return true
+end
+
+function ART:LiveSession_ReceiveRoute(message, distribution, sender)
+  if not self.liveSessionActive or distribution ~= "RAID" or sender == fullName("player")
+      or not self:LiveSession_CanControlProgress(sender) or not self.RaidPlanner or not self.RaidPlanner.Import then
+    return false
+  end
+  local route = type(message) == "table" and message or self:StringToTable(message, false)
+  if type(route) ~= "table" then return false end
+  self.applyingLiveRoute = true
+  local imported = self.RaidPlanner:Import(route)
+  self.applyingLiveRoute = nil
+  return imported ~= nil
 end
 
 ---Sends the current pull payload consumed by the transmission receiver.
@@ -362,3 +413,5 @@ if type(CreateFrame) == "function" then
     C_Timer.After(0.5, function() ART:LiveSession_CheckRaidPrompt() end)
   end)
 end
+
+if ART.GetDB and ART:GetDB().liveSessionUID then C_Timer.After(0, function() ART:LiveSession_Restore() end) end

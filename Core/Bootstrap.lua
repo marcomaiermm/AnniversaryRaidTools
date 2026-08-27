@@ -309,6 +309,7 @@ ART.liveSessionPrefixes = {
   progress = "ARTRaidProgress",
   ccAssignment = "ARTCCAssign",
   playerMark = "ARTPlayerMark",
+  route = "ARTLiveRoute",
 }
 
 ART.commsObject = ART.commsObject or {}
@@ -427,6 +428,7 @@ eventFrame:SetScript("OnEvent", function(self, event)
   if event == "PLAYER_ENTERING_WORLD" then
     ART:RefreshMinimapButton()
     if db.loadOnStartUp and db.devMode then ART:ShowInterface(true) end
+    if db.liveSessionUID then ART:LoadUI("live-session") end
     loadPlayerMarksInRaid()
   elseif event == "GROUP_ROSTER_UPDATE" then
     loadPlayerMarksInRaid()

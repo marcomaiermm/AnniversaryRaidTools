@@ -1,3 +1,8 @@
+## 1.0.3 (2026-08-27)
+
+- Preserved active Live Sessions across UI reloads.
+- Synchronized floor-wide NPC marks when joining and editing Live Sessions.
+
 ## 1.0.2 (2026-08-27)
 
 - Fixed release packages omitting the load-on-demand UI addon.

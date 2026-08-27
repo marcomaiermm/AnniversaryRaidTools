@@ -136,7 +136,7 @@ function ART:SetLivePreset()
   local preset = self:GetCurrentPreset()
   local callback = function()
     self:SetUniqueID(preset)
-    self.livePresetUID = preset.uid
+    self:LiveSession_SetUID(preset.uid)
     self:LiveSession_SendPreset(preset)
     self:UpdatePresetDropdownTextColor()
     self.main_frame.setLivePresetButton:Hide()

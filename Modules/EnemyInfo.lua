@@ -486,7 +486,10 @@ function Integration:Initialize()
     wireMarks(preset, activeRaid)
     if not routeStore or self.preserveStoredRoutes[activeRaid.key] then return end
     local exported = routePreset:Export(preset, activeRaid)
-    if exported then routeStore.presets[activeRaid.key] = exported end
+    if exported then
+      routeStore.presets[activeRaid.key] = exported
+      if ART.LiveSession_SendRoute then ART:LiveSession_SendRoute(exported) end
+    end
   end
 
   planner = ART.RaidPlanner:Initialize({

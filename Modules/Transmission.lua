@@ -199,6 +199,11 @@ function ARTcommsObject:OnCommReceived(prefix, message, distribution, sender)
     return
   end
 
+  if prefix == ART.liveSessionPrefixes.route then
+    ART:LiveSession_ReceiveRoute(message, distribution, fullName)
+    return
+  end
+
   if prefix == ART.liveSessionPrefixes.request then
     if ART.liveSessionActive then
       ART:LiveSession_NotifyEnabled()
@@ -211,6 +216,7 @@ function ARTcommsObject:OnCommReceived(prefix, message, distribution, sender)
     playerName = playerName.."-"..playerRealm
     if playerName == message then
       ART:SendToGroup(ART:IsPlayerInGroup(), true, ART:GetCurrentLivePreset())
+      ART:LiveSession_SendRoute()
     end
   end
 
@@ -312,7 +318,7 @@ function ARTcommsObject:OnCommReceived(prefix, message, distribution, sender)
       ART.transmissionCache[fullName] = ART.transmissionCache[fullName] or {}
       ART.transmissionCache[fullName][displayName] = preset
       if ART:ValidateImportPreset(preset) then
-        ART.livePresetUID = preset.uid
+        ART:LiveSession_SetUID(preset.uid)
         ART:ImportPreset(preset, true)
       end
     end

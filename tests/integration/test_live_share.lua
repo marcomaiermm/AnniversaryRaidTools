@@ -60,7 +60,7 @@ local prefixes = {
   cmd = "ARTLiveCmd", note = "ARTLiveNote", preset = "ARTLivePreset",
   pull = "ARTLivePull", free = "ARTLiveFree", bora = "ARTLiveBora",
   reqPre = "ARTLiveReqPre", progress = "ARTRaidProgress", ccAssignment = "ARTCCAssign",
-  playerMark = "ARTPlayerMark",
+  playerMark = "ARTPlayerMark", route = "ARTLiveRoute",
 }
 local livePreset = {
   uid = "route-live", text = "Live Route",
@@ -68,22 +68,37 @@ local livePreset = {
   objects = { { d = { 10, 20, 0, 0, "old" } }, { d = { 30, 40, 0, 0, "second" } } },
 }
 local browsedPreset = livePreset
+local db = {
+  presets = { [161] = { livePreset } }, currentPreset = { [161] = 1 }, currentRaidIndex = 161,
+}
+local routePreset = {
+  schemaVersion = 1, raidKey = "black-temple", currentSublevel = 1, routeSteps = {},
+  marking = { npcDefaults = {}, floorNpcDefaults = { [1] = { [22844] = { 8 } } }, packOverrides = {} },
+}
+local importedRoute
 local ART = {
   L = setmetatable({}, { __index = function(_, key) return key end }),
   commsObject = { SendCommMessage = function(_, ...) sent[#sent + 1] = { ... } end },
   presetCommPrefix = "ARTPreset", versionCheckPrefix = "ARTVersion",
   liveSessionPrefixes = prefixes, liveSessionActive = true, liveSessionRequested = true,
   livePresetUID = livePreset.uid, knownRaids = {},
-  RaidPlanner = { raid = { key = "black-temple" } },
+  RaidPlanner = {
+    raid = { key = "black-temple" },
+    Export = function() return routePreset end,
+    Import = function(_, value) importedRoute = value; return value end,
+  },
   main_frame = {
     SendingStatusBar = {
       Show = function() end, Hide = function() record("hideStatus") end, SetValue = function() end,
       value = { SetText = function() end },
     },
     LiveSessionButton = { SetText = function() end, SetDisabled = function() end,
-      text = { SetTextColor = function() end } },
+      normalTextColor = { r = 1, g = 1, b = 1 }, text = { SetTextColor = function() end, SetText = function() end } },
     LinkToChatButton = { SetText = function() end, SetDisabled = function() end,
       text = { SetTextColor = function() end } },
+    sidePanelDeleteButton = { SetDisabled = function() end, text = { SetTextColor = function() end } },
+    liveReturnButton = { Hide = function() end }, setLivePresetButton = { Hide = function() end },
+    sidePanel = { WidgetGroup = { PresetDropDown = { text = { SetTextColor = function() end } } } },
   },
   Compat = { SendChatMessage = function(_, message, distribution)
     chat[#chat + 1] = { message = message, distribution = distribution }
@@ -102,7 +117,11 @@ function ART:GetRaidName(index) return index == 161 and "Black Temple" or nil en
 function ART:ValidateImportPreset(value) return type(value) == "table" and type(value.value) == "table" end
 function ART:SetUniqueID(preset) preset.uid = preset.uid or "generated" end
 function ART:EnsurePresetCreatedBy(preset) preset.createdBy = preset.createdBy or "Leader-Realm" end
-function ART:GetDB() return { presets = {} } end
+function ART:GetDB() return db end
+function ART:UpdatePresetDropdownTextColor() end
+function ART:ReturnToLivePreset() record("returnLive") end
+function ART:RunAfterFramesInitialized(callback) callback() end
+function ART:StartMainFrameInitialization() record("initializeFrames") end
 function ART:SetSelectionToPull(index) browsedPreset.value.currentPull = index; record("selectPull", index) end
 function ART:ReloadPullButtons() record("reloadPulls") end
 function ART:PingMap(x, y) record("ping", x, y) end
@@ -161,8 +180,11 @@ assert(assertPacket(prefixes.cmd, "RAID", "ALERT")[2] == "undo")
 resetSent(); ART:LiveSession_SendNoteCommand("move", 2, 12, 34)
 assert(assertPacket(prefixes.note, "RAID", "ALERT")[2] == "move:2:12:34")
 resetSent(); ART:LiveSession_SendPreset(livePreset)
-packet = assertPacket(prefixes.preset, "RAID", "BULK")
+packet = sent[1]
+assert(packet[1] == prefixes.preset and packet[3] == "RAID" and packet[5] == "BULK")
 assert(ART:StringToTable(packet[2]) == livePreset and packet[7][3] == true and packet[7][4] == true)
+assert(sent[2][1] == prefixes.route and ART:StringToTable(sent[2][2]) == routePreset,
+    "changing the live preset also shares its floor marks")
 resetSent(); ART:SendToGroup("RAID", false, livePreset)
 packet = assertPacket("ARTPreset", "RAID", "BULK")
 packet[6](packet[7], 100, 100, true)
@@ -198,10 +220,28 @@ fromAssist(prefixes.request, "0")
 assert(count("notify") == 1)
 resetSent()
 fromAssist(prefixes.reqPre, "Leader-Realm")
-packet = assertPacket("ARTPreset", "RAID", "BULK")
-assert(ART:StringToTable(packet[2]) == livePreset and packet[7][3] == true)
+assert(sent[1][1] == "ARTPreset" and ART:StringToTable(sent[1][2]) == livePreset and sent[1][7][3] == true)
+assert(sent[2][1] == prefixes.route and ART:StringToTable(sent[2][2]) == routePreset,
+    "joining a live session receives the floor marks")
 fromAssist(prefixes.reqPre, "Someone-Realm")
-assert(#sent == 1, "preset requests for another player are ignored")
+assert(#sent == 2, "preset requests for another player are ignored")
+
+importedRoute = nil
+fromAssist(prefixes.route, ART:TableToString(routePreset))
+assert(importedRoute == routePreset, "live floor marks are imported")
+importedRoute = nil
+receive(ART.commsObject, prefixes.route, ART:TableToString(routePreset), "RAID", "Member")
+assert(importedRoute == nil, "raid members cannot replace live floor marks")
+
+-- Reload restores the opted-in live route; explicitly disabling clears it.
+ART.liveSessionActive, ART.livePresetUID, db.liveSessionUID = false, nil, livePreset.uid
+resetSent()
+assert(ART:LiveSession_Restore())
+assert(ART.liveSessionActive and ART.livePresetUID == livePreset.uid and count("returnLive") == 1)
+ART:LiveSession_Disable()
+assert(db.liveSessionUID == nil, "disabling Live Session clears reload persistence")
+ART.liveSessionActive = true
+ART:LiveSession_SetUID(livePreset.uid)
 
 -- Pulls update the live preset, clamp selection and redraw only when it is browsed.
 local receivedPulls = { {}, {} }
@@ -303,5 +343,11 @@ assert(livePreset.value.pulls == before.pulls and count("storeObject") == before
     and count("offset") == before.offsets and count("drawAll") == before.draws
     and count("import") == before.imports and count("notify") == before.notifications,
     "inactive sessions reject every live mutation")
+
+local bootstrap = assert(io.open(root.."/Core/Bootstrap.lua", "rb"))
+local bootstrapSource = bootstrap:read("*a")
+bootstrap:close()
+assert(bootstrapSource:find('if db.liveSessionUID then ART:LoadUI("live-session") end', 1, true),
+    "the always-loaded core must restore the Live Session UI after reload")
 
 print("live share package checks passed")
