@@ -361,6 +361,8 @@ local function wireMapSelection()
     local result = Integration.originalUpdateToRaid(self, raidIndex, ...)
     if raidKey and (not Integration.planner.raid or Integration.planner.raid.key ~= raidKey) then
       self:OpenRaidRoute(raidKey)
+      if ART.WaveModeUI and ART.WaveModeUI.Refresh then ART.WaveModeUI:Refresh() end
+      if ART.AutoMarksUI and ART.AutoMarksUI.UpdateAvailability then ART.AutoMarksUI:UpdateAvailability() end
     end
     return result
   end

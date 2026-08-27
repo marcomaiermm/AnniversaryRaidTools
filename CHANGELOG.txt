@@ -1,3 +1,16 @@
+## 1.0.1 (2026-08-27)
+
+- Added Battle for Mount Hyjal wave planning with direct marker and CC assignment controls.
+- Added pull-mob portraits, saved positioning and clearer Pull > Floor > Global assignment ordering to the Active Pull tracker.
+- Displayed Hyjal progress within each boss segment while preserving global wave progression internally.
+- Added separate Clear Marks and Clear CC actions to the Hyjal wave card.
+- Fixed Hyjal opening in pull mode instead of wave mode.
+- Fixed wave markers and CC assignments not appearing or clearing correctly.
+- Fixed CC assignments moving to another marker when editing a wave.
+- Fixed CC menus resolving the wrong pull when a route contains multiple pulls.
+- Fixed lower-priority CC assignments merging onto NPCs that are immune to that crowd control.
+- Fixed stale or incompatible global assignees appearing in the Active Pull tracker.
+
 ## 1.0.0 (2026-08-27)
 
 - Added interactive raid maps and route planning for Gruul's Lair, Magtheridon's Lair,

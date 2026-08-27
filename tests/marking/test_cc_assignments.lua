@@ -48,6 +48,7 @@ local preset = {
   value = { currentRaidIndex = 1, currentSublevel = 1, currentPull = 1, pulls = { pull } },
 }
 local sent = {}
+local selectedPull = 1
 local ART = {
   mapInfo = { [1] = { mapID = 1 } },
   raidEnemies = { [1] = { [1] = {
@@ -73,6 +74,7 @@ local ART = {
 _G.ART = ART
 function ART:GetDB() return { currentRaidIndex = 1 } end
 function ART:GetCurrentPreset() return preset end
+function ART:GetCurrentPull() return selectedPull end
 function ART:GetCurrentSubLevel() return preset.value.currentSublevel end
 function ART:GetCurrentLivePreset() return preset end
 function ART:LiveSession_CanControlProgress() return true end
@@ -105,9 +107,9 @@ ART.RaidPlanner.GetNpcDefaultMarks = function(_, npcId) return npcId == 100 and 
 rows = CC:GetAssignmentRows(1)
 assert(#rows == 1 and rows[1].global and rows[1].assignment.ccKey == "SAP",
     "a global CC on a free marker appears as a global Active Pull row")
-ART.RaidPlanner.GetPullStep = function() return { marks = { [otherSpawn.key] = 8 } } end
+ART.RaidPlanner.GetPullStep = function() return { marks = { [spawn.key] = 8 } } end
 rows = CC:GetAssignmentRows(1)
-assert(#rows == 1 and rows[1].spawnKey == otherSpawn.key and not rows[1].global
+assert(#rows == 1 and rows[1].spawnKey == spawn.key and not rows[1].global
     and rows[1].assignment and rows[1].assignment.ccKey == "SAP",
     "a pull mark inherits the lower-priority floor CC on the same marker")
 ART.RaidPlanner.GetPullStep = originalGetPullStep
@@ -122,7 +124,23 @@ for _, row in ipairs(rows) do if row.marker == 1 then playerRow = row end end
 assert(playerRow and playerRow.playerGlobal and playerRow.name == "Mage-Realm"
     and playerRow.assignment and playerRow.assignment.ccKey == "POLYMORPH",
     "a free marker exposes its preset-wide player and CC assignment")
-ART.RaidPlanner.GetPullStep = function() return { marks = { [otherSpawn.key] = 1 } } end
+ART.RaidPlanner.GetNpcDefaultMarks = function(_, npcId)
+  return npcId == 100 and { 7 } or npcId == 101 and { 5 } or {}
+end
+preset.value.artPlayerMarks[6] = { name = mage.assignee.name, classFile = mage.assignee.classFile }
+ART.RaidPlanner.GetPullStep = function() return { marks = { [spawn.key] = 6 } } end
+pull[2] = nil
+local _, displayRows = CC:GetAssignmentRows(1)
+assert(#displayRows == 3 and displayRows[1].source == "pull"
+    and displayRows[1].inheritedPlayer.name == "Mage-Realm" and not displayRows[1].assignment
+    and displayRows[2].source == "floor" and displayRows[2].npcId == 100
+    and displayRows[3].source == "global" and displayRows[3].marker == 1,
+    "marker resolution inherits a missing pull assignee from the matching global mark")
+preset.value.artPlayerMarks[6] = nil
+pull[2] = { 1 }
+ART.RaidPlanner.GetPullStep = originalGetPullStep
+ART.RaidPlanner.GetNpcDefaultMarks = function(self, npcId) return self.preset.marking.npcDefaults[npcId] or {} end
+ART.RaidPlanner.GetPullStep = function() return { marks = { [spawn.key] = 1 } } end
 rows = CC:GetAssignmentRows(1)
 for _, row in ipairs(rows) do
   assert(not row.playerGlobal, "a pull marker suppresses the lower-priority player mark")
@@ -130,6 +148,17 @@ end
 assert(#rows == 1 and rows[1].assignment and rows[1].assignment.ccKey == "POLYMORPH"
     and rows[1].assignment.assignee.name == "Mage-Realm",
     "a pull mark without CC inherits the global CC and assignee on that marker")
+
+preset.value.artPlayerMarks[6] = {
+  name = "Warlock-Realm", classFile = "WARLOCK", ccKey = "BANISH",
+}
+ART.RaidPlanner.GetPullStep = function() return { marks = { [otherSpawn.key] = 6 } } end
+rows = CC:GetAssignmentRows(1)
+local immuneRow
+for _, row in ipairs(rows) do if row.marker == 6 then immuneRow = row end end
+assert(#rows == 2 and immuneRow and not immuneRow.assignment and not immuneRow.inheritedPlayer,
+    "an ineligible global CC does not merge its CC or player onto the marked NPC")
+preset.value.artPlayerMarks[6] = nil
 
 assert(CC:SetDefaultAssignment(preset, 100, 1, rogue, true, raid))
 ART.RaidPlanner.GetNpcDefaultMarks = function(_, npcId) return npcId == 100 and { 1 } or {} end
@@ -160,6 +189,20 @@ rows = CC:GetAssignmentRows(1)
 assert(#rows == 1 and rows[1].playerGlobal,
     "global player marks remain active when the selected pull has no route step")
 ART.RaidPlanner.GetPullStep = originalGetPullStep
+preset.value.artPlayerMarks[1] = preset.value.artPlayerMarks[1] or {
+  name = mage.assignee.name, classFile = mage.assignee.classFile,
+}
+local routePlannerPreset, routeMode = ART.RaidPlanner.preset, raid.mode
+raid.mode = "waves"
+ART.RaidPlanner.preset = {
+  routeSteps = { { id = "wave-1", marks = { [spawn.key] = 8 } } },
+  marking = routePlannerPreset.marking,
+}
+_, rows = CC:GetAssignmentRows(1)
+assert(rows[1].source == "pull" and rows[1].spawnKey == spawn.key
+    and rows[2].source == "global" and rows[2].marker == 1,
+    "wave route-step marks and free global assignments resolve into tracker rows immediately")
+ART.RaidPlanner.preset, raid.mode = routePlannerPreset, routeMode
 preset.value.artPlayerMarks = nil
 assert(CC:SetPullAssignment(preset, 1, spawn.key, 8, mage, true, raid))
 assert(CC:GetEffectiveAssignment(preset, 1, spawn.key, 100, 8).ccKey == "POLYMORPH",
@@ -250,6 +293,34 @@ local markedMenu = menuNode()
 CC:AddNpcMenu(markedMenu, { assignment = 8, clone = { artSpawnKey = spawn.key } }, function() return true end)
 assert(findButton(markedMenu, "Polymorph") and not findButton(markedMenu, "CC Assignment"),
     "marked NPCs expose CC choices directly")
+preset.value.pulls = { {}, pull }
+preset.value.currentPull, selectedPull = 1, 2
+local selectedPullMenu = menuNode()
+CC:AddNpcMenu(selectedPullMenu, { assignment = 8, clone = { artSpawnKey = spawn.key } }, function() return true end)
+assert(findButton(selectedPullMenu, "Polymorph") and not findButton(selectedPullMenu, "CC Assignment"),
+    "CC choices follow the visibly selected pull when multiple pulls exist")
+preset.value.pulls = { pull, {} }
+preset.value.currentPull, selectedPull = 2, 2
+local otherPullMenu = menuNode()
+CC:AddNpcMenu(otherPullMenu, { assignment = 8, clone = { artSpawnKey = spawn.key } }, function() return true end)
+assert(findButton(otherPullMenu, "Polymorph") and not findButton(otherPullMenu, "CC Assignment"),
+    "CC choices resolve the pull containing the clicked NPC when another pull is selected")
+preset.value.pulls = { pull, {} }
+pull.artCCAssignments = { [spawn.key] = mage }
+local badge = { shown = false }
+function badge:SetTexture(texture) self.texture = texture end
+function badge:Show() self.shown = true end
+function badge:Hide() self.shown = false end
+CC:UpdateBlipBadge({ assignment = 1, clone = { artSpawnKey = spawn.key }, texture_CCIcon = badge })
+assert(badge.shown and badge.texture == CC.catalog.POLYMORPH.icon,
+    "map CC badges resolve the pull containing the NPC when another pull is active")
+preset.value.pulls = { {}, {} }
+preset.value.artCCFloorDefaults = { [1] = { [100] = { [8] = rogue } } }
+badge.shown, badge.texture = false, nil
+CC:UpdateBlipBadge({ assignment = 8, clone = { artSpawnKey = spawn.key }, texture_CCIcon = badge })
+assert(badge.shown and badge.texture == CC.catalog.SAP.icon,
+    "floor CC badges remain visible when the NPC does not belong to a pull")
+preset.value.pulls, preset.value.currentPull, selectedPull = { pull }, 1, 1
 local unmarkedMenu = menuNode()
 CC:AddNpcMenu(unmarkedMenu, { clone = { artSpawnKey = spawn.key } }, function() return true end)
 local crossMenu = findButton(unmarkedMenu, "UI-RaidTargetingIcon_7")

@@ -304,11 +304,25 @@ function Planner:SetStepNpcMarks(stepId, npcId, markers)
 
   local previous = {}
   for spawnKey, marker in pairs(step.marks) do previous[spawnKey] = marker end
-  for _, spawnKey in ipairs(spawnKeys) do step.marks[spawnKey] = nil end
-  for spawnKey, marker in pairs(step.marks) do
-    if seen[marker] then step.marks[spawnKey] = nil end
+  local assigned = {}
+  for _, spawnKey in ipairs(spawnKeys) do
+    local marker = tonumber(step.marks[spawnKey])
+    if marker and seen[marker] and not assigned[marker] then
+      assigned[marker] = spawnKey
+    else
+      step.marks[spawnKey] = nil
+    end
   end
-  for index, marker in ipairs(normalized) do step.marks[spawnKeys[index]] = marker end
+  for spawnKey, marker in pairs(step.marks) do
+    if seen[marker] and assigned[marker] ~= spawnKey then step.marks[spawnKey] = nil end
+  end
+  local nextSpawn = 1
+  for _, marker in ipairs(normalized) do
+    if not assigned[marker] then
+      while step.marks[spawnKeys[nextSpawn]] do nextSpawn = nextSpawn + 1 end
+      step.marks[spawnKeys[nextSpawn]], assigned[marker] = marker, spawnKeys[nextSpawn]
+    end
+  end
 
   local valid, validationReason = self.presets:Validate(self.preset, self.raid)
   if not valid then

@@ -413,6 +413,13 @@ addon:UpdateToRaid(164)
 assert(saved.currentRaidIndex == 164 and addon.RaidPlanner.raid.key == "magtheridons-lair")
 addon:UpdateToRaid(161)
 assert(saved.currentRaidIndex == 161 and addon.RaidPlanner.raid.key == "black-temple")
+local waveRefreshRaid, availabilityRaid
+addon.WaveModeUI = { Refresh = function() waveRefreshRaid = addon.RaidPlanner.raid.key end }
+addon.AutoMarksUI = { UpdateAvailability = function() availabilityRaid = addon.RaidPlanner.raid.key end }
+addon:UpdateToRaid(162)
+assert(waveRefreshRaid == "hyjal" and availabilityRaid == "hyjal",
+    "opening Hyjal immediately refreshes the wave UI after the planner switches raids")
+addon:UpdateToRaid(161)
 assert(addon:CreateRaidRoute("black-temple"))
 assert(saved.currentRaidIndex == 161 and addon.RaidPlanner.raid.key == "black-temple")
 local blackTemple = addon.RaidRegistry:Get("black-temple")

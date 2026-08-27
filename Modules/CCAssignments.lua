@@ -158,6 +158,14 @@ function CC:PullContainsSpawn(preset, pullIndex, spawnKey)
   return false
 end
 
+function CC:ResolvePullForSpawn(preset, spawnKey, preferredPull)
+  preferredPull = tonumber(preferredPull)
+  if preferredPull and self:PullContainsSpawn(preset, preferredPull, spawnKey) then return preferredPull end
+  for pullIndex in ipairs(preset and preset.value and preset.value.pulls or {}) do
+    if self:PullContainsSpawn(preset, pullIndex, spawnKey) then return pullIndex end
+  end
+end
+
 function CC:MarkerAvailableForSpawn(preset, pullIndex, spawnKey, marker)
   local value = preset and preset.value
   local pull = value and value.pulls and value.pulls[pullIndex]
@@ -347,6 +355,7 @@ end
 function CC:RefreshUI()
   self:RefreshEventRegistration()
   self:RefreshTracker()
+  if ART.WaveModeUI and ART.WaveModeUI.IsActive and ART.WaveModeUI:IsActive() then ART.WaveModeUI:Refresh() end
   if ART.AutoMarksUI and ART.AutoMarksUI.Refresh then ART.AutoMarksUI:Refresh() end
   if ART.RaidEnemies_UpdateEnemiesAsync then
     if ART.Async then ART:Async(function() ART:RaidEnemies_UpdateEnemiesAsync() end, "ARTCCAssignments", true)
@@ -618,7 +627,9 @@ function CC:GetUsedMarkers(pullIndex)
   local used, planner = {}, ART.RaidPlanner
   local step = planner and planner.GetPullStep and planner:GetPullStep(pullIndex)
   local active = planner and planner.GetActiveStep and planner:GetActiveStep()
-  if active and ((pullIndex and active.id == "pull-"..pullIndex)
+  if planner and planner.raid and planner.raid.mode == "waves" then
+    step = planner.preset and planner.preset.routeSteps and planner.preset.routeSteps[pullIndex]
+  elseif active and ((pullIndex and active.id == "pull-"..pullIndex)
       or planner.IsStepPinned and planner:IsStepPinned()) then step = active end
   for _, marker in pairs(step and step.marks or {}) do
     local normalized = validMarker(marker)
@@ -633,10 +644,12 @@ function CC:AddNpcMenu(root, frame, setMarker)
     return
   end
   local preset = ART:GetCurrentPreset()
-  local pullIndex = tonumber(preset.value.currentPull) or 1
+  local pullIndex = tonumber(ART.GetCurrentPull and ART:GetCurrentPull())
+      or tonumber(preset.value.currentPull) or 1
   local spawnKey = frame.clone and frame.clone.artSpawnKey
   local _, enemy, npcId = self:FindSpawn(ART.RaidPlanner and ART.RaidPlanner.raid, spawnKey)
-  if not spawnKey or not enemy or not self:PullContainsSpawn(preset, pullIndex, spawnKey) then
+  pullIndex = spawnKey and enemy and self:ResolvePullForSpawn(preset, spawnKey, pullIndex)
+  if not pullIndex then
     root:CreateButton("CC Assignment", function() end):CreateTitle("Add this NPC to the current pull first")
     return
   end
@@ -710,10 +723,17 @@ function CC:GetAssignmentRows(pullIndex)
   pullIndex = pullIndex or self:GetActivePullIndex()
   local step = pullIndex and planner and planner.GetPullStep and planner:GetPullStep(pullIndex)
   local active = planner and planner.GetActiveStep and planner:GetActiveStep()
-  if active and (active.id == "pull-"..pullIndex or planner.IsStepPinned and planner:IsStepPinned()) then step = active end
   if not raid or not preset or type(preset.value) ~= "table" then return {} end
+  if raid.mode == "waves" then
+    step = planner.preset and planner.preset.routeSteps and planner.preset.routeSteps[pullIndex]
+  elseif active and (active.id == "pull-"..pullIndex or planner.IsStepPinned and planner:IsStepPinned()) then
+    step = active
+  end
   step = step or { marks = {} }
   local rows, usedMarkers, names, floorByMarker, globalByMarker = {}, {}, {}, {}, {}
+  local function eligible(assignment, enemy)
+    return assignment and self:IsEligible(catalog[assignment.ccKey], enemy) and assignment or nil
+  end
   for npcKey, enemy in pairs(raid.enemies or {}) do
     names[tonumber(enemy.npcId) or tonumber(npcKey)] = enemy.name
   end
@@ -723,7 +743,7 @@ function CC:GetAssignmentRows(pullIndex)
     if marker and player then
       globalByMarker[marker] = {
         key = "player:"..marker, marker = marker, name = player.name,
-        player = player, playerGlobal = true,
+        player = player, playerGlobal = true, source = "global",
         assignment = player.ccKey and {
           ccKey = player.ccKey,
           assignee = { name = player.name, classFile = player.classFile },
@@ -744,7 +764,7 @@ function CC:GetAssignmentRows(pullIndex)
           floorByMarker[marker] = {
             key = npcId..":"..marker, npcId = npcId, marker = marker,
             name = names[npcId] or projected.name,
-            assignment = self:GetDefaultAssignment(preset, npcId, marker), global = true,
+            assignment = self:GetDefaultAssignment(preset, npcId, marker), global = true, source = "floor",
           }
         end
       end
@@ -756,20 +776,30 @@ function CC:GetAssignmentRows(pullIndex)
     local normalizedMarker = validMarker(marker)
     if enemy and normalizedMarker then
       local floor, global = floorByMarker[normalizedMarker], globalByMarker[normalizedMarker]
+      local globalAssignment = global and eligible(global.assignment, enemy)
+      local assignment = eligible(self:GetEffectiveAssignment(preset, pullIndex, spawnKey, npcId, normalizedMarker), enemy)
+          or floor and eligible(floor.assignment, enemy) or globalAssignment
       usedMarkers[normalizedMarker] = true
-      rows[#rows + 1] = {
+      local row = {
         key = spawnKey, spawnKey = spawnKey, npcId = npcId, marker = normalizedMarker,
-        name = enemy.name,
-        assignment = self:GetEffectiveAssignment(preset, pullIndex, spawnKey, npcId, normalizedMarker)
-            or floor and floor.assignment or global and global.assignment,
+        name = enemy.name, source = "pull",
+        assignment = assignment,
+        inheritedPlayer = not assignment and global
+            and (not global.assignment or globalAssignment) and global.player or nil,
       }
+      rows[#rows + 1] = row
     end
   end
 
   for marker, floor in pairs(floorByMarker) do
     if not usedMarkers[marker] then
       usedMarkers[marker] = true
-      floor.assignment = floor.assignment or globalByMarker[marker] and globalByMarker[marker].assignment
+      local enemy = raid.enemies[tostring(floor.npcId)] or raid.enemies[floor.npcId]
+      local global = globalByMarker[marker]
+      local globalAssignment = global and eligible(global.assignment, enemy)
+      floor.assignment = eligible(floor.assignment, enemy) or globalAssignment
+      floor.inheritedPlayer = not floor.assignment and global
+          and (not global.assignment or globalAssignment) and global.player or nil
       rows[#rows + 1] = floor
     end
   end
@@ -782,7 +812,17 @@ function CC:GetAssignmentRows(pullIndex)
         or priority[left.marker] == priority[right.marker] and left.name < right.name
   end)
   for _, row in ipairs(rows) do row.runtime = self:GetRuntime(row.npcId, row.marker) end
-  return rows
+  local displayRows = {}
+  for _, row in ipairs(rows) do displayRows[#displayRows + 1] = row end
+  local sourcePriority = { pull = 1, floor = 2, global = 3 }
+  table.sort(displayRows, function(left, right)
+    return sourcePriority[left.source] < sourcePriority[right.source]
+        or sourcePriority[left.source] == sourcePriority[right.source]
+        and (priority[left.marker] < priority[right.marker]
+          or priority[left.marker] == priority[right.marker] and left.name < right.name)
+  end)
+  for _, row in ipairs(displayRows) do row.runtime = self:GetRuntime(row.npcId, row.marker) end
+  return rows, displayRows
 end
 
 local function npcIdFromGuid(guid)
@@ -966,7 +1006,10 @@ function CC:UpdateBlipBadge(frame)
   local preset, marker = ART:GetCurrentPreset(), validMarker(frame.assignment)
   local spawnKey = frame.clone and frame.clone.artSpawnKey
   local _, _, npcId = self:FindSpawn(ART.RaidPlanner and ART.RaidPlanner.raid, spawnKey)
-  local assignment = marker and self:GetEffectiveAssignment(preset, preset.value.currentPull, spawnKey, npcId, marker)
+  local preferredPull = ART.GetCurrentPull and ART:GetCurrentPull() or preset.value.currentPull
+  local pullIndex = self:ResolvePullForSpawn(preset, spawnKey, preferredPull)
+      or tonumber(preferredPull) or 1
+  local assignment = marker and self:GetEffectiveAssignment(preset, pullIndex, spawnKey, npcId, marker)
   if assignment then
     frame.texture_CCIcon:SetTexture(catalog[assignment.ccKey].icon)
     frame.texture_CCIcon:Show()

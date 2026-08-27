@@ -157,9 +157,11 @@ function WaveModeUI:BuildModel()
         entry = entry or {
           npcId = tonumber(enemy.npcId) or tonumber(npcKey), name = L[enemy.name] or enemy.name,
           displayId = enemy.displayId, health = enemy.health, level = enemy.level,
-          creatureType = enemy.creatureType, count = 0,
+          creatureType = enemy.creatureType, count = 0, markerSpawns = {},
         }
         entry.count = entry.count + 1
+        local marker = tonumber(step.marks[spawn.key])
+        if marker then entry.markerSpawns[marker] = spawn.key end
         local reference = spawnLookup and spawnLookup[spawn.key]
         local clone = reference and projectedEnemies and projectedEnemies[reference.enemyIdx]
             and projectedEnemies[reference.enemyIdx].clones[reference.cloneIdx]
@@ -306,11 +308,33 @@ end
 local function createMarkerButton(parent, marker)
   local button = CreateFrame("Button", nil, parent)
   button:SetSize(19, 19)
+  if button.RegisterForClicks then button:RegisterForClicks("LeftButtonUp", "RightButtonUp") end
   button.icon = button:CreateTexture(nil, "ARTWORK")
   button.icon:SetAllPoints()
   button.icon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcon_"..marker)
+  button.ccIcon = button:CreateTexture(nil, "OVERLAY")
+  button.ccIcon:SetSize(14, 14)
+  button.ccIcon:SetPoint("CENTER", button, "TOP", 0, 0)
+  button.ccIcon:Hide()
   button.marker = marker
   return button
+end
+
+function WaveModeUI:ClearMarks(model)
+  if not model then return false end
+  for _, enemy in ipairs(model.enemies) do
+    ART.RaidPlanner:SetStepNpcMarks(model.step.id, enemy.npcId, {})
+  end
+  if ART.LiveMarks then ART.LiveMarks:ClearWorldMarks() end
+  self:Refresh()
+  return true
+end
+
+function WaveModeUI:ClearCC(model)
+  if not model then return false end
+  if ART.CCAssignments then ART.CCAssignments:ClearActivePullAssignments() end
+  self:Refresh()
+  return true
 end
 
 function WaveModeUI:CreateMapCard()
@@ -336,17 +360,13 @@ function WaveModeUI:CreateMapCard()
   card.clear = CreateFrame("Button", nil, card, "UIPanelButtonTemplate")
   card.clear:SetSize(66, 24)
   card.clear:SetPoint("TOPRIGHT", -77, -10)
-  card.clear:SetText(L["Clear Marks"])
-  card.clear:SetScript("OnClick", function()
-    if ART.LiveMarks then ART.LiveMarks:ClearWorldMarks() end
+  card.clear:SetText(L["Clear >"])
+  card.clear:SetScript("OnClick", function(button)
+    ART:CreateContextMenu(button, function(_, root)
+      root:CreateButton(L["Clear Marks"], function() WaveModeUI:ClearMarks(card.model) end)
+      root:CreateButton(L["Clear CC"], function() WaveModeUI:ClearCC(card.model) end)
+    end)
   end)
-  card.clear:SetScript("OnEnter", function(button)
-    if not GameTooltip then return end
-    GameTooltip:SetOwner(button, "ANCHOR_TOP")
-    GameTooltip:SetText(L["Clear all Markers"])
-    GameTooltip:Show()
-  end)
-  card.clear:SetScript("OnLeave", function() if GameTooltip then GameTooltip:Hide() end end)
   card.previous = CreateFrame("Button", nil, card, "UIPanelButtonTemplate")
   card.previous:SetSize(28, 24)
   card.previous:SetPoint("TOPRIGHT", -45, -10)
@@ -391,13 +411,28 @@ function WaveModeUI:CreateCardRow(card, index)
   for markerIndex, marker in ipairs(markerOrder) do
     local button = createMarkerButton(row, marker)
     button:SetPoint("LEFT", 176 + ((markerIndex - 1) * 21), 0)
-    button:SetScript("OnClick", function(item)
+    button:SetScript("OnClick", function(item, mouseButton)
+      local spawnKey = row.model.markerSpawns[item.marker]
+      if mouseButton == "RightButton" then
+        if spawnKey and ART.CCAssignments then
+          ART:CreateContextMenu(item, function(_, root)
+            root:CreateTitle(row.model.name)
+            ART.CCAssignments:AddNpcMenu(root, {
+              assignment = item.marker, clone = { artSpawnKey = spawnKey },
+            }, function() return true end)
+          end)
+        end
+        return
+      end
       local selected = {}
       for _, value in ipairs(row.model.markers) do selected[value] = true end
       selected[item.marker] = not selected[item.marker]
       local markers = {}
       for _, candidate in ipairs(markerOrder) do if selected[candidate] then markers[#markers + 1] = candidate end end
       ART.RaidPlanner:SetStepNpcMarks(card.model.step.id, row.model.npcId, markers)
+      if spawnKey and not selected[item.marker] and ART.CCAssignments then
+        ART.CCAssignments:ClearPullAssignment(ART:GetCurrentPreset(), card.model.waveIndex, spawnKey)
+      end
       self:Refresh()
     end)
     row.markers[markerIndex] = button
@@ -434,6 +469,11 @@ function WaveModeUI:RefreshCard(model)
       local enabled = selected[button.marker] or #enemy.markers < enemy.count
       button:SetEnabled(enabled)
       button.icon:SetAlpha(selected[button.marker] and 1 or (enabled and 0.2 or 0.08))
+      local spawnKey = enemy.markerSpawns[button.marker]
+      local assignment = spawnKey and ART.CCAssignments and ART.CCAssignments:GetEffectiveAssignment(
+          ART:GetCurrentPreset(), model.waveIndex, spawnKey, enemy.npcId, button.marker)
+      local definition = assignment and ART.CCAssignments.catalog[assignment.ccKey]
+      if definition then button.ccIcon:SetTexture(definition.icon); button.ccIcon:Show() else button.ccIcon:Hide() end
     end
     row:Show()
   end

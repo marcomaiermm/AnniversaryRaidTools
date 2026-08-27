@@ -7,6 +7,22 @@ ART.RaidMarksUI = RaidMarksUI
 
 local tracker
 local L = ART.L or {}
+local MAX_PULL_PORTRAITS = 4
+
+local function getPullMobs(value, pullIndex)
+  local mobs = {}
+  local enemies = value and ART.raidEnemies and ART.raidEnemies[value.currentRaidIndex]
+  for enemyIdx, clones in pairs(value and value.pulls and value.pulls[pullIndex] or {}) do
+    local enemy = tonumber(enemyIdx) and enemies and enemies[tonumber(enemyIdx)]
+    if enemy and type(clones) == "table" and #clones > 0 then
+      mobs[#mobs + 1] = {
+        enemyIdx = tonumber(enemyIdx), name = enemy.name, displayId = enemy.displayId, count = #clones,
+      }
+    end
+  end
+  table.sort(mobs, function(left, right) return left.enemyIdx < right.enemyIdx end)
+  return mobs
+end
 
 function RaidMarksUI:ResetPullTracker()
   self.trackerPreset, self.trackerPullIndex, self.trackerTotalPulls = nil, nil, nil
@@ -37,7 +53,7 @@ function RaidMarksUI:GetPullTrackerModel()
   local pullIndex = self.trackerPullIndex
   if not pullIndex then return nil end
 
-  local mode, currentLabel, currentText, nextText = raid.mode
+  local mode, currentLabel, currentText, nextText, progressCurrent, progressTotal = raid.mode
   local totalPulls = self.trackerTotalPulls
   if mode == "waves" then
     totalPulls = #raid.waves
@@ -45,8 +61,12 @@ function RaidMarksUI:GetPullTrackerModel()
     for _, group in ipairs(definition and definition.waveMode and definition.waveMode.groups or {}) do
       if pullIndex >= group.firstWave and pullIndex <= group.lastWave then
         local boss = pullIndex == group.lastWave
+        local groupWaves = math.max(1, group.lastWave - group.firstWave)
+        local groupWave = math.min(pullIndex - group.firstWave + 1, groupWaves)
         currentLabel = L[group.label] or group.label
-        currentText = (L[boss and "Boss" or "Wave"] or (boss and "Boss" or "Wave")).." "..pullIndex.." / "..totalPulls
+        currentText = boss and (L["Boss"] or "Boss")
+            or (L["Wave"] or "Wave").." "..groupWave.." / "..groupWaves
+        progressCurrent, progressTotal = groupWave, groupWaves
         break
       end
     end
@@ -55,11 +75,13 @@ function RaidMarksUI:GetPullTrackerModel()
     currentLabel = "CURRENT PULL"
     currentText = ("Pull %d / %d"):format(pullIndex, totalPulls)
     nextText = pullIndex < totalPulls and "NEXT  Pull "..(pullIndex + 1).."  >" or "LAST PULL"
+    progressCurrent, progressTotal = pullIndex, totalPulls
   end
 
   local rows
   if ART.CCAssignments then
-    rows = ART.CCAssignments:GetAssignmentRows(pullIndex)
+    local effectiveRows, displayRows = ART.CCAssignments:GetAssignmentRows(pullIndex)
+    rows = displayRows or effectiveRows
   else
     local names = {}
     for _, enemy in pairs(raid.enemies or {}) do
@@ -84,11 +106,14 @@ function RaidMarksUI:GetPullTrackerModel()
     showNext = mode ~= "waves",
     pullIndex = pullIndex,
     totalPulls = totalPulls,
+    progressCurrent = progressCurrent or pullIndex,
+    progressTotal = progressTotal or totalPulls,
     nextPullIndex = pullIndex < totalPulls and pullIndex + 1 or nil,
     currentLabel = currentLabel,
     currentText = currentText,
     nextText = nextText,
     debugCC = ART.CCAssignments and ART.CCAssignments.debugMode == true,
+    mobs = getPullMobs(value, pullIndex),
     marks = rows,
   }
 end
@@ -97,6 +122,7 @@ local function showBody(frame, shown)
   frame.status:SetShown(shown)
   frame.assignments:SetShown(shown)
   frame.debugCC:SetShown(shown and frame.model.debugCC)
+  for _, portrait in ipairs(frame.mobPortraits) do portrait:SetShown(shown and portrait.used) end
   frame.clear:SetShown(shown)
   frame.empty:SetShown(shown and #frame.model.marks == 0)
   for _, row in ipairs(frame.rows) do row:SetShown(shown and row.used) end
@@ -106,6 +132,7 @@ local function setBodyAlpha(frame, alpha)
   frame.status:SetAlpha(alpha)
   frame.assignments:SetAlpha(alpha)
   frame.debugCC:SetAlpha(alpha)
+  for _, portrait in ipairs(frame.mobPortraits) do portrait:SetAlpha(alpha) end
   frame.clear:SetAlpha(alpha)
   frame.empty:SetAlpha(alpha)
   for _, row in ipairs(frame.rows) do row:SetAlpha(alpha) end
@@ -171,7 +198,13 @@ local function createTracker()
   if tracker or type(CreateFrame) ~= "function" or not UIParent then return tracker end
   local frame = CreateFrame("Frame", "ARTPullTrackerFrame", UIParent)
   frame:SetSize(300, 192)
-  frame:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -36, -210)
+  local db = ART.GetDB and ART:GetDB()
+  local position = db and db.pullTrackerPosition
+  if type(position) == "table" and tonumber(position.left) and tonumber(position.top) then
+    frame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", position.left, position.top)
+  else
+    frame:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -36, -210)
+  end
   frame:SetFrameStrata("MEDIUM")
   frame:SetClampedToScreen(true)
   frame:SetMovable(true)
@@ -200,6 +233,8 @@ local function createTracker()
   frame.header:SetScript("OnDragStop", function()
     frame:StopMovingOrSizing()
     anchorAtHeader(frame)
+    local current = ART.GetDB and ART:GetDB()
+    if current then current.pullTrackerPosition = { left = frame:GetLeft(), top = frame:GetTop() } end
   end)
   frame.header.background = frame.header:CreateTexture(nil, "ARTWORK")
   frame.header.background:SetAllPoints()
@@ -363,6 +398,45 @@ local function createTracker()
     if ART.CCAssignments then ART.CCAssignments:FireFirstDebugCC(frame.model.pullIndex) end
   end)
 
+  frame.mobPortraits = {}
+  for index = 1, MAX_PULL_PORTRAITS do
+    local portrait = CreateFrame("Button", nil, frame)
+    portrait:SetSize(22, 22)
+    if index == 1 then
+      portrait:SetPoint("LEFT", frame.assignments, "RIGHT", 5, 0)
+    else
+      portrait:SetPoint("LEFT", frame.mobPortraits[index - 1], "RIGHT", -7, 0)
+    end
+    portrait.background = portrait:CreateTexture(nil, "ARTWORK")
+    portrait.background:SetAllPoints()
+    portrait.background:SetColorTexture(0.02, 0.02, 0.02, 1)
+    portrait.image = portrait:CreateTexture(nil, "OVERLAY")
+    portrait.image:SetPoint("TOPLEFT", 2, -2)
+    portrait.image:SetPoint("BOTTOMRIGHT", -2, 2)
+    if portrait.CreateMaskTexture and portrait.image.AddMaskTexture then
+      portrait.backgroundMask = portrait:CreateMaskTexture()
+      portrait.backgroundMask:SetTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMask")
+      portrait.backgroundMask:SetAllPoints(portrait.background)
+      portrait.background:AddMaskTexture(portrait.backgroundMask)
+      portrait.mask = portrait:CreateMaskTexture()
+      portrait.mask:SetTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMask")
+      portrait.mask:SetAllPoints(portrait.image)
+      portrait.image:AddMaskTexture(portrait.mask)
+    end
+    portrait.count = portrait:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    portrait.count:SetPoint("BOTTOMRIGHT", 2, -1)
+    portrait.count:SetTextColor(1, 1, 1)
+    portrait:SetScript("OnEnter", function(button)
+      if not GameTooltip then return end
+      GameTooltip:SetOwner(button, "ANCHOR_TOP")
+      GameTooltip:SetText(button.mob and button.mob.name or ("+%d mob types"):format(button.overflow))
+      if button.mob and button.mob.count > 1 then GameTooltip:AddLine("x"..button.mob.count, 0.8, 0.8, 0.8) end
+      GameTooltip:Show()
+    end)
+    portrait:SetScript("OnLeave", function() if GameTooltip then GameTooltip:Hide() end end)
+    frame.mobPortraits[index] = portrait
+  end
+
   frame.rows = {}
   for index = 1, 8 do
     local row = CreateFrame("Frame", nil, frame)
@@ -515,15 +589,27 @@ local function renderRow(row, mark)
   row.marker:SetTexture(("Interface\\TargetingFrame\\UI-RaidTargetingIcon_%d"):format(mark.marker))
   row.runtime = mark.runtime
   local assignment = mark.assignment
+  local assignee = assignment and assignment.assignee or mark.inheritedPlayer
   local definition = assignment and ART.CCAssignments and ART.CCAssignments.catalog[assignment.ccKey]
   row.npcFullName = tostring(mark.playerGlobal and definition and definition.label or mark.name or "")
+  if mark.source == "global" then row.npcFullName = row.npcFullName:match("^[^-]+") or row.npcFullName end
   row.npc:ClearAllPoints()
   row.npc:SetPoint("LEFT", row.marker, "RIGHT", 6, 0)
-  row.npc:SetPoint("RIGHT", row, "CENTER", -6, 0)
-  local npcText, npcTruncated = truncateUtf8(row.npcFullName, 18)
+  if mark.source == "pull" then
+    row.npc:SetPoint("RIGHT", row, "CENTER", -6, 0)
+  elseif assignee then
+    row.npc:SetPoint("RIGHT", row.ccIcon, "LEFT", -6, 0)
+  else
+    row.npc:SetPoint("RIGHT", row, "RIGHT", 0, 0)
+  end
+  local npcText, npcTruncated = row.npcFullName, false
+  if mark.source == "pull" then npcText, npcTruncated = truncateUtf8(row.npcFullName, 18) end
   row.npc:SetText(npcText)
   row.tooltipStatus = nil
-  if mark.playerGlobal and mark.player then
+  if mark.source == "floor" then
+    local color = NORMAL_FONT_COLOR or { r = 1, g = 0.82, b = 0 }
+    row.npc:SetTextColor(color.r, color.g, color.b)
+  elseif mark.playerGlobal and mark.player then
     local color = RAID_CLASS_COLORS and RAID_CLASS_COLORS[mark.player.classFile]
     row.npc:SetTextColor(color and color.r or 1, color and color.g or 1, color and color.b or 1)
     local roster = ART.CCAssignments and ART.CCAssignments:FindRosterPlayer(mark.player.name)
@@ -536,17 +622,22 @@ local function renderRow(row, mark)
   end
   row.npcTruncated = npcTruncated
       or row.npc.GetStringWidth and row.npc.GetWidth and row.npc:GetStringWidth() > row.npc:GetWidth()
-  if not assignment or not ART.CCAssignments then
+  if not assignee or not ART.CCAssignments then
     row.runtime = nil
     row:SetScript("OnUpdate", nil)
     row.ccIcon:Hide(); row.cooldown:Hide(); row.timer:Hide(); row.player:Hide()
     return
   end
 
-  row.ccIcon:Show(); row.timer:Show(); row.player:Show()
-  row.ccIcon:SetTexture(definition.icon)
+  row.player:Show()
   local runtime = mark.runtime
-  if runtime and runtime.expires > GetTime() then
+  if not assignment then
+    row.runtime = nil
+    row:SetScript("OnUpdate", nil)
+    row.ccIcon:Hide(); row.cooldown:Hide(); row.timer:Hide()
+  elseif runtime and runtime.expires > GetTime() then
+    row.ccIcon:Show(); row.timer:Show()
+    row.ccIcon:SetTexture(definition.icon)
     row:SetScript("OnUpdate", updateRuntime)
     row.ccIcon:SetDesaturated(false)
     row.ccIcon:SetAlpha(1)
@@ -557,6 +648,8 @@ local function renderRow(row, mark)
       CooldownFrame_Set(row.cooldown, runtime.started, runtime.duration, true)
     end
   else
+    row.ccIcon:Show(); row.timer:Show()
+    row.ccIcon:SetTexture(definition.icon)
     row.runtime = nil
     row:SetScript("OnUpdate", nil)
     row.ccIcon:SetDesaturated(true)
@@ -564,15 +657,15 @@ local function renderRow(row, mark)
     row.cooldown:Hide()
     row.timer:SetText("")
   end
-  local roster = ART.CCAssignments:FindRosterPlayer(assignment.assignee.name)
+  local roster = ART.CCAssignments:FindRosterPlayer(assignee.name)
   local name = roster and roster.displayName
-      or tostring(assignment.assignee.name):match("^[^-]+") or assignment.assignee.name
-  row.player:SetText(truncateUtf8(name, 12))
-  local color = RAID_CLASS_COLORS and RAID_CLASS_COLORS[assignment.assignee.classFile]
-  if not roster or roster.online == false then
-    row.normalPlayerColor = { 0.45, 0.45, 0.45 }
-  elseif color then
+      or tostring(assignee.name):match("^[^-]+") or assignee.name
+  row.player:SetText(mark.source ~= "pull" and name or truncateUtf8(name, 12))
+  local color = RAID_CLASS_COLORS and RAID_CLASS_COLORS[assignee.classFile]
+  if color then
     row.normalPlayerColor = { color.r, color.g, color.b }
+  elseif not roster or roster.online == false then
+    row.normalPlayerColor = { 0.45, 0.45, 0.45 }
   else
     row.normalPlayerColor = { 1, 1, 1 }
   end
@@ -580,6 +673,28 @@ local function renderRow(row, mark)
     row.player:SetTextColor(1, 0.82, 0)
   else
     row.player:SetTextColor(unpack(row.normalPlayerColor))
+  end
+end
+
+local function renderPullMobs(frame, mobs)
+  local overflow = #mobs > MAX_PULL_PORTRAITS and #mobs - MAX_PULL_PORTRAITS + 1 or nil
+  for index, portrait in ipairs(frame.mobPortraits) do
+    local mob = (not overflow or index < MAX_PULL_PORTRAITS) and mobs[index] or nil
+    portrait.used, portrait.mob, portrait.overflow = mob ~= nil or overflow and index == MAX_PULL_PORTRAITS, mob, nil
+    portrait.image:SetShown(mob ~= nil)
+    if mob then
+      SetPortraitTextureFromCreatureDisplayID(portrait.image, mob.displayId or 39490)
+      portrait.count:ClearAllPoints()
+      portrait.count:SetPoint("BOTTOMRIGHT", 2, -1)
+      portrait.count:SetText(mob.count > 1 and mob.count or "")
+    elseif overflow and index == MAX_PULL_PORTRAITS then
+      portrait.overflow = overflow
+      portrait.count:ClearAllPoints()
+      portrait.count:SetPoint("CENTER")
+      portrait.count:SetText("+"..overflow)
+    else
+      portrait.count:SetText("")
+    end
   end
 end
 
@@ -606,11 +721,18 @@ function RaidMarksUI:RefreshPullTracker()
     frame.next.background:SetColorTexture(0.045, 0.05, 0.06, 0.9)
     frame.next.label:SetTextColor(0.45, 0.45, 0.45)
   end
-  frame:AnimateProgress(270 * math.min(model.pullIndex / math.max(1, model.totalPulls), 1))
+  frame:AnimateProgress(270 * math.min(model.progressCurrent / math.max(1, model.progressTotal), 1))
+  renderPullMobs(frame, model.mobs)
   for index, row in ipairs(frame.rows) do
     local mark = model.marks[index]
     row.used = mark ~= nil
-    if mark then renderRow(row, mark) else row.runtime = nil; row:SetScript("OnUpdate", nil) end
+    if mark then
+      row:ClearAllPoints()
+      row:SetPoint("TOPLEFT", 16, -130 - (index - 1) * 22)
+      renderRow(row, mark)
+    else
+      row.runtime = nil; row:SetScript("OnUpdate", nil)
+    end
   end
   frame.clear:ClearAllPoints()
   frame.clear:SetPoint("TOPLEFT", 8, -140 - math.max(1, math.min(8, #model.marks)) * 22)

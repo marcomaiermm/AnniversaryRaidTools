@@ -162,9 +162,11 @@ preset.currentSublevel = 2
 assert(planner:GetNpcDefaultMark(200) == 7, "clearing floor marks preserves other floors")
 preset.currentSublevel = 1
 
-local stepMarkers = assert(planner:SetStepNpcMarks("step-b", 200, { 8, 7 }))
-assert(stepMarkers[1] == 8 and stepMarkers[2] == 7 and planner.preset.routeSteps[2].marks[spawnB.key] == 8
-    and planner.preset.routeSteps[2].marks[spawnBAlt.key] == 7, "step NPC marker pool is stored on deterministic spawns")
+assert(planner:SetStepNpcMarks("step-b", 200, { 1 }))
+local stepMarkers = assert(planner:SetStepNpcMarks("step-b", 200, { 7, 1 }))
+assert(stepMarkers[1] == 7 and stepMarkers[2] == 1 and planner.preset.routeSteps[2].marks[spawnB.key] == 1
+    and planner.preset.routeSteps[2].marks[spawnBAlt.key] == 7,
+    "adding a wave marker keeps existing marker-to-spawn CC identity stable")
 assert(#planner:GetStepNpcMarks("step-b", 200) == 2, "step NPC marker pool roundtrips")
 local rejected, rejectedReason = planner:SetStepNpcMarks("step-b", 200, { 8, 7, 1 })
 assert(not rejected and rejectedReason == "too many markers", "step NPC marker pool cannot exceed occurrences")

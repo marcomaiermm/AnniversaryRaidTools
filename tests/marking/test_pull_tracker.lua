@@ -16,8 +16,14 @@ ART.RaidPlanner = {
 }
 
 local db = { currentRaidIndex = 164 }
-local currentPreset = { value = { currentPull = 2, pulls = { {}, {}, {} } } }
+local currentPreset = { value = { currentRaidIndex = 164, currentPull = 2, pulls = {
+  {}, { [1] = { 1, 2 }, [2] = { 1 } }, {},
+} } }
 ART.mapInfo = { [164] = { mapID = 544 } }
+ART.raidEnemies = { [164] = {
+  [1] = { name = "Hellfire Channeler", displayId = 1001 },
+  [2] = { name = "Hellfire Warder", displayId = 1002 },
+} }
 function ART:GetDB() return db end
 function ART:GetCurrentPreset() return currentPreset end
 assert(loadfile(root.."/Modules/RaidMarksUI.lua"))("AnniversaryRaidTools", ART)
@@ -32,10 +38,18 @@ assert(model.raidName == "Magtheridon's Lair")
 assert(model.pullIndex == 2 and model.totalPulls == 3 and model.nextPullIndex == 3)
 assert(model.marks[1].marker == 8 and model.marks[1].name == "Hellfire Channeler")
 assert(model.marks[2].marker == 5 and model.marks[2].name == "Hellfire Warder")
+assert(#model.mobs == 2 and model.mobs[1].name == "Hellfire Channeler" and model.mobs[1].count == 2
+    and model.mobs[1].displayId == 1001 and model.mobs[2].count == 1,
+    "tracker groups pull portraits by mob type with clone counts")
 
 ART.CCAssignments = {
   GetAssignmentRows = function(_, pullIndex)
-    return { { marker = 8, name = ART.RaidPlanner.raid.name.."-"..pullIndex } }
+    local name = ART.RaidPlanner.raid.name.."-"..pullIndex
+    return { { marker = 8, name = name } }, {
+      { marker = 8, name = name, source = "pull" },
+      { marker = 7, name = "Floor", source = "floor" },
+      { marker = 6, name = "Global", source = "global" },
+    }
   end,
 }
 
@@ -46,6 +60,9 @@ ART.RaidMarksUI:ResetPullTracker()
 model = assert(ART.RaidMarksUI:GetPullTrackerModel())
 assert(model.pullIndex == 1 and model.totalPulls == 1 and model.marks[1].name == "Magtheridon's Lair-1",
     "floor changes rebuild the tracker from that floor's current pull")
+assert(#model.marks == 3 and model.marks[1].source == "pull"
+    and model.marks[2].source == "floor" and model.marks[3].source == "global",
+    "tracker renders assignment rows in explicit pull, floor, global sections")
 
 local secondRaid = { name = "Black Temple", mapId = 564, enemies = {} }
 ART.RaidPlanner.raid, ART.RaidPlanner.preset = secondRaid, {}
@@ -77,8 +94,8 @@ ART.mapInfo[162] = { mapID = 534 }
 ART.RaidPlanner.lastPullIndex = 3
 model = assert(ART.RaidMarksUI:GetPullTrackerModel())
 assert(model.mode == "waves" and model.currentLabel == "Rage Winterchill")
-assert(model.currentText == "Wave 3 / 37" and model.nextText == "NEXT  Wave 4  >",
-    "Hyjal tracker presents wave progress instead of pull progress")
+assert(model.currentText == "Wave 3 / 8" and model.progressCurrent == 3 and model.progressTotal == 8,
+    "Hyjal tracker presents progress within the current boss segment")
 assert(model.showNext == false, "automatic wave mode hides the tracker Next button")
 
 ART.PullClickAreaOnLeave = function() end
@@ -90,5 +107,15 @@ assert(currentPreset.value.currentPull == 3 and currentPreset.value.selection[1]
 db.currentRaidIndex = 1
 ART.mapInfo[1] = { mapID = 999 }
 assert(ART.RaidMarksUI:GetPullTrackerModel() == nil, "tracker hides outside the active raid")
+
+local trackerFile = assert(io.open(root.."/Modules/RaidMarksUI.lua", "r"))
+local trackerSource = trackerFile:read("*a")
+trackerFile:close()
+assert(trackerSource:find("db.pullTrackerPosition", 1, true)
+    and trackerSource:find("current.pullTrackerPosition = { left = frame:GetLeft(), top = frame:GetTop() }", 1, true),
+    "dragged pull tracker position is restored from and saved to the profile")
+assert(trackerSource:find('mark.source ~= "pull" and name or truncateUtf8(name, 12)', 1, true)
+    and trackerSource:find('row.npcFullName:match("^[^-]+")', 1, true),
+    "floor and global names stay complete while global players omit the realm suffix")
 
 print("pull tracker checks passed")

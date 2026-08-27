@@ -68,10 +68,14 @@ assert(ui:IsActive(), "Hyjal wave mode activates from raid mode and map metadata
 assert(runtimeFrame.events.COMBAT_LOG_EVENT_UNFILTERED,
     "Hyjal combat logging activates only for the active runtime")
 
+local ghoulSpawn = raid.enemies["17895"].spawns[1]
+preset.routeSteps[1].marks[ghoulSpawn.key] = 8
 local model = assert(ui:BuildModel())
 assert(model.waveIndex == 1 and model.group.label == "Rage Winterchill" and model.groupWave == 1)
 assert(#model.enemies == 1 and model.enemies[1].npcId == 17895 and model.enemies[1].count == 10,
     "wave composition aggregates identical NPCs")
+assert(model.enemies[1].markerSpawns[8] == ghoulSpawn.key,
+    "wave marker models retain the concrete spawn needed for pull CC assignments")
 assert(#model.paths == 1 and model.paths[1].occurrences == 10, "identical wave paths are deduplicated")
 local alliancePath = model.paths[1].points
 assert(alliancePath[1].x == 0.061 and alliancePath[1].y == 0.742
@@ -79,6 +83,28 @@ assert(alliancePath[1].x == 0.061 and alliancePath[1].y == 0.742
     "wave routes reuse the patrol projection used by the map")
 assert(model.camp.label == "Alliance Base", "wave camp resolves through raid POIs")
 assert(math.abs(model.camp.x - 0.128277) < 0.000001, "Alliance camp uses the displayed map orientation")
+local clearedAssignments, clearedWorldMarks = 0, 0
+ART.RaidPlanner.SetStepNpcMarks = function(_, stepId, npcId, markers)
+  assert(stepId == model.step.id and npcId == 17895 and #markers == 0)
+  model.step.marks = {}
+  return markers
+end
+ART.CCAssignments = { ClearActivePullAssignments = function() clearedAssignments = clearedAssignments + 1 end }
+ART.LiveMarks = { ClearWorldMarks = function() clearedWorldMarks = clearedWorldMarks + 1 end }
+assert(ui:ClearMarks(model) and not next(model.step.marks)
+    and clearedAssignments == 0 and clearedWorldMarks == 1,
+    "wave Clear Marks removes planned and active world markers without clearing CC")
+model.step.marks[ghoulSpawn.key] = 8
+assert(ui:ClearCC(model) and model.step.marks[ghoulSpawn.key] == 8
+    and clearedAssignments == 1 and clearedWorldMarks == 1,
+    "wave Clear CC removes assignments without clearing markers")
+ART.CCAssignments, ART.LiveMarks = nil, nil
+
+local waveSource = assert(io.open(root.."/Modules/WaveModeUI.lua", "r")):read("*a")
+assert(waveSource:find('card.clear:SetText(L["Clear >"]', 1, true)
+    and waveSource:find('root:CreateButton(L["Clear Marks"]', 1, true)
+    and waveSource:find('root:CreateButton(L["Clear CC"]', 1, true),
+    "wave card exposes separate Clear Marks and Clear CC menu actions")
 
 current.value.currentPull = 20
 model = assert(ui:BuildModel())
@@ -168,6 +194,10 @@ local waveUI = assert(io.open(root.."/Modules/WaveModeUI.lua", "rb"))
 local waveSource = waveUI:read("*a")
 waveUI:close()
 assert(waveSource:find("ART.LiveMarks:ClearWorldMarks()", 1, true), "wave card must expose clear world marks")
+assert(waveSource:find('RegisterForClicks("LeftButtonUp", "RightButtonUp")', 1, true)
+    and waveSource:find("ART.CCAssignments:AddNpcMenu", 1, true)
+    and waveSource:find('button.ccIcon:SetPoint("CENTER", button, "TOP", 0, 0)', 1, true),
+    "selected wave markers expose direct CC choices and render their badge at center-top")
 assert(waveSource:find('HYJAL_WAVE_WIDGET_ID = 534, 3121', 1, true)
     and waveSource:find('RegisterEvent("UPDATE_UI_WIDGET")', 1, true),
     "Hyjal wave mode must listen to the Classic wave widget")
