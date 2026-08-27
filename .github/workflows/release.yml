@@ -48,12 +48,14 @@ jobs:
       - name: Stage cleaned release bundle
         uses: BigWigsMods/packager@v2
         with:
-          args: -d -z -w 0 -l
+          args: -d -w 0 -l
 
       - name: Audit cleaned release bundle
-        run: ./scripts/validate-release.sh .release/AnniversaryRaidTools
+        run: |
+          ./scripts/validate-release.sh .release/AnniversaryRaidTools
+          unzip -Z1 .release/AnniversaryRaidTools-*.zip | grep -Fx 'AnniversaryRaidTools_UI/AnniversaryRaidTools_UI.toc'
 
       - name: Package and release
         uses: BigWigsMods/packager@v2
         with:
-          args: -c -o -w 0 -l
+          args: -o -w 0 -l
