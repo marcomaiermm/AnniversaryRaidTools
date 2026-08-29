@@ -106,6 +106,8 @@ end
 
 function Planner:GetActiveStep()
   if not self.preset then return nil end
+  if self.raid and self.raid.mode ~= "waves" and ART.IsPullModeEnabled
+      and not ART:IsPullModeEnabled() then return nil end
   if not self.preset.currentStepPinned then
     local step = currentPullStep(self)
     if step then return step end

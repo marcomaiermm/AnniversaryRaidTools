@@ -172,11 +172,15 @@ function ARTcommsObject:OnCommReceived(prefix, message, distribution, sender)
       preset.value.pulls = pulls
       if not preset.value.pulls[preset.value.currentPull] then
         preset.value.currentPull = #preset.value.pulls
-        preset.value.selection = { #preset.value.pulls }
+        preset.value.selection = ART:IsPullModeEnabled(preset) and { #preset.value.pulls } or {}
       end
       if preset == ART:GetCurrentPreset() then
         ART:ReloadPullButtons()
-        ART:SetSelectionToPull(ART:GetCurrentPull(), nil, true)
+        if ART:IsPullModeEnabled() then
+          ART:SetSelectionToPull(ART:GetCurrentPull(), nil, true)
+        else
+          ART:SetPullModeEnabled(false, nil, true)
+        end
       end
     end
   end

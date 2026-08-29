@@ -41,6 +41,24 @@ function RaidMarksUI:GetPullTrackerModel()
 
   local currentPreset = ART.GetCurrentPreset and ART:GetCurrentPreset()
   local value = currentPreset and currentPreset.value
+  if raid.mode ~= "waves" and ART.IsPullModeEnabled and not ART:IsPullModeEnabled() then
+    local rows
+    if ART.CCAssignments then
+      local effectiveRows, displayRows = ART.CCAssignments:GetAssignmentRows(nil)
+      rows = displayRows or effectiveRows
+    else
+      rows = {}
+    end
+    return {
+      raidName = raid.name..(ART.CCAssignments and ART.CCAssignments.debugMode and " |cffffd100[CC DEBUG]|r" or ""),
+      mode = raid.mode, showNext = false, showStatus = false, pullIndex = nil,
+      totalPulls = #(value and value.pulls or {}),
+      progressCurrent = 0, progressTotal = 1, nextPullIndex = nil,
+      currentLabel = "CURRENT PULL", currentText = L["No pull"], nextText = "",
+      debugCC = ART.CCAssignments and ART.CCAssignments.debugMode == true,
+      mobs = {}, marks = rows,
+    }
+  end
   local selectedPull = tonumber(planner.lastPullIndex)
   if self.trackerPreset ~= preset then
     self.trackerPreset, self.trackerPullIndex, self.trackerTotalPulls = preset, nil, nil
@@ -119,7 +137,7 @@ function RaidMarksUI:GetPullTrackerModel()
 end
 
 local function showBody(frame, shown)
-  frame.status:SetShown(shown)
+  frame.status:SetShown(shown and frame.model.showStatus ~= false)
   frame.assignments:SetShown(shown)
   frame.debugCC:SetShown(shown and frame.model.debugCC)
   for _, portrait in ipairs(frame.mobPortraits) do portrait:SetShown(shown and portrait.used) end
@@ -140,7 +158,8 @@ local function setBodyAlpha(frame, alpha)
 end
 
 local function expandedHeight(frame)
-  return 170 + math.max(1, math.min(8, #frame.model.marks)) * 22
+  return (frame.model.showStatus == false and 102 or 170)
+      + math.max(1, math.min(8, #frame.model.marks)) * 22
 end
 
 local function anchorAtHeader(frame)
@@ -247,9 +266,33 @@ local function createTracker()
 
   frame.title = frame.header:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
   frame.title:SetPoint("LEFT", 18, 1)
-  frame.title:SetPoint("RIGHT", -64, 1)
+  frame.title:SetPoint("RIGHT", -142, 1)
   frame.title:SetJustifyH("LEFT")
   frame.title:SetTextColor(1, 0.82, 0.18)
+
+  frame.mode = CreateFrame("Button", nil, frame.header, "BackdropTemplate")
+  frame.mode:SetSize(76, 22)
+  frame.mode:SetPoint("RIGHT", -55, 1)
+  frame.mode:SetBackdrop({
+    bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
+    edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", edgeSize = 8,
+    insets = { left = 2, right = 2, top = 2, bottom = 2 },
+  })
+  frame.mode:SetBackdropColor(0.06, 0.04, 0.01, 0.95)
+  frame.mode:SetBackdropBorderColor(0.78, 0.57, 0.15, 0.9)
+  frame.mode.text = frame.mode:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+  frame.mode.text:SetAllPoints()
+  frame.mode.text:SetText(L["Pull Mode"])
+  frame.mode.icon = frame.mode:CreateTexture(nil, "OVERLAY")
+  frame.mode.icon:SetSize(12, 12)
+  frame.mode.icon:SetPoint("LEFT", 5, 0)
+  frame.mode.icon:SetTexture("Interface\\FriendsFrame\\StatusIcon-Online")
+  frame.mode.text:ClearAllPoints()
+  frame.mode.text:SetPoint("LEFT", frame.mode.icon, "RIGHT", 2, 0)
+  frame.mode.text:SetPoint("RIGHT", -3, 0)
+  frame.mode:SetScript("OnClick", function()
+    ART:SetPullModeEnabled(not ART:IsPullModeEnabled())
+  end)
 
   frame.toggle = CreateFrame("Button", nil, frame.header, "BackdropTemplate")
   frame.toggle:SetSize(22, 22)
@@ -710,6 +753,11 @@ function RaidMarksUI:RefreshPullTracker()
   frame.title:SetText(model.raidName)
   frame.currentLabel:SetText(model.currentLabel)
   frame.current:SetText(model.currentText)
+  local pullModeEnabled = ART:IsPullModeEnabled()
+  frame.mode:SetShown(model.mode ~= "waves")
+  frame.mode.text:SetTextColor(pullModeEnabled and 1 or 0.45, pullModeEnabled and 0.82 or 0.45,
+      pullModeEnabled and 0.18 or 0.45)
+  frame.mode.icon:SetTexture("Interface\\FriendsFrame\\StatusIcon-"..(pullModeEnabled and "Online" or "Offline"))
   frame.next:SetShown(model.showNext)
   frame.next.label:SetText(model.nextText)
   if model.nextPullIndex then
@@ -723,19 +771,26 @@ function RaidMarksUI:RefreshPullTracker()
   end
   frame:AnimateProgress(270 * math.min(model.progressCurrent / math.max(1, model.progressTotal), 1))
   renderPullMobs(frame, model.mobs)
+  local assignmentTop = model.showStatus == false and 44 or 112
+  frame.assignments:ClearAllPoints()
+  frame.assignments:SetPoint("TOPLEFT", 12, -assignmentTop)
+  frame.debugCC:ClearAllPoints()
+  frame.debugCC:SetPoint("TOPRIGHT", -12, -(assignmentTop - 7))
+  frame.empty:ClearAllPoints()
+  frame.empty:SetPoint("TOPLEFT", 16, -(assignmentTop + 20))
   for index, row in ipairs(frame.rows) do
     local mark = model.marks[index]
     row.used = mark ~= nil
     if mark then
       row:ClearAllPoints()
-      row:SetPoint("TOPLEFT", 16, -130 - (index - 1) * 22)
+      row:SetPoint("TOPLEFT", 16, -(assignmentTop + 18) - (index - 1) * 22)
       renderRow(row, mark)
     else
       row.runtime = nil; row:SetScript("OnUpdate", nil)
     end
   end
   frame.clear:ClearAllPoints()
-  frame.clear:SetPoint("TOPLEFT", 8, -140 - math.max(1, math.min(8, #model.marks)) * 22)
+  frame.clear:SetPoint("TOPLEFT", 8, -(assignmentTop + 28) - math.max(1, math.min(8, #model.marks)) * 22)
   setExpanded(frame, frame.expanded ~= false, false)
   frame:Show()
   return model

@@ -1366,7 +1366,8 @@ function ART:RaidEnemies_AddOrRemoveBlipToCurrentPull(blip, add, ignoreGrouped, 
   local enemyIdx = blip.enemyIdx
   local cloneIdx = blip.cloneIdx
   local spawnKey = blip.clone and blip.clone.artSpawnKey
-  pull = pull or preset.value.currentPull
+  pull = pull or self:GetCurrentPull()
+  if not pull then return false end
   pulls = pulls or preset.value.pulls or {}
   pulls[pull] = pulls[pull] or {}
   pulls[pull][enemyIdx] = pulls[pull][enemyIdx] or {}

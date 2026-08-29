@@ -162,33 +162,45 @@ inRaid, isAssistant = false, false
 
 units.raid1 = { guid = "Player-0-0-0-0-1-Mage" }
 units.raid2 = { guid = "Player-0-0-0-0-2-Other" }
-_G.GetNumGroupMembers = function() return 2 end
+units.raid3 = { guid = "Player-0-0-0-0-3-New" }
+_G.GetNumGroupMembers = function() return 3 end
 _G.UnitFullName = function(token)
   if token == "raid1" then return "Mage", "Realm" end
   if token == "raid2" then return "Other", "Realm" end
+  if token == "raid3" then return "New", "Realm" end
   if token == "player" then return "Leader", "Realm" end
 end
-local playerSuppressed, clearedAssignments = false, 0
-ART.CCAssignments = { GetAssignmentRows = function()
-  if playerSuppressed then return { { marker = 1, npcId = 100, name = "Enemy" } } end
-  return { { marker = 1, playerGlobal = true, player = { name = "Mage-Realm", classFile = "MAGE" } } }
-end, ClearActivePullAssignments = function() clearedAssignments = clearedAssignments + 1 end }
+local clearedAssignments = 0
+local playerPreset = { value = {
+  artPlayerMarkCurrent = { [1] = { name = "Mage-Realm", classFile = "MAGE" } },
+  artPlayerMarksEnabled = true,
+  artCCMarks = { [2] = { name = "Other-Realm", classFile = "ROGUE" } },
+} }
+ART.GetCurrentPreset = function() return playerPreset end
+ART.PlayerMarks = { GetActiveMarks = function(_, preset)
+  return preset.value.artPlayerMarksEnabled and preset.value.artPlayerMarkCurrent or {}
+end }
+ART.CCAssignments = { ClearActivePullAssignments = function() clearedAssignments = clearedAssignments + 1 end }
 inRaid, isAssistant = true, true
 eventFrame.onEvent(eventFrame, "GROUP_ROSTER_UPDATE")
-assert(liveMarkers[units.raid1.guid] == 1, "a free global player mark is applied to its raid member")
-playerSuppressed = true
+assert(liveMarkers[units.raid1.guid] == 1 and liveMarkers[units.raid2.guid] == nil,
+    "only an enabled player-mark loadout applies to raid members")
+playerPreset.value.artPlayerMarksEnabled = nil
 ART.LiveMarks:OnPlanChanged()
-assert(liveMarkers[units.raid1.guid] == nil, "a higher-priority NPC mark removes the managed player mark")
-playerSuppressed = false
+assert(liveMarkers[units.raid1.guid] == nil, "disabling the loadout removes its managed mark")
+playerPreset.value.artPlayerMarksEnabled = true
 ART.LiveMarks:OnPlanChanged()
-assert(liveMarkers[units.raid1.guid] == 1, "the player mark returns when the higher-priority mark is free")
-liveMarkers[units.raid2.guid] = 7
-ART.CCAssignments.GetAssignmentRows = function()
-  return { { marker = 7, playerGlobal = true, player = { name = "Mage-Realm", classFile = "MAGE" } } }
-end
-ART.LiveMarks:ReconcilePlayerMarks()
-assert(liveMarkers[units.raid2.guid] == 7 and liveMarkers[units.raid1.guid] == nil,
-    "global player reconciliation never displaces a foreign marker holder")
+liveMarkers[units.foreignHolder.guid] = 4
+eventFrame.onEvent(eventFrame, "NAME_PLATE_UNIT_ADDED", "foreignHolder")
+playerPreset.value.artPlayerMarkCurrent = { [4] = { name = "New-Realm", classFile = "MAGE" } }
+ART.LiveMarks:OnPlanChanged()
+assert(liveMarkers[units.raid1.guid] == nil and liveMarkers[units.raid3.guid] == nil
+    and liveMarkers[units.foreignHolder.guid] == 4,
+    "editing an enabled loadout removes stale managed marks without displacing foreign holders")
+playerPreset.value.artPlayerMarkCurrent = { [1] = { name = "New-Realm", classFile = "MAGE" } }
+ART.LiveMarks:OnPlanChanged()
+assert(liveMarkers[units.raid3.guid] == 1 and liveMarkers[units.foreignHolder.guid] == 4,
+    "editing an enabled loadout reapplies the new desired player")
 inRaid, isAssistant = false, false
 
 settings.autoMark = false

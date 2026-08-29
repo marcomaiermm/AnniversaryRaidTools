@@ -45,5 +45,13 @@ preset.value.currentPull = 2
 ART:SetPullSublevel(1)
 ART:SetPullSublevel(2)
 assert(preset.value.currentPull == 2, "each floor remembers its selected pull")
+preset.value.pullSelectionEnabled = false
+preset.value.selection = {}
+preset.value.currentPull = 2
+ART:SetPullSublevel(1)
+ART:SetPullSublevel(2)
+assert(preset.value.currentPull == 2 and #preset.value.selection == 0,
+    "disabled pull mode remembers each floor's numeric pull without selecting it")
+
 
 print("floor pull checks passed")

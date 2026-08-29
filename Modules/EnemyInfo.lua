@@ -321,6 +321,7 @@ local function configureWavePulls(raid, preset)
   end
   preset.value.pulls = pulls
   preset.value.currentPull = math.min(math.max(preset.value.currentPull or 1, 1), #pulls)
+  preset.value.pullSelectionEnabled = true
   preset.value.selection = { preset.value.currentPull }
   preset.value.artWaveRaid = raid.key
 end
@@ -498,7 +499,7 @@ function Integration:Initialize()
     onChange = persist,
     getPullPackKeys = pullPackKeys,
     getPullStep = pullStep,
-    getCurrentPullIndex = function() return ART:GetCurrentPreset().value.currentPull end,
+    getCurrentPullIndex = function() return ART.GetCurrentPull and ART:GetCurrentPull() end,
   })
   local raidSelect = ART.RaidSelect:Initialize({ registry = registry, planner = planner })
   wireMarks(nil, raids[DEFAULT_RAID_KEY])

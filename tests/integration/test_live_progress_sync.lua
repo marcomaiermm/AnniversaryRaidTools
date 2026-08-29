@@ -43,7 +43,12 @@ function ART:IsPlayerInGroup() return "RAID" end
 function ART:TableToString(value) return value end
 function ART:StringToTable(value) return value end
 function ART:SetMapSublevel(index) selectedFloor = index end
-function ART:SetSelectionToPull(index) selected = index end
+function ART:SetSelectionToPull(index)
+  selected = index
+  livePreset.value.currentPull = index
+  livePreset.value.selection = { index }
+  livePreset.value.pullSelectionEnabled = true
+end
 function ART:OpenConfirmationFrame(_, _, _, _, _, callback) prompt = callback end
 function ART:RunAfterFramesInitialized(callback) self.afterFrames = callback end
 function ART:StartMainFrameInitialization() initialized = true; self.afterFrames() end
@@ -73,10 +78,14 @@ ART:SetSelectionToPull(1)
 ART.applyingLiveProgress = nil
 assert(#sent == 2, "received selection does not echo")
 
+livePreset.value.pullSelectionEnabled = false
+livePreset.value.selection = {}
 selected, selectedFloor = nil, nil
 assert(ART:LiveSession_ReceiveProgress(payload, "RAID", "Assist-Realm"))
 assert(selected == 3 and selectedFloor == 3 and livePreset.value.currentPull == 3)
 assert(ART.applyingLiveProgress == nil, "remote selection guard must be released")
+assert(livePreset.value.pullSelectionEnabled == true and livePreset.value.selection[1] == 3,
+    "remote numeric progress re-enables pull mode")
 assert(not ART:LiveSession_ReceiveProgress(payload, "RAID", "Member-Realm"))
 
 local wrongRoute = {
@@ -123,7 +132,8 @@ local transmissionSource = transmission:read("*a")
 transmission:close()
 assert(transmissionSource:find("LiveSession_ReceiveProgress(message, distribution, fullName)", 1, true),
     "central comm receiver must dispatch live progress")
-assert(transmissionSource:find("SetSelectionToPull(ART:GetCurrentPull(), nil, true)", 1, true),
-    "received pull data must not echo a progress broadcast")
+assert(transmissionSource:find("ART:IsPullModeEnabled()", 1, true)
+    and transmissionSource:find("ART:SetPullModeEnabled(false, nil, true)", 1, true),
+    "passive pull-table refresh preserves locally disabled pull mode")
 
 print("live progress sync checks passed")

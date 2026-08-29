@@ -1,3 +1,10 @@
+## 1.0.4 (2026-08-29)
+
+- Added a Pull Mode toggle for switching between pull assignments and floor-wide marker and CC editing.
+- Split mob CC Marks from live player marks.
+- Added named player-mark loadouts with raid and guild autocomplete plus explicit enable and disable controls.
+- Fixed pending player-mark rows disappearing and compacted the loadout delete dialog.
+
 ## 1.0.3 (2026-08-27)
 
 - Preserved active Live Sessions across UI reloads.

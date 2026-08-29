@@ -548,7 +548,13 @@ function ART:UpdateMap(ignoreSetSelection, ignoreReloadPullButtons, ignoreUpdate
     end
     ART:UpdatePresetDropdownTextColor()
     if not ART:AreFramesInitialized() then coroutine.yield() end
-    if not ignoreSetSelection then ART:SetSelectionToPull(preset.value.currentPull, nil, true) end
+    if not ignoreSetSelection then
+      if ART:IsPullModeEnabled() then
+        ART:SetSelectionToPull(preset.value.currentPull, nil, true)
+      else
+        ART:SetPullModeEnabled(false, nil, true)
+      end
+    end
     if ART.pendingAutoPanToPull then
       local pull = ART.pendingAutoPanToPull
       ART.pendingAutoPanToPull = nil

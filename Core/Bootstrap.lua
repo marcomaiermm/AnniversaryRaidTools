@@ -416,8 +416,10 @@ local function hasPlayerMarks()
   local raidIndex = db.currentRaidIndex
   local presetIndex = raidIndex and db.currentPreset and db.currentPreset[raidIndex]
   local preset = presetIndex and db.presets and db.presets[raidIndex] and db.presets[raidIndex][presetIndex]
-  local marks = preset and preset.value and preset.value.artPlayerMarks
-  return type(marks) == "table" and next(marks) ~= nil
+  local value = preset and preset.value
+  local marks = value and value.artPlayerMarkCurrent
+  return value and value.artPlayerMarksEnabled == true
+      and type(marks) == "table" and next(marks) ~= nil
 end
 local function loadPlayerMarksInRaid()
   if db.autoMark == true and type(IsInRaid) == "function" and IsInRaid() and hasPlayerMarks() then

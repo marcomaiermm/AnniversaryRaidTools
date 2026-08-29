@@ -87,6 +87,17 @@ end
 local guild = roster:RefreshGuildPlayers()
 assert(#guild == 1 and guild[1].name == "GuildMage-Realm" and guild[1].classFile == "MAGE",
     "guild autocomplete keeps only class-bearing player suggestions")
+local autocomplete = roster:GetAutocompletePlayers()
+assert(#autocomplete == 3 and autocomplete[1].unit and autocomplete[2].unit
+    and autocomplete[3].name == "GuildMage-Realm",
+    "roster autocomplete lists current raid members before remaining guild members")
+local shortNameEdit = {
+  slotIndex = 40,
+  GetText = function() return "GuildMage" end,
+  SetTextColor = function() end,
+}
+assert(roster:CommitEdit(shortNameEdit) and roster:GetSlots()[40].name == "GuildMage-Realm",
+    "roster autocomplete accepts character-only input while storing the canonical realm")
 
 preset.value.artPlayerMarks = {
   [1] = { name = "Mage-Realm", classFile = "MAGE" },
@@ -95,10 +106,13 @@ preset.value.artPlayerMarks = {
 }
 assert(roster:NormalizePreset(preset))
 local normalizedCount = 0
-for _ in pairs(preset.value.artPlayerMarks) do normalizedCount = normalizedCount + 1 end
-assert(normalizedCount == 1 and not preset.value.artPlayerMarks[9],
-    "preset normalization rejects invalid and duplicate global player marks")
-preset.value.artPlayerMarks = nil
+for _ in pairs(preset.value.artCCMarks) do normalizedCount = normalizedCount + 1 end
+assert(normalizedCount == 1 and not preset.value.artCCMarks[9] and preset.value.artPlayerMarks == nil,
+    "legacy player marks migrate once into normalized CC marks")
+preset.value.artCCMarks = nil
+local rosterSource = assert(io.open(root.."/Modules/Roster.lua", "r")):read("*a")
+assert(rosterSource:find('marksTitle:SetText("CC Marks")', 1, true),
+    "the roster labels its assignment block CC Marks")
 
 local sent, reconciles = {}, 0
 preset.uid = "preset-a"

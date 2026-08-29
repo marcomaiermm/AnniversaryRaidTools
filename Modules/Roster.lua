@@ -158,20 +158,20 @@ end
 
 function Roster:GetPlayerMark(preset, marker)
   marker = validMarker(marker)
-  local marks = preset and preset.value and preset.value.artPlayerMarks
+  local marks = preset and preset.value and preset.value.artCCMarks
   return playerCopy(marker and marks and marks[marker])
 end
 
 function Roster:SetPlayerMark(preset, marker, player, silent)
   marker, player = validMarker(marker), playerCopy(player)
   if not marker or not player or not preset or type(preset.value) ~= "table" then return false end
-  local marks = type(preset.value.artPlayerMarks) == "table" and preset.value.artPlayerMarks or {}
+  local marks = type(preset.value.artCCMarks) == "table" and preset.value.artCCMarks or {}
   for otherMarker, other in pairs(marks) do
     if otherMarker ~= marker and type(other) == "table" and type(other.name) == "string"
         and other.name:lower() == player.name:lower() then marks[otherMarker] = nil end
   end
   marks[marker] = player
-  preset.value.artPlayerMarks = marks
+  preset.value.artCCMarks = marks
   if not silent then self:SendChange(preset, "set", marker, player) end
   self:RefreshMarks(preset)
   return player
@@ -179,10 +179,10 @@ end
 
 function Roster:ClearPlayerMark(preset, marker, silent)
   marker = validMarker(marker)
-  local marks = preset and preset.value and preset.value.artPlayerMarks
+  local marks = preset and preset.value and preset.value.artCCMarks
   if not marker or type(marks) ~= "table" or not marks[marker] then return false end
   marks[marker] = nil
-  if not next(marks) then preset.value.artPlayerMarks = nil end
+  if not next(marks) then preset.value.artCCMarks = nil end
   if not silent then self:SendChange(preset, "clear", marker) end
   self:RefreshMarks(preset)
   return true
@@ -207,15 +207,18 @@ end
 function Roster:NormalizePreset(preset)
   local value = preset and preset.value
   if type(value) ~= "table" then return false end
+  if value.artCCMarks == nil and type(value.artPlayerMarks) == "table" then
+    value.artCCMarks, value.artPlayerMarks = value.artPlayerMarks, nil
+  end
   local normalized, seen = {}, {}
-  local marks = type(value.artPlayerMarks) == "table" and value.artPlayerMarks or {}
+  local marks = type(value.artCCMarks) == "table" and value.artCCMarks or {}
   for _, marker in ipairs(MARKER_ORDER) do
     local player = playerCopy(marks[marker])
     if marker and player and not seen[player.name:lower()] then
       normalized[marker], seen[player.name:lower()] = player, true
     end
   end
-  value.artPlayerMarks = next(normalized) and normalized or nil
+  value.artCCMarks = next(normalized) and normalized or nil
   return true
 end
 
@@ -249,6 +252,24 @@ function Roster:RefreshGuildPlayers()
   end
   table.sort(players, function(left, right) return left.name < right.name end)
   self.guildPlayers = players
+  return players
+end
+
+function Roster:GetAutocompletePlayers()
+  local players, seen = {}, {}
+  local function add(player)
+    local copy = playerCopy(player)
+    if not copy or seen[copy.name:lower()] then return end
+    copy.unit, copy.online = player.unit, player.online
+    players[#players + 1], seen[copy.name:lower()] = copy, true
+  end
+  for _, player in ipairs(self:GetPlayers(true)) do add(player) end
+  for _, player in ipairs(self.guildPlayers or {}) do add(player) end
+  table.sort(players, function(left, right)
+    local leftRaid, rightRaid = left.unit ~= nil, right.unit ~= nil
+    if leftRaid ~= rightRaid then return leftRaid end
+    return left.name:lower() < right.name:lower()
+  end)
   return players
 end
 
@@ -287,19 +308,35 @@ function Roster:CommitEdit(edit)
   local text = edit:GetText():match("^%s*(.-)%s*$")
   if text == "" then
     self:ClearSlot(edit.slotIndex)
-    edit.pendingClass = nil
+    edit.pendingClass, edit.pendingPlayer = nil, nil
     self:RefreshUI()
     return
   end
+  local selected = edit.pendingPlayer
+  if not selected then
+    local wanted = text:lower()
+    for _, player in ipairs(self:GetAutocompletePlayers()) do
+      local displayName = player.name:match("^[^-]+") or player.name
+      if player.name:lower() == wanted or displayName:lower() == wanted then
+        selected = player
+        break
+      end
+    end
+  end
   local current = self:GetSlots()[edit.slotIndex]
-  local classFile = edit.pendingClass
-      or current and canonicalName(text) == current.name and current.classFile
+  local classFile = selected and selected.classFile or edit.pendingClass
+      or current and (current.name:match("^[^-]+") or current.name):lower() == text:lower()
+          and current.classFile
   if not classFile then
     edit:SetTextColor(1, 0.3, 0.3)
     return false
   end
-  local player = self:SetSlot(edit.slotIndex, { name = text, classFile = classFile })
-  if player then edit.pendingClass = nil; self:RefreshUI(); return player end
+  local player = self:SetSlot(edit.slotIndex, selected or { name = text, classFile = classFile })
+  if player then
+    edit.pendingClass, edit.pendingPlayer = nil, nil
+    self:RefreshUI()
+    return player
+  end
   edit:SetTextColor(1, 0.3, 0.3)
   return false
 end
@@ -308,8 +345,11 @@ function Roster:ShowSuggestions(edit)
   local query = edit and edit:GetText():lower() or ""
   if query == "" or not self.suggestions then return self:HideSuggestions() end
   local matches = {}
-  for _, player in ipairs(self.guildPlayers or {}) do
-    if player.name:lower():find(query, 1, true) then matches[#matches + 1] = player end
+  for _, player in ipairs(self:GetAutocompletePlayers()) do
+    local displayName = player.name:match("^[^-]+") or player.name
+    if displayName:lower():find(query, 1, true) or player.name:lower():find(query, 1, true) then
+      matches[#matches + 1] = player
+    end
     if #matches == 8 then break end
   end
   if #matches == 0 then return self:HideSuggestions() end
@@ -323,7 +363,7 @@ function Roster:ShowSuggestions(edit)
     button:SetShown(player ~= nil)
     if player then
       button.player = player
-      button.text:SetText(player.name)
+      button.text:SetText(player.name:match("^[^-]+") or player.name)
       button.text:SetTextColor(classColor(player.classFile))
     end
   end
@@ -401,7 +441,7 @@ function Roster:RefreshUI()
   local slots = self:GetSlots()
   for index, edit in ipairs(frame.edits) do
     local player = slots[index]
-    edit:SetText(player and player.name or "")
+    edit:SetText(player and (player.name:match("^[^-]+") or player.name) or "")
     edit:SetTextColor(classColor(player and player.classFile))
     edit.classButton:SetNormalTexture(player and CLASS_ICON_TEXTURE or BUTTON_TEXTURE)
     local texture = edit.classButton:GetNormalTexture()
@@ -439,7 +479,7 @@ function Roster:CreateUI(parent)
   title:SetText("Raid Roster")
   local help = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
   help:SetPoint("LEFT", title, "RIGHT", 12, 0)
-  help:SetText("Guild autocomplete · drag names to swap slots")
+  help:SetText("Guild + raid autocomplete · drag names to swap slots")
 
   for group = 1, 8 do
     local column, band = (group - 1) % 2, math.floor((group - 1) / 2)
@@ -493,13 +533,18 @@ function Roster:CreateUI(parent)
 
   local marksTitle = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
   marksTitle:SetPoint("TOPLEFT", 505, -34)
-  marksTitle:SetText("Global Marks")
+  marksTitle:SetText("CC Marks")
+  local marksHelp = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+  marksHelp:SetPoint("TOPLEFT", marksTitle, "BOTTOMLEFT", 0, -4)
+  marksHelp:SetWidth(250)
+  marksHelp:SetJustifyH("LEFT")
+  marksHelp:SetText("Assign which player owns this mob marker; optional CC sets the spell for that assignee.")
   for index, marker in ipairs(MARKER_ORDER) do
     local selectedMarker = marker
     local icon = frame:CreateTexture(nil, "ARTWORK")
     icon:SetTexture(("Interface\\TargetingFrame\\UI-RaidTargetingIcon_%d"):format(marker))
     icon:SetSize(22, 22)
-    icon:SetPoint("TOPLEFT", 505, -72 - (index - 1) * 32)
+    icon:SetPoint("TOPLEFT", 505, -92 - (index - 1) * 32)
     local button = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
     button:SetSize(142, 24)
     button:SetPoint("LEFT", icon, "RIGHT", 8, 0)
@@ -538,8 +583,8 @@ function Roster:CreateUI(parent)
     button.text:SetPoint("LEFT", 5, 0)
     button:SetScript("OnClick", function(item)
       local edit = popup.owner
-      edit.pendingClass = item.player.classFile
-      edit:SetText(item.player.name)
+      edit.pendingClass, edit.pendingPlayer = item.player.classFile, item.player
+      edit:SetText(item.player.name:match("^[^-]+") or item.player.name)
       self:CommitEdit(edit)
       edit:ClearFocus()
       self:HideSuggestions()

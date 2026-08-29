@@ -184,6 +184,7 @@ function ART:NormalizeCurrentPreset()
   db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentSublevel or 1
   db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentPull = db.presets[
   db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentPull or 1
+  if preset.value.pullSelectionEnabled == nil then preset.value.pullSelectionEnabled = true end
   db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls = db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls or {}
   -- make sure, that at least 1 pull exists
   if #db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls == 0 then
@@ -227,6 +228,11 @@ function ART:NormalizeCurrentPreset()
     db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.currentPull = #
         db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls
   end
+  if preset.value.pullSelectionEnabled == false then
+    preset.value.selection = {}
+  elseif not preset.value.selection or #preset.value.selection == 0 then
+    preset.value.selection = { preset.value.currentPull }
+  end
 
   for k, v in pairs(db.presets[db.currentRaidIndex][db.currentPreset[db.currentRaidIndex]].value.pulls) do
     if k == 0 then
@@ -256,6 +262,7 @@ function ART:NormalizeCurrentPreset()
   end
   if ART.CCAssignments then ART.CCAssignments:NormalizePreset(preset) end
   if ART.Roster then ART.Roster:NormalizePreset(preset) end
+  if ART.PlayerMarks then ART.PlayerMarks:NormalizePreset(preset) end
 
   --make sure sublevel actually exists for the raid
   --this might have been caused by bugged dropdowns in the past
@@ -386,6 +393,7 @@ function ART:ValidateImportPreset(preset, allowKnownRaid)
   end
   if ART.CCAssignments then ART.CCAssignments:NormalizePreset(preset) end
   if ART.Roster then ART.Roster:NormalizePreset(preset) end
+  if ART.PlayerMarks then ART.PlayerMarks:NormalizePreset(preset) end
   return true
 end
 

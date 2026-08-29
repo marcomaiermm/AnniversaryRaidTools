@@ -578,7 +578,7 @@ function ART:MakeSidePanel(frame)
   frame.sidePanel.WidgetGroup.PresetDropDown = AceGUI:Create("Dropdown")
   frame.sidePanel.WidgetGroup.PresetDropDown.pullout.frame:SetParent(frame.sidePanel.WidgetGroup.PresetDropDown.frame)
   local dropdown = frame.sidePanel.WidgetGroup.PresetDropDown
-  dropdown.frame:SetWidth(170)
+  dropdown.frame:SetWidth(145)
   dropdown.text:SetJustifyH("LEFT")
   dropdown:SetCallback("OnValueChanged", function(widget, callbackName, key)
     if db.presets[db.currentRaidIndex][key].value == 0 then
@@ -604,6 +604,45 @@ function ART:MakeSidePanel(frame)
   end)
   ART:UpdatePresetDropDown()
   frame.sidePanel.WidgetGroup:AddChild(dropdown)
+  frame.pullModeButton = AceGUI:Create("Button")
+  frame.pullModeButton:SetText("")
+  frame.pullModeButton:SetWidth(24)
+  frame.pullModeButton.statusIcon = frame.pullModeButton.frame:CreateTexture(nil, "OVERLAY")
+  frame.pullModeButton.statusIcon:SetSize(14, 14)
+  frame.pullModeButton.statusIcon:SetPoint("CENTER")
+  frame.pullModeButton.statusIcon:SetTexture("Interface\\FriendsFrame\\StatusIcon-Online")
+  local pullModeFont = CreateFont("ARTPullModeButtonFont")
+  if pullModeFont then
+    pullModeFont:CopyFontObject(frame.pullModeButton.frame:GetNormalFontObject())
+    local fontName = pullModeFont:GetFont()
+    pullModeFont:SetFont(fontName, 10, "")
+    frame.pullModeButton.frame:SetNormalFontObject(pullModeFont)
+    frame.pullModeButton.frame:SetHighlightFontObject(pullModeFont)
+    frame.pullModeButton.frame:SetDisabledFontObject(pullModeFont)
+  end
+  frame.pullModeButton:SetCallback("OnClick", function()
+    ART:SetPullModeEnabled(not ART:IsPullModeEnabled())
+  end)
+  frame.pullModeButton.frame:SetScript("OnEnter", function(button)
+    GameTooltip:SetOwner(button, "ANCHOR_BOTTOMLEFT", -7, button:GetHeight() + 3)
+    GameTooltip:AddLine(ART:IsPullModeEnabled() and L["Disable pull mode"] or L["Enable pull mode"], 1, 1, 1)
+    GameTooltip:Show()
+  end)
+  frame.pullModeButton.frame:SetScript("OnLeave", function() GameTooltip:Hide() end)
+  frame.sidePanel.WidgetGroup:AddChild(frame.pullModeButton)
+
+  function ART:RefreshPullModeButton()
+    local button = self.main_frame and self.main_frame.pullModeButton
+    if not button then return end
+    local preset = self:GetCurrentPreset()
+    local waves = preset and preset.value and preset.value.artWaveRaid ~= nil
+    local enabled = not waves and self:IsPullModeEnabled()
+    button:SetDisabled(waves)
+    button.statusIcon:SetTexture("Interface\\FriendsFrame\\StatusIcon-"..((waves or enabled) and "Online" or "Offline"))
+    button.text:SetTextColor(enabled and 1 or 0.5, enabled and 0.8196 or 0.5, enabled and 0 or 0.5)
+  end
+  ART:RefreshPullModeButton()
+
 
   local function anchorTooltip(anchorFrame)
     GameTooltip:SetOwner(anchorFrame, "ANCHOR_BOTTOMLEFT", -7, anchorFrame:GetHeight() + 3)

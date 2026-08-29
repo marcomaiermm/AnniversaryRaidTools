@@ -711,16 +711,18 @@ function CC:OpenDefaultMenu(owner, enemy, marker, assignmentChanged)
 end
 
 function CC:GetActivePullIndex()
+  if ART.IsPullModeEnabled and not ART:IsPullModeEnabled() then return nil end
   local tracker = ART.RaidMarksUI
   return tonumber(tracker and tracker.trackerPullIndex)
       or tonumber(ART.RaidPlanner and ART.RaidPlanner.lastPullIndex)
       or tonumber(ART.GetCurrentPreset and ART:GetCurrentPreset().value.currentPull)
 end
 
-function CC:GetAssignmentRows(pullIndex)
+function CC:GetAssignmentRows(...)
   local preset, planner = ART:GetCurrentPreset(), ART.RaidPlanner
   local raid = planner and planner.raid
-  pullIndex = pullIndex or self:GetActivePullIndex()
+  local pullIndex = ...
+  if select("#", ...) == 0 then pullIndex = self:GetActivePullIndex() end
   local step = pullIndex and planner and planner.GetPullStep and planner:GetPullStep(pullIndex)
   local active = planner and planner.GetActiveStep and planner:GetActiveStep()
   if not raid or not preset or type(preset.value) ~= "table" then return {} end
@@ -738,7 +740,7 @@ function CC:GetAssignmentRows(pullIndex)
     names[tonumber(enemy.npcId) or tonumber(npcKey)] = enemy.name
   end
 
-  for marker, player in pairs(type(preset.value.artPlayerMarks) == "table" and preset.value.artPlayerMarks or {}) do
+  for marker, player in pairs(type(preset.value.artCCMarks) == "table" and preset.value.artCCMarks or {}) do
     marker, player = validMarker(marker), playerCopy(player)
     if marker and player then
       globalByMarker[marker] = {
@@ -754,18 +756,36 @@ function CC:GetAssignmentRows(pullIndex)
 
   local pull = pullIndex and preset.value.pulls and preset.value.pulls[pullIndex]
   local enemies = ART.raidEnemies and ART.raidEnemies[preset.value.currentRaidIndex]
-  for enemyIdx, clones in pairs(type(pull) == "table" and pull or {}) do
-    local projected = tonumber(enemyIdx) and enemies and enemies[tonumber(enemyIdx)]
-    local npcId = projected and tonumber(projected.id)
-    if npcId then
-      for _, marker in ipairs(planner:GetNpcDefaultMarks(npcId)) do
-        marker = validMarker(marker)
-        if marker then
-          floorByMarker[marker] = {
+  if pullIndex then
+    for enemyIdx in pairs(type(pull) == "table" and pull or {}) do
+      local projected = tonumber(enemyIdx) and enemies and enemies[tonumber(enemyIdx)]
+      local npcId = projected and tonumber(projected.id)
+      if npcId then
+        for _, marker in ipairs(planner:GetNpcDefaultMarks(npcId)) do
+          marker = validMarker(marker)
+          if marker then floorByMarker[marker] = {
             key = npcId..":"..marker, npcId = npcId, marker = marker,
             name = names[npcId] or projected.name,
             assignment = self:GetDefaultAssignment(preset, npcId, marker), global = true, source = "floor",
-          }
+          } end
+        end
+      end
+    end
+  else
+    local sublevel = preset.value.currentSublevel
+    for npcKey, enemy in pairs(raid.enemies or {}) do
+      local onFloor = false
+      for _, spawn in ipairs(enemy.spawns or {}) do
+        if spawn.sublevel == sublevel then onFloor = true break end
+      end
+      if onFloor then
+        local npcId = tonumber(enemy.npcId) or tonumber(npcKey)
+        for _, marker in ipairs(planner:GetNpcDefaultMarks(npcId)) do
+          marker = validMarker(marker)
+          if marker then floorByMarker[marker] = {
+            key = npcId..":"..marker, npcId = npcId, marker = marker, name = enemy.name,
+            assignment = self:GetDefaultAssignment(preset, npcId, marker), global = true, source = "floor",
+          } end
         end
       end
     end
@@ -1005,11 +1025,26 @@ function CC:UpdateBlipBadge(frame)
   if not frame or not frame.texture_CCIcon then return end
   local preset, marker = ART:GetCurrentPreset(), validMarker(frame.assignment)
   local spawnKey = frame.clone and frame.clone.artSpawnKey
-  local _, _, npcId = self:FindSpawn(ART.RaidPlanner and ART.RaidPlanner.raid, spawnKey)
-  local preferredPull = ART.GetCurrentPull and ART:GetCurrentPull() or preset.value.currentPull
-  local pullIndex = self:ResolvePullForSpawn(preset, spawnKey, preferredPull)
-      or tonumber(preferredPull) or 1
-  local assignment = marker and self:GetEffectiveAssignment(preset, pullIndex, spawnKey, npcId, marker)
+  local _, enemy, npcId = self:FindSpawn(ART.RaidPlanner and ART.RaidPlanner.raid, spawnKey)
+  local assignment
+  if ART.IsPullModeEnabled and not ART:IsPullModeEnabled() then
+    local isDefault = false
+    for _, defaultMarker in ipairs(ART.RaidPlanner:GetNpcDefaultMarks(npcId)) do
+      if marker == validMarker(defaultMarker) then isDefault = true break end
+    end
+    if isDefault then
+      assignment = self:GetDefaultAssignment(preset, npcId, marker)
+      local player = type(preset.value.artCCMarks) == "table" and preset.value.artCCMarks[marker]
+      if not assignment and playerCopy(player) and player.ccKey then
+        assignment = { ccKey = player.ccKey, assignee = { name = player.name, classFile = player.classFile } }
+      end
+      if assignment and not self:IsEligible(catalog[assignment.ccKey], enemy) then assignment = nil end
+    end
+  else
+    local preferredPull = ART.GetCurrentPull and ART:GetCurrentPull() or preset.value.currentPull
+    local pullIndex = self:ResolvePullForSpawn(preset, spawnKey, preferredPull) or tonumber(preferredPull) or 1
+    assignment = marker and self:GetEffectiveAssignment(preset, pullIndex, spawnKey, npcId, marker)
+  end
   if assignment then
     frame.texture_CCIcon:SetTexture(catalog[assignment.ccKey].icon)
     frame.texture_CCIcon:Show()
@@ -1029,9 +1064,10 @@ end
 function CC:RefreshEventRegistration()
   local preset = ART.GetCurrentPreset and ART:GetCurrentPreset()
   local value = preset and preset.value
-  local pull = value and value.pulls and value.pulls[self:GetActivePullIndex()]
+  local pullIndex = self:GetActivePullIndex()
+  local pull = pullIndex and value and value.pulls and value.pulls[pullIndex]
   local hasGlobalCC = false
-  for _, player in pairs(type(value and value.artPlayerMarks) == "table" and value.artPlayerMarks or {}) do
+  for _, player in pairs(type(value and value.artCCMarks) == "table" and value.artCCMarks or {}) do
     if playerCopy(player) and player.ccKey then hasGlobalCC = true break end
   end
   local hasAssignments = type(pull) == "table" and type(pull.artCCAssignments) == "table"

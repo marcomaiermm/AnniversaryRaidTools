@@ -296,9 +296,8 @@ function ART:ReloadPullButtons(force)
     --set the scroll value back to the old value
     frame.pullButtonsScrollFrame.scrollframe.obj:SetScroll(oldScrollValue)
     frame.pullButtonsScrollFrame.scrollframe.obj:FixScroll()
-    if self:GetCurrentPreset().value.currentPull then
-      self:PickPullButton(self:GetCurrentPreset().value.currentPull)
-    end
+    if self:IsPullModeEnabled() then self:PickPullButton(preset.value.currentPull) end
+    if self.RefreshPullModeButton then self:RefreshPullModeButton() end
     ART:ColorAllPulls(nil, 0)
     if preset.value.artWaveRaid then
       ART:ReleaseHullTextures()

@@ -23,7 +23,10 @@ local otherFloor = blip(3, 3, "raid:pull-group:linked", 2)
 local storedPreset = { value = { currentPull = 1, pulls = {} } }
 local reconciles = 0
 local environment = {
-  ART = { GetCurrentPreset = function() return storedPreset end },
+  ART = {
+    GetCurrentPreset = function() return storedPreset end,
+    GetCurrentPull = function() return storedPreset.value.currentPull end,
+  },
   preset = { value = { currentPull = 1, pulls = {} } },
   blips = { first, linked, otherFloor },
   isCloneConstrained = function() return false end,

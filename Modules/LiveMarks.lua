@@ -159,12 +159,9 @@ function LiveMarks:ReconcilePlayerMarks()
       or type(rawget(_G, "SetRaidTarget")) ~= "function"
       or type(unitGuid) ~= "function" then return false end
   self:ObserveKnownUnits()
-  local desired = {}
-  local assignments = ART.CCAssignments
-  for _, row in ipairs(assignments and assignments.GetAssignmentRows
-      and assignments:GetAssignmentRows() or {}) do
-    if row.playerGlobal and row.player then desired[row.marker] = row.player end
-  end
+  local preset = ART.GetCurrentPreset and ART:GetCurrentPreset()
+  local desired = ART.PlayerMarks and ART.PlayerMarks.GetActiveMarks
+      and ART.PlayerMarks:GetActiveMarks(preset) or {}
 
   local setRaidTarget = rawget(_G, "SetRaidTarget")
   for marker, guid in pairs(managedPlayerByMarker) do

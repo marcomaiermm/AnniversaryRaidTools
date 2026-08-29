@@ -1,4 +1,4 @@
-# Roster and Player Mark Contract v1
+# Roster, CC Marks, and Player Marks Contract v2
 
 The roster is local account configuration and is not exported or live-shared:
 
@@ -13,31 +13,63 @@ There are eight groups with five positions. Names are canonical and unique
 case-insensitively; moving an existing player clears the old slot. Manual names
 require a valid TBC class. Removing a roster entry does not delete assignments.
 
-Global player marks belong to the preset and use normal export/import:
+## CC Marks
+
+CC Marks belong to the preset and use normal export/import:
 
 ```lua
-preset.value.artPlayerMarks[marker] = {
+preset.value.artCCMarks[marker] = {
   name = "Name-Realm",
   classFile = "MAGE",
   ccKey = "POLYMORPH", -- optional, must match the player's class
 }
 ```
 
-A player may hold at most one configured marker. A mark may include one optional
+A player may own at most one mob marker. A row may include one optional,
 class-compatible long CC from the assignment catalog. Invalid entries are
-removed during preset normalization. Live changes use the `ARTPlayerMark` prefix
-with the current raid, preset UID, marker, operation, and optional player.
+removed during preset normalization. Legacy `artPlayerMarks` tables migrate
+once to `artCCMarks` and are then removed.
 
-The Active Pull and automatic marker reconciliation use this priority:
+Live CC Mark edits retain the version 1 `ARTPlayerMark` transport with the
+current raid, preset UID, marker, operation, and optional player.
+
+Active Pull CC resolution uses this priority:
 
 1. Pull marker and optional pull CC.
 2. Current-floor All Mark, only when its NPC occurs in the active pull.
-3. Global player mark.
+3. CC Mark assignee and optional CC.
 
-The visible mark owner and its CC are resolved separately. The highest available
-layer supplies the row target, while a missing CC falls through in the same
-order: pull CC, floor CC, then global player CC. This produces one merged row per
-marker, for example a pull NPC with Star plus the global Star player's CC and
-assignee. Missing configured players remain visible and class-colored as
-`not in raid`. Auto Mark restores suppressed player assignments when their
-marker becomes free and never overwrites a foreign holder.
+The visible mob owner and its CC are resolved separately. A missing CC falls
+through in the same order: pull CC, floor CC, then CC Mark CC.
+
+## Player Mark Loadouts
+
+Player marks are independent preset-scoped working rows and named snapshots:
+
+```lua
+preset.value.artPlayerMarkCurrent[marker] = {
+  name = "Name-Realm",
+  classFile = "MAGE",
+}
+preset.value.artPlayerMarkLoadouts["Moroes"][marker] = {
+  name = "Name-Realm",
+  classFile = "MAGE",
+}
+preset.value.artPlayerMarkSelected = "Moroes"
+preset.value.artPlayerMarksEnabled = true
+```
+
+The current table is the editable working set. Loading copies a saved snapshot
+into it; saving or overwriting copies the working set into a snapshot. Renaming
+or deleting a snapshot does not delete the current rows. Loadout names are
+non-empty and unique within the preset.
+
+Player-mark entries never contain `ccKey`. Markers and classes are validated,
+names are canonicalized, and one player may hold at most one marker in each
+table. Empty current tables and empty saved snapshots are removed during
+normalization.
+
+Only an enabled current table is applied live. Reconciliation finds matching
+group members, never displaces a foreign marker holder, and clears only
+ART-managed player marks when disabling, clearing, or changing the working set.
+CC assignment resolution never reads player-mark loadouts.

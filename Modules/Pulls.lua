@@ -43,6 +43,36 @@ function ART:IsCloneIncluded(enemyIdx, cloneIdx)
   if not clone then return false end
   return true
 end
+function ART:IsPullModeEnabled(preset)
+  preset = preset or self:GetCurrentPreset()
+  return preset.value.pullSelectionEnabled ~= false
+end
+
+function ART:SetPullModeEnabled(enabled, ignoreHulls, passive)
+  local preset = self:GetCurrentPreset()
+  if not preset or not preset.value then return end
+  if enabled then
+    self:SetSelectionToPull(preset.value.currentPull, ignoreHulls, passive)
+  else
+    preset.value.pullSelectionEnabled = false
+    preset.value.selection = {}
+    if self.main_frame and self.main_frame.sidePanel then
+      self:ClearPullButtonPicks()
+      self:RaidEnemies_UpdateSelected(nil, nil, ignoreHulls)
+    end
+    if self.RaidPlanner then self.RaidPlanner.lastPullIndex = nil end
+    if self.RaidMarksUI then
+      self.RaidMarksUI.trackerPullIndex = nil
+      self.RaidMarksUI.trackerTotalPulls = nil
+    end
+    if self.LiveMarks then self.LiveMarks:OnPlanChanged() end
+    self:PullClickAreaOnLeave()
+  end
+  if self.RefreshPullModeButton then self:RefreshPullModeButton() end
+  if self.RaidMarksUI and self.RaidMarksUI.RefreshPullTracker then self.RaidMarksUI:RefreshPullTracker() end
+  return true
+end
+
 
 ---Returns the current pull of the currently active preset
 function ART:GetCurrentPull()
@@ -106,7 +136,7 @@ function ART:EnablePullsPerSublevel()
   value.pullsBySublevel[currentSublevel] = pulls
   value.pulls = pulls
   value.currentPull = math.min(value.currentPullBySublevel[currentSublevel] or value.currentPull or 1, #pulls)
-  value.selection = { value.currentPull }
+  value.selection = self:IsPullModeEnabled() and { value.currentPull } or {}
 end
 
 function ART:SetPullSublevel(sublevel)
@@ -119,7 +149,7 @@ function ART:SetPullSublevel(sublevel)
   value.pullsBySublevel[sublevel] = pulls
   value.pulls = pulls
   value.currentPull = math.min(value.currentPullBySublevel[sublevel] or 1, #pulls)
-  value.selection = { value.currentPull }
+  value.selection = self:IsPullModeEnabled() and { value.currentPull } or {}
 end
 
 ---Stores r g b values for coloring pulls with ART:ColorPull()
@@ -338,6 +368,7 @@ function ART:SetSelectionToPull(pull, ignoreHulls)
     end
     pull = count
   end
+  ART:GetCurrentPreset().value.pullSelectionEnabled = true
 
   --SaveCurrentPresetPull
   if type(pull) == "number" and pull > 0 then
@@ -407,11 +438,13 @@ function ART:DeletePull(index)
 end
 
 function ART:GetSelection()
-  if not ART:GetCurrentPreset().value.selection or #ART:GetCurrentPreset().value.selection == 0 then
-    ART:GetCurrentPreset().value.selection = { ART:GetCurrentPreset().value.currentPull }
+  local value = ART:GetCurrentPreset().value
+  if not ART:IsPullModeEnabled() then
+    value.selection = value.selection or {}
+    return value.selection
   end
-
-  return ART:GetCurrentPreset().value.selection
+  if not value.selection or #value.selection == 0 then value.selection = { value.currentPull } end
+  return value.selection
 end
 
 function ART:CopyPullOptions(sourceIdx, destinationIdx)

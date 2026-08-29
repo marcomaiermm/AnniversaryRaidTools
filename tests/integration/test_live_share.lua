@@ -111,6 +111,14 @@ function ART:GetCurrentPreset() return browsedPreset end
 function ART:GetCurrentLivePreset() return livePreset end
 function ART:GetCurrentSubLevel() return browsedPreset.value.currentSublevel end
 function ART:GetCurrentPull() return browsedPreset.value.currentPull end
+function ART:IsPullModeEnabled(preset)
+  return (preset or browsedPreset).value.pullSelectionEnabled ~= false
+end
+function ART:SetPullModeEnabled(enabled)
+  browsedPreset.value.pullSelectionEnabled = enabled == true
+  if not enabled then browsedPreset.value.selection = {} end
+  record("pullMode", enabled)
+end
 function ART:IsPlayerInGroup() return "RAID" end
 function ART:GetScale() return 2 end
 function ART:GetRaidName(index) return index == 161 and "Black Temple" or nil end
