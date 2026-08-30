@@ -61,7 +61,7 @@ function ART:HandleChatLink(link, text)
       ART:Async(function()
         showMapSectionIfNeeded()
         ART:ShowInterfaceInternal(true)
-        ART:LiveSession_Enable()
+        ART:LiveSession_Enable("join")
       end, "showInterfaceLive")
     end
     return

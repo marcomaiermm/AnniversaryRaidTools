@@ -16,7 +16,7 @@ end
 
 function ART:CheckPresetSize(callback, cancelCallback, fireCancelOnClose)
   local presetSize = #self:TableToString(self:GetCurrentPreset())
-  if presetSize > 3500 then
+  if presetSize > 10000 then
     local timeToSend = 1 + math.max(presetSize - 2550, 0) / 255
     local prompt = string.format(L["LargePresetWarning"], timeToSend, "\n", "\n", "\n")
     ART:OpenConfirmationFrame(450, 150, L["Sharing large preset"], "Share", prompt, callback, nil, cancelCallback, fireCancelOnClose)

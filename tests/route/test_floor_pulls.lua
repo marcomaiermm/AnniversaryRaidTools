@@ -53,5 +53,15 @@ ART:SetPullSublevel(2)
 assert(preset.value.currentPull == 2 and #preset.value.selection == 0,
     "disabled pull mode remembers each floor's numeric pull without selecting it")
 
+-- Persisted floor pulls without per-floor selection state must remain navigable.
+preset.value.currentPullBySublevel = nil
+ART:EnablePullsPerSublevel()
+ART:SetPullSublevel(1)
+for _ = 1, 20 do
+  ART:SetPullSublevel(2)
+  ART:SetPullSublevel(1)
+end
+assert(type(preset.value.currentPullBySublevel) == "table",
+    "floor navigation must restore missing per-floor selection state")
 
 print("floor pull checks passed")

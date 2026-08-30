@@ -5,7 +5,8 @@ local WaveModeUI = ART.WaveModeUI or {}
 ART.WaveModeUI = WaveModeUI
 
 local markerOrder = { 8, 7, 1, 5, 6, 3, 4, 2 }
-local HYJAL_INSTANCE_ID, HYJAL_WAVE_WIDGET_ID = 534, 3121
+local HYJAL_INSTANCE_ID = 534
+local HYJAL_WAVE_WIDGET_IDS = { 3121, 528 }
 local hyjalBossGroup = { [17767] = 1, [17808] = 2, [17888] = 3, [17842] = 4, [17968] = 5 }
 local runtimeGroup, pendingGroup, previousLocalWave
 
@@ -59,14 +60,8 @@ function WaveModeUI:RefreshEventRegistration()
   elseif self.runtimeFrame.UnregisterEvent then self.runtimeFrame:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED") end
 end
 
-local function mapPlanningOpen()
-  local frame = ART.main_frame
-  return frame and type(frame.IsShown) == "function" and frame:IsShown()
-      and (not ART.IsMapSectionActive or ART:IsMapSectionActive())
-end
 
 local function selectRuntimeWave(index)
-  if mapPlanningOpen() then return false end
   local preset = ART:GetCurrentPreset()
   if tonumber(preset.value.currentPull) == index then return false end
   ART:SetSelectionToPull(index)
@@ -99,10 +94,21 @@ function WaveModeUI:HandleHyjalWave(localWave)
   return selectRuntimeWave(index)
 end
 
-function WaveModeUI:ReadHyjalWave()
+function WaveModeUI:ReadHyjalWave(widgetId)
   if not self:IsHyjalRuntimeActive() or not C_UIWidgetManager
-      or type(C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo) ~= "function" then return false end
-  local info = C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo(HYJAL_WAVE_WIDGET_ID)
+      or type(C_UIWidgetManager.GetIconAndTextWidgetVisualizationInfo) ~= "function" then return false end
+  if widgetId ~= nil and widgetId ~= HYJAL_WAVE_WIDGET_IDS[1] and widgetId ~= HYJAL_WAVE_WIDGET_IDS[2] then
+    return false
+  end
+  local info
+  if widgetId then
+    info = C_UIWidgetManager.GetIconAndTextWidgetVisualizationInfo(widgetId)
+  else
+    for _, id in ipairs(HYJAL_WAVE_WIDGET_IDS) do
+      info = C_UIWidgetManager.GetIconAndTextWidgetVisualizationInfo(id)
+      if info and tostring(info.text or ""):match("%d") then break end
+    end
+  end
   local wave = info and tostring(info.text or ""):match("(%d+)")
   return self:HandleHyjalWave(wave)
 end
@@ -594,7 +600,7 @@ if type(CreateFrame) == "function" then
   runtimeFrame:SetScript("OnEvent", function(_, event, ...)
     if event == "UPDATE_UI_WIDGET" then
       local widget = ...
-      if type(widget) == "table" and widget.widgetID == HYJAL_WAVE_WIDGET_ID then WaveModeUI:ReadHyjalWave() end
+      if type(widget) == "table" then WaveModeUI:ReadHyjalWave(widget.widgetID) end
     elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
       local _, subevent, _, sourceGuid, _, _, _, destGuid = CombatLogGetCurrentEventInfo()
       local sourceNpc, destNpc = npcIdFromGuid(sourceGuid), npcIdFromGuid(destGuid)

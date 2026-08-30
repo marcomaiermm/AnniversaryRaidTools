@@ -104,7 +104,17 @@ function ART:SetLegacyBlipMark(enemyIdx, cloneIdx, marker)
   local preset = self:GetCurrentPreset()
   local assignments = preset.value.enemyAssignments or {}
   preset.value.enemyAssignments = assignments
-  local pull = preset.value.pulls and preset.value.pulls[self:GetCurrentPull()]
+  local pulls, pullIndex = preset.value.pulls or {}
+  for candidateIndex, candidate in pairs(pulls) do
+    local cloneIndexes = candidate[enemyIdx]
+    if type(cloneIndexes) == "table" then
+      for _, candidateCloneIdx in pairs(cloneIndexes) do
+        if candidateCloneIdx == cloneIdx then pullIndex = candidateIndex break end
+      end
+    end
+    if pullIndex then break end
+  end
+  local pull = pullIndex and pulls[pullIndex]
   if marker and pull then
     for otherEnemyIdx, cloneIndexes in pairs(pull) do
       for _, otherCloneIdx in ipairs(type(cloneIndexes) == "table" and cloneIndexes or {}) do
@@ -124,7 +134,7 @@ function ART:SetLegacyBlipMark(enemyIdx, cloneIdx, marker)
   if not marker and self.CCAssignments then
     local blip = findLegacyBlip(enemyIdx, cloneIdx)
     local spawnKey = blip and blip.clone and blip.clone.artSpawnKey
-    if spawnKey then self.CCAssignments:ClearPullAssignment(preset, self:GetCurrentPull(), spawnKey, true) end
+    if spawnKey and pullIndex then self.CCAssignments:ClearPullAssignment(preset, pullIndex, spawnKey, true) end
   end
   notifyLiveMarkPlanChanged()
 end

@@ -18,11 +18,11 @@ ART.RaidPlanner = {
   GetStepNpcMarks = function() return {} end,
 }
 local current = { value = { currentPull = 1, artWaveRaid = "hyjal" } }
-local instanceId, widgetText = 534, "Wave 1/8"
+local instanceId, widgetId, widgetText = 534, 3121, "Wave 1/8"
 function GetInstanceInfo() return "Battle for Mount Hyjal", "raid", 1, "", 25, 0, false, instanceId end
 C_UIWidgetManager = {
-  GetTextWithStateWidgetVisualizationInfo = function(widgetId)
-    assert(widgetId == 3121, "Hyjal runtime reads the Classic wave widget")
+  GetIconAndTextWidgetVisualizationInfo = function(requestedWidgetId)
+    if requestedWidgetId ~= widgetId then return end
     return { shownState = 0, text = widgetText }
   end,
 }
@@ -118,9 +118,10 @@ assert(model.group.label == "Archimonde" and model.groupWave == 1 and model.grou
 ART.RaidPlanner.raid = raid
 current.value.currentPull = 1
 ui:ResetHyjalRuntime()
-widgetText = "Wave 3/8"
-assert(ui:ReadHyjalWave() and current.value.currentPull == 3,
-    "visible widget text selects the matching global wave")
+widgetId, widgetText = 528, "Wave 3/8"
+runtimeFrame.onEvent(nil, "UPDATE_UI_WIDGET", { widgetID = widgetId })
+assert(current.value.currentPull == 3, "either Hyjal wave widget selects the matching global wave")
+widgetId = 3121
 assert(not ui:ReadHyjalWave(), "duplicate widget updates are idempotent")
 assert(ui:HandleHyjalBoss(17767, false) and current.value.currentPull == 9,
     "boss activity selects the boss step")
@@ -167,11 +168,10 @@ widgetText = "Wave 6/8"
 ui:ResetHyjalRuntime()
 ART.main_frame = { IsShown = function() return true end }
 function ART:IsMapSectionActive() return true end
-assert(not ui:ReadHyjalWave() and current.value.currentPull == 4,
-    "automatic runtime progress must not override manual Hyjal map planning")
-ART.main_frame = nil
 assert(ui:ReadHyjalWave() and current.value.currentPull == 6,
-    "automatic progress catches up after map planning closes")
+    "automatic runtime progress must continue while Hyjal planning is visible")
+ART.main_frame = nil
+assert(not ui:ReadHyjalWave(), "duplicate progress remains idempotent after planning closes")
 
 ART.RaidPlanner.raid = { mode = "route", mapId = 565 }
 assert(not ui:IsActive(), "normal route raids never enter wave mode")
@@ -198,9 +198,6 @@ assert(waveSource:find('RegisterForClicks("LeftButtonUp", "RightButtonUp")', 1, 
     and waveSource:find("ART.CCAssignments:AddNpcMenu", 1, true)
     and waveSource:find('button.ccIcon:SetPoint("CENTER", button, "TOP", 0, 0)', 1, true),
     "selected wave markers expose direct CC choices and render their badge at center-top")
-assert(waveSource:find('HYJAL_WAVE_WIDGET_ID = 534, 3121', 1, true)
-    and waveSource:find('RegisterEvent("UPDATE_UI_WIDGET")', 1, true),
-    "Hyjal wave mode must listen to the Classic wave widget")
 local core = assert(io.open(root.."/AnniversaryRaidTools.lua", "rb"))
 local coreSource = core:read("*a")
 core:close()

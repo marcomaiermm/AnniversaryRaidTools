@@ -5,7 +5,7 @@
 # Modified for Anniversary Raid Tools beginning 2026-08-21.
 
 ## Title: Anniversary Raid Tools (ART) - UI
-## Version: 1.0.4
+## Version: 1.0.5
 ## Notes: Load-on-demand interface for Anniversary Raid Tools
 ## Dependencies: AnniversaryRaidTools
 ## LoadOnDemand: 1

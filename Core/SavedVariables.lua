@@ -15,6 +15,7 @@ local defaultSavedVars = {
     showPullTracker = true,
     autoPanToPull = true,
     autoMark = false,
+    autoMarkNameplates = true,
     autoMarkModifier = "ALT",
     announceInstanceReset = false,
     xoffset = -80,

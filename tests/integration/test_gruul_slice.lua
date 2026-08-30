@@ -175,6 +175,8 @@ C_Map = {
 
 load("/Core/SavedVariables.lua", addon)
 assert(addon:GetDefaultSavedVariables().global.autoMark == false, "auto marking must default to disabled")
+assert(addon:GetDefaultSavedVariables().global.autoMarkNameplates == true,
+    "visible-nameplate marking must default to enabled")
 assert(addon:GetDefaultSavedVariables().global.autoMarkModifier == "ALT", "auto marking must default to Alt")
 assert(addon:GetDefaultSavedVariables().global.showPullTracker == true, "pull tracker must default to visible")
 if mode == "invalid-store" then
@@ -468,8 +470,25 @@ assert(#importedHyjal.value.pulls == 37 and importedHyjal.value.currentPull == 3
   and importedHyjal.value.artWaveRaid == "hyjal")
 addon:SetSelectionToPull(99)
 assert(addon:GetCurrentPreset().value.currentPull == 37)
+local waveTwoSpawnKey = hyjal.packs[hyjal.waves[2].packKeys[1]].spawnKeys[1]
+local waveTwoNpcId
+for npcKey, enemy in pairs(hyjal.enemies) do
+  for _, spawn in ipairs(enemy.spawns) do
+    if spawn.key == waveTwoSpawnKey then waveTwoNpcId = tonumber(npcKey) break end
+  end
+  if waveTwoNpcId then break end
+end
+assert(addon.RaidPlanner:SetNpcDefaultMarks(waveTwoNpcId, { 8 }))
 addon:SetSelectionToPull(2)
 assert(addon:GetCurrentPreset().value.currentPull == 2 and addon.waveRefreshes == 2)
+assert(addon.RaidPlanner:GetActiveStep() == addon.RaidPlanner.preset.routeSteps[2],
+    "Hyjal wave selection activates its matching mark step")
+addon.RaidMarks.resolver.dependencies.markerAvailable = function() return true end
+local hyjalMarker, hyjalMark = addon.RaidMarks:ResolveUnit({
+  guid = "Creature-0-0-0-0-"..waveTwoNpcId.."-0000000002", npcId = waveTwoNpcId,
+})
+assert(hyjalMarker == 8 and hyjalMark.source == "global",
+    "Hyjal floor-marked NPC resolves its raid mark")
 addon.RaidPlanner.lastPullIndex = 1
 addon:SetSelectionToPull(2, nil, true)
 assert(addon.RaidPlanner.lastPullIndex == 1, "passive map refresh must not advance the planner pull")
@@ -508,6 +527,12 @@ assert(plannedPull.packKeys[1] == encounterPack and plannedPull.marks[encounterS
   "planned pull must expose pre-pull marks by stable spawn key")
 assert(#plannedPull.spawnKeys == 1 and plannedPull.spawnKeys[1] == encounterSpawnKeys[1],
   "planned pull must expose its configured spawn membership")
+addon.RaidMarks.resolver.dependencies.markerAvailable = function() return true end
+local magtheridonMarker, magtheridonMark = addon.RaidMarks:ResolveUnit({
+  guid = "Creature-0-0-0-0-17256-0000000003", npcId = 17256,
+})
+assert(magtheridonMarker == 8 and magtheridonMark.source == "pull",
+    "Magtheridon NPC marking remains functional")
 assert(integration.planner:AddRouteStep({ label = "Magtheridon", packKeys = { encounterPack } }))
 local magtheridonExport = assert(addon:SaveRaidRoute())
 assert(addon:OpenRaidRoute("magtheridons-lair") and addon.RaidPlanner.raid.key == "magtheridons-lair")

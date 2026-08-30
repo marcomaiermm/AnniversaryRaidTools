@@ -223,6 +223,15 @@ function ART:MakeSettingsFrame(frame)
     if ART.RaidMarksUI then ART.RaidMarksUI:SetPullTrackerShown(value) end
   end)
   frame.settingsGeneralColumn:AddChild(frame.pullTrackerCheckbox)
+  frame.nameplateAutoMarkCheckbox = AceGUI:Create("CheckBox")
+  frame.nameplateAutoMarkCheckbox:SetLabel(L["Automatically mark visible nameplates"])
+  frame.nameplateAutoMarkCheckbox:SetWidth(settingWidth)
+  frame.nameplateAutoMarkCheckbox:SetValue(db.autoMarkNameplates ~= false)
+  frame.nameplateAutoMarkCheckbox:SetCallback("OnValueChanged", function(_, _, value)
+    db.autoMarkNameplates = value == true
+  end)
+  frame.settingsGeneralColumn:AddChild(frame.nameplateAutoMarkCheckbox)
+
 
   frame.autoPanToPullCheckbox = AceGUI:Create("CheckBox")
   frame.autoPanToPullCheckbox:SetLabel(L["Auto pan to selected pull"])

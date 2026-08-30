@@ -24,6 +24,7 @@ LibStub = setmetatable({
   GetLibrary = function(_, name)
     if name == "AceSerializer-3.0" then return Serializer end
     if name == "LibDeflate" then return Deflate end
+    if name == "AceGUI-3.0" then return {} end
     error("unexpected library: "..tostring(name))
   end,
 }, { __call = function(self, name) return self:GetLibrary(name) end })
@@ -105,7 +106,13 @@ local ART = {
   end },
 }
 _G.ART = ART
-C_Timer = { After = function(_, callback) callback() end }
+C_Timer = {
+  After = function(_, callback) callback() end,
+  NewTimer = function(_, callback)
+    callback()
+    return { Cancel = function() end }
+  end,
+}
 
 function ART:GetCurrentPreset() return browsedPreset end
 function ART:GetCurrentLivePreset() return livePreset end
@@ -130,6 +137,9 @@ function ART:UpdatePresetDropdownTextColor() end
 function ART:ReturnToLivePreset() record("returnLive") end
 function ART:RunAfterFramesInitialized(callback) callback() end
 function ART:StartMainFrameInitialization() record("initializeFrames") end
+function ART:Async(callback) callback() end
+function ART:ShowInterfaceInternal() record("showInterface") end
+function ART:CheckPresetSize() record("sizePrompt") end
 function ART:SetSelectionToPull(index) browsedPreset.value.currentPull = index; record("selectPull", index) end
 function ART:ReloadPullButtons() record("reloadPulls") end
 function ART:PingMap(x, y) record("ping", x, y) end
@@ -351,6 +361,31 @@ assert(livePreset.value.pulls == before.pulls and count("storeObject") == before
     and count("offset") == before.offsets and count("drawAll") == before.draws
     and count("import") == before.imports and count("notify") == before.notifications,
     "inactive sessions reject every live mutation")
+
+-- Joining another player's live session must not start the local share confirmation flow.
+ART.liveSessionActive = false
+local sizePrompts = count("sizePrompt")
+ART:HandleChatLink("garrmission:artlive-Assist+Realm", "[Live Session: Black Temple]")
+assert(ART.liveSessionActive and count("sizePrompt") == sizePrompts,
+    "joining a live session must not prompt to share the local route")
+ART.liveSessionActive = false
+ART:LiveSession_Enable()
+assert(count("sizePrompt") == sizePrompts + 1,
+    "starting a local live session must retain the share confirmation flow")
+
+-- Raid-sized routes below ten thousand encoded characters share without a warning.
+assert(loadfile(root.."/Modules/PresetDialogs.lua"))("AnniversaryRaidTools", ART)
+local presetSize = 10000
+function ART:TableToString() return string.rep("x", presetSize) end
+function ART:OpenConfirmationFrame() record("largePresetPrompt") end
+local shares = 0
+ART:CheckPresetSize(function() shares = shares + 1 end)
+assert(shares == 1 and count("largePresetPrompt") == 0,
+    "ten-thousand-character raid routes must share without a warning")
+presetSize = presetSize + 1
+ART:CheckPresetSize(function() shares = shares + 1 end)
+assert(shares == 1 and count("largePresetPrompt") == 1,
+    "larger routes must still require confirmation")
 
 local bootstrap = assert(io.open(root.."/Core/Bootstrap.lua", "rb"))
 local bootstrapSource = bootstrap:read("*a")

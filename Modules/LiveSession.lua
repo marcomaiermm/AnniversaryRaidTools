@@ -130,9 +130,9 @@ function ART:LiveSession_CheckRaidPrompt()
 end
 
 ---LiveSession_Enable
-function ART:LiveSession_Enable(restoring)
+function ART:LiveSession_Enable(mode)
   if self.liveSessionActive then return end
-  local preset = restoring and self:GetCurrentLivePreset() or self:GetCurrentPreset()
+  local preset = mode == "restore" and self:GetCurrentLivePreset() or self:GetCurrentPreset()
   if not preset then return false end
   self.main_frame.LiveSessionButton:SetText(L["*Live*"])
   self.main_frame.LiveSessionButton.text:SetTextColor(0, 1, 0)
@@ -147,7 +147,7 @@ function ART:LiveSession_Enable(restoring)
   -- The local session must participate so simultaneous joins choose the same ranked owner.
   self:LiveSession_RequestSession()
   self:UpdatePresetDropdownTextColor()
-  if restoring then return true end
+  if mode then return true end
   timer = C_Timer.NewTimer(2, function()
     local callback = function()
       self.liveSessionRequested = false
@@ -180,7 +180,7 @@ function ART:LiveSession_Restore()
   self:RunAfterFramesInitialized(function()
     if self:GetDB().liveSessionUID ~= uid or self.liveSessionActive then return end
     self:ReturnToLivePreset()
-    self:LiveSession_Enable(true)
+    self:LiveSession_Enable("restore")
   end)
   self:StartMainFrameInitialization()
   return true

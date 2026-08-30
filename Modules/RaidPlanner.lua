@@ -108,6 +108,9 @@ function Planner:GetActiveStep()
   if not self.preset then return nil end
   if self.raid and self.raid.mode ~= "waves" and ART.IsPullModeEnabled
       and not ART:IsPullModeEnabled() then return nil end
+  if self.raid and self.raid.mode == "waves" then
+    return stepById(self.preset, self.preset.currentStepId)
+  end
   if not self.preset.currentStepPinned then
     local step = currentPullStep(self)
     if step then return step end
@@ -144,6 +147,15 @@ end
 function Planner:SyncStepFromPull(pullIndex)
   if not self.preset or not self.raid then return nil, "no active preset" end
   if type(pullIndex) ~= "number" or pullIndex % 1 ~= 0 then return nil, "invalid pull index" end
+  if self.raid.mode == "waves" then
+    local step = self.preset.routeSteps and self.preset.routeSteps[pullIndex]
+    if not step then return nil, "empty pull" end
+    local changed = self.preset.currentStepId ~= step.id or self.preset.currentStepPinned
+    self.preset.currentStepId, self.preset.currentStepPinned = step.id, false
+    self.lastPullIndex = pullIndex
+    if changed then commit(self) end
+    return step
+  end
   if self.preset.currentStepPinned then return nil, "step-pinned" end
   self.lastPullIndex = pullIndex
   if self.raid.mode == "route" and type(self.getPullStep) == "function" then

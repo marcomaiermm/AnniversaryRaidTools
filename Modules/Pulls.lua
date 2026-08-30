@@ -132,6 +132,7 @@ function ART:EnablePullsPerSublevel()
     value.pullsBySublevel = pullsBySublevel
     value.currentPullBySublevel = {}
   end
+  value.currentPullBySublevel = value.currentPullBySublevel or {}
   local pulls = value.pullsBySublevel[currentSublevel] or { {} }
   value.pullsBySublevel[currentSublevel] = pulls
   value.pulls = pulls

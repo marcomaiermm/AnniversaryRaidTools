@@ -17,7 +17,10 @@ ART.CCAssignments = {
 local preset = {
   value = {
     enemyAssignments = { [1] = { [1] = 3 }, [2] = { [1] = 3 }, [3] = { [1] = 4 }, [4] = { [1] = 3 } },
-    pulls = { [1] = { [1] = { 1 }, [2] = { 1 }, [3] = { 1 } } },
+    pulls = {
+      [1] = { [1] = { 1 }, [2] = { 1 }, [3] = { 1 } },
+      [2] = { [4] = { 1 } },
+    },
   },
 }
 function ART:GetCurrentPreset() return preset end
@@ -40,6 +43,10 @@ assert(preset.value.enemyAssignments[1][1] == nil and oldBlip.texture_OverlayIco
 assert(preset.value.enemyAssignments[2][1] == 3, "new mob must own the mark")
 assert(preset.value.enemyAssignments[3][1] == 4, "other marks must remain")
 assert(preset.value.enemyAssignments[4][1] == 3, "other pulls must remain untouched")
+
+ART:SetLegacyBlipMark(4, 1, 4)
+assert(preset.value.enemyAssignments[3][1] == 4 and preset.value.enemyAssignments[4][1] == 4,
+    "marking a mob in another pull must not steal that marker from the selected pull")
 
 preset.value.enemyAssignments[1][1] = 3
 ART:SetLegacyBlipMark(1, 1, nil)

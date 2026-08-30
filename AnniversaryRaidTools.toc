@@ -5,7 +5,7 @@
 # Modified for Anniversary Raid Tools beginning 2026-08-21.
 
 ## Title: Anniversary Raid Tools (ART)
-## Version: 1.0.4
+## Version: 1.0.5
 ## X-Curse-Project-ID: 1669306
 ## X-Wago-ID: rN4VrAKD
 ## Notes: Raid-route planner for WoW TBC Anniversary

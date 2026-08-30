@@ -206,14 +206,14 @@ function LiveMarks:ReconcilePlayerMarks()
   return true
 end
 
-local function eligibleMouseover()
-  if type(UnitExists) ~= "function" or UnitExists("mouseover") ~= true then return nil, "missing" end
-  if type(UnitCanAttack) == "function" and UnitCanAttack("player", "mouseover") ~= true then
+local function eligibleUnit(unitToken)
+  if type(UnitExists) ~= "function" or UnitExists(unitToken) ~= true then return nil, "missing" end
+  if type(UnitCanAttack) == "function" and UnitCanAttack("player", unitToken) ~= true then
     return nil, "friendly"
   end
   local unitDead = rawget(_G, "UnitIsDeadOrGhost") or rawget(_G, "UnitIsDead")
-  if type(unitDead) == "function" and unitDead("mouseover") == true then return nil, "dead" end
-  local guid = type(UnitGUID) == "function" and UnitGUID("mouseover")
+  if type(unitDead) == "function" and unitDead(unitToken) == true then return nil, "dead" end
+  local guid = type(UnitGUID) == "function" and UnitGUID(unitToken)
   if not guid or not parseNpcId(guid) then return nil, "unknown-npc" end
   if not canMarkUnits() then return nil, "permission" end
   if type(rawget(_G, "SetRaidTarget")) ~= "function" then return nil, "api-forbidden" end
@@ -237,24 +237,23 @@ local function reclaimOwnedCandidate(candidates)
   return false
 end
 
-function LiveMarks:TryMouseover()
-  if self.debugMode then self:PrintDebugMouseover() end
+local function tryUnit(self, unitToken, requireModifier, scanKnownUnits)
   local settings = db()
   if not (settings and settings.autoMark == true) then return false, "disabled" end
-  if not modifierDown() then return false, "modifier" end
+  if requireModifier and not modifierDown() then return false, "modifier" end
   local marks = ART.RaidMarks
   if not (marks and marks.initialized) then return false, "not-initialized" end
 
-  self:ObserveKnownUnits()
-  local guid, reason = eligibleMouseover()
+  if scanKnownUnits then self:ObserveKnownUnits() end
+  local guid, reason = eligibleUnit(unitToken)
   if not guid then return false, reason end
-  local _, currentMarker = observeMarker("mouseover")
+  local _, currentMarker = observeMarker(unitToken)
   if currentMarker > 0 then return false, "existing-marker" end
 
-  local marker, result = marks:ResolveUnit("mouseover")
+  local marker, result = marks:ResolveUnit(unitToken)
   if not marker and result and result.reason == "slots-exhausted" and result.source == "pull"
       and reclaimOwnedCandidate(result.candidates) then
-    marker, result = marks:ResolveUnit("mouseover")
+    marker, result = marks:ResolveUnit(unitToken)
   end
   if not marker then return false, result and result.reason or "no-mark", result end
   if not self:IsMarkerAvailable(marker, guid) then
@@ -263,7 +262,7 @@ function LiveMarks:TryMouseover()
   end
 
   local setRaidTarget = rawget(_G, "SetRaidTarget")
-  if setRaidTarget("mouseover", marker) == false then
+  if setRaidTarget(unitToken, marker) == false then
     marks:OnUnitDeath(guid)
     return false, "api-failed", result
   end
@@ -273,6 +272,20 @@ function LiveMarks:TryMouseover()
   local step = planner and planner.GetActiveStep and planner:GetActiveStep()
   artStepByGuid[guid] = step and step.id
   return true, marker, result
+end
+
+function LiveMarks:TryMouseover()
+  if self.debugMode then self:PrintDebugMouseover() end
+  return tryUnit(self, "mouseover", true, true)
+end
+
+function LiveMarks:TryNameplate(unitToken)
+  local settings = db()
+  if settings and settings.autoMarkNameplates == false then
+    observeMarker(unitToken)
+    return false, "nameplates-disabled"
+  end
+  return tryUnit(self, unitToken, false, false)
 end
 
 function LiveMarks:PrintDebugMouseover()
@@ -347,7 +360,7 @@ if type(CreateFrame) == "function" then
       observeTargetEvent(unitToken)
     elseif event == "NAME_PLATE_UNIT_ADDED" then
       visibleNameplates[unitToken] = true
-      observeMarker(unitToken)
+      LiveMarks:TryNameplate(unitToken)
     elseif event == "NAME_PLATE_UNIT_REMOVED" then
       visibleNameplates[unitToken] = nil
     elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then

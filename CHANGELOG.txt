@@ -1,9 +1,13 @@
-## 1.0.4 (2026-08-29)
+## 1.0.5 (2026-08-30)
 
 - Added a Pull Mode toggle for switching between pull assignments and floor-wide marker and CC editing.
+- Added optional automatic marking for visible nameplates, enabled by default.
+- Fixed simultaneous nameplates dropping later raid markers before WoW reported earlier assignments.
+- Fixed imported map notes crashing when client 20506 omits QuestPinTemplate texture regions.
 - Split mob CC Marks from live player marks.
 - Added named player-mark loadouts with raid and guild autocomplete plus explicit enable and disable controls.
 - Fixed pending player-mark rows disappearing and compacted the loadout delete dialog.
+- Fixed automatic Hyjal wave tracking and mark-step alignment while the wave planner is open.
 
 ## 1.0.3 (2026-08-27)
 

@@ -576,6 +576,15 @@ local function POIButton_CalculateNumericTexCoords(index, color)
   end
 end
 
+local function getButtonTexture(button, texture, getter, setter)
+  texture = texture or getter(button)
+  if texture then return texture end
+  texture = button:CreateTexture(nil, "BACKGROUND")
+  texture:SetPoint("CENTER")
+  setter(button, texture)
+  return texture
+end
+
 ---DrawNote
 function ART:DrawNote(x, y, text, objectIndex)
   if not noteFramePool then
@@ -592,10 +601,15 @@ function ART:DrawNote(x, y, text, objectIndex)
   local idx = note.noteIdx % 25
   if idx == 0 then idx = 1 end
 
-  local texture = note.NormalTexture
-  local highlight = note.HighlightTexture
-  local number = note.Display.Icon
-  local pushed = note.PushedTexture
+  local texture = getButtonTexture(note, note.NormalTexture, note.GetNormalTexture, note.SetNormalTexture)
+  local highlight = getButtonTexture(note, note.HighlightTexture, note.GetHighlightTexture, note.SetHighlightTexture)
+  local pushed = getButtonTexture(note, note.PushedTexture, note.GetPushedTexture, note.SetPushedTexture)
+  local number = note.Display and note.Display.Icon or note.artNumberTexture
+  if not number then
+    number = note:CreateTexture(nil, "ARTWORK")
+    number:SetPoint("CENTER")
+    note.artNumberTexture = number
+  end
   texture:SetSize(15 * scale, 15 * scale)
   texture:SetTexture("Interface/WorldMap/UI-QuestPoi-NumberIcons")
   texture:SetTexCoord(0.500, 0.625, 0.375, 0.5)
