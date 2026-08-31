@@ -17,7 +17,8 @@ local units = {
   two = { guid = "Creature-0-0-0-0-100-two" },
   three = { guid = "Creature-0-0-0-0-100-three" },
   global = { guid = "Creature-0-0-0-0-200-global" },
-  globalSecond = { guid = "Creature-0-0-0-0-200-global-second" },
+  globalSecond = { guid = "Creature-0-0-0-0-200-second" },
+  higherPriority = { guid = "Creature-0-0-0-0-800-higher" },
   combatFree = { guid = "Creature-0-0-0-0-300-combat" },
   reclaim = { guid = "Creature-0-0-0-0-400-reclaim" },
   combatBlocked = { guid = "Creature-0-0-0-0-500-blocked" },
@@ -85,6 +86,7 @@ local raid = { enemies = {
   ["600"] = { spawns = { { key = "s7", npcId = 600 } } },
   ["700"] = { spawns = { { key = "s8", npcId = 700 } } },
   ["900"] = { spawns = { { key = "s10", npcId = 900 } } },
+  ["800"] = { spawns = { { key = "s12", npcId = 800 } } },
 } }
 local step = { id = "pull-1", marks = { s1 = 8, s2 = 7, s11 = 1 } }
 ART.RaidPlanner = { GetActiveStep = function() return step end }
@@ -93,8 +95,10 @@ local resolver = ART.MarkResolver.new({
   routeSteps = { step },
   profile = {
     floorNpcDefaults = { [1] = {
-      [100] = { 1 }, [200] = { 5 }, [300] = { 2 }, [600] = { 4 }, [700] = { 6 }, [900] = { 3 },
+      [100] = { 1 }, [200] = { 5 }, [300] = { 2 }, [600] = { 4 }, [700] = { 6 }, [800] = { 5, 6 },
+      [900] = { 3 },
     } },
+    floorNpcPriority = { [1] = { 800, 200, 100, 300, 600, 700, 900 } },
   },
   getCurrentSublevel = function() return 1 end,
   getRouteStep = function(id) return id == step.id and step or nil end,
@@ -142,6 +146,14 @@ assert(liveMarkers[units.global.guid] == 5, "pressing the modifier applies its f
 hover("globalSecond")
 assert(liveMarkers[units.global.guid] == 5 and liveMarkers[units.globalSecond.guid] == nil,
     "floor marks stay on the first intentionally hovered matching NPC")
+local _, _, highPriority = resolver:GetRuleForNpcId(800)
+local _, _, lowPriority = resolver:GetRuleForNpcId(200)
+assert(highPriority == 1 and lowPriority == 2,
+    "resolver exposes floor priority to live mark arbitration")
+hover("higherPriority")
+assert(liveMarkers[units.higherPriority.guid] == 5 and liveMarkers[units.global.guid] == nil,
+    "higher-priority reclaim failed: higher="..tostring(liveMarkers[units.higherPriority.guid])
+        .." lower="..tostring(liveMarkers[units.global.guid]))
 settings.autoMarkNameplates = false
 eventFrame.onEvent(eventFrame, "NAME_PLATE_UNIT_ADDED", "plateDisabled")
 assert(liveMarkers[units.plateDisabled.guid] == nil, "disabled nameplate marking only observes units")
@@ -157,7 +169,7 @@ ART.AutoMarksUI = { Refresh = function() autoMarksRefreshes = autoMarksRefreshes
 ART.LiveMarks:OnPullSelected()
 assert(autoMarksRefreshes == 0, "route mark changes must not rebuild the Auto Marks NPC list")
 hover("combatBlocked")
-assert(liveMarkers[units.combatBlocked.guid] == nil and liveMarkers[units.global.guid] == 5,
+assert(liveMarkers[units.combatBlocked.guid] == nil and liveMarkers[units.higherPriority.guid] == 5,
     "combat never moves an ART-owned occupied marker")
 inCombat = false
 hover("reclaim")

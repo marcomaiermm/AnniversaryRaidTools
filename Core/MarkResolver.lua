@@ -30,6 +30,14 @@ local function copyMarkers(values)
   return result
 end
 
+local function npcPriority(profile, sublevel, npcId)
+  local priority = profile and profile.floorNpcPriority and profile.floorNpcPriority[sublevel]
+  for index, candidate in ipairs(type(priority) == "table" and priority or {}) do
+    if tonumber(candidate) == npcId then return index end
+  end
+  return math.huge
+end
+
 local function findById(values, id)
   if type(values) ~= "table" then return nil end
   if values[id] then return values[id] end
@@ -168,8 +176,8 @@ function Resolver:GetRuleForNpcId(npcId)
       and self.profile.floorNpcDefaults[sublevel]
       or self.profile and self.profile.npcDefaults
   local globalMarkers = copyMarkers(type(defaults) == "table" and defaults[npcId] or nil)
-  if #globalMarkers > 0 then return globalMarkers, "global" end
-  return {}, "none"
+  if #globalMarkers > 0 then return globalMarkers, "global", npcPriority(self.profile, sublevel, npcId) end
+  return {}, "none", math.huge
 end
 
 function Resolver:_resolve(info, commit)
@@ -181,13 +189,13 @@ function Resolver:_resolve(info, commit)
   if assigned then
     return assigned.marker, {
       marker = assigned.marker, source = assigned.source, guid = info.guid,
-      npcId = npcId, candidates = copyMarkers(assigned.candidates), reused = true,
+      npcId = npcId, candidates = copyMarkers(assigned.candidates), priority = assigned.priority, reused = true,
     }
   end
 
-  local candidates, source = self:GetRuleForNpcId(npcId)
+  local candidates, source, priority = self:GetRuleForNpcId(npcId)
   if #candidates == 0 then
-    return nil, { reason = "no-mark", source = source, info = info, npcId = npcId, candidates = candidates }
+    return nil, { reason = "no-mark", source = source, info = info, npcId = npcId, candidates = candidates, priority = priority }
   end
 
   local markerAvailable = self.dependencies.markerAvailable
@@ -202,13 +210,13 @@ function Resolver:_resolve(info, commit)
   if not marker then
     return nil, {
       reason = "slots-exhausted", source = source, info = info,
-      npcId = npcId, candidates = candidates,
+      npcId = npcId, candidates = candidates, priority = priority,
     }
   end
 
   local result = {
     marker = marker, source = source, guid = info.guid,
-    npcId = npcId, candidates = copyMarkers(candidates),
+    npcId = npcId, candidates = copyMarkers(candidates), priority = priority,
   }
   if commit and assignmentKey then
     self.assignments[assignmentKey] = result

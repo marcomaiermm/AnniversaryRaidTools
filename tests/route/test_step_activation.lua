@@ -140,8 +140,11 @@ assert(planner:SetNpcDefaultMark(200, 3) == 3)
 preset.currentSublevel = 1
 assert(planner:GetNpcDefaultMark(200) == 5, "switching back restores the first floor rule")
 assert(planner:SetNpcDefaultMark(201, 5) == 5)
-assert(planner:GetNpcDefaultMark(200) == nil and planner:GetNpcDefaultMark(201) == 5,
-    "one floor marker can belong to only one NPC rule")
+assert(planner:GetNpcDefaultMark(200) == 5 and planner:GetNpcDefaultMark(201) == 5,
+    "multiple floor NPC rules may share a marker")
+local floorPriority = assert(planner:SetFloorNpcPriority({ 201, 200 }))
+assert(floorPriority[1] == 201 and planner:GetFloorNpcPriority()[2] == 200,
+    "floor NPC priority persists in drag order")
 assert(planner:SetNpcDefaultMark(200, 5) == 5)
 local fallbackMarks = assert(planner:SetNpcDefaultMarks(200, { 8, 7, 8 }))
 assert(#fallbackMarks == 2 and fallbackMarks[1] == 8 and fallbackMarks[2] == 7,

@@ -4,6 +4,7 @@
 ---@class ARTMarkingProfile
 ---@field npcDefaults table<integer, integer[]> -- legacy import field
 ---@field floorNpcDefaults table<integer, table<integer, integer[]>> -- sublevel -> npcId -> marker IDs
+---@field floorNpcPriority table<integer, integer[]> -- sublevel -> NPC IDs, highest priority first
 ---@field packOverrides table<string, ARTMarkingPackOverride> -- retained for v1 import compatibility
 
 ---@class ARTMarkingPackOverride
@@ -23,8 +24,11 @@ Hostile NPC resolution has two layers:
 2. If that pool is empty, `floorNpcDefaults[currentSublevel][npcId]` is used.
 
 An exhausted pull pool does not fall back to the floor rule. Hover order assigns
-duplicate positionless NPCs without claiming a physical spawn identity. A marker
-may belong to only one NPC rule on a floor.
+duplicate positionless NPCs without claiming a physical spawn identity. Floor
+NPC rules may share markers. `floorNpcPriority[currentSublevel]` decides which
+NPC keeps a shared ART-owned marker; a higher-priority NPC may reclaim it from a
+lower-priority floor rule outside combat. Existing foreign marks and ART marks
+already in combat are preserved.
 
 The planner APIs below read and write the active floor:
 
@@ -33,6 +37,8 @@ ART.RaidPlanner:GetNpcDefaultMark(npcId) -- marker|nil
 ART.RaidPlanner:SetNpcDefaultMark(npcId, markerOrNil) -- marker|0, reason
 ART.RaidPlanner:GetNpcDefaultMarks(npcId) -- marker[]
 ART.RaidPlanner:SetNpcDefaultMarks(npcId, markers) -- marker[]|nil, reason
+ART.RaidPlanner:GetFloorNpcPriority(sublevelOrNil) -- npcId[]
+ART.RaidPlanner:SetFloorNpcPriority(npcIds, sublevelOrNil) -- npcId[]|nil, reason
 ART.RaidPlanner:GetStepNpcMarks(stepId, npcId) -- marker[]
 ART.RaidPlanner:SetStepNpcMarks(stepId, npcId, markers) -- marker[]|nil, reason
 ```

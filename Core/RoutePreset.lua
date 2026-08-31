@@ -65,6 +65,20 @@ local function validateMarking(marking, raid, spawns)
       end
     end
   end
+  if marking.floorNpcPriority ~= nil then
+    if type(marking.floorNpcPriority) ~= "table" then return nil, "invalid floor NPC priority" end
+    for sublevel, priority in pairs(marking.floorNpcPriority) do
+      if type(sublevel) ~= "number" or sublevel % 1 ~= 0 or not raid.sublevels[sublevel]
+          or not array(priority) then return nil, "invalid floor NPC priority" end
+      local seen = {}
+      for _, npcId in ipairs(priority) do
+        if type(npcId) ~= "number" or npcId % 1 ~= 0 or seen[npcId] or not raid.enemies[tostring(npcId)] then
+          return nil, "invalid floor NPC priority"
+        end
+        seen[npcId] = true
+      end
+    end
+  end
   for packKey, override in pairs(marking.packOverrides) do
     if not raid.packs[packKey] or type(override) ~= "table" then return nil, "invalid pack marking override" end
     if override.npcDefaults ~= nil then
@@ -139,7 +153,7 @@ function RoutePreset:Create(raid)
   assert(type(raid) == "table", "RoutePreset.Create requires a raid")
   local preset = {
     schemaVersion = 1, raidKey = raid.key, currentSublevel = 1,
-    routeSteps = {}, marking = { npcDefaults = {}, floorNpcDefaults = {}, packOverrides = {} },
+    routeSteps = {}, marking = { npcDefaults = {}, floorNpcDefaults = {}, floorNpcPriority = {}, packOverrides = {} },
     currentStepId = nil, currentStepPinned = false,
   }
   if raid.mode == "waves" then
@@ -292,6 +306,7 @@ function RoutePreset:Import(value, registry)
   local marking = candidate.marking
   if type(marking) == "table" then
     marking.floorNpcDefaults = type(marking.floorNpcDefaults) == "table" and marking.floorNpcDefaults or {}
+    marking.floorNpcPriority = type(marking.floorNpcPriority) == "table" and marking.floorNpcPriority or {}
     for npcId, markers in pairs(type(marking.npcDefaults) == "table" and marking.npcDefaults or {}) do
       local enemy = raid.enemies and raid.enemies[tostring(tonumber(npcId))]
       for _, spawn in ipairs(enemy and enemy.spawns or {}) do

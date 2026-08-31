@@ -381,26 +381,53 @@ function Planner:SetNpcDefaultMarks(npcId, markers)
   self.preset.marking.floorNpcDefaults = self.preset.marking.floorNpcDefaults or {}
   self.preset.marking.floorNpcDefaults[sublevel] = self.preset.marking.floorNpcDefaults[sublevel] or {}
   local defaults = self.preset.marking.floorNpcDefaults[sublevel]
-  local previous = {}
-  for otherNpcId, values in pairs(defaults) do
-    previous[otherNpcId] = {}
-    for index, value in ipairs(values) do previous[otherNpcId][index] = value end
-  end
-  for otherNpcId, values in pairs(defaults) do
-    if otherNpcId ~= npcId then
-      local kept = {}
-      for _, value in ipairs(values) do if not seen[value] then kept[#kept + 1] = value end end
-      defaults[otherNpcId] = #kept > 0 and kept or nil
-    end
-  end
+  local previous = defaults[npcId]
   defaults[npcId] = #normalized > 0 and normalized or nil
   local valid, reason = self.presets:Validate(self.preset, self.raid)
   if not valid then
-    for key in pairs(defaults) do defaults[key] = nil end
-    for key, values in pairs(previous) do defaults[key] = values end
+    defaults[npcId] = previous
     return nil, reason
   end
 
+  commit(self)
+  if not self.onChange and ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
+  return normalized
+end
+
+function Planner:GetFloorNpcPriority(sublevel)
+  sublevel = tonumber(sublevel) or tonumber(ART.GetCurrentSubLevel and ART:GetCurrentSubLevel())
+      or tonumber(self.preset and self.preset.currentSublevel)
+  local marking = self.preset and self.preset.marking
+  local priority = marking and marking.floorNpcPriority and marking.floorNpcPriority[sublevel]
+  local result = {}
+  for _, npcId in ipairs(type(priority) == "table" and priority or {}) do
+    result[#result + 1] = tonumber(npcId)
+  end
+  return result
+end
+
+function Planner:SetFloorNpcPriority(npcIds, sublevel)
+  if not self.preset or not self.raid then return nil, "no active preset" end
+  sublevel = tonumber(sublevel) or tonumber(ART.GetCurrentSubLevel and ART:GetCurrentSubLevel())
+      or tonumber(self.preset.currentSublevel)
+  if not sublevel or not self.raid.sublevels[sublevel] then return nil, "invalid sublevel" end
+  if type(npcIds) ~= "table" then return nil, "invalid NPC priority" end
+
+  local normalized, seen = {}, {}
+  for _, value in ipairs(npcIds) do
+    local npcId = tonumber(value)
+    if not npcId or npcId % 1 ~= 0 or seen[npcId] or not self.raid.enemies[tostring(npcId)] then
+      return nil, "invalid NPC priority"
+    end
+    normalized[#normalized + 1], seen[npcId] = npcId, true
+  end
+
+  self.preset.marking.floorNpcPriority = self.preset.marking.floorNpcPriority or {}
+  local priorities = self.preset.marking.floorNpcPriority
+  local previous = priorities[sublevel]
+  priorities[sublevel] = #normalized > 0 and normalized or nil
+  local valid, reason = self.presets:Validate(self.preset, self.raid)
+  if not valid then priorities[sublevel] = previous return nil, reason end
   commit(self)
   if not self.onChange and ART.LiveMarks and ART.LiveMarks.OnPlanChanged then ART.LiveMarks:OnPlanChanged() end
   return normalized

@@ -27,6 +27,10 @@ function RaidMarks:ResolveUnit(unitToken)
   if not self.resolver then return nil, { reason = "not-initialized" } end
   return self.resolver:ResolveUnit(unitToken)
 end
+function RaidMarks:GetRuleForNpcId(npcId)
+  if not self.resolver then return {}, "none" end
+  return self.resolver:GetRuleForNpcId(npcId)
+end
 
 function RaidMarks:ResetActivePack()
   return self.resolver and self.resolver:ResetActivePack()

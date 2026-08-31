@@ -1,3 +1,9 @@
+## 1.0.6 (2026-09-01)
+
+- Added drag-and-drop floor mob mark priority with a left grip, cursor preview and insertion indicator; bosses stay hidden.
+- Fixed drop and clear actions rebuilding AceGUI children before their callbacks returned.
+- Fixed Auto Marks boss filtering, row wrapping, pooled grips, drop scrolling, stale rebuilds, and raid-change refreshes.
+
 ## 1.0.5 (2026-08-30)
 
 - Added a Pull Mode toggle for switching between pull assignments and floor-wide marker and CC editing.

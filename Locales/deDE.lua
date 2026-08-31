@@ -59,6 +59,7 @@ L["Auto pan to selected pull"] = "Automatisches Schwenken zum ausgewählten Pull
 L["Automatically color pulls"] = "Pulls automatisch einfärben"
 L["Automatically mark visible nameplates"] = "Sichtbare Namensplaketten automatisch markieren"
 L["Mouseover modifier"] = "Mouseover-Modifikatortaste"
+L["Drag to change mark priority"] = "Ziehen, um die Markierungspriorität zu ändern"
 L["Selected marks are tried left to right. Pull marks take priority. Existing marks are preserved."] = "Ausgewählte Markierungen werden von links nach rechts versucht. Pull-Markierungen haben Vorrang. Bestehende Markierungen bleiben erhalten."
 L["Pulls"] = "Pulls"
 L["Pull Mode"] = "Pull-Modus"

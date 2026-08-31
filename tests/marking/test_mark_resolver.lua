@@ -23,6 +23,7 @@ local resolver = ART.MarkResolver.new({
   profile = {
     npcDefaults = {},
     floorNpcDefaults = { [1] = { [100] = { 3, 4 }, [200] = { 5 } }, [2] = { [200] = { 6 } } },
+    floorNpcPriority = { [1] = { 200, 100 }, [2] = { 200 } },
     packOverrides = {},
   },
   getCurrentSublevel = function() return currentFloor end,
@@ -55,7 +56,8 @@ blocked[8], blocked[1] = nil, nil
 resolver:ResetActivePack()
 step.marks = {}
 marker, result = resolver:ResolveUnit("a")
-assert(marker == 3 and result.source == "global", "global NPC rule applies without a pull rule")
+assert(marker == 3 and result.source == "global" and result.priority == 2,
+    "global NPC rule includes its floor priority")
 assert(resolver:ResolveUnit("b") == 4, "identical NPCs use the next global fallback marker")
 marker, result = resolver:ResolveUnit("c")
 assert(marker == nil and result.reason == "slots-exhausted", "global fallbacks stop when exhausted")
