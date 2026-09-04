@@ -27,8 +27,8 @@ An exhausted pull pool does not fall back to the floor rule. Hover order assigns
 duplicate positionless NPCs without claiming a physical spawn identity. Floor
 NPC rules may share markers. `floorNpcPriority[currentSublevel]` decides which
 NPC keeps a shared ART-owned marker; a higher-priority NPC may reclaim it from a
-lower-priority floor rule outside combat. Existing foreign marks and ART marks
-already in combat are preserved.
+lower-priority ART rule or configured player mark, including during combat.
+Existing observed foreign marks are preserved.
 
 The planner APIs below read and write the active floor:
 
@@ -47,7 +47,28 @@ Step storage remains `step.marks[spawnKey]`; markers are assigned to determinist
 member spawns so preset schema v1 does not change. A pool may not contain more
 markers than that NPC has spawns in the step.
 
-`LiveMarks` keeps hostile writes on the intentional `mouseover` boundary.
-Configured global player marks are the exception: while Auto Mark is enabled,
-they reconcile through stable raid and party unit tokens. Existing foreign
+`LiveMarks` keeps hostile mouseover writes on the intentional `mouseover`
+boundary. Visible hostile nameplate writes are the explicit configurable
+exception described below. Configured global player marks reconcile through
+stable raid and party unit tokens while Auto Mark is enabled. Existing foreign
 holders are never overwritten. See [Roster and Player Marks](roster-player-marks.md).
+
+## Visible-nameplate policy
+The account setting `autoMarkNameplates` is exposed at runtime as
+`ART:GetDB().autoMarkNameplates`. Its saved-variable default is `true`, and the
+Settings checkbox labelled **Automatically mark visible nameplates** edits the
+value. The master `autoMark` setting remains a separate gate and defaults to
+`false`.
+
+With Auto Mark enabled and this policy `true`, a newly visible eligible
+nameplate may be marked using the normal pull-then-current-floor NPC rules.
+The policy does not promise that every nameplate receives a marker: eligibility,
+permissions, available markers, and existing ownership still apply. Pull and
+floor NPC rules outrank configured player marks, including during combat when
+ART owns the competing marker; observed foreign marker holders remain protected.
+
+When `autoMarkNameplates` is `false`, `NAME_PLATE_UNIT_ADDED` remains an
+observation path only. ART records visible tokens and occupied markers for
+ownership decisions but does not write a raid target from that event. A
+`UNIT_DIED` observation releases ART's runtime and resolver ownership; desktop
+tests do not claim that this clears the client's icon.

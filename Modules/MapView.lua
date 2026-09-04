@@ -589,23 +589,16 @@ end
 ART.zoneIdToRaidIndex = {}
 ART.zoneIdToSublevel = {}
 
-local lastUpdatedRaidIndex
 function ART:CheckCurrentZone(init)
   initializeDB()
   local zoneId = ART.Compat:GetBestMapForUnit("player")
   local raidIndex = ART.zoneIdToRaidIndex[zoneId]
-  if not raidIndex then return end
+  if not raidIndex or db.currentRaidIndex == raidIndex then return end
 
   local sublevel = ART.zoneIdToSublevel[zoneId]
-  local raidChanged = db.currentRaidIndex ~= raidIndex
-  if raidChanged or lastUpdatedRaidIndex ~= raidIndex then
-    lastUpdatedRaidIndex = raidIndex
-    ART:UpdateToRaid(raidIndex, sublevel ~= nil, init)
-  end
-
-  local floorChanged = sublevel and ART:GetCurrentSubLevel() ~= sublevel
-  if floorChanged then ART:SetCurrentSubLevel(sublevel) end
-  if sublevel and not init and (raidChanged or floorChanged) then ART:UpdateMap() end
+  ART:UpdateToRaid(raidIndex, sublevel ~= nil, init)
+  if sublevel then ART:SetCurrentSubLevel(sublevel) end
+  if sublevel and not init then ART:UpdateMap() end
 end
 
 function ART:SetMapSublevel(pull)

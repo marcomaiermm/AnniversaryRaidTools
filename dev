@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT=$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+cd "$ROOT"
+
+case ${1:-} in
+  test)
+    busted
+    ;;
+  coverage)
+    busted --coverage && luacov
+    ;;
+  check)
+    ./scripts/validate-addon.sh && busted
+    ;;
+  static)
+    wowlua_ls check .
+    ;;
+  *)
+    printf 'Usage: %s {test|coverage|check|static}\n' "${BASH_SOURCE[0]}" >&2
+    exit 2
+    ;;
+esac

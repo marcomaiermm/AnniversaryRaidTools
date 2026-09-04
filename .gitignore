@@ -13,3 +13,5 @@ libs/*
 __pycache__/
 *.pyc
 .release/
+luacov.report.out
+luacov.stats.out

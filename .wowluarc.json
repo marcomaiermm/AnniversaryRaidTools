@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/TradeSkillMaster/wowlua-ls/v0.30.5/editors/vscode/wowluarc.schema.json",
+  "library": [
+    "libs/"
+  ],
+  "ignore": [
+    ".release/",
+    "spec/",
+    "tests/",
+    "tools/",
+    "Raids/TBC/Generated/BlackTempleWorldPositions.lua",
+    "Raids/TBC/Generated/HyjalWorldPositions.lua",
+    "Raids/TBC/Generated/KarazhanWorldPositions.lua",
+    "Raids/TBC/Generated/SunwellPlateauWorldPositions.lua"
+  ]
+}

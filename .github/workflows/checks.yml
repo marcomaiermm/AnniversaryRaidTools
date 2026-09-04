@@ -1,0 +1,72 @@
+name: Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  stable:
+    name: Lua 5.1 and LuaJIT validation
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v6
+
+      - name: Install validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes lua5.1 liblua5.1-0-dev luajit luarocks subversion
+          luarocks --lua-version=5.1 install busted 2.3.0-1
+          luarocks --lua-version=5.1 install luacov 0.16.0-1
+
+      - name: Run validation and Busted specs
+        run: ./dev check
+
+      - name: Run coverage
+        run: ./dev coverage
+
+  package:
+    name: Package and audit release bundle
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v6
+
+      - name: Install packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes subversion
+
+      - name: Stage cleaned release bundle
+        uses: BigWigsMods/packager@v2
+        with:
+          args: -d -w 0 -l
+
+      - name: Audit cleaned release bundle
+        run: |
+          ./scripts/validate-release.sh .release/AnniversaryRaidTools
+          unzip -Z1 .release/AnniversaryRaidTools-*.zip | grep -Fx 'AnniversaryRaidTools_UI/AnniversaryRaidTools_UI.toc'
+
+  static:
+    name: wowlua-ls static analysis (advisory)
+    runs-on: ubuntu-22.04
+    continue-on-error: true
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v6
+
+      - name: Install pinned wowlua-ls
+        run: |
+          curl --fail --location --output wowlua_ls \
+            https://github.com/TradeSkillMaster/wowlua-ls/releases/download/v0.30.5/wowlua_ls-x86_64-unknown-linux-gnu
+          echo '1233a099ed3eeaacc7fba6f89b33efef1c4505beda44bf1714b1696791ec2e30  wowlua_ls' | sha256sum --check
+          chmod +x wowlua_ls
+          echo "$PWD" >> "$GITHUB_PATH"
+
+      - name: Run advisory static analysis
+        run: ./dev static

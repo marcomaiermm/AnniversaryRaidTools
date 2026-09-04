@@ -10,8 +10,8 @@ local ART = {
 }
 assert(loadfile(root.."/Modules/MapView.lua"))("AnniversaryRaidTools", ART)
 
-ART.zoneIdToRaidIndex = { [344] = 161, [345] = 161 }
-ART.zoneIdToSublevel = { [344] = 6, [345] = 7 }
+ART.zoneIdToRaidIndex = { [339] = 161, [344] = 161 }
+ART.zoneIdToSublevel = { [339] = 2, [344] = 6 }
 function ART:UpdateToRaid(raidIndex) saved.currentRaidIndex, selectedRaid = raidIndex, raidIndex end
 function ART:UpdateMap() mapUpdates = mapUpdates + 1 end
 
@@ -19,14 +19,15 @@ ART:CheckCurrentZone()
 assert(selectedRaid == 161, "current raid is selected from its UiMapID")
 assert(currentPreset.value.currentSublevel == 6 and mapUpdates == 1, "current raid floor is selected before rendering")
 
-zoneId = 345
+ART:SetCurrentSubLevel(8)
+zoneId = 339
 ART:CheckCurrentZone()
-assert(currentPreset.value.currentSublevel == 7 and mapUpdates == 2,
-  "floor changes are applied even while the raid stays the same")
+assert(currentPreset.value.currentSublevel == 8 and mapUpdates == 1,
+  "reopening the selected raid preserves its saved floor")
 
 zoneId = 999
 ART:CheckCurrentZone()
-assert(saved.currentRaidIndex == 161 and currentPreset.value.currentSublevel == 7,
+assert(saved.currentRaidIndex == 161 and currentPreset.value.currentSublevel == 8,
   "unsupported zones preserve the current planner selection")
 
 local mainFrame = assert(io.open(root.."/Modules/MainFrame.lua", "rb")):read("*a")

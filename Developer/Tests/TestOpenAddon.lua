@@ -5,17 +5,13 @@ local _, addon = ...
 -- Modified for Anniversary Raid Tools beginning 2026-08-21.
 
 
-local function FireUnprotectedSlashCommand(command)
-  local editbox = ChatEdit_ChooseBoxForSend(DEFAULT_CHAT_FRAME); -- Get an editbox
-  ChatEdit_ActivateChat(editbox);                                -- Show the editbox
-  editbox:SetText(command);                                      -- Command goes here
-  -- Process command and hide (runs ChatEdit_SendText() and ChatEdit_DeactivateChat() respectively)
-  ChatEdit_OnEnterPressed(editbox);
-end
-
 local function testFunc()
-  if addon.main_frame and addon.main_frame:IsShown() then return end
-  FireUnprotectedSlashCommand("/art")
+  if not addon:AreFramesInitialized() then
+    addon:ShowInterface()
+    return
+  end
+  if addon.main_frame:IsShown() then return end
+  addon:ShowInterface()
 end
 
 ---@type ARTTest

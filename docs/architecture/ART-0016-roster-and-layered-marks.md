@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Superseded by ART-0020
 
 ## Date
 
@@ -45,3 +45,9 @@ must travel with the route preset.
 - The tracker, CC display, and automatic marker writer share one precedence.
 - Old presets gain floor-specific behavior without losing valid defaults.
 - Absent players remain planned but cannot be marked until they join.
+
+## Superseded by
+
+ART-0020 carries forward the roster, preset player-mark, layered NPC
+precedence, floor-scoping, stable group-token reconciliation, and observed
+foreign-holder decisions while replacing the nameplate and combat policies.

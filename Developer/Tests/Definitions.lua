@@ -5,5 +5,5 @@
 -- Modified for Anniversary Raid Tools beginning 2026-08-21.
 
 --- @field name string
---- @field func function
+--- @field func fun(): function|nil
 --- @field duration number

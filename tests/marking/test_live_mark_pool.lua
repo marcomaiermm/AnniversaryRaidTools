@@ -18,7 +18,9 @@ local units = {
   three = { guid = "Creature-0-0-0-0-100-three" },
   global = { guid = "Creature-0-0-0-0-200-global" },
   globalSecond = { guid = "Creature-0-0-0-0-200-second" },
-  higherPriority = { guid = "Creature-0-0-0-0-800-higher" },
+  cascadeHigh = { guid = "Creature-0-0-0-0-801-cascadehigh" },
+  cascadeMid = { guid = "Creature-0-0-0-0-802-cascademid" },
+  cascadeLow = { guid = "Creature-0-0-0-0-803-cascadelow" },
   combatFree = { guid = "Creature-0-0-0-0-300-combat" },
   reclaim = { guid = "Creature-0-0-0-0-400-reclaim" },
   combatBlocked = { guid = "Creature-0-0-0-0-500-blocked" },
@@ -30,6 +32,8 @@ local units = {
   permission = { guid = "Creature-0-0-0-0-700-permission" },
   hostilePlayer = { guid = "Player-0-0-0-0-700-hostile" },
 }
+units.cascadeMidNameplate = units.cascadeMid
+units.cascadeLowNameplate = units.cascadeLow
 _G.UnitExists = function(token) return units[token] ~= nil end
 _G.UnitGUID = function(token) return units[token] and units[token].guid end
 _G.UnitCanAttack = function(_, token) return units[token] and units[token].friendly ~= true end
@@ -51,11 +55,16 @@ end
 
 local liveMarkers = {}
 local reportAppliedMarkers = true
+local failOnMarkCall
 _G.GetRaidTargetIndex = function(token)
   local guid = units[token] and units[token].guid
   return reportAppliedMarkers and guid and liveMarkers[guid]
 end
 _G.SetRaidTarget = function(token, marker)
+  if failOnMarkCall then
+    failOnMarkCall = failOnMarkCall - 1
+    if failOnMarkCall == 0 then failOnMarkCall = nil return false end
+  end
   local guid = assert(units[token] and units[token].guid)
   if marker == 0 then liveMarkers[guid] = nil return end
   for otherGuid, otherMarker in pairs(liveMarkers) do
@@ -86,7 +95,9 @@ local raid = { enemies = {
   ["600"] = { spawns = { { key = "s7", npcId = 600 } } },
   ["700"] = { spawns = { { key = "s8", npcId = 700 } } },
   ["900"] = { spawns = { { key = "s10", npcId = 900 } } },
-  ["800"] = { spawns = { { key = "s12", npcId = 800 } } },
+  ["801"] = { spawns = { { key = "s13", npcId = 801 } } },
+  ["802"] = { spawns = { { key = "s14", npcId = 802 } } },
+  ["803"] = { spawns = { { key = "s15", npcId = 803 } } },
 } }
 local step = { id = "pull-1", marks = { s1 = 8, s2 = 7, s11 = 1 } }
 ART.RaidPlanner = { GetActiveStep = function() return step end }
@@ -95,10 +106,10 @@ local resolver = ART.MarkResolver.new({
   routeSteps = { step },
   profile = {
     floorNpcDefaults = { [1] = {
-      [100] = { 1 }, [200] = { 5 }, [300] = { 2 }, [600] = { 4 }, [700] = { 6 }, [800] = { 5, 6 },
-      [900] = { 3 },
+      [100] = { 1 }, [200] = { 5 }, [300] = { 2 }, [600] = { 4 }, [700] = { 6 },
+      [801] = { 8 }, [802] = { 8, 7 }, [803] = { 8, 7, 6 }, [900] = { 3 },
     } },
-    floorNpcPriority = { [1] = { 800, 200, 100, 300, 600, 700, 900 } },
+    floorNpcPriority = { [1] = { 801, 802, 803, 200, 100, 300, 600, 700, 900 } },
   },
   getCurrentSublevel = function() return 1 end,
   getRouteStep = function(id) return id == step.id and step or nil end,
@@ -146,14 +157,36 @@ assert(liveMarkers[units.global.guid] == 5, "pressing the modifier applies its f
 hover("globalSecond")
 assert(liveMarkers[units.global.guid] == 5 and liveMarkers[units.globalSecond.guid] == nil,
     "floor marks stay on the first intentionally hovered matching NPC")
-local _, _, highPriority = resolver:GetRuleForNpcId(800)
-local _, _, lowPriority = resolver:GetRuleForNpcId(200)
-assert(highPriority == 1 and lowPriority == 2,
-    "resolver exposes floor priority to live mark arbitration")
-hover("higherPriority")
-assert(liveMarkers[units.higherPriority.guid] == 5 and liveMarkers[units.global.guid] == nil,
-    "higher-priority reclaim failed: higher="..tostring(liveMarkers[units.higherPriority.guid])
-        .." lower="..tostring(liveMarkers[units.global.guid]))
+assert(ART.LiveMarks:ClearWorldMarks())
+assert(ART.RaidMarks:ActivateRouteStep(step.id))
+hover("cascadeLow")
+eventFrame.onEvent(eventFrame, "NAME_PLATE_UNIT_ADDED", "cascadeLowNameplate")
+hover("cascadeMid")
+eventFrame.onEvent(eventFrame, "NAME_PLATE_UNIT_ADDED", "cascadeMidNameplate")
+hover("cascadeHigh")
+assert(liveMarkers[units.cascadeHigh.guid] == 8 and liveMarkers[units.cascadeMid.guid] == 7
+    and liveMarkers[units.cascadeLow.guid] == 6,
+    "priority rebalancing resolves the full displacement chain")
+
+assert(ART.LiveMarks:ClearWorldMarks())
+assert(ART.RaidMarks:ActivateRouteStep(step.id))
+hover("cascadeLow")
+hover("cascadeMid")
+failOnMarkCall = 3
+units.mouseover = units.cascadeHigh
+local applied, failedReason = ART.LiveMarks:TryMouseover()
+assert(not applied and failedReason == "api-failed"
+    and liveMarkers[units.cascadeHigh.guid] == nil and liveMarkers[units.cascadeMid.guid] == 8
+    and liveMarkers[units.cascadeLow.guid] == 7,
+    "failed priority rebalancing restores every previous marker lease")
+local retryApplied = ART.LiveMarks:TryMouseover()
+assert(retryApplied and liveMarkers[units.cascadeHigh.guid] == 8
+    and liveMarkers[units.cascadeMid.guid] == 7 and liveMarkers[units.cascadeLow.guid] == 6,
+    "failed rebalancing leaves ART ownership available for retry")
+
+assert(ART.LiveMarks:ClearWorldMarks())
+assert(ART.RaidMarks:ActivateRouteStep(step.id))
+hover("global")
 settings.autoMarkNameplates = false
 eventFrame.onEvent(eventFrame, "NAME_PLATE_UNIT_ADDED", "plateDisabled")
 assert(liveMarkers[units.plateDisabled.guid] == nil, "disabled nameplate marking only observes units")
@@ -169,13 +202,12 @@ ART.AutoMarksUI = { Refresh = function() autoMarksRefreshes = autoMarksRefreshes
 ART.LiveMarks:OnPullSelected()
 assert(autoMarksRefreshes == 0, "route mark changes must not rebuild the Auto Marks NPC list")
 hover("combatBlocked")
-assert(liveMarkers[units.combatBlocked.guid] == nil and liveMarkers[units.higherPriority.guid] == 5,
-    "combat never moves an ART-owned occupied marker")
-inCombat = false
+assert(liveMarkers[units.combatBlocked.guid] == 5 and liveMarkers[units.global.guid] == nil,
+    "pull marks reclaim an ART-owned floor marker in combat")
 hover("reclaim")
 assert(liveMarkers[units.reclaim.guid] == 2 and liveMarkers[units.combatFree.guid] == nil,
-    "outside combat reclaim failed: new="..tostring(liveMarkers[units.reclaim.guid])
-        .." old="..tostring(liveMarkers[units.combatFree.guid]))
+    "pull marks reclaim an ART-owned occupied marker in combat")
+inCombat = false
 
 liveMarkers[units.foreignHolder.guid] = 4
 eventFrame.onEvent(eventFrame, "NAME_PLATE_UNIT_ADDED", "foreignHolder")
@@ -244,12 +276,14 @@ units.disabled = { guid = "Creature-0-0-0-0-200-disabled" }
 hover("disabled")
 assert(liveMarkers[units.disabled.guid] == nil, "disabled auto marking is inert")
 
+local clearsBeforeFinalClear = clearedMarks
 assert(ART.LiveMarks:ClearWorldMarks())
-assert(clearedMarks == 2 and next(liveMarkers) == nil, "manual clear removes all world marks")
+assert(clearedMarks == clearsBeforeFinalClear + 1 and next(liveMarkers) == nil,
+    "manual clear removes all world marks")
 assert(clearedAssignments == 1, "manual clear also removes active-pull CC assignments")
 settings.autoMark, altDown = true, true
 hover("one")
-assert(liveMarkers[units.one.guid] == 1, "manual clear resets resolver assignments")
+assert(liveMarkers[units.one.guid] == 1, "manual clear releases live marker leases")
 
 assert(eventFrame.events.UPDATE_MOUSEOVER_UNIT and eventFrame.events.MODIFIER_STATE_CHANGED)
 assert(not eventFrame.events.PLAYER_REGEN_ENABLED and not eventFrame.events.ENCOUNTER_END,

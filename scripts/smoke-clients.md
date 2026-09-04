@@ -49,7 +49,8 @@ warning, stuck loading spinner, or duplicate UI/event handler.
       bounded counts/latest evidence and UTC timestamps persist. Unknown events
       or malformed GUIDs are ignored without blocking route planning.
 
-Record for each client: build/interface, addon version, fresh vs migrated
-profile, steps run, result, and any exact error text. Automated evidence comes
-from `scripts/validate-addon.sh`; this checklist is intentionally manual and
-cannot be substituted by a desktop Lua interpreter.
+Record each step as `PASS`, `FAIL`, or `SKIP` for each client. Every `SKIP`
+requires a reason. Include build/interface, addon version, fresh vs migrated
+profile, and exact error text for failures.
+Automated evidence comes from `scripts/validate-addon.sh`; this checklist is
+intentionally manual and cannot be substituted by a desktop Lua interpreter.

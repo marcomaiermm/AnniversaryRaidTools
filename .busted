@@ -1,0 +1,8 @@
+return {
+  default = {
+    lua = "lua5.1",
+    helper = "spec/setup.lua",
+    pattern = "_spec.lua$",
+    lpath = "spec/?.lua;spec/?/init.lua;?.lua;?/init.lua",
+  },
+}

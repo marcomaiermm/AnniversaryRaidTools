@@ -6,8 +6,7 @@ local LiveMarks = ART.LiveMarks or {}
 ART.LiveMarks = LiveMarks
 
 local visibleNameplates = {}
-local markerLeaseByIndex, markerByGuid, artMarkerByGuid = {}, {}, {}
-local artSourceByGuid, artStepByGuid, artPriorityByGuid = {}, {}, {}
+local leaseByMarker, leaseByGuid = {}, {}
 local managedPlayerByMarker = {}
 local EVENTS = {
   "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "PLAYER_TARGET_CHANGED", "UNIT_TARGET",
@@ -55,26 +54,26 @@ local function canMarkUnits()
   return leader == true or assistant == true
 end
 
-local function groupInCombat()
-  if type(UnitAffectingCombat) == "function" then
-    if UnitAffectingCombat("player") == true then return true end
-    for index = 1, 4 do if UnitAffectingCombat("party"..index) == true then return true end end
-    for index = 1, 40 do if UnitAffectingCombat("raid"..index) == true then return true end end
-    return false
-  end
-  return type(InCombatLockdown) == "function" and InCombatLockdown() == true or false
-end
-
 local function forgetGuid(guid)
-  local marker = markerByGuid[guid]
-  if marker and markerLeaseByIndex[marker] == guid then markerLeaseByIndex[marker] = nil end
-  markerByGuid[guid], artMarkerByGuid[guid] = nil, nil
-  artSourceByGuid[guid], artStepByGuid[guid], artPriorityByGuid[guid] = nil, nil, nil
+  local lease = leaseByGuid[guid]
+  if lease and leaseByMarker[lease.marker] == lease then leaseByMarker[lease.marker] = nil end
+  leaseByGuid[guid] = nil
 end
 
-local function releaseResolverAssignment(guid)
-  local marks = ART.RaidMarks
-  if marks and marks.initialized then marks:OnUnitDeath(guid) end
+local function rememberLease(guid, marker, details)
+  forgetGuid(guid)
+  local displaced = leaseByMarker[marker]
+  if displaced then leaseByGuid[displaced.guid] = nil end
+  local lease = {
+    guid = guid,
+    marker = marker,
+    artOwned = details and details.artOwned == true,
+    source = details and details.source,
+    stepId = details and details.stepId,
+    priority = details and details.priority,
+  }
+  leaseByMarker[marker], leaseByGuid[guid] = lease, lease
+  return lease
 end
 
 local function observeMarker(unitToken)
@@ -85,30 +84,9 @@ local function observeMarker(unitToken)
   if not guid then return nil, 0 end
   local getMarker = rawget(_G, "GetRaidTargetIndex")
   local marker = type(getMarker) == "function" and (tonumber(getMarker(unitToken)) or 0) or 0
-  local previous = markerByGuid[guid]
-
-  if previous and previous ~= marker and markerLeaseByIndex[previous] == guid then
-    markerLeaseByIndex[previous] = nil
-  end
-  if artMarkerByGuid[guid] and artMarkerByGuid[guid] ~= marker then
-    artMarkerByGuid[guid], artSourceByGuid[guid], artStepByGuid[guid], artPriorityByGuid[guid] = nil, nil, nil, nil
-    releaseResolverAssignment(guid)
-  end
-
-  if marker > 0 then
-    local displaced = markerLeaseByIndex[marker]
-    if displaced and displaced ~= guid then
-      markerByGuid[displaced] = nil
-      if artMarkerByGuid[displaced] == marker then
-        artMarkerByGuid[displaced], artSourceByGuid[displaced], artStepByGuid[displaced],
-            artPriorityByGuid[displaced] = nil, nil, nil, nil
-        releaseResolverAssignment(displaced)
-      end
-    end
-    markerLeaseByIndex[marker], markerByGuid[guid] = guid, marker
-  else
-    markerByGuid[guid] = nil
-  end
+  local previous = leaseByGuid[guid]
+  if previous and previous.marker == marker then return guid, marker end
+  if marker > 0 then rememberLease(guid, marker) else forgetGuid(guid) end
   return guid, marker
 end
 
@@ -123,14 +101,29 @@ local function knownUnitTokens()
   tokens[#tokens + 1] = "player"
   return tokens
 end
+local function knownUnitsByGuid()
+  local unitsByGuid = {}
+  local unitGuid = rawget(_G, "UnitGUID")
+  if type(unitGuid) ~= "function" then return unitsByGuid end
+  for _, unitToken in ipairs(knownUnitTokens()) do
+    local guid = unitGuid(unitToken)
+    if guid and not unitsByGuid[guid] then unitsByGuid[guid] = unitToken end
+  end
+  return unitsByGuid
+end
 
 function LiveMarks:ObserveKnownUnits()
-  for _, unitToken in ipairs(knownUnitTokens()) do observeMarker(unitToken) end
+  local unitsByGuid = {}
+  for _, unitToken in ipairs(knownUnitTokens()) do
+    local guid = observeMarker(unitToken)
+    if guid and not unitsByGuid[guid] then unitsByGuid[guid] = unitToken end
+  end
+  return unitsByGuid
 end
 
 function LiveMarks:IsMarkerAvailable(marker, guid)
-  local owner = markerLeaseByIndex[tonumber(marker)]
-  return owner == nil or owner == guid
+  local lease = leaseByMarker[tonumber(marker)]
+  return lease == nil or lease.guid == guid
 end
 
 local function fullName(unit)
@@ -198,8 +191,8 @@ function LiveMarks:ReconcilePlayerMarks()
         managedPlayerByMarker[marker] = guid
       elseif currentMarker == 0 and self:IsMarkerAvailable(marker, guid) then
         if setRaidTarget(unit, marker) ~= false then
-          markerLeaseByIndex[marker], markerByGuid[guid], artMarkerByGuid[guid] = guid, marker, marker
-          artSourceByGuid[guid], managedPlayerByMarker[marker] = "player", guid
+          rememberLease(guid, marker, { artOwned = true, source = "player" })
+          managedPlayerByMarker[marker] = guid
         end
       end
     end
@@ -221,79 +214,151 @@ local function eligibleUnit(unitToken)
   return guid
 end
 
-local function reclaimOwnedCandidate(candidates, source, priority, stopAtAvailableForGuid)
-  if groupInCombat() then return false end
+local function canDisplace(incoming, owner, activeStepId)
+  if not owner or not owner.artOwned then return false end
+  if incoming.source == "pull" then
+    return owner.source == "global" or owner.source == "player"
+        or owner.source == "pull" and owner.stepId ~= activeStepId
+  end
+  return incoming.source == "global"
+      and (owner.source == "global" or owner.source == "player")
+      and incoming.priority < (owner.priority or math.huge)
+end
+
+local function planRebalance(marks, unitToken, guid, unitsByGuid)
+  unitsByGuid = unitsByGuid or knownUnitsByGuid()
+  unitsByGuid[guid] = unitToken
   local planner = ART.RaidPlanner
   local activeStep = planner and planner.GetActiveStep and planner:GetActiveStep()
   local activeStepId = activeStep and activeStep.id
-  for _, marker in ipairs(type(candidates) == "table" and candidates or {}) do
-    local owner = markerLeaseByIndex[marker]
-    if stopAtAvailableForGuid and (not owner or owner == stopAtAvailableForGuid) then return false end
-    local oldPull = artSourceByGuid[owner] == "pull" and artStepByGuid[owner] ~= activeStepId
-    local higherFloorPriority = source == "global" and artSourceByGuid[owner] == "global"
-        and priority < (artPriorityByGuid[owner] or math.huge)
-    if owner and artMarkerByGuid[owner] == marker
-        and ((source == "pull" and (artSourceByGuid[owner] == "global" or oldPull)) or higherFloorPriority) then
-      releaseResolverAssignment(owner)
-      forgetGuid(owner)
-      return true
+  local npcId = parseNpcId(guid)
+  local candidates, source, priority = marks:GetRuleForNpcId(npcId)
+  local root = {
+    guid = guid, unit = unitToken, candidates = candidates, source = source,
+    priority = priority or math.huge, stepId = activeStepId, artOwned = true,
+  }
+  local result = {
+    source = source, guid = guid, npcId = npcId,
+    candidates = candidates, priority = priority,
+  }
+  if #candidates == 0 then result.reason = "no-mark"; return nil, result end
+
+  local virtualByMarker, virtualByGuid = {}, {}
+  for marker, lease in pairs(leaseByMarker) do virtualByMarker[marker] = lease end
+  for ownerGuid, lease in pairs(leaseByGuid) do virtualByGuid[ownerGuid] = lease end
+  local plan = { operations = {}, affected = {}, unitsByGuid = unitsByGuid }
+  local queue, head = { root }, 1
+  while queue[head] do
+    local incoming = queue[head]
+    head = head + 1
+    local marker, displaced
+    for _, candidate in ipairs(incoming.candidates) do
+      local owner = virtualByMarker[candidate]
+      if not owner or owner.guid == incoming.guid then
+        marker = candidate
+        break
+      end
+      if canDisplace(incoming, owner, activeStepId) then
+        marker, displaced = candidate, owner
+        break
+      end
+    end
+    if not marker then
+      if incoming == root then
+        result.reason = "slots-exhausted"
+        return nil, result
+      end
+    else
+      local previous = virtualByGuid[incoming.guid]
+      if previous and virtualByMarker[previous.marker] == previous then
+        virtualByMarker[previous.marker] = nil
+      end
+      incoming.marker = marker
+      virtualByMarker[marker], virtualByGuid[incoming.guid] = incoming, incoming
+      plan.operations[#plan.operations + 1] = incoming
+      plan.affected[incoming.guid] = true
+      if displaced then
+        virtualByGuid[displaced.guid] = nil
+        plan.affected[displaced.guid] = true
+        local displacedUnit = unitsByGuid[displaced.guid]
+        if displacedUnit then
+          local nextCandidates, nextSource, nextPriority =
+              marks:GetRuleForNpcId(parseNpcId(displaced.guid))
+          if #nextCandidates > 0 then
+            queue[#queue + 1] = {
+              guid = displaced.guid, unit = displacedUnit, candidates = nextCandidates,
+              source = nextSource, priority = nextPriority or math.huge,
+              stepId = activeStepId, artOwned = true,
+            }
+          end
+        end
+      end
     end
   end
-  return false
+  result.marker = root.marker
+  return plan, result
 end
 
-local function tryUnit(self, unitToken, requireModifier, scanKnownUnits)
-  local settings = db()
-  if not (settings and settings.autoMark == true) then return false, "disabled" end
-  if requireModifier and not modifierDown() then return false, "modifier" end
+local function applyPlan(plan, result)
+  local setRaidTarget = rawget(_G, "SetRaidTarget")
+  local getRaidTarget = rawget(_G, "GetRaidTargetIndex")
+  local originals = {}
+  for guid in pairs(plan.affected) do originals[guid] = leaseByGuid[guid] or false end
+
+  local function restoreOriginals()
+    for guid, lease in pairs(originals) do
+      local unit = plan.unitsByGuid[guid]
+      if lease and unit then pcall(setRaidTarget, unit, lease.marker) end
+    end
+    for guid, lease in pairs(originals) do
+      local unit = plan.unitsByGuid[guid]
+      local marker = unit and type(getRaidTarget) == "function" and tonumber(getRaidTarget(unit))
+      if not lease and marker and marker > 0 then pcall(setRaidTarget, unit, 0) end
+    end
+  end
+
+  for _, operation in ipairs(plan.operations) do
+    local ok, response = pcall(setRaidTarget, operation.unit, operation.marker)
+    local observed = type(getRaidTarget) == "function" and tonumber(getRaidTarget(operation.unit))
+    if not ok or response == false or observed and observed ~= operation.marker then
+      restoreOriginals()
+      return false, "api-failed", result
+    end
+  end
+
+  for guid in pairs(plan.affected) do forgetGuid(guid) end
+  for _, operation in ipairs(plan.operations) do rememberLease(operation.guid, operation.marker, operation) end
+  return true, result.marker, result
+end
+
+local function markUnit(unitToken, unitsByGuid)
   local marks = ART.RaidMarks
   if not (marks and marks.initialized) then return false, "not-initialized" end
-
-  if scanKnownUnits then self:ObserveKnownUnits() end
   local guid, reason = eligibleUnit(unitToken)
   if not guid then return false, reason end
   local _, currentMarker = observeMarker(unitToken)
   if currentMarker > 0 then return false, "existing-marker" end
-  local candidates, source, priority = marks:GetRuleForNpcId(parseNpcId(guid))
-  if source == "global" then reclaimOwnedCandidate(candidates, source, priority, guid) end
-
-  local marker, result = marks:ResolveUnit(unitToken)
-  if not marker and result and result.reason == "slots-exhausted"
-      and reclaimOwnedCandidate(result.candidates, result.source, result.priority) then
-    marker, result = marks:ResolveUnit(unitToken)
-  end
-  if not marker then return false, result and result.reason or "no-mark", result end
-  if not self:IsMarkerAvailable(marker, guid) then
-    marks:OnUnitDeath(guid)
-    return false, "marker-in-use", result
-  end
-
-  local setRaidTarget = rawget(_G, "SetRaidTarget")
-  if setRaidTarget(unitToken, marker) == false then
-    marks:OnUnitDeath(guid)
-    return false, "api-failed", result
-  end
-  markerLeaseByIndex[marker], markerByGuid[guid], artMarkerByGuid[guid] = guid, marker, marker
-  artSourceByGuid[guid] = result and result.source
-  artPriorityByGuid[guid] = result and result.priority
-  local planner = ART.RaidPlanner
-  local step = planner and planner.GetActiveStep and planner:GetActiveStep()
-  artStepByGuid[guid] = step and step.id
-  return true, marker, result
+  local plan, result = planRebalance(marks, unitToken, guid, unitsByGuid)
+  if not plan then return false, result.reason, result end
+  return applyPlan(plan, result)
 end
 
 function LiveMarks:TryMouseover()
   if self.debugMode then self:PrintDebugMouseover() end
-  return tryUnit(self, "mouseover", true, true)
+  local settings = db()
+  if not (settings and settings.autoMark == true) then return false, "disabled" end
+  if not modifierDown() then return false, "modifier" end
+  return markUnit("mouseover", self:ObserveKnownUnits())
 end
 
 function LiveMarks:TryNameplate(unitToken)
   local settings = db()
-  if settings and settings.autoMarkNameplates == false then
+  if not (settings and settings.autoMark == true) then return false, "disabled" end
+  if settings.autoMarkNameplates == false then
     observeMarker(unitToken)
     return false, "nameplates-disabled"
   end
-  return tryUnit(self, unitToken, false, false)
+  return markUnit(unitToken)
 end
 
 function LiveMarks:PrintDebugMouseover()
@@ -317,12 +382,8 @@ function LiveMarks:ClearWorldMarks()
   local removeRaidTargets = rawget(_G, "RemoveRaidTargets")
   if type(removeRaidTargets) ~= "function" then return false, "api-forbidden" end
   removeRaidTargets()
-  for marker in pairs(markerLeaseByIndex) do markerLeaseByIndex[marker] = nil end
-  for guid in pairs(markerByGuid) do markerByGuid[guid] = nil end
-  for guid in pairs(artMarkerByGuid) do artMarkerByGuid[guid] = nil end
-  for guid in pairs(artSourceByGuid) do artSourceByGuid[guid] = nil end
-  for guid in pairs(artStepByGuid) do artStepByGuid[guid] = nil end
-  for guid in pairs(artPriorityByGuid) do artPriorityByGuid[guid] = nil end
+  for marker in pairs(leaseByMarker) do leaseByMarker[marker] = nil end
+  for guid in pairs(leaseByGuid) do leaseByGuid[guid] = nil end
   for marker in pairs(managedPlayerByMarker) do managedPlayerByMarker[marker] = nil end
   if ART.CCAssignments and ART.CCAssignments.ClearActivePullAssignments then
     ART.CCAssignments:ClearActivePullAssignments()
@@ -376,7 +437,8 @@ if type(CreateFrame) == "function" then
       local _, subevent, _, _, _, _, _, destGuid = CombatLogGetCurrentEventInfo()
       if subevent == "UNIT_DIED" and destGuid then
         forgetGuid(destGuid)
-        releaseResolverAssignment(destGuid)
+        local marks = ART.RaidMarks
+        if marks and marks.initialized then marks:OnUnitDeath(destGuid) end
       end
     elseif event == "RAID_TARGET_UPDATE" or event == "GROUP_ROSTER_UPDATE"
         or event == "PLAYER_ENTERING_WORLD" then

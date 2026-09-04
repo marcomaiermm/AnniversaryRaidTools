@@ -1,5 +1,8 @@
 manual-changelog: CHANGELOG.txt
 ignore:
+  - .busted
+  - .wowluarc.json
+  - dev
   - README.md
   - pkgmeta.yaml
   - cspell.json
@@ -9,6 +12,7 @@ ignore:
   - Developer
   - docs
   - tests
+  - spec
   - tools
   - Raids/TBC/Calibration
   - Raids/TBC/Generated/BlackTempleWorldPositions.lua

@@ -1,3 +1,9 @@
+## 1.1.0 (2026-09-04)
+
+- Improved live marker rebalancing across pull, floor and player assignments, including combat, while preserving observed foreign markers.
+- Fixed failed raid-target changes leaving partial marker ownership behind.
+- Fixed runtime marker ownership after unit deaths and roster changes.
+
 ## 1.0.6 (2026-09-01)
 
 - Added drag-and-drop floor mob mark priority with a left grip, cursor preview and insertion indicator; bosses stay hidden.
